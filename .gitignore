@@ -16,3 +16,5 @@ yarn-error.log
 /.vscode
 package-lock.json
 composer.lock
+/public/assets/admin-bower
+/public/assets/client-bower
