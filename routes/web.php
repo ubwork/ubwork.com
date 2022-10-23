@@ -14,5 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.home');
 });
+Route::get('/job', function () {
+    return view('client.job.job');
+});
+Route::get('/job-detail', function () {
+    return view('client.job.job-detail');
+});
+Route::get('/candi', function () {
+    return view('client.candi.candilist');
+});
+Route::get('/candi-detail', function () {
+    return view('client.candi.candi-detail');
+});
+Route::get('/company', function () {
+    return view('client.company.company');
+});
+Route::get('/company-detail', function () {
+    return view('client.company.company-detail');
+});
+
