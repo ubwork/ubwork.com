@@ -18,4 +18,5 @@ mix.js("resources/js/app.js", "public/js").postCss(
         //
     ]
 );
+mix.js("resources/asset/client/", "public/asset/")
 
