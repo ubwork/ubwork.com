@@ -1,5 +1,5 @@
   <!-- jQuery -->
-  @include('sweetalert::alert')
+  
   <script src="{{ asset('assets/admin-bower/plugins/jquery/jquery.min.js') }}"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ asset('assets/admin-bower/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
