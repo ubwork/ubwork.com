@@ -24,11 +24,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+});
+//company
 
-    //company
-    Route::prefix('company')->name('company.')->group(function () {
-        Route::get('/list', function () {
-            return view('admin.companies.lists_company');
-        })->name('lists_company');
-    });
+Route::prefix('company')->name('company.')->group(function () {
+    Route::get('list', 'CompanyController@index')->name('ListCompany');
 });
