@@ -17,11 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('client.home');
 });
-//company
+
 
 //admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+    //company
+    Route::prefix('company')->name('company.')->group(function () {
+        Route::get('/list', function () {
+            return view('admin.companies.lists_company');
+        })->name('lists_company');
+    });
 });
