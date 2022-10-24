@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $v;
+    public function __construct()
+    {
+        $this->v = [];
+    }
     public function index()
     {
-        //
+        $opj = new Company();
+        $this->v['lists_company'] = $opj->loadList();
+
+        return view("admin/companies.index", $this->v,);
     }
 
     /**
@@ -45,7 +49,10 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = new Company();
+        $objItem = $obj->loadOne($id);
+        $this->v['objItem'] = $objItem;
+        return view("admin/companies.edit_company", $this->v);
     }
 
     /**
@@ -79,6 +86,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $opj = new Company();
+        $this->v['list_room'] = $opj->deleteRoom($id);
+        return back();
     }
 }
