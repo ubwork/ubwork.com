@@ -51,7 +51,7 @@
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>     
                                 <td>
-                                    <a href="" class="btn btn-sm btn-info">
+                                    <a href="{{route('admin.company.detail', ['id' => $item->id])}}" class="btn btn-sm btn-info">
                                         <i class="fas fa-edit"></i>
                                     </a>
 

@@ -70,9 +70,9 @@ class CompanyController extends Controller
     public function show($id)
     {
         $obj = new Company();
-        $objItem = $obj->loadOne($id);
-        $this->v['objItem'] = $objItem;
-        return view("admin/companies.edit_company", $this->v);
+        $item = $obj->loadOne($id);
+        $this->v['item'] = $item;
+        return view("admin/companies.edit", $this->v);
     }
 
     /**
@@ -81,9 +81,25 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, CompanyRequest $request)
     {
-        //
+        $method_route = 'admin.company.detail';
+        $params = [];
+        $params['cols'] = $request->post();
+        unset($params['cols']['_token']);
+        $objRoom = new Company();
+        $objItem = $objRoom->loadOne($id);
+        $params['cols']['id'] = $id;
+        $res = $objRoom->SaveUpdate($params);
+        if ($res == null) {
+            return redirect()->route($method_route, ['id' => $id]);
+        } else if ($res == 1) {
+            Session::flash('success', 'Cập nhật bản ghi' . $objItem->id . 'thành công');
+            return redirect()->route($method_route, ['id' => $id]);
+        } else {
+            Session::flash('error', 'lỗi cập nhật abnr ghi' . $objItem->id);
+            return redirect()->route($method_route, ['id' => $id]);
+        }
     }
 
     /**
