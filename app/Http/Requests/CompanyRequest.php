@@ -27,11 +27,10 @@ class CompanyRequest extends FormRequest
         $rules = [];
         $currentAction = $this->route()->getActionMethod();
         // để lấy phương thức hiện tại
-
         switch ($this->method()):
             case 'POST':
                 switch ($currentAction) {
-                    case 'add':
+                    case 'store':
                         $rules = [
                             'name' => 'required|unique:companies',
                             'company_name' => 'required',
