@@ -19,20 +19,11 @@
                     <thead>
                         <th>STT</th>
                         <th>Name</th>
+                        <th>logo</th>
                         <th>company_name</th>
-                        <th>address</th>
-                        <th>distric</th>
-                        <th>company_model</th>
-                        <th>woking_time</th>
-                        <th>city</th>
-                        <th>country</th>
                         <th>zipcode</th>
                         <th>phone</th>
                         <th>email</th>
-                        <th>password</th>
-                        <th>logo</th>
-                        <th>link_web</th>
-                        <th>coin</th>
                         <th>tax_code</th>
                         <th>is_active</th>
                         <th>status</th>
@@ -48,20 +39,12 @@
                         <?php foreach ($lists_company as $index => $item) : ?>
                             <tr>
                                 <td>{{$index + 1}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->logo}}</td>
                                 <td>{{$item->company_name}}</td>
-                                <td>{{$item->address}}</td>
-                                <td>{{$item->district}}</td>
-                                <td>{{$item->company_model}}</td>
-                                <td>{{$item->working_time}}</td>
-                                <td>{{$item->city}}</td>
-                                <td>{{$item->country}}</td>
                                 <td>{{$item->zipcode}}</td>
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->email}}</td>
-                                <td>{{$item->password}}</td>
-                                <td>{{$item->logo}}</td>
-                                <td>{{$item->link_web}}</td>
-                                <td>{{$item->coin}}</td>
                                 <td>{{$item->tax_code}}</td>
                                 <td>{{$item->is_active}}</td>
                                 <td>{{$item->status}}</td>
