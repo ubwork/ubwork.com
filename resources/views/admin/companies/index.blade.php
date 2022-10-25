@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('title')
-    {{ __('Dashboard') }}
+    {{ __('Danh sách Công ty') }}
 @endsection
 @section('content')
 <div class="row">

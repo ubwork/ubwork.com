@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
@@ -16,7 +18,6 @@ class CompanyController extends Controller
     {
         $opj = new Company();
         $this->v['lists_company'] = $opj->loadList();
-
         return view("admin/companies.index", $this->v,);
     }
 
@@ -27,7 +28,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin/companies.add");
     }
 
     /**
@@ -36,9 +37,28 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
-        //
+        $method_route = 'AddCompany';
+        if ($request->isMethod('post')) {
+            $param = [];
+            $param['cols'] = $request->post();
+            unset($param['cols']['_token']);
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $param['cols']['image'] = $this->uploadFile($request->file('image'));
+            }
+            $modelTest = new Company();
+            $res = $modelTest->saveNew($param);
+            if ($res == null) {
+                return redirect()->route($method_route);
+            } elseif ($res > 0) {
+                Session::flash('success', 'Thêm thành công');
+            } else {
+                Session::flash('error', 'Lỗi thêm mới người dùng');
+                return redirect()->route($method_route);
+            }
+        }
+        return view("admin/companies.add", $this->v);
     }
 
     /**
