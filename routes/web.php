@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('client.home');
 });
+Route::get('/login', function () {
+    return view('login.login');
+});
 //company
 
 //admin
