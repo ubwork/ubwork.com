@@ -9,24 +9,25 @@ use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
+    private $v;
+    public function __construct(){
+        $this->v = [];
+    }
 
     public function index()
     {
         $customer = new Customer();
-        $listCustomer = $customer->loadList();
-        if($listCustomer) {
-            return view('admin.customer.index', [
-                'list' => $listCustomer,
-            ]);
-        }
-        return view('admin.customer.index', [
-            'list' => null,
-        ]);
+        $this->v['list'] = $customer->loadList();
+        $this->v['title'] = "Danh sách ứng viên có trong hệ thống";
+
+        return view('admin.customer.index', $this->v);
     }
 
     public function create()
     {
-        //
+        $this->v['title'] = "Thêm ứng viên vào trong hệ thống";
+
+        return view('admin.customer.add', $this->v);
     }
 
     public function store(Request $request)
