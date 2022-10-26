@@ -23,7 +23,7 @@ class Customer extends Model
                ->where('deleted_at', '=', '0')
                ->orderBy('id', 'desc');
 
-        $lists = $query->paginate(5);
+        $lists = $query->paginate(9);
         return $lists;
     }
 
