@@ -18,4 +18,4 @@ mix.js("resources/js/app.js", "public/js").postCss(
         //
     ]
 );
-
+mix.js("resources/js/admin/customer.js", "public/js/admin");
