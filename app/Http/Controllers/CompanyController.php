@@ -123,7 +123,7 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $opj = new Company();
-        $this->v['list_room'] = $opj->deleteRoom($id);
+        $this->v['list_room'] = $opj->deleteCompany($id);
         return back();
     }
 }

@@ -59,7 +59,7 @@ class Company extends Model
             ->update($dataUpdate);
         return $res;
     }
-    public function deleteRoom($id)
+    public function deleteCompany($id)
     {
         $query = DB::table($this->table)
             ->where('id', '=', $id);

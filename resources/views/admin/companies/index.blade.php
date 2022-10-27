@@ -55,7 +55,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
 
-                                    <a href="" class="btn btn-sm btn-danger">
+                                    <a href="{{route('admin.company.delete', ['id' => $item->id])}}" class="btn btn-sm btn-danger">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>

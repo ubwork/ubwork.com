@@ -29,9 +29,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //company
     Route::prefix('company')->name('company.')->group(function () {
         Route::get('list', 'CompanyController@index')->name('List');
-        Route::get('add', 'CompanyController@create')->name('Add');
-        Route::post('add', 'CompanyController@store')->name('Save');
+        Route::match(['get', 'post'], 'add', 'CompanyController@store')->name('Add');
         Route::get('detail/{id}', 'CompanyController@show')->name('detail');
         Route::post('update/{id}', 'CompanyController@edit')->name('update');
+        Route::get('delete/{id}', 'CompanyController@destroy')->name('delete');
     });
 });
