@@ -7,12 +7,12 @@
       <!-- Login Form -->
       <div class="login-form default-form">
         <div class="form-inner">
-          <h3>Login to Superio</h3>
+          <h3>Login to UbWork</h3>
           <!--Login Form-->
           <form method="post" action="https://creativelayers.net/themes/superio/add-parcel.html">
             <div class="form-group">
-              <label>Username</label>
-              <input type="text" name="username" placeholder="Username" required>
+              <label>Email</label>
+              <input type="text" name="username" placeholder="Email" required>
             </div>
 
             <div class="form-group">
@@ -40,10 +40,10 @@
             <div class="divider"><span>or</span></div>
             <div class="btn-box row">
               <div class="col-lg-6 col-md-12">
-                <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log In via Facebook</a>
+                <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log in Facebook</a>
               </div>
               <div class="col-lg-6 col-md-12">
-                <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
+                <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log in Gmail</a>
               </div>
             </div>
           </div>
