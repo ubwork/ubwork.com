@@ -9,10 +9,10 @@
         <div class="form-inner">
           <h3>Login to UbWork</h3>
           <!--Login Form-->
-          <form method="post" action="https://creativelayers.net/themes/superio/add-parcel.html">
+          <form method="post" action="{{url('/login')}}">
             <div class="form-group">
               <label>Email</label>
-              <input type="text" name="username" placeholder="Email" required>
+              <input type="text" name="email" placeholder="Email">
             </div>
 
             <div class="form-group">

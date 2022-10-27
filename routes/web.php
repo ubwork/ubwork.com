@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('client.home');
 });
-Route::get('/login', function () {
-    return view('login.login');
-});
+Route::get('/login',['as'=>'login','uses'=>'Auth\LoginController@getLogin']);
+Route::post('/login',['as'=>'login','uses'=>'Auth\LoginController@postLogin']);
+Route::get('/logout',['as'=>'logout','uses'=>'Auth\LoginController@getLogout']);
 //company
 
 //admin

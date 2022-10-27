@@ -10,7 +10,5 @@ class Customers extends Model
     use HasFactory;
     protected $table="customers";
 
-    protected $fillable[
         
-    ];
 }
