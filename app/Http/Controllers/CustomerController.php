@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
@@ -66,27 +68,15 @@ class CustomerController extends Controller
             $model = new Customer();
             $res = $model->saveAdd($params);
             if($res == null) {
-                return response()->json(
-                    [
-                        'message' => 'Vui lòng nhập dữ liệu !',
-                        'code' => 404
-                    ]
-                );
+                Session::flash('error', 'Vui lòng nhập dữ liệu!');
+                return Redirect::to('/product');
             }
             else if ($res > 0) {
-                return response()->json(
-                    [
-                        'message' => 'Thêm thành công !',
-                        'code' => 200
-                    ]
-                );
+                Session::flash('success', 'Thêm sản phẩm thành công!');
+                return Redirect::to('/product');
             }else {
-                return response()->json(
-                    [
-                        'message' => 'Lỗi thêm mới !',
-                        'code' => 404
-                    ]
-                );
+                Session::flash('error', 'Lỗi thêm mới!');
+                return Redirect::to('/product');
             }
         }
     }
