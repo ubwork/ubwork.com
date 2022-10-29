@@ -28,6 +28,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('customer')->name('customer.')->group(function () {
         Route::get('list', 'CustomerController@index')->name('list');
         Route::get('add', 'CustomerController@create')->name('add');
-        Route::post('add', 'CustomerController@store')->name('add');
+        Route::post('add', 'CustomerController@store')->name('saveAdd');
+        Route::get('edit/{id}', 'CustomerController@edit')->name('edit');
+        Route::any('delete/{id}', 'CustomerController@destroy')->name('delete');
     });
 });

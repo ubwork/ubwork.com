@@ -5,6 +5,44 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
+
+      <div id="msg-box">
+        <?php //Hiển thị thông báo thành công?>
+        @if ( Session::has('success') )
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <strong>{{ Session::get('success') }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+        @endif
+        <?php //Hiển thị thông báo lỗi?>
+        @if ( Session::has('error') )
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>{{ Session::get('error') }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+        @endif
+    </div>
+
+
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -36,14 +74,16 @@
                         <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->avatar)}}" alt=""></td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->phone}}</td>
-                        <td>{{$item->status==1 ? "Hoạt động" : "Không hoạt động" }}</td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+                        </td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
-                        <td class="project-actions text-right d-flex align-items-center">
-                            <a class="btn btn-info btn-sm mr-3" href="#">
+                        <td class="project-actions xoa text-right d-flex align-items-center">
+                            <a class="btn btn-info btn-sm mr-3" href="{{route('admin.customer.edit', ['id' => $item->id])}}">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a id="delete" class="btn btn-danger btn-sm" href="#">
+                            <a class="btn btn-danger btn-sm" href="{{route('admin.customer.delete', ['id' => $item->id])}}">
                               <i class="fas fa-trash"></i>
                             </a>
                         </td>
