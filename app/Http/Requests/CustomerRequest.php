@@ -29,7 +29,7 @@ class CustomerRequest extends FormRequest
         switch($this->method()):
             case 'POST':
                 switch($currentAction) {
-                    case 'admin.customer.postAdd':
+                    case 'add':
                         $rules = [
                             'name' => 'required',
                             'email' => 'required|email|unique:customers',

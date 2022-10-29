@@ -12,7 +12,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="{{route('admin.customer.postAdd')}}" method="post" enctype="multipart/form-data">
+                  <form action="" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                     <div class="col-sm-6">
