@@ -19,13 +19,19 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="inputName">Tên <span class="text-danger">*</span></label>
-                            <input type="text" id="inputName" name="name" class="form-control">
+                            <input type="text" id="inputName" name="name" class="form-control" value="{{old('name')}}">
+                            @error('name')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Số điện thoại <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="phone">
+                            <input type="text" class="form-control" name="phone" value="{{old('phone')}}">
+                            @error('phone')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     </div>
@@ -33,13 +39,19 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Email <span class="text-danger">*</span></label>
-                          <input type="email" class="form-control" name="email">
+                          <input type="text" class="form-control" name="email" value="{{old('email')}}">
+                          @error('email')
+                          <small class="text-danger">{{$message}}</small>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>password <span class="text-danger">*</span></label>
-                          <input type="password" class="form-control" name="password">
+                          <input type="password" class="form-control" name="password" value="{{old('password')}}">
+                          @error('password')
+                          <small class="text-danger">{{$message}}</small>
+                          @enderror
                         </div>
                     </div>
                     </div>
@@ -67,6 +79,9 @@
                                   style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
                               <input name="image" type="file" id="img">
                               <small class="form-text text-muted">Chọn ảnh kích thước nhỏ hơn 5mb</small>
+                              @error('image')
+                              <small class="text-danger">{{$message}}</small>
+                              @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -136,23 +151,7 @@
                             </div>
                         </div>
                     @endif
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-outline alert-dismissible" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            <div class="alert-icon">
-                                <i class="far fa-fw fa-bell"></i>
-                            </div>
-                            <div class="alert-message">
-                                <strong>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </strong>
-                            </div>
-                        </div>
-                    @endif
+                    
 
 
                     <div class="mt-3">

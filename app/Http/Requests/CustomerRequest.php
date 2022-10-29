@@ -34,7 +34,8 @@ class CustomerRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required|email|unique:customers',
                             'password' => 'required',
-                            'phone' => 'required|numeric|unique:customers|digits:10'
+                            'phone' => 'required|numeric|unique:customers|digits:10',
+                            'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
 
@@ -70,6 +71,9 @@ class CustomerRequest extends FormRequest
             'phone.numeric' => 'Số điện thoại phải là số!',
             'phone.digits' => 'Sai định dạng số điện thoại!',
             'phone.unique' => 'Số điện thoại đã tồn tại!',
+            'image.image' => 'File nhập lên phải là Ảnh!',
+            'image.mimes' => 'Ảnh phải thuộc định dạng jpg, png, jpeg!',
+            'image.max' => 'Ảnh nhập không quá 5mb!',
         ];
     }
 }
