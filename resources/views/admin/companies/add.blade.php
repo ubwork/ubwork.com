@@ -19,26 +19,38 @@
                             <div class="form-group">
                                 <label for="">Name</label>
                                 <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['name']){{ $request['name'] }}@endisset">
+                                @error('name')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                            <label for="">Company name</label>
-                            <input type="text" name="company_name" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['company_name']){{ $request['company_name'] }}@endisset">
-                            </div>
+                                <label for="">Company name</label>
+                                <input type="text" name="company_name" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['company_name']){{ $request['company_name'] }}@endisset">
+                            @error('company_name')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                            <label for="">Address</label>
-                            <input type="text" name="address" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['address']){{ $request['address'] }}@endisset">
+                                <label for="">Address</label>
+                                <input type="text" name="address" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['address']){{ $request['address'] }}@endisset">
+                                @error('address')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">District</label>
                                 <input type="text" name="district" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['district']){{ $request['district'] }}@endisset">
+                                @error('name')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -47,26 +59,38 @@
                             <div class="form-group">
                                 <label for="">Company Model</label>
                                 <input type="text" name="company_model" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['company_model']){{ $request['company_model'] }}@endisset">
+                                @error('conpany_model')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Working Time</label>
                                 <input type="text" name="working_time" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['working_time']){{ $request['working_time'] }}@endisset">
+                                 @error('working_time')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                            <label for="">City</label>
-                            <input type="text" name="city" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['city']){{ $request['city'] }}@endisset">
+                                <label for="">City</label>
+                                <input type="text" name="city" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['city']){{ $request['city'] }}@endisset">
+                                @error('city')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Country</label>
                                 <input type="text" name="country" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['country']){{ $request['country'] }}@endisset">
+                                @error('country')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -75,12 +99,18 @@
                             <div class="form-group">
                                 <label for="">Zipcode</label>
                                 <input type="text" name="zipcode" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['zipcode']){{ $request['zipcode'] }}@endisset">
+                                @error('zip_code')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Phone</label>
                                 <input type="text" name="phone" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['phone']){{ $request['phone'] }}@endisset">
+                                @error('phone')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -89,12 +119,18 @@
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <input type="text" name="email" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['email']){{ $request['email'] }}@endisset">
+                                @error('email')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Password</label>
                                 <input type="text" name="password" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['password']){{ $request['password'] }}@endisset">
+                                @error('password')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -103,12 +139,18 @@
                             <div class="form-group">
                                 <label for="">Link Web</label>
                                 <input type="text" name="link_web" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['link_web']){{ $request['link_web'] }}@endisset">
+                                @error('phone')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                          <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Coin</label>
                                 <input type="text" name="coin" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['coin']){{ $request['coin'] }}@endisset">
+                                @error('coin')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -117,6 +159,9 @@
                             <div class="form-group">
                                 <label for="">Tax code</label>
                                 <input type="text" name="tax_code" class="form-control" placeholder="" aria-describedby="helpId"value="@isset($request['tax_code']){{ $request['tax_code'] }}@endisset">
+                                @error('tax_code')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>           
@@ -144,7 +189,7 @@
                                 </div>
                             </div>
                         @endif
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger alert-outline alert-dismissible" role="alert">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 <div class="alert-icon">
@@ -160,7 +205,7 @@
                                     </strong>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="row">
                           <div class="col-sm-6">
                               <div class="form-group">
