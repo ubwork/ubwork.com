@@ -9,15 +9,16 @@
         <div class="form-inner">
           <h3>Login to UbWork</h3>
           <!--Login Form-->
-          <form method="post" action="{{url('/login')}}">
+          <form method="post" action="{{ url('/login') }}">
+            @csrf
             <div class="form-group">
               <label>Email</label>
-              <input type="text" name="email" placeholder="Email">
+              <input value="{{old('email')}}" type="text" name="email" placeholder="Email">
             </div>
 
             <div class="form-group">
               <label>Password</label>
-              <input id="password-field" type="password" name="password" value="" placeholder="Password">
+              <input value="{{old('password')}}" id="password-field" type="password" name="password" placeholder="Password">
             </div>
 
             <div class="form-group">
@@ -33,10 +34,53 @@
             <div class="form-group">
               <button class="theme-btn btn-style-one" type="submit" name="log-in">Log In</button>
             </div>
+            {{-- //Hiển thị thông báo thành công --}}
+            <br>
+            @if ( Session::has('success') )
+                <div class="alert alert-success alert-outline alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert-icon">
+                        <i class="far fa-fw fa-bell"></i>
+                    </div>
+                    <div class="alert-message">
+                        <strong>{{ Session::get('success') }}</strong>
+                    </div>
+                </div>
+            @endif
+            <?php //Hiển thị thông báo lỗi?>
+            @if ( Session::has('error') )
+                <div class="alert alert-danger alert-outline alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert-icon">
+                        <i class="far fa-fw fa-bell"></i>
+                    </div>
+                    <div class="alert-message">
+                        <strong>{{ Session::get('error') }}</strong>
+                    </div>
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger alert-outline alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert-icon">
+                        <i class="far fa-fw fa-bell"></i>
+                    </div>
+                    <div class="alert-message">
+                        <strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </strong>
+                    </div>
+                </div>
+            @endif
+            {{-- hiển thị --}}
           </form>
 
           <div class="bottom-box">
-            <div class="text">Don't have an account? <a href="register.html">Signup</a></div>
+            <div class="text">Don't have an account? <a href="">Signup</a></div>
             <div class="divider"><span>or</span></div>
             <div class="btn-box row">
               <div class="col-lg-6 col-md-12">

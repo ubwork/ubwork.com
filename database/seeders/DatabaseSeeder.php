@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder
                 "password"=>Hash::make('123456'),
             ],
             [
-                "email"=>"linh120@gmail.com",
+                "email"=>"luonglinh120@gmail.com",
                 "name"=>"linh",
-                "password"=>Hash::make('123456'),
+                "password"=>'123456',
             ]
         ];
         DB::table('customers')->insert($dataCustomers);
