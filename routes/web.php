@@ -28,5 +28,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('customer')->name('customer.')->group(function () {
         Route::get('list', 'CustomerController@index')->name('list');
         Route::get('add', 'CustomerController@create')->name('add');
+        Route::post('postAdd', 'CustomerController@store')->name('postAdd');
     });
 });
