@@ -33,21 +33,10 @@ class CompanyRequest extends FormRequest
                     case 'store':
                         $rules = [
                             'name' => 'required|unique:companies',
-                            'company_name' => 'required',
-                            'address' => 'required',
-                            'district' => 'required',
+                            'company_name' => 'required|unique:companies',
                             'company_model' => 'required',
-                            'working_time' => 'required',
-                            'city' => 'required',
-                            'country' => 'required',
-                            'zipcode' => 'required',
-                            'phone' => 'required',
                             'email' => 'required|email',
-                            'company_name' => 'required',
                             'password' => 'required',
-                            'logo' => 'required',
-                            'link_web' => 'required',
-                            'coin' => 'required',
                             'tax_code' => 'required',
                         ];
                     default:
@@ -63,24 +52,14 @@ class CompanyRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Bắt Buộc Phải Nhập Tên Phòng',
-            'name.unique' => 'Tên Phòng Đã Tồn Tại',
-            'company.required' => 'Bắt Buộc Phải Chọn Loại Phòng',
-            'address.required' => 'Bắt Buộc Phải Nhập Giá',
-            'district.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'company_model.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'working_time.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'city.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'country.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'zipcode.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'phone.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'email.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'company_name.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'password.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'logo.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'link_web.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'coin.required' => 'Bắt Buộc Phải Nhập Mô Tả',
-            'tax_code.required' => 'Bắt Buộc Phải Nhập Mô Tả',
+            'name.required' => 'Bắt Buộc Phải Nhập Tên',
+            'name.unique' => 'Tên Đã Tồn Tại',
+            'company_model.required' => 'Bắt Buộc Phải Nhập Company model',
+            'email.required' => 'Bắt Buộc Phải Nhập Email',
+            'email.unique' => 'Email Đã Tồn Tại',
+            'company_name.required' => 'Bắt Buộc Phải Nhập Tên Công Ty',
+            'company_name.unique' => 'Tên Công Ty Đã Tồn Tại',
+            'tax_code.required' => 'Bắt Buộc Phải Nhập Code',
         ];
     }
 }

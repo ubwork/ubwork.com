@@ -18,6 +18,7 @@ class CompanyController extends Controller
     {
         $opj = new Company();
         $this->v['lists_company'] = $opj->loadList();
+        $this->v['title'] = "Danh sách công ty";
         return view("admin/companies.index", $this->v,);
     }
 
@@ -28,7 +29,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view("admin/companies.add");
+        return view("admin/companies.add", $this->v,);
     }
 
     /**
@@ -39,13 +40,14 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
+        $this->v['title'] = "Thêm Công Ty";
         $method_route = 'AddCompany';
         if ($request->isMethod('post')) {
             $param = [];
             $param['cols'] = $request->post();
             unset($param['cols']['_token']);
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
-                $param['cols']['image'] = $this->uploadFile($request->file('image'));
+                $param['cols']['logo'] = $this->uploadFile($request->file('image'));
             }
             $modelTest = new Company();
             $res = $modelTest->saveNew($param);
@@ -69,6 +71,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
+        $this->v['title'] = "Sửa Công Ty";
         $obj = new Company();
         $item = $obj->loadOne($id);
         $this->v['item'] = $item;
@@ -123,7 +126,12 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $opj = new Company();
-        $this->v['list_room'] = $opj->deleteCompany($id);
+        $this->v['list_company'] = $opj->deleteCompany($id);
         return back();
+    }
+    public function uploadFile($file)
+    {
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        return $file->storeAs('images', $fileName, 'public');
     }
 }
