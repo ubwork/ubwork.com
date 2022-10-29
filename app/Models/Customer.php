@@ -47,7 +47,7 @@ class Customer extends Model
     }
 
     // lưu cập nhật
-    public function saveUpdatePro($params) {
+    public function saveUpdate($params) {
         if(empty($params['cols']['id'])) {
             Session::flash('error', 'Không xác định bản cập nhật');
             return null;

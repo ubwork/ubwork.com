@@ -44,7 +44,8 @@ class CustomerRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required|email|unique:customers',
                             'password' => 'required',
-                            'phone' => 'required|numeric|unique:customers|digits:10'
+                            'phone' => 'required|numeric|unique:customers|digits:10',
+                            'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                             break;
 
