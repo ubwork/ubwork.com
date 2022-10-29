@@ -29,7 +29,7 @@ class CustomerRequest extends FormRequest
         switch($this->method()):
             case 'POST':
                 switch($currentAction) {
-                    case 'add':
+                    case 'store':
                         $rules = [
                             'name' => 'required',
                             'email' => 'required|email|unique:customers',
@@ -38,7 +38,7 @@ class CustomerRequest extends FormRequest
                         ];
                         break;
 
-                        case 'Update':
+                        case 'update':
                         $rules = [
                             'name' => 'required',
                             'email' => 'required|email|unique:customers',

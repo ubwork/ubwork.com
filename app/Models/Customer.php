@@ -39,6 +39,7 @@ class Customer extends Model
     // lấy dữ liệu ra bảng cập nhật
     public function loadOne($id, $params = null){
         $query = DB::table($this->table)
+               ->where('deleted_at', '=', '0')
                ->where('id', '=', $id);
 
         $obj = $query->first();

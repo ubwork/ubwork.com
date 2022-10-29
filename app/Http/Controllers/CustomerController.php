@@ -41,22 +41,22 @@ class CustomerController extends Controller
         $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
         $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
-        if($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $params['cols']['avatar'] = $this->uploadFile($request->file('avatar'));
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
         }
         unset($params['cols']['_token']);
         $model = new Customer();
         $res = $model->saveAdd($params);
         if($res == null) {
             Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return Redirect::to('admin.customer.add');
+            return Redirect()->route('admin.customer.add');
         }
         else if ($res > 0) {
             Session::flash('success', 'Thêm thành công!');
-            return Redirect::to('admin.customer.list');
+            return Redirect()->route('admin.customer.add');
         }else {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect::to('admin.customer.add');
+            return Redirect()->route('admin.customer.add');
         }
         
     }
@@ -68,7 +68,10 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-        //
+        $this->v['title'] = "Cập nhật ứng viên có trong hệ thống";
+        $model = new Customer();
+        $this->v['obj'] = $model->loadOne($id);
+        return view('admin.customer.edit', $this->v);
     }
 
     public function update(Request $request, $id)
@@ -78,7 +81,9 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
-        //
+        Customer::destroy($id);
+        Session::flash('success', 'Xóa thành công!');
+        return back();
     }
 
     // up ảnh
