@@ -30,6 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('add', 'CustomerController@create')->name('add');
         Route::post('add', 'CustomerController@store')->name('saveAdd');
         Route::get('edit/{id}', 'CustomerController@edit')->name('edit');
+        Route::post('edit/{id}', 'CustomerController@update')->name('SaveUpdate');
         Route::any('delete/{id}', 'CustomerController@destroy')->name('delete');
     });
 });

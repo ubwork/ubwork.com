@@ -6,6 +6,31 @@
 <section class="content">
     <div class="container-fluid">
         <div class="">
+
+          <div id="msg-box">
+            <?php //Hiển thị thông báo thành công?>
+            @if ( Session::has('success') )
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong>{{ Session::get('success') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+            @endif
+            <?php //Hiển thị thông báo lỗi?>
+            @if ( Session::has('error') )
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>{{ Session::get('error') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+            @endif
+        </div>
+          
+
             <div class="card card-warning">
                 <div class="card-header">
                   <h3 class="card-title">{{$title}}</h3>
@@ -60,13 +85,13 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Thành phố</label>
-                          <input type="text" class="form-control" name="city">
+                          <input type="text" class="form-control" name="city" value="{{old('city')}}">
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Vị trí</label>
-                          <input type="text" class="form-control" name="position">
+                          <input type="text" class="form-control" name="position" value="{{old('position')}}">
                         </div>
                     </div>
                     </div>
@@ -87,7 +112,7 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label>Địa chỉ</label>
-                            <input type="text" class="form-control" name="address">
+                            <input type="text" class="form-control" name="address" value="{{old('address')}}">
                           </div>
                       </div>
                     </div>
@@ -126,36 +151,8 @@
                       </div>
                     </div>
 
-                    {{-- //Hiển thị thông báo thành công --}}
-                    <br>
-                    @if ( Session::has('success') )
-                        <div class="alert alert-success alert-outline alert-dismissible" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            <div class="alert-icon">
-                                <i class="far fa-fw fa-bell"></i>
-                            </div>
-                            <div class="alert-message">
-                                <strong>{{ Session::get('success') }}</strong>
-                            </div>
-                        </div>
-                    @endif
-                    <?php //Hiển thị thông báo lỗi?>
-                    @if ( Session::has('error') )
-                        <div class="alert alert-danger alert-outline alert-dismissible" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            <div class="alert-icon">
-                                <i class="far fa-fw fa-bell"></i>
-                            </div>
-                            <div class="alert-message">
-                                <strong>{{ Session::get('error') }}</strong>
-                            </div>
-                        </div>
-                    @endif
-                    
-
-
                     <div class="mt-3">
-                        <input type="submit" value="Thêm" class="btn btn-success float-left mr-3">
+                        <input type="submit" value="Lưu" class="btn btn-success float-left mr-3">
                         <a href="{{route('admin.customer.list')}}" class="btn btn-secondary">Cancel</a>
                     </div>
                   </form>
