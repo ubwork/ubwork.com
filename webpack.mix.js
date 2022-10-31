@@ -18,4 +18,5 @@ mix.js("resources/js/app.js", "public/js").postCss(
         //
     ]
 );
-
+mix.js("resources/js/admin/candidate.js", "public/js/admin");
+mix.js("resources/js/remove-ajax.js", "public/js")

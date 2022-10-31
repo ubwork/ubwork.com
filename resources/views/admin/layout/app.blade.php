@@ -49,6 +49,7 @@
     @section('script')
         @include('admin.layout.script')
     @show
+    @include('admin.layout.toastr')
 </body>
 
 </html>

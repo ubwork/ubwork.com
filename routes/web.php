@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//client
 Route::get('/', function () {
     return view('client.home');
 });
 //company
 Route::get('register', ['as'=>'register','uses'=>'Company\RegisterController@getRegister']);
 Route::post('register', ['as'=>'register','uses'=>'Company\RegisterController@postRegister']);
+
 
 Route::get('company/login', ['as'=>'login','uses'=>'Company\LoginController@getLogin']);
 Route::post('company/login', ['as'=>'login','uses'=>'Company\LoginController@postLogin']);
@@ -33,3 +33,15 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 });
+
+//company
+Route::prefix('company')->name('company.')->group(function () {
+    Route::get('/', 'Admin\CompanyController@index')->name('index');
+    Route::match(['get', 'post'], 'store', 'Admin\CompanyController@store')->name('store');
+    Route::get('show/{id}', 'Admin\CompanyController@show')->name('show');
+    Route::post('edit/{id}', 'Admin\CompanyController@edit')->name('edit');
+    Route::get('destroy/{id}', 'Admin\CompanyController@destroy')->name('destroy');
+});
+//company
+
+Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
