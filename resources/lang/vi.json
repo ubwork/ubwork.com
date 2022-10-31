@@ -116,8 +116,16 @@
     "TO" : "đến",
     "Manage ACL" : "Quản lý ACL",
     "Roles" : "Vai trò",
-    "Permissions" : "Quyền"
-
-
-
+    "Permissions" : "Quyền",
+    "Candidate" : "Ứng viên",
+    "City" : "Thành phố",
+    "Gender" : "Giới tính",
+    "Position" : "Vị trí",
+    "Choose an image smaller than 5mb" : "Chọn ảnh kích thước nhỏ hơn 5mb",
+    "Male" : "Nam",
+    "Other" : "Khác",
+    "Female" : "Nữ",
+    "Block" : "Chặn",
+    "Cancel" : "Hủy",
+    "Add candidates in the system" : "Thêm ứng viên vào trong hệ thống"
 }

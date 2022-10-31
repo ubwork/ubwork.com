@@ -33,5 +33,6 @@ Route::prefix('company')->name('company.')->group(function () {
     Route::post('edit/{id}', 'Admin\CompanyController@edit')->name('edit');
     Route::get('destroy/{id}', 'Admin\CompanyController@destroy')->name('destroy');
 });
+//company
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
