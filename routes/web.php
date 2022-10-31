@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//client
 Route::get('/', function () {
     return view('client.home');
 });
@@ -35,3 +34,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('delete/{id}', 'CompanyController@destroy')->name('delete');
     });
 });
+Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
