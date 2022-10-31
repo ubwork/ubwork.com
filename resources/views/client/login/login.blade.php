@@ -1,4 +1,4 @@
-@extends('login.layout.app')
+@extends('client.login.layout.app')
 @section('content')
  <!-- Info Section -->
  <div class="login-section">

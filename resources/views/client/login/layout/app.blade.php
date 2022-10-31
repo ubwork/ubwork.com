@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Superio | Just another HTML Template | Login</title>
   @section('style')
-    @include('login.layout.style')
+    @include('client.login.layout.style')
   @show
   <link rel="shortcut icon" href="{{asset('/assets/client-bower/images/favicon.png')}}" type="image/x-icon">
   <link rel="icon" href="{{asset('/assets/client-bower/images/favicon.png')}}" type="image/x-icon">
@@ -19,7 +19,7 @@
     <div class="preloader"></div>
 
     <!-- Main Header-->
-      @include('login.layout.header')
+      @include('client.login.layout.header')
     <!--End Main Header -->
 
     <!-- Info Content -->
@@ -30,7 +30,7 @@
 
   {{-- script --}}
   @section('script')
-    @include('login.layout.script')
+    @include('client.login.layout.script')
   @show
   {{-- script --}}
   
