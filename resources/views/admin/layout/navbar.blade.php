@@ -37,8 +37,8 @@
                 <i class="fa fa-language" aria-hidden="true"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                {{-- <a class="dropdown-item" href="{{ route('change-language', ['en']) }}">{{ __('ENGLISH') }}</a>
-                <a class="dropdown-item" href="{{ route('change-language', ['vi']) }}">{{ __('VIETNAMESE') }}</a> --}}
+                <a class="dropdown-item" href="{{ route('change-language', ['en']) }}">{{ __('ENGLISH') }}</a>
+                <a class="dropdown-item" href="{{ route('change-language', ['vi']) }}">{{ __('VIETNAMESE') }}</a>
             </div>
         </div>
         <li class="nav-item">
