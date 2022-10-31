@@ -29,16 +29,30 @@ class CompanyRequest extends FormRequest
         // để lấy phương thức hiện tại
         switch ($this->method()):
             case 'POST':
+                $id = $this->route()->id;
                 switch ($currentAction) {
                     case 'store':
                         $rules = [
                             'name' => 'required|unique:companies',
-                            'company_name' => 'required|unique:companies',
+                            'company_name' => 'required',
                             'company_model' => 'required',
-                            'email' => 'required|email',
+                            'email' => 'required|email|unique:companies',
                             'password' => 'required',
                             'tax_code' => 'required',
+                            'phone' => 'required | min:10 ',
                         ];
+                        break;
+                    case 'edit':
+                        $rules = [
+                            'name' => 'required',
+                            'company_name' => 'required',
+                            'company_model' => 'required',
+                            'email' => 'required|email|unique:companies,email,' . $id . ',id',
+                            'password' => 'required',
+                            'tax_code' => 'required',
+                            'phone' => 'required | min:10 ',
+                        ];
+                        break;
                     default:
                         break;
                 }
