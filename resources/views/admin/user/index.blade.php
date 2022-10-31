@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('title')
-    {{ $title }}
+    {{ __($title) }}
 @endsection
 @section('style')
     @parent

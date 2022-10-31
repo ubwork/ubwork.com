@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PermissionRequest;
 use App\Http\Requests\Admin\UserRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        $this->v['title'] = __('User list');
+        $this->v['title'] = 'User list';
         $this->v['users'] = User::all();
         return view('admin.user.index',$this->v);
     }
@@ -28,7 +30,7 @@ class UserController extends Controller
         return view('admin.user.add',$this->v);
     }
 
-    public function store(UserRequest $request)
+    public function store(PermissionRequest $request)
     {
         dd($request);
     }

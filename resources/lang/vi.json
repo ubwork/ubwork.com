@@ -116,8 +116,10 @@
     "TO" : "đến",
     "Manage ACL" : "Quản lý ACL",
     "Roles" : "Vai trò",
-    "Permissions" : "Quyền"
-
-
-
+    "Permissions" : "Quyền",
+    "Permission list" : "Danh sách quyền",
+    "Permission add" : "Thêm quyền",
+    "Permission edit": "Sửa quyền",
+    "Permission delete" : "Xóa quyền",
+    "DISPLAY_NAME" : "Tên hiện thị"
 }

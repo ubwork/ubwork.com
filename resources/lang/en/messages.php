@@ -28,5 +28,7 @@ return [
    'phone.min' => 'Phone must 11 number',
    'phone.numeric' => 'Phone must number',
    'address.required' => 'The address field is required',
-   "Add falid" => "Add falid"
+   "Add falid" => "Add falid",
+   "display_name.required" => "The display name field is required",
+   "display_name.unique" => "The display name field is required",
 ];

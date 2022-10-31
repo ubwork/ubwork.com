@@ -104,5 +104,10 @@
     "TO" : "To",
     "Manage ACL" : "Manage ACL",
     "Roles" : "Roles",
-    "Permissions" : "Permissions"
+    "Permissions" : "Permissions",
+    "Permission list": "Permission list",
+    "Permission add" : "Permission add",
+    "Permission edit": "Permission edit",
+    "Permission delete" : "Permission delete",
+    "DISPLAY_NAME" : "Display name"
 }
