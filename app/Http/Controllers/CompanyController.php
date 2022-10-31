@@ -41,7 +41,7 @@ class CompanyController extends Controller
     public function store(CompanyRequest $request)
     {
         $this->v['title'] = "Thêm Công Ty";
-        $method_route = 'AddCompany';
+        $method_route = 'store';
         if ($request->isMethod('post')) {
             $param = [];
             $param['cols'] = $request->post();
@@ -86,7 +86,7 @@ class CompanyController extends Controller
      */
     public function edit($id, CompanyRequest $request)
     {
-        $method_route = 'admin.company.detail';
+        $method_route = 'company.show';
         $params = [];
         $params['cols'] = $request->post();
         unset($params['cols']['_token']);

@@ -234,7 +234,7 @@
                         <br>
                         <div class="mt-3">
                             <input type="submit" value="Thêm" class="btn btn-success float-left mr-3">
-                            <a href="{{route('admin.company.list')}}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{route('company.index')}}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>
