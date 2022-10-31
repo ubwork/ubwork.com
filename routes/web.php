@@ -35,6 +35,9 @@ Route::get('/company', function () {
 Route::get('/company-detail', function () {
     return view('client.company.company-detail');
 });
+Route::get('/cv', function () {
+    return view('client.upcv.cv');
+});
 //company
 
 //admin
