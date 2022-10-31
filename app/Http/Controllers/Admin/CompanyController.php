@@ -88,14 +88,14 @@ class CompanyController extends Controller
      */
     public function edit($id, CompanyRequest $request)
     {
-        $method_route = 'admin.company.detail';
+        $method_route = 'company.edit';
         $params = [];
         $params['cols'] = $request->post();
         unset($params['cols']['_token']);
-        $objRoom = new Company();
-        $objItem = $objRoom->loadOne($id);
+        $objCompany = new Company();
+        $objItem = $objCompany->loadOne($id);
         $params['cols']['id'] = $id;
-        $res = $objRoom->SaveUpdate($params);
+        $res = $objCompany->SaveUpdate($params);
         if ($res == null) {
             return redirect()->route($method_route, ['id' => $id]);
         } else if ($res == 1) {

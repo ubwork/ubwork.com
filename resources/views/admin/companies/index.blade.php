@@ -34,9 +34,15 @@
                         <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->logo)}}" alt=""></td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->phone}}</td>
-                        <td class="text-center">
-                          <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
-                        </td>
+                        <td>
+                        @if($item->status == 0)
+                        Đóng
+                        @elseif($item->status == 1)
+                        Hoạt động
+                        @elseif($item->status == 2)
+                        Chặn
+                        @endif
+                      </td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td class="project-actions xoa text-right d-flex align-items-center">

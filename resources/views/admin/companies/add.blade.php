@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Name</label>
+                                <label for="">Name<span class="text-danger">*</label>
                                 <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['name']){{ $request['name'] }}@endisset">
                                 @error('name')
                                     <small class="text-danger">{{$message}}</small>
@@ -97,7 +97,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Zipcode</label>
+                                <label for="">Zipcode<span class="text-danger">*</label>
                                 <input type="text" name="zipcode" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['zipcode']){{ $request['zipcode'] }}@endisset">
                                 @error('zip_code')
                                     <small class="text-danger">{{$message}}</small>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Phone</label>
+                                <label for="">Phone<span class="text-danger">*</label>
                                 <input type="text" name="phone" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['phone']){{ $request['phone'] }}@endisset">
                                 @error('phone')
                                     <small class="text-danger">{{$message}}</small>
@@ -117,7 +117,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Email</label>
+                                <label for="">Email<span class="text-danger">*</label>
                                 <input type="text" name="email" class="form-control" placeholder="" aria-describedby="helpId" value="@isset($request['email']){{ $request['email'] }}@endisset">
                                 @error('email')
                                     <small class="text-danger">{{$message}}</small>
@@ -157,7 +157,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Tax code</label>
+                                <label for="">Tax code<span class="text-danger">*</label>
                                 <input type="text" name="tax_code" class="form-control" placeholder="" aria-describedby="helpId"value="@isset($request['tax_code']){{ $request['tax_code'] }}@endisset">
                                 @error('tax_code')
                                     <small class="text-danger">{{$message}}</small>
