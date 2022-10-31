@@ -37,8 +37,9 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="" method="post" enctype="multipart/form-data">
+                  <form action="{{ route('admin.customer.SaveUpdate', ['id' => $obj->id])}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{ $obj->id }}">
                     <div class="row">
                     <div class="col">
                         <!-- text input -->

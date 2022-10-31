@@ -74,9 +74,32 @@ class CustomerController extends Controller
         return view('admin.customer.edit', $this->v);
     }
 
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, $id)
     {
-        //
+        $method_route = 'admin.customer.edit';
+        $params = [];
+        $params['cols'] = $request->post();
+
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $params['cols']['image'] = $this->uploadFile($request->file('image'));
+        }
+
+        unset($params['cols']['_token']);
+        $model = new Customer();
+        $obj = $model->loadOne($id);
+        $params['cols']['id'] = $id;
+        $res = $model->saveUpdate($params);
+        if($res == null) {
+            Session::flash('error', 'Bạn chưa thực hiện thay đổi nào!');
+            return Redirect()->route($method_route, ['id' => $id]);
+        }
+        if ($res == 1) {
+            Session::flash('success', 'Cập nhật '.$obj->name .' thành công!');
+            return Redirect()->route($method_route, ['id' => $id]);
+        }else {
+            Session::flash('error', 'Lỗi cập nhật!');
+            return Redirect()->route($method_route, ['id' => $id]);
+        }
     }
 
     public function destroy($id)
