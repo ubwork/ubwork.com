@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Client\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Customers;
+use App\Models\Candidates;
 
 class LoginController extends Controller
 {
@@ -29,7 +29,6 @@ class LoginController extends Controller
         // $password = password_hash($request->input('password'), PASSWORD_ARGON2I);
 
         // password_verify('adsadsasasa',$hash);
-        dd(Auth::user());
         $password = $request->input('password');
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return Redirect::to('/');

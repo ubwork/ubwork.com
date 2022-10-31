@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $dataCustomers=[
+        $data=[
             [
                 "email"=>"admin@gmail.com",
                 "name"=>"admin",
@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
             [
                 "email"=>"luonglinh120@gmail.com",
                 "name"=>"linh",
-                "password"=>'123456',
+                "password"=>Hash::make('123456'),
             ]
         ];
-        DB::table('customers')->insert($dataCustomers);
+        DB::table('candidates')->insert($data);
     }
 }
