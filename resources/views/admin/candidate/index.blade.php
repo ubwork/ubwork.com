@@ -1,41 +1,17 @@
 @extends('admin.layout.app')
 @section('title')
-    {{ __('Customer') }}
+    {{ __('Candidate') }}
 @endsection
 @section('content')
 <section class="content">
     <div class="container-fluid">
-
-      <div id="msg-box">
-        <?php //Hiển thị thông báo thành công?>
-        @if ( Session::has('success') )
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <strong>{{ Session::get('success') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-        <?php //Hiển thị thông báo lỗi?>
-        @if ( Session::has('error') )
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <strong>{{ Session::get('error') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-    </div>
-
 
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <a href="{{route('admin.customer.add')}}" class="btn btn-primary float-right">Tạo mới</a>
+              <a href="{{route('admin.candidate.create')}}" class="btn btn-primary float-right">Tạo mới</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -48,8 +24,6 @@
                   <th>Email</th>
                   <th>Số điện thoại</th>
                   <th>Trạng thái</th>
-                  <th>Thời gian tạo</th>
-                  <th>Thời gian sửa</th>
                   <th>Hành động</th>
                 </tr>
                 </thead>
@@ -61,18 +35,29 @@
                         <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->avatar)}}" alt=""></td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->phone}}</td>
-                        <td class="text-center">
-                          <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
-                        </td>
-                        <td>{{$item->created_at}}</td>
-                        <td>{{$item->updated_at}}</td>
+                        <td>
+                        @if($item->status == 0)
+                        Đóng
+                        @elseif($item->status == 1)
+                        Hoạt động
+                        @elseif($item->status == 2)
+                        Chặn
+                        @endif
+                      </td>
+                        
                         <td class="project-actions xoa text-right d-flex align-items-center">
-                            <a class="btn btn-info btn-sm mr-3" href="{{route('admin.customer.edit', ['id' => $item->id])}}">
+                            <a class="btn btn-info btn-sm mr-3" href="{{route('admin.candidate.edit', ['id' => $item->id])}}">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-danger btn-sm" href="{{route('admin.customer.delete', ['id' => $item->id])}}">
+                            <form action="{{route('admin.candidate.destroy', ['id' => $item->id])}}" method="post">
+                              @csrf
+                              <button onclick="return Del()" class="btn btn-danger btn-sm" type="submit"
+                                        value="{{ $item->id }}"><i class="fa fa-trash"></i></button>
+                            </form>
+                            
+                            {{-- <a onclick="" class="btn btn-danger btn-sm" href="{{route('admin.candidate.destroy', ['id' => $item->id])}}">
                               <i class="fas fa-trash"></i>
-                            </a>
+                            </a> --}}
                         </td>
                     </tr>
                     @endforeach
@@ -95,5 +80,11 @@
 @endsection
 @section('script')
 @parent
-<script src="{{asset('js/admin/customer.js')}}"></script>
+<script>
+  function Del() {
+    return confirm('Bạn có chắc chắn muốn xóa');
+  }
+</script>
+<script src="{{ asset('js/remove-ajax.js') }}"></script>
+<script src="{{asset('js/admin/Candidate.js')}}"></script>
 @endsection

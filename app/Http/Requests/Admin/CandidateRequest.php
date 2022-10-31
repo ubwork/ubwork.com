@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerRequest extends FormRequest
+class CandidateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,7 @@ class CustomerRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route()->id;
         $rules = [];
         $currentAction = $this->route()->getActionMethod();
         // để lấy phương thức hiện tại
@@ -32,9 +33,9 @@ class CustomerRequest extends FormRequest
                     case 'store':
                         $rules = [
                             'name' => 'required',
-                            'email' => 'required|email|unique:customers',
+                            'email' => 'required|email|unique:candidates',
                             'password' => 'required',
-                            'phone' => 'required|numeric|unique:customers',
+                            'phone' => 'required|unique:candidates|min:10|max:10',
                             'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
@@ -42,8 +43,8 @@ class CustomerRequest extends FormRequest
                         case 'update':
                         $rules = [
                             'name' => 'required',
-                            'email' => 'required|email|unique:customers',
-                            'phone' => 'required|numeric|unique:customers',
+                            'email' => 'required|email|unique:candidates,email,' . $id . ',id',
+                            'phone' => 'required|min:10|max:10|unique:candidates,phone,' . $id . ',id',
                             'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                             break;
@@ -62,16 +63,17 @@ class CustomerRequest extends FormRequest
 
     public function messages() {
         return [
-            'name.required' => 'Vui lòng nhập tên!',
-            'email.required' => 'Vui lòng nhập email!',
-            'email.email' => 'Sai định dạng email!',
-            'email.unique' => 'Email đã tồn tại!',
-            'password.required' => 'Vui lòng nhập mật khẩu! ',
-            'phone.required' => 'Vui lòng nhập số điện thoại!',
-            'phone.numeric' => 'Số điện thoại phải là số!',
+            'name.required' => __('messages.name.required'),
+            'email.required' => __('messages.email.required'),
+            'email.email' => __('messages.email.email'),
+            'email.unique' => __('messages.email.unique'),
+            'password.required' => __('messages.password.required'),
+            'phone.required' => __('messages.phone.required'),
+            'phone.min' => 'Số điện thoại có 10 số!',
+            'phone.max' => 'Số điện thoại nhỏ hơn 10 số!',
             'phone.digits' => 'Sai định dạng số điện thoại!',
             'phone.unique' => 'Số điện thoại đã tồn tại!',
-            'image.image' => 'File nhập lên phải là Ảnh!',
+            'image.image' => __('messages.image.image'),
             'image.mimes' => 'Ảnh phải thuộc định dạng jpg, png, jpeg!',
             'image.max' => 'Ảnh nhập không quá 5mb!',
         ];

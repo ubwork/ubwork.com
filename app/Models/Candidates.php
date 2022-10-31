@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-class Customer extends Model
+class Candidates extends Model
 {
     use HasFactory;
-    protected $table = 'customers';
+    protected $table = 'candidates';
     // public $timestamps = false;
     protected $fillable = ['id', 'name', 'avatar', 'email', 'password', 'phone', 'address', 'position', 'gender',
-    'city', 'coin', 'is_active', 'deleted_at', 'status', 'created_at', 'updated_at'];
+    'city', 'coin', 'deleted_at', 'status', 'created_at', 'updated_at'];
 
     // Lấy dữ liệu ra bảng
     public function loadList($param = []){
         $query = DB::table($this->table)
                ->select($this->fillable)
-               ->where('deleted_at', '=', '0')
+               ->where('deleted_at', null)
                ->orderBy('id', 'desc');
 
         $lists = $query->paginate(9);
@@ -39,7 +39,7 @@ class Customer extends Model
     // lấy dữ liệu ra bảng cập nhật
     public function loadOne($id, $params = null){
         $query = DB::table($this->table)
-               ->where('deleted_at', '=', '0')
+               ->where('deleted_at', '=', null)
                ->where('id', '=', $id);
 
         $obj = $query->first();

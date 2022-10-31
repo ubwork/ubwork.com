@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CustomerRequest;
-use App\Models\Customer;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CandidateRequest;
+use App\Models\Candidates;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 
-class CustomerController extends Controller
+class CandidateController extends Controller
 {
     private $v;
     public function __construct(){
@@ -19,21 +18,21 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customer = new Customer();
-        $this->v['list'] = $customer->loadList();
+        $candidate = new Candidates();
+        $this->v['list'] = $candidate->loadList();
         $this->v['title'] = "Danh sách ứng viên có trong hệ thống";
 
-        return view('admin.customer.index', $this->v);
+        return view('admin.candidate.index', $this->v);
     }
 
     public function create()
     {
-        $this->v['title'] = "Thêm ứng viên vào trong hệ thống";
+        $this->v['title'] = "Add candidates in the system";
 
-        return view('admin.customer.add', $this->v);
+        return view('admin.candidate.add', $this->v);
     }
 
-    public function store(CustomerRequest $request)
+    public function store(CandidateRequest $request)
     {
         $params = [];
         $params['cols'] = $request->post();
@@ -45,18 +44,18 @@ class CustomerController extends Controller
             $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
         }
         unset($params['cols']['_token']);
-        $model = new Customer();
+        $model = new Candidates();
         $res = $model->saveAdd($params);
         if($res == null) {
             Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return Redirect()->route('admin.customer.add');
+            return Redirect()->route('admin.candidate.create');
         }
         else if ($res > 0) {
             Session::flash('success', 'Thêm thành công!');
-            return Redirect()->route('admin.customer.add');
+            return Redirect()->route('admin.candidate.create');
         }else {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('admin.customer.add');
+            return Redirect()->route('admin.candidate.create');
         }
         
     }
@@ -69,28 +68,28 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $this->v['title'] = "Cập nhật ứng viên có trong hệ thống";
-        $model = new Customer();
+        $model = new Candidates();
         $this->v['obj'] = $model->loadOne($id);
-        return view('admin.customer.edit', $this->v);
+        return view('admin.candidate.edit', $this->v);
     }
 
-    public function update(CustomerRequest $request, $id)
+    public function update(CandidateRequest $request, $id)
     {
-        $method_route = 'admin.customer.edit';
+        $method_route = 'admin.candidate.edit';
         $params = [];
         $params['cols'] = $request->post();
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['cols']['image'] = $this->uploadFile($request->file('image'));
+            $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
         }
 
         unset($params['cols']['_token']);
-        $model = new Customer();
+        $model = new Candidates();
         $obj = $model->loadOne($id);
         $params['cols']['id'] = $id;
         $res = $model->saveUpdate($params);
         if($res == null) {
-            Session::flash('error', 'Bạn chưa thực hiện thay đổi nào!');
+            Session::flash('success', 'Cập nhật thành công!');
             return Redirect()->route($method_route, ['id' => $id]);
         }
         if ($res == 1) {
@@ -104,7 +103,7 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
-        Customer::destroy($id);
+        Candidates::where('id', $id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
         Session::flash('success', 'Xóa thành công!');
         return back();
     }

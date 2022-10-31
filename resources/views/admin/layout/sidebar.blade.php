@@ -46,10 +46,10 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="{{ route('admin.customer.list') }}" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <a href="{{ route('admin.candidate.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            {{ __('CUSTOMERS') }}
+                            {{ __('Candidate') }}
                         </p>
                     </a>
                 </li>
