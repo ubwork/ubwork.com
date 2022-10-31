@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CompanyRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -55,6 +56,7 @@ class CompanyController extends Controller
                 return redirect()->route($method_route);
             } elseif ($res > 0) {
                 Session::flash('success', 'Thêm thành công');
+                return Redirect()->route('company.index');
             } else {
                 Session::flash('error', 'Lỗi thêm mới người dùng');
                 return redirect()->route($method_route);
@@ -98,7 +100,7 @@ class CompanyController extends Controller
             return redirect()->route($method_route, ['id' => $id]);
         } else if ($res == 1) {
             Session::flash('success', 'Cập nhật bản ghi' . $objItem->id . 'thành công');
-            return redirect()->route($method_route, ['id' => $id]);
+            return redirect()->route('company.index', ['id' => $id]);
         } else {
             Session::flash('error', 'lỗi cập nhật abnr ghi' . $objItem->id);
             return redirect()->route($method_route, ['id' => $id]);

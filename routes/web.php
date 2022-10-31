@@ -27,11 +27,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 //company
 Route::prefix('company')->name('company.')->group(function () {
-    Route::get('/', 'CompanyController@index')->name('index');
-    Route::match(['get', 'post'], 'store', 'CompanyController@store')->name('store');
-    Route::get('show/{id}', 'CompanyController@show')->name('show');
-    Route::post('edit/{id}', 'CompanyController@edit')->name('edit');
-    Route::get('destroy/{id}', 'CompanyController@destroy')->name('destroy');
+    Route::get('/', 'Admin\CompanyController@index')->name('index');
+    Route::match(['get', 'post'], 'store', 'Admin\CompanyController@store')->name('store');
+    Route::get('show/{id}', 'Admin\CompanyController@show')->name('show');
+    Route::post('edit/{id}', 'Admin\CompanyController@edit')->name('edit');
+    Route::get('destroy/{id}', 'Admin\CompanyController@destroy')->name('destroy');
 });
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
