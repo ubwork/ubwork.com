@@ -1,5 +1,4 @@
   <!-- jQuery -->
-  @include('sweetalert::alert')
   <script src="{{ asset('assets/admin-bower/plugins/jquery/jquery.min.js') }}"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ asset('assets/admin-bower/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -14,4 +13,6 @@
   <!-- AdminLTE App -->
   <script src="{{ asset('assets/admin-bower/dist/js/adminlte.js') }}"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="{{ asset('assets/admin-bower/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+  <script src="{{ asset('assets/admin-bower/plugins/toastr/toastr.min.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
