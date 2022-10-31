@@ -62,7 +62,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Customers::class,
+            'model' => App\Models\User::class,
+        ],
+        'candidate' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Candidates::class,
         ],
 
         // 'users' => [
@@ -89,6 +93,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'candidate' => [
+            'provider' => 'candidate',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
