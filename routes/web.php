@@ -13,15 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//client
 Route::get('/', function () {
     return view('client.home');
 });
-//company
-
-//admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-});
+Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
