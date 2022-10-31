@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
+
 {
     private $v;
     public function __construct()
@@ -29,7 +31,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view("admin/companies.add", $this->v,);
+        return view("admin/companies.store", $this->v,);
     }
 
     /**
@@ -41,7 +43,7 @@ class CompanyController extends Controller
     public function store(CompanyRequest $request)
     {
         $this->v['title'] = "Thêm Công Ty";
-        $method_route = 'AddCompany';
+        $method_route = 'store';
         if ($request->isMethod('post')) {
             $param = [];
             $param['cols'] = $request->post();

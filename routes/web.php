@@ -24,14 +24,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+});
 
-
-    //company
-    Route::prefix('company')->name('company.')->group(function () {
-        Route::get('list', 'CompanyController@index')->name('list');
-        Route::match(['get', 'post'], 'add', 'CompanyController@store')->name('add');
-        Route::get('detail/{id}', 'CompanyController@show')->name('detail');
-        Route::post('update/{id}', 'CompanyController@edit')->name('update');
-        Route::get('delete/{id}', 'CompanyController@destroy')->name('delete');
-    });
+//company
+Route::prefix('company')->name('company.')->group(function () {
+    Route::get('/', 'Admin\CompanyController@index')->name('index');
+    Route::match(['get', 'post'], 'store', 'Admin\CompanyController@store')->name('store');
+    Route::get('show/{id}', 'Admin\CompanyController@show')->name('show');
+    Route::post('edit/{id}', 'Admin\CompanyController@edit')->name('edit');
+    Route::get('destroy/{id}', 'Admin\CompanyController@destroy')->name('destroy');
 });

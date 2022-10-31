@@ -8,7 +8,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <a href="{{route('admin.company.add')}}" class="btn btn-primary float-right">Tạo mới</a>
+              <a href="{{route('company.store')}}" class="btn btn-primary float-right">Tạo mới</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -40,10 +40,10 @@
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
-                            <a class="btn btn-info btn-sm mr-3" href="{{route('admin.company.detail', ['id' => $item->id])}}">
+                            <a class="btn btn-info btn-sm mr-3" href="{{route('company.show', ['id' => $item->id])}}">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-danger btn-sm" href="{{route('admin.company.delete', ['id' => $item->id])}}">
+                            <a class="btn btn-danger btn-sm" href="{{route('company.destroy', ['id' => $item->id])}}">
                               <i class="fas fa-trash"></i>
                             </a>
                         </td>

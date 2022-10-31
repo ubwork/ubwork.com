@@ -40,6 +40,7 @@ class CompanyRequest extends FormRequest
                             'password' => 'required',
                             'tax_code' => 'required',
                             'phone' => 'required | min:10 ',
+
                         ];
                         break;
                     case 'edit':
