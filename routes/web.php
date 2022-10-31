@@ -18,9 +18,17 @@ Route::get('/', function () {
     return view('client.home');
 });
 //company
+Route::get('register', ['as'=>'register','uses'=>'Company\RegisterController@getRegister']);
+Route::post('register', ['as'=>'register','uses'=>'Company\RegisterController@postRegister']);
 
+Route::get('company/login', ['as'=>'login','uses'=>'Company\LoginController@getLogin']);
+Route::post('company/login', ['as'=>'login','uses'=>'Company\LoginController@postLogin']);
 //admin
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::get('admin/login', ['as'=>'login','uses'=>'Admin\LoginController@getLogin']);
+Route::post('admin/login', ['as'=>'login','uses'=>'Admin\LoginController@postLogin']);
+
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
