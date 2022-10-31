@@ -1,4 +1,3 @@
-
 $(function(){
     function readURL(input, selector) {
         if (input.files && input.files[0]) {
@@ -17,7 +16,4 @@ $(function(){
 
 });
 
-$('.toastrDefaultSuccess').click(function() {
-    toastr.success('Thêm thành công')
-});
 
