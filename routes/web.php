@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 Route::get('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@getLogin']);
 Route::post('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@postLogin']);
+
 //company
 
 //admin
