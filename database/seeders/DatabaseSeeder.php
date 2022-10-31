@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 class DatabaseSeeder extends Seeder
 {
