@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\client\JobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,33 @@ Route::post('admin/login', ['as'=>'login','uses'=>'Admin\LoginController@postLog
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+// Route::get('/', [, 'category'])->name('category');
+Route::get('/', [JobController::class, 'index'])->name('index');
+Route::get('/job', function () {
+    return view('client.job.job');
+});
+Route::get('/job-detail', function () {
+    return view('client.job.job-detail');
+});
+Route::get('/candi', function () {
+    return view('client.candidate.candi-list');
+});
+Route::get('/candi-detail', function () {
+    return view('client.candidate.candi-detail');
+});
+Route::get('/company', function () {
+    return view('client.company.company');
+});
+Route::get('/company-detail', function () {
+    return view('client.company.company-detail');
+});
+Route::get('/cv', function () {
+    return view('client.upcv.cv');
+});
+//company
+
+//admin
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
