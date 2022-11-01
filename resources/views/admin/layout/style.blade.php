@@ -12,3 +12,4 @@
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="{{ asset('assets/admin-bower/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin-bower/plugins/summernote/summernote-bs4.css') }}">
+<link rel="stylesheet" href="{{asset('assets/admin-bower/plugins/toastr/toastr.css')}}">
