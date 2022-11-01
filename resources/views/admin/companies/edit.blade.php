@@ -11,7 +11,7 @@
                   <h3 class="card-title">{{$title}}</h3>
                 </div>
             <div class="card-body">
-                <form action="{{route('company.edit', ['id' => $item->id])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route("company.edit",['id'=>request()->route('id')])}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">

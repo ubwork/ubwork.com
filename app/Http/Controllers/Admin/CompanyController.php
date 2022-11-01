@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CompanyRequest;
+use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
-
 {
     private $v;
     public function __construct()
@@ -31,7 +30,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view("admin/companies.store", $this->v,);
+        return view("admin/companies.add", $this->v,);
     }
 
     /**
@@ -57,6 +56,7 @@ class CompanyController extends Controller
                 return redirect()->route($method_route);
             } elseif ($res > 0) {
                 Session::flash('success', 'Thêm thành công');
+                return Redirect()->route('company.index');
             } else {
                 Session::flash('error', 'Lỗi thêm mới người dùng');
                 return redirect()->route($method_route);
@@ -88,19 +88,19 @@ class CompanyController extends Controller
      */
     public function edit($id, CompanyRequest $request)
     {
-        $method_route = 'company.edit';
+        $method_route = 'company.show';
         $params = [];
         $params['cols'] = $request->post();
         unset($params['cols']['_token']);
-        $objCompany = new Company();
-        $objItem = $objCompany->loadOne($id);
+        $objRoom = new Company();
+        $objItem = $objRoom->loadOne($id);
         $params['cols']['id'] = $id;
-        $res = $objCompany->SaveUpdate($params);
+        $res = $objRoom->SaveUpdate($params);
         if ($res == null) {
             return redirect()->route($method_route, ['id' => $id]);
         } else if ($res == 1) {
             Session::flash('success', 'Cập nhật bản ghi' . $objItem->id . 'thành công');
-            return redirect()->route($method_route, ['id' => $id]);
+            return redirect()->route('company.index', ['id' => $id]);
         } else {
             Session::flash('error', 'lỗi cập nhật abnr ghi' . $objItem->id);
             return redirect()->route($method_route, ['id' => $id]);
