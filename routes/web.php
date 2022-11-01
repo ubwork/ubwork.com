@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//client
 Route::get('/', function () {
     return view('client.home');
 });
+Route::get('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@getLogin']);
+Route::post('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@postLogin']);
+
 //company
 Route::get('register', ['as'=>'register','uses'=>'Company\RegisterController@getRegister']);
 Route::post('register', ['as'=>'register','uses'=>'Company\RegisterController@postRegister']);
