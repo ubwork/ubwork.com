@@ -14,44 +14,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('client.home');
-});
+
+Route::get('/', 'client\HomeController@index')->name('index');
 //company
-Route::get('register', ['as'=>'register','uses'=>'Company\RegisterController@getRegister']);
-Route::post('register', ['as'=>'register','uses'=>'Company\RegisterController@postRegister']);
+Route::get('register', ['as' => 'register', 'uses' => 'Company\RegisterController@getRegister']);
+Route::post('register', ['as' => 'register', 'uses' => 'Company\RegisterController@postRegister']);
 
 
-Route::get('company/login', ['as'=>'login','uses'=>'Company\LoginController@getLogin']);
-Route::post('company/login', ['as'=>'login','uses'=>'Company\LoginController@postLogin']);
+Route::get('company/login', ['as' => 'login', 'uses' => 'Company\LoginController@getLogin']);
+Route::post('company/login', ['as' => 'login', 'uses' => 'Company\LoginController@postLogin']);
 //admin
-Route::get('admin/login', ['as'=>'login','uses'=>'Admin\LoginController@getLogin']);
-Route::post('admin/login', ['as'=>'login','uses'=>'Admin\LoginController@postLogin']);
+Route::get('admin/login', ['as' => 'login', 'uses' => 'Admin\LoginController@getLogin']);
+Route::post('admin/login', ['as' => 'login', 'uses' => 'Admin\LoginController@postLogin']);
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-// Route::get('/', [, 'category'])->name('category');
-Route::get('/', [JobController::class, 'index'])->name('index');
-Route::get('/job', function () {
-    return view('client.job.job');
-});
-Route::get('/job-detail', function () {
-    return view('client.job.job-detail');
-});
-Route::get('/candi', function () {
-    return view('client.candidate.candi-list');
-});
-Route::get('/candi-detail', function () {
-    return view('client.candidate.candi-detail');
-});
-Route::get('/company', function () {
-    return view('client.company.company');
-});
-Route::get('/company-detail', function () {
-    return view('client.company.company-detail');
-});
-Route::get('/cv', function () {
-    return view('client.upcv.cv');
+    // Route::get('/', [, 'category'])->name('category');
+    Route::get('/', [JobController::class, 'index'])->name('index');
+    Route::get('/job', function () {
+        return view('client.job.job');
+    });
+    Route::get('/job-detail', function () {
+        return view('client.job.job-detail');
+    });
+    Route::get('/candi', function () {
+        return view('client.candidate.candi-list');
+    });
+    Route::get('/candi-detail', function () {
+        return view('client.candidate.candi-detail');
+    });
+    Route::get('/company', function () {
+        return view('client.company.company');
+    });
+    Route::get('/company-detail', function () {
+        return view('client.company.company-detail');
+    });
+    Route::get('/cv', function () {
+        return view('client.upcv.cv');
+    });
 });
 //company
 

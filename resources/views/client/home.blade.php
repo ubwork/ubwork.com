@@ -54,6 +54,40 @@
                         <!-- End Popular Search -->
                     </div>
                 </div>
+                <div class="image-column col-lg-5 col-md-12">
+                    <div class="image-box">
+                    <figure class="main-image wow fadeIn animated" data-wow-delay="500ms" style="visibility: visible; animation-delay: 500ms; animation-name: fadeIn;"><img src="{{asset('storage/'.'images/banner-img-1.png')}}" alt=""></figure>
+
+                    <!-- Info BLock One -->
+                    <div class="info_block anm wow fadeIn animated" data-wow-delay="1000ms" data-speed-x="2" data-speed-y="2" style="transform: translate3d(-4px, -7.36px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 1000ms; animation-name: fadeIn;">
+                        <span class="icon flaticon-email-3"></span>
+                        <p>Work Inquiry From <br>Ali Tufan</p>
+                    </div>
+
+                    <!-- Info BLock Two -->
+                    <div class="info_block_two anm wow fadeIn animated" data-wow-delay="2000ms" data-speed-x="1" data-speed-y="1" style="transform: translate3d(-2px, -3.68px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2000ms; animation-name: fadeIn;">
+                        <p>10k+ Candidates</p>
+                        <div class="image"><img src="images/resource/multi-peoples.png" alt=""></div>
+                    </div>
+
+                    <!-- Info BLock Three -->
+                    <div class="info_block_three anm wow fadeIn animated" data-wow-delay="1500ms" data-speed-x="4" data-speed-y="4" style="transform: translate3d(-8px, -14.72px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 1500ms; animation-name: fadeIn;">
+                        <span class="icon flaticon-briefcase"></span>
+                        <p>Creative Agency</p>
+                        <span class="sub-text">Startup</span>
+                        <span class="right_icon fa fa-check"></span>
+                    </div>
+
+                    <!-- Info BLock Four -->
+                    <div class="info_block_four anm wow fadeIn animated" data-wow-delay="2500ms" data-speed-x="3" data-speed-y="3" style="transform: translate3d(-6px, -11.04px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2500ms; animation-name: fadeIn;">
+                        <span class="icon flaticon-file"></span>
+                        <div class="inner">
+                        <p>Upload Your CV</p>
+                        <span class="sub-text">It only takes a few seconds</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -68,105 +102,18 @@
             </div>
 
             <div class="row wow fadeInUp">
+                @foreach( $jop_type as $item_job)
                 <!-- Category Block -->
                 <div class="category-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="content">
-                            <span class="icon flaticon-money-1"></span>
-                            <h4><a href="#">Accounting / Finance</a></h4>
+                            <span class="{{$item_job->icon}}"></span>
+                            <h4><a href="#">{{$item_job->name}}</a></h4>
                             <p>(2 open positions)</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-promotion"></span>
-                            <h4><a href="#">Marketing</a></h4>
-                            <p>86 open positions)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-vector"></span>
-                            <h4><a href="#">Design</a></h4>
-                            <p>43 open positions)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-web-programming"></span>
-                            <h4><a href="#">Development</a></h4>
-                            <p>(12 open positions)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-headhunting"></span>
-                            <h4><a href="#">Human Resource</a></h4>
-                            <p>55 open positions)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-rocket-ship"></span>
-                            <h4><a href="#">Project Management</a></h4>
-                            <p>(2 open positions)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-support-1"></span>
-                            <h4><a href="#">Customer Service</a></h4>
-                            <p>(2 open positions)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-first-aid-kit-1"></span>
-                            <h4><a href="#">Health and Care</a></h4>
-                            <p>(25 open positions)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Block -->
-                <div class="category-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="icon flaticon-car"></span>
-                            <h4><a href="#">Automotive Jobs</a></h4>
-                            <p>92 open positions</p>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
@@ -188,19 +135,26 @@
                     <div class="job-block col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-box">
                             <div class="content">
-                                <span class="company-logo"><img src="{{asset($item->company->logo)}}"
+                                <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}"
                                         alt=""></span>
                                 <h4><a href="#">{{$item->title}}</a></h4>
                                 <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                                    <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
+                                    <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
                                     <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
                                 </ul>
                                 <ul class="job-other-info">
-                                    <li class="time">Full Time</li>
-                                    <li class="privacy">Private</li>
-                                    <li class="required">Urgent</li>
+                                    <li class="time">
+                                        @if($item->full_time == 1)
+                                            Full Time
+                                        @endif
+                                    </li>
+                                    <li class="privacy">
+                                        @if($item->full_time == 1)
+                                            Part Time
+                                        @endif</li>
+                                    {{-- <li class="required">Urgent</li> --}}
                                 </ul>
                                 <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                             </div>
@@ -346,15 +300,15 @@
 
                 <!-- Image Column -->
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
-                    <figure class="image wow fadeInLeft"><img src="images/resource/image-2.jpg" alt="">
+                    <figure class="image wow fadeInLeft">
+                        <img src="{{asset('storage/'.'images/1667319992_image-2.jpg')}}" alt="">
                     </figure>
 
-                    <!-- Count Employers -->
-                    {{-- <div class="count-employers wow fadeInUp">
-                            <div class="check-box"><span class="flaticon-tick"></span></div>
-                            <span class="title">300k+ Employers</span>
-                            <figure class="image"><img src="images/resource/multi-logo.png" alt=""></figure>
-                        </div> --}}
+                    <div class="count-employers wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="check-box"><span class="flaticon-tick"></span></div>
+                    <span class="title">300k+ Employers</span>
+                    <figure class="image"><img src="{{asset('storage/'.'images/1667320257_multi-logo.png')}}" alt=""></figure>
+            </div>
                 </div>
             </div>
 

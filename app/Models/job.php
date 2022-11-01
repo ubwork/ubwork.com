@@ -21,7 +21,12 @@ class job extends Model
         'start_date',
         'end_date',
         'experience',
-        'status'
+        'status',
+        'full_time',
+        'part_time',
+        'created_at',
+        'updated_at',
+        'icon',
     ];
     public function company()
     {

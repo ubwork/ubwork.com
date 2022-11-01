@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = job::where('status', 1)->get();
         // dd($data->company->id);
         // dd(company::all());
