@@ -45,6 +45,35 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.user.index')}}" class="nav-link">
+                      <i class="fas fa-users nav-icon"></i>
+                      <p>{{__('USER')}}</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-user-shield"></i>
+                      <p>
+                        {{__('Manage ACL')}}
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="pages/layout/top-nav.html" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{__('Roles')}}</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{__('Permissions')}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
