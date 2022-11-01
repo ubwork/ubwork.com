@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\client\JobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//client
 Route::get('/', function () {
     return view('client.home');
 });
+// Route::get('/', [, 'category'])->name('category');
+Route::get('/', [JobController::class, 'index'])->name('index');
 Route::get('/job', function () {
     return view('client.job.job');
 });
@@ -46,3 +48,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 });
+Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
