@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'candidates',
         ],
+        'company' => [
+            'driver' => 'session',
+            'provider' => 'companies',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'candidates' => [
             'driver' => 'eloquent',
             'model' => App\Models\Candidates::class,
+        ],
+        'companies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Company::class,
         ],
 
         // 'users' => [

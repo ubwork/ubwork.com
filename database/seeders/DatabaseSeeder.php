@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,22 +17,18 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        $data=[
-            [
-                "email"=>"admin@gmail.com",
-                "name"=>"admin",
-                "password"=>Hash::make('123456'),
-            ],
-            [
-                "email"=>"luonglinh120@gmail.com",
-                "name"=>"linh",
-                "password"=>Hash::make('123456'),
-            ]
-        ];
-        DB::table('candidates')->insert($data);
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'phone' => '0123456789',
+            'image'=> '',
+            'email_verified_at' => Carbon::now()->toDateTimeString(),
+            'status' => 1,
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ]);
     }
 }
