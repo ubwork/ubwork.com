@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Candidate;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
-use App\Models\candidates;
+use App\Models\Candidates;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
@@ -18,11 +19,11 @@ class RegisterController extends Controller
         $this->v = [];
     }
     public function getRegister(){
-        return view('client.register-candidates.index');
+        return view('client.register.index');
     }
     
     public function postRegister(Request $request){
-        
+        // dd($request->all());
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:candidates',
@@ -35,10 +36,10 @@ class RegisterController extends Controller
             'name.required' => 'Mời bạn nhập vào tên',
             'email.required' => 'Mời bạn nhập vào emal',
             'email.email' => 'Mời bạn nhập đúng định dạnh email',
+            'email.unique' => 'Email bạn nhập đã tồn tại',
             'password.required' => 'Mời bạn nhập password',
             'phone.required' => 'Mời bạn nhập vào số điện thoại',
-            'name.required' => 'Mời bạn chọn giới tính',
-            ''
+            'phone.unique' => 'Số điện thoại bạn nhập đã tồn tại',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -52,16 +53,16 @@ class RegisterController extends Controller
             $params = [];
             $params['cols'] = $request->post();
             unset($params['cols']['_token']);
-            $modelSv = new candidates();
-            $res = $modelSv->register($params);
+            $modelSv = new Candidates();
+            $res = $modelSv->saveAdd($params);
             if ($res == null) {
                 return redirect()->route('register');
             } elseif ($res > 0) {
                 Session::flash('success', 'Dang ky thanh cong nguoi dung');
-                return redirect('login');
+                return redirect()->route('candidate.register');
             } else {
                 Session::flash('error', 'Loi dang ky');
-                return redirect()->route('register');
+                return redirect()->route('candidate.register');
             }
         }
     

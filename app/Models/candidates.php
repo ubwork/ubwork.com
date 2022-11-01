@@ -8,43 +8,60 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-class candidates extends Model
+class Candidates extends Model
 {
     use HasFactory;
-    protected $table = "candidates";
-    protected $fillable = ['id', 'name', 'email', 'password', 'phone', 'gender'];
+    protected $table = 'candidates';
+    // public $timestamps = false;
+    protected $fillable = ['id', 'name', 'avatar', 'email', 'password', 'phone', 'address', 'position', 'gender',
+    'city', 'coin', 'deleted_at', 'status', 'created_at', 'updated_at'];
 
+    // Lấy dữ liệu ra bảng
     public function loadList($param = []){
         $query = DB::table($this->table)
-            ->select($this->fillable)
-            ->orderBy('id', 'desc');
+               ->select($this->fillable)
+               ->where('deleted_at', null)
+               ->orderBy('id', 'desc');
 
-        $lists = $query->paginate(5);
+        $lists = $query->paginate(9);
         return $lists;
     }
 
-    //  // lưu tạo user
-    public function saveAddUser($params) {
-        $data = $params['cols'];
+    // lưu tạo
+    public function saveAdd($params) {
+        $data = array_merge($params['cols'], [
+            'password' => Hash::make($params['cols']['password']),
+        ]);
         $res = DB::table($this->table)->insert($data);
         return $res;
     }
 
-    // lấy dữ liệu ra bảng cập nhật user
+    // lấy dữ liệu ra bảng cập nhật
     public function loadOne($id, $params = null){
         $query = DB::table($this->table)
-            ->where('id', '=', $id);
+               ->where('deleted_at', '=', null)
+               ->where('id', '=', $id);
 
         $obj = $query->first();
         return $obj;
     }
-    public function register($params)
-    {
-        $data = array_merge(
-            $params['cols'],
-            ['password' => Hash::make($params['cols']['password'])]
-        );
-        $res = DB::table($this->table)->insert($data);
+
+    // lưu cập nhật
+    public function saveUpdate($params) {
+        if(empty($params['cols']['id'])) {
+            Session::flash('error', 'Không xác định bản cập nhật');
+            return null;
+        }
+        $data = [];
+        foreach($params['cols'] as $colName => $val) {
+            if($colName == 'id') continue;
+            if(in_array($colName, $this->fillable)) {
+                $data[$colName] = (strlen($val) == 0) ? null : $val;
+            }
+        }
+        $res = DB::table($this->table)
+        ->where('id', '=', $params['cols']['id'])
+        ->update($data);
         return $res;
     }
 }
