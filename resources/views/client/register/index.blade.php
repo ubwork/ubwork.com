@@ -93,78 +93,56 @@
               <div class="form-group">
                 <div class="btn-box row">
                   <div class="">
-                    <a href="javascript:void(0)" class="theme-btn btn-style-seven btn-candidate"><i class="la la-user"></i> Đăng nhập ứng viên </a>
+                    <a href="javascript:void(0)" class="theme-btn btn-style-seven btn-candidate"><i class="la la-user"></i> Đăng ký ứng viên </a>
                   </div>
                 </div>
               </div>
-              <form method="post" action="{{ url('/register') }}" class="candidate">
+              <form method="post" action="{{ route('candidate.register') }}" class="candidate">
                 @csrf
                 <div class="form-group">
-                    <label>Họ và tên</label>
+                    <label>Name</label>
                     <input type="text" name="name" placeholder="Ho Ten" value="{{old('name')}}">
+                    @error('name')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
                 </div>
               <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email" value="{{old('email')}}">
+                @error('email')
+                  <small class="text-danger">{{$message}}</small>
+                @enderror
               </div>
               
 
               <div class="form-group">
                 <label>Password</label>
                 <input id="password-field" type="password" name="password" value="" placeholder="Password">
+                @error('password')
+                  <small class="text-danger">{{$message}}</small>
+                @enderror
               </div>
 
               <div class="form-group">
                 <label>Phone Number</label>
                 <input id="phone-number" type="number" name="phone" value="" placeholder="Phone number">
+                @error('phone')
+                  <small class="text-danger">{{$message}}</small>
+                @enderror
               </div>
 
               <div class="form-group">
                 <label>Gender</label> <br>
-                <input type="radio" id="html" name="gender" value="man">
+                <input type="radio" checked id="html" name="gender" value="1">
                 <label for="html">Man</label>
-                <input type="radio" id="css" name="gender" value="woman">
+                <input type="radio" id="css" name="gender" value="2">
                 <label for="css">Woman</label>
               </div>
 
               <div class="form-group">
                 <button class="theme-btn btn-style-one " type="submit" name="">Register</button>
               </div>
-            </form>
-
-            <?php //Hiển thị thông báo thành công?>
-        @if ( Session::has('success') )
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <strong>{{ Session::get('success') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-        <?php //Hiển thị thông báo lỗi?>
-        @if ( Session::has('error') )
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <strong>{{ Session::get('error') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
+            </form> 
 
             <div class="bottom-box">
               <div class="divider"><span>or</span></div>
