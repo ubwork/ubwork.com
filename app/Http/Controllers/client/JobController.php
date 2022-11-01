@@ -15,4 +15,8 @@ class JobController extends Controller
         // dd(company::all());
         return view('client.home', compact('data'));
     }
+    public function job(){
+        $data = job::where('status', 1)->get();
+        return view('client.job.job', compact('data'));
+    }
 }
