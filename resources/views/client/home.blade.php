@@ -137,7 +137,7 @@
                             <div class="content">
                                 <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}"
                                         alt=""></span>
-                                <h4><a href="#">{{$item->title}}</a></h4>
+                                <h4><a href="{{route('show', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                 <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                     <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
@@ -151,7 +151,7 @@
                                         @endif
                                     </li>
                                     <li class="privacy">
-                                        @if($item->full_time == 1)
+                                        @if($item->part_time == 1)
                                             Part Time
                                         @endif</li>
                                     {{-- <li class="required">Urgent</li> --}}

@@ -16,4 +16,15 @@ class JobController extends Controller
         // dd(company::all());
         return view('client.home', compact('data'));
     }
+    public function list()
+    {
+        $job_list = job::paginate();
+        return view('client.job.job', compact('job_list'));
+    }
+    public function show($id)
+    {
+        $job_detail = job::where('id', $id)->first();
+        $job = job::where('jop_type_id', $job_detail->id)->take(3)->get();
+        return view('client.job.job_detail', compact('job_detail', 'job'));
+    }
 }

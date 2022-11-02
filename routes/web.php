@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'client\HomeController@index')->name('index');
+Route::get('list', 'client\JobController@list')->name('list');
+Route::get('show/{id}', 'client\JobController@show')->name('show');
 //company
 Route::get('register', ['as' => 'register', 'uses' => 'Company\RegisterController@getRegister']);
 Route::post('register', ['as' => 'register', 'uses' => 'Company\RegisterController@postRegister']);
@@ -34,9 +36,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/job', function () {
         return view('client.job.job');
     });
-    Route::get('/job-detail', function () {
-        return view('client.job.job-detail');
-    });
+    Route::get('/', [JobController::class, 'index'])->name('index');
     Route::get('/candi', function () {
         return view('client.candidate.candi-list');
     });
