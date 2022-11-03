@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{__('Job Detail')}}
+    {{__('UB Work')}} | {{$job_detail->title}}
 @endsection
 @section('content')
     <section class="job-detail-section">
