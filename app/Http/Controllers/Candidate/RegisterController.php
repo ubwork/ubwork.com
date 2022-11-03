@@ -34,7 +34,7 @@ class RegisterController extends Controller
         ];
         $messages = [
             'name.required' => 'Mời bạn nhập vào tên',
-            'email.required' => 'Mời bạn nhập vào emal',
+            'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Mời bạn nhập đúng định dạnh email',
             'email.unique' => 'Email bạn nhập đã tồn tại',
             'password.required' => 'Mời bạn nhập password',
@@ -59,7 +59,7 @@ class RegisterController extends Controller
                 return redirect()->route('register');
             } elseif ($res > 0) {
                 Session::flash('success', 'Dang ky thanh cong nguoi dung');
-                return redirect()->route('candidate.register');
+                return redirect()->route('login');
             } else {
                 Session::flash('error', 'Loi dang ky');
                 return redirect()->route('candidate.register');
