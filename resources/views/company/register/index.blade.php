@@ -98,28 +98,36 @@
                   </div> --}}
                 {{-- </div> --}}
               </div>
-              <form method="post" action="{{ url('/register') }}" class="candidate">
+              <form method="post" action="{{ route('register.store') }}" class="candidate">
                 @csrf
                 <div class="form-group">
                   <label>Tên Công Ty</label>
-                  <input type="text" name="company_name" placeholder="Tên Công ty..." value="{{old('company_name')}}">
+                  <input type="text" name="name" placeholder="Tên Công ty..." value="{{old('name')}}">
                 </div>
+                  @error('name')
+                    <small class="text-danger">{{$message}}</small>
+                  @enderror
               <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email" value="{{old('email')}}">
               </div>
+              @error('email')
+                    <small class="text-danger">{{$message}}</small>
+                  @enderror
               <div class="form-group">
                 <label>Số điện thoại</label>
                 <input type="number" name="phone" placeholder="Phone" value="{{old('phone')}}">
               </div>
+              @error('phone')
+                    <small class="text-danger">{{$message}}</small>
+                  @enderror
               <div class="form-group">
                 <label>Mật khẩu</label>
                 <input id="password-field" type="password" name="password" value="" placeholder="Password">
               </div>
-              <div class="form-group">
-                <label>Website</label>
-                <input type="text" name="website" placeholder="Link website" value="{{old('website')}}">
-              </div>
+              @error('password')
+                    <small class="text-danger">{{$message}}</small>
+                  @enderror
               <div class="form-group">
                 <button class="theme-btn btn-style-one " type="submit" name="Register">Đăng ký</button>
               </div>
