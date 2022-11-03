@@ -144,190 +144,31 @@
 
 
                         <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-1.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Netflix</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                        @foreach ($data as $item)
+                            <div class="company-block-three">
+                                <div class="inner-box">
+                                    <div class="content">
+                                        <div class="content-inner">
+                                            <span class="company-logo"><img src="{{asset($item->logo)}}"
+                                                    alt=""></span>
+                                            <h4><a href="#">{{$item->company_name}}</a></h4>
+                                            <ul class="job-info">
+                                                <li><span class="icon flaticon-map-locator"></span>{{$item->address}}</li>
+                                                <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                                            </ul>
+                                        </div>
+
+                                        <ul class="job-other-info">
+                                            <li class="privacy">Featured</li>
+                                            <li class="time">Open Jobs – {{count($job)}}</li>
                                         </ul>
                                     </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="privacy">Featured</li>
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
+                                    {{-- @dd($job) --}}
+                                    <div class="text">Mô Tả Chưa Có</div>
+                                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                 </div>
-
-                                <div class="text">Netflix is the world's leading streaming entertainment service with over
-                                    195 million paid memberships in over 190 countries enjoying TV series, documentaries and
-                                    feature films across a wide variety...</div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                             </div>
-                        </div>
-
-                        <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-2.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Opendoor</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> Opendoor</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
-                                </div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                            </div>
-                        </div>
-
-                        <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-3.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Checkr</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> Opendoor</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
-                                </div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                            </div>
-                        </div>
-
-                        <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-4.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Mural</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> Opendoor</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
-                                </div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                            </div>
-                        </div>
-
-
-                        <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-5.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Astronomer</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> Opendoor</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="privacy">Featured</li>
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
-                                </div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                            </div>
-                        </div>
-
-                        <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-6.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Figma</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> Opendoor</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
-                                </div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                            </div>
-                        </div>
-
-                        <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-7.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Stripe</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> Opendoor</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
-                                </div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                            </div>
-                        </div>
-
-                        <!-- Block Block -->
-                        <div class="company-block-three">
-                            <div class="inner-box">
-                                <div class="content">
-                                    <div class="content-inner">
-                                        <span class="company-logo"><img src="images/resource/company-logo/6-8.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Invision</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-map-locator"></span> Opendoor</li>
-                                            <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="job-other-info">
-                                        <li class="privacy">Featured</li>
-                                        <li class="time">Open Jobs – 2</li>
-                                    </ul>
-                                </div>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                            </div>
-                        </div>
-
-
+                        @endforeach
                         <!-- Listing Show More -->
                         <div class="ls-show-more">
                             <p>Showing 36 of 497 Jobs</p>

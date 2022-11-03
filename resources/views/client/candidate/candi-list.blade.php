@@ -131,16 +131,17 @@
 
                         <div class="row">
                             <!-- Candidate block Four -->
+                            @foreach ($data as $item)
                             <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                                 <div class="inner-box">
                                     <ul class="job-other-info">
                                         <li class="green">Featured</li>
                                     </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-1.png" alt=""></span>
-                                    <h3 class="name"><a href="#">Floyd Miles</a></h3>
+                                    <span class="thumb"><img src="{{asset($item->avatar)}}" alt=""></span>
+                                    <h3 class="name"><a href="#">{{$item->name}}</a></h3>
                                     <span class="cat">UI Designer</span>
                                     <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                                        <li><span class="icon flaticon-map-locator"></span> {{$item->address}}</li>
                                         <li><span class="icon flaticon-money"></span> $99 / hour</li>
                                     </ul>
                                     <ul class="post-tags">
@@ -151,188 +152,7 @@
                                     <a href="#" class="theme-btn btn-style-three">View Profile</a>
                                 </div>
                             </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-2.png" alt=""></span>
-                                    <h3 class="name"><a href="#">Darrell Steward</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-3.png" alt=""></span>
-                                    <h3 class="name"><a href="#">Brooklyn Simmons</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-4.png"
-                                            alt=""></span>
-                                    <h3 class="name"><a href="#">Jane Cooper</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-5.png"
-                                            alt=""></span>
-                                    <h3 class="name"><a href="#">Ralph Edwards</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-6.png"
-                                            alt=""></span>
-                                    <h3 class="name"><a href="#">Ronald Richards</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-7.png"
-                                            alt=""></span>
-                                    <h3 class="name"><a href="#">Robert Fox</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-8.png"
-                                            alt=""></span>
-                                    <h3 class="name"><a href="#">Esther Howard</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
-
-                            <!-- Candidate block Four -->
-                            <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <ul class="job-other-info">
-                                        <li class="green">Featured</li>
-                                    </ul>
-                                    <span class="thumb"><img src="images/resource/candidate-9.png"
-                                            alt=""></span>
-                                    <h3 class="name"><a href="#">Cody Fisher</a></h3>
-                                    <span class="cat">UI Designer</span>
-                                    <ul class="job-info">
-                                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
-                                    </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
-                                    </ul>
-                                    <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
 
                         <!-- Pagination -->
