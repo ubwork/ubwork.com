@@ -26,6 +26,7 @@ class job extends Model
         'part_time',
         'created_at',
         'updated_at',
+        'job_type_id',
         'icon',
     ];
     public function company()

@@ -56,11 +56,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 });
 
 // Route::get('/', [, 'category'])->name('category');
-Route::get('/', [JobController::class, 'index'])->name('index');
-Route::get('/job', [JobController::class, 'job'])->name('job');
-Route::get('/job-detail', function () {
-    return view('client.job.job-detail');
-});
 //candidate
 Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
 // Route::get('/candi', function () {

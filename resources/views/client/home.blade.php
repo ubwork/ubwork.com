@@ -102,7 +102,7 @@
             </div>
 
             <div class="row wow fadeInUp">
-                @foreach( $jop_type as $item_job)
+                @foreach($job_type as $item_job)
                 <!-- Category Block -->
                 <div class="category-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
