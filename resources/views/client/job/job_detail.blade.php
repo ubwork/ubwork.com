@@ -178,12 +178,9 @@
                   <h4 class="widget-title">Job Skills</h4>
                   <div class="widget-content">
                     <ul class="job-skills">
-                      <li><a href="#">app</a></li>
-                      <li><a href="#">administrative</a></li>
-                      <li><a href="#">android</a></li>
-                      <li><a href="#">wordpress</a></li>
-                      <li><a href="#">design</a></li>
-                      <li><a href="#">react</a></li>
+                      @foreach($job_skills as $item)
+                      <li><a href="#">{{$item->name}}</a></li>
+                      @endforeach
                     </ul>
                   </div>
                 </div>

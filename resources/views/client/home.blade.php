@@ -108,8 +108,8 @@
                     <div class="inner-box">
                         <div class="content">
                             <span class="{{$item_job->icon}}"></span>
-                            <h4><a href="#">{{$item_job->name}}</a></h4>
-                            <p>(2 open positions)</p>
+                            <h4><a href="{{route('cat', ['id' => $item_job->id])}}">{{$item_job->name}}</a></h4>
+                            <p>({{$count[$item_job->id]}} open positions)</p>
                         </div>
                     </div>
                 </div>

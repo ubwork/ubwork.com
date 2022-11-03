@@ -12,10 +12,14 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $arr = [];
         $data = job::where('status', 1)->take(6)->get();
         $jop_type = Jop_type::all();
-        // dd($jop_type);
+        foreach ($jop_type as $item) {
+            $id = $item->id;
+            $count[$id] = job::where('jop_type_id', $id)->count();
+        }
         // dd(company::all());
-        return view('client.home', compact('data', 'jop_type'));
+        return view('client.home', compact('data', 'jop_type', 'count'));
     }
 }
