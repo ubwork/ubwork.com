@@ -86,15 +86,16 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
+            <h3>Create a Free Account</h3>
             {{-- <h3>ĐĂNG NHẬP</h3> --}}
 
             <!--Login Form-->
            
               <div class="form-group">
                 <div class="btn-box row">
-                  <div class="">
+                  {{-- <div class="">
                     <a href="javascript:void(0)" class="theme-btn btn-style-seven btn-candidate"><i class="la la-user"></i> Đăng ký ứng viên </a>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
               <form method="post" action="{{ route('candidate.register') }}" class="candidate">
@@ -117,7 +118,7 @@
 
               <div class="form-group">
                 <label>Password</label>
-                <input id="password-field" type="password" name="password" value="" placeholder="Password">
+                <input id="password-field" type="password" name="password" value="" placeholder="Mat khau">
                 @error('password')
                   <small class="text-danger">{{$message}}</small>
                 @enderror
@@ -125,7 +126,7 @@
 
               <div class="form-group">
                 <label>Phone Number</label>
-                <input id="phone-number" type="number" name="phone" value="" placeholder="Phone number">
+                <input id="phone-number" type="number" name="phone" value="" placeholder="So dien thoai">
                 @error('phone')
                   <small class="text-danger">{{$message}}</small>
                 @enderror
@@ -144,16 +145,6 @@
               </div>
             </form> 
 
-            <div class="bottom-box">
-              <div class="divider"><span>or</span></div>
-              <div class="btn-box row">
-                <div class="">
-                  <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <!--End Login Form -->
       </div>
     </div>
