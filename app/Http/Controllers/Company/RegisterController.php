@@ -17,15 +17,14 @@ class RegisterController extends Controller
     }
     public function postRegister(Request $request) {
         $rules = [
-            'company_name' => 'required|max:255',
+            'name' => 'required|max:255',
 			'email' => 'required|string|email|max:255|unique:users',
 			'password' => 'required|string|min:6',
 			'phone' => 'required|max:10',
-			'website' => 'required',
         ];
         $message = [
-            'company_name.required' => 'Họ và tên là trường bắt buộc',
-            'company_name.max' => 'Họ và tên không quá 255 ký tự',
+            'name.required' => 'Họ và tên là trường bắt buộc',
+            'name.max' => 'Họ và tên không quá 255 ký tự',
             'email.required' => 'Email là trường bắt buộc',
             'email.email' => 'Email không đúng định dạng',
             'email.max' => 'Email không quá 255 ký tự',
@@ -35,10 +34,9 @@ class RegisterController extends Controller
             'phone.required' => 'Số điện thoại là trường bắt buộc',
             // 'phone.required' => 'Số điện thoại phải là số nguyên',
             'phone.max' => 'Số điện thoại không quá 10 số',
-            'website.required' => 'Website là trường bắt buộc',
 
         ];
-        $validator = Validator::make($data = $request->only(['company_name', 'email', 'password', 'phone', 'website']), $rules, $message);
+        $validator = Validator::make($data = $request->all(), $rules, $message);
         if ($validator->fails()) return back()->withErrors($validator)->withInput();
         $data['password'] = Hash::make($request->password);
         Company::create($data);
