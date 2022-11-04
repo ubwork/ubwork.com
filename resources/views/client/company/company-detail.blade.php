@@ -11,7 +11,7 @@
                 <div class="job-block-seven">
                     <div class="inner-box">
                         <div class="content">
-                            <span class="company-logo"><img src="images/resource/company-logo/5-1.png" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/'.$company_detail->logo)}}" alt=""></span>
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
@@ -20,7 +20,7 @@
                                 <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                <li class="time">Open Jobs – 3</li>
+                                <li class="time">Open Jobs – {{count($company_job)}}</li>
                             </ul>
                         </div>
 
