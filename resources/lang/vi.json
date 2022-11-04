@@ -122,5 +122,16 @@
     "Permission edit": "Sửa quyền",
     "Permission delete" : "Xóa quyền",
     "DISPLAY_NAME" : "Tên hiện thị",
-    "Enter display name" : "Nhập tên hiện thị"
+    "Enter display name" : "Nhập tên hiện thị",
+    "Candidate" : "Ứng viên",
+    "City" : "Thành phố",
+    "Gender" : "Giới tính",
+    "Position" : "Vị trí",
+    "Choose an image smaller than 5mb" : "Chọn ảnh kích thước nhỏ hơn 5mb",
+    "Male" : "Nam",
+    "Other" : "Khác",
+    "Female" : "Nữ",
+    "Block" : "Chặn",
+    "Cancel" : "Hủy",
+    "Add candidates in the system" : "Thêm ứng viên vào trong hệ thống"
 }
