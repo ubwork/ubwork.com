@@ -121,5 +121,6 @@
     "Permission add" : "Thêm quyền",
     "Permission edit": "Sửa quyền",
     "Permission delete" : "Xóa quyền",
-    "DISPLAY_NAME" : "Tên hiện thị"
+    "DISPLAY_NAME" : "Tên hiện thị",
+    "Enter display name" : "Nhập tên hiện thị"
 }

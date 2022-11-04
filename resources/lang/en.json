@@ -109,5 +109,6 @@
     "Permission add" : "Permission add",
     "Permission edit": "Permission edit",
     "Permission delete" : "Permission delete",
-    "DISPLAY_NAME" : "Display name"
+    "DISPLAY_NAME" : "Display name",
+    "Enter display name" : "Enter display name"
 }

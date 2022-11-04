@@ -30,5 +30,7 @@ return [
    'address.required' => 'The address field is required',
    "Add falid" => "Add falid",
    "display_name.required" => "The display name field is required",
-   "display_name.unique" => "The display name field is required",
+   "name.unique" => "The name has already been taken",
+   "numberPhone.faild" => "The number phone invalid format supplied",
+   "role.required" => "The role field is required"
 ];

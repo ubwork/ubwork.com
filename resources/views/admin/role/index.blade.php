@@ -23,11 +23,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{ __('NAME') }}</th>
-                            <th>{{ __('ASSIGNED TO') }}</th>
+                            <th>{{ __('NAME ROLE') }}</th>
+                            {{-- <th>{{ __('TOTAL USER') }}</th> --}}
                             <th>{{ __('CREATED DATE') }}</th>
                             <th>
-                                {{-- <a href="{{route('admin.permission.create')}}"><i class="fa fa-plus"></i></a> --}}
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#formAdd">
                                     <i class="fa fa-plus"></i>
@@ -35,18 +34,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($permissions as $permission)
+                        @foreach ($roles as $role)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $permission->name }}</td>
-                                <td>{{ $permission->display_name }}</td>
-                                <td>{{ $permission->created_at }}</td>
+                                <td>{{ $role->name }}</td>
+                                {{-- <td></td> --}}
+                                <td>{{ $role->created_at }}</td>
                                 <td>
                                     <button class="btn btn-primary btn-sm btn-modal-edit" data-toggle="modal"
-                                        data-target="#modal-edit" data-name="{{ $permission->name }}"
-                                        data-id="{{ $permission->id }}"><i class="fa fa-edit"></i></button>
+                                        data-target="#modal-edit" data-name="{{ $role->name }}"
+                                        data-id="{{ $role->id }}"><i class="fa fa-edit"></i></button>
                                     <button class="btn btn-danger btn-sm delete-confirm" type="submit"
-                                        value="{{ $permission->id }}"><i class="fa fa-trash"></i></button>
+                                        value="{{ $role->id }}"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -54,7 +53,7 @@
                 </table>
                 <tfoot>
                     <tr>
-                        <td>{{ $permissions->links() }}</td>
+                        <td>{{ $roles->links() }}</td>
                     </tr>
                 </tfoot>
             </div>
@@ -62,8 +61,8 @@
         </div>
     </div>
     <!-- Modal -->
-    @include('admin.permission.add')
-    @include('admin.permission.edit')
+    @include('admin.role.add')
+    @include('admin.role.edit')
 @endsection
 @section('script')
     @parent
@@ -74,18 +73,24 @@
             var model = arrayUrl[arrayUrl.length - 1];
             var url = `${model}`;
             var nameInput = $('#nameInput').val();
+            var permissions = [];
+            $(':checkbox:checked').each(function(i){
+                permissions[i] = $(this).val();
+            });
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: {
                     "_token": CSRF_TOKEN,
-                    "name": nameInput
+                    "name": nameInput,
+                    "permissions" : permissions
                 },
                 success: function success(results) {
                     if (results.status == false) {
                         $('#nameInput').addClass('is-invalid'),
                         $('#name-error').text(results.message.name),
+                        $('#permission-error').text(results.message.permissions)
                     } else {
                         console.log(results);
                         Swal.fire({
@@ -102,19 +107,41 @@
                 }
             });
         });
+        $('#modal-edit').on('hidden.bs.modal', function () {
+            $('#nameEdit').val();
+            $('.checkbox-edit').removeAttr('checked')
+        })
         $('.btn-modal-edit').click(function() {
             var namePresent = $(this).attr('data-name');
-            var idPermission = $(this).attr('data-id');
+            var idRole = $(this).attr('data-id');
             $('#nameEdit').val(namePresent) ;
-            $('#idPermission').val(idPermission);
+            $('#idRole').val(idRole);
+            var arrayUrl = $(location).attr('pathname').split('/');
+            var model = arrayUrl[arrayUrl.length - 1];
+            var url = `${model}/${idRole}/edit`;
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function success(results) {
+                    if (results.status) {
+                        results.data.forEach(element => {
+                            $('#permissionChecked'+element).attr('checked', 'checked');
+                        });
+                    }
+                }
+            });
         })
         $('.btn-edit').click(function(e) {
             e.preventDefault();
             var arrayUrl = $(location).attr('pathname').split('/');
             var model = arrayUrl[arrayUrl.length - 1];
-            var idPermission = $('#idPermission').val();
-            var url = `${model}/${idPermission}`;
+            var idRole = $('#idRole').val();
+            var url = `${model}/${idRole}`;
             var nameEdit = $('#nameEdit').val();
+            var permissions = [];
+            $(':checkbox:checked').each(function(i){
+                permissions[i] = $(this).val();
+            });
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 type: 'PUT',
@@ -123,6 +150,7 @@
                     "_method": 'PUT',
                     "_token": CSRF_TOKEN,
                     "name": nameEdit,
+                    "permissions" : permissions
                 },
                 success: function success(results) {
                     if (results.status == false) {
