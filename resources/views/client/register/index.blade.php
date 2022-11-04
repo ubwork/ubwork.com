@@ -43,14 +43,14 @@
           <!--Nav Outer -->
           <div class="nav-outer">
             <div class="logo-box">
-                <div class="logo"><a href="{{route('register')}}"><img src="{{ asset('assets/client-bower/images/logo-2.svg')}}" alt="" title=""></a></div>            </div>
+                <div class="logo"><a href="{{route('candidate.register')}}"><img src="{{ asset('assets/client-bower/images/logo-2.svg')}}" alt="" title=""></a></div>            </div>
           </div>
 
           <div class="outer-box">
             <!-- Login/Register -->
             <div class="btn-box">
               {{-- <a href="{{route('login')}}" class="btn-style-three">Login / Register</a> --}}
-              <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a>
+              <a href="{{route('candidate.login')}}" class="btn-style-three">Log in</a>
             </div>
           </div>
         </div>
@@ -144,6 +144,9 @@
                 <button class="theme-btn btn-style-one " type="submit" name="">Register</button>
               </div>
             </form> 
+            <div class="bottom-box">
+              <div class="text">Do you have an account? <a href="{{route('candidate.login')}}">Login</a></div>
+            </div>
 
         <!--End Login Form -->
       </div>

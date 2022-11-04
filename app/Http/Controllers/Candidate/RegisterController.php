@@ -43,7 +43,7 @@ class RegisterController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
-            return redirect('register')->withErrors($validator);
+            return redirect()->route('candidate.register')->withErrors($validator);
         } else {
             $name = $request->input('name');
             $email = $request->input('email');
@@ -56,10 +56,10 @@ class RegisterController extends Controller
             $modelSv = new Candidates();
             $res = $modelSv->saveAdd($params);
             if ($res == null) {
-                return redirect()->route('register');
+                return redirect()->route('candidate.register');
             } elseif ($res > 0) {
                 Session::flash('success', 'Dang ky thanh cong nguoi dung');
-                return redirect()->route('login');
+                return redirect()->route('candidate.login');
             } else {
                 Session::flash('error', 'Loi dang ky');
                 return redirect()->route('candidate.register');

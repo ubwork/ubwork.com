@@ -49,7 +49,7 @@
           <div class="outer-box">
             <!-- Login/Register -->
             <div class="btn-box">
-              <a href="" class="btn-style-three">Đăng nhập</a>
+              <a href="{{route('company.login')}}" class="btn-style-three">Log in</a>
               {{-- <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> --}}
             </div>
           </div>
@@ -172,6 +172,9 @@
                 </button>
             </div>
         @endif
+        <div class="bottom-box">
+          <div class="text">Do you have an account? <a href="{{route('company.login')}}">Login</a></div>
+        </div>
     
           </div>
         </div>

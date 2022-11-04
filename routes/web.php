@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Register client
-Route::get('register',['as'=>'candidate.register','uses'=>'Candidate\RegisterController@getRegister']); 
-Route::post('register',['as'=>'candidate.register','uses'=>'Candidate\RegisterController@postRegister']); 
+Route::get('/register',['as'=>'candidate.register','uses'=>'Candidate\RegisterController@getRegister']); 
+Route::post('/register',['as'=>'candidate.register','uses'=>'Candidate\RegisterController@postRegister']); 
 //client
 
 
@@ -22,11 +22,11 @@ Route::post('register',['as'=>'candidate.register','uses'=>'Candidate\RegisterCo
 Route::get('/', function () {
     return view('client.home');
 });
-Route::get('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@getLogin']);
-Route::post('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@postLogin']);
+Route::get('/login',['as'=>'candidate.login','uses'=>'Client\Auth\LoginController@getLogin']);
+Route::post('/login',['as'=>'candidate.login','uses'=>'Client\Auth\LoginController@postLogin']);
 
 //company
-Route::get('company/register', ['as'=>'register','uses'=>'Company\RegisterController@getRegister']);
+Route::get('company/register', ['as'=>'company.register','uses'=>'Company\RegisterController@getRegister']);
 Route::post('company/register', ['as'=>'register.store','uses'=>'Company\RegisterController@postRegister']);
 
 
