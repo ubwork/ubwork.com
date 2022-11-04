@@ -17,3 +17,10 @@ Route::prefix('candidate')->name('candidate.')->group(function () {
     Route::post('update/{id}', 'Admin\CandidateController@update')->name('update');
     Route::any('/{id}', 'Admin\CandidateController@destroy')->name('destroy');
 });
+Route::prefix('company')->name('company.')->group(function () {
+    Route::get('/', 'Admin\CompanyController@index')->name('index');
+    Route::match(['get', 'post'], 'store', 'Admin\CompanyController@store')->name('store');
+    Route::get('show/{id}', 'Admin\CompanyController@show')->name('show');
+    Route::post('edit/{id}', 'Admin\CompanyController@edit')->name('edit');
+    Route::get('destroy/{id}', 'Admin\CompanyController@destroy')->name('destroy');
+});
