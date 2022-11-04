@@ -27,5 +27,9 @@ return [
     'phone.min' => 'Số điện thoại không đủ 11 số',
     'phone.numeric' => 'Mời nhập đúng định dạng',
     'address.required' => 'Mời nhập địa chỉ',
-    "Add falid" => "Thêm mới thất bại "
+    "Add falid" => "Thêm mới thất bại ",
+    "display_name.required" => "Tên hiện thị không được để trống",
+    "name.unique" => "Tên đã tồn tại",
+    "numberPhone.faild" => "Số định không đúng định dạng",
+    "role.required" => "Hãy chọn vai trò"
 ];

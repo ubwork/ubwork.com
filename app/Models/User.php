@@ -7,44 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'website',
-        'password',
-    ];
-    public static function rules($id = 0) {
-	    return [
-            [
-            'name' => 'required|string|max:255',
-			'email' => 'required|string|email|max:255|unique:users',
-			'password' => 'required|string|min:6|confirmed',
-
-        ],
-        [ 
-            'name.required' => 'Họ và tên là trường bắt buộc',
-            'name.max' => 'Họ và tên không quá 255 ký tự',
-            'email.required' => 'Email là trường bắt buộc',
-            'email.email' => 'Email không đúng định dạng',
-            'email.max' => 'Email không quá 255 ký tự',
-            'email.unique' => 'Email đã tồn tại',
-            'password.required' => 'Mật khẩu là trường bắt buộc',
-            'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
-            'password.confirmed' => 'Xác nhận mật khẩu không đúng',
-        ],
-    ];
-	}
+    protected $fillable = [ 'name', 'email', 'password', 'phone','image','status'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -64,8 +38,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
 }
