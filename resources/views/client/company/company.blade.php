@@ -151,7 +151,7 @@
                                         <div class="content-inner">
                                             <span class="company-logo"><img src="{{asset($item->logo)}}"
                                                     alt=""></span>
-                                            <h4><a href="#">{{$item->company_name}}</a></h4>
+                                            <h4><a href="{{route('company-detail', ['id' => $item->id])}}">{{$item->company_name}}</a></h4>
                                             <ul class="job-info">
                                                 <li><span class="icon flaticon-map-locator"></span>{{$item->address}}</li>
                                                 <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>

@@ -12,12 +12,12 @@
                     <div class="inner-box">
                         <div class="content">
                             <span class="company-logo"><img src="images/resource/company-logo/5-1.png" alt=""></span>
-                            <h4><a href="#">Invision</a></h4>
+                            <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
-                                <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                                <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
                                 <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
-                                <li><span class="icon flaticon-telephone-1"></span> 123 456 7890</li>
-                                <li><span class="icon flaticon-mail"></span> info@invision.com</li>
+                                <li><span class="icon flaticon-telephone-1"></span>{{$company_detail->phone}}</li>
+                                <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
                             <ul class="job-other-info">
                                 <li class="time">Open Jobs – 3</li>
@@ -39,15 +39,7 @@
                     <div class="content-column col-lg-8 col-md-12 col-sm-12">
                         <div class="job-detail">
                             <h4>About Company</h4>
-                            <p>Moody’s Corporation, often referred to as Moody’s, is an American business and financial
-                                services company. It is the holding company for Moody’s Investors Service (MIS), an American
-                                credit rating agency, and Moody’s Analytics (MA), an American provider of financial analysis
-                                software and services.</p>
-                            <p>Moody’s was founded by John Moody in 1909 to produce manuals of statistics related to stocks
-                                and bonds and bond ratings. Moody’s was acquired by Dun & Bradstreet in 1962. In 2000, Dun &
-                                Bradstreet spun off Moody’s Corporation as a separate company that was listed on the NYSE
-                                under MCO. In 2007, Moody’s Corporation was split into two operating divisions, Moody’s
-                                Investors Service, the rating agency, and Moody’s Analytics, with all of its other products.
+                            <p>{{$company_detail->about}}
                             </p>
                             <div class="row images-outer">
                                 <div class="col-lg-3 col-md-3 col-sm-6">
@@ -91,69 +83,40 @@
                             </div>
 
                             <!-- Job Block -->
-                            <div class="job-block">
-                                <div class="inner-box">
-                                    <div class="content">
-                                        <span class="company-logo"><img src="images/resource/company-logo/1-3.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Senior Full Stack Engineer, Creator Success</a></h4>
+                            @foreach ($company_job as $item)
+                                <div class="job-block">
+                                    <div class="inner-box">
+                                        <div class="content">
+                                        <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
+                                        <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                         <ul class="job-info">
                                             <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                                            <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
+                                            <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($item->max_salary)}}</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            <li class="time">Full Time</li>
-                                            <li class="required">Urgent</li>
+                                            <li class="time">
+                                                @if($item->full_time == 1)
+                                                    Full Time
+                                                @endif
+                                            </li>
+                                            <li class="privacy">
+                                                @if($item->part_time == 1)
+                                                    Part Time
+                                                @endif
+                                            </li>
+                                            <li class="required">
+                                                @if($item->full_time == 1 && $item->part_time == 1 )
+                                                Full Time / Part Time
+                                                @endif
+                                            </li>
                                         </ul>
                                         <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Job Block -->
-                            <div class="job-block">
-                                <div class="inner-box">
-                                    <div class="content">
-                                        <span class="company-logo"><img src="images/resource/company-logo/1-3.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Web Developer</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                                        </ul>
-                                        <ul class="job-other-info">
-                                            <li class="time">Part Time</li>
-                                            <li class="required">Urgent</li>
-                                        </ul>
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Job Block -->
-                            <div class="job-block">
-                                <div class="inner-box">
-                                    <div class="content">
-                                        <span class="company-logo"><img src="images/resource/company-logo/1-3.png"
-                                                alt=""></span>
-                                        <h4><a href="#">Sr. Full Stack Engineer</a></h4>
-                                        <ul class="job-info">
-                                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                                        </ul>
-                                        <ul class="job-other-info">
-                                            <li class="time">Part Time</li>
-                                        </ul>
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
 
                         </div>
                     </div>
@@ -164,12 +127,12 @@
                                 <div class="widget-content">
 
                                     <ul class="company-info mt-0">
-                                        <li>Primary industry: <span>Software</span></li>
-                                        <li>Company size: <span>501-1,000</span></li>
-                                        <li>Founded in: <span>2011</span></li>
-                                        <li>Phone: <span>123 456 7890</span></li>
-                                        <li>Email: <span>info@joio.com</span></li>
-                                        <li>Location: <span>London, UK</span></li>
+                                        <li>Primary industry: <span>{{$company_detail->company_model}}</span></li>
+                                        <li>Company size: <span>{{$company_detail->company_size}}</span></li>
+                                        <li>Founded in: <span>{{$company_detail->founded_in}}</span></li>
+                                        <li>Phone: <span>{{$company_detail->phone}}</span></li>
+                                        <li>Email: <span>{{$company_detail->email}}</span></li>
+                                        <li>Location: <span>{{$company_detail->address}}</span></li>
                                         <li>Social media:
                                             <div class="social-links">
                                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -181,7 +144,7 @@
                                     </ul>
 
                                     <div class="btn-box"><a href="#"
-                                            class="theme-btn btn-style-three">www.invisionapp.com</a></div>
+                                            class="theme-btn btn-style-three">{{$company_detail->link_web}}</a></div>
                                 </div>
                             </div>
 
@@ -190,16 +153,10 @@
                                 <h4 class="widget-title">Job Location</h4>
                                 <div class="widget-content">
                                     <div class="map-outer mb-0">
-                                        <div class="map-canvas" data-zoom="12" data-lat="-37.817085"
-                                            data-lng="144.955631" data-type="roadmap" data-hue="#ffc400"
-                                            data-title="Envato" data-icon-path="images/resource/map-marker.png"
-                                            data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>">
-                                        </div>
+                                        <iframe class="map-canvas" width="100%" src="{{$company_detail->map}}" frameborder="0"></iframe>
                                     </div>
                                 </div>
                             </div>
-
-
                         </aside>
                     </div>
                 </div>

@@ -26,6 +26,7 @@ class company extends Model
         'link_web',
         'coin',
         'tax_code',
-        'status'
+        'status',
+        'about'
     ];
 }
