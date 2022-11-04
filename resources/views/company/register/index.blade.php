@@ -43,13 +43,13 @@
           <!--Nav Outer -->
           <div class="nav-outer">
             <div class="logo-box">
-                <div class="logo"><a href="{{route('register')}}"><img src="" alt="" title=""></a></div></div>
+                <div class="logo"><a href="{{route('company.register')}}"><img src="" alt="" title=""></a></div></div>
           </div>
 
           <div class="outer-box">
             <!-- Login/Register -->
             <div class="btn-box">
-              <a href="" class="btn-style-three">Đăng nhập</a>
+              <a href="{{route('company.login')}}" class="btn-style-three">Log in</a>
               {{-- <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> --}}
             </div>
           </div>
@@ -84,7 +84,7 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
-            <h3>Tạo tài khoản Công Ty</h3>
+            <h3>Create a Free Account Company</h3>
 
             <!--Login Form-->
            
@@ -110,24 +110,34 @@
               <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email" value="{{old('email')}}">
+                @error('email')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
               </div>
               @error('email')
                     <small class="text-danger">{{$message}}</small>
                   @enderror
               <div class="form-group">
-                <label>Số điện thoại</label>
-                <input type="number" name="phone" placeholder="Phone" value="{{old('phone')}}">
+                <label>Phone number</label>
+                <input type="number" name="phone" placeholder="Số điện thoại" value="{{old('phone')}}">
+                @error('phone')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
               </div>
               @error('phone')
                     <small class="text-danger">{{$message}}</small>
                   @enderror
               <div class="form-group">
-                <label>Mật khẩu</label>
-                <input id="password-field" type="password" name="password" value="" placeholder="Password">
-              </div>
-              @error('password')
+                <label>Password</label>
+                <input id="password-field" type="password" name="password" value="" placeholder="Mật khẩu">
+                @error('password')
                     <small class="text-danger">{{$message}}</small>
-                  @enderror
+                    @enderror
+              </div>
+              <div class="form-group">
+                <label>Website</label>
+                <input type="text" name="link_web" placeholder="Link website" value="{{old('link_web')}}">
+              </div>
               <div class="form-group">
                 <button class="theme-btn btn-style-one " type="submit" name="Register">Đăng ký</button>
               </div>
@@ -162,29 +172,10 @@
                 </button>
             </div>
         @endif
-        <?php //Hiển thị thông báo lỗi?>
-        @if ( Session::has('error') )
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <strong>{{ Session::get('error') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
+        <div class="bottom-box">
+          <div class="text">Do you have an account? <a href="{{route('company.login')}}">Login</a></div>
+        </div>
+    
           </div>
         </div>
         <!--End Login Form -->
