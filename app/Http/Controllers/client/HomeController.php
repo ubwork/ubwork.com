@@ -13,8 +13,15 @@ class HomeController extends Controller
     {
         $data = job::where('status', 1)->take(6)->get();
         $data_job_type = Job_type::all();
+        foreach ($data_job_type as $item) {
+            if (!empty($item)) {
+                $count[$item->id] = job::where('job_type_id', $item->id)->count();
+            } else {
+                $count[$item->id] = 0;
+            }
+        }
         // dd($data->company->id);
         // dd(company::all());
-        return view('client.home', compact('data', 'data_job_type'));
+        return view('client.home', compact('data', 'data_job_type', 'count'));
     }
 }
