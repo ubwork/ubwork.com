@@ -11,7 +11,7 @@
                   <h3 class="card-title">{{$title}}</h3>
                 </div>
             <div class="card-body">
-                <form action="{{route("company.edit",['id'=>request()->route('id')])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route("admin.company.edit",['id'=>request()->route('id')])}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
@@ -188,7 +188,7 @@
                         <br>
                         <div class="mt-3">
                             <input type="submit" value="Sửa" class="btn btn-success float-left mr-3">
-                            <a href="{{route('company.index')}}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{route('admin.company.index')}}" class="btn btn-secondary">Cancel</a>
                         </div>
                 </form>
                 </div>
