@@ -21,24 +21,24 @@ class RegisterController extends Controller
 			'email' => 'required|string|email|max:255|unique:users',
 			'password' => 'required|string|min:6',
 			'phone' => 'required|max:10',
-			'website' => 'required',
+			'link_web' => 'required',
         ];
         $message = [
-            'company_name.required' => 'Họ và tên là trường bắt buộc',
-            'company_name.max' => 'Họ và tên không quá 255 ký tự',
-            'email.required' => 'Email là trường bắt buộc',
+            'company_name.required' => 'Mời bạn nhập vào Tên công ty',
+            'company_name.max' => 'Tên công ty không quá 255 ký tự',
+            'email.required' => 'Mời bạn nhập vào Email',
             'email.email' => 'Email không đúng định dạng',
             'email.max' => 'Email không quá 255 ký tự',
             'email.unique' => 'Email đã tồn tại',
-            'password.required' => 'Mật khẩu là trường bắt buộc',
+            'password.required' => 'Mời bạn nhập vào mật khẩu',
             'password.min' => 'Mật khẩu phải chứa ít nhất 6 ký tự',
-            'phone.required' => 'Số điện thoại là trường bắt buộc',
+            'phone.required' => 'Mời bạn nhập vào số điện thoại',
             // 'phone.required' => 'Số điện thoại phải là số nguyên',
             'phone.max' => 'Số điện thoại không quá 10 số',
-            'website.required' => 'Website là trường bắt buộc',
+            'link_web.required' => 'Website là trường bắt buộc',
 
         ];
-        $validator = Validator::make($data = $request->only(['company_name', 'email', 'password', 'phone', 'website']), $rules, $message);
+        $validator = Validator::make($data = $request->all(), $rules, $message);
         if ($validator->fails()) return back()->withErrors($validator)->withInput();
         $data['password'] = Hash::make($request->password);
         Company::create($data);
