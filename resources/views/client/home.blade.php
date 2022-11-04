@@ -109,7 +109,7 @@
                         <div class="content">
                             <span class="{{$item_job->icon}}"></span>
                             <h4><a href="{{route('cat', ['id' => $item_job->id])}}">{{$item_job->name}}</a></h4>
-                            <p>({{$count[$item_job->id]}} open positions)</p>
+                            <p>({{count($item_job)}} open positions)</p>
                         </div>
                     </div>
                 </div>
