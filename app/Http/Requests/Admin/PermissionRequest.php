@@ -28,14 +28,14 @@ class PermissionRequest extends FormRequest
         switch ($this->route()->getActionMethod()) {
             case 'store':
                 $rules = [
-                    'name' => 'required',
-                    'display_name' => 'required| unique:permission',
+                    'name' => 'required| unique:permissions',
+                    'display_name' => 'required',
                 ];
                 break;
             case 'update':
                 $rules = [
-                    'name' => 'required',
-                    'display_name' => 'required| unique:permission,display_name,' . $id . ',id',
+                    'name' => 'required| unique:permissions,name,' . $id . ',id',
+                    'display_name' => 'required',
                 ];
                 break;
             default:
@@ -48,7 +48,7 @@ class PermissionRequest extends FormRequest
         return [
             'name.required' => __('messages.name.required'),
             'display_name.required' => __('messages.display_name.required'),
-            'display_name.unique' => __('messages.display_name.required'),
+            'name.unique' => __('messages.name.unique'),
         ];
     }
 }
