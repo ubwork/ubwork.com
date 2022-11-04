@@ -23,9 +23,9 @@ class RegisterController extends Controller
 			'phone' => 'required|max:10',
         ];
         $message = [
-            'name.required' => 'Họ và tên là trường bắt buộc',
-            'name.max' => 'Họ và tên không quá 255 ký tự',
-            'email.required' => 'Email là trường bắt buộc',
+            'name.required' => 'Mời bạn nhập vào tên công ty',
+            'name.max' => 'Tên công ty không quá 255 ký tự',
+            'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Email không đúng định dạng',
             'email.max' => 'Email không quá 255 ký tự',
             'email.unique' => 'Email đã tồn tại',
@@ -42,6 +42,6 @@ class RegisterController extends Controller
         Company::create($data);
         Session::flash('message', trans('system.success'));
         Session::flash('alert-class', 'success');
-        return redirect()->route('login');
+        return redirect()->route('company.login');
     }
 }

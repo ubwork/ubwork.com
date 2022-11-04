@@ -41,7 +41,7 @@
           <div class="outer-box">
             <!-- Login/Register -->
             <div class="btn-box">
-              <a href="{{route('register')}}" class="btn-style-three">Login / Register</a>
+              <a href="{{route('company.register')}}" class="btn-style-three">Register</a>
               {{-- <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> --}}
             </div>
           </div>
@@ -65,17 +65,23 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
-            <h3>Đăng nhập Nhà tuyển dụng</h3>
+            <h3>Login to UBWORK</h3>
             <!--Login Form-->
             <form method="post" action="{{ url('company/login') }}">
               <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email" >
+                @error('email')
+                  <small class="text-danger">{{$message}}</small>
+                @enderror
               </div>
 
               <div class="form-group">
                 <label>Password</label>
                 <input id="password-field" type="password" name="password" value="" placeholder="Password">
+                @error('password')
+                  <small class="text-danger">{{$message}}</small>
+                @enderror
               </div>
 
               <div class="form-group">
@@ -104,40 +110,8 @@
                 </button>
             </div>
         @endif
-        <?php //Hiển thị thông báo lỗi?>
-        @if ( Session::has('error') )
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <strong>{{ Session::get('error') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
             <div class="bottom-box">
-              <div class="text">Don't have an account? <a href="{{route('register')}}">Signup</a></div>
-              <div class="divider"><span>or</span></div>
-              <div class="btn-box row">
-                <div class="col-lg-6 col-md-12">
-                  <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log In via Facebook</a>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
-                </div>
-              </div>
+              <div class="text">Don't have an account? <a href="{{route('company.register')}}">Signup</a></div>
             </div>
           </div>
         </div>

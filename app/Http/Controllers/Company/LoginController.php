@@ -26,9 +26,9 @@ class LoginController extends Controller
             'password' => 'required',
         ];
         $message = [
-            'email.required' => 'Email bắt buộc nhập!',
+            'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Email không đúng định dạng!',
-            'password.required' => 'Mật khẩu bắt buộc nhập!'
+            'password.required' => 'Mời bạn nhập vào mật khẩu'
 
         ];
         $validator = Validator::make($request->all(), $rules, $message);
