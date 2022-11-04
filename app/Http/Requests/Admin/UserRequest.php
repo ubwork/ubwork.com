@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\NumberPhone;
 use Illuminate\Foundation\Http\FormRequest;
 // use Illuminate\Support\Facades\Lang;
 
@@ -24,27 +25,29 @@ class UserRequest extends FormRequest
      */
    public function rules()
     {
-        $id = $this->route()->id;
+        $id = $this->route()->user;
         $rules = [];
         switch ($this->route()->getActionMethod()) {
             case 'store':
                 $rules = [
                     'name' => 'required',
-                    'email' => 'required|email | unique:users',
-                    'phone' => 'required | min:10 ',
+                    'email' => 'required|email|unique:users',
+                    'phone' => ['required', new NumberPhone],
                     'password' => 'required | min:8',
                     're-password' => 'required | same:password',
                     'image' => 'image',
+                    'roles' => 'required'
                 ];
                 break;
             case 'update':
                 $rules = [
                     'name' => 'required',
-                    'email' => 'required|email | unique:users,email,' . $id . ',id',
-                    'phone' => 'required | min:10 ',
+                    'email' => 'required|email | unique:users,email,' . $id,
+                    'phone' => ['required', new NumberPhone],
                     'password' => '',
                     're-password' => ' same:password',
                     'image' => 'image',
+                    'roles' => 'required'
                 ];
                 break;
             default:
@@ -58,14 +61,15 @@ class UserRequest extends FormRequest
             'name.required' => __('messages.name.required'),
             'email.required' => __('messages.email.required'),
             'email.email' => __('messages.email.email'),
-            'email.unique' => __('messages.email.required'),
+            'email.unique' => __('messages.email.unique'),
             'phone.required' => __('messages.phone.required'),
             'phone.min' => __('messages.phone.min'),
             'password.required' => __('messages.password.required'),
             'password.min' => __('messages.password.min'),
             're-password.required' => __('messages.re-password.required'),
             're-password.same' => __('messages.re-password.same'),
-            'image.image' => __('messages.image.image')
+            'image.image' => __('messages.image.image'),
+            'roles.required' => __('messages.role.required')
 
         ];
     }

@@ -26,8 +26,8 @@ Route::get('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@getLogin
 Route::post('/login',['as'=>'login','uses'=>'Client\Auth\LoginController@postLogin']);
 
 //company
-Route::get('company/register', ['as'=>'company.register','uses'=>'Company\RegisterController@getRegister']);
-Route::post('company/register', ['as'=>'company.register','uses'=>'Company\RegisterController@postRegister']);
+Route::get('company/register', ['as'=>'register','uses'=>'Company\RegisterController@getRegister']);
+Route::post('company/register', ['as'=>'register.store','uses'=>'Company\RegisterController@postRegister']);
 
 
 Route::get('company/login', ['as'=>'company.login','uses'=>'Company\LoginController@getLogin']);

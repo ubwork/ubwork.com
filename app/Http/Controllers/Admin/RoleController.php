@@ -3,83 +3,113 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $v;
+    public function __construct()
+    {
+        $this->v = [];
+    }
     public function index()
     {
-        //
+        $this->v['title'] = __('Role list');
+        $this->v['roles'] = Role::paginate(5);
+        $this->v['permissions'] = Permission::paginate(5);
+        return view('admin.role.index',$this->v);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => "required | unique:roles",
+            'permissions' => "required"
+        ];
+        $message = [
+            'name.required' => __('messages.name.required'),
+            'name.unique'=> __('messages.name.unique'),
+            'permissions.required'=> __('messages.permissions.required')
+        ];
+        $validator = Validator::make($request->input(),$rules,$message);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->messages(),
+            ]);
+        }else{
+            $res = Role::create(['name' => $request->input('name')]);
+            $res->givePermissionTo($request->permissions);
+            return response()->json([
+                'status' => true,
+                'data' => $res,
+                'message' => __('messages.add.success')
+            ]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+       $data = Role::find($id)->permissions->pluck('id');
+       return response()->json([
+                'status' => true,
+                'data' => $data,
+    ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'name' => "required | unique:roles,name,$id",
+            'permissions' => "required"
+        ];
+        $message = [
+            'name.required' => __('messages.name.required'),
+            'name.unique'=> __('messages.name.unique'),
+            'permissions.required'=> __('messages.permissions.required')
+        ];
+        $validator = Validator::make($request->input(),$rules,$message);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->messages(),
+            ]);
+        }else{
+            $modelRole = Role::find($id);
+            $modelRole->update(['name' => $request->input('name')]);
+            $modelRole->syncPermissions($request->permissions);
+            return response()->json([
+                'status' => true,
+                'data' => $modelRole,
+                'message' => __('messages.add.success')
+            ]);
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        try {
+            Role::where('id',$id)->delete();
+            $success = true;
+            $message = __('messages.delete.success');
+            } catch (\Throwable $th) {
+                throw $th;
+                $success =  false;
+                $message = __('messages.add.failed');
+            }
+            return response()->json([
+                'success'=> $success,
+                'message' =>  $message
+            ]);
     }
 }

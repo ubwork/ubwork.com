@@ -17,16 +17,15 @@ class RegisterController extends Controller
     }
     public function postRegister(Request $request) {
         $rules = [
-            'company_name' => 'required|max:255',
+            'name' => 'required|max:255',
 			'email' => 'required|string|email|max:255|unique:users',
 			'password' => 'required|string|min:6',
 			'phone' => 'required|max:10',
-			'link_web' => 'required',
         ];
         $message = [
-            'company_name.required' => 'Mời bạn nhập vào Tên công ty',
-            'company_name.max' => 'Tên công ty không quá 255 ký tự',
-            'email.required' => 'Mời bạn nhập vào Email',
+            'name.required' => 'Họ và tên là trường bắt buộc',
+            'name.max' => 'Họ và tên không quá 255 ký tự',
+            'email.required' => 'Email là trường bắt buộc',
             'email.email' => 'Email không đúng định dạng',
             'email.max' => 'Email không quá 255 ký tự',
             'email.unique' => 'Email đã tồn tại',
@@ -35,7 +34,6 @@ class RegisterController extends Controller
             'phone.required' => 'Mời bạn nhập vào số điện thoại',
             // 'phone.required' => 'Số điện thoại phải là số nguyên',
             'phone.max' => 'Số điện thoại không quá 10 số',
-            'link_web.required' => 'Website là trường bắt buộc',
 
         ];
         $validator = Validator::make($data = $request->all(), $rules, $message);
