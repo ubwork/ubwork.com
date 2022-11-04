@@ -3,6 +3,7 @@
 use App\Http\Controllers\client\CandidateController;
 use App\Http\Controllers\client\CompanyController;
 use App\Http\Controllers\client\JobController;
+use App\Http\Controllers\client\HomeController;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +22,9 @@ Route::get('/', function () {
     return view('client.home');
 });
 // Route::get('/', [, 'category'])->name('category');
-Route::get('/', [JobController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/job', [JobController::class, 'job'])->name('job');
-Route::get('/job-detail', function () {
-    return view('client.job.job-detail');
-});
+Route::get('/job-detail/{id}', [JobController::class, 'detail'])->name('job-detail');
 //candidate
 Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
 // Route::get('/candi', function () {
@@ -39,9 +38,8 @@ Route::get('/company', [CompanyController::class, 'index'])->name('index');
 // Route::get('/company', function () {
 //     return view('client.company.company');
 // });
-Route::get('/company-detail', function () {
-    return view('client.company.company-detail');
-});
+Route::get('/company-detail/{id}', [CompanyController::class, 'detail'])->name('company-detail');
+
 Route::get('/cv', function () {
     return view('client.upcv.cv');
 });
