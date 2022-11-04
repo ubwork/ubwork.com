@@ -11,7 +11,7 @@ class Company extends Model
 {
     use HasFactory;
     protected $table = "companies";
-    protected $fillable = ['id', 'name', 'company_name', 'address', 'district', 'company_model', 'working_time', 'city', 'country', 'zipcode', 'phone', 'email', 'password', 'logo', 'link_web', 'coin', 'tax_code', 'is_active', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'company_name', 'phone', 'email', 'password', 'link_web','created_at', 'updated_at'];
     public function loadList($param = [])
     {
         $query = DB::table($this->table)

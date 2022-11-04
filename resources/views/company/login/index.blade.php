@@ -34,7 +34,7 @@
           <!--Nav Outer -->
           <div class="nav-outer">
             <div class="logo-box">
-              <div class="logo"><a href="{{route('login')}}"><img src="" alt="" title=""></a></div>
+              <div class="logo"><a href="{{route('company.login')}}"><img src="" alt="" title=""></a></div>
             </div>
           </div>
 
