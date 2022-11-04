@@ -9,7 +9,7 @@
         <div class="form-inner">
           <h3>Login to UbWork</h3>
           <!--Login Form-->
-          <form method="post" action="{{ url('/login') }}">
+          <form method="post" action="{{ route('candidate.login') }}">
             @csrf
             <div class="form-group">
               <label>Email</label>
@@ -62,9 +62,6 @@
             @if ($errors->any())
                 <div class="alert alert-danger alert-outline alert-dismissible" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <div class="alert-icon">
-                        <i class="far fa-fw fa-bell"></i>
-                    </div>
                     <div class="alert-message">
                         <strong>
                             <ul>
@@ -80,16 +77,7 @@
           </form>
 
           <div class="bottom-box">
-            <div class="text">Don't have an account? <a href="">Signup</a></div>
-            <div class="divider"><span>or</span></div>
-            <div class="btn-box row">
-              <div class="col-lg-6 col-md-12">
-                <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log in Facebook</a>
-              </div>
-              <div class="col-lg-6 col-md-12">
-                <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log in Gmail</a>
-              </div>
-            </div>
+            <div class="text">Don't have an account? <a href="{{route('candidate.register')}}">Signup</a></div>
           </div>
         </div>
       </div>
