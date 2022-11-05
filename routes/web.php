@@ -33,9 +33,8 @@ Route::get('/job-detail/{id}', [JobController::class, 'detail'])->name('job-deta
 //candidate
 Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
 Route::get('/candidate-detail/{id}', [CandidateController::class, 'detail'])->name('detail');
-Route::get('/shortlisted-job', function () {
-    return view('client.candidate.shortlisted-job');
-});
+Route::get('/shortlisted-job/{id}', [ShortlistedController::class, 'shortlisted_job'])->name('shortlisted_job');
+
 Route::get('/shortlisted/{id}', [ShortlistedController::class, 'shortlisted'])->name('shortlisted');
 
 Route::get('/applied-job', function () {
