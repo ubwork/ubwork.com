@@ -16,4 +16,8 @@ class Shortlisted extends Model
         'created_at',
         'updated_at',
     ];
+    public function company()
+    {
+        return $this->belongsTo(company::class);
+    }
 }
