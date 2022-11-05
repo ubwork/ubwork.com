@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = Candidate::where('status', 1)->get();
         // dd($data);
         return view('client.candidate.candi-list', compact('data'));
+    }
+    public function detail($id)
+    {
+        $detail = Candidate::where('id', $id)->first();
+        // dd($data);
+        return view('client.candidate.candidate-profile', compact('detail'));
     }
 }

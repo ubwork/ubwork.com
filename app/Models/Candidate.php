@@ -20,6 +20,14 @@ class Candidate extends Model
         'gender',
         'city',
         'coin',
+        'link_git',
+        'languages',
+        'description',
+        'facebook',
+        'zalo',
+        'twitter',
+        'instagram',
+        'country',
         'status'
     ];
 }
