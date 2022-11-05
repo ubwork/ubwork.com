@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('client.home');
 });
+Route::get('/dashboard', function () {
+    return view('client.candidate.dashboard');
+});
 // Route::get('/', [, 'category'])->name('category');
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/job', [JobController::class, 'job'])->name('job');
