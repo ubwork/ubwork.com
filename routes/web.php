@@ -4,7 +4,9 @@ use App\Http\Controllers\client\CandidateController;
 use App\Http\Controllers\client\CompanyController;
 use App\Http\Controllers\client\JobController;
 use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\client\ShortlistedController;
 use App\Models\Candidate;
+use App\Models\Shortlisted;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,8 @@ Route::get('/candidate-detail/{id}', [CandidateController::class, 'detail'])->na
 Route::get('/shortlisted-job', function () {
     return view('client.candidate.shortlisted-job');
 });
+Route::get('/shortlisted/{id}', [ShortlistedController::class, 'shortlisted'])->name('shortlisted');
+
 Route::get('/applied-job', function () {
     return view('client.candidate.applied-job');
 });

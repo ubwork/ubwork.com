@@ -144,18 +144,18 @@
                                     <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
                                 </ul>
                                 <ul class="job-other-info">
+                                    @if($item->full_time == 1)
                                     <li class="time">
-                                        @if($item->full_time == 1)
-                                            Full Time
-                                        @endif
+                                        Full Time 
                                     </li>
+                                    @endif
+                                    @if($item->part_time == 1)
                                     <li class="privacy">
-                                        @if($item->part_time == 1)
-                                            Part Time
-                                        @endif</li>
+                                        Part Time </li>
+                                    @endif
                                     {{-- <li class="required">Urgent</li> --}}
                                 </ul>
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
                             </div>
                         </div>
                     </div>
