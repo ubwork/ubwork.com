@@ -105,6 +105,12 @@
     "Manage ACL" : "Manage ACL",
     "Roles" : "Roles",
     "Permissions" : "Permissions",
+    "Permission list": "Permission list",
+    "Permission add" : "Permission add",
+    "Permission edit": "Permission edit",
+    "Permission delete" : "Permission delete",
+    "DISPLAY_NAME" : "Display name",
+    "Enter display name" : "Enter display name",
     "Candidate" : "Candidate",
     "City" : "City",
     "Gender" : "Gender",
@@ -118,3 +124,4 @@
     "Add candidates in the system" : "Add candidates in the system",
     "Company" : "Company"
 }
+

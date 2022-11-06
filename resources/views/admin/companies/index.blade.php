@@ -8,7 +8,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <a href="{{route('company.store')}}" class="btn btn-primary float-right">Tạo mới</a>
+              <a href="{{route('admin.company.store')}}" class="btn btn-primary float-right">Tạo mới</a>
               <form action="" class="form-inline float-right mr-3">
                 <div class="form-group">
                     <input class="form-control" name="key" id="key" placeholder="Nhập tên công ty....">
@@ -54,10 +54,10 @@
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
-                            <a class="btn btn-info btn-sm mr-3" href="{{route('company.show', ['id' => $item->id])}}">
+                            <a class="btn btn-info btn-sm mr-3" href="{{route('admin.company.show', ['id' => $item->id])}}">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-danger btn-sm" href="{{route('company.destroy', ['id' => $item->id])}}">
+                            <a class="btn btn-danger btn-sm" href="{{route('admin.company.destroy', ['id' => $item->id])}}">
                               <i class="fas fa-trash"></i>
                             </a>
                         </td>
