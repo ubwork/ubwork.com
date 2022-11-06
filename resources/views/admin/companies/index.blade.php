@@ -9,6 +9,14 @@
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
               <a href="{{route('admin.company.store')}}" class="btn btn-primary float-right">Tạo mới</a>
+              <form action="" class="form-inline float-right mr-3">
+                <div class="form-group">
+                    <input class="form-control" name="key" id="key" placeholder="Nhập tên công ty....">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
