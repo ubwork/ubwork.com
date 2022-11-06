@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
-class Company extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Company  extends Authenticatable
 {
     use HasFactory;
     protected $table = "companies";
