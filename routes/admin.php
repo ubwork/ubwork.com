@@ -15,3 +15,7 @@ Route::prefix('candidate')->name('candidate.')->group(function () {
     Route::post('update/{id}', 'Admin\CandidateController@update')->name('update');
     Route::any('/{id}', 'Admin\CandidateController@destroy')->name('destroy');
 });
+Route::prefix('blacklist')->name('blacklist.')->group(function () {
+    Route::get('candidate', 'Admin\BlacklistController@index_can')->name('index_can');
+    Route::get('company', 'Admin\BlacklistController@index_cpn')->name('index_cpn');
+});
