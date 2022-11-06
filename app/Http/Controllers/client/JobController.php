@@ -22,6 +22,12 @@ class JobController extends Controller
         $data = job::where('status', 1)->get();
         return view('client.job.job', compact('data'));
     }
+    public function job_cat($id)
+    {
+        $data = job::where('job_type_id', $id)->get();
+
+        return view('client.job.job-cat', compact('data'));
+    }
     public function detail($id)
     {
         $data_job = job::where('id', $id)->first();

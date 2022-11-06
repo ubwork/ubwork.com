@@ -29,10 +29,13 @@ Route::get('/dashboard', function () {
 // Route::get('/', [, 'category'])->name('category');
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/job', [JobController::class, 'job'])->name('job');
+Route::get('/job-cat/{id}', [JobController::class, 'job_cat'])->name('job-cat');
 Route::get('/job-detail/{id}', [JobController::class, 'detail'])->name('job-detail');
 //candidate
 Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
 Route::get('/candidate-detail/{id}', [CandidateController::class, 'detail'])->name('detail');
+
+Route::post('/candidate-profile-edit/{id}', [CandidateController::class, 'update'])->name('update');
 Route::get('/shortlisted-job/{id}', [ShortlistedController::class, 'shortlisted_job'])->name('shortlisted_job');
 
 Route::get('/shortlisted/{id}', [ShortlistedController::class, 'shortlisted'])->name('shortlisted');
