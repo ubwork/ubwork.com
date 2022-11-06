@@ -30,7 +30,8 @@
                     <div class="text">Max file size is 1MB, Minimum dimension: 330x300 And Suitable files are .jpg & .png</div>
                   </div>
 
-                  <form class="default-form">
+                  <form class="default-form" action="{{route("update",['id'=>request()->route('id')])}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
@@ -41,25 +42,25 @@
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Job Title</label>
-                        <input type="text" name="name" placeholder="UI Designer" value="{{$detail->name}}">
+                        <input type="text" name="" placeholder="UI Designer" value="">
                       </div>
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Phone</label>
-                        <input type="text" name="name" placeholder="phone" value="{{$detail->phone}}">
+                        <input type="text" name="phone" placeholder="phone" value="{{$detail->phone}}">
                       </div>
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Email address</label>
-                        <input type="text" name="name" placeholder="Email" value="{{$detail->email}}">
+                        <input type="text" name="email" placeholder="Email" value="{{$detail->email}}">
                       </div>
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Website</label>
-                        <input type="text" name="name" placeholder="www.jerome.com" value="{{$detail->link_git}}">
+                        <input type="text" name="link_git" placeholder="www.jerome.com" value="{{$detail->link_git}}">
                       </div>
 
                       <!-- Input -->
@@ -90,7 +91,7 @@
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Experience</label>
-                        <input type="text" name="name" placeholder="5-10 Years">
+                        <input type="text" name="" placeholder="5-10 Years">
                       </div>
 
                       <!-- Input -->
@@ -107,13 +108,13 @@
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Education Levels</label>
-                        <input type="text" name="name" placeholder="Education Levels" value="{{$detail->education_levels}}">
+                        <input type="text" name="education_levels" placeholder="Education Levels" value="{{$detail->education_levels}}">
                       </div>
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Languages</label>
-                        <input type="text" name="name" placeholder="English, Turkish" value="{{$detail->languages}}">
+                        <input type="text" name="languages" placeholder="English, Turkish" value="{{$detail->languages}}">
                       </div>
 
                       <!-- Search Select -->
@@ -140,12 +141,12 @@
                       <!-- About Company -->
                       <div class="form-group col-lg-12 col-md-12">
                         <label>Description</label>
-                        <textarea placeholder="description">{{$detail->description}}</textarea>
+                        <textarea name="description" placeholder="description">{{$detail->description}}</textarea>
                       </div>
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <button class="theme-btn btn-style-one">Save</button>
+                        <button type="submit" class="theme-btn btn-style-one">Save</button>
                       </div>
                     </div>
                   </form>
