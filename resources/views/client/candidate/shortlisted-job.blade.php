@@ -1,9 +1,9 @@
-@extends('client.candidate.layout.app')
+@extends('client.layout.app')
 @section('title')
     {{ __('Home') }}
 @endsection
 @section('content')
-        <section class="user-dashboard">
+    <section class="user-dashboard">
       <div class="dashboard-outer">
         <div class="upper-title-box">
           <h3>Shorlisted Jobs</h3>
@@ -65,8 +65,8 @@
                           <td>
                             <div class="option-box">
                               <ul class="option-list">
-                                <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                                <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                <li><a href="{{route('job-detail', ['id' => $item->id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
+                                <li><a href="{{route('delete_shortlisted', ['id' => $item->id])}}"><button data-text="Delete Aplication"><span class="la la-trash"></span></button></a></li>
                               </ul>
                             </div>
                           </td>

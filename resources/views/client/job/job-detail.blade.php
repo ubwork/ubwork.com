@@ -39,8 +39,8 @@
               </div>
 
               <div class="btn-box">
-                <a href="#" class="theme-btn btn-style-one">Apply For Job</a>
-                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                <a href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
+                <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"><i class="flaticon-bookmark"></i></button></a>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@
                                     @endif
                                 </li>
                             </ul>
-                            <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                            <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
                             </div>
                         </div>
                     </div>

@@ -214,7 +214,7 @@
                                                 @endif</li>
                                             {{-- <li class="required">Urgent</li> --}}
                                         </ul>
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                        <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
                                     </div>
                                 </div>
                             </div>

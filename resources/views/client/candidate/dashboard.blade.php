@@ -1,4 +1,4 @@
-@extends('client.candidate.layout.app')
+@extends('client.layout.app')
 @section('title')
     {{ __('Home') }}
 @endsection
