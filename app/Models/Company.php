@@ -20,7 +20,7 @@ class Company extends Model
         if($key = request()->key);
             $query = DB::table($this->table)
                 ->select($this->fillable)
-                ->where('company_name','like','%' . $key . '%');
+                ->where('name','like','%' . $key . '%');
             $lists = $query->paginate(10);
         return $lists;
     }
