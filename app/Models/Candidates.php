@@ -26,8 +26,14 @@ class Candidates extends Authenticatable
                ->select($this->fillable)
                ->where('deleted_at', null)
                ->orderBy('id', 'desc');
-
         $lists = $query->paginate(9);
+        if($key = request()->key);
+            $query = DB::table($this->table)
+                ->select($this->fillable)
+                ->where('name','like','%' . $key . '%')
+                ->where('deleted_at', null)
+                ->orderBy('id', 'desc');
+            $lists = $query->paginate(9);
         return $lists;
     }
 
