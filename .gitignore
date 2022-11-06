@@ -18,3 +18,5 @@ package-lock.json
 composer.lock
 /public/assets/admin-bower
 /public/assets/client-bower
+/public/js
+/public/css
