@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="">
 
-            <div class="card card-warning">
+            <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">{{__($title)}}</h3>
                 </div>
@@ -129,7 +129,7 @@
 
                     <div class="mt-3">
                         
-                        <button type="submit" class="btn btn-success float-left mr-3">{{__('SAVE')}}</button>
+                        <button type="submit" class="btn btn-primary float-left mr-3">{{__('SAVE')}}</button>
                         <a href="{{route('admin.candidate.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
                     </div>
                   </form>

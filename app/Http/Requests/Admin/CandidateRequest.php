@@ -35,7 +35,7 @@ class CandidateRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required|email|unique:candidates',
                             'password' => 'required',
-                            'phone' => 'required|unique:candidates|min:10|max:10',
+                            'phone' => 'required|min:10|unique:candidates|max:10',
                             'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
@@ -44,7 +44,7 @@ class CandidateRequest extends FormRequest
                         $rules = [
                             'name' => 'required',
                             'email' => 'required|email|unique:candidates,email,' . $id . ',id',
-                            'phone' => 'required|min:10|max:10|unique:candidates,phone,' . $id . ',id',
+                            'phone' => 'required|max:10|unique:candidates,phone,' . $id . ',id',
                             'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                             break;
@@ -69,7 +69,6 @@ class CandidateRequest extends FormRequest
             'email.unique' => __('messages.email.unique'),
             'password.required' => __('messages.password.required'),
             'phone.required' => __('messages.phone.required'),
-            'phone.min' => 'Số điện thoại có 10 số!',
             'phone.max' => 'Số điện thoại nhỏ hơn 10 số!',
             'phone.digits' => 'Sai định dạng số điện thoại!',
             'phone.unique' => 'Số điện thoại đã tồn tại!',

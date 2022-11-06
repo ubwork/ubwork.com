@@ -15,7 +15,8 @@ Route::prefix('candidate')->name('candidate.')->group(function () {
     Route::post('store', 'Admin\CandidateController@store')->name('store');
     Route::get('edit/{id}', 'Admin\CandidateController@edit')->name('edit');
     Route::post('update/{id}', 'Admin\CandidateController@update')->name('update');
-    Route::any('/{id}', 'Admin\CandidateController@destroy')->name('destroy');
+    Route::delete('/{id}', 'Admin\CandidateController@destroy')->name('destroy');
+    Route::post('/{id}', 'Admin\CandidateController@status')->name('status');
 });
 Route::prefix('company')->name('company.')->group(function () {
     Route::get('/', 'Admin\CompanyController@index')->name('index');
