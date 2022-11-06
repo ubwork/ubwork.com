@@ -17,6 +17,11 @@ class Company extends Model
         $query = DB::table($this->table)
             ->select($this->fillable);
         $lists = $query->paginate(10);
+        if($key = request()->key);
+            $query = DB::table($this->table)
+                ->select($this->fillable)
+                ->where('name','like','%' . $key . '%');
+            $lists = $query->paginate(10);
         return $lists;
     }
     public function companyDetail($id)

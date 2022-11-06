@@ -46,10 +46,21 @@
                     </a>
                 </li>
                 <li class="nav-item menu-is-opening menu-open">
-                    <a href="{{ route('admin.company.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p> Company </p>
-                    </a>
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                      Company
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview" style="display: block;">
+                    <li class="nav-item">
+                      <a href="{{route('admin.company.index')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>List</p>
+                      </a>
+                    </li>
+                  </ul>
                 <li class="nav-item ">
                     <a href="{{ route('admin.candidate.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -86,7 +97,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                  </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
