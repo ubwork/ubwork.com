@@ -26,7 +26,7 @@
     <!-- Sidebar Backdrop -->
     <div class="sidebar-backdrop"></div>
     <!-- User Sidebar -->
-    @include('client.candidate.layout.sidebar')
+
     <!-- End User Sidebar -->
     <!-- Dashboard -->
     @yield('content')

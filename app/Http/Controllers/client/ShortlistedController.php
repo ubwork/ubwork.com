@@ -21,9 +21,18 @@ class ShortlistedController extends Controller
     {
         $data = Shortlisted::where('candidate_id', $id)->take(6)->get();
         foreach ($data as $item) {
-            $id = $item->job_post_id;
-            $job_short[$id] = job::where('id', $id)->first();
+            if (!empty($item)) {
+                $id = $item->job_post_id;
+                $job_short[$id] = job::where('id', $id)->first();
+            } else {
+                $job_short[$id] = [];
+            }
         }
         return view('client.candidate.shortlisted-job', compact('data', 'job_short'));
+    }
+    public function destroy($id)
+    {
+        Shortlisted::destroy($id);
+        return back();
     }
 }
