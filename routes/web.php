@@ -5,7 +5,7 @@ use App\Http\Controllers\client\CandidateController;
 use App\Http\Controllers\client\CompanyController;
 use App\Http\Controllers\client\JobController;
 use App\Http\Controllers\client\HomeController;
-use App\Http\Controllers\client\Job_post_activities;
+use App\Http\Controllers\client\Job_post_activitiesController;
 use App\Http\Controllers\client\ShortlistedController;
 use App\Models\Applied_jobs;
 use App\Models\Candidate;
