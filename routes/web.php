@@ -43,10 +43,5 @@ Route::prefix('company')->name('company.')->group(function () {
     Route::get('/', 'Admin\CompanyController@index')->name('index');
     Route::get('destroy/{id}', 'Admin\CompanyController@destroy')->name('destroy');
 });
-//blacklist
-Route::prefix('admin/blacklist')->name('admin/blacklist.')->group(function () {
-    Route::get('candidate', 'Admin\BlacklistController@index_can')->name('index_can');
-    Route::get('company', 'Admin\BlacklistController@index_cpn')->name('index_cpn');
-});
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
