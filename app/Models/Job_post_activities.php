@@ -13,4 +13,8 @@ class Job_post_activities extends Model
         'job_post_id',
         'seeker_id',
     ];
+    public function company()
+    {
+        return $this->belongsTo(company::class);
+    }
 }

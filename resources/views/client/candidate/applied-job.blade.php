@@ -6,7 +6,7 @@
     <section class="user-dashboard">
       <div class="dashboard-outer">
         <div class="upper-title-box">
-          <h3>Applied Jobs</h3>
+          <h3>Shorlisted Jobs</h3>
           <div class="text">Ready to jump back in?</div>
         </div>
 
@@ -16,7 +16,7 @@
             <div class="ls-widget">
               <div class="tabs-box">
                 <div class="widget-title">
-                  <h4>My Applied Jobs</h4>
+                  <h4>My Favorite Jobs</h4>
 
                   <div class="chosen-outer">
                     <!--Tabs Box-->
@@ -44,6 +44,7 @@
 
                       <tbody>
                         @foreach($data as $item)
+
                         <tr>
                           <td>
                             <!-- Job Block -->
@@ -54,13 +55,13 @@
                                   <h4><a href="#">{{$job_applied[$item->job_post_id]->title}}</a></h4>
                                   <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                    <li><span class="icon flaticon-map-locator"></span>{{$job_applied[$item->job_post_id]->company->address}}</li>
+                                    <li><span class="icon flaticon-map-locator">{{$job_applied[$item->job_post_id]->company->address}}</span></li>
                                   </ul>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td>{{$item->created_at}}</td>
+                          <td>Dec 5, 2020</td>
                           <td class="status">Active</td>
                           <td>
                             <div class="option-box">
