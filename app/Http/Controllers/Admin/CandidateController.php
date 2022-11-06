@@ -20,8 +20,9 @@ class CandidateController extends Controller
     {
         $candidate = new Candidates();
         $this->v['list'] = Candidates::paginate(9);
+        if($key = request()->key);
+            $this->v['list'] = Candidates::where('name','like','%' . $key . '%')->paginate(9);
         $this->v['title'] = "Danh sách ứng viên có trong hệ thống";
-
         return view('admin.candidate.index', $this->v);
     }
 

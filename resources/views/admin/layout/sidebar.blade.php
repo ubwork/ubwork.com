@@ -55,7 +55,7 @@
                   </a>
                   <ul class="nav nav-treeview" style="display: block;">
                     <li class="nav-item">
-                      <a href="{{route('company.index')}}" class="nav-link">
+                      <a href="{{route('admin.company.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>List</p>
                       </a>
