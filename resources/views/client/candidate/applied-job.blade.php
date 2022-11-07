@@ -3,13 +3,11 @@
     {{ __('Home') }}
 @endsection
 @section('content')
-    <section class="user-dashboard">
+    <section class="user-dashboard pt-5 mt-5">
       <div class="dashboard-outer">
         <div class="upper-title-box">
           <h3>Shorlisted Jobs</h3>
-          <div class="text">Ready to jump back in?</div>
         </div>
-
         <div class="row">
           <div class="col-lg-12">
             <!-- Ls widget -->
@@ -44,24 +42,23 @@
 
                       <tbody>
                         @foreach($data as  $item)
-   
                         <tr>
                           <td>
                             <!-- Job Block -->
                             <div class="job-block">
                               <div class="inner-box">
                                 <div class="content">
-                                  <span class="company-logo"><img src="" alt=""></span>
+                                  <span class="company-logo"><img src="{{asset('storage/'.$job_applied[$item->id]->company->logo)}}" alt=""></span>
                                   <h4><a href="#">{{$job_applied[$item->id]->title}}</a></h4>
                                   <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                    <li><span class="icon flaticon-map-locator"></span></li>
+                                    <li><span class="icon flaticon-map-locator"></span>{{$job_applied[$item->id]->company->address}}</li>
                                   </ul>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td>Dec 5, 2020</td>
+                          <td>{{$item->created_at}}</td>
                           <td class="status">Active</td>
                           <td>
                             <div class="option-box">

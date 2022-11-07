@@ -23,10 +23,13 @@ class Job_post_activitiesController extends Controller
     }
     public function applied_jobs($id)
     {
+        $job_applied = [];
         $data = Job_post_activities::where('seeker_id', $id)->take(6)->get();
-        foreach ($data as $item) {
-            $id_post = $item->job_post_id;
-            $job_applied[$item->id] = job::where('id', $id_post)->first();
+        if (!empty($data)) {
+            foreach ($data as $item) {
+                $id_post = $item->job_post_id;
+                $job_applied[$item->id] = job::where('id', $id_post)->first();
+            }
         }
         return view('client.candidate.applied-job', compact('data', 'job_applied'));
     }
