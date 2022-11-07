@@ -1,15 +1,10 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('Home') }}
+    {{ __('UB Work') }} | {{$detail->name}}
 @endsection
 @section('content')
-    <section class="user-dashboard">
+    <section class="user-dashboard pt-5 mt-5">
       <div class="dashboard-outer">
-        <div class="upper-title-box">
-          <h3>My Profile</h3>
-          <div class="text">Ready to jump back in?</div>
-        </div>
-
         <div class="row">
           <div class="col-lg-12">
             <!-- Ls widget -->
@@ -20,32 +15,22 @@
                 </div>
 
                 <div class="widget-content">
-
-                  <div class="uploading-outer">
-                    <div class="uploadButton">
-                      <input class="uploadButton-input" type="file" name="attachments[]" accept="image/*, application/pdf" id="upload" multiple />
-                      <label class="uploadButton-button ripple-effect" for="upload">Browse Logo</label>
-                      <span class="uploadButton-file-name"></span>
-                    </div>
-                    <div class="text">Max file size is 1MB, Minimum dimension: 330x300 And Suitable files are .jpg & .png</div>
-                  </div>
-
                   <form class="default-form" action="{{route("update",['id'=>request()->route('id')])}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
+                      <div class="uploading-outer">
+                        <div class="uploadButton">
+                          <input class="uploadButton-input" type="file" name="avatar" accept="image/*, application/pdf" id="upload" multiple />
+                          <label class="uploadButton-button ripple-effect" for="upload"><img id="image" src="{{asset('storage/'. $detail->avatar)}}" alt="your image"
+                                    style="max-width: 150px; height:100px; margin-bottom: 10px;" class="img-fluid"/></label>
+                          <span class="uploadButton-file-name"></span>
+                        </div>
+                        <div class="text">Max file size is 1MB, Minimum dimension: 330x300 And Suitable files are .jpg & .png</div>
+                      </div>
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Full Name</label>
                         <input type="text" name="name" placeholder="fullname" value="{{$detail->name}}">
-                        @error('name')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                      </div>
-
-                      <!-- Input -->
-                      <div class="form-group col-lg-6 col-md-12">
-                        <label>Job Title</label>
-                        <input type="text" name="" placeholder="UI Designer" value="">
                         @error('name')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
@@ -71,53 +56,38 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <label>Website</label>
-                        <input type="text" name="link_git" placeholder="www.jerome.com" value="{{$detail->link_git}}">
-                        @error('link_git')
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="password" value="{{$detail->password}}">
+                        @error('password')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                       </div>
 
                       <!-- Input -->
-                      <div class="form-group col-lg-3 col-md-12">
-                        <label>Current Salary($)</label>
-                        <select class="chosen-select">
-                          <option>40-70 K</option>
-                          <option>50-80 K</option>
-                          <option>60-90 K</option>
-                          <option>70-100 K</option>
-                          <option>100-150 K</option>
-                        </select>
-                      </div>
-
-                      <!-- Input -->
-                      <div class="form-group col-lg-3 col-md-12">
-                        <label>Expected Salary($)</label>
-                        <select class="chosen-select">
-                          <option>120-350 K</option>
-                          <option>40-70 K</option>
-                          <option>50-80 K</option>
-                          <option>60-90 K</option>
-                          <option>70-100 K</option>
-                          <option>100-150 K</option>
-                        </select>
-                      </div>
-
-                      <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <label>Experience</label>
-                        <input type="text" name="" placeholder="5-10 Years">
+                        <label>Country</label>
+                        <input type="text" name="country" placeholder="Country" value="{{$detail->country}}">
+                        @error('country')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
                       </div>
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Age</label>
-                        <select class="chosen-select">
-                          <option>23 - 27 Years</option>
-                          <option>24 - 28 Years</option>
-                          <option>25 - 29 Years</option>
-                          <option>26 - 30 Years</option>
-                        </select>
+                        <input type="number" name="age" placeholder="Age" value="{{$detail->age}}">
+                        @error('age')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
+                      </div>
+
+                      <!-- Input -->
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>Website</label>
+                        <input type="text" name="link_git" placeholder="www.jerome.com" value="{{$detail->link_git}}">
+                        @error('link_git')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
                       </div>
 
                       <!-- Input -->
@@ -131,6 +101,16 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
+                        <label>Experience</label>
+                        <input type="text" name="experience" placeholder="Experience">
+                        @error('experience')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
+                      </div>
+
+
+                      <!-- Input -->
+                      <div class="form-group col-lg-6 col-md-12">
                         <label>Languages</label>
                         <input type="text" name="languages" placeholder="English, Turkish" value="{{$detail->languages}}">
                         @error('languages')
@@ -138,26 +118,6 @@
                         @enderror
                       </div>
 
-                      <!-- Search Select -->
-                      <div class="form-group col-lg-6 col-md-12">
-                        <label>Categories </label>
-                        <select data-placeholder="Categories" class="chosen-select multiple" multiple tabindex="4">
-                          <option value="Banking">Banking</option>
-                          <option value="Digital&Creative">Digital & Creative</option>
-                          <option value="Retail">Retail</option>
-                          <option value="Human Resources">Human Resources</option>
-                          <option value="Management">Management</option>
-                        </select>
-                      </div>
-
-                      <!-- Input -->
-                      <div class="form-group col-lg-6 col-md-12">
-                        <label>Allow In Search & Listing</label>
-                        <select class="chosen-select">
-                          <option>Yes</option>
-                          <option>No</option>
-                        </select>
-                      </div>
 
                       <!-- About Company -->
                       <div class="form-group col-lg-12 col-md-12">

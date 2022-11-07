@@ -13,7 +13,7 @@ class CandidateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -30,17 +30,14 @@ class CandidateRequest extends FormRequest
             case 'POST':
                 $id = $this->route()->id;
                 switch ($currentAction) {
-                    case 'store':
+                    case 'update':
                         $rules = [
                             'name' => 'required',
-                            'email' =>
-                            'required|email|unique:candidates,email,' . $id . ',id',
-                            'password' => 'required',
-                            'phone' => 'required|unique:candidates|min:10|max:10',
-                            'link_git' => 'required',
-                            'education_levels' => 'required',
-                            'languages' => 'required',
-                            'description' => 'required',
+                            'email' => 'required|email|unique:candidates,email,' . $id . ',id',
+                            'phone' => 'required|min:10|unique:candidates,phone,' . $id . ',id',
+                            'password' => 'required|min:8',
+                            'age' => 'required',
+                            'country' => 'required',
                         ];
                         break;
                     default:
@@ -54,19 +51,19 @@ class CandidateRequest extends FormRequest
         return $rules;
     }
 
-    public function messages()
+    public function message()
     {
         return [
             'name.required' => 'Chưa nhập tên',
             'email.required' => 'Chưa nhập email',
             'email.unique' => 'Email đã tồn tại',
             'email.eamil' => 'Email chưa đúng định dạng',
-            'password.required' => 'Chưa nhập password',
-            'phone.required' => 'Chưa nhập phone',
-            'link_git.required' => 'Chưa nhập link_git',
-            'education_levels.required' => 'Chưa nhập education_level',
-            'languages.required' => 'Chưa nhập languages',
-            'description.required' => 'Chưa nhập description',
+            'phone.required' => 'Chưa nhập số diện thoại',
+            'phone.phone' => 'Chưa đúng định dạng',
+            'password.require' => 'Chưa nhập mật khẩu',
+            'password.min:8' => 'Mật khẩu phải hơn 8 chữ số',
+            'age.require' => 'Chưa nhập tuổi',
+            'country.require' => 'Chưa nhập quê quán',
         ];
     }
 }
