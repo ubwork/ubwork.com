@@ -17,123 +17,109 @@ class CompanyController extends Controller
     }
     public function index()
     {
-        $opj = new Company();
-        $this->v['lists_company'] = $opj->loadList();
-        $this->v['title'] = "Danh sách công ty";
-        return view("admin/companies.index", $this->v,);
+        $this->v['list'] = Company::paginate(9);
+        $this->v['title'] = "Danh sách công ty có trong hệ thống";
+        return view("admin.companies.index", $this->v);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        return view("admin/companies.add", $this->v,);
+        $this->v['title'] = "Thêm công ty vào trong hệ thống";
+        return view("admin.companies.add", $this->v,);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(CompanyRequest $request)
     {
         $this->v['title'] = "Thêm Công Ty";
-        $method_route = 'store';
         if ($request->isMethod('post')) {
-            $param = [];
-            $param['cols'] = $request->post();
-            unset($param['cols']['_token']);
+            $params = [];
+            $params['cols'] = $request->post();
+            unset($params['cols']['_token']);
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
-                $param['cols']['logo'] = $this->uploadFile($request->file('image'));
+                $params['cols']['logo'] = $this->uploadFile($request->file('image'));
             }
             $modelTest = new Company();
-            $res = $modelTest->saveNew($param);
-            if ($res == null) {
-                return redirect()->route($method_route);
-            } elseif ($res > 0) {
-                Session::flash('success', 'Thêm thành công');
-                return Redirect()->route('company.index');
-            } else {
-                Session::flash('error', 'Lỗi thêm mới người dùng');
-                return redirect()->route($method_route);
+            $res = $modelTest->saveAdd($params);
+            if($res == null) {
+                Session::flash('error', 'Vui lòng nhập dữ liệu!');
+                return Redirect()->route('admin.company.create');
+            }
+            else if ($res > 0) {
+                Session::flash('success', 'Thêm thành công!');
+                return Redirect()->route('admin.company.index');
+            }else {
+                Session::flash('error', 'Lỗi thêm mới!');
+                return Redirect()->route('admin.company.create');
             }
         }
         return view("admin/companies.add", $this->v);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        $this->v['title'] = "Sửa Công Ty";
-        $obj = new Company();
-        $item = $obj->loadOne($id);
-        $this->v['item'] = $item;
-        return view("admin/companies.edit", $this->v);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id, CompanyRequest $request)
+
+    public function edit($id)
     {
-        $method_route = 'company.show';
+        $this->v['title'] = "Cập nhật công ty";
+        $obj = Company::find($id);
+        $this->v['obj'] = $obj;
+        return view("admin.companies.edit", $this->v);
+    }
+
+
+    public function update(CompanyRequest $request, $id)
+    {
+        $method_route = 'admin.company.edit';
         $params = [];
         $params['cols'] = $request->post();
+
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $params['cols']['logo'] = $this->uploadFile($request->file('image'));
+        }
+
         unset($params['cols']['_token']);
-        $objRoom = new Company();
-        $objItem = $objRoom->loadOne($id);
+        $model = new Company();
+        $obj = $model->find($id);
         $params['cols']['id'] = $id;
-        $res = $objRoom->SaveUpdate($params);
-        if ($res == null) {
-            return redirect()->route($method_route, ['id' => $id]);
-        } else if ($res == 1) {
-            Session::flash('success', 'Cập nhật bản ghi' . $objItem->id . 'thành công');
-            return redirect()->route('company.index', ['id' => $id]);
-        } else {
-            Session::flash('error', 'lỗi cập nhật abnr ghi' . $objItem->id);
-            return redirect()->route($method_route, ['id' => $id]);
+        $res = $model->saveUpdate($params);
+        if($res == null) {
+            Session::flash('success', 'Cập nhật thành công!');
+            return Redirect()->route($method_route, ['id' => $id]);
+        }
+        if ($res == 1) {
+            Session::flash('success', 'Cập nhật '.$obj->name .' thành công!');
+            return Redirect()->route($method_route, ['id' => $id]);
+        }else {
+            Session::flash('error', 'Lỗi cập nhật!');
+            return Redirect()->route($method_route, ['id' => $id]);
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $opj = new Company();
-        $this->v['list_company'] = $opj->deleteCompany($id);
-        return back();
+        Company::where('id', $id)->delete();
+        return response()->json(['success'=>'Xóa thành công!']);
     }
+
     public function uploadFile($file)
     {
         $fileName = time() . '_' . $file->getClientOriginalName();
         return $file->storeAs('images', $fileName, 'public');
+    }
+
+    public function status(Request $request, $id) {
+        $params = [];
+        $params['cols'] = $request->all();
+        unset($params['cols']['_token']);
+        $val = $params['cols']['status'];
+        Company::where('id', $id)->update(['status' => $val]);
+        return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
     }
 }

@@ -94,7 +94,7 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-6">
-                        <label class="form-label w-100">{{__('ADDRESS')}}</label>
+                        <label class="form-label w-100">{{__('Giới tính')}}</label>
                         <div class="d-flex">
                           <div class="form-check mr-3">
                             <input type="radio" class="form-check-input" id="radio1" name="gender" value="1" checked>{{__('Male')}}
@@ -115,6 +115,10 @@
                       <div class="col-sm-6">
                         <label class="form-label w-100">{{__('STATUS')}}</label>
                         <div class="d-flex">
+                          <div class="form-check mr-3">
+                            <input type="radio" class="form-check-input" id="status" name="status" value="0" checked>{{__('Chưa kích hoạt')}}
+                            <label class="form-check-label" for="status"></label>
+                          </div>
                           <div class="form-check mr-3">
                             <input type="radio" class="form-check-input" id="status" name="status" value="1" checked>{{__('Operational')}}
                             <label class="form-check-label" for="status"></label>
