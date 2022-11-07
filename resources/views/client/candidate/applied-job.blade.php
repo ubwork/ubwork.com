@@ -5,10 +5,7 @@
 @section('content')
     <section class="user-dashboard pt-5 mt-5">
       <div class="dashboard-outer">
-        <div class="upper-title-box">
-          <h3>Shorlisted Jobs</h3>
-        </div>
-        <div class="row">
+        <div class="row pt-5">
           <div class="col-lg-12">
             <!-- Ls widget -->
             <div class="ls-widget">
@@ -49,7 +46,7 @@
                               <div class="inner-box">
                                 <div class="content">
                                   <span class="company-logo"><img src="{{asset('storage/'.$job_applied[$item->id]->company->logo)}}" alt=""></span>
-                                  <h4><a href="#">{{$job_applied[$item->id]->title}}</a></h4>
+                                  <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$job_applied[$item->id]->title}}</a></h4>
                                   <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                     <li><span class="icon flaticon-map-locator"></span>{{$job_applied[$item->id]->company->address}}</li>

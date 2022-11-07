@@ -1,12 +1,12 @@
 @extends('client.layout.app')
 @section('title')
-    {{__('Job')}}
+    {{__('Job')}} | {{$job_cat->name}}
 @endsection
 @section('content')
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
-                <h1>Find Jobs</h1>
+                <h1>{{$job_cat->name}}</h1>
                 <ul class="page-breadcrumb">
                     <li><a href="index.html">Home</a></li>
                     <li>Jobs</li>

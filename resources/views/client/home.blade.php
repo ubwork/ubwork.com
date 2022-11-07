@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('Home') }}
+    {{ __('UB Work') }}
 @endsection
 @section('content')
     <!--End Main Header -->

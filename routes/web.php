@@ -5,9 +5,8 @@ use App\Http\Controllers\client\CandidateController;
 use App\Http\Controllers\client\CompanyController;
 use App\Http\Controllers\client\JobController;
 use App\Http\Controllers\client\HomeController;
-use App\Http\Controllers\client\Job_post_activitiesController;
+use App\Http\Controllers\client\JobPostactivitiesController;
 use App\Http\Controllers\client\ShortlistedController;
-use App\Models\Applied_jobs;
 use App\Models\Candidate;
 use App\Models\Shortlisted;
 use Illuminate\Support\Facades\Route;
@@ -44,9 +43,9 @@ Route::get('/shortlisted-job/{id}', [ShortlistedController::class, 'shortlisted_
 Route::get('/shortlisted/{id}', [ShortlistedController::class, 'shortlisted'])->name('shortlisted');
 Route::get('/delete-shortlisted/{id}', [ShortlistedController::class, 'destroy'])->name('delete_shortlisted');
 
-Route::get('/applied/{id}', [Job_post_activitiesController::class, 'applied'])->name('applied');
-Route::get('/applied-job/{id}', [Job_post_activitiesController::class, 'applied_jobs'])->name('applied_jobs');
-Route::get('/delete-applied-job/{id}', [Job_post_activitiesController::class, 'destroy'])->name('delete_applied_jobs');
+Route::get('/applied/{id}', [JobPostActivitiesController::class, 'applied'])->name('applied');
+Route::get('/applied-job/{id}', [JobPostActivitiesController::class, 'applied_jobs'])->name('applied_jobs');
+Route::get('/delete-applied-job/{id}', [JobPostActivitiesController::class, 'destroy'])->name('delete_applied_jobs');
 
 Route::get('/applied-job', function () {
     return view('client.candidate.applied-job');
