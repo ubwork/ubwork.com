@@ -7,7 +7,6 @@
       <div class="dashboard-outer">
         <div class="upper-title-box">
           <h3>Howdy, Jerome!!</h3>
-          <div class="text">Ready to jump back in?</div>
         </div>
         <div class="row">
           <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
