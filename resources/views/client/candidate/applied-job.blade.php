@@ -43,19 +43,19 @@
                       </thead>
 
                       <tbody>
-                        @foreach($data as $item)
-
+                        @foreach($data as  $item)
+   
                         <tr>
                           <td>
                             <!-- Job Block -->
                             <div class="job-block">
                               <div class="inner-box">
                                 <div class="content">
-                                  <span class="company-logo"><img src="{{asset('storage/'.$job_applied[$item->job_post_id]->company->logo)}}" alt=""></span>
-                                  <h4><a href="#">{{$job_applied[$item->job_post_id]->title}}</a></h4>
+                                  <span class="company-logo"><img src="" alt=""></span>
+                                  <h4><a href="#">{{$job_applied[$item->id]->title}}</a></h4>
                                   <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                    <li><span class="icon flaticon-map-locator">{{$job_applied[$item->job_post_id]->company->address}}</span></li>
+                                    <li><span class="icon flaticon-map-locator"></span></li>
                                   </ul>
                                 </div>
                               </div>

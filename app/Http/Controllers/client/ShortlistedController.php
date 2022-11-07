@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class ShortlistedController extends Controller
 {
+
     public function shortlisted(Request $request, $id)
     {
         $shortlisted = new Shortlisted;
@@ -19,11 +20,19 @@ class ShortlistedController extends Controller
     }
     public function shortlisted_job($id)
     {
+        $job_short = [];
         $data = Shortlisted::where('candidate_id', $id)->take(6)->get();
-        foreach ($data as $item) {
-            $id_post = $item->job_post_id;
-            $job_short[$id_post] = job::where('id', $id_post)->first();
+        if (!empty($data)) {
+            foreach ($data as $item) {
+                $id_post = $item->job_post_id;
+                $job_short[$id_post] = job::where('id', $id_post)->first();
+            }
         }
         return view('client.candidate.shortlisted-job', compact('data', 'job_short'));
+    }
+    public function destroy($id)
+    {
+        Shortlisted::destroy($id);
+        return back();
     }
 }
