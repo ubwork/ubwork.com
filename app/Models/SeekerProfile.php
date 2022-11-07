@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Seeker_profile extends Model
+class SeekerProfile extends Model
 {
     use HasFactory;
     protected $table = 'seeker_profile';
