@@ -27,3 +27,7 @@ Route::prefix('company')->name('company.')->group(function () {
     Route::delete('/{id}', 'Admin\CompanyController@destroy')->name('destroy');
     Route::post('/{id}', 'Admin\CompanyController@status')->name('status');
 });
+Route::prefix('blacklist')->name('blacklist.')->group(function () {
+    Route::get('candidate', 'Admin\BlacklistController@index_can')->name('index_can');
+    Route::get('company', 'Admin\BlacklistController@index_cpn')->name('index_cpn');
+});

@@ -16,7 +16,9 @@
     },
     "dependencies": {
         "bower": "^1.8.14",
-        "laravel-mix": "^6.0.49",
-        "sweetalert2": "^11.6.1"
+        "laravel-mix": "^6.0.15",
+        "sweetalert2": "^11.6.1",
+        "typeahead": "^0.2.2",
+        "typeahead.js": "^0.11.1"
     }
 }

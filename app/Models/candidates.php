@@ -20,8 +20,6 @@ class Candidates extends Authenticatable
     // public $timestamps = false;
     protected $fillable = ['id', 'name', 'avatar', 'email', 'password', 'phone', 'address', 'position', 'gender',
     'city', 'coin', 'deleted_at', 'status', 'created_at', 'updated_at'];
-
-
     // lưu tạo
     public function saveAdd($params) {
         $data = array_merge($params['cols'], [
