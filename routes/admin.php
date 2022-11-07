@@ -20,8 +20,10 @@ Route::prefix('candidate')->name('candidate.')->group(function () {
 });
 Route::prefix('company')->name('company.')->group(function () {
     Route::get('/', 'Admin\CompanyController@index')->name('index');
-    Route::match(['get', 'post'], 'store', 'Admin\CompanyController@store')->name('store');
-    Route::get('show/{id}', 'Admin\CompanyController@show')->name('show');
-    Route::post('edit/{id}', 'Admin\CompanyController@edit')->name('edit');
-    Route::get('destroy/{id}', 'Admin\CompanyController@destroy')->name('destroy');
+    Route::get('create', 'Admin\CompanyController@create')->name('create');
+    Route::post('store', 'Admin\CompanyController@store')->name('store');
+    Route::get('edit/{id}', 'Admin\CompanyController@edit')->name('edit');
+    Route::post('update/{id}', 'Admin\CompanyController@update')->name('update');
+    Route::delete('/{id}', 'Admin\CompanyController@destroy')->name('destroy');
+    Route::post('/{id}', 'Admin\CompanyController@status')->name('status');
 });
