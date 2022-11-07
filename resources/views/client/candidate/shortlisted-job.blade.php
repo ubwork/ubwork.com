@@ -3,14 +3,7 @@
     {{ __('Home') }}
 @endsection
 @section('content')
-    <section class="user-dashboard">
-      <div class="dashboard-outer">
-        <div class="upper-title-box">
-          <h3>Shorlisted Jobs</h3>
-          <div class="text">Ready to jump back in?</div>
-        </div>
-
-        <div class="row">
+        <div class="row pt-5" >
           <div class="col-lg-12">
             <!-- Ls widget -->
             <div class="ls-widget">
@@ -65,8 +58,8 @@
                           <td>
                             <div class="option-box">
                               <ul class="option-list">
-                                <li><a href="{{route('job-detail', ['id' => $item->id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
-                                <li><a href="{{route('delete_shortlisted', ['id' => $item->id])}}"><button data-text="Delete Aplication"><span class="la la-trash"></span></button></a></li>
+                                <li><a href="{{route('job-detail', ['id' => $job_short[$item->job_post_id]->id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
+                                <li><a href="{{route('delete_shortlisted', ['id' => $job_short[$item->job_post_id]->id])}}"><button data-text="Delete Aplication"><span class="la la-trash"></span></button></a></li>
                               </ul>
                             </div>
                           </td>
@@ -82,6 +75,4 @@
 
 
         </div>
-      </div>
-    </section>
 @endsection

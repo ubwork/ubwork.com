@@ -26,7 +26,7 @@ class Job_post_activitiesController extends Controller
         $data = Job_post_activities::where('seeker_id', $id)->take(6)->get();
         foreach ($data as $item) {
             $id_post = $item->job_post_id;
-            $job_applied[$id_post] = job::where('id', $id_post)->first();
+            $job_applied[$item->id] = job::where('id', $id_post)->first();
         }
         return view('client.candidate.applied-job', compact('data', 'job_applied'));
     }

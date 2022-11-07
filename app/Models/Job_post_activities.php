@@ -17,4 +17,8 @@ class Job_post_activities extends Model
     {
         return $this->belongsTo(company::class);
     }
+    public function job()
+    {
+        return $this->belongsToMany(job::class);
+    }
 }

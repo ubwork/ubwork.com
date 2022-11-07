@@ -11,7 +11,7 @@ class Seeker_profile extends Model
     protected $table = 'seeker_profile';
     protected $fillable = [
         'candidate_id',
-        'dít_name',
+        'firt_name',
         'last_name',
         'name',
         'position_candidate',
