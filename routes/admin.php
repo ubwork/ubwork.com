@@ -31,3 +31,11 @@ Route::prefix('blacklist')->name('blacklist.')->group(function () {
     Route::get('candidate', 'Admin\BlacklistController@index_can')->name('index_can');
     Route::get('company', 'Admin\BlacklistController@index_cpn')->name('index_cpn');
 });
+Route::prefix('skill')->name('skill.')->group(function () {
+    Route::get('/', 'Admin\SkillController@index')->name('index');
+    Route::get('create', 'Admin\SkillController@create')->name('create');
+    Route::post('store', 'Admin\SkillController@store')->name('store');
+    Route::get('edit/{id}', 'Admin\SkillController@edit')->name('edit');
+    Route::post('update/{id}', 'Admin\SkillController@update')->name('update');
+    Route::delete('/{id}', 'Admin\SkillController@destroy')->name('destroy');
+});
