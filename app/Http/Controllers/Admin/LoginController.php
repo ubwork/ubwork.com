@@ -45,4 +45,9 @@ class LoginController extends Controller
         }
 
     }
+
+    public function getLogOut(){
+        Auth::logout();
+        return redirect('admin/login');
+    }
 }
