@@ -12,6 +12,9 @@ Route::get('/dashboard', function () {
 });
 Route::post('/logout',"Company\LoginController@logOut")->name('logOut');
 Route::prefix('post')->name('post.')->group(function () {
-    Route::get('/','Company\PostController@index')->name('index');
-    Route::get('create','Company\PostController@create')->name('create');
+    Route::get('/','Company\JobPostController@index')->name('index');
+    Route::get('create','Company\JobPostController@create')->name('create');
+    Route::POST('store','Company\JobPostController@store')->name('store');
+    Route::get('edit/{id}','Company\JobPostController@edit')->name('edit');
+    Route::post('update/{id}', 'Company\JobPostController@update')->name('update');
 });

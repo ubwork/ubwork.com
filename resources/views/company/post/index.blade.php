@@ -34,25 +34,26 @@
                     </th>
                   </tr>
                 </thead>
-
                 <tbody>
+                  @foreach ($posts as $item)
                   <tr>
                     <td>
-                      <h6>Senior Full Stack Engineer, Creator Success</h6>
+                      <h6>{{$item->title}}</h6>
                     </td>
                     <td class="applied"><a href="#">3+ Applied</a></td>
-                    <td>October 27, 2017 <br>April 25, 2011</td>
-                    <td class="status">Active</td>
+                    <td>{{date_format(new DateTime($item->start_date),"d/m/Y")}} <br>{{date_format(new DateTime($item->end_date),"d/m/Y")}}</td>
+                    <td class="status">{{$item->status}}</td>
                     <td>
                       <div class="option-box">
                         <ul class="option-list d-block text-center">
                           <li class="mb-2"><button data-text="Chi tiết"><span class="la la-eye"></span></button></li>
-                          <li><button data-text="Chỉnh sửa tin"><span class="la la-pencil"></span></button></li>
+                          <li><a href="{{route('company.post.edit',$item->id)}}"><button data-text="Chỉnh sửa tin"><span class="la la-pencil"></span></button></a></li>
                           {{-- <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li> --}}
                         </ul>
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
