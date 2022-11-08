@@ -67,6 +67,8 @@ Route::get('/company', [CompanyController::class, 'index'])->name('index');
 //     return view('client.company.company');
 // });
 Route::get('/company-detail/{id}', [CompanyController::class, 'detail'])->name('company-detail');
+Route::get('/company-feedback/{id}', [CompanyController::class, 'feedback'])->name('feedback');
+Route::post('/feedback/{id}', [CompanyController::class, 'saveFeedback'])->name('saveFeedback');
 
 Route::get('/cv', function () {
     return view('client.upcv.cv');

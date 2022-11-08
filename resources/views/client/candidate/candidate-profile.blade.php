@@ -55,13 +55,7 @@
                       </div>
 
                       <!-- Input -->
-                      <div class="form-group col-lg-6 col-md-12">
-                        <label>Password</label>
-                        <input type="password" name="password" placeholder="password" value="{{$detail->password}}">
-                        @error('password')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                      </div>
+
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">

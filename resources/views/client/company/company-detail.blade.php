@@ -25,8 +25,17 @@
                         </div>
 
                         <div class="btn-box">
-                            <a href="#" class="theme-btn btn-style-one">Apply For Job</a>
-                            <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                            @if (auth('candidate')->check()) 
+                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Feedback</a>
+                            @else
+                                <button class="theme-btn btn-style-one">Feedback</button>
+                            @endif
+
+                            @if (auth('candidate')->check()) 
+                                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                            @else
+                                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -43,24 +52,24 @@
                             </p>
                             <div class="row images-outer">
                                 <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href="images/resource/employers-single-1.png"
+                                    <figure class="image"><a href=""
                                             class="lightbox-image" data-fancybox="gallery"><img
-                                                src="images/resource/employers-single-1.png" alt=""></a></figure>
+                                                src="" alt=""></a></figure>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href="images/resource/employers-single-2.png"
+                                    <figure class="image"><a href=""
                                             class="lightbox-image" data-fancybox="gallery"><img
-                                                src="images/resource/employers-single-2.png" alt=""></a></figure>
+                                                src="" alt=""></a></figure>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href="images/resource/employers-single-3.png"
+                                    <figure class="image"><a href=""
                                             class="lightbox-image" data-fancybox="gallery"><img
-                                                src="images/resource/employers-single-3.png" alt=""></a></figure>
+                                                src="" alt=""></a></figure>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href="images/resource/employers-single-4.png"
+                                    <figure class="image"><a href=""
                                             class="lightbox-image" data-fancybox="gallery"><img
-                                                src="images/resource/employers-single-4.png" alt=""></a></figure>
+                                                src="" alt=""></a></figure>
                                 </div>
                             </div>
                             <p>Moody’s Corporation, often referred to as Moody’s, is an American business and financial
