@@ -66,8 +66,8 @@
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Country</label>
-                        <input type="text" name="country" placeholder="Country" value="{{$detail->country}}">
-                        @error('country')
+                        <input type="text" name="address" placeholder="Country" value="{{$detail->address}}">
+                        @error('address')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                       </div>

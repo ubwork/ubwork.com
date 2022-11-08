@@ -96,21 +96,21 @@
                                             <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($item->max_salary)}}</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            <li class="time">
-                                                @if($item->full_time == 1)
+                                             @if($item->full_time == 1)
+                                                <li class="time">
                                                     Full Time
+                                                </li>
                                                 @endif
-                                            </li>
-                                            <li class="privacy">
                                                 @if($item->part_time == 1)
+                                                <li class="privacy">
                                                     Part Time
+                                                </li>
                                                 @endif
-                                            </li>
-                                            <li class="required">
                                                 @if($item->full_time == 1 && $item->part_time == 1 )
+                                                <li class="required">
                                                 Full Time / Part Time
-                                                @endif
-                                            </li>
+                                                </li>
+                                            @endif
                                         </ul>
                                         <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                         </div>

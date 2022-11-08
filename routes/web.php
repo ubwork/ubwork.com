@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Register client
-Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister']);
+Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
 //client
 
@@ -42,7 +42,6 @@ Route::get('/job-detail/{id}', [JobController::class, 'detail'])->name('job-deta
 //candidate
 Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
 Route::get('/candidate-detail', [CandidateController::class, 'detail'])->name('detail');
-
 Route::post('/candidate-profile-edit', [CandidateController::class, 'update'])->name('update');
 
 Route::get('/shortlisted-job', [ShortlistedController::class, 'shortlisted_job'])->name('shortlisted_job');
