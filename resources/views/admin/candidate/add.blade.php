@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="">
 
-            <div class="card card-warning">
+            <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">{{__($title)}}</h3>
                 </div>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-6">
-                        <label class="form-label w-100">{{__('ADDRESS')}}</label>
+                        <label class="form-label w-100">{{__('Giới tính')}}</label>
                         <div class="d-flex">
                           <div class="form-check mr-3">
                             <input type="radio" class="form-check-input" id="radio1" name="gender" value="1" checked>{{__('Male')}}
@@ -116,6 +116,10 @@
                         <label class="form-label w-100">{{__('STATUS')}}</label>
                         <div class="d-flex">
                           <div class="form-check mr-3">
+                            <input type="radio" class="form-check-input" id="status" name="status" value="0" checked>{{__('Chưa kích hoạt')}}
+                            <label class="form-check-label" for="status"></label>
+                          </div>
+                          <div class="form-check mr-3">
                             <input type="radio" class="form-check-input" id="status" name="status" value="1" checked>{{__('Operational')}}
                             <label class="form-check-label" for="status"></label>
                           </div>
@@ -129,7 +133,7 @@
 
                     <div class="mt-3">
                         
-                        <button type="submit" class="btn btn-success float-left mr-3">{{__('SAVE')}}</button>
+                        <button type="submit" class="btn btn-primary float-left mr-3">{{__('SAVE')}}</button>
                         <a href="{{route('admin.candidate.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
                     </div>
                   </form>

@@ -3,60 +3,55 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CandidateRequest;
-use App\Models\Candidates;
-use Carbon\Carbon;
+use App\Models\Skill;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\SkillRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
-class CandidateController extends Controller
+class SkillController extends Controller
 {
-    private $v;
+    //private $v;
     public function __construct(){
         $this->v = [];
     }
 
     public function index()
     {
-        $candidate = new Candidates();
-        $this->v['list'] = Candidates::paginate(9);
+        $candidate = new Skill();
+        $this->v['list'] = Skill::paginate(9);
         if($key = request()->key);
-            $this->v['list'] = Candidates::where('name','like','%' . $key . '%')->paginate(9);
-        $this->v['title'] = "Danh sách ứng viên có trong hệ thống";
-        return view('admin.candidate.index', $this->v);
+            $this->v['list'] = Skill::where('name','like','%' . $key . '%')->paginate(9);
+        $this->v['title'] = "Danh sách kỹ năng có trong hệ thống";
+        return view('admin.skill.index', $this->v);
     }
-
     public function create()
     {
         $this->v['title'] = "Thêm ứng viên vào hệ thống";
 
-        return view('admin.candidate.add', $this->v);
+        return view('admin.skill.add', $this->v);
     }
 
-    public function store(CandidateRequest $request)
+    public function store(SkillRequest $request)
     {
         $params = [];
         $params['cols'] = $request->post();
-        // dd($params['cols']);
         $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
         $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
-        }
         unset($params['cols']['_token']);
-        $model = new Candidates();
+        $model = new Skill();
         $res = $model->saveAdd($params);
         if($res == null) {
             Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return Redirect()->route('admin.candidate.create');
+            return Redirect()->route('admin.skill.create');
         }
         else if ($res > 0) {
             Session::flash('success', 'Thêm thành công!');
-            return Redirect()->route('admin.candidate.index');
+            return Redirect()->route('admin.skill.index');
         }else {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('admin.candidate.create');
+            return Redirect()->route('admin.skill.create');
         }
         
     }
@@ -69,14 +64,14 @@ class CandidateController extends Controller
     public function edit($id)
     {
         $this->v['title'] = "Cập nhật ứng viên có trong hệ thống";
-        $model = new Candidates();
-        $this->v['obj'] = Candidates::find($id);
-        return view('admin.candidate.edit', $this->v);
+        $model = new Skill();
+        $this->v['obj'] = Skill::find($id);
+        return view('admin.skill.edit', $this->v);
     }
 
-    public function update(CandidateRequest $request, $id)
+    public function update(SkillRequest $request, $id)
     {
-        $method_route = 'admin.candidate.edit';
+        $method_route = 'admin.skill.edit';
         $params = [];
         $params['cols'] = $request->post();
 
@@ -85,7 +80,7 @@ class CandidateController extends Controller
         }
 
         unset($params['cols']['_token']);
-        $model = new Candidates();
+        $model = new Skill();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
         $res = $model->saveUpdate($params);
@@ -104,24 +99,8 @@ class CandidateController extends Controller
 
     public function destroy($id)
     {
-        Candidates::where('id', $id)->delete();
+        Skill::where('id', $id)->delete();
         return response()->json(['success'=>'Xóa thành công!']);
     }
 
-    // up ảnh
-    public function uploadFile($file) {
-        $fileName = time().'_'.$file->getClientOriginalName();
-        return $file->storeAs('images', $fileName , 'public');
-    }
-
-    // cập nhật trạng thái
-    public function status(Request $request, $id) {
-        $params = [];
-        $params['cols'] = $request->all();
-        // dd($params['cols']);
-        unset($params['cols']['_token']);
-        $val = $params['cols']['status'];
-        Candidates::where('id', $id)->update(['status' => $val]);
-        return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
-    }
 }
