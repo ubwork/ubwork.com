@@ -19,15 +19,16 @@ class CandidateController extends Controller
     public function index()
     {
         $candidate = new Candidates();
-        $this->v['list'] = $candidate->loadList();
+        $this->v['list'] = Candidates::paginate(9);
+        if($key = request()->key);
+            $this->v['list'] = Candidates::where('name','like','%' . $key . '%')->paginate(9);
         $this->v['title'] = "Danh sách ứng viên có trong hệ thống";
-
         return view('admin.candidate.index', $this->v);
     }
 
     public function create()
     {
-        $this->v['title'] = "Add candidates in the system";
+        $this->v['title'] = "Thêm ứng viên vào hệ thống";
 
         return view('admin.candidate.add', $this->v);
     }
@@ -52,7 +53,7 @@ class CandidateController extends Controller
         }
         else if ($res > 0) {
             Session::flash('success', 'Thêm thành công!');
-            return Redirect()->route('admin.candidate.create');
+            return Redirect()->route('admin.candidate.index');
         }else {
             Session::flash('error', 'Lỗi thêm mới!');
             return Redirect()->route('admin.candidate.create');
@@ -69,7 +70,7 @@ class CandidateController extends Controller
     {
         $this->v['title'] = "Cập nhật ứng viên có trong hệ thống";
         $model = new Candidates();
-        $this->v['obj'] = $model->loadOne($id);
+        $this->v['obj'] = Candidates::find($id);
         return view('admin.candidate.edit', $this->v);
     }
 
@@ -85,7 +86,7 @@ class CandidateController extends Controller
 
         unset($params['cols']['_token']);
         $model = new Candidates();
-        $obj = $model->loadOne($id);
+        $obj = $model->find($id);
         $params['cols']['id'] = $id;
         $res = $model->saveUpdate($params);
         if($res == null) {
@@ -103,14 +104,24 @@ class CandidateController extends Controller
 
     public function destroy($id)
     {
-        Candidates::where('id', $id)->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
-        Session::flash('success', 'Xóa thành công!');
-        return back();
+        Candidates::where('id', $id)->delete();
+        return response()->json(['success'=>'Xóa thành công!']);
     }
 
     // up ảnh
     public function uploadFile($file) {
         $fileName = time().'_'.$file->getClientOriginalName();
         return $file->storeAs('images', $fileName , 'public');
+    }
+
+    // cập nhật trạng thái
+    public function status(Request $request, $id) {
+        $params = [];
+        $params['cols'] = $request->all();
+        // dd($params['cols']);
+        unset($params['cols']['_token']);
+        $val = $params['cols']['status'];
+        Candidates::where('id', $id)->update(['status' => $val]);
+        return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
     }
 }

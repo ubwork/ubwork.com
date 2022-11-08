@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -13,24 +14,12 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Candidates extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
     
     protected $table = 'candidates';
     // public $timestamps = false;
     protected $fillable = ['id', 'name', 'avatar', 'email', 'password', 'phone', 'address', 'position', 'gender',
     'city', 'coin', 'deleted_at', 'status', 'created_at', 'updated_at'];
-
-    // Lấy dữ liệu ra bảng
-    public function loadList($param = []){
-        $query = DB::table($this->table)
-               ->select($this->fillable)
-               ->where('deleted_at', null)
-               ->orderBy('id', 'desc');
-
-        $lists = $query->paginate(9);
-        return $lists;
-    }
-
     // lưu tạo
     public function saveAdd($params) {
         $data = array_merge($params['cols'], [
@@ -38,16 +27,6 @@ class Candidates extends Authenticatable
         ]);
         $res = DB::table($this->table)->insert($data);
         return $res;
-    }
-
-    // lấy dữ liệu ra bảng cập nhật
-    public function loadOne($id, $params = null){
-        $query = DB::table($this->table)
-               ->where('deleted_at', '=', null)
-               ->where('id', '=', $id);
-
-        $obj = $query->first();
-        return $obj;
     }
 
     // lưu cập nhật

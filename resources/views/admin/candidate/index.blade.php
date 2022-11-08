@@ -12,19 +12,27 @@
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
               <a href="{{route('admin.candidate.create')}}" class="btn btn-primary float-right">Tạo mới</a>
+              <form action="" class="form-inline float-right mr-3">
+                <div class="form-group">
+                    <input class="form-control" name="key" id="key" placeholder="Nhập tên ứng viên....">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-hover">
+              <table id="example2" class="table table-bordered table-striped dataTable dtr-inline">
                 <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Tên</th>
-                  <th>Ảnh</th>
+                  <th>{{__('NAME')}}</th>
+                  <th>{{__('IMAGE')}}</th>
                   <th>Email</th>
-                  <th>Số điện thoại</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
+                  <th>{{__('PHONE')}}</th>
+                  <th>{{__('STATUS')}}</th>
+                  <th><a href="{{route('admin.candidate.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,28 +44,23 @@
                         <td>{{$item->email}}</td>
                         <td>{{$item->phone}}</td>
                         <td>
-                        @if($item->status == 0)
-                        Đóng
-                        @elseif($item->status == 1)
-                        Hoạt động
-                        @elseif($item->status == 2)
-                        Chặn
-                        @endif
+                          <form action="{{route('admin.candidate.status', ['id' => $item->id])}}" method="post">
+                            @csrf
+                            @method('post')
+                            <select class="stu form-select" name="status" data-id="{{$item->id}}">
+                              <option @if($item->status == 0) selected @endif value="0">Chưa kích hoạt</option>
+                              <option @if($item->status == 1) selected @endif value="1">Đã kích hoạt</option>
+                              <option @if($item->status == 2) selected @endif value="2">Chặn</option>
+                            </select>
+                          </form>
                       </td>
                         
                         <td class="project-actions xoa text-right d-flex align-items-center">
-                            <a class="btn btn-info btn-sm mr-3" href="{{route('admin.candidate.edit', ['id' => $item->id])}}">
-                              <i class="fas fa-edit"></i>
+                            <a class="btn btn-info mr-3" href="{{route('admin.candidate.edit', ['id' => $item->id])}}">
+                              <i class="fa fa-edit"></i>
                             </a>
-                            <form action="{{route('admin.candidate.destroy', ['id' => $item->id])}}" method="post">
-                              @csrf
-                              <button onclick="return Del()" class="btn btn-danger btn-sm" type="submit"
-                                        value="{{ $item->id }}"><i class="fa fa-trash"></i></button>
-                            </form>
-                            
-                            {{-- <a onclick="" class="btn btn-danger btn-sm" href="{{route('admin.candidate.destroy', ['id' => $item->id])}}">
-                              <i class="fas fa-trash"></i>
-                            </a> --}}
+
+                            <button data-id="{{$item->id}}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -80,11 +83,5 @@
 @endsection
 @section('script')
 @parent
-<script>
-  function Del() {
-    return confirm('Bạn có chắc chắn muốn xóa');
-  }
-</script>
-<script src="{{ asset('js/remove-ajax.js') }}"></script>
-<script src="{{asset('js/admin/Candidate.js')}}"></script>
+<script src="{{asset('js/admin/candidate.js')}}"></script>
 @endsection

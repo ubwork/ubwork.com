@@ -16,7 +16,7 @@ class LoginController extends Controller
     {
         if (auth('company')->check()) {
             Session::flash('Account is logged in');
-            return redirect('/');
+            return redirect()->route('company.home');
         }
         return view('company.login.index');
     }
@@ -38,7 +38,6 @@ class LoginController extends Controller
         } else {
             $email = $request->input('email');
             $password = $request->input('password');
-            // dd(auth('company'));
             if (auth('company')->attempt(['email'=>$email, 'password'=>$password])){
                 $data = auth('company')->user();
                 auth('company')->login($data);
@@ -50,8 +49,10 @@ class LoginController extends Controller
         }
 
     }
-    public function getLogout(){
+    public function logOut(Request $request){
         auth('company')->logout();
-        return redirect('company/login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('company.login');
     }
 }
