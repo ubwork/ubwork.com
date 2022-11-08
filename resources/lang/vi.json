@@ -49,6 +49,7 @@
     "Confirmed": "Xác nhận",
     "Operational": "Hoạt động",
     "Completed": "Hoàn thành",
+    "Company": "Công ty",
     "Cancelled": "Hủy bỏ",
     "Unsuccessful": "Không thành công",
     "Booking Detail" : "Chi tiết đặt phòng",
@@ -133,5 +134,6 @@
     "Female" : "Nữ",
     "Block" : "Chặn",
     "Cancel" : "Hủy",
-    "Add candidates in the system" : "Thêm ứng viên vào trong hệ thống"
+    "Add candidates in the system" : "Thêm ứng viên vào trong hệ thống",
+    "Skill": "Kỹ năng"
 }
