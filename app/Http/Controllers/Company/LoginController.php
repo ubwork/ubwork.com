@@ -16,7 +16,7 @@ class LoginController extends Controller
     {
         if (auth('company')->check()) {
             Session::flash('Account is logged in');
-            return redirect()->route('home');
+            return redirect('/');
         }
         return view('company.login.index');
     }
@@ -32,6 +32,7 @@ class LoginController extends Controller
 
         ];
         $validator = Validator::make($request->all(), $rules, $message);
+        // dd($request->all());
         if ($validator->fails()) {
             return redirect('company/login')->withErrors($validator);
         } else {
@@ -39,12 +40,18 @@ class LoginController extends Controller
             $password = $request->input('password');
             // dd(auth('company'));
             if (auth('company')->attempt(['email'=>$email, 'password'=>$password])){
-                return redirect('company');
+                $data = auth('company')->user();
+                auth('company')->login($data);
+                return redirect('company/dashboard');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng');
                 return redirect('company/login');
             }
         }
 
+    }
+    public function getLogout(){
+        auth('company')->logout();
+        return redirect('company/login');
     }
 }

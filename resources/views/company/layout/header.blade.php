@@ -35,7 +35,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="dashboard-company-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
-                        <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
+                        <li><a href="{{route('logout')}}"><i class="la la-sign-out"></i>Logout</a></li>
                         <li><a href="index.html"><i class="la la-trash"></i>Delete Profile</a></li>
                     </ul>
                 </div>

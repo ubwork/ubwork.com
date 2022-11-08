@@ -17,7 +17,6 @@ Route::get('/register',['as'=>'candidate.register','uses'=>'Candidate\RegisterCo
 Route::post('/register',['as'=>'candidate.register','uses'=>'Candidate\RegisterController@postRegister']); 
 //client
 
-
 //client
 Route::get('/', function () {
     return view('client.home');
@@ -30,6 +29,8 @@ Route::get('company/register', ['as'=>'company.register','uses'=>'Company\Regist
 Route::post('company/register', ['as'=>'register.store','uses'=>'Company\RegisterController@postRegister']);
 
 
+
+Route::get('company/logout', ['as'=>'logout','uses'=>'Company\LoginController@getLogout']);
 Route::get('company/login', ['as'=>'company.login','uses'=>'Company\LoginController@getLogin']);
 Route::post('company/login', ['as'=>'company.login','uses'=>'Company\LoginController@postLogin']);
 //admin
