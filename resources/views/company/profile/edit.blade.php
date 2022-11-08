@@ -89,7 +89,7 @@
 
                     <!-- Input -->
                     <div class="form-group col-lg-6 col-md-12">
-                      <label>Thành Lâp</label>
+                      <label>Thành Lập</label>
                       <input type="text" name="year" placeholder="06.04.2020">
                     </div>
                     <div class="form-group col-lg-6 col-md-12">
@@ -108,8 +108,6 @@
                     <!-- Input -->
                     <div class="form-group col-lg-6 col-md-12">
                       <label>Team Size</label>
-                     
-
                       <select class="chosen-select">
                         @foreach ($team as $k => $v)
                         <option value="{{$k}}" @if (isset($data->team) && $data->team == $k ) selected @endif>
