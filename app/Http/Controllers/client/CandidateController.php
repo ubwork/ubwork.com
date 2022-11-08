@@ -16,14 +16,16 @@ class CandidateController extends Controller
         // dd($data);
         return view('client.candidate.candi-list', compact('data'));
     }
-    public function detail($id)
+    public function detail()
     {
+        $id = auth('candidate')->user()->id;
         $detail = Candidate::where('id', $id)->first();
         // dd($data);
         return view('client.candidate.candidate-profile', compact('detail'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = auth('candidate')->user()->id;
         $method_route = 'detail';
         $params = [];
         $params['cols'] = $request->post();

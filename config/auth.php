@@ -74,7 +74,7 @@ return [
         ],
         'candidates' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Candidates::class,
+            'model' => App\Models\candidates::class,
         ],
         'companies' => [
             'driver' => 'eloquent',

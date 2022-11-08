@@ -12,14 +12,16 @@ class ShortlistedController extends Controller
 
     public function shortlisted(Request $request, $id)
     {
+        $id_user = auth('candidate')->user()->id;
         $shortlisted = new Shortlisted;
         $shortlisted->job_post_id = $request->id;
-        $shortlisted->candidate_id = '1';
+        $shortlisted->candidate_id = $id_user;
         $shortlisted->save();
         return back();
     }
-    public function shortlisted_job($id)
+    public function shortlisted_job()
     {
+        $id = auth('candidate')->user()->id;
         $job_short = [];
         $data = Shortlisted::where('candidate_id', $id)->take(6)->get();
         if (!empty($data)) {

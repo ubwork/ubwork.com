@@ -3,7 +3,7 @@
     {{ __('Home') }}
 @endsection
 @section('content')
-    <section class="user-dashboard">
+    <section class="user-dashboard mt-5 pt-5">
       <div class="dashboard-outer">
         <div class="upper-title-box">
           <h3>Howdy, Jerome!!</h3>
