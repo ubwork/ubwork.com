@@ -26,9 +26,9 @@ class JobPostActivitiesController extends Controller
     public function jobApply()
     {
         $id_user = auth('candidate')->user()->id;
+        $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
         $job_applied = [];
-        $data = JobPostActivities::where('seeker_id', $id_user)->take(6)->get();
-        dd($data);
+        $data = JobPostActivities::where('seeker_id', $seeker->id)->take(6)->get();
         if (!empty($data)) {
             foreach ($data as $item) {
                 $id_post = $item->job_post_id;
