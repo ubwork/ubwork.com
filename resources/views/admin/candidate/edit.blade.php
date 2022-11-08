@@ -6,7 +6,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="">
-            <div class="card card-warning">
+            <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">{{$title}}</h3>
                 </div>
@@ -16,7 +16,7 @@
                     @csrf
                     <input type="hidden" name="id" value="{{ $obj->id }}">
                     <div class="row">
-                    <div class="col">
+                    <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
                             <label for="inputName">Tên <span class="text-danger">*</span></label>
@@ -26,7 +26,12 @@
                             @enderror
                         </div>
                     </div>
-                    
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" name="address" value="{{$obj->address}}">
+                      </div>
+                  </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-6">
@@ -48,21 +53,6 @@
                         </div>
                     </div>
                     </div>
-                    
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label>Thành phố</label>
-                          <input type="text" class="form-control" name="city" value="{{$obj->city}}">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label>Vị trí</label>
-                          <input type="text" class="form-control" name="position" value="{{$obj->position}}">
-                        </div>
-                    </div>
-                    </div>
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -79,8 +69,8 @@
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label>Địa chỉ</label>
-                            <input type="text" class="form-control" name="address" value="{{$obj->address}}">
+                            <label>Vị trí</label>
+                            <input type="text" class="form-control" name="position" value="{{$obj->position}}">
                           </div>
                       </div>
                     </div>
@@ -108,7 +98,11 @@
                         <label class="form-label w-100">Trạng thái</label>
                         <div class="d-flex">
                           <div class="form-check mr-3">
-                            <input type="radio" class="form-check-input" id="status" name="status" value="1" @if($obj->status == 1) checked @endif>Hoạt động
+                            <input type="radio" class="form-check-input" id="status" name="status" value="0" @if($obj->status == 0) checked @endif>Chưa kích hoạt
+                            <label class="form-check-label" for="status"></label>
+                          </div>
+                          <div class="form-check mr-3">
+                            <input type="radio" class="form-check-input" id="status" name="status" value="1" @if($obj->status == 1) checked @endif>Đã kích hoạt
                             <label class="form-check-label" for="status"></label>
                           </div>
                           <div class="form-check">
@@ -120,7 +114,7 @@
                     </div>
 
                     <div class="mt-3">
-                        <input type="submit" value="Lưu" class="btn btn-success float-left mr-3">
+                        <input type="submit" value="Lưu" class="btn btn-primary float-left mr-3">
                         <a href="{{route('admin.candidate.index')}}" class="btn btn-secondary">Cancel</a>
                     </div>
                   </form>

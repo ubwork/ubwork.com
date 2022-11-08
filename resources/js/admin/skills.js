@@ -55,29 +55,4 @@ $(document).ready(function() {
 
     });
 
-    $('.stu').change(function(){
-        var arrayUrl = $(location).attr('pathname').split('/');
-        var model = arrayUrl[arrayUrl.length - 1];
-        var id = $(this).data('id');
-        var status = $(this).val();
-        console.log($('.stu'));
-        // alert(status);
-        var data = {
-            "_token": $('meta[name="csrf-token"]').attr('content'),
-            "id": id,
-            "status": status
-        }
-        $.ajax({
-          type: "POST",
-          url: `${model}/${id}`,
-          data: data,
-            success: function(response) {
-                toastr.success(response.success)
-            },
-            error: function(response) {
-                toastr.error("Cập nhật trạng thái thất bại")
-            }
-        });
-    });
-
 });

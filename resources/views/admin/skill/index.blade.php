@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('title')
-    {{ __('Candidate') }}
+    {{ __('Skill') }}
 @endsection
 @section('content')
 <section class="content">
@@ -11,10 +11,10 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <a href="{{route('admin.candidate.create')}}" class="btn btn-primary float-right">Tạo mới</a>
+              <a href="{{route('admin.skill.create')}}" class="btn btn-primary float-right">Tạo mới</a>
               <form action="" class="form-inline float-right mr-3">
                 <div class="form-group">
-                    <input class="form-control" name="key" id="key" placeholder="Nhập tên ứng viên....">
+                    <input class="form-control" name="key" id="key" placeholder="Nhập tên kỹ năng ....">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>
                     </button>
@@ -28,11 +28,8 @@
                 <tr>
                   <th>STT</th>
                   <th>{{__('NAME')}}</th>
-                  <th>{{__('IMAGE')}}</th>
-                  <th>Email</th>
-                  <th>{{__('PHONE')}}</th>
-                  <th>{{__('STATUS')}}</th>
-                  <th><a href="{{route('admin.candidate.create')}}"><i class="fa fa-plus"></i></a></th>
+                  <th>{{__('DESCRIPTION')}}</th>
+                  <th><a href="{{route('admin.skill.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,23 +37,9 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->name}}</td>
-                        <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->avatar)}}" alt=""></td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->phone}}</td>
-                        <td>
-                          <form action="{{route('admin.candidate.status', ['id' => $item->id])}}" method="post">
-                            @csrf
-                            @method('post')
-                            <select class="stu form-select" name="status" data-id="{{$item->id}}">
-                              <option @if($item->status == 0) selected @endif value="0">Chưa kích hoạt</option>
-                              <option @if($item->status == 1) selected @endif value="1">Đã kích hoạt</option>
-                              <option @if($item->status == 2) selected @endif value="2">Chặn</option>
-                            </select>
-                          </form>
-                      </td>
-                        
+                        <td>{{$item->description}}</td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
-                            <a class="btn btn-info mr-3" href="{{route('admin.candidate.edit', ['id' => $item->id])}}">
+                            <a class="btn btn-info mr-3" href="{{route('admin.skill.edit', ['id' => $item->id])}}">
                               <i class="fa fa-edit"></i>
                             </a>
 

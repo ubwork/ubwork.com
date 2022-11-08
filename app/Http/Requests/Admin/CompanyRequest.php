@@ -24,35 +24,37 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
 
+        $id = $this->route()->id;
         $rules = [];
         $currentAction = $this->route()->getActionMethod();
         // để lấy phương thức hiện tại
         switch ($this->method()):
             case 'POST':
-                $id = $this->route()->id;
                 switch ($currentAction) {
                     case 'store':
                         $rules = [
-                            'name' => 'required|unique:companies',
+                            'name' => 'required',
                             'company_name' => 'required',
-                            'company_model' => 'required',
                             'email' => 'required|email|unique:companies',
                             'password' => 'required',
-                            'tax_code' => 'required',
-                            'phone' => 'required | min:10 ',
+                            'tax_code' => 'required|unique:companies',
+                            'phone' => 'required|min:10|unique:companies',
+                            'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
-                    case 'edit':
+
+                    case 'update':
                         $rules = [
                             'name' => 'required',
                             'company_name' => 'required',
-                            'company_model' => 'required',
                             'email' => 'required|email|unique:companies,email,' . $id . ',id',
-                            'password' => 'required',
-                            'tax_code' => 'required',
-                            'phone' => 'required | min:10 ',
+                            'tax_code' => 'required|unique:companies,tax_code,' . $id . ',id',
+                            'phone' => 'required|max:10|unique:companies,phone,' . $id . ',id',
+                            'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
+
+                        
                     default:
                         break;
                 }
@@ -66,14 +68,21 @@ class CompanyRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Bắt Buộc Phải Nhập Tên',
-            'name.unique' => 'Tên Đã Tồn Tại',
-            'company_model.required' => 'Bắt Buộc Phải Nhập Company model',
-            'email.required' => 'Bắt Buộc Phải Nhập Email',
-            'email.unique' => 'Email Đã Tồn Tại',
-            'company_name.required' => 'Bắt Buộc Phải Nhập Tên Công Ty',
-            'company_name.unique' => 'Tên Công Ty Đã Tồn Tại',
-            'tax_code.required' => 'Bắt Buộc Phải Nhập Code',
+            'name.required' => 'Vui lòng nhập tên',
+            'email.required' => 'Vui lòng nhập email',
+            'email.unique' => 'Email đã tồn tại trong hệ thống',
+            'email.email' => 'Email sai định dạng',
+            'company_name.required' => 'Vui lòng nhập tên công ty',
+            'company_name.unique' => 'Tên công ty đã tồn tại',
+            'tax_code.required' => 'Vui lòng nhập mã số thuế',
+            'tax_code.unique' => 'Mã số thuế đã tồn tại trong hệ thống',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'phone.min' => 'Số điện thoại phải có 10 số',
+            'phone.max' => 'Số điện thoại nhỏ hơn 10 số',
+            'phone.unique' => 'Số điện thoại đã tồn tại!',
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'image.mimes' => 'Ảnh phải thuộc định dạng jpg, png, jpeg!',
+            'image.max' => 'Ảnh nhập không quá 5mb!',
         ];
     }
 }
