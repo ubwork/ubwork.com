@@ -27,7 +27,7 @@ class SkillController extends Controller
     }
     public function create()
     {
-        $this->v['title'] = "Thêm ứng viên vào hệ thống";
+        $this->v['title'] = "Thêm Kỹ năng vào hệ thống";
 
         return view('admin.skill.add', $this->v);
     }
@@ -63,7 +63,7 @@ class SkillController extends Controller
 
     public function edit($id)
     {
-        $this->v['title'] = "Cập nhật ứng viên có trong hệ thống";
+        $this->v['title'] = "Cập nhật kỹ năng có trong hệ thống";
         $model = new Skill();
         $this->v['obj'] = Skill::find($id);
         return view('admin.skill.edit', $this->v);
