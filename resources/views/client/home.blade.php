@@ -66,7 +66,7 @@
                     <!-- Info BLock Two -->
                     <div class="info_block_two anm wow fadeIn animated" data-wow-delay="2000ms" data-speed-x="1" data-speed-y="1" style="transform: translate3d(-2px, -3.68px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2000ms; animation-name: fadeIn;">
                         <p>10k+ Candidates</p>
-                        <div class="image"><img src="" alt=""></div>
+                        <div class="image"><img src="{{asset('storage/'.'images/1667320257_multi-logo.png')}}" alt=""></div>
                     </div>
 
                     <!-- Info BLock Three -->
@@ -134,14 +134,13 @@
                     <div class="job-block col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-box">
                             <div class="content">
-                                <span class="company-logo"><img src=""
-                                        alt=""></span>
+                                <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo )}}" alt=""></span>
                                 <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                 <ul class="job-info">
-                                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                                    <li><span class="icon flaticon-briefcase"></span> {{$item->jobType->name}}</li>
                                     <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
-                                    <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
-                                    <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
+                                    <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ</li>
+                                    <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}} đ</li>
                                 </ul>
                                 <ul class="job-other-info">
                                     @if($item->full_time == 1)
@@ -155,7 +154,11 @@
                                     @endif
                                     {{-- <li class="required">Urgent</li> --}}
                                 </ul>
-                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                                @if (auth('candidate')->check()) 
+                                    <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                                @else
+                                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -163,7 +166,7 @@
             </div>
 
             <div class="btn-box">
-                <a href="#" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Load More
+                <a href="{{route('job')}}" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Load More
                         Listing</span></a>
             </div>
         </div>

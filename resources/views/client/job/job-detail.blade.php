@@ -39,8 +39,17 @@
               </div>
 
               <div class="btn-box">
-                <a href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
-                <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"><i class="flaticon-bookmark"></i></button></a>
+                @if (auth('candidate')->check()) 
+                    <a href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
+                @else
+                    <button class="theme-btn btn-style-one">Apply For Job</button>
+                @endif
+                
+                @if (auth('candidate')->check()) 
+                    <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                @else
+                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                @endif
               </div>
             </div>
           </div>
@@ -89,29 +98,33 @@
                             <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                                <li><span class="icon flaticon-briefcase"></span>{{$item->jobType->name}}</li>
                                 <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
-                                <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
+                                <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ/ngày</li>
                                 <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                <li class="time">
-                                    @if($item->full_time == 1)
-                                        Full Time
-                                    @endif
-                                </li>
-                                <li class="privacy">
-                                    @if($item->part_time == 1)
-                                        Part Time
-                                    @endif
-                                </li>
-                                <li class="required">
-                                    @if($item->full_time == 1 && $item->part_time == 1 )
-                                    Full Time / Part Time
-                                    @endif
-                                </li>
+                                @if($item->full_time == 1)
+                                  <li class="time">
+                                    Full Time
+                                  </li>
+                                @endif
+                                @if($item->part_time == 1)
+                                  <li class="privacy">
+                                      Part Time
+                                  </li>
+                                @endif
+                                @if($item->full_time == 1 && $item->part_time == 1 )
+                                  <li class="required">
+                                  Full Time / Part Time
+                                  </li>
+                                @endif
                             </ul>
-                            <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                            @if (auth('candidate')->check()) 
+                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                            @else
+                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -149,17 +162,17 @@
                       <li>
                         <i class="icon icon-clock"></i>
                         <h5>Hours:</h5>
-                        <span>{{$data_job->company->working_time}}</span>
+                        <span>{{$data_job->company->working_time}} giờ/ngày</span>
                       </li>
                       <li>
                         <i class="icon icon-rate"></i>
                         <h5>Rate:</h5>
-                        <span>{{number_format($data_job->min_salary/8/27)}} - {{number_format($data_job->max_salary/8/27)}}$ / hour</span>
+                        <span>{{number_format($data_job->min_salary/8/27)}} - {{number_format($data_job->max_salary/8/27)}} đ / giờ</span>
                       </li>
                       <li>
                         <i class="icon icon-salary"></i>
                         <h5>Salary:</h5>
-                        <span>{{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}$</span>
+                        <span>{{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}} đ</span>
                       </li>
                     </ul>
                   </div>
@@ -190,7 +203,7 @@
                     <div class="company-title">
                       <div class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
-                      <a href="#" class="profile-link">View company profile</a>
+                      <a href="{{route('company-detail', ['id' => $item->id])}}" class="profile-link">View company profile</a>
                     </div>
 
                     <ul class="company-info">
