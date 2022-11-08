@@ -13,14 +13,15 @@ use Illuminate\Console\View\Components\Alert;
 class LoginController extends Controller
 {
     //
-   
-    public function getLogin(){
+
+    public function getLogin()
+    {
+
         if (auth('candidate')->check()) {
             Session::flash(__('Account is logged in'));
             return Redirect::to('/');
         }
         return view('client.login.login');
-        
     }
 
     public function postLogin(AuthRequest $request)
@@ -28,14 +29,13 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-
         if (auth('candidate')->attempt(['email' => $email, 'password' => $password])) {
+            $data = auth('candidate')->user();
+            auth('candidate')->login($data);
             return Redirect::to('/');
         } else {
             Session::flash('error', 'Email hoặc mật khẩu không đúng');
             return Redirect::to('/login');
         }
     }
-
-  
 }

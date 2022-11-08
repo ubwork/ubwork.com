@@ -57,7 +57,38 @@
             <!-- Main Menu End-->
         </div>
 
+    @if(auth('candidate')->check())
         <div class="outer-box">
+            <button class="menu-btn">
+              <span class="count">1</span>
+              <span class="icon la la-heart-o"></span>
+            </button>
+
+            <button class="menu-btn">
+              <span class="icon la la-bell"></span>
+            </button>
+
+            <!-- Dashboard Option -->
+            <div class="dropdown dashboard-option">
+              <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                <img src="" alt="avatar" class="thumb">
+                <span class="name">My Account</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="active"><a href="/dashboard"> <i class="la la-home"></i> Dashboard</a></li>
+                <li><a href="/candidate-detail"><i class="la la-user-tie"></i>My Profile</a></li>
+                <li><a href="/applied-job"><i class="la la-briefcase"></i> Applied Jobs </a></li>
+                <li><a href=""><i class="la la-bookmark-o"></i>Shortlisted Jobs</a></li>
+                <li><a href=""><i class="la la-file-invoice"></i> CV manager</a></li>
+                <li><a href="dashboard-change-password.html"><i class="la la-lock"></i>Change Password</a></li>
+                <li><a href="dashboard-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
+                <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
+                <li><a href="dashboard-delete.html"><i class="la la-trash"></i>Delete Profile</a></li>
+              </ul>
+            </div>
+          </div>
+    @else
+    <div class="outer-box">
             <!-- Add Listing -->
             <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a>
             <!-- Login/Register -->
@@ -67,7 +98,7 @@
             </div>
         </div>
     </div>
-
+    @endif
     <!-- Mobile Header -->
     <div class="mobile-header">
         <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}"
