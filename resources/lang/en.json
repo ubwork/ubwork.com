@@ -104,5 +104,25 @@
     "TO" : "To",
     "Manage ACL" : "Manage ACL",
     "Roles" : "Roles",
-    "Permissions" : "Permissions"
+    "Permissions" : "Permissions",
+    "Permission list": "Permission list",
+    "Permission add" : "Permission add",
+    "Permission edit": "Permission edit",
+    "Permission delete" : "Permission delete",
+    "DISPLAY_NAME" : "Display name",
+    "Enter display name" : "Enter display name",
+    "Candidate" : "Candidate",
+    "City" : "City",
+    "Gender" : "Gender",
+    "Position" : "Position",
+    "Choose an image smaller than 5mb" : "Choose an image smaller than 5mb",
+    "Male" : "Male",
+    "Other" : "Other",
+    "Female" : "Female",
+    "Block" : "Block",
+    "Cancel" : "Cancel",
+    "Add candidates in the system" : "Add candidates in the system",
+    "Company" : "Company",
+    "Skill": "Skill"
 }
+

@@ -3,49 +3,57 @@
     {{ $title }}
 @endsection
 @section('content')
-    <div class="row">
-        <div class="col-6">
+    <div class="row justify-content-md-center">
+        <div class="col-12 col-lg-9 col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">{{$title}}</h3>
+                    <h3 class="card-title">{{ $title }}</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="Email">Email</label>
-                            <input type="text" class="form-control" name="email" value="{{ old('email') }}"
-                                placeholder="{{__('Enter email')}}">
-                        </div>
-                        @error('email')
-                            <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
-                                <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    <span class="sr-only">Close</span>
-                                </button>
-                                {{ $message }}
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" name="email" id="email"
+                                        value="{{ old('email') }}" placeholder="{{ __('Enter email') }}">
+                                </div>
+                                @error('email')
+                                    <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
+                                        <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="name">{{__('NAME')}}</label>
-                            <input type="text" class="form-control" name="name" id="name"
-                                value="{{ old('name') }}" placeholder="{{__('Enter Name')}}">
-                        </div>
-                        @error('name')
-                            <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
-                                <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    <span class="sr-only">Close</span>
-                                </button>
-                                {{ $message }}
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="name">{{ __('NAME') }}</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        value="{{ old('name') }}" placeholder="{{ __('Enter Name') }}">
+                                </div>
+                                @error('name')
+                                    <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
+                                        <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                        @enderror
+                        </div>
+
+
                         <div class="form-group">
-                            <label for="Phone">{{__('PHONE')}}</label>
+                            <label for="Phone">{{ __('PHONE') }}</label>
                             <input type="text" class="form-control" name="phone" id="Phone"
-                                value="{{ old('phone') }}" placeholder="{{__('Enter phone')}}">
+                                value="{{ old('phone') }}" placeholder="{{ __('Enter phone') }}">
                         </div>
                         @error('phone')
                             <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
@@ -56,12 +64,54 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        <div class="form-group">
-                            <label for="password">{{__('PASSWORD')}}</label>
-                            <input type="password" class="form-control" name="password" id="password"
-                                placeholder="{{__('Enter password')}}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">{{ __('PASSWORD') }}</label>
+                                    <input type="password" class="form-control" name="password" id="password"
+                                        placeholder="{{ __('Enter password') }}">
+                                </div>
+                                @error('password')
+                                    <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
+                                        <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">{{ __('Confirm Password') }}</label>
+                                    <input type="password" class="form-control" name="re-password" id="password"
+                                        placeholder="{{ __('Enter password') }}">
+                                </div>
+                                @error('re-password')
+                                    <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
+                                        <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-                        @error('password')
+                        <div class="form-group row">
+                            <div class="col-12"><label for="">{{__('ROLE')}}</label></div>
+                            @foreach ($roles as $role)
+                                <div class="col-lg-3 col-md-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input
+                                            class="custom-control-input custom-control-input-secondary custom-control-input-outline checkbox-edit"
+                                            type="checkbox" id="roleChecked{{ $role }}" name="roles[]" value="{{ $role }}">
+                                        <label for="roleChecked{{ $role }}" class="custom-control-label">{{ $role }}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('roles')
                             <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
                                 <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -71,21 +121,7 @@
                             </div>
                         @enderror
                         <div class="form-group">
-                            <label for="password">{{__('Confirm Password')}}</label>
-                            <input type="password" class="form-control" name="re-password" id="password"
-                                placeholder="{{__('Enter password')}}">
-                        </div>
-                        @error('re-password')
-                            <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
-                                <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    <span class="sr-only">Close</span>
-                                </button>
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <div class="form-group">
-                            <label class="col-md-3 col-sm-4 control-label">{{__('IMAGE')}}</label>
+                            <label class="col-md-3 col-sm-4 control-label">{{ __('IMAGE') }}</label>
                             <div class="col-md-9 col-sm-8">
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -112,7 +148,8 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{__('SAVE')}}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('SAVE') }}</button>
+                        <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">{{ __('BACK') }}</a>
                     </div>
                 </form>
             </div>

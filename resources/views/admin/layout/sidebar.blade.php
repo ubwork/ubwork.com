@@ -3,7 +3,7 @@
     <a href="" class="brand-link">
         <img src="{{ asset('assets/admin-bower/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Hotel</span>
+        <span class="brand-text font-weight-light">UBWORK</span>
     </a>
 
     <!-- Sidebar -->
@@ -46,32 +46,53 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.user.index')}}" class="nav-link">
-                      <i class="fas fa-users nav-icon"></i>
-                      <p>{{__('USER')}}</p>
+                    <a href="{{ route('admin.company.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p> Công ty </p>
                     </a>
-                  </li>
-                  <li class="nav-item">
+                <li class="nav-item ">
+                    <a href="{{ route('admin.candidate.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            {{ __('Candidate') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.skill.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            {{ __('Skill') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.user.index') }}" class="nav-link">
+                        <i class="fas fa-users nav-icon"></i>
+                        <p>{{ __('USER') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-user-shield"></i>
-                      <p>
-                        {{__('Manage ACL')}}
-                        <i class="fas fa-angle-left right"></i>
-                      </p>
+                        <i class="nav-icon fas fa-user-shield"></i>
+                        <p>
+                            {{ __('Manage ACL') }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
                     </a>
                     <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="pages/layout/top-nav.html" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>{{__('Roles')}}</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>{{__('Permissions')}}</p>
-                        </a>
-                      </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.role.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Roles') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.permission.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Permissions') }}</p>
+                            </a>
+                        </li>
                     </ul>
                   </li>
             </ul>

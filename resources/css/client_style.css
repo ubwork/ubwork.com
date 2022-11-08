@@ -1,0 +1,12 @@
+.nav-outer img,.main-footer .logo img {
+    max-height: 40px;
+}
+.btn-style-one {
+    background-color: #f7941d;
+}
+.btn-style-one:hover {
+    background-color: #995e18;
+}
+.main-footer .phone-num a {
+    color:#995e18;
+}
