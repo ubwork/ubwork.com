@@ -63,9 +63,7 @@
                         <small class="text-danger">{{$message}}</small>
                       @enderror
                     </div>
-                    
-                    {{-- @dd(asset('storage/images/'. $data->logo)); --}}
-                    <!-- Input -->
+
                     <div class="form-group col-lg-6 col-md-12">
                       <label>Email address</label>
                       <input type="text" name="email" value="{!!$data->email !!}">
