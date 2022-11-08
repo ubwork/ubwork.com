@@ -31,12 +31,18 @@
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('assets/client-bower/images/resource/company-6.png') }}" alt="avatar"
                             class="thumb">
-                        <span class="name">My Account</span>
+                        <span class="name">{{ auth('company')->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="dashboard-company-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
-                        <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
-                        <li><a href="index.html"><i class="la la-trash"></i>Delete Profile</a></li>
+                        <li>
+                            <form action="{{ route('company.logOut') }}" method="post">
+                                @csrf
+                                <a><button type="submit">
+                                        <i class="la la-sign-out"></i>Logout
+                                </button></a>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>
