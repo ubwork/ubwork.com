@@ -4,14 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Session;
+use Laravel\Sanctum\HasApiTokens;
 
-class Company extends Model
+class Company extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $table = "companies";
-    protected $fillable = ['id', 'name', 'company_name', 'address', 'district', 'company_model', 'working_time', 'city', 'country', 'zipcode', 'phone', 'email', 'password', 'logo', 'link_web', 'coin', 'tax_code', 'is_active', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'name', 'company_name', 'address', 'district', 'company_model','team', 'working_time', 'city', 'country', 'zipcode', 'phone', 'email', 'password', 'logo', 'link_web', 'coin', 'about', 'tax_code', 'is_active', 'status', 'created_at', 'updated_at'];
+
+
+    public static function rules()
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required|max:10',
+        ];
+    }
     public function loadList($param = [])
     {
         $query = DB::table($this->table)
