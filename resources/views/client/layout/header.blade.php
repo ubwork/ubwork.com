@@ -71,7 +71,7 @@
             <!-- Dashboard Option -->
             <div class="dropdown dashboard-option">
               <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                <img src="images/resource/company-6.png" alt="avatar" class="thumb">
+                <img src="" alt="avatar" class="thumb">
                 <span class="name">My Account</span>
               </a>
               <ul class="dropdown-menu">

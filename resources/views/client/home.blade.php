@@ -66,7 +66,7 @@
                     <!-- Info BLock Two -->
                     <div class="info_block_two anm wow fadeIn animated" data-wow-delay="2000ms" data-speed-x="1" data-speed-y="1" style="transform: translate3d(-2px, -3.68px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2000ms; animation-name: fadeIn;">
                         <p>10k+ Candidates</p>
-                        <div class="image"><img src="images/resource/multi-peoples.png" alt=""></div>
+                        <div class="image"><img src="" alt=""></div>
                     </div>
 
                     <!-- Info BLock Three -->
@@ -134,7 +134,7 @@
                     <div class="job-block col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-box">
                             <div class="content">
-                                <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}"
+                                <span class="company-logo"><img src=""
                                         alt=""></span>
                                 <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                 <ul class="job-info">
@@ -192,7 +192,7 @@
                                 sorted out quickly with everything! Can’t quite… The Mitech team works really hard
                                 to ensure high level of quality</div>
                             <div class="info-box">
-                                <div class="thumb"><img src="images/resource/testi-thumb-1.png" alt="">
+                                <div class="thumb"><img src="" alt="">
                                 </div>
                                 <h4 class="name">Nicole Wells</h4>
                                 <span class="designation">Web Developer</span>
@@ -208,7 +208,7 @@
                                 sorted out quickly with everything! Can’t quite… The Mitech team works really hard
                                 to ensure high level of quality</div>
                             <div class="info-box">
-                                <div class="thumb"><img src="images/resource/testi-thumb-2.png" alt="">
+                                <div class="thumb"><img src="" alt="">
                                 </div>
                                 <h4 class="name">Gabriel Nolan</h4>
                                 <span class="designation">Consultant</span>
@@ -224,7 +224,7 @@
                                 sorted out quickly with everything! Can’t quite… The Mitech team works really hard
                                 to ensure high level of quality</div>
                             <div class="info-box">
-                                <div class="thumb"><img src="images/resource/testi-thumb-3.png" alt="">
+                                <div class="thumb"><img src="" alt="">
                                 </div>
                                 <h4 class="name">Ashley Jenkins</h4>
                                 <span class="designation">Designer</span>
@@ -243,31 +243,31 @@
             <!--Sponsors Carousel-->
             <ul class="sponsors-carousel owl-carousel owl-theme">
                 <li class="slide-item">
-                    <figure class="image-box"><a href="#"><img src="images/clients/1-1.png" alt=""></a>
+                    <figure class="image-box"><a href="#"><img src="" alt=""></a>
                     </figure>
                 </li>
                 <li class="slide-item">
-                    <figure class="image-box"><a href="#"><img src="images/clients/1-2.png" alt=""></a>
+                    <figure class="image-box"><a href="#"><img src="" alt=""></a>
                     </figure>
                 </li>
                 <li class="slide-item">
-                    <figure class="image-box"><a href="#"><img src="images/clients/1-3.png" alt=""></a>
+                    <figure class="image-box"><a href="#"><img src="" alt=""></a>
                     </figure>
                 </li>
                 <li class="slide-item">
-                    <figure class="image-box"><a href="#"><img src="images/clients/1-4.png" alt=""></a>
+                    <figure class="image-box"><a href="#"><img src="" alt=""></a>
                     </figure>
                 </li>
                 <li class="slide-item">
-                    <figure class="image-box"><a href="#"><img src="images/clients/1-5.png" alt=""></a>
+                    <figure class="image-box"><a href="#"><img src="" alt=""></a>
                     </figure>
                 </li>
                 <li class="slide-item">
-                    <figure class="image-box"><a href="#"><img src="images/clients/1-6.png" alt=""></a>
+                    <figure class="image-box"><a href="#"><img src="" alt=""></a>
                     </figure>
                 </li>
                 <li class="slide-item">
-                    <figure class="image-box"><a href="#"><img src="images/clients/1-7.png" alt=""></a>
+                    <figure class="image-box"><a href="#"><img src="" alt=""></a>
                     </figure>
                 </li>
             </ul>
@@ -352,7 +352,7 @@
                 <div class="news-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><img src="images/resource/news-1.jpg" alt="" />
+                            <figure class="image"><img src="" alt="" />
                             </figure>
                         </div>
                         <div class="lower-content">
@@ -372,7 +372,7 @@
                 <div class="news-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><img src="images/resource/news-2.jpg" alt="" />
+                            <figure class="image"><img src="" alt="" />
                             </figure>
                         </div>
                         <div class="lower-content">
@@ -392,7 +392,7 @@
                 <div class="news-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><img src="images/resource/news-3.jpg" alt="" />
+                            <figure class="image"><img src="" alt="" />
                             </figure>
                         </div>
                         <div class="lower-content">
@@ -419,7 +419,7 @@
                 <!-- Image Column -->
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="bg-shape"></div>
-                    <figure class="image wow fadeInLeft"><img src="images/resource/mobile-app.png" alt="">
+                    <figure class="image wow fadeInLeft"><img src="" alt="">
                     </figure>
                 </div>
 
@@ -432,8 +432,8 @@
                                 swipe right to apply.</div>
                         </div>
                         <div class="download-btn">
-                            <a href="#"><img src="images/icons/apple.png" alt=""></a>
-                            <a href="#"><img src="images/icons/google.png" alt=""></a>
+                            <a href="#"><img src="" alt=""></a>
+                            <a href="#"><img src="" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -456,8 +456,8 @@
                     </div>
                 </div>
 
-                <div class="image-column" style="background-image: url(images/resource/image-1.png);">
-                    <figure class="image"><img src="images/resource/image-1.png" alt=""></figure>
+                <div class="image-column" style="">
+                    <figure class="image"><img src="" alt=""></figure>
                 </div>
             </div>
         </div>

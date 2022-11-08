@@ -15,7 +15,7 @@
 
 <body data-anm=".anm">
     <div class="page-wrapper">
-        {{-- <div class="preloader"></div> --}}
+        <div class="preloader"></div>
         @include('client.layout.header')
         @yield('content')
         @include('client.layout.footer')
