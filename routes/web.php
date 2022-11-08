@@ -41,16 +41,16 @@ Route::get('/job-cat/{id}', [JobController::class, 'job_cat'])->name('job-cat');
 Route::get('/job-detail/{id}', [JobController::class, 'detail'])->name('job-detail');
 //candidate
 Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
-Route::get('/candidate-detail/{id}', [CandidateController::class, 'detail'])->name('detail');
+Route::get('/candidate-detail', [CandidateController::class, 'detail'])->name('detail');
 
-Route::post('/candidate-profile-edit/{id}', [CandidateController::class, 'update'])->name('update');
+Route::post('/candidate-profile-edit', [CandidateController::class, 'update'])->name('update');
 
-Route::get('/shortlisted-job/{id}', [ShortlistedController::class, 'shortlisted_job'])->name('shortlisted_job');
+Route::get('/shortlisted-job', [ShortlistedController::class, 'shortlisted_job'])->name('shortlisted_job');
 Route::get('/shortlisted/{id}', [ShortlistedController::class, 'shortlisted'])->name('shortlisted');
 Route::get('/delete-shortlisted/{id}', [ShortlistedController::class, 'destroy'])->name('delete_shortlisted');
 
 Route::get('/applied/{id}', [JobPostActivitiesController::class, 'applied'])->name('applied');
-Route::get('/applied-job/{id}', [JobPostActivitiesController::class, 'applied_jobs'])->name('applied_jobs');
+Route::get('/jobApply', [JobPostActivitiesController::class, 'jobApply'])->name('jobApply');
 Route::get('/delete-applied-job/{id}', [JobPostActivitiesController::class, 'destroy'])->name('delete_applied_jobs');
 
 Route::get('/applied-job', function () {

@@ -12,19 +12,23 @@ class JobPostActivitiesController extends Controller
 {
     public function applied(Request $request, $id)
     {
-        $seeker = SeekerProfile::where('id', 1)->first();
+        $id_user = auth('candidate')->user()->id;
+        $seeker = SeekerProfile::where('id', $id_user)->first();
         $seeker_id = $seeker->id;
         $applied = new JobPostActivities();
-        $applied->job_post_id = $request->id;
+        $applied->job_post_id = $id;
         $applied->seeker_id = $seeker_id;
         $applied->is_see = '1';
         $applied->save();
         return back();
     }
-    public function applied_jobs($id)
+
+    public function jobApply()
     {
+        $id_user = auth('candidate')->user()->id;
         $job_applied = [];
-        $data = JobPostActivities::where('seeker_id', $id)->take(6)->get();
+        $data = JobPostActivities::where('seeker_id', $id_user)->take(6)->get();
+        dd($data);
         if (!empty($data)) {
             foreach ($data as $item) {
                 $id_post = $item->job_post_id;
