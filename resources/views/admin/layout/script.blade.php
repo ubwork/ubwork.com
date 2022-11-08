@@ -1,4 +1,5 @@
   <!-- jQuery -->
+  
   <script src="{{ asset('assets/admin-bower/plugins/jquery/jquery.min.js') }}"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ asset('assets/admin-bower/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -16,3 +17,4 @@
   <script src="{{ asset('assets/admin-bower/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
   <script src="{{ asset('assets/admin-bower/plugins/toastr/toastr.min.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
