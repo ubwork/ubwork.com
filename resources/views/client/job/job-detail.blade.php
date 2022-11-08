@@ -203,7 +203,7 @@
                     <div class="company-title">
                       <div class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
-                      <a href="{{route('company-detail', ['id' => $item->id])}}" class="profile-link">View company profile</a>
+                      <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">View company profile</a>
                     </div>
 
                     <ul class="company-info">
