@@ -30,22 +30,7 @@
     <header class="main-header">
       <div class="container-fluid">
         <!-- Main box -->
-        <div class="main-box">
-          <!--Nav Outer -->
-          <div class="nav-outer">
-            <div class="logo-box">
-              <div class="logo"><a href="{{route('login')}}"><img src="" alt="" title=""></a></div>
-            </div>
-          </div>
 
-          <div class="outer-box">
-            <!-- Login/Register -->
-            <div class="btn-box">
-              <a href="{{route('register')}}" class="btn-style-three">Login / Register</a>
-              {{-- <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> --}}
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Mobile Header -->
@@ -81,10 +66,10 @@
               <div class="form-group">
                 <div class="field-outer">
                   <div class="input-group checkboxes square">
-                    <input type="checkbox" name="remember-me" value="" id="remember">
-                    <label for="remember" class="remember"><span class="custom-checkbox"></span> Remember me</label>
+                    {{-- <input type="checkbox" name="remember-me" value="" id="remember">
+                    <label for="remember" class="remember"><span class="custom-checkbox"></span> Remember me</label> --}}
                   </div>
-                  <a href="#" class="pwd">Forgot password?</a>
+                  {{-- <a href="#" class="pwd">Forgot password?</a> --}}
                 </div>
               </div>
 
@@ -94,41 +79,8 @@
               </div>
               <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             </form>
-            <?php //Hiển thị thông báo thành công?>
-        @if ( Session::has('success') )
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <strong>{{ Session::get('success') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-        <?php //Hiển thị thông báo lỗi?>
-        @if ( Session::has('error') )
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <strong>{{ Session::get('error') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
-            <div class="bottom-box">
-              <div class="text">Don't have an account? <a href="{{route('register')}}">Signup</a></div>
+            {{-- <div class="bottom-box">
+              <div class="text">Don't have an account? <a href="">Signup</a></div>
               <div class="divider"><span>or</span></div>
               <div class="btn-box row">
                 <div class="col-lg-6 col-md-12">
@@ -138,7 +90,7 @@
                   <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </div>
         <!--End Login Form -->
