@@ -20,6 +20,7 @@ class CreateCvController extends Controller
         $id = auth('candidate')->user()->id;
         $seeker = SeekerProfile::where('candidate_id', $id)->first();
         $skills = Skill::all();
+        $list_skill = [];
         $experiences = [];
         $list_experiences = [];
         
@@ -29,6 +30,8 @@ class CreateCvController extends Controller
             $experiences = Experiences::where('seeker_id', $seeker->id)->first();
             $list_experiences = Experiences::where('seeker_id', $seeker->id)->get();
 
+            $list_skill = Skill_seeker::where('seeker_id', $seeker->id)->get();
+
             $educations = Education::where('seeker_id', $seeker->id)->first();
             $list_educations = Education::where('seeker_id', $seeker->id)->get();
         }
@@ -37,6 +40,8 @@ class CreateCvController extends Controller
             'experiences' => $experiences,
             'list_experiences' => $list_experiences,
             'skills' => $skills,
+            'list_skill' => $list_skill,
+            'list_educations' => $list_educations,
             'educations' => $educations,
             'list_educations' => $list_educations,
         ]);
@@ -149,10 +154,16 @@ class CreateCvController extends Controller
         unset($params['cols']['_token']);
         $model = new Skill_seeker();
 
-        $a = implode(",", $params['cols']['skill_id']);
+        $a = implode(".", $params['cols']['skill_id']);
         $params['cols']['skill_id'] = $a;
+        // foreach ($params['cols']['skill_id'] as $item) {
+        //     Skill_seeker::create([
+        //         'seeker_id' => $params['cols']['seeker_id'],
+        //         'skill_id' => $
+        //     ]);
+        // }
 
-        dd($params);
+        dd($params['cols']);
         $res = $model->saveAdd($params);
         if($res == null) {
             Session::flash('error', 'Vui lòng nhập dữ liệu!');

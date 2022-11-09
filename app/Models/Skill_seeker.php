@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 class Skill_seeker extends Model
 {
     use HasFactory;
-    protected $table = 'experiences';
+    protected $table = 'skill_seeker';
     protected $fillable = [
         'id',
         'seeker_id',

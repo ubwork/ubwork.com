@@ -193,6 +193,7 @@
                                             </div>
                                         </div>
                                     </form>
+
                                 </div>
 
                                 <div class="educations mb-3">
