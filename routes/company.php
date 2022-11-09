@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Company\ProfileController;
 
 Route::get('', function () {
     $activeRoute='dashboard';
@@ -19,3 +20,9 @@ Route::prefix('post')->name('post.')->group(function () {
     Route::post('update/{id}', 'Company\JobPostController@update')->name('update');
     Route::get('profileApply/{id}', 'Company\JobPostController@profileApply')->name('profileApply');
 });
+
+Route::get('profile/{id}',['as'=>'profile','uses'=>'Company\ProfileController@edit']);
+Route::post('profile/{id}',['as'=>'profile.update','uses'=>'Company\ProfileController@update']);
+// Route::group([], function(){
+//     Route::resource('profile', ProfileController::class);
+// });
