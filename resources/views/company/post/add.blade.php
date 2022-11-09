@@ -109,11 +109,11 @@
                                                     </div>
                                                     <div class="form-group col-lg-4 col-md-12">
                                                         <label>Từ</label>
-                                                        <input type="number" name="min_salary">
+                                                        <input type="number" name="min_salary" value="{{old('min_salary')}}">
                                                     </div>
                                                     <div class="form-group col-lg-4 col-md-12">
                                                         <label>Đến</label>
-                                                        <input type="number" name="max_salary">
+                                                        <input type="number" name="max_salary" value="{{old('max_salary')}}">
                                                     </div>
                                                     <div class="form-group col-lg-3 col-md-12">
                                                         <label>Khu vực</label>
@@ -126,7 +126,7 @@
                                                     <div class="form-group col-lg-9 col-md-12">
                                                         <label>Địa chỉ</label>
                                                         <input type="text" name="address"
-                                                            placeholder="">
+                                                            placeholder="" value="{{old('address')}}">
                                                         @error('address')
                                                             <div class="text-danger pl-4">
                                                                 {{ $message }}
@@ -187,7 +187,7 @@
                                                     </div>
                                                     <div class="form-group col-lg-4 col-md-12">
                                                         <label>Thời gian bắt đầu </label>
-                                                        <div class="row"><input type="date"  name="start_date"></div>
+                                                        <div class="row"><input type="date"  name="start_date" value="{{old('start_date',date('Y-m-d'))}}"></div>
                                                         @error('start_date')
                                                                 <div class="text-danger pl-4">
                                                                     {{ $message }}
@@ -196,7 +196,7 @@
                                                     </div>
                                                     <div class="form-group col-lg-4 col-md-12">
                                                         <label>Thời gian kết thức </label>
-                                                        <input type="date" name="end_date">
+                                                        <input type="date" name="end_date" value="{{old('end_date',date('Y-m-d'))}}">
                                                         @error('end_date')
                                                                 <div class="text-danger pl-4">
                                                                     {{ $message }}
