@@ -17,14 +17,14 @@ class RegisterController extends Controller
     }
     public function postRegister(Request $request) {
         $rules = [
-            'name' => 'required|max:255',
+            'company_name' => 'required|max:255',
 			'email' => 'required|string|email|max:255|unique:users',
 			'password' => 'required|string|min:6',
 			'phone' => 'required|max:10',
         ];
         $message = [
-            'name.required' => 'Mời bạn nhập vào tên công ty',
-            'name.max' => 'Tên công ty không quá 255 ký tự',
+            'company_name.required' => 'Mời bạn nhập vào tên công ty',
+            'company_name.max' => 'Tên công ty không quá 255 ký tự',
             'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Email không đúng định dạng',
             'email.max' => 'Email không quá 255 ký tự',
@@ -32,7 +32,6 @@ class RegisterController extends Controller
             'password.required' => 'Mời bạn nhập vào mật khẩu',
             'password.min' => 'Mật khẩu phải chứa ít nhất 6 ký tự',
             'phone.required' => 'Mời bạn nhập vào số điện thoại',
-            // 'phone.required' => 'Số điện thoại phải là số nguyên',
             'phone.max' => 'Số điện thoại không quá 10 số',
 
         ];

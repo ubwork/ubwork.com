@@ -75,20 +75,8 @@
                                 <input type="text" name="link_web" class="form-control" placeholder=""  value="{{$obj->link_web}}">
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="">Quốc gia</label>
-                                <input type="text" name="country" class="form-control" placeholder=""  value="{{$obj->country}}">
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="">Mã Bưu Chính</label>
-                                <input type="text" name="zipcode" class="form-control" placeholder=""  value="{{$obj->zipcode}}">
-                            </div>
-                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Số điện thoại *</label>

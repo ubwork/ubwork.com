@@ -56,22 +56,6 @@
                         </div>
                     </div>
                     </div>
-                    
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label>{{__('City')}}</label>
-                          <input type="text" class="form-control" name="city" value="{{old('city')}}">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label>{{__('Position')}}</label>
-                          <input type="text" class="form-control" name="position" value="{{old('position')}}">
-                        </div>
-                    </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">

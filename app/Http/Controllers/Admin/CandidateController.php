@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CandidateRequest;
-use App\Models\Candidates;
+use App\Models\Candidate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -18,10 +18,10 @@ class CandidateController extends Controller
 
     public function index()
     {
-        $candidate = new Candidates();
-        $this->v['list'] = Candidates::paginate(9);
+        $candidate = new Candidate();
+        $this->v['list'] = Candidate::paginate(9);
         if($key = request()->key);
-            $this->v['list'] = Candidates::where('name','like','%' . $key . '%')->paginate(9);
+            $this->v['list'] = Candidate::where('name','like','%' . $key . '%')->paginate(9);
         $this->v['title'] = "Danh sách ứng viên có trong hệ thống";
         return view('admin.candidate.index', $this->v);
     }
@@ -45,7 +45,7 @@ class CandidateController extends Controller
             $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
         }
         unset($params['cols']['_token']);
-        $model = new Candidates();
+        $model = new Candidate();
         $res = $model->saveAdd($params);
         if($res == null) {
             Session::flash('error', 'Vui lòng nhập dữ liệu!');
@@ -69,8 +69,8 @@ class CandidateController extends Controller
     public function edit($id)
     {
         $this->v['title'] = "Cập nhật ứng viên có trong hệ thống";
-        $model = new Candidates();
-        $this->v['obj'] = Candidates::find($id);
+        $model = new Candidate();
+        $this->v['obj'] = Candidate::find($id);
         return view('admin.candidate.edit', $this->v);
     }
 
@@ -85,7 +85,7 @@ class CandidateController extends Controller
         }
 
         unset($params['cols']['_token']);
-        $model = new Candidates();
+        $model = new Candidate();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
         $res = $model->saveUpdate($params);
@@ -104,7 +104,7 @@ class CandidateController extends Controller
 
     public function destroy($id)
     {
-        Candidates::where('id', $id)->delete();
+        Candidate::where('id', $id)->delete();
         return response()->json(['success'=>'Xóa thành công!']);
     }
 
@@ -121,7 +121,7 @@ class CandidateController extends Controller
         // dd($params['cols']);
         unset($params['cols']['_token']);
         $val = $params['cols']['status'];
-        Candidates::where('id', $id)->update(['status' => $val]);
+        Candidate::where('id', $id)->update(['status' => $val]);
         return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
     }
 }

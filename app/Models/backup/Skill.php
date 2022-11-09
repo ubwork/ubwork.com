@@ -7,28 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class SeekerProfile extends Model
+class Skill extends Model
 {
     use HasFactory;
-    protected $table = 'seeker_profiles';
-    protected $fillable = [
-        'id',
-        'candidate_id',
-        'name',
-        'position_candidate',
-        'coin',
-        'major_id',
-        'path_cv',
-        'created_at',
-        'updated_at',
-        'description',
-        'email',
-        'phone',
-    ];
+    protected $table = 'skills';
+    protected $fillable = ['id','name','description', 'created_at', 'updated_at'];
 
-    // lưu tạo
     public function saveAdd($params) {
-        $data = $params['cols'];
+        $data = array_merge($params['cols']);
         $res = DB::table($this->table)->insert($data);
         return $res;
     }

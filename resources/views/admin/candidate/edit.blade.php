@@ -67,12 +67,6 @@
                               @enderror
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                            <label>Vị trí</label>
-                            <input type="text" class="form-control" name="position" value="{{$obj->position}}">
-                          </div>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-6">

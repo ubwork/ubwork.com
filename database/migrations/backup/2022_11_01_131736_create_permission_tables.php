@@ -14,6 +14,10 @@ class CreatePermissionTables extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('role_user');
+        Schema::dropIfExists('role_permission');
         $tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
         $teams = config('permission.teams');

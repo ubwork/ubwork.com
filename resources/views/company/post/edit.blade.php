@@ -265,13 +265,5 @@
             });
 
         });
-        // $("#formPost").serialize();
-        // $('#buttonSubmit').click(function(e){
-        //     e.preventDefault();
-        //     // var data = $($('#formPost').serializeArray()).each(function(index, value){
-        //     //     $('#formPost [name="' + value.name + '"]'); 
-        //     // });
-        //     console.log($('#formPost').serializeArray());
-        // })
     </script>
 @endsection

@@ -4,28 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
-class SeekerProfile extends Model
+class FeedbackCandidate extends Model
 {
     use HasFactory;
-    protected $table = 'seeker_profiles';
+    protected $table = 'feedback_candidates';
     protected $fillable = [
         'id',
         'candidate_id',
-        'name',
-        'position_candidate',
-        'coin',
-        'major_id',
-        'path_cv',
+        'company_id',
+        'rate',
+        'comment',
+        'satisfied',
+        'unsatisfied',
+        'is_candidate',
         'created_at',
         'updated_at',
-        'description',
-        'email',
-        'phone',
     ];
-
     // lưu tạo
     public function saveAdd($params) {
         $data = $params['cols'];

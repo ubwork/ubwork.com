@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Major extends Model
 {
     use HasFactory;
-    protected $table = 'majors';
-    protected $fillable = ['id','name','description', 'created_at', 'updated_at'];
-
 }

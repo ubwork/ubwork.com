@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Candidate;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
-use App\Models\Candidates;
+use App\Models\Candidate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -23,14 +23,12 @@ class RegisterController extends Controller
     }
     
     public function postRegister(Request $request){
-        // dd($request->all());
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:candidates',
             'password' => 'required',
             'phone' => 'required|unique:candidates',
             'gender' => 'required',
-            //'password2' => 'required'
         ];
         $messages = [
             'name.required' => 'Mời bạn nhập vào tên',
@@ -53,7 +51,7 @@ class RegisterController extends Controller
             $params = [];
             $params['cols'] = $request->post();
             unset($params['cols']['_token']);
-            $modelSv = new Candidates();
+            $modelSv = new Candidate();
             $res = $modelSv->saveAdd($params);
             if ($res == null) {
                 return redirect()->route('candidate.register');

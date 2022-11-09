@@ -7,7 +7,7 @@ use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Candidates;
+use App\Models\Candidate;
 use Illuminate\Console\View\Components\Alert;
 
 class LoginController extends Controller
