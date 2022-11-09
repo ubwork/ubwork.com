@@ -7,22 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class SeekerProfile extends Model
+class Experiences extends Model
 {
     use HasFactory;
-    protected $table = 'seeker_profile';
+    protected $table = 'experiences';
     protected $fillable = [
         'id',
-        'candidate_id',
-        'name',
-        'position_candidate',
-        'coin',
-        'path_cv',
+        'seeker_id',
+        'company_name',
+        'position',
+        'description',
+        'start_date',
+        'end_date',
+        'verify_company',
         'created_at',
         'updated_at',
-        'description',
-        'email',
-        'phone',
     ];
 
     // lưu tạo

@@ -53,6 +53,26 @@ Route::get('/applied/{id}', [JobPostActivitiesController::class, 'applied'])->na
 Route::get('/jobApply', [JobPostActivitiesController::class, 'jobApply'])->name('jobApply');
 Route::get('/delete-applied-job/{id}', [JobPostActivitiesController::class, 'destroy'])->name('delete_applied_jobs');
 
+// create CV
+// info CV
+Route::get('create-cv', 'Client\CreateCvController@index')->name('create_cv');
+Route::post('create-cv/saveInfo', 'Client\CreateCvController@saveInfo')->name('saveInfo');
+Route::post('create-cv/updateInfo', 'Client\CreateCvController@updateInfo')->name('updateInfo');
+
+//experiences
+Route::post('create-cv/saveExperience', 'Client\CreateCvController@saveExperience')->name('saveExperience');
+Route::post('create-cv/updateExperience', 'Client\CreateCvController@updateExperience')->name('updateExperience');
+Route::get('create-cv/deleteExperience/{id}', 'Client\CreateCvController@deleteExperience')->name('deleteExperience');
+
+//skills
+Route::post('create-cv/saveSkills', 'Client\CreateCvController@saveSkills')->name('saveSkills');
+
+//educations
+Route::post('create-cv/saveEducation', 'Client\CreateCvController@saveEducation')->name('saveEducation');
+Route::post('create-cv/updateEducation', 'Client\CreateCvController@updateEducation')->name('updateEducation');
+Route::get('create-cv/deleteEducation/{id}', 'Client\CreateCvController@deleteEducation')->name('deleteEducation');
+
+
 Route::get('/applied-job', function () {
     return view('client.candidate.applied-job');
 });

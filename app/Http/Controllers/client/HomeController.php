@@ -11,6 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $count = [];
         $data = job::where('status', 1)->take(6)->get();
         $data_job_type = JobType::all();
         foreach ($data_job_type as $item) {
