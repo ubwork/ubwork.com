@@ -40,7 +40,7 @@ Route::get('/job', [JobController::class, 'job'])->name('job');
 Route::get('/job-cat/{id}', [JobController::class, 'job_cat'])->name('job-cat');
 Route::get('/job-detail/{id}', [JobController::class, 'detail'])->name('job-detail');
 //candidate
-Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
+// Route::get('/candidate', [CandidateController::class, 'index'])->name('index');
 Route::get('/candidate-detail', [CandidateController::class, 'detail'])->name('detail');
 Route::post('/candidate-profile-edit', [CandidateController::class, 'update'])->name('update');
 
@@ -62,7 +62,7 @@ Route::get('/candi-detail', function () {
     return view('client.candidate.candi-detail');
 });
 //client/company
-Route::get('/company', [CompanyController::class, 'index'])->name('index');
+Route::get('/company-list', [CompanyController::class, 'index'])->name('company-list');
 // Route::get('/company', function () {
 //     return view('client.company.company');
 // });
@@ -83,7 +83,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@postLogin']);
-
+Route::get('/logout', ['as' => 'candidate.logout', 'uses' => 'Client\Auth\LoginController@getLogout']);
 //company
 Route::get('company/register', ['as' => 'company.register', 'uses' => 'Company\RegisterController@getRegister']);
 Route::post('company/register', ['as' => 'register.store', 'uses' => 'Company\RegisterController@postRegister']);

@@ -5,7 +5,7 @@
         <!--Nav Outer -->
         <div class="nav-outer">
             <div class="logo-box">
-                <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}"
+                <div class="logo"><a href="/"><img src="{{ asset('images/logo_ubwork.png') }}"
                             alt="" title=""></a></div>
             </div>
 
@@ -18,12 +18,12 @@
 
                     <li class="dropdown has-mega-menu" id="has-mega-menu">
                         {{-- <span>Find Jobs</span> --}}
-                        <a href="/job">Find Jobs</a>
+                        <a href="{{route('job')}}">Find Jobs</a>
                     </li>
 
                     <li class="dropdown">
                         {{-- <span>Employers</span> --}}
-                        <a href="/company">Company</a>
+                        <a href="{{route('company-list')}}">Company</a>
                     </li>
 
                     <li class="dropdown">
