@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\JobPostRequest;
 use App\Models\JobPost;
+use App\Models\JobPostActivities;
 use App\Models\Major;
 use Carbon\Carbon;
 use Exception;
@@ -23,7 +24,7 @@ class JobPostController extends Controller
     public function index()
     {
         $this->v['title'] = 'Quản lý tin tuyển dụng';
-        $this->v['posts'] = JobPost::all();
+        $this->v['posts'] = JobPost::with('activities')->get();
         return view('company.post.index',$this->v);
     }
 
@@ -86,6 +87,13 @@ class JobPostController extends Controller
             return Redirect()->route('company.post.edit',$id);
             throw new Exception($e->getMessage());
         }
+    }
+
+    public function profileApply($id){
+        $this->v['title'] = 'CV ứng tuyển';
+        $model = new JobPostActivities();
+        $this->v['listSeeker'] = $model->getListCandidate($id);
+        return view('company.post.applied',$this->v);
     }
 
     public function destroy($id)

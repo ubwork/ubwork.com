@@ -40,7 +40,7 @@
                     <td>
                       <h6>{{$item->title}}</h6>
                     </td>
-                    <td class="applied"><a href="#">3+ Applied</a></td>
+                    <td class="applied"><a href="{{route('company.post.profileApply',$item->id)}}">{{$item->activities->count()}} CV</a></td>
                     <td>{{date_format(new DateTime($item->start_date),"d/m/Y")}} <br>{{date_format(new DateTime($item->end_date),"d/m/Y")}}</td>
                     <td class="status">{{$item->status}}</td>
                     <td>
