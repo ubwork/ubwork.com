@@ -12,10 +12,11 @@ return [
                 'route' => 'company.post.index',
                 'icon'  => 'la la-paper-plane',
             ],
-            // 'info' => [
-            //     'route' => 'company.info.index',
-            //     'icon'  => 'la la-paper-plane',
-            // ]
+            'profile' => [
+                'title' => "Sửa thông tin",
+                'route' => 'company.profile',
+                'icon'  => 'la la-user-tie',
+            ]
         ]
     ]
 ];

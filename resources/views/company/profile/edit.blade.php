@@ -19,7 +19,7 @@
                 <h4>My Profile</h4>
               </div>
               <div class="widget-content">
-                <form class="default-form" action="{{route('company.profile.update', $data->id)}}" method="post" enctype="multipart/form-data">
+                <form class="default-form" action="{{route('company.profile.update')}}" method="post" enctype="multipart/form-data">
                   @csrf
                   <div class="uploading-outer">
                     <div class="uploadButton">
@@ -29,15 +29,7 @@
                     </div>
                     <div class="text">Max file size is 1MB, Minimum dimension: 330x300 And Suitable files are .jpg & .png</div>
                   </div>
-                  {{-- <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-label w-100">Logo</label>
-                      <img id="image" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt="your image"
-                          style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
-                      <input name="image" type="file" id="img">
-                      <small class="form-text text-muted">Chọn ảnh kích thước nhỏ hơn 5mb</small>
-                    </div>
-                </div> --}}
+                {{-- @dd($data);  --}}
                 <input type="hidden" name="logo_old" value="{{$data->logo}}">
                 <div class="form-group col-lg-6 col-md-12">
                       <label>Logo</label> 
@@ -114,23 +106,7 @@
                         {{ $v }}</option>
                         @endforeach
                       </select>
-                    </div>
-
-                    <!-- Search Select -->
-                    {{-- <div class="form-group col-lg-6 col-md-12">
-                      <label>Multiple Select boxes </label>
-                      <select data-placeholder="Categories" class="chosen-select multiple" multiple tabindex="4">
-                        <option value="Banking">Banking</option>
-                        <option value="Digital&Creative">Digital & Creative</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Human Resources">Human Resources</option>
-                        <option value="Management">Management</option>
-                      </select>
-                    </div> --}}
-
-                    <!-- Input -->
-
-                    <!-- About Company -->
+                    </div>           
                     <div class="form-group col-lg-12 col-md-12">
                       <label>About Company</label>
                       <textarea type="text" name="about">{!!$data->about !!}</textarea>
@@ -145,135 +121,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Ls widget -->
-          {{-- <div class="ls-widget">
-            <div class="tabs-box">
-              <div class="widget-title">
-                <h4>Social Network</h4>
-              </div>
-
-              <div class="widget-content">
-                <form class="default-form">
-                  <div class="row">
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <label>Facebook</label>
-                      <input type="text" name="name" placeholder="www.facebook.com/Invision">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <label>Twitter</label>
-                      <input type="text" name="name" placeholder="">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <label>Linkedin</label>
-                      <input type="text" name="name" placeholder="">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <label>Google Plus</label>
-                      <input type="text" name="name" placeholder="">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <button class="theme-btn btn-style-one">Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ls widget -->
-          <div class="ls-widget">
-            <div class="tabs-box">
-              <div class="widget-title">
-                <h4>Contact Information</h4>
-              </div>
-
-              <div class="widget-content">
-                <form class="default-form">
-                  <div class="row">
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <label>Country</label>
-                      <select class="chosen-select">
-                        <option>Australia</option>
-                        <option>Pakistan</option>
-                        <option>Chaina</option>
-                        <option>Japan</option>
-                        <option>India</option>
-                      </select>
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <label>City</label>
-                      <select class="chosen-select">
-                        <option>Melbourne</option>
-                        <option>Pakistan</option>
-                        <option>Chaina</option>
-                        <option>Japan</option>
-                        <option>India</option>
-                      </select>
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-12 col-md-12">
-                      <label>Complete Address</label>
-                      <input type="text" name="name" placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia.">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-6 col-md-12">
-                      <label>Find On Map</label>
-                      <input type="text" name="name" placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia.">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-3 col-md-12">
-                      <label>Latitude</label>
-                      <input type="text" name="name" placeholder="Melbourne">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-3 col-md-12">
-                      <label>Longitude</label>
-                      <input type="text" name="name" placeholder="Melbourne">
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-12 col-md-12">
-                      <button class="theme-btn btn-style-three">Search Location</button>
-                    </div>
-
-
-                    <div class="form-group col-lg-12 col-md-12">
-                      <div class="map-outer">
-                        <div class="map-canvas map-height" data-zoom="12" data-lat="-37.817085" data-lng="144.955631" data-type="roadmap" data-hue="#ffc400" data-title="Envato" data-icon-path="images/resource/map-marker.png" data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>">
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Input -->
-                    <div class="form-group col-lg-12 col-md-12">
-                      <button class="theme-btn btn-style-one">Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-        </div> --}}
-
-
       </div>
     </div>
   </section>

@@ -20,8 +20,8 @@ Route::prefix('post')->name('post.')->group(function () {
     Route::post('update/{id}', 'Company\JobPostController@update')->name('update');
 });
 
-Route::get('profile/{id}',['as'=>'profile','uses'=>'Company\ProfileController@edit']);
-Route::post('profile/{id}',['as'=>'profile.update','uses'=>'Company\ProfileController@update']);
+Route::get('profile',['as'=>'profile','uses'=>'Company\ProfileController@edit']);
+Route::post('profile',['as'=>'profile.update','uses'=>'Company\ProfileController@update']);
 // Route::group([], function(){
 //     Route::resource('profile', ProfileController::class);
 // });
