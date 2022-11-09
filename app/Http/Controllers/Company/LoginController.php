@@ -32,13 +32,16 @@ class LoginController extends Controller
 
         ];
         $validator = Validator::make($request->all(), $rules, $message);
+        // dd($request->all());
         if ($validator->fails()) {
             return redirect('company/login')->withErrors($validator);
         } else {
             $email = $request->input('email');
             $password = $request->input('password');
             if (auth('company')->attempt(['email'=>$email, 'password'=>$password])){
-                return redirect('company');
+                $data = auth('company')->user();
+                auth('company')->login($data);
+                return redirect('company/dashboard');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng');
                 return redirect('company/login');
