@@ -21,13 +21,16 @@ class ShortlistedController extends Controller
     }
     public function shortlisted_job()
     {
-        $id = auth('candidate')->user()->id;
+        $data = [];
         $job_short = [];
-        $data = Shortlisted::where('candidate_id', $id)->take(6)->get();
-        if (!empty($data)) {
-            foreach ($data as $item) {
-                $id_post = $item->job_post_id;
-                $job_short[$id_post] = job::where('id', $id_post)->first();
+        if (auth('candidate')->check()) {
+            $id = auth('candidate')->user()->id;
+            $data = Shortlisted::where('candidate_id', $id)->take(6)->get();
+            if (!empty($data)) {
+                foreach ($data as $item) {
+                    $id_post = $item->job_post_id;
+                    $job_short[$id_post] = job::where('id', $id_post)->first();
+                }
             }
         }
         return view('client.candidate.shortlisted-job', compact('data', 'job_short'));

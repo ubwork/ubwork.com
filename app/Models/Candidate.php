@@ -31,6 +31,7 @@ class Candidate extends Model
         'instagram',
         'age',
         'country',
+        'experience',
         'education_levels',
         'status'
     ];
