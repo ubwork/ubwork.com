@@ -33,7 +33,14 @@ class JobPost extends Model
 
         return $customerStatus;
     }
-    public function jobPostActives(){
-        return $this->belongsToMany(JobPostActives::class);
+    // public function jobPostActivities(){
+    //     return $this->belongsTo(jobPostActivities::class,'job_post_id');
+    // }
+    public function activities()
+    {
+        return $this->hasMany(jobPostActivities::class, 'job_post_id');
+    }
+    public function seekerProfiles(){
+        return $this->belongsToMany(SeekerProfile::class, 'job_post_activities', 'job_post_id', 'seeker_id');
     }
 }

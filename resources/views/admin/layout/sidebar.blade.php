@@ -16,7 +16,7 @@
                 --}}
             </div>
             <div class="info">
-                {{-- <a href="#" class="d-block">{{ Auth::user()->name }}</a> --}}
+                <a href="#" class="d-block">Hello, {{ Auth::User()->name }}</a>
             </div>
         </div>
 
@@ -95,6 +95,14 @@
                         </li>
                     </ul>
                   </li>
+                  <li class="nav-item ">
+                    <a href="{{route('admin.logout')}}" class="nav-link">
+                        <i class="fa fa-sign-out-alt"></i>
+                        <p>
+                            {{ __('Đăng xuất') }}
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
