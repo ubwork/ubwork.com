@@ -28,7 +28,8 @@ class ProfileRequest extends FormRequest
         // để lấy phương thức hiện tại
         switch ($this->method()):
             case 'POST':
-                $id = $this->route()->id;
+                
+                $id = auth('company')->user()->id;
                 switch ($currentAction) {
                     case 'store':
                         $rules = [
