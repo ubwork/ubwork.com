@@ -17,4 +17,5 @@ Route::prefix('post')->name('post.')->group(function () {
     Route::POST('store','Company\JobPostController@store')->name('store');
     Route::get('edit/{id}','Company\JobPostController@edit')->name('edit');
     Route::post('update/{id}', 'Company\JobPostController@update')->name('update');
+    Route::get('profileApply/{id}', 'Company\JobPostController@profileApply')->name('profileApply');
 });
