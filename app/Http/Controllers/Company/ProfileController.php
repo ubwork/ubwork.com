@@ -60,14 +60,18 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $data = Company::find(intval($id));
+        $data = auth('company')->user()->id;
+        $data = Company::find(auth('company')->user()->id);
+        $title = "Sửa thông tin";
+        $activeRoute = "Profile";
         if (is_null($data)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
             return redirect()->route('company.profile');
         }
+        // dd($data);
             $team = [
                 50 => '50-100 người',
                 100 => '100-150 người',
@@ -75,7 +79,7 @@ class ProfileController extends Controller
                 300 => '300-350 người',
                 500 => '500-1000 người',
             ];
-            return view('company.profile.edit', compact('data', 'team'));
+            return view('company.profile.edit', compact('data', 'team', 'title', 'activeRoute'));
         
     }
 
@@ -86,9 +90,11 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileRequest $request, $id)
+    public function update(ProfileRequest $request)
     {
-        $company = Company::find(intval($id));
+        $data = auth('company')->user()->id;
+        $company = Company::find(auth('company')->user()->id);
+        // dd();
         if (is_null($company)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
