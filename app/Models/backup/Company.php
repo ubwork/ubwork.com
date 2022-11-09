@@ -5,30 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
-class SeekerProfile extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Company  extends Authenticatable
 {
     use HasFactory;
-    protected $table = 'seeker_profiles';
-    protected $fillable = [
-        'id',
-        'candidate_id',
-        'name',
-        'position_candidate',
-        'coin',
-        'major_id',
-        'path_cv',
-        'created_at',
-        'updated_at',
-        'description',
-        'email',
-        'phone',
-    ];
+    protected $table = "companies";
+    protected $fillable = ['id', 'name', 'company_name', 'address', 'company_model', 'working_time',
+    'phone', 'email', 'password', 'logo', 'link_web', 'coin', 'tax_code', 'team', 'image_paper',
+    'status', 'about', 'founded_in','map','career', 'created_at', 'updated_at'];
+
+    public function companyDetail($id)
+    {
+        $query = DB::table($this->table)
+            ->where('id', '=', $id);
+        $lists = $query->first();
+        return $lists;
+    }
 
     // lưu tạo
     public function saveAdd($params) {
-        $data = $params['cols'];
+        $data = array_merge($params['cols'], [
+            'password' => Hash::make($params['cols']['password']),
+        ]);
         $res = DB::table($this->table)->insert($data);
         return $res;
     }

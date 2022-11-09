@@ -7,25 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class SeekerProfile extends Model
+class Education extends Model
 {
     use HasFactory;
-    protected $table = 'seeker_profiles';
+    protected $table = 'educations';
     protected $fillable = [
         'id',
-        'candidate_id',
-        'name',
-        'position_candidate',
-        'coin',
+        'seeker_id',
+        'name_education',
+        'description',
+        'type_degree',
+        'start_date',
+        'end_date',
         'major_id',
-        'path_cv',
+        'gpa',
         'created_at',
         'updated_at',
-        'description',
-        'email',
-        'phone',
     ];
-
     // lưu tạo
     public function saveAdd($params) {
         $data = $params['cols'];

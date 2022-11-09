@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\Company\Company as CompanyCompany;
-use App\Http\Requests\Company\Profile;
 use App\Http\Requests\Company\ProfileRequest;
 use App\Models\Company;
 use Illuminate\Support\Facades\Session;
@@ -12,57 +10,28 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit()
     {
-        $data = auth('company')->user()->id;
         $data = Company::find(auth('company')->user()->id);
         $title = "Sửa thông tin";
         $activeRoute = "Profile";
@@ -83,18 +52,11 @@ class ProfileController extends Controller
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProfileRequest $request)
     {
+
         $data = auth('company')->user()->id;
         $company = Company::find(auth('company')->user()->id);
-        // dd();
         if (is_null($company)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
@@ -104,12 +66,10 @@ class ProfileController extends Controller
         if ($request->hasFile('logo')) {
             $image = $request->file('logo');
             $name = time() . '_' . $image->getClientOriginalName();
-            // dd($name);
             $image->storeAs('images/company', $name, 'public');
         }else{
             $name = $request->logo_old;
         }
-        // dd($data);
         $data['logo'] = $name;
         $company->update($data);
         Session::flash('message', trans('system.success'));

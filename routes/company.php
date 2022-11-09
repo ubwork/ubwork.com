@@ -23,6 +23,3 @@ Route::prefix('post')->name('post.')->group(function () {
 
 Route::get('profile',['as'=>'profile','uses'=>'Company\ProfileController@edit']);
 Route::post('profile',['as'=>'profile.update','uses'=>'Company\ProfileController@update']);
-// Route::group([], function(){
-//     Route::resource('profile', ProfileController::class);
-// });

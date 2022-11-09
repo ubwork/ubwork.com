@@ -63,8 +63,7 @@
                         <small class="text-danger">{{$message}}</small>
                       @enderror
                     </div>
-
-                    <!-- Input -->
+<!-- Input -->
                     <div class="form-group col-lg-6 col-md-12">
                       <label>Phone</label>
                       <input type="text" name="phone" value="{!!$data->phone !!}">
@@ -124,13 +123,4 @@
       </div>
     </div>
   </section>
-
-
-
-@endsection
-@section('script')
-@parent
-<script src="{{asset('js/admin/company.js')}}"></script>
-<script src="http://maps.google.com/maps/api/js?key=AIzaSyDaaCBm4FEmgKs5cfVrh3JYue3Chj1kJMw&amp;ver=5.2.4"></script>
-<script src="{{ asset('assets/client-bower/js/map-script.js')}}"></script>
 @endsection

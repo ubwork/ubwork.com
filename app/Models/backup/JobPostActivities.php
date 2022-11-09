@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 class JobPostActivities extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = 'job_post_activities';
     protected $fillable = [
         'job_post_id',

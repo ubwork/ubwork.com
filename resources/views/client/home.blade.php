@@ -137,7 +137,6 @@
                                 <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo )}}" alt=""></span>
                                 <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                 <ul class="job-info">
-                                    <li><span class="icon flaticon-briefcase"></span> {{$item->jobType->name}}</li>
                                     <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                     <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ</li>
                                     <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}} đ</li>
