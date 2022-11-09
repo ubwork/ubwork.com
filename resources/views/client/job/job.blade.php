@@ -214,7 +214,11 @@
                                                 @endif</li>
                                             {{-- <li class="required">Urgent</li> --}}
                                         </ul>
-                                        <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                                        @if (auth('candidate')->check()) 
+                                            <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                                        @else
+                                            <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
