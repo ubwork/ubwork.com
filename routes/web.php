@@ -26,7 +26,6 @@ Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\Regi
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
 //client
 
-
 //client
 Route::get('/', function () {
     return view('client.home');
