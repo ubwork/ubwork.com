@@ -22,10 +22,10 @@
                 <table id="table" class="table table-bordered table-striped dataTable dtr-inline">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>{{ __('NAME') }}</th>
-                            <th>{{ __('ASSIGNED TO') }}</th>
-                            <th>{{ __('CREATED DATE') }}</th>
+                            <th>STT</th>
+                            <th>{{ __('Tên quyền') }}</th>
+                            <th>{{ __('Phần quyền') }}</th>
+                            <th>{{ __('Ngày tạo') }}</th>
                             <th>
                                 {{-- <a href="{{route('admin.permission.create')}}"><i class="fa fa-plus"></i></a> --}}
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"

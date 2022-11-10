@@ -71,14 +71,6 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Link Web</label>
-                                <input type="text" name="link_web" class="form-control" placeholder=""  value="{{$obj->link_web}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
                                 <label for="">Số điện thoại *</label>
                                 <input type="number" name="phone" class="form-control" placeholder=""  value="{{$obj->phone}}">
                                 @error('phone')
@@ -86,9 +78,7 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Email *</label>
                                 <input type="email" name="email" class="form-control" placeholder=""  value="{{$obj->email}}">
@@ -97,8 +87,15 @@
                                 @enderror
                             </div>
                         </div>
-                        
-                    </div>          
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="">Link Website</label>
+                                <input type="text" name="link_web" class="form-control" placeholder=""  value="{{$obj->link_web}}">
+                            </div>
+                        </div>
+                    </div>      
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
@@ -133,7 +130,7 @@
                         <br>
                         <div class="mt-3">
                             <input type="submit" value="Lưu" class="btn btn-primary float-left mr-3">
-                            <a href="{{route('admin.company.index')}}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{route('admin.company.index')}}" class="btn btn-secondary">Hủy</a>
                         </div>
                     </form>
                 </div>
