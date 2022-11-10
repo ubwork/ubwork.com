@@ -50,5 +50,4 @@
 @endsection
 @section('script')
 @parent
-<script src="{{asset('js/admin/candidate.js')}}"></script>
 @endsection

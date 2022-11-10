@@ -41,7 +41,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            {{ __('TỔNG QUAN') }}
+                            {{ __('Tổng quan') }}
                         </p>
                     </a>
                 </li>
