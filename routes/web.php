@@ -21,12 +21,12 @@ Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginCo
 Route::get('/logout', ['as' => 'candidate.logout', 'uses' => 'Client\Auth\LoginController@getLogout']);
 
 //candidate
-Route::get('/','client\HomeController@index')->name('index');
-Route::get('/job','client\JobController@job')->name('job');
-Route::get('/job-cat/{id}','client\JobController@job_cat')->name('job-cat');
-Route::get('/job-detail/{id}','client\JobController@detail')->name('job-detail');
+Route::get('/', 'client\HomeController@index')->name('index');
+Route::get('/job', 'client\JobController@job')->name('job');
+Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
+Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');
 
-Route::get('/candidate-detail','client\CandidateController@detail')->name('detail');
+Route::get('/candidate-detail', 'client\CandidateController@detail')->name('detail');
 Route::post('/candidate-profile-edit', 'client\CandidateController@update')->name('update');
 
 Route::get('/shortlisted-job', 'client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
@@ -48,7 +48,7 @@ Route::get('/candi-detail', function () {
 Route::get('/company-list', 'client\CompanyController@index')->name('company-list');
 
 Route::get('/company-detail/{id}', 'client\CompanyController@detail')->name('company-detail');
-Route::get('/company-feedback/{id}', 'client\CompanyController@feedback' )->name('feedback');
+Route::get('/company-feedback/{id}', 'client\CompanyController@feedback')->name('feedback');
 Route::post('/feedback/{id}', 'client\CompanyController@saveFeedback')->name('saveFeedback');
 
 //company

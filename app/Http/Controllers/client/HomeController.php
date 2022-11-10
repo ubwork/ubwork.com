@@ -34,8 +34,9 @@ class HomeController extends Controller
                 }
             }
         }
+        $maJor = Major::all();
         // dd($data->company->id);
         // dd(company::all());
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short'));
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor'));
     }
 }

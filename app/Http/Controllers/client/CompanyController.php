@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\company;
 use App\Models\FeedbackCompany;
 use App\Models\job;
+use App\Models\Major;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -21,19 +22,22 @@ class CompanyController extends Controller
             $job = job::where('company_id', $item->id)->get();
         }
         // dd(count($job));
-        return view('client.company.company', compact('data', 'job'));
+        $maJor = Major::all();
+        return view('client.company.company', compact('data', 'job', 'maJor'));
     }
     public function detail($id)
     {
         $company_detail = company::where('id', $id)->first();
         $company_job = job::where('company_id', $company_detail->id)->get();
-        return view('client.company.company-detail', compact('company_detail', 'company_job'));
+        $maJor = Major::all();
+        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor'));
     }
     public function feedback($id)
     {
         $company_detail = company::where('id', $id)->first();
         $company_job = job::where('company_id', $company_detail->id)->get();
-        return view('client.company.feedback', compact('company_detail', 'company_job'));
+        $maJor = Major::all();
+        return view('client.company.feedback', compact('company_detail', 'company_job', 'maJor'));
     }
     public function saveFeedback(Request $request, $id)
     {

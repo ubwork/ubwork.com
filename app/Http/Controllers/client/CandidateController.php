@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\CandidateRequest;
 use App\Models\Candidate;
+use App\Models\Major;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -14,14 +15,16 @@ class CandidateController extends Controller
     {
         $data = Candidate::where('status', 1)->get();
         // dd($data);
-        return view('client.candidate.candi-list', compact('data'));
+        $maJor = Major::all();
+        return view('client.candidate.candi-list', compact('data', 'maJor'));
     }
     public function detail()
     {
         $id = auth('candidate')->user()->id;
         $detail = Candidate::where('id', $id)->first();
         // dd($data);
-        return view('client.candidate.candidate-profile', compact('detail'));
+        $maJor = Major::all();
+        return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
     }
     public function update(Request $request)
     {

@@ -1,3 +1,4 @@
+
 <header class="main-header">
 
     <!-- Main box -->
@@ -16,9 +17,30 @@
                         <a href="/">Home</a>
                     </li>
 
-                    <li class="dropdown has-mega-menu" id="has-mega-menu">
-                        {{-- <span>Find Jobs</span> --}}
-                        <a href="{{ route('job') }}">Find Jobs</a>
+                    <li class="dropdown">
+                        <span><a href="{{ route('job') }}">Find Jobs</a></span>
+                        <ul>
+                        <li class="dropdown">
+                            <span>Major</span>
+                            <ul>
+
+                                @foreach ($maJor as $item)
+
+                                    <li><a href="{{route('job-cat', ['id' => $item->id])}}">{{$item->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <span>Employers Single</span>
+                            <ul>
+                            <li><a href="employers-single-v1.html">Employers Single v1</a></li>
+                            <li><a href="employers-single-v2.html">Employers Single v2</a></li>
+                            <li><a href="employers-single-v3.html">Employers Single v3</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="dashboard.html">Employers Dashboard</a></li>
+                        </ul>
                     </li>
 
                     <li class="dropdown">
