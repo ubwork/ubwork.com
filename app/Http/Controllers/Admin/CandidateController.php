@@ -22,13 +22,13 @@ class CandidateController extends Controller
         $this->v['list'] = Candidate::paginate(9);
         if($key = request()->key);
             $this->v['list'] = Candidate::where('name','like','%' . $key . '%')->paginate(9);
-        $this->v['title'] = "Danh sách ứng viên có trong hệ thống";
+        $this->v['title'] = "Danh sách ứng viên";
         return view('admin.candidate.index', $this->v);
     }
 
     public function create()
     {
-        $this->v['title'] = "Thêm ứng viên vào hệ thống";
+        $this->v['title'] = "Thêm ứng viên";
 
         return view('admin.candidate.add', $this->v);
     }
@@ -68,7 +68,7 @@ class CandidateController extends Controller
 
     public function edit($id)
     {
-        $this->v['title'] = "Cập nhật ứng viên có trong hệ thống";
+        $this->v['title'] = "Cập nhật ứng viên";
         $model = new Candidate();
         $this->v['obj'] = Candidate::find($id);
         return view('admin.candidate.edit', $this->v);

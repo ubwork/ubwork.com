@@ -17,7 +17,7 @@ class RoleController extends Controller
     }
     public function index()
     {
-        $this->v['title'] = __('Role list');
+        $this->v['title'] = __('Danh sách vai trò');
         $this->v['roles'] = Role::paginate(5);
         $this->v['permissions'] = Permission::paginate(5);
         return view('admin.role.index',$this->v);
