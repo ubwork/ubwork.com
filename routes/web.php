@@ -31,7 +31,7 @@ Route::post('/candidate-profile-edit', 'client\CandidateController@update')->nam
 
 Route::get('/shortlisted-job', 'client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
 Route::get('/shortlisted/{id}', 'client\ShortlistedController@shortlisted')->name('shortlisted');
-Route::get('/delete-shortlisted/{id}', 'client\JobPostActivitiesController@destroy')->name('delete_shortlisted');
+Route::get('/delete-shortlisted/{id}', 'client\ShortlistedController@destroy')->name('delete_shortlisted');
 
 Route::get('/applied/{id}', 'client\JobPostActivitiesController@applied')->name('applied');
 Route::get('/jobApply', 'client\JobPostActivitiesController@jobApply')->name('jobApply');
