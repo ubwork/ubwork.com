@@ -42,17 +42,23 @@
                 @if (auth('candidate')->check())  
                     @if (!empty($idJobApplied[$data_job->id]) )
                       @if($idJobApplied[$data_job->id]->job_post_id == $data_job->id)
-                      <a class="theme-btn btn-style-one" href="{{route('delete_shortlisted', ['id' => $idJobApplied[$data_job->id]->id])}}">Hủy</a>
+                      <button class="theme-btn btn-style-one" >Đã APPLY</button>
                       @endif
                     @else
-                      <a href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
+                      <a  href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
                     @endif
                 @else
                     <button class="theme-btn btn-style-one">Apply For Job</button>
                 @endif
                 
                 @if (auth('candidate')->check()) 
+                  @if (!empty($idJobShort[$data_job->id]) )
+                    @if($idJobShort[$data_job->id]->job_post_id == $data_job->id)
+                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark" style="color: yellow"></span></button></a>
+                    @endif
+                  @else
                     <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                  @endif
                 @else
                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                 @endif

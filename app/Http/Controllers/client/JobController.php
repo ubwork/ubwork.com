@@ -9,6 +9,8 @@ use App\Models\JobPostActivities;
 use App\Models\JobSkill;
 use App\Models\Major;
 use App\Models\SeekerProfile;
+use App\Models\Shortlist;
+use App\Models\Shortlisted;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -39,6 +41,7 @@ class JobController extends Controller
         $data_job = JobPost::where('id', $id)->first();
         $maJor = Major::all();
         $idJobApplied = [];
+        $idJobShort = [];
         $data_job_relate = [];
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
@@ -49,10 +52,16 @@ class JobController extends Controller
                     $idJobApplied[$item->job_post_id] = $item;
                 }
             }
+            $dataShort = Shortlist::where('candidate_id', $id_user)->get();
+            if (!empty($dataShort)) {
+                foreach ($dataShort as $item) {
+                    $idJobShort[$item->job_post_id] = $item;
+                }
+            }
             // dd($idJobApplied[$item->id]);
             // dd($data_job->id);
         }
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)->take(3)->get();
-        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 'maJor', 'idJobApplied'));
+        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 'maJor', 'idJobApplied', 'idJobShort'));
     }
 }
