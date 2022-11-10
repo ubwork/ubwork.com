@@ -71,12 +71,6 @@ class MajorController extends Controller
     public function update(Request $request, $id)
     {
         $method_route = 'admin.major.edit';
-        $params = [];
-        $params['cols'] = $request->post();
-
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
-        }
 
         unset($params['cols']['_token']);
         $model = new Major();
