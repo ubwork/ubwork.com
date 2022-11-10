@@ -10,13 +10,13 @@
               <div class="modal-body">
                   <div class="row justify-content-md-center">
                       <div class="form-group col-5">
-                          <label for="Name">{{ __('Role name') }}</label>
+                          <label for="Name">{{ __('Tên vai trò') }}</label>
                           <input type="text" class="form-control" name="name" id="nameEdit"
                               placeholder="{{ __('Enter Name') }}" aria-describedby="name-error" aria-invalid="true">
                           <small id="name-error" class="error invalid-feedback"></small>
                       </div>
                   </div>
-                  <label for="">{{ __('Permission list') }}</label>
+                  <label for="">{{ __('Danh sách quyền') }}</label>
                   <p><span id="permission-error" class="error text-danger"></span></p>
                   <div class="row">
                       @foreach ($permissions as $permission)
@@ -35,8 +35,8 @@
                   <input type="hidden" id="idRole">
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-primary btn-edit">{{ __('SAVE') }}</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
+                  <button type="button" class="btn btn-primary btn-edit">{{ __('Lưu') }}</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Đóng') }}</button>
               </div>
           </div>
       </div>

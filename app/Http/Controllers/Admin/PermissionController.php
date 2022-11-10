@@ -18,14 +18,14 @@ class PermissionController extends Controller
     }
     public function index()
     {
-        $this->v['title'] = __('Permission list');
+        $this->v['title'] = __('Danh sách quyền');
         $this->v['permissions'] = Permission::paginate(config('paginate.permission.index'));
         return view('admin.permission.index',$this->v);
     }
 
     public function create()
     {
-        $this->v['title'] = __('Permission add');
+        $this->v['title'] = __('Thêm quyền');
         return view('admin.permission.add',$this->v);
     }
 
@@ -61,7 +61,7 @@ class PermissionController extends Controller
 
     public function edit($id)
     {
-        $this->v['title'] = 'Permission edit';
+        $this->v['title'] = 'Cập nhật quyền';
         $this->v['permission'] = Permission::find($id);
         return view('admin.permission.edit', $this->v);
     }

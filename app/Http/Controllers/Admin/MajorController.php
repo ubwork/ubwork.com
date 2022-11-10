@@ -3,36 +3,35 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Skill;
+use App\Models\Major;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\SkillRequest;
+use App\Http\Requests\Admin\MajorRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
-class SkillController extends Controller
+class MajorController extends Controller
 {
-    //private $v;
     public function __construct(){
         $this->v = [];
     }
 
     public function index()
     {
-        $candidate = new Skill();
-        $this->v['list'] = Skill::paginate(9);
+        $candidate = new Major();
+        $this->v['list'] = Major::paginate(9);
         if($key = request()->key);
-            $this->v['list'] = Skill::where('name','like','%' . $key . '%')->paginate(9);
-        $this->v['title'] = "Danh sách kỹ năng";
-        return view('admin.skill.index', $this->v);
+            $this->v['list'] = Major::where('name','like','%' . $key . '%')->paginate(9);
+        $this->v['title'] = "Danh sách chuyên ngành";
+        return view('admin.major.index', $this->v);
     }
     public function create()
     {
-        $this->v['title'] = "Thêm kỹ năng";
+        $this->v['title'] = "Thêm chuyên ngành";
 
-        return view('admin.skill.add', $this->v);
+        return view('admin.major.add', $this->v);
     }
 
-    public function store(SkillRequest $request)
+    public function store(Request $request)
     {
         $params = [];
         $params['cols'] = $request->post();
@@ -40,18 +39,18 @@ class SkillController extends Controller
         $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
         unset($params['cols']['_token']);
-        $model = new Skill();
+        $model = new Major();
         $res = $model->saveAdd($params);
         if($res == null) {
             Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return Redirect()->route('admin.skill.create');
+            return Redirect()->route('admin.major.create');
         }
         else if ($res > 0) {
             Session::flash('success', 'Thêm thành công!');
-            return Redirect()->route('admin.skill.index');
+            return Redirect()->route('admin.major.index');
         }else {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('admin.skill.create');
+            return Redirect()->route('admin.major.create');
         }
         
     }
@@ -63,24 +62,18 @@ class SkillController extends Controller
 
     public function edit($id)
     {
-        $this->v['title'] = "Cập nhật kỹ năng";
-        $model = new Skill();
-        $this->v['obj'] = Skill::find($id);
-        return view('admin.skill.edit', $this->v);
+        $this->v['title'] = "Cập nhật chuyên ngành";
+        $model = new Major();
+        $this->v['obj'] = Major::find($id);
+        return view('admin.major.edit', $this->v);
     }
 
-    public function update(SkillRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $method_route = 'admin.skill.edit';
-        $params = [];
-        $params['cols'] = $request->post();
-
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
-        }
+        $method_route = 'admin.major.edit';
 
         unset($params['cols']['_token']);
-        $model = new Skill();
+        $model = new Major();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
         $res = $model->saveUpdate($params);
@@ -99,8 +92,7 @@ class SkillController extends Controller
 
     public function destroy($id)
     {
-        Skill::where('id', $id)->delete();
+        Major::where('id', $id)->delete();
         return response()->json(['success'=>'Xóa thành công!']);
     }
-
 }

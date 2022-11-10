@@ -22,10 +22,10 @@
                 <table id="table" class="table table-bordered table-striped dataTable dtr-inline">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>{{ __('NAME ROLE') }}</th>
+                            <th>STT</th>
+                            <th>{{ __('Tên vai trò') }}</th>
                             {{-- <th>{{ __('TOTAL USER') }}</th> --}}
-                            <th>{{ __('CREATED DATE') }}</th>
+                            <th>{{ __('Ngày tạo') }}</th>
                             <th>
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#formAdd">
