@@ -46,4 +46,5 @@ Route::prefix('major')->name('major.')->group(function () {
     Route::get('edit/{id}', 'Admin\MajorController@edit')->name('edit');
     Route::post('update/{id}', 'Admin\MajorController@update')->name('update');
     Route::delete('/{id}', 'Admin\MajorController@destroy')->name('destroy');
+
 });
