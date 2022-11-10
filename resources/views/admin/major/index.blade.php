@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('title')
-    {{ __('Skill') }}
+    {{ __('Major') }}
 @endsection
 @section('content')
 <section class="content">
@@ -13,7 +13,7 @@
               <h3 class="card-title">{{$title}}</h3>
               <form action="" class="form-inline float-right mr-3">
                 <div class="form-group">
-                    <input class="form-control" name="key" id="key" placeholder="Nhập tên kỹ năng ....">
+                    <input class="form-control" name="key" id="key" placeholder="Nhập tên chuyên ngành ....">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>
                     </button>
@@ -26,9 +26,9 @@
                 <thead>
                 <tr>
                   <th>STT</th>
-                  <th>{{__('Tên kỹ năng')}}</th>
+                  <th>{{__('Tên chuyên ngành')}}</th>
                   <th>{{__('Mô tả')}}</th>
-                  <th><a href="{{route('admin.skill.create')}}"><i class="fa fa-plus"></i></a></th>
+                  <th><a href="{{route('admin.major.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->description}}</td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
-                            <a class="btn btn-info mr-3" href="{{route('admin.skill.edit', ['id' => $item->id])}}">
+                            <a class="btn btn-info mr-3" href="{{route('admin.major.edit', ['id' => $item->id])}}">
                               <i class="fa fa-edit"></i>
                             </a>
 

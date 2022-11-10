@@ -11,7 +11,6 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <a href="{{route('admin.candidate.create')}}" class="btn btn-primary float-right">Tạo mới</a>
               <form action="" class="form-inline float-right mr-3">
                 <div class="form-group">
                     <input class="form-control" name="key" id="key" placeholder="Nhập tên ứng viên....">
@@ -27,11 +26,11 @@
                 <thead>
                 <tr>
                   <th>STT</th>
-                  <th>{{__('NAME')}}</th>
-                  <th>{{__('IMAGE')}}</th>
+                  <th>{{__('Họ tên')}}</th>
+                  <th>{{__('Ảnh')}}</th>
                   <th>Email</th>
-                  <th>{{__('PHONE')}}</th>
-                  <th>{{__('STATUS')}}</th>
+                  <th>{{__('Số điện thoại')}}</th>
+                  <th>{{__('Trạng thái')}}</th>
                   <th><a href="{{route('admin.candidate.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
                 </thead>

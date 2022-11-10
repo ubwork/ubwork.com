@@ -1,41 +1,44 @@
 @extends('admin.layout.app')
 @section('title')
-    {{ __('Skill - edit') }}
+    {{ __('Major - add') }}
 @endsection
 @section('content')
 <section class="content">
     <div class="container-fluid">
         <div class="">
+
             <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">{{$title}}</h3>
+                  <h3 class="card-title">{{__($title)}}</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="{{ route('admin.skill.update', ['id' => $obj->id])}}" method="post" enctype="multipart/form-data">
+                  <form action="{{ route('admin.major.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $obj->id }}">
                     <div class="row">
                     <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="inputName">{{__('NAME')}} <span class="text-danger">*</span></label>
-                            <input type="text" id="inputName" name="name" class="form-control" value="{{$obj->name}}">
+                            <label for="inputName">{{__('Tên chuyên ngành')}} <span class="text-danger">*</span></label>
+                            <input type="text" id="inputName" name="name" class="form-control" value="{{old('name')}}">
                             @error('name')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
                     </div>
                     <div class="col-sm-6">
-                      <div class="form-group">
-                        <label>{{__('DESCRIPTION')}}</label>
-                        <input type="text" class="form-control" name="description" value="{{$obj->description}}">
-                      </div>
-                  </div>
+                        <div class="form-group">
+                            <label>{{__('Mô tả')}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="description" value="{{old('description')}}">
+                            @error('description')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                    </div>
                     </div>
                     <div class="mt-3">
-                        <input type="submit" value="Lưu" class="btn btn-primary float-left mr-3">
-                        <a href="{{route('admin.skill.index')}}" class="btn btn-secondary">Hủy</a>
+                        <button type="submit" class="btn btn-primary float-left mr-3">{{__('Lưu')}}</button>
+                        <a href="{{route('admin.major.index')}}" class="btn btn-secondary">{{__('Hủy')}}</a>
                     </div>
                   </form>
                 </div>

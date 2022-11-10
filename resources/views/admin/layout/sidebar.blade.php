@@ -41,7 +41,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            {{ __('DASHBOARD') }}
+                            {{ __('TỔNG QUAN') }}
                         </p>
                     </a>
                 </li>
@@ -54,7 +54,7 @@
                     <a href="{{ route('admin.candidate.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
-                            {{ __('Candidate') }}
+                            {{ __('Ứng viên') }}
                         </p>
                     </a>
                 </li>
@@ -62,21 +62,29 @@
                     <a href="{{ route('admin.skill.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            {{ __('Skill') }}
+                            {{ __('Kỹ năng') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.major.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            {{ __('Chuyên ngành') }}
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.user.index') }}" class="nav-link">
                         <i class="fas fa-users nav-icon"></i>
-                        <p>{{ __('USER') }}</p>
+                        <p>{{ __('Người dùng') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-shield"></i>
                         <p>
-                            {{ __('Manage ACL') }}
+                            {{ __('Quản lý ACL') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -84,13 +92,13 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.role.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ __('Roles') }}</p>
+                                <p>{{ __('Vai trò') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.permission.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ __('Permissions') }}</p>
+                                <p>{{ __('Quyền') }}</p>
                             </a>
                         </li>
                     </ul>

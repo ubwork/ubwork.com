@@ -3,60 +3,54 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CandidateRequest;
-use App\Models\Candidate;
-use Carbon\Carbon;
+use App\Models\Major;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\MajorRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
-class CandidateController extends Controller
+class MajorController extends Controller
 {
-    private $v;
     public function __construct(){
         $this->v = [];
     }
 
     public function index()
     {
-        $candidate = new Candidate();
-        $this->v['list'] = Candidate::paginate(9);
+        $candidate = new Major();
+        $this->v['list'] = Major::paginate(9);
         if($key = request()->key);
-            $this->v['list'] = Candidate::where('name','like','%' . $key . '%')->paginate(9);
-        $this->v['title'] = "Danh sách ứng viên";
-        return view('admin.candidate.index', $this->v);
+            $this->v['list'] = Major::where('name','like','%' . $key . '%')->paginate(9);
+        $this->v['title'] = "Danh sách chuyên ngành";
+        return view('admin.major.index', $this->v);
     }
-
     public function create()
     {
-        $this->v['title'] = "Thêm ứng viên";
+        $this->v['title'] = "Thêm chuyên ngành";
 
-        return view('admin.candidate.add', $this->v);
+        return view('admin.major.add', $this->v);
     }
 
-    public function store(CandidateRequest $request)
+    public function store(Request $request)
     {
         $params = [];
         $params['cols'] = $request->post();
-        // dd($params['cols']);
         $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
         $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['cols']['avatar'] = $this->uploadFile($request->file('image'));
-        }
         unset($params['cols']['_token']);
-        $model = new Candidate();
+        $model = new Major();
         $res = $model->saveAdd($params);
         if($res == null) {
             Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return Redirect()->route('admin.candidate.create');
+            return Redirect()->route('admin.major.create');
         }
         else if ($res > 0) {
             Session::flash('success', 'Thêm thành công!');
-            return Redirect()->route('admin.candidate.index');
+            return Redirect()->route('admin.major.index');
         }else {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('admin.candidate.create');
+            return Redirect()->route('admin.major.create');
         }
         
     }
@@ -68,15 +62,15 @@ class CandidateController extends Controller
 
     public function edit($id)
     {
-        $this->v['title'] = "Cập nhật ứng viên";
-        $model = new Candidate();
-        $this->v['obj'] = Candidate::find($id);
-        return view('admin.candidate.edit', $this->v);
+        $this->v['title'] = "Cập nhật chuyên ngành";
+        $model = new Major();
+        $this->v['obj'] = Major::find($id);
+        return view('admin.major.edit', $this->v);
     }
 
-    public function update(CandidateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $method_route = 'admin.candidate.edit';
+        $method_route = 'admin.major.edit';
         $params = [];
         $params['cols'] = $request->post();
 
@@ -85,7 +79,7 @@ class CandidateController extends Controller
         }
 
         unset($params['cols']['_token']);
-        $model = new Candidate();
+        $model = new Major();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
         $res = $model->saveUpdate($params);
@@ -104,24 +98,7 @@ class CandidateController extends Controller
 
     public function destroy($id)
     {
-        Candidate::where('id', $id)->delete();
+        Major::where('id', $id)->delete();
         return response()->json(['success'=>'Xóa thành công!']);
-    }
-
-    // up ảnh
-    public function uploadFile($file) {
-        $fileName = time().'_'.$file->getClientOriginalName();
-        return $file->storeAs('images', $fileName , 'public');
-    }
-
-    // cập nhật trạng thái
-    public function status(Request $request, $id) {
-        $params = [];
-        $params['cols'] = $request->all();
-        // dd($params['cols']);
-        unset($params['cols']['_token']);
-        $val = $params['cols']['status'];
-        Candidate::where('id', $id)->update(['status' => $val]);
-        return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
     }
 }
