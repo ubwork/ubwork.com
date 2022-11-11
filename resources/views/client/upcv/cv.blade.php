@@ -32,16 +32,20 @@
 
                             </form>
                             <div class="files-outer">
-                                @foreach ($data as $item)
-                                {{-- @dd($item) --}}
-                                    <div class="file-edit-box">
-                                        <span class="title"><a href="upload/cv/{{$item->path_cv}}">{{$item->path_cv}}</a></span>
-                                        <div class="edit-btns">
-                                            <button><span class="la la-pencil"></span></button>
-                                            <button><span class="la la-trash"></span></button>
+                                @if (!empty($data))
+                                    @foreach ($data as $item)
+                                        <div class="file-edit-box">
+                                            <span class="title"><a
+                                                    href="upload/cv/{{ $item->path_cv }}">{{ $item->path_cv }}</a></span>
+                                            <div class="edit-btns">
+                                                {{-- <button><span class="la la-pencil"></span></button> --}}
+                                                <button data-seeker_id={{$item->id}} class="btn-delete-seeker" type="button"><span class="la la-trash"></span></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                @else
+                                <span>Bạn Chưa Đẩy Lên cv nào.</span>
+                                @endif
                             </div>
                         </div>
                     </div>
