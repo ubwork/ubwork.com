@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Models\SeekerProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SeekerController extends Controller
 {
@@ -35,6 +36,18 @@ class SeekerController extends Controller
         $seeker->phone = $request->phone;
         // dd($seeker);
         $seeker->save();
+        return redirect('seeker');
+    }
+    public function destroy($id)
+    {
+        $seeker = SeekerProfile::find($id);
+        $file_path = public_path('upload/cv/'.$seeker->path_cv);
+        // dd($file_path);
+        // dd($file_path);
+        if(is_file($file_path)){
+            unlink($file_path);
+        }
+        $seeker->delete();
         return redirect('seeker');
     }
 }

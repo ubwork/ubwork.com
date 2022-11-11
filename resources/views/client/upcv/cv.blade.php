@@ -32,20 +32,20 @@
 
                             </form>
                             <div class="files-outer">
-                                @if (!empty($data))
-                                    @foreach ($data as $item)
-                                        <div class="file-edit-box">
-                                            <span class="title"><a
-                                                    href="upload/cv/{{ $item->path_cv }}">{{ $item->path_cv }}</a></span>
-                                            <div class="edit-btns">
-                                                {{-- <button><span class="la la-pencil"></span></button> --}}
-                                                <button data-seeker_id={{$item->id}} class="btn-delete-seeker" type="button"><span class="la la-trash"></span></button>
-                                            </div>
+                                @foreach ($data as $item)
+                                    <div class="file-edit-box">
+                                        <span class="title"><a
+                                                href="upload/cv/{{ $item->path_cv }}">{{ $item->path_cv }}</a></span>
+                                        <div class="edit-btns">
+                                            {{-- <button><span class="la la-pencil"></span></button> --}}
+                                            <a href="{{route('delete_seeker', ['id' => $item->id])}}">
+                                                <button class="btn-delete-seeker"
+                                                    type="button"><span class="la la-trash"></span>
+                                                </button>
+                                            </a>
                                         </div>
-                                    @endforeach
-                                @else
-                                <span>Bạn Chưa Đẩy Lên cv nào.</span>
-                                @endif
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
