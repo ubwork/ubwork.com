@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class SeekerController extends Controller
 {
     public function index()
-    {   $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->paginate(2);
+    {
+        $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->paginate(2);
         // dd($data);
         return view('client.upcv.cv', compact('data'));
     }
@@ -24,7 +25,9 @@ class SeekerController extends Controller
         $get_pdf = $request->file('path_cv');
         $path_pdf = 'upload/cv';
         if ($get_pdf) {
-            $new_pdf = time() . '.' . $get_pdf->getClientOriginalExtension();
+            $get_name_pdf = $get_pdf->getClientOriginalName();
+            $name_pdf = current(explode('.', $get_name_pdf));
+            $new_pdf = $name_pdf . rand(0, 99) . '.' . $get_pdf->getClientOriginalExtension();
             $get_pdf->move($path_pdf, $new_pdf);
             $seeker->path_cv = $new_pdf;
         }
