@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{__('Upload CV')}}
+    {{ __('Upload CV') }}
 @endsection
 @section('content')
     <section class="ls-section">
@@ -13,44 +13,35 @@
                             <h4>Cv Manager</h4>
                         </div>
                         <div class="widget-content">
-                            <div class="uploading-resume">
-                                <div class="uploadButton">
-                                    <input class="uploadButton-input" type="file" name="attachments[]"
-                                        accept="image/*, application/pdf" id="upload" multiple />
-                                    <label class="cv-uploadButton" for="upload">
-                                        <span class="title">Drop files here to upload</span>
-                                        <span class="text">To upload file size is (Max 5Mb) and allowed file types are
-                                            (.doc, .docx, .pdf)</span>
-                                        <span class="theme-btn btn-style-one">Upload CV</span>
-                                    </label>
-                                    <span class="uploadButton-file-name"></span>
+                            <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="uploading-resume">
+                                    <div class="uploadButton">
+                                        <input class="uploadButton-input" type="file" name="path_cv" id="upload"
+                                            multiple />
+                                        <label class="cv-uploadButton" for="upload">
+                                            <span class="title">Drop files here to upload</span>
+                                            <span class="text">To upload file size is (Max 5Mb) and allowed file types are
+                                                (.doc, .docx, .pdf)</span>
+                                            <span class="theme-btn btn-style-one">Upload CV</span>
+                                        </label>
+                                        <span class="uploadButton-file-name"></span>
+                                        <center><button type="submit" class="btn btn-danger">submit</button></center>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </form>
                             <div class="files-outer">
-                                <div class="file-edit-box">
-                                    <span class="title">Sample CV</span>
-                                    <div class="edit-btns">
-                                        <button><span class="la la-pencil"></span></button>
-                                        <button><span class="la la-trash"></span></button>
+                                @foreach ($data as $item)
+                                {{-- @dd($item) --}}
+                                    <div class="file-edit-box">
+                                        <span class="title"><a href="upload/cv/{{$item->path_cv}}">{{$item->path_cv}}</a></span>
+                                        <div class="edit-btns">
+                                            <button><span class="la la-pencil"></span></button>
+                                            <button><span class="la la-trash"></span></button>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="file-edit-box">
-                                    <span class="title">Sample CV</span>
-                                    <div class="edit-btns">
-                                        <button><span class="la la-pencil"></span></button>
-                                        <button><span class="la la-trash"></span></button>
-                                    </div>
-                                </div>
-
-                                <div class="file-edit-box">
-                                    <span class="title">Sample CV</span>
-                                    <div class="edit-btns">
-                                        <button><span class="la la-pencil"></span></button>
-                                        <button><span class="la la-trash"></span></button>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
