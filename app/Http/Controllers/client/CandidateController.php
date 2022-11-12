@@ -7,6 +7,7 @@ use App\Http\Requests\Client\CandidateRequest;
 use App\Models\Candidate;
 use App\Models\Major;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class CandidateController extends Controller
@@ -26,7 +27,7 @@ class CandidateController extends Controller
         $maJor = Major::all();
         return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
     }
-    public function update(Request $request)
+    public function update(CandidateRequest $request)
     {
         $id = auth('candidate')->user()->id;
         $method_route = 'detail';
@@ -52,6 +53,11 @@ class CandidateController extends Controller
             Session::flash('error', 'Lỗi cập nhật!');
             return Redirect()->route($method_route, ['id' => $id]);
         }
+    }
+    public function change()
+    {
+        $maJor = Major::all();
+        return view('client.candidate.change-password', compact('maJor'));
     }
     public function uploadFile($file)
     {
