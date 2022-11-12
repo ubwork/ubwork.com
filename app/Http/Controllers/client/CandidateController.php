@@ -57,7 +57,38 @@ class CandidateController extends Controller
     public function change()
     {
         $maJor = Major::all();
-        return view('client.candidate.change-password', compact('maJor'));
+        $id = auth('candidate')->user()->id;
+        $detail = Candidate::where('id', $id)->first();
+        return view('client.candidate.change-password', compact('maJor', 'detail'));
+    }
+    public function update_pass(Request $request)
+    {
+        $id = auth('candidate')->user()->id;
+        $method_route = 'change_password';
+        $params = [];
+        $params['cols'] = $request->post();
+        unset($params['cols']['_token']);
+        if ($params['cols']['password'] == $params['cols']['re_password']) {
+            $model = new Candidate();
+            unset($params['cols']['password_old']);
+            unset($params['cols']['re_password']);
+            $params['cols']['id'] = $id;
+            $res = $model->saveUpdate($params);
+            if ($res == null) {
+                Session::flash('success', 'Cập nhật thành công!');
+                return Redirect()->back();
+            }
+            if ($res == 1) {
+                Session::flash('success', 'Cập nhật  thành công!');
+                return Redirect()->back();
+            } else {
+                Session::flash('error', 'Lỗi cập nhật!');
+                return Redirect()->back();
+            }
+        } else {
+            Session::flash('error', 'Mật khẩu không trùng khớp');
+            return Redirect()->back();
+        }
     }
     public function uploadFile($file)
     {
