@@ -12,7 +12,7 @@
                 <div class="content-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column wow fadeInUp" data-wow-delay="1000ms">
                         <div class="title-box">
-                            <h3>There Are <span class="colored">93,178</span> Postings Here<br> For you!</h3>
+                            <h3>There Are <span class="colored">{{count($total)}}</span> Postings Here<br> For you!</h3>
                             <div class="text">Find Jobs, Employment & Career Opportunities</div>
                         </div>
                         <!-- Job Search Form -->
@@ -173,7 +173,7 @@
     <!-- End Job Section -->
 
     <!-- Testimonial Section -->
-    <section class="testimonial-section">
+    {{-- <section class="testimonial-section">
         <div class="container-fluid">
             <!-- Sec Title -->
             <div class="sec-title text-center">
@@ -236,11 +236,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Testimonial Section -->
 
     <!--Clients Section-->
-    <section class="clients-section">
+    {{-- <section class="clients-section">
         <div class="sponsors-outer wow fadeInUp">
             <!--Sponsors Carousel-->
             <ul class="sponsors-carousel owl-carousel owl-theme">
@@ -274,11 +274,11 @@
                 </li>
             </ul>
         </div>
-    </section>
+    </section> --}}
     <!-- End Clients Section-->
 
     <!-- About Section -->
-    <section class="about-section">
+    {{-- <section class="about-section">
         <div class="auto-container">
             <div class="row">
                 <!-- Content Column -->
@@ -338,11 +338,11 @@
             </div>
             <!-- Fun Fact Section -->
         </div>
-    </section>
+    </section> --}}
     <!-- End About Section -->
 
     <!-- News Section -->
-    <section class="news-section">
+    {{-- <section class="news-section">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Recent News Articles</h2>
@@ -411,11 +411,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End News Section -->
 
     <!-- App Section -->
-    <section class="app-section">
+    {{-- <section class="app-section">
         <div class="auto-container">
             <div class="row">
                 <!-- Image Column -->
@@ -441,7 +441,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End App Section -->
 
     <!-- Call To Action -->

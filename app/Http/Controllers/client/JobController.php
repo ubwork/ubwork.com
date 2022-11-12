@@ -45,7 +45,7 @@ class JobController extends Controller
         $data_job_relate = [];
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
-            $seeker = SeekerProfile::where('id', $id_user)->first();
+            $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
             $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
             if (!empty($dataActive)) {
                 foreach ($dataActive as $item) {
