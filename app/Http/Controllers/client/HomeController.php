@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\JobPost;
 use App\Models\Major;
 use App\Models\Shortlist;

@@ -42,13 +42,13 @@
                 @if (auth('candidate')->check())  
                     @if (!empty($idJobApplied[$data_job->id]) )
                       @if($idJobApplied[$data_job->id]->job_post_id == $data_job->id)
-                      <button class="theme-btn btn-style-one" >Đã APPLY</button>
+                      <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
                     @else
-                      <a  href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
+                      <a  href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Ứng tuyển ngay</a>
                     @endif
                 @else
-                    <button class="theme-btn btn-style-one">Apply For Job</button>
+                    <button class="theme-btn btn-style-one">Ứng tuyển ngay</button>
                 @endif
                 
                 @if (auth('candidate')->check()) 
@@ -73,13 +73,13 @@
           <div class="row">
             <div class="content-column col-lg-8 col-md-12 col-sm-12">
               <div class="job-detail">
-                <h4>Job Description</h4>
+                <h4>Mô tả công việc</h4>
                 <p>{{ $data_job->description}}</p>
-                <h4>Key Responsibilities</h4>
+                <h4>Yêu cầu công việc</h4>
                 <ul class="list-style-three">
                   {{ $data_job->requirement}}
                 </ul>
-                <h4>Skill & Experience</h4>
+                <h4>Kĩ năng và kinh nghiệm</h4>
                 <ul class="list-style-three">
                   <li>{{ $data_job->experience}}
                 </ul>
@@ -88,7 +88,7 @@
               <!-- Other Options -->
               <div class="other-options">
                 <div class="social-share">
-                  <h5>Share this job</h5>
+                  <h5>Chia sẻ công việc</h5>
                   <a href="#" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
                   <a href="#" class="twitter"><i class="fab fa-twitter"></i> Twitter</a>
                   <a href="#" class="google"><i class="fab fa-google"></i> Google+</a>
@@ -98,8 +98,8 @@
               <!-- Related Jobs -->
               <div class="related-jobs">
                 <div class="title-box">
-                  <h3>Related Jobs</h3>
-                  <div class="text">2020 jobs live - 293 added today.</div>
+                  <h3>Công việc liên quan</h3>
+                  <div class="text">Năm 2020 - {{count($total)}} việc làm được đăng tải.</div>
                 </div>
 
                 <!-- Job Block -->
@@ -148,22 +148,22 @@
               <aside class="sidebar">
                 <div class="sidebar-widget">
                   <!-- Job Overview -->
-                  <h4 class="widget-title">Job Overview</h4>
+                  <h4 class="widget-title">Tổng quan về công việc</h4>
                   <div class="widget-content">
                     <ul class="job-overview">
                       <li>
                         <i class="icon icon-calendar"></i>
-                        <h5>Date Posted:</h5>
+                        <h5>Ngày đăng:</h5>
                         <span>{{$data_job->start_date}}</span>
                       </li>
                       <li>
                         <i class="icon icon-expiry"></i>
-                        <h5>Expiration date:</h5>
+                        <h5>Ngày hết hạn:</h5>
                         <span>{{$data_job->end_date}}</span>
                       </li>
                       <li>
                         <i class="icon icon-location"></i>
-                        <h5>Location:</h5>
+                        <h5>Địa điểm:</h5>
                         <span>{{$data_job->company->address}}</span>
                       </li>
                       <li>
@@ -173,24 +173,24 @@
                       </li>
                       <li>
                         <i class="icon icon-clock"></i>
-                        <h5>Hours:</h5>
+                        <h5>Giờ làm việc:</h5>
                         <span>{{$data_job->company->working_time}} giờ/ngày</span>
                       </li>
                       <li>
-                        <i class="icon icon-rate"></i>
-                        <h5>Rate:</h5>
-                        <span>{{number_format($data_job->min_salary/8/27)}} - {{number_format($data_job->max_salary/8/27)}} đ / giờ</span>
+                        <i class="icon icon-salary"></i>
+                        <h5>Lương:</h5>
+                        <span>{{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}} đ</span>
                       </li>
                       <li>
-                        <i class="icon icon-salary"></i>
-                        <h5>Salary:</h5>
-                        <span>{{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}} đ</span>
+                        <i class="icon icon-rate"></i>
+                        <h5>Trung bình:</h5>
+                        <span>{{number_format($data_job->min_salary/8/27)}} - {{number_format($data_job->max_salary/8/27)}} đ / giờ</span>
                       </li>
                     </ul>
                   </div>
 
                   <!-- Map Widget -->
-                  <h4 class="widget-title">Job Location</h4>
+                  <h4 class="widget-title">Đia điểm</h4>
                   <div class="widget-content">
                     <div class="map-outer">
                       <div class="map-canvas">
@@ -200,7 +200,7 @@
                   </div>
 
                   <!-- Job Skills -->
-                  <h4 class="widget-title">Job Skills</h4>
+                  <h4 class="widget-title">Kĩ năng</h4>
                   <div class="widget-content">
                     <ul class="job-skills">
                       {{-- @foreach($job_skills as $item)
@@ -215,17 +215,17 @@
                     <div class="company-title">
                       <div class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
-                      <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">View company profile</a>
+                      <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">Thông tin công ty</a>
                     </div>
 
                     <ul class="company-info">
-                      <li>Primary industry: <span>{{$data_job->company->company_model}}</span></li>
-                      <li>Company size: <span>{{$data_job->company->company_size}}</span></li>
-                      <li>Founded in: <span>{{$data_job->company->founded_in}}</span></li>
-                      <li>Phone: <span>{{$data_job->company->phone}}</span></li>
+                      <li>Ngành chính: <span>{{$data_job->company->company_model}}</span></li>
+                      <li>Quy mô: <span>{{$data_job->company->company_size}}</span></li>
+                      <li>Thành lập: <span>{{$data_job->company->founded_in}}</span></li>
+                      <li>Số điện thoại: <span>{{$data_job->company->phone}}</span></li>
                       <li>Email: <span>{{$data_job->company->email}}</span></li>
-                      <li>Location: <span>{{$data_job->company->address}}</span></li>
-                      <li>Social media:
+                      <li>Địa điểm: <span>{{$data_job->company->address}}</span></li>
+                      <li>Truyền thông xã hội:
                         <div class="social-links">
                           <a href="#"><i class="fab fa-facebook-f"></i></a>
                           <a href="#"><i class="fab fa-twitter"></i></a>
@@ -234,7 +234,6 @@
                         </div>
                       </li>
                     </ul>
-
                     <div class="btn-box"><a href="#" class="theme-btn btn-style-three">{{$data_job->company->link_web}}</a></div>
                   </div>
                 </div>

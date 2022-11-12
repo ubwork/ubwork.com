@@ -8,8 +8,8 @@
             <div class="title-outer">
                 <h1>{{$job_cat->name}}</h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li>Jobs</li>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li>Công việc</li>
                 </ul>
             </div>
         </div>
