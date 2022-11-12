@@ -11,7 +11,7 @@
             <div class="ls-widget">
               <div class="tabs-box">
                 <div class="widget-title">
-                  <h4>My Profile</h4>
+                  <h4>Thông tin của bạn</h4>
                 </div>
 
                 <div class="widget-content">
@@ -21,16 +21,16 @@
                       <div class="uploading-outer">
                         <div class="uploadButton">
                           <input class="uploadButton-input" type="file" name="avatar" accept="image/*, application/pdf" id="upload" multiple />
-                          <label class="uploadButton-button ripple-effect" for="upload"><img id="image" src="{{asset('storage/'. $detail->avatar)}}" alt="your image"
+                          <label class="uploadButton-button ripple-effect" for="upload"><img id="image" src="{{asset('storage/'. $detail->avatar)}}" alt="Ảnh của bạn"
                                     style="max-width: 150px; height:100px; margin-bottom: 10px;" class="img-fluid"/></label>
                           <span class="uploadButton-file-name"></span>
                         </div>
-                        <div class="text">Max file size is 1MB, Minimum dimension: 330x300 And Suitable files are .jpg & .png</div>
+                        <div class="text">Kích thước tệp tối đa là 1MB, Kích thước tối thiểu: 330x300 Và các tệp phù hợp là .jpg & .png</div>
                       </div>
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <label>Full Name</label>
-                        <input type="text" name="name" placeholder="fullname" value="{{$detail->name}}">
+                        <label>Họ và tên</label>
+                        <input type="text" name="name" placeholder="Họ và tên..." value="{{$detail->name}}">
                         @error('name')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
@@ -38,8 +38,8 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <label>Email address</label>
-                        <input type="text" name="email" placeholder="Email" value="{{$detail->email}}">
+                        <label>Email</label>
+                        <input type="text" name="email" placeholder="Email..." value="{{$detail->email}}">
                         @error('email')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
@@ -47,8 +47,8 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <label>Phone</label>
-                        <input type="text" name="phone" placeholder="phone" value="{{$detail->phone}}">
+                        <label>Số điện thoại</label>
+                        <input type="text" name="phone" placeholder="Số điện thoại..." value="{{$detail->phone}}">
                         @error('phone')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
@@ -56,16 +56,16 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <label>Country</label>
-                        <input type="text" name="address" placeholder="Country" value="{{$detail->address}}">
+                        <label>Địa chỉ</label>
+                        <input type="text" name="address" placeholder="Địa chỉ..." value="{{$detail->address}}">
                         @error('address')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                       </div>
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <label>Birthday</label>
-                        <input type="date" name="birthday" placeholder="Birthday" value="{{$detail->birthday}}">
+                        <label>Ngày sinh</label>
+                        <input type="date" name="birthday" placeholder="Ngày sinh..." value="{{$detail->birthday}}">
                         @error('birthday')
                             <small class="text-danger">{{$message}}</small>
                         @enderror

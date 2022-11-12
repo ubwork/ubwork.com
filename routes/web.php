@@ -18,7 +18,7 @@ Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\Reg
 //login
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@postLogin']);
-Route::get('/logout', ['as' => 'candidate.logout', 'uses' => 'Client\Auth\LoginController@getLogout']);
+Route::get('/logout', ['as' => 'logout', 'uses' => 'Client\Auth\LoginController@logout']);
 
 //candidate
 Route::get('/', 'client\HomeController@index')->name('index');

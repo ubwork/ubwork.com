@@ -11,7 +11,7 @@
             <div class="ls-widget">
               <div class="tabs-box">
                 <div class="widget-title">
-                  <h4>My Profile</h4>
+                  <h4>Đổi mật khẩu</h4>
                 </div>
 
                 <div class="widget-content">
@@ -63,7 +63,7 @@
                       <div class="w-100"></div>
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
-                        <button type="submit" class="theme-btn btn-style-one">Save</button>
+                        <button type="submit" class="theme-btn btn-style-one">Cập nhật</button>
                       </div>
                     </div>
                   </form>

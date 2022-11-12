@@ -1,15 +1,15 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('Company') }}
+    {{ __('UB Work') }}|{{ __('Danh sách Công ty') }}
 @endsection
 @section('content')
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
-                <h1>Companies</h1>
+                <h1>Danh sách công ty</h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li>Companies</li>
+                    <li><a href="/">Trnag chủ</a></li>
+                    <li>Công ty</li>
                 </ul>
             </div>
         </div>
@@ -173,7 +173,7 @@
                         <div class="ls-show-more">
                             <p>Showing 36 of 497 Jobs</p>
                             <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
-                            <button class="show-more">Show More</button>
+                            <button class="show-more">Xem thêm</button>
                         </div>
                     </div>
                 </div>

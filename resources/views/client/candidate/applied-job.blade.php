@@ -11,7 +11,7 @@
             <div class="ls-widget">
               <div class="tabs-box">
                 <div class="widget-title">
-                  <h4>My Favorite Jobs</h4>
+                  <h4>Công việc đã ứng tuyển</h4>
 
                   <div class="chosen-outer">
                     <!--Tabs Box-->
@@ -30,10 +30,10 @@
                     <table class="default-table manage-job-table">
                       <thead>
                         <tr>
-                          <th>Job Title</th>
-                          <th>Date Applied</th>
-                          <th>Status</th>
-                          <th>Action</th>
+                          <th>Tiêu đề</th>
+                          <th>Ngày ứng tuyển</th>
+                          <th>Trạng thái</th>
+                          <th>Hành động</th>
                         </tr>
                       </thead>
 

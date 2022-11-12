@@ -61,7 +61,8 @@ class JobController extends Controller
             // dd($idJobApplied[$item->id]);
             // dd($data_job->id);
         }
+        $total = JobPost::all();
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)->take(3)->get();
-        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 'maJor', 'idJobApplied', 'idJobShort'));
+        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 'maJor', 'idJobApplied', 'idJobShort', 'total'));
     }
 }
