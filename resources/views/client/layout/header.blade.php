@@ -28,16 +28,6 @@
                                 @endforeach
                             </ul>
                         </li>
-
-                        <li class="dropdown">
-                            <span></span>
-                            <ul>
-                            <li><a href="employers-single-v1.html">Employers Single v1</a></li>
-                            <li><a href="employers-single-v2.html">Employers Single v2</a></li>
-                            <li><a href="employers-single-v3.html">Employers Single v3</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="dashboard.html">Employers Dashboard</a></li>
                         </ul>
                     </li>
 
@@ -93,7 +83,7 @@
                         <li><a href="{{ route('detail') }}"><i class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã lưu</a></li>
-                        <li><a href=""><i class="la la-file-invoice"></i> CV manager</a></li>
+                        <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
                         <li><a href="{{ route('change_password') }}"><i class="la la-lock"></i>Đổi mật khẩu</a></li>
                         <li><a href="dashboard-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
                         <li><a href="{{ route('logout') }}"><i class="la la-sign-out"></i>Đăng xuất</a></li>
