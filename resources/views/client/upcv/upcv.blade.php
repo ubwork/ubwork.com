@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-{{ __('Upload CV') }}
+{{ __('UB Work') }} | {{'Quản lí CV'}}
 @endsection
 @section('content')
 <section class="ls-section mt-5">
@@ -14,7 +14,7 @@
                         <h4>Tạo CV</h4>
                     </div>
                     <div class="widget-content">
-                        <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('seeker-store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="uploading-resume">
                                 <div class="uploadButton">
