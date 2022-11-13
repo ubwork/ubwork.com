@@ -24,6 +24,8 @@ class SeekerProfile extends Model
         'description',
         'email',
         'phone',
+        'image',
+        'address',
     ];
 
     // lưu tạo

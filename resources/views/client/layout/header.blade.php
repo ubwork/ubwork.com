@@ -74,7 +74,7 @@
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Applied Jobs </a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Shortlisted
                                 Jobs</a></li>
-                        <li><a href=""><i class="la la-file-invoice"></i> CV manager</a></li>
+                        <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
                         <li><a href="dashboard-change-password.html"><i class="la la-lock"></i>Change Password</a></li>
                         <li><a href="dashboard-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
                         <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
