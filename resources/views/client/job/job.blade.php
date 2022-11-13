@@ -1,15 +1,15 @@
 @extends('client.layout.app')
 @section('title')
-    {{__('UB Work')}} | {{__('Find Jobs')}}
+    {{__('UB Work')}} | {{__('Danh sách công việc')}}
 @endsection
 @section('content')
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
-                <h1>Find Jobs</h1>
+                <h1>Danh sách công việc </h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li>Jobs</li>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li>Công việc</li>
                 </ul>
             </div>
         </div>
