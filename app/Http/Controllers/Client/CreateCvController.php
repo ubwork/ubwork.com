@@ -160,7 +160,9 @@ class CreateCvController extends Controller
             $data['created_at'] = Carbon::now()->toDateTimeString();
             $data['updated_at'] = Carbon::now()->toDateTimeString();
             unset($data['_token']);
+
             SkillSeeker::where('seeker_id', $data['seeker_id'])->delete();
+            
             foreach ($data['skill_id'] as $skill) {
                 SkillSeeker::create([
                     'seeker_id' => $data['seeker_id'],
@@ -170,11 +172,8 @@ class CreateCvController extends Controller
             return back();
     }
 
-    public function deleteSkills($id) {
-        if(isset($id)) {
-            SkillSeeker::find($id)->delete();
-            return redirect()->route('CreateCV');
-        }
+    public function DeleteAllSkill($id) {
+        SkillSeeker::where('seeker_id', $id)->delete();
         return redirect()->route('CreateCV');
     }
 
