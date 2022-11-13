@@ -96,9 +96,9 @@
                 {{-- <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a> --}}
                 <!-- Login/Register -->
                 <div class="btn-box">
-                    <a href="{{ route('candidate.login') }}" class="theme-btn btn-style-three call-modal">Đăng nhập</a>
+                    <a href="{{ route('candidate.login') }}" class="theme-btn btn-style-three">Đăng nhập</a>
                     <a href="{{ route('candidate.register') }}"
-                        class="theme-btn btn-style-three call-modal">Đăng kí</a>
+                        class="theme-btn btn-style-three">Đăng kí</a>
                 </div>
             </div>
     </div>
