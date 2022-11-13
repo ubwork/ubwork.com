@@ -18,14 +18,14 @@ class CompanyController extends Controller
     public function index()
     {
         $this->v['list'] = Company::paginate(9);
-        $this->v['title'] = "Danh sách công ty có trong hệ thống";
+        $this->v['title'] = "Danh sách công ty";
         return view("admin.companies.index", $this->v);
     }
 
 
     public function create()
     {
-        $this->v['title'] = "Thêm công ty vào trong hệ thống";
+        $this->v['title'] = "Thêm công ty";
         return view("admin.companies.add", $this->v,);
     }
 
