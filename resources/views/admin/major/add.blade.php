@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('title')
-    {{ __('Skill - add') }}
+    {{ __('Major - add') }}
 @endsection
 @section('content')
 <section class="content">
@@ -13,13 +13,13 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="{{ route('admin.skill.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{ route('admin.major.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                     <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="inputName">{{__('Tên kỹ năng')}} <span class="text-danger">*</span></label>
+                            <label for="inputName">{{__('Tên chuyên ngành')}} <span class="text-danger">*</span></label>
                             <input type="text" id="inputName" name="name" class="form-control" value="{{old('name')}}">
                             @error('name')
                             <small class="text-danger">{{$message}}</small>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary float-left mr-3">{{__('Lưu')}}</button>
-                        <a href="{{route('admin.skill.index')}}" class="btn btn-secondary">{{__('Hủy')}}</a>
+                        <a href="{{route('admin.major.index')}}" class="btn btn-secondary">{{__('Hủy')}}</a>
                     </div>
                   </form>
                 </div>
@@ -50,5 +50,4 @@
 @endsection
 @section('script')
 @parent
-<script src="{{asset('js/admin/candidate.js')}}"></script>
 @endsection
