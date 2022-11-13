@@ -16,7 +16,7 @@ class CompanyController extends Controller
     {
         $data = [];
         $job = [];
-        $data = company::where('status', 1)->get();
+        $data = company::where('status', 1)->paginate(6);
         // dd($data['id']);
         foreach ($data as $item) {
             // dd($item->id);

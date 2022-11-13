@@ -32,7 +32,7 @@ class JobController extends Controller
     public function job_cat($id)
     {
         $job_cat = Major::where('id', $id)->first();
-        $data = JobPost::where('major_id', $id)->get();
+        $data = JobPost::where('major_id', $id)->paginate(1);
         $maJor = Major::all();
         return view('client.job.job-cat', compact('data', 'job_cat', 'maJor'));
     }
