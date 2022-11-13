@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{__('Job')}} | {{$job_cat->name}}
+    {{__('UB Work')}} | {{$job_cat->name}}
 @endsection
 @section('content')
     <section class="page-title">
