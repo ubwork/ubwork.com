@@ -30,7 +30,6 @@
                                     <center><button type="submit" class="btn btn-danger">submit</button></center>
                                 </div>
                             </div>
-
                         </form>
                         <div class="files-outer">
                             @foreach ($data as $item)

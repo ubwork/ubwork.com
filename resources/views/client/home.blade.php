@@ -9,24 +9,19 @@
                 <div class="content-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column wow fadeInUp" data-wow-delay="1000ms">
                         <div class="title-box">
-                            <h3>Có<span class="colored">{{ count($total) }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
+                            <h3>Có<span class="colored">{{ count($data) }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
                             <div class="text">Tìm việc làm, Cơ hội việc làm & Nghề nghiệp</div>
                         </div>
                         <!-- Job Search Form -->
                         <div class="job-search-form">
-                            <form method="post" action="https://creativelayers.net/themes/superio/job-list-v10.html">
+                            <form method="get">
+                                @csrf
                                 <div class="row">
                                     <div class="form-group col-lg-5 col-md-12 col-sm-12">
                                         <span class="icon flaticon-search-1"></span>
-                                        <input type="text" name="field_name"
+                                        <input type="text" name="search"
                                             placeholder="Job title, keywords, or company">
                                     </div>
-                                    <!-- Form Group -->
-                                    {{-- <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
-                                        <span class="icon flaticon-map-locator"></span>
-                                        <input type="text" name="field_name" placeholder="City or postcode">
-                                    </div> --}}
-                                    <!-- Form Group -->
                                     <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
                                         <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Find
                                                 Jobs</span></button>
@@ -105,7 +100,7 @@
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Các chuyên ngành công việc phổ biến</h2>
-                <div class="text">Năm 2020 - {{ count($total) }} việc làm được đăng tải</div>
+                <div class="text">Năm 2020 - {{ count($data) }} việc làm được đăng tải</div>
             </div>
 
             <div class="row wow fadeInUp">
