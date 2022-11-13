@@ -109,7 +109,7 @@
 
                     <div class="mt-3">
                         <input type="submit" value="Lưu" class="btn btn-primary float-left mr-3">
-                        <a href="{{route('admin.candidate.index')}}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{route('admin.candidate.index')}}" class="btn btn-secondary">Hủy</a>
                     </div>
                   </form>
                 </div>

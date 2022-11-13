@@ -1,3 +1,4 @@
+
 <header class="main-header">
 
     <!-- Main box -->
@@ -13,17 +14,36 @@
                 <ul class="navigation" id="navbar">
                     <li class="current dropdown">
                         {{-- <span>Home</span> --}}
-                        <a href="/">Home</a>
+                        <a href="/">Trang chủ</a>
                     </li>
 
-                    <li class="dropdown has-mega-menu" id="has-mega-menu">
-                        {{-- <span>Find Jobs</span> --}}
-                        <a href="{{ route('job') }}">Find Jobs</a>
+                    <li class="dropdown">
+                        <span><a href="{{ route('job') }}">Việc làm</a></span>
+                        <ul>
+                        <li class="dropdown">
+                            <span>Chuyên ngành</span>
+                            <ul>
+                                @foreach ($maJor as $item)
+                                    <li><a href="{{route('job-cat', ['id' => $item->id])}}">{{$item->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <span></span>
+                            <ul>
+                            <li><a href="employers-single-v1.html">Employers Single v1</a></li>
+                            <li><a href="employers-single-v2.html">Employers Single v2</a></li>
+                            <li><a href="employers-single-v3.html">Employers Single v3</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="dashboard.html">Employers Dashboard</a></li>
+                        </ul>
                     </li>
 
                     <li class="dropdown">
                         {{-- <span>Employers</span> --}}
-                        <a href="{{ route('company-list') }}">Company</a>
+                        <a href="{{ route('company-list') }}">Công ty</a>
                     </li>
 
                     <!-- Only for Mobile View -->
@@ -52,45 +72,43 @@
 
         @if (auth('candidate')->check())
             <div class="outer-box">
-                <button class="menu-btn">
+                {{-- <button class="menu-btn">
                     <span class="count">1</span>
                     <span class="icon la la-heart-o"></span>
-                </button>
+                </button> --}}
 
-                <button class="menu-btn">
+                {{-- <button class="menu-btn">
                     <span class="icon la la-bell"></span>
-                </button>
+                </button> --}}
 
                 <!-- Dashboard Option -->
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
                             class="thumb">
-                        <span class="name">My Account</span>
+                        <span class="name">{{auth('candidate')->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="active"><a href=""> <i class="la la-home"></i> Dashboard</a></li>
-                        <li><a href="{{ route('detail') }}"><i class="la la-user-tie"></i>My Profile</a></li>
-                        <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Applied Jobs </a></li>
-                        <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Shortlisted
-                                Jobs</a></li>
+                        <li><a href="{{ route('detail') }}"><i class="la la-user-tie"></i>Thông tin</a></li>
+                        <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>
+                        <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã lưu</a></li>
                         <li><a href=""><i class="la la-file-invoice"></i> CV manager</a></li>
-                        <li><a href="dashboard-change-password.html"><i class="la la-lock"></i>Change Password</a></li>
+                        <li><a href="{{ route('change_password') }}"><i class="la la-lock"></i>Đổi mật khẩu</a></li>
                         <li><a href="dashboard-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
-                        <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
+                        <li><a href="{{ route('logout') }}"><i class="la la-sign-out"></i>Đăng xuất</a></li>
                     </ul>
                 </div>
             </div>
         @else
             <div class="outer-box">
                 <!-- Add Listing -->
-                <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a>
+                {{-- <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a> --}}
                 <!-- Login/Register -->
                 <div class="btn-box">
-                    <a href="{{ route('candidate.login') }}" class="theme-btn btn-style-three call-modal">Login</a>
+                    <a href="{{ route('candidate.login') }}" class="theme-btn btn-style-three call-modal">Đăng nhập</a>
                     <a href="{{ route('candidate.register') }}"
-                        class="theme-btn btn-style-three call-modal">Register</a>
-                    <a href="" class="theme-btn btn-style-one">Job Post</a>
+                        class="theme-btn btn-style-three call-modal">Đăng kí</a>
                 </div>
             </div>
     </div>

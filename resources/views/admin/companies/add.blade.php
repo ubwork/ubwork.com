@@ -71,14 +71,6 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Link Web</label>
-                                <input type="text" name="link_web" class="form-control" placeholder=""  value="{{old('link_web')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
                                 <label for="">Số điện thoại *</label>
                                 <input type="number" name="phone" class="form-control" placeholder=""  value="{{old('phone')}}">
                                 @error('phone')
@@ -86,8 +78,6 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Email *</label>
@@ -95,6 +85,14 @@
                                 @error('email')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Link Website</label>
+                                <input type="text" name="link_web" class="form-control" placeholder=""  value="{{old('link_web')}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -110,7 +108,7 @@
                         <div class="row">
                           <div class="col-sm-6">
                               <div class="form-group">
-                                <label class="form-label w-100">Logo</label>
+                                <label class="form-label w-100">Ảnh</label>
                                 <img id="image" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt="your image"
                                     style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
                                 <input name="image" type="file" id="img">
@@ -118,18 +116,18 @@
                               </div>
                           </div>
                           <div class="">
-                            <label class="form-label w-100">{{__('STATUS')}}</label>
+                            <label class="form-label w-100">{{__('Trạng thái')}}</label>
                             <div class="d-flex">
                                 <div class="form-check mr-3">
                                     <input type="radio" class="form-check-input" id="status" name="status" value="0" checked>{{__('Chưa kích hoạt')}}
                                     <label class="form-check-label" for="status"></label>
                                 </div>
                               <div class="form-check mr-3">
-                                <input type="radio" class="form-check-input" id="status" name="status" value="1" >{{__('Operational')}}
+                                <input type="radio" class="form-check-input" id="status" name="status" value="1" >{{__('Kích hoạt')}}
                                 <label class="form-check-label" for="status"></label>
                               </div>
                               <div class="form-check">
-                                <input type="radio" class="form-check-input" id="status2" name="status" value="2">{{__('Block')}}
+                                <input type="radio" class="form-check-input" id="status2" name="status" value="2">{{__('Chặn')}}
                                 <label class="form-check-label" for="status2"></label>
                               </div>
                             </div>
@@ -138,7 +136,7 @@
                         <br>
                         <div class="mt-3">
                             <input type="submit" value="Thêm" class="btn btn-primary float-left mr-3">
-                            <a href="{{route('admin.company.index')}}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{route('admin.company.index')}}" class="btn btn-secondary">Hủy</a>
                         </div>
                     </form>
                 </div>
