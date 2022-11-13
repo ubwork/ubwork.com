@@ -30,6 +30,7 @@ class CreateCvController extends Controller
         $this->v['seeker'] = $seeker;
         $this->v['skills'] = Skill::all();
         $this->v['major'] = Major::all();
+        $this->v['maJor'] = Major::all();
 
         if(!empty($seeker)){
             $this->v['experiences'] = Experience::where('seeker_id', $seeker->id)->get();
@@ -162,7 +163,7 @@ class CreateCvController extends Controller
             unset($data['_token']);
 
             SkillSeeker::where('seeker_id', $data['seeker_id'])->delete();
-            
+
             foreach ($data['skill_id'] as $skill) {
                 SkillSeeker::create([
                     'seeker_id' => $data['seeker_id'],
