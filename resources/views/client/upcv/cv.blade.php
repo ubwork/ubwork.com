@@ -32,7 +32,7 @@
 @parent
 @endsection
 @section('title')
-    {{__('Tạo CV')}}
+    {{ __('Upload CV') }}
 @endsection
 @section('content')
     <section class="ls-section mt-5">
@@ -163,7 +163,7 @@
                                 </div>
                                 @else
                                 <small><i>*Tạo thông tin cá nhân trước !</i></small>
-                                
+
                                 @endif
                             </div>
 
