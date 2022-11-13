@@ -64,7 +64,7 @@
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
 
                         <!-- ls Switcher -->
-                        <div class="ls-switcher">
+                        {{-- <div class="ls-switcher">
                             <div class="showing-result">
                                 <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> employer</div>
                             </div>
@@ -87,7 +87,7 @@
                                     <option>Show 60</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
 
                         <!-- Block Block -->
@@ -118,9 +118,10 @@
                         @endforeach
                         <!-- Listing Show More -->
                         <div class="ls-show-more">
-                            <p>Showing 36 of 497 Jobs</p>
+                            {{-- <p>Showing 36 of 497 Jobs</p>
                             <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
-                            <button class="show-more">Xem thêm</button>
+                            <button class="show-more">Xem thêm</button> --}}
+                            {{$data->links()}}
                         </div>
                     </div>
                 </div>
