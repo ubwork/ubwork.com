@@ -38,4 +38,11 @@ class LoginController extends Controller
             return Redirect::to('/login');
         }
     }
+    public function logout()
+    {
+        if (auth('candidate')->check()) {
+            auth('candidate')->logout();
+            return Redirect::to('/login');
+        }
+    }
 }

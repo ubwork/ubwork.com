@@ -6,6 +6,7 @@
     <title>{{$title}}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin-bower/plugins/select2-master/select2.min.css') !!}" />
     @section('style')
         @include('company.layout.style')
     @show
@@ -39,6 +40,11 @@
 
     @section('script')
         @include('company.layout.script')
+        <script>
+            $('.select2').select2({
+                'width' : '100%',
+            });
+        </script>
     @show
 </body>
 

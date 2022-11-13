@@ -12,8 +12,8 @@
                 <div class="content-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column wow fadeInUp" data-wow-delay="1000ms">
                         <div class="title-box">
-                            <h3>There Are <span class="colored">93,178</span> Postings Here<br> For you!</h3>
-                            <div class="text">Find Jobs, Employment & Career Opportunities</div>
+                            <h3>Có<span class="colored">{{count($total)}}</span> Bài đăng ở đây<br>dành cho bạn</h3>
+                            <div class="text">Tìm việc làm, Cơ hội việc làm & Nghề nghiệp</div>
                         </div>
                         <!-- Job Search Form -->
                         <div class="job-search-form">
@@ -96,8 +96,8 @@
     <section class="job-categories">
         <div class="auto-container">
             <div class="sec-title text-center">
-                <h2>Popular Job Categories</h2>
-                <div class="text">2020 jobs live - 293 added today.</div>
+                <h2>Các chuyên ngành công việc phổ biến</h2>
+                <div class="text">Năm 2020 - {{count($total)}} việc làm được đăng tải</div>
             </div>
 
             <div class="row wow fadeInUp">
@@ -108,7 +108,7 @@
                         <div class="content">
                             <span class="{{$item_job->icon}}"></span>
                             <h4><a href="{{route('job-cat', ['id' => $item_job->id])}}">{{$item_job->name}}</a></h4>
-                            <p>( {{$count[$item_job->id]}} open positions)</p>
+                            <p>( {{$count[$item_job->id]}} bài đăng.)</p>
                         </div>
                     </div>
                 </div>
@@ -122,8 +122,8 @@
     <section class="job-section">
         <div class="auto-container">
             <div class="sec-title text-center">
-                <h2>Featured Jobs</h2>
-                <div class="text">Know your worth and find the job that qualify your life</div>
+                <h2>Việc làm nổi bật.</h2>
+                <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn./div>
             </div>
 
             <div class="row wow fadeInUp">
@@ -165,15 +165,14 @@
             </div>
 
             <div class="btn-box">
-                <a href="{{route('job')}}" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Load More
-                        Listing</span></a>
+                <a href="{{route('job')}}" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Xem thêm</span></a>
             </div>
         </div>
     </section>
     <!-- End Job Section -->
 
     <!-- Testimonial Section -->
-    <section class="testimonial-section">
+    {{-- <section class="testimonial-section">
         <div class="container-fluid">
             <!-- Sec Title -->
             <div class="sec-title text-center">
@@ -236,11 +235,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Testimonial Section -->
 
     <!--Clients Section-->
-    <section class="clients-section">
+    {{-- <section class="clients-section">
         <div class="sponsors-outer wow fadeInUp">
             <!--Sponsors Carousel-->
             <ul class="sponsors-carousel owl-carousel owl-theme">
@@ -274,11 +273,11 @@
                 </li>
             </ul>
         </div>
-    </section>
+    </section> --}}
     <!-- End Clients Section-->
 
     <!-- About Section -->
-    <section class="about-section">
+    {{-- <section class="about-section">
         <div class="auto-container">
             <div class="row">
                 <!-- Content Column -->
@@ -338,11 +337,11 @@
             </div>
             <!-- Fun Fact Section -->
         </div>
-    </section>
+    </section> --}}
     <!-- End About Section -->
 
     <!-- News Section -->
-    <section class="news-section">
+    {{-- <section class="news-section">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Recent News Articles</h2>
@@ -411,11 +410,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End News Section -->
 
     <!-- App Section -->
-    <section class="app-section">
+    {{-- <section class="app-section">
         <div class="auto-container">
             <div class="row">
                 <!-- Image Column -->
@@ -441,7 +440,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End App Section -->
 
     <!-- Call To Action -->

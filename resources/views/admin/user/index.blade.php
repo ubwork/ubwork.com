@@ -22,14 +22,14 @@
                 <table id="table" class="table table-bordered table-striped dataTable dtr-inline">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>{{ __('NAME') }}</th>
+                            <th>STT</th>
+                            <th>{{ __('Họ tên') }}</th>
                             <th>{{ __('Email') }}</th>
-                            <th>{{ __('PHONE') }}</th>
-                            <th>{{ __('ROLE') }}</th>
+                            <th>{{ __('Số điện thoại') }}</th>
+                            <th>{{ __('Vai trò') }}</th>
                             {{-- <th>{{ __('IMAGE') }}</th> --}}
                             {{-- <th>{{ __('ROLE') }}</th> --}}
-                            <th>{{ __('STATUS') }}</th>
+                            <th>{{ __('Trạng thái') }}</th>
                             <th><a href="{{ route('admin.user.create') }}"><i class="fa fa-plus"></i></a></th>
                         </tr>
                     </thead>

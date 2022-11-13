@@ -19,7 +19,7 @@
                     <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="inputName">{{__('NAME')}} <span class="text-danger">*</span></label>
+                            <label for="inputName">{{__('Tên')}} <span class="text-danger">*</span></label>
                             <input type="text" id="inputName" name="name" class="form-control" value="{{old('name')}}">
                             @error('name')
                             <small class="text-danger">{{$message}}</small>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>{{__('PHONE')}} <span class="text-danger">*</span></label>
+                            <label>{{__('Số điện thoại')}} <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" name="phone" value="{{old('phone')}}">
                             @error('phone')
                             <small class="text-danger">{{$message}}</small>
@@ -48,7 +48,7 @@
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
-                          <label>Password <span class="text-danger">*</span></label>
+                          <label>Mật khẩu <span class="text-danger">*</span></label>
                           <input type="password" class="form-control" name="password" value="{{old('password')}}">
                           @error('password')
                           <small class="text-danger">{{$message}}</small>
@@ -104,11 +104,11 @@
                             <label class="form-check-label" for="status"></label>
                           </div>
                           <div class="form-check mr-3">
-                            <input type="radio" class="form-check-input" id="status" name="status" value="1" checked>{{__('Operational')}}
+                            <input type="radio" class="form-check-input" id="status" name="status" value="1" checked>{{__('kích hoạt')}}
                             <label class="form-check-label" for="status"></label>
                           </div>
                           <div class="form-check">
-                            <input type="radio" class="form-check-input" id="status2" name="status" value="2">{{__('Block')}}
+                            <input type="radio" class="form-check-input" id="status2" name="status" value="2">{{__('Chặn')}}
                             <label class="form-check-label" for="status2"></label>
                           </div>
                         </div>
@@ -118,7 +118,7 @@
                     <div class="mt-3">
                         
                         <button type="submit" class="btn btn-primary float-left mr-3">{{__('SAVE')}}</button>
-                        <a href="{{route('admin.candidate.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                        <a href="{{route('admin.candidate.index')}}" class="btn btn-secondary">{{__('Hủy')}}</a>
                     </div>
                   </form>
                 </div>

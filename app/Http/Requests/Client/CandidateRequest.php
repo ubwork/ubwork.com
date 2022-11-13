@@ -34,10 +34,8 @@ class CandidateRequest extends FormRequest
                         $rules = [
                             'name' => 'required',
                             'email' => 'required|email|unique:candidates,email,' . $id . ',id',
-                            'phone' => 'required|min:10|unique:candidates,phone,' . $id . ',id',
-                            'password' => 'required|min:8',
-                            'age' => 'required',
-                            'country' => 'required',
+                            'phone' => 'required|max:10|unique:candidates,phone,' . $id . ',id',
+                            'address' => 'required',
                         ];
                         break;
                     default:
@@ -54,16 +52,15 @@ class CandidateRequest extends FormRequest
     public function message()
     {
         return [
-            'name.required' => 'Chưa nhập tên',
-            'email.required' => 'Chưa nhập email',
-            'email.unique' => 'Email đã tồn tại',
-            'email.eamil' => 'Email chưa đúng định dạng',
-            'phone.required' => 'Chưa nhập số diện thoại',
-            'phone.phone' => 'Chưa đúng định dạng',
-            'password.require' => 'Chưa nhập mật khẩu',
-            'password.min:8' => 'Mật khẩu phải hơn 8 chữ số',
-            'age.require' => 'Chưa nhập tuổi',
-            'country.require' => 'Chưa nhập quê quán',
+            'name.required' => __('messages.name.required'),
+            'email.required' => __('messages.email.required'),
+            'email.email' => __('messages.email.email'),
+            'email.unique' => __('messages.email.unique'),
+            'password.required' => __('messages.password.required'),
+            'phone.required' => __('messages.phone.required'),
+            'phone.max' => 'Số điện thoại nhỏ hơn 10 số!',
+            'phone.digits' => 'Sai định dạng số điện thoại!',
+            'phone.unique' => 'Số điện thoại đã tồn tại!',
         ];
     }
 }
