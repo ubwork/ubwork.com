@@ -36,4 +36,7 @@ class Skill extends Model
         ->update($data);
         return $res;
     }
+    public function jobPosts(){
+        return $this->belongsToMany(JobPost::class, 'skill_posts', 'skill_id', 'post_id');
+    }
 }

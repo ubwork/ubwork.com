@@ -8,16 +8,11 @@
           <div class="widget-title">
             <h4>{{$title}}</h4>
 
-            {{-- <div class="chosen-outer">
-              <!--Tabs Box-->
-              <select class="chosen-select">
-                <option>Last 6 Months</option>
-                <option>Last 12 Months</option>
-                <option>Last 16 Months</option>
-                <option>Last 24 Months</option>
-                <option>Last 5 year</option>
-              </select>
-            </div> --}}
+            <div class="chosen-outer ">
+                <div class="form-group border-1">
+                  <input type="text" name="title" value="{{ old('title')}}" placeholder="Tìm kiếm">
+              </div>
+            </div>
           </div>
 
           <div class="widget-content">
@@ -26,8 +21,7 @@
                 <thead>
                   <tr>
                     <th>Tin tuyển dụng</th>
-                    <th>Ứng tuyển</th>
-                    <th>Bắt đầu & kết thúc</th>
+                    <th>Chi tiết</th>
                     <th>Trạng thái</th>
                     <th >
                         <button class="add-info-btn text-center"><a href="{{route('company.post.create')}}"><span class="icon flaticon-plus"></span></a></button>
@@ -39,9 +33,9 @@
                   <tr>
                     <td>
                       <h6>{{$item->title}}</h6>
+                      <span><a class="btn bg-light btn-sm" href="{{route('company.post.profileApply',$item->id)}}"> Xem CV</a></span>
                     </td>
-                    <td class="applied"><a href="{{route('company.post.profileApply',$item->id)}}">{{$item->activities->count()}} CV</a></td>
-                    <td>{{date_format(new DateTime($item->start_date),"d/m/Y")}} <br>{{date_format(new DateTime($item->end_date),"d/m/Y")}}</td>
+                    <td>Lượt ứng tuyển: {{$item->activities->count()}} <br> Ngày hết hạn: {{date_format(new DateTime($item->end_date),"d/m/Y")}} </td>
                     <td class="status">{{$item->status}}</td>
                     <td>
                       <div class="option-box">
