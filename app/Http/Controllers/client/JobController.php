@@ -46,23 +46,28 @@ class JobController extends Controller
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
             $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
-            $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
-            if (!empty($dataActive)) {
-                foreach ($dataActive as $item) {
-                    $idJobApplied[$item->job_post_id] = $item;
+            if(!empty($seeker->id)){
+                $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
+                if (!empty($dataActive)) {
+                    foreach ($dataActive as $item) {
+                        $idJobApplied[$item->job_post_id] = $item;
+                    }
                 }
-            }
-            $dataShort = Shortlist::where('candidate_id', $id_user)->get();
-            if (!empty($dataShort)) {
-                foreach ($dataShort as $item) {
-                    $idJobShort[$item->job_post_id] = $item;
+                $dataShort = Shortlist::where('candidate_id', $id_user)->get();
+                if (!empty($dataShort)) {
+                    foreach ($dataShort as $item) {
+                        $idJobShort[$item->job_post_id] = $item;
+                    }
                 }
             }
             // dd($idJobApplied[$item->id]);
             // dd($data_job->id);
         }
-        $total = JobPost::all();
-        $data_job_relate = JobPost::where('major_id', $data_job->major_id)->take(3)->get();
-        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 'maJor', 'idJobApplied', 'idJobShort', 'total'));
+        $total = JobPost::where('major_id', $data_job->major_id)->get();
+        $data_job_relate = JobPost::where('major_id', $data_job->major_id)
+        ->where('id', '!=', $data_job->id)->take(3)->get();
+
+        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 
+        'maJor', 'idJobApplied', 'idJobShort', 'total', 'seeker'));
     }
 }

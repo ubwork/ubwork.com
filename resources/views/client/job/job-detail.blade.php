@@ -11,10 +11,10 @@
           <div class="job-block-seven">
             <div class="inner-box">
               <div class="content">
-                <span class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}"></span>
+                <span class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}"></span>
                 <h4><a href="{{route('job-detail', ['id' => $data_job->id])}}">{{$data_job->title}}</a></h4>
                 <ul class="job-info">
-                  <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                  <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li>
                   <li><span class="icon flaticon-map-locator"></span>{{$data_job->company->address}}</li>
                   <li><span class="icon flaticon-clock-3"></span>{{$data_job->company->working_time}}</li>
                   <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
@@ -45,7 +45,8 @@
                       <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
                     @else
-                      <a  href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Ứng tuyển ngay</a>
+                    
+                      <a  @if(!empty($seeker->id)) href="{{route('applied', ['id' => $data_job->id])}}" @else href="{{route('CreateCV')}}" @endif class="theme-btn btn-style-one">Ứng tuyển ngay</a>
                     @endif
                 @else
                     <button class="theme-btn btn-style-one">Ứng tuyển ngay</button>
@@ -74,32 +75,32 @@
             <div class="content-column col-lg-8 col-md-12 col-sm-12">
               <div class="job-detail">
                 <h4>Mô tả công việc</h4>
-                <p>{{ $data_job->description}}</p>
+                <p>{!! $data_job->description !!}</p>
                 <h4>Yêu cầu công việc</h4>
                 <ul class="list-style-three">
-                  {{ $data_job->requirement}}
+                  {!! $data_job->requirement !!}
                 </ul>
                 <h4>Kĩ năng và kinh nghiệm</h4>
                 <ul class="list-style-three">
-                  <li>{{ $data_job->experience}}
+                  <li>{!! $data_job->experience !!}
                 </ul>
               </div>
 
               <!-- Other Options -->
-              <div class="other-options">
+              {{-- <div class="other-options">
                 <div class="social-share">
                   <h5>Chia sẻ công việc</h5>
                   <a href="#" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
                   <a href="#" class="twitter"><i class="fab fa-twitter"></i> Twitter</a>
                   <a href="#" class="google"><i class="fab fa-google"></i> Google+</a>
                 </div>
-              </div>
+              </div> --}}
 
               <!-- Related Jobs -->
               <div class="related-jobs">
                 <div class="title-box">
                   <h3>Công việc liên quan</h3>
-                  <div class="text">Năm 2020 - {{count($total)}} việc làm được đăng tải.</div>
+                  <div class="text">{{count($total)}} việc làm được đăng tải.</div>
                 </div>
 
                 <!-- Job Block -->
@@ -107,7 +108,7 @@
                     <div class="job-block">
                         <div class="inner-box">
                             <div class="content">
-                            <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/images/company/'.$item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
@@ -154,12 +155,12 @@
                       <li>
                         <i class="icon icon-calendar"></i>
                         <h5>Ngày đăng:</h5>
-                        <span>{{$data_job->start_date}}</span>
+                        <span>{{date("d-m-Y", strtotime($data_job->start_date))}}</span>
                       </li>
                       <li>
                         <i class="icon icon-expiry"></i>
                         <h5>Ngày hết hạn:</h5>
-                        <span>{{$data_job->end_date}}</span>
+                        <span>{{date("d-m-Y", strtotime($data_job->end_date))}}</span>
                       </li>
                       <li>
                         <i class="icon icon-location"></i>
@@ -213,7 +214,7 @@
                 <div class="sidebar-widget company-widget">
                   <div class="widget-content">
                     <div class="company-title">
-                      <div class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}" alt=""></div>
+                      <div class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
                       <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">Thông tin công ty</a>
                     </div>

@@ -28,8 +28,8 @@ Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail'
 
 Route::get('/change-password', 'client\CandidateController@change')->name('change_password');
 Route::post('/update_password', 'client\CandidateController@update_pass')->name('update_pass');
-Route::get('/candidate-detail', 'client\CandidateController@detail')->name('detail');
-Route::post('/candidate-profile-edit', 'client\CandidateController@update')->name('update');
+Route::get('/candidate-detail/{id}', 'client\CandidateController@detail')->name('detail');
+Route::post('/candidate-profile-edit/{id}', 'client\CandidateController@update')->name('update');
 
 Route::get('/seeker', 'client\SeekerController@index')->name('seeker');
 Route::post('/seeker', 'client\SeekerController@store')->name('seeker-store');
