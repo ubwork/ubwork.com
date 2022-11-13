@@ -25,7 +25,7 @@ class JobController extends Controller
     }
     public function job()
     {
-        $data = JobPost::where('status', 1)->get();
+        $data = JobPost::where('status', 1)->paginate(1);
         $maJor = Major::all();
         return view('client.job.job', compact('data', 'maJor'));
     }

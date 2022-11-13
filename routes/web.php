@@ -48,6 +48,7 @@ Route::get('/candi-detail', function () {
 });
 //client/company
 Route::get('/company-list', 'client\CompanyController@index')->name('company-list');
+Route::post('/company-filter', 'client\CompanyController@filter')->name('company-filter');
 
 Route::get('/company-detail/{id}', 'client\CompanyController@detail')->name('company-detail');
 Route::get('/company-feedback/{id}', 'client\CompanyController@feedback')->name('feedback');
