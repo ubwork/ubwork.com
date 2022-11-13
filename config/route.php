@@ -16,6 +16,11 @@ return [
                 'title' => "Sửa thông tin",
                 'route' => 'company.profile',
                 'icon'  => 'la la-user-tie',
+            ],
+            'filter' => [
+                'title' => "Tìm CV",
+                'route' => 'company.filter',
+                'icon'  => 'la la-search',
             ]
         ]
     ]
