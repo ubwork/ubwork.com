@@ -20,14 +20,14 @@ class UserController extends Controller
     }
     public function index()
     {
-        $this->v['title'] = 'User list';
+        $this->v['title'] = 'Danh sách người dùng';
         $this->v['users'] = User::all();
         return view('admin.user.index',$this->v);
     }
 
     public function create()
     {
-        $this->v['title'] = __('Add user');
+        $this->v['title'] = __('Thêm người dùng');
         $this->v['roles'] = Role::all()->pluck('name');
         return view('admin.user.add',$this->v);
     }
@@ -57,7 +57,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $this->v['title'] = __('Edit user');
+        $this->v['title'] = __('Cập nhật người dùng');
         $this->v['user'] = User::find($id);
         $this->v['roles'] = Role::all()->pluck('name');
         return view('admin.user.edit',$this->v);

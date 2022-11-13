@@ -14,3 +14,4 @@
 <script src="{{asset('assets/client-bower/js/owl.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/wow.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/script.js')}}"></script>
+<script src="{!! asset('assets/admin-bower/plugins/select2-master/select2.full.min.js') !!}"></script>

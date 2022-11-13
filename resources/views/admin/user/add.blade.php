@@ -17,6 +17,22 @@
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
+                                    <label for="name">{{ __('Họ tên') }}</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        value="{{ old('name') }}" placeholder="{{ __('Enter Name') }}">
+                                </div>
+                                @error('name')
+                                    <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
+                                        <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
                                     <label for="Email">Email</label>
                                     <input type="text" class="form-control" name="email" id="email"
                                         value="{{ old('email') }}" placeholder="{{ __('Enter email') }}">
@@ -31,27 +47,12 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="name">{{ __('NAME') }}</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        value="{{ old('name') }}" placeholder="{{ __('Enter Name') }}">
-                                </div>
-                                @error('name')
-                                    <div class="alert alert-danger alert-dismissible fade show p-1" role="alert">
-                                        <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            <span class="sr-only">Close</span>
-                                        </button>
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                            
                         </div>
 
 
                         <div class="form-group">
-                            <label for="Phone">{{ __('PHONE') }}</label>
+                            <label for="Phone">{{ __('Số điện thoại') }}</label>
                             <input type="text" class="form-control" name="phone" id="Phone"
                                 value="{{ old('phone') }}" placeholder="{{ __('Enter phone') }}">
                         </div>
@@ -67,7 +68,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="password">{{ __('PASSWORD') }}</label>
+                                    <label for="password">{{ __('Mật khẩu') }}</label>
                                     <input type="password" class="form-control" name="password" id="password"
                                         placeholder="{{ __('Enter password') }}">
                                 </div>
@@ -83,7 +84,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="password">{{ __('Confirm Password') }}</label>
+                                    <label for="password">{{ __('Nhập lại mật khẩu') }}</label>
                                     <input type="password" class="form-control" name="re-password" id="password"
                                         placeholder="{{ __('Enter password') }}">
                                 </div>
@@ -99,7 +100,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-12"><label for="">{{__('ROLE')}}</label></div>
+                            <div class="col-12"><label for="">{{__('Vai trò')}}</label></div>
                             @foreach ($roles as $role)
                                 <div class="col-lg-3 col-md-4">
                                     <div class="custom-control custom-checkbox">
@@ -121,7 +122,7 @@
                             </div>
                         @enderror
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-4 control-label">{{ __('IMAGE') }}</label>
+                            <label class="col-md-3 col-sm-4 control-label">{{ __('Ảnh') }}</label>
                             <div class="col-md-9 col-sm-8">
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -148,8 +149,8 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{ __('SAVE') }}</button>
-                        <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">{{ __('BACK') }}</a>
+                        <button type="submit" class="btn btn-primary">{{ __('Lưu') }}</button>
+                        <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">{{ __('Hủy') }}</a>
                     </div>
                 </form>
             </div>

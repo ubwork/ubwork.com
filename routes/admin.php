@@ -39,3 +39,11 @@ Route::prefix('skill')->name('skill.')->group(function () {
     Route::post('update/{id}', 'Admin\SkillController@update')->name('update');
     Route::delete('/{id}', 'Admin\SkillController@destroy')->name('destroy');
 });
+Route::prefix('major')->name('major.')->group(function () {
+    Route::get('/', 'Admin\MajorController@index')->name('index');
+    Route::get('create', 'Admin\MajorController@create')->name('create');
+    Route::post('store', 'Admin\MajorController@store')->name('store');
+    Route::get('edit/{id}', 'Admin\MajorController@edit')->name('edit');
+    Route::post('update/{id}', 'Admin\MajorController@update')->name('update');
+    Route::delete('/{id}', 'Admin\MajorController@destroy')->name('destroy');
+});
