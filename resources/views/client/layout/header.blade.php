@@ -28,16 +28,6 @@
                                 @endforeach
                             </ul>
                         </li>
-
-                        <li class="dropdown">
-                            <span></span>
-                            <ul>
-                            <li><a href="employers-single-v1.html">Employers Single v1</a></li>
-                            <li><a href="employers-single-v2.html">Employers Single v2</a></li>
-                            <li><a href="employers-single-v3.html">Employers Single v3</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="dashboard.html">Employers Dashboard</a></li>
                         </ul>
                     </li>
 
