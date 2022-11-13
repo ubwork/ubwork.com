@@ -65,4 +65,22 @@ class JobController extends Controller
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)->take(3)->get();
         return view('client.job.job-detail', compact('data_job', 'data_job_relate', 'maJor', 'idJobApplied', 'idJobShort', 'total'));
     }
+    public function search(Request $request)
+    {
+
+        $search = $request->search;
+        $major = $request->major;
+
+        $maJor = Major::all();
+        if (isset($search) && isset($major)) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        }elseif(isset($search) && $major == 0){
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
+        } else {
+            $data = JobPost::where('status', 1)->get();
+        }
+
+
+        return view('client.job.job', compact('data', 'maJor'));
+    }
 }

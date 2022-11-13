@@ -11,12 +11,17 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = [];
         $job = [];
-        $data = company::where('status', 1)->get();
         // dd($data['id']);
+        $search = $request->search;
+        if(!empty($search)){
+            $data = company::where('status', 1)->where('company_name','like','%' . $search . '%')->paginate(10);
+        }else{
+            $data = company::where('status', 1)->get();
+        }
         foreach ($data as $item) {
             // dd($item->id);
             $job = JobPost::where('company_id', $item->id)->get();

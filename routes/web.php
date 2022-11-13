@@ -25,6 +25,7 @@ Route::get('/', 'client\HomeController@index')->name('index');
 Route::get('/job', 'client\JobController@job')->name('job');
 Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
 Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');
+Route::get('/job-search', 'client\JobController@search')->name('search');
 
 Route::get('/change-password', 'client\CandidateController@change')->name('change_password');
 Route::post('/update_password', 'client\CandidateController@update_pass')->name('update_pass');
