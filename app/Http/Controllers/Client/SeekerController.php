@@ -15,7 +15,7 @@ class SeekerController extends Controller
         $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->paginate(2);
         // dd($data);
         $maJor = Major::all();
-        return view('client.upcv.cv', compact('data','maJor'));
+        return view('client.upcv.upcv', compact('data','maJor'));
     }
     public function store(Request $request)
     {
