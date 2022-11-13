@@ -65,5 +65,30 @@ Route::post('company/login', ['as' => 'company.login', 'uses' => 'Company\LoginC
 Route::get('admin/login', ['as' => 'login', 'uses' => 'Admin\LoginController@getLogin']);
 Route::post('admin/login', ['as' => 'login', 'uses' => 'Admin\LoginController@postLogin']);
 
+// create CV
+// info CV
+Route::get('create-cv', 'Client\CreateCvController@index')->name('CreateCV');
+Route::post('create-cv/saveInfo', 'Client\CreateCvController@saveInfo')->name('saveInfo');
+Route::post('create-cv/updateInfo', 'Client\CreateCvController@updateInfo')->name('updateInfo');
+
+//experiences
+Route::post('create-cv/saveExperience', 'Client\CreateCvController@saveExperience')->name('saveExperience');
+Route::post('create-cv/updateExperience/{id}', 'Client\CreateCvController@updateExperience')->name('updateExperience');
+Route::get('create-cv/deleteExperience/{id}', 'Client\CreateCvController@deleteExperience')->name('deleteExperience');
+
+//skills
+Route::post('create-cv/saveSkills', 'Client\CreateCvController@saveSkills')->name('saveSkills');
+Route::post('create-cv/updateSkills/{id}', 'Client\CreateCvController@updateSkills')->name('updateSkills');
+Route::get('create-cv/DeleteAllSkill/{id}', 'Client\CreateCvController@DeleteAllSkill')->name('DeleteAllSkill');
+
+//educations
+Route::post('create-cv/saveEducation', 'Client\CreateCvController@saveEducation')->name('saveEducation');
+Route::post('create-cv/updateEducation/{id}', 'Client\CreateCvController@updateEducation')->name('updateEducation');
+Route::get('create-cv/deleteEducation/{id}', 'Client\CreateCvController@deleteEducation')->name('deleteEducation');
+
+//certificates
+Route::post('create-cv/saveCertificate', 'Client\CreateCvController@saveCertificate')->name('saveCertificate');
+Route::post('create-cv/updateCertificate/{id}', 'Client\CreateCvController@updateCertificate')->name('updateCertificate');
+Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
