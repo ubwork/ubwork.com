@@ -18,20 +18,22 @@ Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\Reg
 //login
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@postLogin']);
-Route::get('/logout', ['as' => 'candidate.logout', 'uses' => 'Client\Auth\LoginController@getLogout']);
+Route::get('/logout', ['as' => 'logout', 'uses' => 'Client\Auth\LoginController@logout']);
 
 //candidate
-Route::get('/','client\HomeController@index')->name('index');
-Route::get('/job','client\JobController@job')->name('job');
-Route::get('/job-cat/{id}','client\JobController@job_cat')->name('job-cat');
-Route::get('/job-detail/{id}','client\JobController@detail')->name('job-detail');
+Route::get('/', 'client\HomeController@index')->name('index');
+Route::get('/job', 'client\JobController@job')->name('job');
+Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
+Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');
 
-Route::get('/candidate-detail','client\CandidateController@detail')->name('detail');
+Route::get('/change-password', 'client\CandidateController@change')->name('change_password');
+Route::post('/update_password', 'client\CandidateController@update_pass')->name('update_pass');
+Route::get('/candidate-detail', 'client\CandidateController@detail')->name('detail');
 Route::post('/candidate-profile-edit', 'client\CandidateController@update')->name('update');
 
 Route::get('/shortlisted-job', 'client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
 Route::get('/shortlisted/{id}', 'client\ShortlistedController@shortlisted')->name('shortlisted');
-Route::get('/delete-shortlisted/{id}', 'client\JobPostActivitiesController@destroy')->name('delete_shortlisted');
+Route::get('/delete-shortlisted/{id}', 'client\ShortlistedController@destroy')->name('delete_shortlisted');
 
 Route::get('/applied/{id}', 'client\JobPostActivitiesController@applied')->name('applied');
 Route::get('/jobApply', 'client\JobPostActivitiesController@jobApply')->name('jobApply');
@@ -48,7 +50,7 @@ Route::get('/candi-detail', function () {
 Route::get('/company-list', 'client\CompanyController@index')->name('company-list');
 
 Route::get('/company-detail/{id}', 'client\CompanyController@detail')->name('company-detail');
-Route::get('/company-feedback/{id}', 'client\CompanyController@feedback' )->name('feedback');
+Route::get('/company-feedback/{id}', 'client\CompanyController@feedback')->name('feedback');
 Route::post('/feedback/{id}', 'client\CompanyController@saveFeedback')->name('saveFeedback');
 
 //company
