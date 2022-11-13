@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\company;
 use App\Models\Company as ModelsCompany;
 use App\Models\FeedbackCompany;
-use App\Models\job;
 use App\Models\JobPost;
 use App\Models\Major;
 use Illuminate\Http\Request;

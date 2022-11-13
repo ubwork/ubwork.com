@@ -26,6 +26,8 @@ class SeekerProfile extends Model
         'description',
         'email',
         'phone',
+        'image',
+        'address',
     ];
     public function candidate()
     {
