@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\SeekerProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -13,7 +14,8 @@ class SeekerController extends Controller
     {
         $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->paginate(2);
         // dd($data);
-        return view('client.upcv.cv', compact('data'));
+        $maJor = Major::all();
+        return view('client.upcv.cv', compact('data','maJor'));
     }
     public function store(Request $request)
     {
@@ -34,7 +36,6 @@ class SeekerController extends Controller
         }
         $seeker->email = $request->email;
         $seeker->phone = $request->phone;
-        // dd($seeker);
         $seeker->save();
         return redirect('seeker');
     }
@@ -42,8 +43,6 @@ class SeekerController extends Controller
     {
         $seeker = SeekerProfile::find($id);
         $file_path = public_path('upload/cv/'.$seeker->path_cv);
-        // dd($file_path);
-        // dd($file_path);
         if(is_file($file_path)){
             unlink($file_path);
         }
