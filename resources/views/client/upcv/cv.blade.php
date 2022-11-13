@@ -32,7 +32,7 @@
 @parent
 @endsection
 @section('title')
-    {{ __('Upload CV') }}
+    {{ __('UB Work') }} | {{__('Tạo CV')}}
 @endsection
 @section('content')
     <section class="ls-section mt-5">

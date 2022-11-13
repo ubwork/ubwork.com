@@ -60,7 +60,7 @@
                           <td>
                             <div class="option-box">
                               <ul class="option-list">
-                                <li><a href="{{route('job-detail', ['id' => $item->id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
+                                <li><a href="{{route('job-detail', ['id' => $item->job_post_id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
                                 <li><a href="{{route('delete_applied_jobs', ['id' => $item->id])}}"><button data-text="Delete Aplication"><span class="la la-trash"></span></button></a></li>
                               </ul>
                             </div>
