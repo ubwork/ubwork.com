@@ -17,6 +17,7 @@ Route::prefix('candidate')->name('candidate.')->group(function () {
     Route::post('update/{id}', 'Admin\CandidateController@update')->name('update');
     Route::delete('/{id}', 'Admin\CandidateController@destroy')->name('destroy');
     Route::post('/{id}', 'Admin\CandidateController@status')->name('status');
+    Route::get('/{id}', 'Admin\CandidateController@getStatus')->name('getStatus');
 });
 Route::prefix('company')->name('company.')->group(function () {
     Route::get('/', 'Admin\CompanyController@index')->name('index');

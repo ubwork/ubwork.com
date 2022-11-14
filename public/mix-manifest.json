@@ -5,5 +5,6 @@
     "/js/admin/blacklist.js": "/js/admin/blacklist.js",
     "/js/remove-ajax.js": "/js/remove-ajax.js",
     "/css/client_style.css": "/css/client_style.css",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/app.css": "/js/app.css"
 }
