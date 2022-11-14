@@ -37,7 +37,7 @@
         <!-- End Dashboard -->
 
     </div><!-- End Page Wrapper -->
-
+    @include('admin.layout.toastr')
     @section('script')
         @include('company.layout.script')
         <script>

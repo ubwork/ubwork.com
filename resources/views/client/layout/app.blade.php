@@ -24,6 +24,7 @@
     @section('script')
         @include('client.layout.script')
     @show
+    @include('admin.layout.toastr')
 </body>
 
 </html>
