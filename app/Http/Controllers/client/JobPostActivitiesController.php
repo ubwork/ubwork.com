@@ -4,7 +4,9 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Models\job;
+use App\Models\JobPost;
 use App\Models\JobPostActivities;
+use App\Models\Major;
 use App\Models\SeekerProfile;
 use Illuminate\Http\Request;
 
@@ -29,17 +31,18 @@ class JobPostActivitiesController extends Controller
         $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
         $data = [];
         $job_applied = [];
-        if(!empty($seeker)){
+        if (!empty($seeker)) {
             $job_applied = [];
-            $data = JobPostActivities::where('seeker_id', $seeker->id)->take(6)->get();
+            $data = JobPostActivities::where('seeker_id', $seeker->id)->get();
             if (!empty($data)) {
                 foreach ($data as $item) {
                     $id_post = $item->job_post_id;
-                    $job_applied[$id_post] = job::where('id', $id_post)->first();
+                    $job_applied[$id_post] = JobPost::where('id', $id_post)->first();
                 }
             }
         }
-        return view('client.candidate.applied-job', compact('data', 'job_applied'));
+        $maJor = Major::all();
+        return view('client.candidate.applied-job', compact('data', 'job_applied', 'maJor'));
     }
     public function destroy($id)
     {

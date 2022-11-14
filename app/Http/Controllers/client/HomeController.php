@@ -15,6 +15,7 @@ class HomeController extends Controller
         $count = [];
         $job_short = [];
         $data = JobPost::where('status', 1)->take(6)->get();
+        $total = JobPost::all();
         $data_job_type = Major::all();
         foreach ($data_job_type as $item) {
             if (!empty($item)) {
@@ -34,8 +35,9 @@ class HomeController extends Controller
                 }
             }
         }
+        $maJor = Major::all();
         // dd($data->company->id);
         // dd(company::all());
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short'));
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'total'));
     }
 }

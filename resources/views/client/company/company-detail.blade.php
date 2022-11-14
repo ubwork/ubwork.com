@@ -26,7 +26,13 @@
 
                         <div class="btn-box">
                             @if (auth('candidate')->check()) 
-                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Feedback</a>
+                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one btn-fb">Feedback</a>
+                                    <div class="modal">
+                                        <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <p>Modal Box</p>
+                                        </div>
+                                    </div>
                             @else
                                 <button class="theme-btn btn-style-one">Feedback</button>
                             @endif
@@ -136,6 +142,21 @@
                                 <div class="widget-content">
 
                                     <ul class="company-info mt-0">
+                                        <li class="rating-css">
+                                            <label>Rating:</label>
+                                            <div class="star-icon">
+                                                <input type="radio" value="1" name="rate" checked id="rating1">
+                                                <label for="rating1" class="fa fa-star"></label>
+                                                <input type="radio" value="2" name="rate" id="rating2">
+                                                <label for="rating2" class="fa fa-star"></label>
+                                                <input type="radio" value="3" name="rate" id="rating3">
+                                                <label for="rating3" class="fa fa-star"></label>
+                                                <input type="radio" value="4" name="rate" id="rating4">
+                                                <label for="rating4" class="fa fa-star"></label>
+                                                <input type="radio" value="5" name="rate" id="rating5">
+                                                <label for="rating5" class="fa fa-star"></label>
+                                            </div>
+                                        </li>
                                         <li>Primary industry: <span>{{$company_detail->company_model}}</span></li>
                                         <li>Company size: <span>{{$company_detail->company_size}}</span></li>
                                         <li>Founded in: <span>{{$company_detail->founded_in}}</span></li>
@@ -172,4 +193,8 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+@parent
+<script src="{{asset('js/client/feedback.js')}}"></script>
 @endsection
