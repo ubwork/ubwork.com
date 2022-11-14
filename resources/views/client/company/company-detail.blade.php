@@ -142,21 +142,25 @@
                                 <div class="widget-content">
 
                                     <ul class="company-info mt-0">
+                                        @if($sum >= 10)
                                         <li class="rating-css">
                                             <label>Rating:</label>
                                             <div class="star-icon">
-                                                <input type="radio" value="1" name="rate" checked id="rating1">
+                                                <?php $a = 0?>
+                                                <input @if($average > 0 && $average <= 1.5) checked @endif type="radio" value="1" name="rate"id="rating1" disabled>
                                                 <label for="rating1" class="fa fa-star"></label>
-                                                <input type="radio" value="2" name="rate" id="rating2">
+                                                <input @if($average > 1.5 && $average <= 2.5) checked @endif type="radio" value="2" name="rate" id="rating2" disabled>
                                                 <label for="rating2" class="fa fa-star"></label>
-                                                <input type="radio" value="3" name="rate" id="rating3">
+                                                <input @if($average > 2.5 && $average <= 3.5) checked @endif type="radio" value="3" name="rate" id="rating3" disabled>
                                                 <label for="rating3" class="fa fa-star"></label>
-                                                <input type="radio" value="4" name="rate" id="rating4">
+                                                <input @if($average > 3.5 && $average <= 4.5) checked @endif type="radio" value="4" name="rate" id="rating4" disabled>
                                                 <label for="rating4" class="fa fa-star"></label>
-                                                <input type="radio" value="5" name="rate" id="rating5">
+                                                <input @if($average > 4.5 && $average <= 5) checked @endif type="radio" value="5" name="rate" id="rating5" disabled>
                                                 <label for="rating5" class="fa fa-star"></label>
                                             </div>
+                                            <span>(<?php echo $average?>)</span>
                                         </li>
+                                        @endif
                                         <li>Primary industry: <span>{{$company_detail->company_model}}</span></li>
                                         <li>Company size: <span>{{$company_detail->company_size}}</span></li>
                                         <li>Founded in: <span>{{$company_detail->founded_in}}</span></li>
