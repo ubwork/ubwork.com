@@ -140,7 +140,6 @@
                                         <li class="rating-css">
                                             <label>Rating:</label>
                                             <div class="star-icon">
-                                                <?php $a = 0?>
                                                 <input @if($average > 0 && $average <= 1.5) checked @endif type="radio" value="1" name="rate"id="rating1" disabled>
                                                 <label for="rating1" class="fa fa-star"></label>
                                                 <input @if($average > 1.5 && $average <= 2.5) checked @endif type="radio" value="2" name="rate" id="rating2" disabled>
