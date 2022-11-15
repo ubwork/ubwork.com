@@ -32,8 +32,9 @@
                             @endif
 
                             @if (auth('candidate')->check()) 
-                                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                                 <a class="bookmark-btn"  href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"></a>
                             @else
+                           
                                 <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
                             @endif
                         </div>
