@@ -238,14 +238,6 @@
                         </nav>
 
                         <!-- Call To Action -->
-                        <div class="call-to-action-four style-two">
-                            <h5>Recruiting?</h5>
-                            <p>Advertise your jobs to millions of monthly users and search 15.8 million <br>CVs in our
-                                database.</p>
-                            <a href="#" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Start
-                                    Recruiting Now</span></a>
-                            <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
-                        </div>
                         <!-- End Call To Action -->
                     </div>
                 </div>
