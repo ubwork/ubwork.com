@@ -123,7 +123,7 @@
               </div>
             </form>
         <div class="bottom-box">
-          <div class="text">Do you have an account? <a href="{{route('company.login')}}">Login</a></div>
+          <div class="text">Bạn đã có tài khoản? <a href="{{route('company.login')}}">Đăng nhập</a></div>
         </div>
     
           </div>

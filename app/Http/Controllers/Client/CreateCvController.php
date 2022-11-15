@@ -340,7 +340,6 @@ class CreateCvController extends Controller
         $fileName = public_path('upload/cv/'. $fileName);
         $pdf->save($fileName);
 
-        $link_dow = basename($seeker->path_cv, "upload/cv/");
         if ($seeker->path_cv == "") {
             Session::flash('success', 'Tạo CV thành công!');
             return back();
