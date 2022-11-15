@@ -8,6 +8,7 @@ use App\Models\Company as ModelsCompany;
 use App\Models\FeedbackCompany;
 use App\Models\JobPost;
 use App\Models\Major;
+use App\Models\ShortlistCompany;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -19,11 +20,6 @@ class CompanyController extends Controller
         $data = company::where('status', 1)->paginate(6);
         // dd($data['id']);
         $search = $request->search;
-        if (!empty($search)) {
-            $data = company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->paginate(10);
-        } else {
-            $data = company::where('status', 1)->get();
-        }
         foreach ($data as $item) {
             // dd($item->id);
             $job = JobPost::where('company_id', $item->id)->get();
@@ -37,7 +33,19 @@ class CompanyController extends Controller
         $company_detail = company::where('id', $id)->first();
         $company_job = JobPost::where('company_id', $company_detail->id)->get();
         $maJor = Major::all();
-        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor'));
+        $idCompanyShort = [];
+        if (auth('candidate')->check()) {
+            $id_user = auth('candidate')->user()->id;
+            $dataShort = ShortlistCompany::where('candidate_id', $id_user)->get();
+            if (!empty($dataShort)) {
+                foreach ($dataShort as $item) {
+                    $idCompanyShort[$item->company_id] = $item;
+                }
+            }
+        }
+        // dd($idJobApplied[$item->id]);
+        // dd($data_job->id);
+        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor', 'idCompanyShort'));
     }
     public function filter(Request $request)
     {
