@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('Upload CV') }}
+{{ __('UB Work') }} | {{'Quản lí CV'}}
 @endsection
 @section('content')
     <section class="ls-section mt-5">
@@ -20,6 +20,27 @@
                                     @php
                                         Session::forget('success');
                                     @endphp
+            <div class="col-lg-12">
+                <!-- CV Manager Widget -->
+                <div class="cv-manager-widget ls-widget">
+                    <div class="widget-title">
+                        <h4>Tạo CV</h4>
+                    </div>
+                    <div class="widget-content">
+                        <form action="{{ route('seeker-store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="uploading-resume">
+                                <div class="uploadButton">
+                                    <input class="uploadButton-input" type="file" name="path_cv" id="upload"
+                                        multiple />
+                                    <label class="cv-uploadButton" for="upload">
+                                        <span class="title">Drop files here to upload</span>
+                                        <span class="text">To upload file size is (Max 5Mb) and allowed file types are
+                                            (.doc, .docx, .pdf)</span>
+                                        <span class="theme-btn btn-style-one">Upload CV</span>
+                                    </label>
+                                    <span class="uploadButton-file-name"></span>
+                                    <center><button type="submit" class="btn btn-danger">submit</button></center>
                                 </div>
                             @endif
                             @if ($errors->any())

@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('UB Work') }}|{{ __('Danh sách Công ty') }}
+    {{ __('UB Work') }} | {{ __('Danh sách Công ty') }}
 @endsection
 @section('content')
     <section class="page-title">
@@ -8,7 +8,7 @@
             <div class="title-outer">
                 <h1>Danh sách công ty</h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="/">Trnag chủ</a></li>
+                    <li><a href="/">Trang chủ</a></li>
                     <li>Công ty</li>
                 </ul>
             </div>
@@ -27,8 +27,6 @@
                 <div class="filters-column col-lg-4 col-md-12 col-sm-12">
                     <div class="inner-column pd-right">
                         <div class="filters-outer">
-                            <button type="button" class="theme-btn close-filters">X</button>
-
                             <!-- Filter Block -->
                             <div class="filter-block">
                                 <h4>Tìm Kiếm</h4>
@@ -53,6 +51,32 @@
                                     dụng.</span></a>
                             <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
                         </div>
+                            <form action="{{route('company-filter')}}" method="post">
+                                @csrf
+                                <div class="filter-block">
+                                <h4>Tìm theo tên</h4>
+                                <div class="form-group">
+                                    <input type="text" name="keyword"
+                                        placeholder="Tên công ty">
+                                    <span class="icon flaticon-search-3"></span>
+                                </div>
+                            </div>
+
+                            <!-- Filter Block -->
+                            <div class="filter-block">
+                                <h4>Tìm theo địa điểm</h4>
+                                <div class="form-group">
+                                    <input type="text" name="address" placeholder="Thành phố">
+                                    <span class="icon flaticon-map-locator"></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
+                                <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
+                                        công ty</span></button>
+                            </div>
+                            </form>
+                        </div>
+
                         <!-- End Call To Action -->
                     </div>
                 </div>
@@ -63,7 +87,7 @@
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
 
                         <!-- ls Switcher -->
-                        <div class="ls-switcher">
+                        {{-- <div class="ls-switcher">
                             <div class="showing-result">
                                 <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> employer</div>
                             </div>
@@ -86,7 +110,7 @@
                                     <option>Show 60</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
 
                         <!-- Block Block -->
@@ -109,6 +133,7 @@
                                         <ul class="job-other-info">
                                             <li class="privacy">Featured</li>
                                             <li class="time">Open Jobs – {{ count($job) }}</li>
+                                            {{-- <li class="time">Open Jobs – {{count($job)}}</li> --}}
                                         </ul>
                                     </div>
                                     {{-- @dd($job) --}}
@@ -119,9 +144,10 @@
                         @endforeach
                         <!-- Listing Show More -->
                         <div class="ls-show-more">
-                            <p>Showing 36 of 497 Jobs</p>
+                            {{-- <p>Showing 36 of 497 Jobs</p>
                             <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
-                            <button class="show-more">Xem thêm</button>
+                            <button class="show-more">Xem thêm</button> --}}
+                            {{$data->links()}}
                         </div>
                     </div>
                 </div>

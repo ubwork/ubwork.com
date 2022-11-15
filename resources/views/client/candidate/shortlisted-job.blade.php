@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('UB Work') }} | {{__('Shortlisted Jobs') }}
+    {{ __('UB Work') }} | {{__('Công việc đã lưu') }}
 @endsection
 @section('content')
     <section class="user-dashboard pt-5 mt-5">
