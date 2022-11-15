@@ -7,23 +7,32 @@ use App\Http\Requests\Client\FeedbackRequest;
 use App\Models\company;
 use App\Models\Feedback;
 use App\Models\JobPost;
+use App\Models\Company as ModelsCompany;
+use App\Models\Major;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = [];
         $job = [];
-        $data = company::where('status', 1)->get();
+        $data = company::where('status', 1)->paginate(6);
         // dd($data['id']);
+        $search = $request->search;
+        if(!empty($search)){
+            $data = company::where('status', 1)->where('company_name','like','%' . $search . '%')->paginate(10);
+        }else{
+            $data = company::where('status', 1)->get();
+        }
         foreach ($data as $item) {
             // dd($item->id);
             $job = JobPost::where('company_id', $item->id)->get();
         }
         // dd(count($job));
-        return view('client.company.company', compact('data', 'job'));
+        $maJor = Major::all();
+        return view('client.company.company', compact('data', 'job', 'maJor'));
     }
     public function detail($id)
     {
@@ -37,14 +46,23 @@ class CompanyController extends Controller
             $u+=$item->rate;
         }
         $average = number_format($u/$sum ,1);
-        
-        return view('client.company.company-detail', compact('company_detail', 'company_job','average','sum'));
+        $maJor = Major::all();
+        return view('client.company.company-detail', compact('company_detail', 'company_job','average','sum', 'maJor'));
+    }
+    public function filter(Request $request)
+    {
+        $keyword = $request->keyword;
+        $address = $request->address;
+        $data = company::where('name', 'like', '%' . $keyword . '%')->Where('address', 'like', '%' . $address . '%')->get();
+        $maJor = Major::all();
+        return view('client.company.company', compact('data', 'maJor'));
     }
     public function feedback($id)
     {
         $company_detail = company::where('id', $id)->first();
         $company_job = JobPost::where('company_id', $company_detail->id)->get();
-        return view('client.company.feedback', compact('company_detail', 'company_job'));
+        $maJor = Major::all();
+        return view('client.company.feedback', compact('company_detail', 'company_job', 'maJor'));
     }
     public function saveFeedback(FeedbackRequest $request, $id)
     {
