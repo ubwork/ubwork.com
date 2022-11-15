@@ -14,9 +14,11 @@ use App\Models\SkillSeeker;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\File;
 class CreateCvController extends Controller
 {
     private $v;
@@ -295,5 +297,54 @@ class CreateCvController extends Controller
         return $file->storeAs('images', $fileName , 'public');
     }
     
+    public function getPdf(Request $request) {
+        $id = auth('candidate')->user()->id;
+        $seeker = SeekerProfile::where('candidate_id', $id)->first();
+        $this->v['seeker'] = $seeker;
+        $this->v['skills'] = Skill::all();
+        $this->v['major'] = Major::all();
+        $this->v['maJor'] = Major::all();
+
+        if(!empty($seeker)){
+            $this->v['experiences'] = Experience::where('seeker_id', $seeker->id)->get();
+            $this->v['educations'] = Education::where('seeker_id', $seeker->id)->get();
+            $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seeker->id)->get();
+            $this->v['certificates'] = Certificate::where('seeker_id', $seeker->id)->get();
+
+            //active skills
+            $this->v['skillActive'] = $this->v['list_skill']->pluck('skill_id')->toArray();
+
+        }
+
+        //lưu rồi mở file
+        
+        $pdf = Pdf::loadView('client.upcv.index', $this->v);
+
+        $path_pdf = 'upload/cv/';
+
+
+        $fileName = $path_pdf.'CV-'.$seeker->name. time(). rand('999', '999999') .'.pdf';
+
+        $seekerA = SeekerProfile::where('candidate_id', $id)->first();
+        $file_path = public_path($seekerA->path_cv);
+        if(is_file($file_path)){
+            unlink($file_path);
+        }
+
+        SeekerProfile::where('candidate_id', $id)->update([
+            'path_cv' => $fileName
+        ]);
+
+        $fileName = public_path($fileName);
+        $pdf->save($fileName);
+        
+        $link_dow = basename($seeker->path_cv, "upload/cv/");
+        if($seeker->path_cv == ""){
+            Session::flash('success', 'Tạo CV thành công!');
+            return back();
+        }
+        return $pdf->download($link_dow);
+    }
+
         
 }
