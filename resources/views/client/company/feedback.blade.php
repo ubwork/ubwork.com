@@ -110,29 +110,6 @@
                         @enderror
                       </div>
 
-                      <!-- Input -->
-
-                        @if ( Session::has('success') )
-                            <div class="alert alert-success alert-outline alert-dismissible" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                <div class="alert-icon">
-                                    <i class="far fa-fw fa-bell"></i>
-                                </div>
-                                <div class="alert-message">
-                                    <strong>{{ Session::get('success') }}</strong>
-                                </div>
-                            </div>
-                        @endif
-                        <?php //Hiển thị thông báo lỗi?>
-                        @if ( Session::has('error') )
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    {{ Session::get('error') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
-                      <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <button type="submit" class="theme-btn btn-style-one">Save</button>
                       </div>
