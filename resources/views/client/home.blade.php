@@ -101,7 +101,6 @@
             <div class="sec-title text-center">
                 <h2>Các chuyên ngành công việc phổ biến</h2>
                 <div class="text">Năm 2020 - {{ count($data) }} việc làm được đăng tải</div>
-                <div class="text"> {{ count($total) }} việc làm được đăng tải</div>
             </div>
 
             <div class="row wow fadeInUp">

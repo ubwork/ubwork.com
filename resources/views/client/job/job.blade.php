@@ -18,76 +18,33 @@
         <div class="auto-container">
             <div class="filters-backdrop"></div>
             <div class="row">
-                {{-- <div class="filters-column hide-left">
-                    <div class="inner-column">
-                        <div class="filters-outer">
-                            <form action="job-search" method="get">
-                                <button type="button" class="theme-btn close-filters">X</button>
-                                <!-- Filter Block -->
-                                <div class="filter-block">
-                                    <h4>Tìm Kiếm</h4>
-                                    <div class="form-group">
-                                        <input type="text" name="search"
-                                            placeholder="Job title, keywords, or company">
-                                        <span class="icon flaticon-search-3"></span>
-                                    </div>
-                                </div>
-                                <div class="filter-block">
-                                    <h4>Chuyên Ngành</h4>
-                                    <select name="major" id="">
-                                        <option value="">Mời Chọn</option>
-                                        @foreach ($maJor as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <!-- Filter Block -->
-                                <div class="filter-block">
-                                    <h4>Tags</h4>
-                                    <ul class="tags-style-one">
-                                        <li><a href="#">app</a></li>
-                                        <li><a href="#">administrative</a></li>
-                                        <li><a href="#">android</a></li>
-                                        <li><a href="#">wordpress</a></li>
-                                        <li><a href="#">design</a></li>
-                                        <li><a href="#">react</a></li>
-                                    </ul>
-                                </div>
-                                <button type="submit" class="btn btn-danger">Tìm Kiếm</button>
-                            </form>
+                <div class="job-search-form">
+                    <form method="get" action="job-search">
+                        <div class="row">
+                            <!-- Form Group -->
+                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                                <span class="icon flaticon-search-1"></span>
+                                <input type="text" name="search" placeholder="Job title, keywords, or company">
+                            </div>
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12 location">
+                                <span class="icon flaticon-briefcase"></span>
+                                <select name="major" class="chosen-select">
+                                    <option value="">All Categories</option>
+                                    @foreach ($maJor as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
+                                <button type="submit" class="theme-btn btn-style-one">Find Jobs</button>
+                            </div>
                         </div>
-                    </div>
-                </div> --}}
+                    </form>
+                </div>
                 <div class="content-column col-lg-12">
                     <div class="ls-outer">
-                        <!-- ls Switcher -->
-                        {{-- <div class="ls-switcher">
-                            <div class="showing-result show-filters">
-                                <button type="button" class="theme-btn toggle-filters"><span
-                                        class="icon icon-filter"></span> Filter</button>
-                                <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> jobs</div>
-                            </div>
-                            <div class="sort-by">
-                                <select class="chosen-select">
-                                    <option>New Jobs</option>
-                                    <option>Freelance</option>
-                                    <option>Full Time</option>
-                                    <option>Internship</option>
-                                    <option>Part Time</option>
-                                    <option>Temporary</option>
-                                </select>
-
-                                <select class="chosen-select">
-                                    <option>Show 10</option>
-                                    <option>Show 20</option>
-                                    <option>Show 30</option>
-                                    <option>Show 40</option>
-                                    <option>Show 50</option>
-                                    <option>Show 60</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
                         <div class="row">
                             <!-- Job Block -->
                             @foreach ($data as $item)
@@ -147,7 +104,7 @@
                                 <li><a href="#">3</a></li>
                                 <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
                             </ul> --}}
-                            {{$data->links()}}
+                            {{-- {{$data->links()}} --}}
                         </nav>
 
                         <!-- Call To Action -->
