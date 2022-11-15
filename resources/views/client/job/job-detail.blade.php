@@ -55,10 +55,10 @@
                 @if (auth('candidate')->check()) 
                   @if (!empty($idJobShort[$data_job->id]) )
                     @if($idJobShort[$data_job->id]->job_post_id == $data_job->id)
-                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark" style="color: yellow"></span></button></a>
+                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark" ></span></button></a>
                     @endif
                   @else
-                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;" ><span class="flaticon-bookmark" style="color: white"></span></button></a>
                   @endif
                 @else
                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
