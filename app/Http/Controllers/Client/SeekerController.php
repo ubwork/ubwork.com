@@ -14,7 +14,6 @@ class SeekerController extends Controller
     public function index()
     {
         $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->paginate(2);
-        // dd($data);
         $maJor = Major::all();
         return view('client.upcv.upcv', compact('data', 'maJor'));
     }
@@ -25,7 +24,6 @@ class SeekerController extends Controller
         ]);
         $seeker = new SeekerProfile;
         $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->first();
-        // dd($data);
         if (!empty($data)) {
             $get_pdf = $request->file('path_cv');
             $path_pdf = 'upload/cv';
