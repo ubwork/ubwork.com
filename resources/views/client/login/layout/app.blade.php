@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Superio | Just another HTML Template | Login</title>
+  <title>UBWORK | Login</title>
   @section('style')
     @include('client.login.layout.style')
   @show

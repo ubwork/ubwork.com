@@ -56,10 +56,10 @@ class RegisterController extends Controller
             if ($res == null) {
                 return redirect()->route('candidate.register');
             } elseif ($res > 0) {
-                Session::flash('success', 'Dang ky thanh cong nguoi dung');
+                Session::flash('success', 'Đăng ký thành công');
                 return redirect()->route('candidate.login');
             } else {
-                Session::flash('error', 'Loi dang ky');
+                Session::flash('error', 'Lỗi đăng ký');
                 return redirect()->route('candidate.register');
             }
         }
