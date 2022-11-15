@@ -4,7 +4,6 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobPost;
-use App\Models\Major;
 use App\Models\Shortlist;
 use Illuminate\Http\Request;
 
@@ -34,8 +33,7 @@ class ShortlistedController extends Controller
                 }
             }
         }
-        $maJor = Major::all();
-        return view('client.candidate.shortlisted-job', compact('data', 'job_short', 'maJor'));
+        return view('client.candidate.shortlisted-job', compact('data', 'job_short'));
     }
     public function destroy($id)
     {

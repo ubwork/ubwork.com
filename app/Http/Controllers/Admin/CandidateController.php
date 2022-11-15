@@ -124,14 +124,4 @@ class CandidateController extends Controller
         Candidate::where('id', $id)->update(['status' => $val]);
         return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
     }
-    public function getStatus(Request $request, $id) {
-        $params = [];
-        $params['cols'] = $request->all();
-        // dd($params['cols']);
-        unset($params['cols']['_token']);
-        $val = $params['cols']['status'];
-        $this->v['list'] = Candidate::where('status','=', $id)->update(['status' => $val]);
-        dd($this->v['list']);
-        return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
-    }
 }

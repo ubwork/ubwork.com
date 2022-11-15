@@ -39,26 +39,14 @@
               </div>
 
               <div class="btn-box">
-                @if (auth('candidate')->check())  
-                    @if (!empty($idJobApplied[$data_job->id]) )
-                      @if($idJobApplied[$data_job->id]->job_post_id == $data_job->id)
-                      <button class="theme-btn btn-style-one" >Đã APPLY</button>
-                      @endif
-                    @else
-                      <a  href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
-                    @endif
+                @if (auth('candidate')->check()) 
+                    <a href="{{route('applied', ['id' => $data_job->id])}}" class="theme-btn btn-style-one">Apply For Job</a>
                 @else
                     <button class="theme-btn btn-style-one">Apply For Job</button>
                 @endif
                 
                 @if (auth('candidate')->check()) 
-                  @if (!empty($idJobShort[$data_job->id]) )
-                    @if($idJobShort[$data_job->id]->job_post_id == $data_job->id)
-                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark" style="color: yellow"></span></button></a>
-                    @endif
-                  @else
                     <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
-                  @endif
                 @else
                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                 @endif
@@ -110,7 +98,7 @@
                             <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
+                                <li><span class="icon flaticon-briefcase"></span>{{$item->jobType->name}}</li>
                                 <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                 <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ/ngày</li>
                                 <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
@@ -203,9 +191,9 @@
                   <h4 class="widget-title">Job Skills</h4>
                   <div class="widget-content">
                     <ul class="job-skills">
-                      {{-- @foreach($job_skills as $item)
+                      @foreach($job_skills as $item)
                       <li><a href="#">{{$item->name}}</a></li>
-                      @endforeach --}}
+                      @endforeach
                     </ul>
                   </div>
                 </div>

@@ -4,13 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
-class Feedback extends Model
+class FeedbackCandidate extends Model
 {
     use HasFactory;
-    protected $table = 'feedback';
+    protected $table = 'feedback_candidates';
     protected $fillable = [
         'id',
         'candidate_id',
