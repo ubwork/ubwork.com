@@ -6,4 +6,3 @@
     max-height: 40px;
 }
 </style>
-<link rel="stylesheet" href="{{asset('assets/admin-bower/plugins/toastr/toastr.css')}}">

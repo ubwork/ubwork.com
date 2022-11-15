@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('UB Work') }} | {{__('Công việc đã lưu') }}
+    {{ __('Home') }}
 @endsection
 @section('content')
     <section class="user-dashboard pt-5 mt-5">
@@ -11,7 +11,7 @@
             <div class="ls-widget">
               <div class="tabs-box">
                 <div class="widget-title">
-                  <h4>Công việc đã lưu</h4>
+                  <h4>My Favorite Jobs</h4>
 
                   <div class="chosen-outer">
                     <!--Tabs Box-->
@@ -30,10 +30,10 @@
                     <table class="default-table manage-job-table">
                       <thead>
                         <tr>
-                          <th>Tiêu đề</th>
-                          <th>Ngày lưu</th>
-                          <th>Trạng thái</th>
-                          <th>Hành động</th>
+                          <th>Job Title</th>
+                          <th>Date Applied</th>
+                          <th>Status</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
 

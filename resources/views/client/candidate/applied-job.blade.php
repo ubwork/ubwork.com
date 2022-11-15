@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('UB Work') }} | {{__('Công việc đã ứng tuyển')}}
+    {{ __('Home') }}
 @endsection
 @section('content')
     <section class="user-dashboard pt-5 mt-5">
@@ -11,7 +11,7 @@
             <div class="ls-widget">
               <div class="tabs-box">
                 <div class="widget-title">
-                  <h4>Công việc đã ứng tuyển</h4>
+                  <h4>My Favorite Jobs</h4>
 
                   <div class="chosen-outer">
                     <!--Tabs Box-->
@@ -30,10 +30,10 @@
                     <table class="default-table manage-job-table">
                       <thead>
                         <tr>
-                          <th>Tiêu đề</th>
-                          <th>Ngày ứng tuyển</th>
-                          <th>Trạng thái</th>
-                          <th>Hành động</th>
+                          <th>Job Title</th>
+                          <th>Date Applied</th>
+                          <th>Status</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
 
@@ -60,7 +60,7 @@
                           <td>
                             <div class="option-box">
                               <ul class="option-list">
-                                <li><a href="{{route('job-detail', ['id' => $item->job_post_id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
+                                <li><a href="{{route('job-detail', ['id' => $item->id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
                                 <li><a href="{{route('delete_applied_jobs', ['id' => $item->id])}}"><button data-text="Delete Aplication"><span class="la la-trash"></span></button></a></li>
                               </ul>
                             </div>

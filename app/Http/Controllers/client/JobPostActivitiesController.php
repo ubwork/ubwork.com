@@ -15,7 +15,7 @@ class JobPostActivitiesController extends Controller
     public function applied(Request $request, $id)
     {
         $id_user = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
+        $seeker = SeekerProfile::where('id', $id_user)->first();
         $seeker_id = $seeker->id;
         $applied = new JobPostActivities();
         $applied->job_post_id = $id;

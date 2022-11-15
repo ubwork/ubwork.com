@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class Experience extends Model
+class Experiences extends Model
 {
     use HasFactory;
     protected $table = 'experiences';

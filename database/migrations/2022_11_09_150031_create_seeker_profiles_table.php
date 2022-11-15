@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('candidate_id');
             $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->integer('major_id')->comment('chuyen nghanh')->nullable();
+            $table->string('email');
+            $table->string('phone');
+            $table->integer('major_id')->comment('chuyen nghanh');
             $table->string('description')->nullable();
             $table->string('position_candidate')->nullable();
             $table->string('coin')->default(0);

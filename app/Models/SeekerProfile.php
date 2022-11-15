@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\Candidate;
-use App\Models\Major;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -19,24 +18,13 @@ class SeekerProfile extends Model
         'position_candidate',
         'coin',
         'major_id',
-        'skill_id',
         'path_cv',
         'created_at',
         'updated_at',
         'description',
         'email',
         'phone',
-        'image',
-        'address',
     ];
-    public function candidate()
-    {
-        return $this->belongsTo(Candidate::class, 'id');
-    }
-    public function major()
-    {
-        return $this->belongsTo(Major::class, 'id');
-    }
 
     // lưu tạo
     public function saveAdd($params) {

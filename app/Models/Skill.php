@@ -36,9 +36,4 @@ class Skill extends Model
         ->update($data);
         return $res;
     }
-
-    public function getIdSkillSeeker()
-    {
-        return $this->belongsTo(SkillSeeker::class,'id','skill_id');
-    }
 }
