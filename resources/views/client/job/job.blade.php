@@ -18,7 +18,7 @@
         <div class="auto-container">
             <div class="filters-backdrop"></div>
             <div class="row">
-                <div class="filters-column hide-left">
+                {{-- <div class="filters-column hide-left">
                     <div class="inner-column">
                         <div class="filters-outer">
                             <form action="job-search" method="get">
@@ -57,11 +57,11 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="content-column col-lg-12">
                     <div class="ls-outer">
                         <!-- ls Switcher -->
-                        <div class="ls-switcher">
+                        {{-- <div class="ls-switcher">
                             <div class="showing-result show-filters">
                                 <button type="button" class="theme-btn toggle-filters"><span
                                         class="icon icon-filter"></span> Filter</button>
@@ -86,7 +86,7 @@
                                     <option>Show 60</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <!-- Job Block -->
@@ -140,13 +140,14 @@
 
                         <!-- Pagination -->
                         <nav class="ls-pagination mb-5">
-                            <ul>
+                            {{-- <ul>
                                 <li class="prev"><a href="#"><i class="fa fa-arrow-left"></i></a></li>
                                 <li><a href="#">1</a></li>
                                 <li><a href="#" class="current-page">2</a></li>
                                 <li><a href="#">3</a></li>
                                 <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-                            </ul>
+                            </ul> --}}
+                            {{$data->links()}}
                         </nav>
 
                         <!-- Call To Action -->

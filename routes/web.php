@@ -30,11 +30,11 @@ Route::get('/job-search', 'client\JobController@search')->name('search');
 
 Route::get('/change-password', 'client\CandidateController@change')->name('change_password');
 Route::post('/update_password', 'client\CandidateController@update_pass')->name('update_pass');
-Route::get('/candidate-detail', 'client\CandidateController@detail')->name('detail');
-Route::post('/candidate-profile-edit', 'client\CandidateController@update')->name('update');
+Route::get('/candidate-detail/{id}', 'client\CandidateController@detail')->name('detail');
+Route::post('/candidate-profile-edit/{id}', 'client\CandidateController@update')->name('update');
 
-Route::get('/seeker', 'client\SeekerController@index')->name('index');
-Route::post('/seeker', 'client\SeekerController@store')->name('store');
+Route::get('/seeker', 'client\SeekerController@index')->name('seeker');
+Route::post('/seeker', 'client\SeekerController@store')->name('seeker-store');
 Route::get('/delete-seeker/{id}', 'client\SeekerController@destroy')->name('delete_seeker');
 
 Route::get('/shortlisted-job', 'client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
@@ -54,6 +54,7 @@ Route::get('/candi-detail', function () {
 });
 //client/company
 Route::get('/company-list', 'client\CompanyController@index')->name('company-list');
+Route::post('/company-filter', 'client\CompanyController@filter')->name('company-filter');
 
 Route::get('/company-detail/{id}', 'client\CompanyController@detail')->name('company-detail');
 Route::get('/company-feedback/{id}', 'client\CompanyController@feedback')->name('feedback');
@@ -95,5 +96,7 @@ Route::get('create-cv/deleteEducation/{id}', 'Client\CreateCvController@deleteEd
 Route::post('create-cv/saveCertificate', 'Client\CreateCvController@saveCertificate')->name('saveCertificate');
 Route::post('create-cv/updateCertificate/{id}', 'Client\CreateCvController@updateCertificate')->name('updateCertificate');
 Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
+
+Route::get('create-cv/getPdf', 'Client\CreateCvController@getPdf')->name('getPdf');
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');

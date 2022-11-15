@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Models\company;
+use App\Models\Company as ModelsCompany;
 use App\Models\FeedbackCompany;
 use App\Models\JobPost;
 use App\Models\Major;
@@ -15,6 +16,7 @@ class CompanyController extends Controller
     {
         $data = [];
         $job = [];
+        $data = company::where('status', 1)->paginate(6);
         // dd($data['id']);
         $search = $request->search;
         if(!empty($search)){
@@ -36,6 +38,14 @@ class CompanyController extends Controller
         $company_job = JobPost::where('company_id', $company_detail->id)->get();
         $maJor = Major::all();
         return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor'));
+    }
+    public function filter(Request $request)
+    {
+        $keyword = $request->keyword;
+        $address = $request->address;
+        $data = company::where('name', 'like', '%' . $keyword . '%')->Where('address', 'like', '%' . $address . '%')->get();
+        $maJor = Major::all();
+        return view('client.company.company', compact('data', 'maJor'));
     }
     public function feedback($id)
     {

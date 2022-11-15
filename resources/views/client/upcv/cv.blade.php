@@ -32,7 +32,7 @@
 @parent
 @endsection
 @section('title')
-    {{ __('Upload CV') }}
+    {{ __('UB Work') }} | {{__('Tạo CV')}}
 @endsection
 @section('content')
     <section class="ls-section mt-5">
@@ -166,7 +166,15 @@
 
                                 @endif
                             </div>
-
+                            @if(!empty($seeker))
+                            <div class="mt-5 text-center">
+                                @if($seeker->path_cv == "")
+                                <a href="{{route('getPdf')}}" class="btn btn-primary">Tạo CV</a>
+                                @else
+                                <a href="{{route('getPdf')}}" class="btn btn-primary">Tải CV</a>
+                                @endif
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <small class="text-red"><i>Ghi chú: Các trường có * là bắt buộc nhập</i></small>

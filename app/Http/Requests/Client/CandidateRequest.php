@@ -35,7 +35,7 @@ class CandidateRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required|email|unique:candidates,email,' . $id . ',id',
                             'phone' => 'required|max:10|unique:candidates,phone,' . $id . ',id',
-                            'address' => 'required',
+                            'image' => 'mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
                     default:
@@ -52,15 +52,18 @@ class CandidateRequest extends FormRequest
     public function message()
     {
         return [
-            'name.required' => __('messages.name.required'),
-            'email.required' => __('messages.email.required'),
-            'email.email' => __('messages.email.email'),
-            'email.unique' => __('messages.email.unique'),
-            'password.required' => __('messages.password.required'),
-            'phone.required' => __('messages.phone.required'),
+            'name.required' => 'Vui lòng nhập tên',
+            'email.required' => 'Vui lòng nhập email',
+            'email.email' => 'Nhập đúng định dạng email VD:email@gmail.com',
+            'email.unique' => 'Email đã tồn tại',
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
             'phone.max' => 'Số điện thoại nhỏ hơn 10 số!',
             'phone.digits' => 'Sai định dạng số điện thoại!',
             'phone.unique' => 'Số điện thoại đã tồn tại!',
+            'address.required' => 'Vui lòng  nhập địa chỉ',
+            'image.mimes' => 'Ảnh phải thuộc định dạng jpg, png, jpeg!',
+            'image.max' => 'Ảnh nhập không quá 5mb!',
         ];
     }
 }
