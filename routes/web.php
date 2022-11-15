@@ -95,4 +95,6 @@ Route::post('create-cv/saveCertificate', 'Client\CreateCvController@saveCertific
 Route::post('create-cv/updateCertificate/{id}', 'Client\CreateCvController@updateCertificate')->name('updateCertificate');
 Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
 
+Route::get('create-cv/getPdf', 'Client\CreateCvController@getPdf')->name('getPdf');
+
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
