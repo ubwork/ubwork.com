@@ -19,9 +19,9 @@ class CompanyController extends Controller
         $data = company::where('status', 1)->paginate(6);
         // dd($data['id']);
         $search = $request->search;
-        if(!empty($search)){
-            $data = company::where('status', 1)->where('company_name','like','%' . $search . '%')->paginate(10);
-        }else{
+        if (!empty($search)) {
+            $data = company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->paginate(10);
+        } else {
             $data = company::where('status', 1)->get();
         }
         foreach ($data as $item) {
@@ -43,9 +43,14 @@ class CompanyController extends Controller
     {
         $keyword = $request->keyword;
         $address = $request->address;
+        $job = [];
         $data = company::where('name', 'like', '%' . $keyword . '%')->Where('address', 'like', '%' . $address . '%')->get();
         $maJor = Major::all();
-        return view('client.company.company', compact('data', 'maJor'));
+        foreach ($data as $item) {
+            // dd($item->id);
+            $job = JobPost::where('company_id', $item->id)->get();
+        }
+        return view('client.company.company', compact('data', 'maJor', 'job'));
     }
     public function feedback($id)
     {
