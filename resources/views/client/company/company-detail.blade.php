@@ -157,6 +157,7 @@
                                                 <label for="rating5" class="fa fa-star"></label>
                                             </div>
                                         </li>
+                                        @endif
                                         <li>Primary industry: <span>{{$company_detail->company_model}}</span></li>
                                         <li>Company size: <span>{{$company_detail->company_size}}</span></li>
                                         <li>Founded in: <span>{{$company_detail->founded_in}}</span></li>

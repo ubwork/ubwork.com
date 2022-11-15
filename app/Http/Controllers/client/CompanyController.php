@@ -29,7 +29,16 @@ class CompanyController extends Controller
     {
         $company_detail = company::where('id', $id)->first();
         $company_job = JobPost::where('company_id', $company_detail->id)->get();
-        return view('client.company.company-detail', compact('company_detail', 'company_job'));
+        $query = new Feedback();
+        $data = $query->listFeedback($id);
+        $sum = count($data);
+        $u = 0;
+        foreach($data as $list=> $item){
+            $u+=$item->rate;
+        }
+        $average = number_format($u/$sum ,1);
+        
+        return view('client.company.company-detail', compact('company_detail', 'company_job','average','sum'));
     }
     public function feedback($id)
     {
