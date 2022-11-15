@@ -100,8 +100,7 @@
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Các chuyên ngành công việc phổ biến</h2>
-                <div class="text">Năm 2020 - {{ count($data) }} việc làm được đăng tải</div>
-                <div class="text"> {{ count($total) }} việc làm được đăng tải</div>
+                <div class="text">{{ $data != "" ? count($data) : 0 }} việc làm được đăng tải</div>
             </div>
 
             <div class="row wow fadeInUp">
@@ -123,7 +122,7 @@
     <!-- End Job Categories -->
 
     <!-- Job Section -->
-    {{-- <section class="job-section">
+    <section class="job-section">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Việc làm nổi bật</h2>
@@ -175,7 +174,7 @@
                             thêm</span></a>
                 </div>
             </div>
-    </section> --}}
+    </section>
     <!-- End Job Section -->
 
 @endsection
