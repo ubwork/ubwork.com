@@ -45,11 +45,11 @@
                             <div class="job-block">
                               <div class="inner-box">
                                 <div class="content">
-                                  <span class="company-logo"><img src="{{asset('storage/'.$job_short[$item->job_post_id]->company->logo)}}" alt=""></span>
-                                  <h4><a href="{{route('job-detail', ['id' => $job_short[$item->job_post_id]->id])}}">{{$job_short[$item->job_post_id]->title}}</a></h4>
+                                  <span class="company-logo"><img src="" alt=""></span>
+                                  <h4><a href="{{route('job-detail', ['id' => $com_short[$item->company_id]->id])}}">{{$com_short[$item->company_id]->company_name}}</a></h4>
                                   <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                    <li><span class="icon flaticon-map-locator"></span>{{$job_short[$item->job_post_id]->company->address}}</li>
+                                    <li><span class="icon flaticon-map-locator">{{$com_short[$item->company_id]->address}}</span></li>
                                   </ul>
                                 </div>
                               </div>
@@ -60,8 +60,8 @@
                           <td>
                             <div class="option-box">
                               <ul class="option-list">
-                                <li><a href="{{route('job-detail', ['id' => $job_short[$item->job_post_id]->id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
-                                <li><a href="{{route('delete_shortlisted', ['id' => $item->id])}}"><button data-text="Delete Aplication"><span class="la la-trash"></span></button></a></li>
+                                <li><a href="{{route('company-detail', ['id' => $com_short[$item->company_id]->id])}}"><button data-text="View Aplication"><span class="la la-eye"></span></button></a></li>
+                                <li><a href="{{route('delete_shortlisted_company', ['id' => $item->id])}}"><button data-text="Delete Aplication"><span class="la la-trash"></span></button></a></li>
                               </ul>
                             </div>
                           </td>

@@ -122,7 +122,7 @@
                             {{-- <p>Showing 36 of 497 Jobs</p>
                             <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
                             <button class="show-more">Xem thêm</button> --}}
-                            {{-- {{$data->links()}} --}}
+                            {{$data->links()}}
                         </div>
                     </div>
                 </div>
