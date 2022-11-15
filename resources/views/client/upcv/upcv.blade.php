@@ -27,7 +27,7 @@
                         <h4>Tạo CV</h4>
                     </div>
                     <div class="widget-content">
-                        <form action="{{ route('seeker-store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="uploading-resume">
                                 <div class="uploadButton">
