@@ -14,11 +14,17 @@
             <div class="form-group">
               <label>Email</label>
               <input value="{{old('email')}}" type="text" name="email" placeholder="Nhập vào email..">
+              @error('email')
+                  <small class="text-danger">{{$message}}</small>
+                @enderror
             </div>
 
             <div class="form-group">
               <label>Mật khẩu</label>
               <input value="{{old('password')}}" id="password-field" type="password" name="password" placeholder="Nhập vào mật khẩu..">
+              @error('password')
+                <small class="text-danger">{{$message}}</small>
+              @enderror
             </div>
 
             <div class="form-group">

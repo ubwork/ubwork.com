@@ -30,8 +30,10 @@
 
   {{-- script --}}
   @section('script')
+  
     @include('client.login.layout.script')
   @show
+  @include('admin.layout.toastr')
   {{-- script --}}
   
 </body>
