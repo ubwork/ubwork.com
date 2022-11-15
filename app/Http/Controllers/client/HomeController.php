@@ -11,13 +11,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $count = [];
         $job_short = [];
-        $data = JobPost::where('status', 1)->take(6)->get();
-        $total = JobPost::all();
         $data_job_type = Major::all();
+        // dd(isset($search));
+        $search = $request->search;
+        if(isset($search)){
+            $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title','like','%' . $search . '%')->paginate(10);
+        }else{
+            $data = JobPost::Orderby('title', 'DESC')->select('*')->paginate(10);
+        }
         foreach ($data_job_type as $item) {
             if (!empty($item)) {
                 $count[$item->id] = JobPost::where('major_id', $item->id)->count();
@@ -37,8 +42,6 @@ class HomeController extends Controller
             }
         }
         $maJor = Major::all();
-        // dd($data->company->id);
-        // dd(company::all());
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'total'));
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor'));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\client\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,14 +26,15 @@ Route::get('/', 'client\HomeController@index')->name('index');
 Route::get('/job', 'client\JobController@job')->name('job');
 Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
 Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');
+Route::get('/job-search', 'client\JobController@search')->name('search');
 
 Route::get('/change-password', 'client\CandidateController@change')->name('change_password');
 Route::post('/update_password', 'client\CandidateController@update_pass')->name('update_pass');
-Route::get('/candidate-detail', 'client\CandidateController@detail')->name('detail');
-Route::post('/candidate-profile-edit', 'client\CandidateController@update')->name('update');
+Route::get('/candidate-detail/{id}', 'client\CandidateController@detail')->name('detail');
+Route::post('/candidate-profile-edit/{id}', 'client\CandidateController@update')->name('update');
 
 Route::get('/seeker', 'client\SeekerController@index')->name('seeker');
-Route::post('/seeker', 'client\SeekerController@store')->name('seeker-store');
+Route::post('/seeker', 'client\SeekerController@store')->name('store');
 Route::get('/delete-seeker/{id}', 'client\SeekerController@destroy')->name('delete_seeker');
 
 Route::get('/shortlisted-job', 'client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
@@ -94,5 +96,7 @@ Route::get('create-cv/deleteEducation/{id}', 'Client\CreateCvController@deleteEd
 Route::post('create-cv/saveCertificate', 'Client\CreateCvController@saveCertificate')->name('saveCertificate');
 Route::post('create-cv/updateCertificate/{id}', 'Client\CreateCvController@updateCertificate')->name('updateCertificate');
 Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
+
+Route::get('create-cv/getPdf', 'Client\CreateCvController@getPdf')->name('getPdf');
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');

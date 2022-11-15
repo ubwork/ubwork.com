@@ -27,7 +27,7 @@ class CandidateController extends Controller
         $maJor = Major::all();
         return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
     }
-    public function update(CandidateRequest $request)
+    public function update(CandidateRequest $request, $id)
     {
         $id = auth('candidate')->user()->id;
         $method_route = 'detail';
@@ -41,7 +41,7 @@ class CandidateController extends Controller
         unset($params['cols']['_token']);
         $model = new Candidate();
         $params['cols']['id'] = $id;
-        $res = $model->saveUpdate($params);
+        $res = $model->saveUpdateProfile($params);
         if ($res == null) {
             Session::flash('success', 'Cập nhật thành công!');
             return Redirect()->route($method_route, ['id' => $id]);

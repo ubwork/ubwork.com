@@ -7,7 +7,7 @@
         <div class="nav-outer">
             <div class="logo-box">
                 <div class="logo"><a href="/"><img src="{{ asset('images/logo_ubwork.png') }}" alt=""
-                            title=""></a></div>
+                            title="" style="max-height: 40px;"></a></div>
             </div>
 
             <nav class="nav main-menu">
@@ -80,7 +80,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="active"><a href=""> <i class="la la-home"></i> Dashboard</a></li>
-                        <li><a href="{{ route('detail') }}"><i class="la la-user-tie"></i>Thông tin</a></li>
+                        <li><a href="{{ route('detail', ['id' => auth('candidate')->user()->id]) }}"><i class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã lưu</a></li>
                         <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
