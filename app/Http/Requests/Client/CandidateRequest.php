@@ -34,10 +34,8 @@ class CandidateRequest extends FormRequest
                         $rules = [
                             'name' => 'required',
                             'email' => 'required|email|unique:candidates,email,' . $id . ',id',
-                            'phone' => 'required|min:10|unique:candidates,phone,' . $id . ',id',
-                            'password' => 'required|min:8',
-                            'age' => 'required',
-                            'country' => 'required',
+                            'phone' => 'required|max:10|unique:candidates,phone,' . $id . ',id',
+                            'image' => 'mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
                     default:
@@ -54,16 +52,18 @@ class CandidateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Chưa nhập tên',
-            'email.required' => 'Chưa nhập email',
+            'name.required' => 'Vui lòng nhập tên',
+            'email.required' => 'Vui lòng nhập email',
+            'email.email' => 'Nhập đúng định dạng email VD:email@gmail.com',
             'email.unique' => 'Email đã tồn tại',
-            'email.eamil' => 'Email chưa đúng định dạng',
-            'phone.required' => 'Chưa nhập số diện thoại',
-            'phone.phone' => 'Chưa đúng định dạng',
-            'password.require' => 'Chưa nhập mật khẩu',
-            'password.min:8' => 'Mật khẩu phải hơn 8 chữ số',
-            'age.require' => 'Chưa nhập tuổi',
-            'country.require' => 'Chưa nhập quê quán',
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'phone.max' => 'Số điện thoại nhỏ hơn 10 số!',
+            'phone.digits' => 'Sai định dạng số điện thoại!',
+            'phone.unique' => 'Số điện thoại đã tồn tại!',
+            'address.required' => 'Vui lòng  nhập địa chỉ',
+            'image.mimes' => 'Ảnh phải thuộc định dạng jpg, png, jpeg!',
+            'image.max' => 'Ảnh nhập không quá 5mb!',
         ];
     }
 }

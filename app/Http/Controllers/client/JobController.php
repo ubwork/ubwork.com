@@ -25,14 +25,14 @@ class JobController extends Controller
     }
     public function job()
     {
-        $data = JobPost::where('status', 1)->get();
+        $data = JobPost::where('status', 1)->paginate(1);
         $maJor = Major::all();
         return view('client.job.job', compact('data', 'maJor'));
     }
     public function job_cat($id)
     {
         $job_cat = Major::where('id', $id)->first();
-        $data = JobPost::where('major_id', $id)->get();
+        $data = JobPost::where('major_id', $id)->paginate(1);
         $maJor = Major::all();
         return view('client.job.job-cat', compact('data', 'job_cat', 'maJor'));
     }
@@ -46,22 +46,48 @@ class JobController extends Controller
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
             $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
-            $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
-            if (!empty($dataActive)) {
-                foreach ($dataActive as $item) {
-                    $idJobApplied[$item->job_post_id] = $item;
+
+            if(!empty($seeker->id)){
+                $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
+                if (!empty($dataActive)) {
+                    foreach ($dataActive as $item) {
+                        $idJobApplied[$item->job_post_id] = $item;
+                    }
                 }
-            }
-            $dataShort = Shortlist::where('candidate_id', $id_user)->get();
-            if (!empty($dataShort)) {
-                foreach ($dataShort as $item) {
-                    $idJobShort[$item->job_post_id] = $item;
+                $dataShort = Shortlist::where('candidate_id', $id_user)->get();
+                if (!empty($dataShort)) {
+                    foreach ($dataShort as $item) {
+                        $idJobShort[$item->job_post_id] = $item;
+                    }
+
                 }
             }
             // dd($idJobApplied[$item->id]);
             // dd($data_job->id);
         }
-        $data_job_relate = JobPost::where('major_id', $data_job->major_id)->take(3)->get();
-        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 'maJor', 'idJobApplied', 'idJobShort'));
+        $total = JobPost::where('major_id', $data_job->major_id)->get();
+        $data_job_relate = JobPost::where('major_id', $data_job->major_id)
+        ->where('id', '!=', $data_job->id)->take(3)->get();
+
+        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 
+        'maJor', 'idJobApplied', 'idJobShort', 'total', 'seeker'));
+    }
+    public function search(Request $request)
+    {
+
+        $search = $request->search;
+        $major = $request->major;
+
+        $maJor = Major::all();
+        if (isset($search) && isset($major)) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        }elseif(isset($search) && $major == 0){
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
+        } else {
+            $data = JobPost::where('status', 1)->get();
+        }
+
+
+        return view('client.job.job', compact('data', 'maJor'));
     }
 }
