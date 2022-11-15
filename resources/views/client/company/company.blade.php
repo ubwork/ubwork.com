@@ -26,31 +26,6 @@
                 <!-- Filters Column -->
                 <div class="filters-column col-lg-4 col-md-12 col-sm-12">
                     <div class="inner-column pd-right">
-                        <div class="filters-outer">
-                            <!-- Filter Block -->
-                            <div class="filter-block">
-                                <h4>Tìm Kiếm</h4>
-                                <form action="" method="get">
-                                    <div class="form-group">
-                                        <input type="text" name="search"
-                                            placeholder="Job title, keywords, or company">
-                                        <span class="icon flaticon-search-3"></span>
-                                    </div>
-                                    <button style="margin:5px" type="submit" class="btn btn-danger">search</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <!-- Call To Action -->
-                        <div class="call-to-action-four">
-                            <h5>Tuyển dụng?</h5>
-                            <p>Quảng cáo công việc của bạn cho hàng triệu người dùng hàng tháng và tìm kiếm 15,8 triệu CV
-                                trong cơ sở dữ liệu của chúng tôi.
-                            </p>
-                            <a href="#" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Bắt đầu tuyển
-                                    dụng.</span></a>
-                            <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
-                        </div>
                             <form action="{{route('company-filter')}}" method="post">
                                 @csrf
                                 <div class="filter-block">
@@ -79,7 +54,7 @@
 
                         <!-- End Call To Action -->
                     </div>
-                </div>
+                
 
                 <!-- Content Column -->
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
@@ -151,6 +126,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </section>
