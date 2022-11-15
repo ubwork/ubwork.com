@@ -37,14 +37,6 @@
               <div class="logo"><a href="{{route('company.login')}}"><img src="" alt="" title=""></a></div>
             </div>
           </div>
-
-          <div class="outer-box">
-            <!-- Login/Register -->
-            <div class="btn-box">
-              <a href="{{route('company.register')}}" class="btn-style-three">Register</a>
-              {{-- <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> --}}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -65,7 +57,7 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
-            <h3>Login to UBWORK</h3>
+            <h3>Đăng nhập UBWORK</h3>
             <!--Login Form-->
             <form method="post" action="{{ url('company/login') }}">
               <div class="form-group">
@@ -86,11 +78,6 @@
 
               <div class="form-group">
                 <div class="field-outer">
-                  <div class="input-group checkboxes square">
-                    <input type="checkbox" name="remember-me" value="" id="remember">
-                    <label for="remember" class="remember"><span class="custom-checkbox"></span> Remember me</label>
-                  </div>
-                  <a href="#" class="pwd">Forgot password?</a>
                 </div>
               </div>
 
@@ -111,7 +98,7 @@
             </div>
         @endif
             <div class="bottom-box">
-              <div class="text">Don't have an account? <a href="{{route('company.register')}}">Signup</a></div>
+              <div class="text">Bạn chưa có tài khoản? <a href="{{route('company.register')}}">Đăng ký</a></div>
             </div>
           </div>
         </div>

@@ -44,13 +44,6 @@
                 <div class="logo"><a href="{{route('company.register')}}"><img src="" alt="" title=""></a></div></div>
           </div>
 
-          <div class="outer-box">
-            <!-- Login/Register -->
-            <div class="btn-box">
-              <a href="{{route('company.login')}}" class="btn-style-three">Log in</a>
-              {{-- <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> --}}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -82,7 +75,7 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
-            <h3>Create a Free Account Company</h3>
+            <h3>Tạo tài khoản công ty</h3>
 
             <!--Login Form-->
            
@@ -108,17 +101,14 @@
                     <small class="text-danger">{{$message}}</small>
                   @enderror
               <div class="form-group">
-                <label>Phone number</label>
+                <label>Số điện thoại</label>
                 <input type="number" name="phone" placeholder="Số điện thoại" value="{{old('phone')}}">
                 @error('phone')
                     <small class="text-danger">{{$message}}</small>
                     @enderror
               </div>
-              @error('phone')
-                    <small class="text-danger">{{$message}}</small>
-                  @enderror
               <div class="form-group">
-                <label>Password</label>
+                <label>Mật khẩu</label>
                 <input id="password-field" type="password" name="password" value="" placeholder="Mật khẩu">
                 @error('password')
                     <small class="text-danger">{{$message}}</small>
