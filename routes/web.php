@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\client\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
