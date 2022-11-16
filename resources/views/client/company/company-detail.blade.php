@@ -31,10 +31,22 @@
                                 <button class="theme-btn btn-style-one">Tố cáo</button>
                             @endif
 
-                            @if (auth('candidate')->check()) 
-                                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                            {{-- @if (auth('candidate')->check()) 
+                                 <a class="bookmark-btn"  href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><i class="flaticon-bookmark"></i></a>
                             @else
+                           
                                 <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                            @endif --}}
+                            @if (auth('candidate')->check()) 
+                                @if (!empty($idCompanyShort[$company_detail->id]) )
+                                    @if($idCompanyShort[$company_detail->id]->company_id == $company_detail->id)
+                                    <a href="{{route('delete_shortlisted_company', ['id' => $idCompanyShort[$company_detail->id]->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" ></span></button></a>
+                                    @endif
+                                @else
+                                    <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" style="color: white"></span></button></a>
+                                @endif
+                            @else
+                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                             @endif
                         </div>
                     </div>
