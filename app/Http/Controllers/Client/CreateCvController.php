@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\CreateCvRequest;
+use App\Models\Candidate;
 use App\Models\Certificate;
 use App\Models\Education;
 use App\Models\Experience;
@@ -30,27 +31,31 @@ class CreateCvController extends Controller
 
     public function index()
     {
-        $id = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id)->first();
-        $this->v['seeker'] = $seeker;
-        $this->v['skills'] = Skill::all();
-        $this->v['major'] = Major::all();
-        $this->v['maJor'] = Major::all();
+        if(auth('candidate')->check()) {
+            $id = auth('candidate')->user()->id;
+            $seeker = SeekerProfile::where('candidate_id', $id)->first();
+            $this->v['seeker'] = $seeker;
+            $this->v['skills'] = Skill::all();
+            $this->v['major'] = Major::all();
+            $this->v['maJor'] = Major::all();
 
-        if (!empty($seeker)) {
-            $this->v['experiences'] = Experience::where('seeker_id', $seeker->id)->get();
-            $this->v['educations'] = Education::where('seeker_id', $seeker->id)->get();
-            $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seeker->id)->get();
-            $this->v['certificates'] = Certificate::where('seeker_id', $seeker->id)->get();
+            if (!empty($seeker)) {
+                $this->v['experiences'] = Experience::where('seeker_id', $seeker->id)->get();
+                $this->v['educations'] = Education::where('seeker_id', $seeker->id)->get();
+                $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seeker->id)->get();
+                $this->v['certificates'] = Certificate::where('seeker_id', $seeker->id)->get();
 
-            //active skills
-            $this->v['skillActive'] = $this->v['list_skill']->pluck('skill_id')->toArray();
+                //active skills
+                $this->v['skillActive'] = $this->v['list_skill']->pluck('skill_id')->toArray();
+            }
+            return view('client.upcv.cv', $this->v);
         }
-        return view('client.upcv.cv', $this->v);
+        return redirect()->route('candidate.login');
     }
 
     public function saveInfo(CreateCvRequest $request)
     {
+        $id = auth('candidate')->user()->id;
         $params = [];
         $params['cols'] = $request->post();
         $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
@@ -58,6 +63,12 @@ class CreateCvController extends Controller
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $params['cols']['image'] = $this->uploadFile($request->file('image'));
+        }
+
+        $candidateImage = Candidate::where('id', $id)->first();
+        if($candidateImage->avatar == "" && $params['cols']['image'] != "") {
+            $candidateImage->avatar = $params['cols']['image'];
+            $candidateImage->save();
         }
 
         unset($params['cols']['_token']);
@@ -89,7 +100,7 @@ class CreateCvController extends Controller
         $model = new SeekerProfile();
         $res = $model->saveUpdate($params);
         if ($res == null) {
-            Session::flash('success', 'Cập nhật thất bại!');
+            Session::flash('success', 'Cập nhật thành công!');
             return back();
         }
         if ($res == 1) {
@@ -172,12 +183,14 @@ class CreateCvController extends Controller
                 'skill_id' => $skill,
             ]);
         }
+        Session::flash('success', 'Thêm thành công!');
         return back();
     }
 
     public function DeleteAllSkill($id)
     {
         SkillSeeker::where('seeker_id', $id)->delete();
+        Session::flash('success', 'Xóa thành công!');
         return redirect()->route('CreateCV');
     }
 
@@ -233,6 +246,7 @@ class CreateCvController extends Controller
             Education::find($id)->delete();
             return redirect()->route('CreateCV');
         }
+        Session::flash('success', 'Xóa thành công!');
         return redirect()->route('CreateCV');
     }
 
@@ -321,14 +335,11 @@ class CreateCvController extends Controller
         //lưu rồi mở file
 
         $pdf = Pdf::loadView('client.upcv.index', $this->v);
-
-        $path_pdf = 'upload/cv/';
-
-
-        $fileName = 'CV-' . $seeker->name . time() . rand('0', '99') . '.pdf';
+        $fileName = 'CV-' . $seeker->name .'_'. time() . rand('0', '99') . '.pdf';
 
         $seekerA = SeekerProfile::where('candidate_id', $id)->first();
-        $file_path = public_path($seekerA->path_cv);
+        $file_path = public_path('upload/cv/'.$seekerA->path_cv);
+
         if (is_file($file_path)) {
             unlink($file_path);
         }
@@ -340,11 +351,7 @@ class CreateCvController extends Controller
         $fileName = public_path('upload/cv/'. $fileName);
         $pdf->save($fileName);
 
-        $link_dow = basename($seeker->path_cv, "upload/cv/");
-        if ($seeker->path_cv == "") {
-            Session::flash('success', 'Tạo CV thành công!');
-            return back();
-        }
+        Session::flash('success', 'Cập nhật CV thành công!');
         return redirect()->route('seeker');
     }
 }

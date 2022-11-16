@@ -49,31 +49,14 @@
                         <form class="default-form" action="{{ route('saveFeedback', ['id'=> $company_detail->id]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                         <!-- Input -->
-                        <div class="form-group col-lg-12 col-md-3">
-                            <label>Tiêu đề</label>
-                            <input type="text" name="title" placeholder="Tóm tắt đánh giá của bạn ví dụ: 'công ty ảo' hoặc 'bạn hr quá xinh đẹp'" value="">
-                            @error('title')
-                                <small class="text-danger">{{$message}}</small>
-                            @enderror
-                          </div>
                         <!-- Input -->
-                        <div class="form-group col-lg-12 col-md-12 rating-css">
-                            <label>Đánh giá</label>
-                            <div class="star-icon">
-                                <input type="radio" value="1" name="rate" checked id="rating1">
-                                <label for="rating1" class="fa fa-star"></label>
-                                <input type="radio" value="2" name="rate" id="rating2">
-                                <label for="rating2" class="fa fa-star"></label>
-                                <input type="radio" value="3" name="rate" id="rating3">
-                                <label for="rating3" class="fa fa-star"></label>
-                                <input type="radio" value="4" name="rate" id="rating4">
-                                <label for="rating4" class="fa fa-star"></label>
-                                <input type="radio" value="5" name="rate" id="rating5">
-                                <label for="rating5" class="fa fa-star"></label>
-                            </div>
-                        </div>
-
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>Rate</label>
+                        <input type="number" name="rate" placeholder="rate" value="" max="5" min="1">
+                        @error('rate')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
+                      </div>
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Hài Lòng</label>
@@ -103,6 +86,15 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-12 col-md-12">
+                        <label>Điều bạn chưa thích</label>
+                        <textarea type="text" name="dislike_text" placeholder="Điều bạn chưa thích" value=""></textarea>
+                        @error('dislike_text')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror
+                      </div>
+
+                      <!-- Input -->
+                      <div class="form-group col-lg-12 col-md-12">
                         <label>Điều công ty cần cải thiện</label>
                         <textarea type="text" name="improve" placeholder="Điều công ty cần cải thiện" value=""></textarea>
                         @error('improve')
@@ -110,29 +102,6 @@
                         @enderror
                       </div>
 
-                      <!-- Input -->
-
-                        @if ( Session::has('success') )
-                            <div class="alert alert-success alert-outline alert-dismissible" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                <div class="alert-icon">
-                                    <i class="far fa-fw fa-bell"></i>
-                                </div>
-                                <div class="alert-message">
-                                    <strong>{{ Session::get('success') }}</strong>
-                                </div>
-                            </div>
-                        @endif
-                        <?php //Hiển thị thông báo lỗi?>
-                        @if ( Session::has('error') )
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    {{ Session::get('error') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
-                      <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <button type="submit" class="theme-btn btn-style-one">Save</button>
                       </div>

@@ -8,20 +8,33 @@ use App\Models\Major;
 use App\Models\SeekerProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class SeekerController extends Controller
 {
     public function index()
     {
-        $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->paginate(2);
-        $maJor = Major::all();
-        return view('client.upcv.upcv', compact('data', 'maJor'));
+        if(auth('candidate')->check()) {
+            $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->paginate(2);
+            $maJor = Major::all();
+            return view('client.upcv.upcv', compact('data', 'maJor'));
+        }
+        return redirect()->route('candidate.login');
     }
     public function store(Upcv $request)
     {
-        $request->validate([
-            'path_cv' => 'required'
-        ]);
+        $rules = [
+            'path_cv' => 'required|mimes:pdf,doc,docx|max:2048',
+        ];
+        $message = [
+            'path_cv.required' => 'Không được bỏ trống',
+            'path_cv.mimes' => 'Vui lòng tải lên file pdf hoặc docs',
+            'path_cv.max' => 'Vui lòng tải lên file không quá 2mb',
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+        if ($validator->fails()) {
+            return redirect('seeker')->withErrors($validator);
+        }
         $seeker = new SeekerProfile;
         $data = SeekerProfile::where('candidate_id', auth('candidate')->user()->id)->first();
         if (!empty($data)) {

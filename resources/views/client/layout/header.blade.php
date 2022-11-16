@@ -1,4 +1,3 @@
-
 <header class="main-header">
 
     <!-- Main box -->
@@ -74,7 +73,7 @@
                 <!-- Dashboard Option -->
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
+                        <img style="object-fit: cover;" src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
                             class="thumb">
                         <span class="name">{{auth('candidate')->user()->name }}</span>
                     </a>

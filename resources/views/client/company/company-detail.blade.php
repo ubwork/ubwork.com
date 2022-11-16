@@ -15,12 +15,12 @@
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
-                                <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                                <li><span class="icon flaticon-briefcase"></span> {{$company_detail->company_model}}</li>
                                 <li><span class="icon flaticon-telephone-1"></span>{{$company_detail->phone}}</li>
                                 <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                <li class="time">Open Jobs – {{count($company_job)}}</li>
+                                <li class="time">Công việc – {{count($company_job)}}</li>
                             </ul>
                         </div>
 
@@ -40,10 +40,10 @@
                             @if (auth('candidate')->check()) 
                                 @if (!empty($idCompanyShort[$company_detail->id]) )
                                     @if($idCompanyShort[$company_detail->id]->company_id == $company_detail->id)
-                                    <a href="{{route('delete_shortlisted_company', ['id' => $idCompanyShort[$company_detail->id]->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" ></span></button></a>
+                                    <a href="{{route('delete_shortlisted_company', ['id' => $idCompanyShort[$company_detail->id]->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white" ></span></button></a>
                                     @endif
                                 @else
-                                    <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" style="color: white"></span></button></a>
+                                    <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                                 @endif
                             @else
                                 <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
@@ -62,38 +62,7 @@
                             <h4>Thông tin công ty</h4>
                             <p>{{$company_detail->about}}
                             </p>
-                            <div class="row images-outer">
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                            </div>
-                            <p>Moody’s Corporation, often referred to as Moody’s, is an American business and financial
-                                services company. It is the holding company for Moody’s Investors Service (MIS), an American
-                                credit rating agency, and Moody’s Analytics (MA), an American provider of financial analysis
-                                software and services.</p>
-                            <p>Moody’s was founded by John Moody in 1909 to produce manuals of statistics related to stocks
-                                and bonds and bond ratings. Moody’s was acquired by Dun & Bradstreet in 1962. In 2000, Dun &
-                                Bradstreet spun off Moody’s Corporation as a separate company that was listed on the NYSE
-                                under MCO. In 2007, Moody’s Corporation was split into two operating divisions, Moody’s
-                                Investors Service, the rating agency, and Moody’s Analytics, with all of its other products.
-                            </p>
+    
                         </div>
 
                         <!-- Related Jobs -->
@@ -148,26 +117,8 @@
                                 <div class="widget-content">
 
                                     <ul class="company-info mt-0">
-                                        @if($sum >= 10)
-                                        <li class="rating-css">
-                                            <label>Rating:</label>
-                                            <div class="star-icon">
-                                                <input @if($average > 0 && $average <= 1.5) checked @endif type="radio" value="1" name="rate"id="rating1" disabled>
-                                                <label for="rating1" class="fa fa-star"></label>
-                                                <input @if($average > 1.5 && $average <= 2.5) checked @endif type="radio" value="2" name="rate" id="rating2" disabled>
-                                                <label for="rating2" class="fa fa-star"></label>
-                                                <input @if($average > 2.5 && $average <= 3.5) checked @endif type="radio" value="3" name="rate" id="rating3" disabled>
-                                                <label for="rating3" class="fa fa-star"></label>
-                                                <input @if($average > 3.5 && $average <= 4.5) checked @endif type="radio" value="4" name="rate" id="rating4" disabled>
-                                                <label for="rating4" class="fa fa-star"></label>
-                                                <input @if($average > 4.5 && $average <= 5) checked @endif type="radio" value="5" name="rate" id="rating5" disabled>
-                                                <label for="rating5" class="fa fa-star"></label>
-                                            </div>
-                                            <span>(<?php echo $average?>)</span>
-                                        </li>
-                                        @endif
                                         <li>Ngành chính: <span>{{$company_detail->company_model}}</span></li>
-                                        <li>Quy mô: <span>{{$company_detail->company_size}}</span></li>
+                                        <li>Quy mô: <span>{{$company_detail->team}}</span></li>
                                         <li>Thành lập: <span>{{$company_detail->founded_in}}</span></li>
                                         <li>Số điện thoại: <span>{{$company_detail->phone}}</span></li>
                                         <li>Email: <span>{{$company_detail->email}}</span></li>
@@ -182,7 +133,7 @@
                                         </li>
                                     </ul>
 
-                                    <div class="btn-box"><a href="#"
+                                    <div class="btn-box"><a href=""
                                             class="theme-btn btn-style-three">{{$company_detail->link_web}}</a></div>
                                 </div>
                             </div>
@@ -202,8 +153,4 @@
             </div>
         </div>
     </section>
-@endsection
-@section('script')
-@parent
-<script src="{{asset('js/client/feedback.js')}}"></script>
 @endsection

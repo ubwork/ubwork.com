@@ -23,15 +23,15 @@ class RegisterController extends Controller
 			'phone' => 'required|max:10',
         ];
         $message = [
-            'company_name.required' => 'Mời bạn nhập vào tên công ty',
+            'company_name.required' => 'Vui lòng nhập vào tên công ty',
             'company_name.max' => 'Tên công ty không quá 255 ký tự',
-            'email.required' => 'Mời bạn nhập vào email',
+            'email.required' => 'Vui lòng nhập vào email',
             'email.email' => 'Email không đúng định dạng',
             'email.max' => 'Email không quá 255 ký tự',
             'email.unique' => 'Email đã tồn tại',
-            'password.required' => 'Mời bạn nhập vào mật khẩu',
+            'password.required' => 'Vui lòng nhập vào mật khẩu',
             'password.min' => 'Mật khẩu phải chứa ít nhất 6 ký tự',
-            'phone.required' => 'Mời bạn nhập vào số điện thoại',
+            'phone.required' => 'Vui lòng nhập vào số điện thoại',
             'phone.max' => 'Số điện thoại không quá 10 số',
 
         ];
@@ -39,8 +39,8 @@ class RegisterController extends Controller
         if ($validator->fails()) return back()->withErrors($validator)->withInput();
         $data['password'] = Hash::make($request->password);
         Company::create($data);
-        Session::flash('message', trans('system.success'));
-        Session::flash('alert-class', 'success');
+        // Session::flash('message', trans('system.success'));
+        Session::flash('success', 'Đăng ký thành công');
         return redirect()->route('company.login');
     }
 }

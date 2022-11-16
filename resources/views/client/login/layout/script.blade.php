@@ -15,3 +15,5 @@
 <script src="{{ asset('/assets/client-bower/js/script.js') }}"></script>
 <script src="{{ asset('/assets/client-bower/js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('/assets/client-bower/js/map-script.js') }}"></script>
+<script src="{{ asset('assets/admin-bower/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('assets/admin-bower/plugins/toastr/toastr.min.js') }}"></script>
