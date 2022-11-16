@@ -15,12 +15,12 @@
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
-                                <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                                <li><span class="icon flaticon-briefcase"></span> {{$company_detail->company_model}}</li>
                                 <li><span class="icon flaticon-telephone-1"></span>{{$company_detail->phone}}</li>
                                 <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                <li class="time">Open Jobs – {{count($company_job)}}</li>
+                                <li class="time">Công việc – {{count($company_job)}}</li>
                             </ul>
                         </div>
 
@@ -62,38 +62,7 @@
                             <h4>Thông tin công ty</h4>
                             <p>{{$company_detail->about}}
                             </p>
-                            <div class="row images-outer">
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <figure class="image"><a href=""
-                                            class="lightbox-image" data-fancybox="gallery"><img
-                                                src="" alt=""></a></figure>
-                                </div>
-                            </div>
-                            <p>Moody’s Corporation, often referred to as Moody’s, is an American business and financial
-                                services company. It is the holding company for Moody’s Investors Service (MIS), an American
-                                credit rating agency, and Moody’s Analytics (MA), an American provider of financial analysis
-                                software and services.</p>
-                            <p>Moody’s was founded by John Moody in 1909 to produce manuals of statistics related to stocks
-                                and bonds and bond ratings. Moody’s was acquired by Dun & Bradstreet in 1962. In 2000, Dun &
-                                Bradstreet spun off Moody’s Corporation as a separate company that was listed on the NYSE
-                                under MCO. In 2007, Moody’s Corporation was split into two operating divisions, Moody’s
-                                Investors Service, the rating agency, and Moody’s Analytics, with all of its other products.
-                            </p>
+    
                         </div>
 
                         <!-- Related Jobs -->
@@ -149,7 +118,7 @@
 
                                     <ul class="company-info mt-0">
                                         <li>Ngành chính: <span>{{$company_detail->company_model}}</span></li>
-                                        <li>Quy mô: <span>{{$company_detail->company_size}}</span></li>
+                                        <li>Quy mô: <span>{{$company_detail->team}}</span></li>
                                         <li>Thành lập: <span>{{$company_detail->founded_in}}</span></li>
                                         <li>Số điện thoại: <span>{{$company_detail->phone}}</span></li>
                                         <li>Email: <span>{{$company_detail->email}}</span></li>

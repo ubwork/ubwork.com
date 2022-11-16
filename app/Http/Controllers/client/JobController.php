@@ -79,7 +79,6 @@ class JobController extends Controller
             // dd($idJobApplied[$item->id]);
             // dd($data_job->id);
         }
-        $total = JobPost::where('major_id', $data_job->major_id)->get();
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)
             ->where('id', '!=', $data_job->id)->take(3)->get();
 
@@ -89,7 +88,6 @@ class JobController extends Controller
             'maJor',
             'idJobApplied',
             'idJobShort',
-            'total',
             'seeker'
         ));
     }
