@@ -55,10 +55,10 @@
                 @if (auth('candidate')->check()) 
                   @if (!empty($idJobShort[$data_job->id]) )
                     @if($idJobShort[$data_job->id]->job_post_id == $data_job->id)
-                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark" ></span></button></a>
+                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
                     @endif
                   @else
-                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;" ><span class="flaticon-bookmark" style="color: white"></span></button></a>
+                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                   @endif
                 @else
                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
@@ -117,24 +117,30 @@
                                 <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                @if($item->full_time == 1)
+                                @if($item->type_work == 1)
                                   <li class="time">
-                                    Full Time
+                                      Full Time
                                   </li>
                                 @endif
-                                @if($item->part_time == 1)
+                                @if($item->type_work == 2)
                                   <li class="privacy">
                                       Part Time
                                   </li>
                                 @endif
-                                @if($item->full_time == 1 && $item->part_time == 1 )
+                                @if($item->type_work == 0 )
                                   <li class="required">
-                                  Full Time / Part Time
+                                    Intern
                                   </li>
                                 @endif
                             </ul>
-                            @if (auth('candidate')->check()) 
-                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                           @if (auth('candidate')->check()) 
+                              @if (!empty($idJobShort[$item->id]) )
+                                @if($idJobShort[$item->id]->job_post_id == $item->id)
+                                  <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                                @endif
+                              @else
+                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
+                              @endif
                             @else
                                 <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                             @endif

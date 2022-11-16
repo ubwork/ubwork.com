@@ -40,10 +40,10 @@
                             @if (auth('candidate')->check()) 
                                 @if (!empty($idCompanyShort[$company_detail->id]) )
                                     @if($idCompanyShort[$company_detail->id]->company_id == $company_detail->id)
-                                    <a href="{{route('delete_shortlisted_company', ['id' => $idCompanyShort[$company_detail->id]->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" ></span></button></a>
+                                    <a href="{{route('delete_shortlisted_company', ['id' => $idCompanyShort[$company_detail->id]->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white" ></span></button></a>
                                     @endif
                                 @else
-                                    <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" style="color: white"></span></button></a>
+                                    <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                                 @endif
                             @else
                                 <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
@@ -133,7 +133,7 @@
                                         </li>
                                     </ul>
 
-                                    <div class="btn-box"><a href="#"
+                                    <div class="btn-box"><a href=""
                                             class="theme-btn btn-style-three">{{$company_detail->link_web}}</a></div>
                                 </div>
                             </div>

@@ -49,7 +49,7 @@
                     <div class="image-box">
                         <figure class="main-image wow fadeIn animated" data-wow-delay="500ms"
                             style="visibility: visible; animation-delay: 500ms; animation-name: fadeIn;"><img
-                                src="{{ asset('storage/' . 'images/banner-img-1.png') }}" alt=""></figure>
+                                src="{{ asset('/assets/client-bower/images/resource/banner-img-1.png') }}" alt=""></figure>
 
                         <!-- Info BLock One -->
                         <div class="info_block anm wow fadeIn animated" data-wow-delay="1000ms" data-speed-x="2"
@@ -64,7 +64,7 @@
                             data-speed-y="1"
                             style="transform: translate3d(-2px, -3.68px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2000ms; animation-name: fadeIn;">
                             <p>10k+ Candidates</p>
-                            <div class="image"><img src="{{ asset('storage/' . 'images/1667320257_multi-logo.png') }}"
+                            <div class="image"><img src="{{ asset('/assets/client-bower/images/resource/multi-peoples.png') }}"
                                     alt=""></div>
                         </div>
 
@@ -134,7 +134,8 @@
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <h4><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                    <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}" alt=""></span>
+                                    <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                     </h4>
                                     <ul class="job-info">
                                         <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
@@ -145,14 +146,20 @@
                                             {{ $item->max_salary }} đ</li>
                                     </ul>
                                     <ul class="job-other-info">
-                                        @if ($item->full_time == 1)
+                                        @if($item->type_work == 1)
                                             <li class="time">
                                                 Full Time
                                             </li>
                                         @endif
-                                        @if ($item->part_time == 1)
+                                        @if($item->type_work == 2)
                                             <li class="privacy">
-                                                Part Time </li>
+                                                Part Time
+                                            </li>
+                                        @endif
+                                        @if($item->type_work == 0 )
+                                            <li class="required">
+                                                Intern
+                                            </li>
                                         @endif
                                     </ul>
                                     @if (auth('candidate')->check()) 
@@ -189,7 +196,8 @@
                             <div class="job-block col-lg-6 col-md-12 col-sm-12">
                                 <div class="inner-box">
                                     <div class="content">
-                                        <h4><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                        <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}" alt=""></span>
+                                        <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                         </h4>
                                         <ul class="job-info">
                                             <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
@@ -200,14 +208,20 @@
                                                 {{ $item->max_salary }} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if ($item->full_time == 1)
+                                            @if($item->company->type_work == 1)
                                                 <li class="time">
                                                     Full Time
                                                 </li>
                                             @endif
-                                            @if ($item->part_time == 1)
+                                            @if($item->company->type_work == 2)
                                                 <li class="privacy">
-                                                    Part Time </li>
+                                                    Part Time
+                                                </li>
+                                            @endif
+                                            @if($item->company->type_work == 0 )
+                                                <li class="required">
+                                                    Intern
+                                                </li>
                                             @endif
                                         </ul>
                                         @if (auth('candidate')->check()) 

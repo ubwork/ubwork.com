@@ -197,21 +197,27 @@
                                                 alt=""></span>
                                         <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                         <ul class="job-info">
-                                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                                            <li><span class="icon flaticon-briefcase"></span>{{$item->company->company_model}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
                                             <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            <li class="time">
-                                                @if($item->full_time == 1)
+                                            @if($item->type_work == 1)
+                                                <li class="time">
                                                     Full Time
-                                                @endif
-                                            </li>
-                                            <li class="privacy">
-                                                @if($item->part_time == 1)
+                                                </li>
+                                            @endif
+                                            @if($item->type_work == 2)
+                                                <li class="privacy">
                                                     Part Time
-                                                @endif</li>
+                                                </li>
+                                            @endif
+                                            @if($item->type_work == 0 )
+                                                <li class="required">
+                                                    Intern
+                                                </li>
+                                            @endif
                                             {{-- <li class="required">Urgent</li> --}}
                                         </ul>
                                         @if (auth('candidate')->check()) 
