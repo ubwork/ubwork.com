@@ -5,6 +5,7 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
+
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -17,12 +18,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-              </form>
-              <select id="statusBox" class="form-control custom-select float-right col-md-3 mr-3">
-                <option value="0">Chưa kích hoạt</option>
-                <option value="1">Đã kích hoạt</option>
-                <option value="2">Chặn</option>
-              </select>
+            </form>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

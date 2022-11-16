@@ -16,12 +16,10 @@ class Feedback extends Model
         'candidate_id',
         'company_id',
         'rate',
-        'title',
+        'comment',
         'satisfied',
         'unsatisfied',
         'is_candidate',
-        'like_text',
-        'improve',
         'created_at',
         'updated_at',
     ];
@@ -58,4 +56,5 @@ class Feedback extends Model
         return $list;
 
     }
+
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -50,16 +51,18 @@ class RegisterController extends Controller
             $gender = $request->input('gender');
             $params = [];
             $params['cols'] = $request->post();
+            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
+            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
             unset($params['cols']['_token']);
             $modelSv = new Candidate();
             $res = $modelSv->saveAdd($params);
             if ($res == null) {
                 return redirect()->route('candidate.register');
             } elseif ($res > 0) {
-                Session::flash('success', 'Dang ky thanh cong nguoi dung');
+                Session::flash('success', 'Đăng ký thành công');
                 return redirect()->route('candidate.login');
             } else {
-                Session::flash('error', 'Loi dang ky');
+                Session::flash('error', 'Lỗi đăng ký');
                 return redirect()->route('candidate.register');
             }
         }
