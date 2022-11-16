@@ -21,6 +21,11 @@ return [
                 'title' => "Tìm CV",
                 'route' => 'company.filter',
                 'icon'  => 'la la-search',
+            ],
+            'image-paper' => [
+                'title' => "Giấy phép kinh doanh",
+                'route' => 'company.image-paper',
+                'icon'  => 'la la-file',
             ]
         ]
     ]
