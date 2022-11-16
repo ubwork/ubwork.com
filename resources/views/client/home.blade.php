@@ -138,6 +138,7 @@
                                     <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                     </h4>
                                     <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                         <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                         </li>
                                         <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
@@ -200,6 +201,7 @@
                                         <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                         </h4>
                                         <ul class="job-info">
+                                            <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                             </li>
                                             <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
