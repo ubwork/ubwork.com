@@ -9,6 +9,7 @@ use App\Models\Major;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CandidateController extends Controller
 {
@@ -63,12 +64,27 @@ class CandidateController extends Controller
     }
     public function update_pass(Request $request)
     {
+        $rules = [
+            'password' => 'required',
+            'password_old' => 'required',
+            're_password' => 'required|same:password',
+        ];
+        $messages = [
+            'password.required' => 'Vui lòng nhập mật khẩu mới',
+            'password_old.required' => 'Vui lòng nhập mật khẩu cũ',
+            're_password.required' => 'Vui lòng nhập lại mật khẩu mới',
+            're_password.same' => 'Mật khẩu nhập lại không khớp',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->route('change_password')->withErrors($validator);
+        }
         $id = auth('candidate')->user()->id;
-        $method_route = 'change_password';
         $params = [];
         $params['cols'] = $request->post();
         unset($params['cols']['_token']);
-        if ($params['cols']['password'] == $params['cols']['re_password']) {
+
+        if (Hash::check($params['cols']['password_old'], auth('candidate')->user()->password)) {
             $model = new Candidate();
             unset($params['cols']['password_old']);
             unset($params['cols']['re_password']);
@@ -85,8 +101,8 @@ class CandidateController extends Controller
                 Session::flash('error', 'Lỗi cập nhật!');
                 return Redirect()->back();
             }
-        } else {
-            Session::flash('error', 'Mật khẩu không trùng khớp');
+        }else {
+            Session::flash('error', 'Mật khẩu cũ không đúng!');
             return Redirect()->back();
         }
     }

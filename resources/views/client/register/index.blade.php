@@ -5,7 +5,7 @@
 <!-- Mirrored from creativelayers.net/themes/superio/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 Aug 2022 09:27:55 GMT -->
 <head>
   <meta charset="utf-8">
-  <title>Register</title>
+  <title>UBWORK | Register</title>
 
   <!-- Stylesheets -->
   <link href="{{ asset('assets/client-bower/css/bootstrap.css')}}" rel="stylesheet">
@@ -41,18 +41,6 @@
         <!-- Main box -->
         <div class="main-box">
           <!--Nav Outer -->
-          <div class="nav-outer">
-            <div class="logo-box">
-                <div class="logo"><a href="{{route('candidate.register')}}"><img src="{{ asset('assets/client-bower/images/logo-2.svg')}}" alt="" title=""></a></div>            </div>
-          </div>
-
-          <div class="outer-box">
-            <!-- Login/Register -->
-            <div class="btn-box">
-              {{-- <a href="{{route('login')}}" class="btn-style-three">Login / Register</a> --}}
-              <a href="{{route('candidate.login')}}" class="btn-style-three">Log in</a>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -86,7 +74,7 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
-            <h3>Create a Free Account</h3>
+            <h3>Tạo mới tài khoản</h3>
             {{-- <h3>ĐĂNG NHẬP</h3> --}}
 
             <!--Login Form-->
@@ -101,15 +89,15 @@
               <form method="post" action="{{ route('candidate.register') }}" class="candidate">
                 @csrf
                 <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" placeholder="Ho Ten" value="{{old('name')}}">
+                    <label>Họ tên</label>
+                    <input type="text" name="name" placeholder="Nhập vào họ tên" value="{{old('name')}}">
                     @error('name')
                     <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Email" value="{{old('email')}}">
+                <input type="email" name="email" placeholder="Nhập vào email" value="{{old('email')}}">
                 @error('email')
                   <small class="text-danger">{{$message}}</small>
                 @enderror
@@ -117,35 +105,35 @@
               
 
               <div class="form-group">
-                <label>Password</label>
-                <input id="password-field" type="password" name="password" value="" placeholder="Mat khau">
+                <label>Mật khẩu</label>
+                <input id="password-field" type="password" name="password" value="" placeholder="Nhập vào mật khẩu">
                 @error('password')
                   <small class="text-danger">{{$message}}</small>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label>Phone Number</label>
-                <input id="phone-number" type="number" name="phone" value="" placeholder="So dien thoai">
+                <label>Số điện thoại</label>
+                <input id="phone-number" type="number" name="phone" value="" placeholder="Nhập vào số điện thoại">
                 @error('phone')
                   <small class="text-danger">{{$message}}</small>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label>Gender</label> <br>
+                <label>Giới tính</label> <br>
                 <input type="radio" checked id="html" name="gender" value="1">
-                <label for="html">Man</label>
-                <input type="radio" id="css" name="gender" value="2">
-                <label for="css">Woman</label>
+                <label for="html">Nam</label>
+                <input style="margin: " type="radio" id="css" name="gender" value="2">
+                <label for="css">Nữ</label>
               </div>
 
               <div class="form-group">
-                <button class="theme-btn btn-style-one " type="submit" name="">Register</button>
+                <button class="theme-btn btn-style-one " type="submit" name="">Đăng ký</button>
               </div>
             </form> 
             <div class="bottom-box">
-              <div class="text">Do you have an account? <a href="{{route('candidate.login')}}">Login</a></div>
+              <div class="text">Bạn đã có tài khoản? <a href="{{route('candidate.login')}}">Đăng nhập</a></div>
             </div>
 
         <!--End Login Form -->

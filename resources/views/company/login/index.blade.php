@@ -9,7 +9,7 @@
   <link href="{{ asset('assets/client-bower/css/bootstrap.css')}}" rel="stylesheet">
   <link href="{{ asset('assets/client-bower/css/style.css')}}" rel="stylesheet">
   <link href="{{ asset('assets/client-bower/css/responsive.css')}}" rel="stylesheet">
-
+  <link rel="stylesheet" href="{{asset('assets/admin-bower/plugins/toastr/toastr.css')}}">
   <link rel="shortcut icon" href="{{ asset('assets/client-bower/images/favicon.png')}}" type="image/x-icon">
   <link rel="icon" href="{{ asset('assets/client-bower/images/favicon.png')}}" type="image/x-icon">
 
@@ -37,14 +37,6 @@
               <div class="logo"><a href="{{route('company.login')}}"><img src="" alt="" title=""></a></div>
             </div>
           </div>
-
-          <div class="outer-box">
-            <!-- Login/Register -->
-            <div class="btn-box">
-              <a href="{{route('company.register')}}" class="btn-style-three">Register</a>
-              {{-- <a href="dashboard-post-job.html" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> --}}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -65,7 +57,7 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
-            <h3>Login to UBWORK</h3>
+            <h3>Đăng nhập vào UbWork</h3>
             <!--Login Form-->
             <form method="post" action="{{ url('company/login') }}">
               <div class="form-group">
@@ -85,33 +77,13 @@
               </div>
 
               <div class="form-group">
-                <div class="field-outer">
-                  <div class="input-group checkboxes square">
-                    <input type="checkbox" name="remember-me" value="" id="remember">
-                    <label for="remember" class="remember"><span class="custom-checkbox"></span> Remember me</label>
-                  </div>
-                  <a href="#" class="pwd">Forgot password?</a>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <button class="theme-btn btn-style-one" type="submit">Log In</button>
+                <button class="theme-btn btn-style-one" type="submit">Đăng nhập</button>
                 
               </div>
               <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             </form>
-            <?php //Hiển thị thông báo thành công?>
-        @if ( Session::has('success') )
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <strong>{{ Session::get('success') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-        @endif
             <div class="bottom-box">
-              <div class="text">Don't have an account? <a href="{{route('company.register')}}">Signup</a></div>
+              <div class="text">Bạn chưa có tài khoản? <a href="{{route('company.register')}}">Đăng ký</a></div>
             </div>
           </div>
         </div>
@@ -139,8 +111,10 @@
   <script src="{{ asset('assets/client-bower/js/owl.js')}}"></script>
   <script src="{{ asset('assets/client-bower/js/wow.js')}}"></script>
   <script src="{{ asset('assets/client-bower/js/script.js')}}"></script>
+  <script src="{{ asset('assets/admin-bower/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+  <script src="{{ asset('assets/admin-bower/plugins/toastr/toastr.min.js') }}"></script>
 </body>
-
+@include('admin.layout.toastr')
 
 <!-- Mirrored from creativelayers.net/themes/superio/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 Aug 2022 09:27:55 GMT -->
 </html>

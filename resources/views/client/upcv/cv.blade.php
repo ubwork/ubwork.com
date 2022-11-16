@@ -162,17 +162,13 @@
                                     @include('client.upcv.certificates')
                                 </div>
                                 @else
-                                <small><i>*Tạo thông tin cá nhân trước !</i></small>
-
+                                <small><i>*Vui lòng tạo thông tin cá nhân trước !</i></small>
                                 @endif
                             </div>
                             @if(!empty($seeker))
                             <div class="mt-5 text-center">
-                                @if($seeker->path_cv == "")
-                                <a href="{{route('getPdf')}}" class="btn btn-primary">Tạo CV</a>
-                                @else
-                                <a href="{{route('getPdf')}}" class="btn btn-primary">Tải CV</a>
-                                @endif
+                                <a href="{{route('getPdf')}}" class="btn btn-primary">Cập nhật CV</a>
+                                
                             </div>
                             @endif
                         </div>
