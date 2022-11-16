@@ -20,100 +20,46 @@
     <section class="ls-section">
         <div class="auto-container">
             <div class="filters-backdrop"></div>
-
             <div class="row">
-
-                <!-- Filters Column -->
                 <div class="filters-column col-lg-4 col-md-12 col-sm-12">
                     <div class="inner-column pd-right">
                         <div class="filters-outer">
-                            <!-- Filter Block -->
-                            <div class="filter-block">
-                                <h4>Tìm Kiếm</h4>
-                                <form action="" method="get">
+                            <form action="" method="get">
+                                <div class="filter-block">
+                                    <h4>Tìm theo tên</h4>
                                     <div class="form-group">
-                                        <input type="text" name="search"
-                                            placeholder="Job title, keywords, or company">
+                                        <input type="text" name="search" placeholder="Tên công ty">
                                         <span class="icon flaticon-search-3"></span>
                                     </div>
-                                    <button style="margin:5px" type="submit" class="btn btn-danger">search</button>
-                                </form>
-                            </div>
-                        </div>
+                                </div>
 
-                        <!-- Call To Action -->
-                        <div class="call-to-action-four">
-                            <h5>Tuyển dụng?</h5>
-                            <p>Quảng cáo công việc của bạn cho hàng triệu người dùng hàng tháng và tìm kiếm 15,8 triệu CV
-                                trong cơ sở dữ liệu của chúng tôi.
-                            </p>
-                            <a href="#" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Bắt đầu tuyển
-                                    dụng.</span></a>
-                            <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
-                        </div>
-                            <form action="{{route('company-filter')}}" method="post">
-                                @csrf
+                                <!-- Filter Block -->
                                 <div class="filter-block">
-                                <h4>Tìm theo tên</h4>
-                                <div class="form-group">
-                                    <input type="text" name="keyword"
-                                        placeholder="Tên công ty">
-                                    <span class="icon flaticon-search-3"></span>
+                                    <h4>Quy Mô Công Ty</h4>
+                                    <div class="form-group">
+                                        <select class="chosen-select" name="size" id="">
+                                            <option value="">Mời Chọn</option>
+                                            <option value="1">1-50</option>
+                                            <option value="2">50-100</option>
+                                            <option value="3">100-200</option>
+                                            <option value="4">200-500</option>
+                                            <option value="5">500-1000</option>
+                                        </select>
+                                        <span class="icon flaticon-briefcase"></span>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <!-- Filter Block -->
-                            <div class="filter-block">
-                                <h4>Tìm theo địa điểm</h4>
-                                <div class="form-group">
-                                    <input type="text" name="address" placeholder="Thành phố">
-                                    <span class="icon flaticon-map-locator"></span>
+                                <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
+                                    <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
+                                            công ty</span></button>
                                 </div>
-                            </div>
-                            <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
-                                <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
-                                        công ty</span></button>
-                            </div>
                             </form>
                         </div>
-
-                        <!-- End Call To Action -->
                     </div>
+                    <!-- End Call To Action -->
                 </div>
-
-                <!-- Content Column -->
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
                     <div class="ls-outer">
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
-
-                        <!-- ls Switcher -->
-                        {{-- <div class="ls-switcher">
-                            <div class="showing-result">
-                                <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> employer</div>
-                            </div>
-                            <div class="sort-by">
-                                <select class="chosen-select">
-                                    <option>Most Recent</option>
-                                    <option>Freelance</option>
-                                    <option>Full Time</option>
-                                    <option>Internship</option>
-                                    <option>Part Time</option>
-                                    <option>Temporary</option>
-                                </select>
-
-                                <select class="chosen-select">
-                                    <option>Show 10</option>
-                                    <option>Show 20</option>
-                                    <option>Show 30</option>
-                                    <option>Show 40</option>
-                                    <option>Show 50</option>
-                                    <option>Show 60</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
-
-                        <!-- Block Block -->
                         @foreach ($data as $item)
                             <div class="company-block-three">
                                 <div class="inner-box">
@@ -136,22 +82,16 @@
                                             {{-- <li class="time">Open Jobs – {{count($job)}}</li> --}}
                                         </ul>
                                     </div>
-                                    {{-- @dd($job) --}}
-                                    <div class="text">Mô Tả Chưa Có</div>
                                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
                         @endforeach
-                        <!-- Listing Show More -->
                         <div class="ls-show-more">
-                            {{-- <p>Showing 36 of 497 Jobs</p>
-                            <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
-                            <button class="show-more">Xem thêm</button> --}}
-                            {{$data->links()}}
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

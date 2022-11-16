@@ -25,7 +25,7 @@ class JobController extends Controller
     }
     public function job()
     {
-        $data = JobPost::where('status', 1)->paginate(1);
+        $data = JobPost::where('status', 1)->paginate(10);
         $maJor = Major::all();
         return view('client.job.job', compact('data', 'maJor'));
     }
@@ -46,7 +46,7 @@ class JobController extends Controller
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
             $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
-            if(!empty($seeker->id)){
+            if (!empty($seeker->id)) {
                 $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
                 if (!empty($dataActive)) {
                     foreach ($dataActive as $item) {
@@ -65,27 +65,41 @@ class JobController extends Controller
         }
         $total = JobPost::where('major_id', $data_job->major_id)->get();
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)
-        ->where('id', '!=', $data_job->id)->take(3)->get();
+            ->where('id', '!=', $data_job->id)->take(3)->get();
 
-        return view('client.job.job-detail', compact('data_job', 'data_job_relate', 
-        'maJor', 'idJobApplied', 'idJobShort', 'total', 'seeker'));
+        return view('client.job.job-detail', compact(
+            'data_job',
+            'data_job_relate',
+            'maJor',
+            'idJobApplied',
+            'idJobShort',
+            'total',
+            'seeker'
+        ));
     }
     public function search(Request $request)
     {
-
         $search = $request->search;
         $major = $request->major;
-
+        $type = $request->type;
         $maJor = Major::all();
-        if (isset($search) && isset($major)) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
-        }elseif(isset($search) && $major == 0){
+        if (isset($search) && isset($major) && isset($type)) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
+        } elseif (isset($search) && $major == null && $type == null) {
             $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
+        } elseif ($search == null && isset($major) && $type == null) {
+            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        } elseif ($search == null && $major == null && isset($type)) {
+            $data = JobPost::where('status', 1)->where('type_work', 'like', '%' . $type . '%')->paginate(10);
+        } elseif (isset($search) && isset($major) && $type == null) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        } elseif (isset($search) && $major == null && isset($type)) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
+        } elseif ($search == null && isset($major) && isset($type)) {
+            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
         } else {
             $data = JobPost::where('status', 1)->get();
         }
-
-
         return view('client.job.job', compact('data', 'maJor'));
     }
 }

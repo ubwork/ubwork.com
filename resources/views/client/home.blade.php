@@ -14,25 +14,32 @@
                         </div>
                         <!-- Job Search Form -->
                         <div class="job-search-form">
-                            <form method="get">
-                                @csrf
+                            <form method="get" action="search">
                                 <div class="row">
                                     <div class="form-group col-lg-5 col-md-12 col-sm-12">
                                         <span class="icon flaticon-search-1"></span>
-                                        <input type="text" name="search"
-                                            placeholder="Job title, keywords, or company">
+                                        <input type="text" name="search" placeholder="Mời Nhập Từ Khóa">
                                     </div>
+                                    <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
+                                        <span class="icon flaticon-map-locator"></span>
+                                        <select name="major" class="chosen-select">
+                                            <option value="">Chuyên Ngành</option>
+                                            @foreach ($maJor as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                      </div>
                                     <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
-                                        <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Find
-                                                Jobs</span></button>
+                                        <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm Kiếm</span></button>
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                         <!-- Job Search Form -->
 
                         <!-- Popular Search -->
-                        <div class="popular-searches">
+                        {{-- <div class="popular-searches">
                             <span class="title">Popular Searches : </span>
                             <a href="#">Designer</a>,
                             <a href="#">Developer</a>,
@@ -41,7 +48,7 @@
                             <a href="#">PHP</a>,
                             <a href="#">Senior</a>,
                             <a href="#">Engineer</a>,
-                        </div>
+                        </div> --}}
                         <!-- End Popular Search -->
                     </div>
                 </div>
@@ -176,5 +183,4 @@
             </div>
     </section> --}}
     <!-- End Job Section -->
-
 @endsection

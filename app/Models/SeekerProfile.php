@@ -31,11 +31,11 @@ class SeekerProfile extends Model
     ];
     public function candidate()
     {
-        return $this->belongsTo(Candidate::class, 'id');
+        return $this->belongsTo(Candidate::class);
     }
     public function major()
     {
-        return $this->belongsTo(Major::class, 'id');
+        return $this->belongsTo(Major::class);
     }
 
     // lưu tạo

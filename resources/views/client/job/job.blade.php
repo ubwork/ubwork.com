@@ -24,21 +24,29 @@
                             <!-- Form Group -->
                             <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                 <span class="icon flaticon-search-1"></span>
-                                <input type="text" name="search" placeholder="Job title, keywords, or company">
+                                <input type="text" name="search" placeholder="Mời Nhập Từ Khóa">
                             </div>
-                            <div class="form-group col-lg-3 col-md-12 col-sm-12 location">
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                                <span class="icon fa fa-history"></span>
+                                <select name="type" id="" class="chosen-select">
+                                    <option value="">Mời Chọn</option>
+                                    <option value="1">Intern</option>
+                                    <option value="2">Part Time</option>
+                                    <option value="3">Full Time</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12">
                                 <span class="icon flaticon-briefcase"></span>
                                 <select name="major" class="chosen-select">
-                                    <option value="">All Categories</option>
+                                    <option value="">Chuyên Ngành</option>
                                     @foreach ($maJor as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
                             <!-- Form Group -->
                             <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
-                                <button type="submit" class="theme-btn btn-style-one">Find Jobs</button>
+                                <button type="submit" class="theme-btn btn-style-one">Tìm Kiếm</button>
                             </div>
                         </div>
                     </form>
@@ -116,7 +124,6 @@
                                     Recruiting Now</span></a>
                             <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
                         </div>
-                        <!-- End Call To Action -->
                     </div>
                 </div>
             </div>

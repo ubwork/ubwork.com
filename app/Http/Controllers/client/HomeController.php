@@ -16,13 +16,7 @@ class HomeController extends Controller
         $count = [];
         $job_short = [];
         $data_job_type = Major::all();
-        // dd(isset($search));
-        $search = $request->search;
-        if(isset($search)){
-            $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title','like','%' . $search . '%')->paginate(10);
-        }else{
             $data = JobPost::Orderby('title', 'DESC')->select('*')->paginate(10);
-        }
         foreach ($data_job_type as $item) {
             if (!empty($item)) {
                 $count[$item->id] = JobPost::where('major_id', $item->id)->count();
@@ -43,5 +37,22 @@ class HomeController extends Controller
         }
         $maJor = Major::all();
         return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor'));
+    }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $major = $request->major;
+
+        $maJor = Major::all();
+        if (isset($search) && isset($major)) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        }elseif(isset($search) && $major == null){
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
+        }elseif($search == null && isset($major)){
+            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        } else {
+            $data = JobPost::where('status', 1)->get();
+        }
+        return view('client.job.job', compact('data', 'maJor'));
     }
 }

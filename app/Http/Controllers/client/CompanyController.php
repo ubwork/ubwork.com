@@ -19,9 +19,15 @@ class CompanyController extends Controller
         $data = company::where('status', 1)->paginate(6);
         // dd($data['id']);
         $search = $request->search;
-        if(!empty($search)){
-            $data = company::where('status', 1)->where('company_name','like','%' . $search . '%')->paginate(10);
-        }else{
+        $size = $request->size;
+        if (isset($search) && isset($size)) {
+            $data = company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->where('company_model', 'like','%' . $size . '%')->paginate(10);
+        }elseif(isset($search) && $size == null){
+            $data = company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->paginate(10);
+        }elseif($search == null && isset($size)){
+            $data = company::where('status', 1)->where('company_model', 'like','%' . $size . '%')->paginate(10);
+
+        } else {
             $data = company::where('status', 1)->get();
         }
         foreach ($data as $item) {
