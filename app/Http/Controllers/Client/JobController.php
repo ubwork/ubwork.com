@@ -13,6 +13,8 @@ use App\Models\SeekerProfile;
 use App\Models\Shortlist;
 use App\Models\Shortlisted;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class JobController extends Controller
 {
@@ -27,7 +29,8 @@ class JobController extends Controller
     public function job()
     {
         $job_short = [];
-        $data = JobPost::where('status', 1)->paginate(1);
+        $data = JobPost::where('status', 1)->paginate(10);
+        $today = strtotime(Carbon::now());
         $maJor = Major::all();
         if (auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
@@ -40,7 +43,7 @@ class JobController extends Controller
                 }
             }
         }
-        return view('client.job.job', compact('data', 'maJor', 'job_short'));
+        return view('client.job.job', compact('data', 'maJor', 'job_short','today'));
     }
     public function job_cat($id)
     {
@@ -93,20 +96,28 @@ class JobController extends Controller
     }
     public function search(Request $request)
     {
-
         $search = $request->search;
         $major = $request->major;
-
+        $type = $request->type;
+        $today = strtotime(Carbon::now());
         $maJor = Major::all();
-        if (isset($search) && isset($major)) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
-        } elseif (isset($search) && $major == 0) {
+        if (isset($search) && isset($major) && isset($type)) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
+        } elseif (isset($search) && $major == null && $type == null) {
             $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
+        } elseif ($search == null && isset($major) && $type == null) {
+            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        } elseif ($search == null && $major == null && isset($type)) {
+            $data = JobPost::where('status', 1)->where('type_work', 'like', '%' . $type . '%')->paginate(10);
+        } elseif (isset($search) && isset($major) && $type == null) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
+        } elseif (isset($search) && $major == null && isset($type)) {
+            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
+        } elseif ($search == null && isset($major) && isset($type)) {
+            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
         } else {
             $data = JobPost::where('status', 1)->get();
         }
-
-
-        return view('client.job.job', compact('data', 'maJor'));
+        return view('client.job.job', compact('data', 'maJor','today'));
     }
 }

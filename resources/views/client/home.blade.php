@@ -14,19 +14,27 @@
                         </div>
                         <!-- Job Search Form -->
                         <div class="job-search-form">
-                            <form method="get">
-                                @csrf
+                            <form method="get" action="search">
                                 <div class="row">
                                     <div class="form-group col-lg-5 col-md-12 col-sm-12">
                                         <span class="icon flaticon-search-1"></span>
-                                        <input type="text" name="search"
-                                            placeholder="Job title, keywords, or company">
+                                        <input type="text" name="search" placeholder="Mời Nhập Từ Khóa">
+                                    </div>
+                                    <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
+                                        <span class="icon flaticon-briefcase"></span>
+                                        <select name="major" class="chosen-select">
+                                            <option value="">Chuyên Ngành</option>
+                                            @foreach ($maJor as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
-                                        <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Find
-                                                Jobs</span></button>
+                                        <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
+                                                Kiếm</span></button>
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                         <!-- Job Search Form -->
@@ -162,7 +170,7 @@
                                             </li>
                                         @endif
                                     </ul>
-                                    @if (auth('candidate')->check()) 
+                                    @if (auth('candidate')->check())
                                         @if (!empty($job_short[$item->id]) )
                                             @if($job_short[$item->id]->job_post_id == $item->id)
                                             <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white" ></span></a>
@@ -184,7 +192,7 @@
                             thêm</span></a>
                 </div>
             </div>
-            @if (auth('candidate')->check()) 
+            @if (auth('candidate')->check())
                 <div class="sec-title text-center">
                     <h2>Việc làm có thể phù hợp với bạn</h2>
                     <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
@@ -224,7 +232,7 @@
                                                 </li>
                                             @endif
                                         </ul>
-                                        @if (auth('candidate')->check()) 
+                                        @if (auth('candidate')->check())
                                         @if (!empty($job_short[$item->id]) )
                                             @if($job_short[$item->id]->job_post_id == $item->id)
                                             <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark"style="color: white" ></span></a>
