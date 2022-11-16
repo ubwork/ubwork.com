@@ -187,8 +187,8 @@
                                                         <label>Kĩ năng liên quan</label>
                                                         <select data-placeholder="Chọn ... " class="chosen-select"
                                                             name="skill[]" multiple>
-                                                            @foreach (config('custom.skill') as $value)
-                                                                <option  value="{{ $value['id'] }}">{{ $value['name'] }}
+                                                            @foreach ($skills as $value)
+                                                                <option {{in_array($value['id'],$skillActive) ? 'selected' : ''}}  value="{{ $value['id'] }}">{{ $value['name'] }}
                                                                 </option>
                                                             @endforeach
                                                         </select>

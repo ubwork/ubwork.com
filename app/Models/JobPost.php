@@ -42,9 +42,8 @@ class JobPost extends Model
     {
         return $this->hasMany(jobPostActivities::class, 'job_post_id');
     }
-    public function seekerProfiles()
-    {
-        return $this->belongsToMany(SeekerProfile::class, 'job_post_activities', 'job_post_id', 'seeker_id');
+    public function seekerProfiles(){
+        return $this->belongsToMany(SeekerProfile::class, 'job_post_activities', 'job_post_id', 'seeker_id')->withPivot('is_see');
     }
     public function company()
     {
@@ -53,5 +52,8 @@ class JobPost extends Model
     public function major()
     {
         return $this->belongsTo(Major::class);
+    }
+    public function skills(){
+        return $this->belongsToMany(Skill::class, 'skill_posts', 'post_id','skill_id');
     }
 }
