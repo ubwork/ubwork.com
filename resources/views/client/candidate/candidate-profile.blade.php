@@ -69,6 +69,20 @@
                         @enderror
                       </div>
 
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>Giới tính</label>
+                        <div class="d-flex">
+                          <div class="form-check mr-3">
+                            <input type="radio" class="form-check-input" id="radio1" name="gender" value="1" @if($detail->gender == 1) checked @endif>Nam
+                            <label class="form-check-label" for="radio1"></label>
+                          </div>
+                          <div class="form-check ml-3" style="margin-left: 10px;">
+                            <input type="radio" class="form-check-input" id="radio2" name="gender" value="2" @if($detail->gender == 2) checked @endif>Nữ
+                            <label class="form-check-label" for="radio2"></label>
+                          </div>
+                        </div>
+                      </div>
+
                       <div class="w-100"></div>
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
