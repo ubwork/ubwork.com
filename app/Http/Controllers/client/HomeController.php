@@ -19,12 +19,13 @@ class HomeController extends Controller
         $data_job_type = Major::all();
         $dataYour = [];
         $job_short = [];
+        $data = [];
         // dd(isset($search));
         $search = $request->search;
         if (isset($search)) {
             $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title', 'like', '%' . $search . '%')->paginate(1);
         } else {
-            $data = JobPost::all()->random(1);
+            $data = JobPost::inRandomOrder()->limit(5)->get();
         }
         foreach ($data_job_type as $item) {
             if (!empty($item)) {
