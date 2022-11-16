@@ -335,10 +335,6 @@ class CreateCvController extends Controller
         //lưu rồi mở file
 
         $pdf = Pdf::loadView('client.upcv.index', $this->v);
-
-        $path_pdf = 'upload/cv/';
-
-
         $fileName = 'CV-' . $seeker->name .'_'. time() . rand('0', '99') . '.pdf';
 
         $seekerA = SeekerProfile::where('candidate_id', $id)->first();
