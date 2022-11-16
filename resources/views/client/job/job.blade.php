@@ -112,16 +112,21 @@
                                                     {{ $item->max_salary }}</li>
                                             </ul>
                                             <ul class="job-other-info">
+                                                @if($item->type_work == 1)
                                                 <li class="time">
-                                                    @if ($item->full_time == 1)
-                                                        Full Time
-                                                    @endif
+                                                    Full Time
                                                 </li>
+                                                @endif
+                                                @if($item->type_work == 2)
                                                 <li class="privacy">
-                                                    @if ($item->part_time == 1)
-                                                        Part Time
-                                                    @endif
+                                                    Part Time
                                                 </li>
+                                                @endif
+                                                @if($item->type_work == 0 )
+                                                <li class="required">
+                                                    Intern
+                                                </li>
+                                                @endif
                                                 {{-- <li class="required">Urgent</li> --}}
                                             </ul>
                                             @if (auth('candidate')->check()) 
