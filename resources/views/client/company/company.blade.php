@@ -26,35 +26,38 @@
                 <!-- Filters Column -->
                 <div class="filters-column col-lg-4 col-md-12 col-sm-12">
                     <div class="inner-column pd-right">
-                            <form action="{{route('company-filter')}}" method="post">
-                                @csrf
-                                <div class="filter-block">
+                        <form action="" method="get">
+                            <div class="filter-block">
                                 <h4>Tìm theo tên</h4>
                                 <div class="form-group">
-                                    <input type="text" name="keyword"
-                                        placeholder="Tên công ty">
+                                    <input type="text" name="search" placeholder="Tên công ty">
                                     <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
-
-                            <!-- Filter Block -->
                             <div class="filter-block">
-                                <h4>Tìm theo địa điểm</h4>
+                                <h4>Quy mô công ty</h4>
                                 <div class="form-group">
-                                    <input type="text" name="address" placeholder="Thành phố">
-                                    <span class="icon flaticon-map-locator"></span>
+                                    <select name="size" class="chosen-select">
+                                        <option value="">Mời Chọn</option>
+                                        <option value="1">1-50 Nhân viên</option>
+                                        <option value="2" >50-100 Nhân Viên</option>
+                                        <option value="3" >100-200 Nhân Viên</option>
+                                        <option value="4" >200-500 Nhân Viên</option>
+                                        <option value="5" >500-1000 Nhân Viên</option>
+                                    </select>
+                                    <span class="icon flaticon-briefcase"></span>
                                 </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
                                 <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
                                         công ty</span></button>
                             </div>
-                            </form>
-                        </div>
-
-                        <!-- End Call To Action -->
+                        </form>
                     </div>
-                
+
+                    <!-- End Call To Action -->
+                </div>
+
 
                 <!-- Content Column -->
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
@@ -112,7 +115,6 @@
                                         </ul>
                                     </div>
                                     {{-- @dd($job) --}}
-                                    <div class="text">Mô Tả Chưa Có</div>
                                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
@@ -122,12 +124,12 @@
                             {{-- <p>Showing 36 of 497 Jobs</p>
                             <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
                             <button class="show-more">Xem thêm</button> --}}
-                            {{$data->links()}}
+                            {{ $data->links() }}
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
     </section>
 @endsection
