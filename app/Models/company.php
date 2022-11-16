@@ -51,6 +51,4 @@ class Company  extends Authenticatable
         ->update($data);
         return $res;
     }
-
-    
 }
