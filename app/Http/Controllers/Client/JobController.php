@@ -46,7 +46,6 @@ class JobController extends Controller
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
             $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
-
             if(!empty($seeker->id)){
                 $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
                 if (!empty($dataActive)) {
@@ -59,7 +58,6 @@ class JobController extends Controller
                     foreach ($dataShort as $item) {
                         $idJobShort[$item->job_post_id] = $item;
                     }
-
                 }
             }
             // dd($idJobApplied[$item->id]);

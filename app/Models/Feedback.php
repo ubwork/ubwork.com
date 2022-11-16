@@ -4,24 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
-class Feedback extends Model
+class FeedbackCandidate extends Model
 {
     use HasFactory;
-    protected $table = 'feedback';
+    protected $table = 'feedback_candidates';
     protected $fillable = [
         'id',
         'candidate_id',
         'company_id',
         'rate',
-        'title',
+        'comment',
         'satisfied',
         'unsatisfied',
         'is_candidate',
-        'like_text',
-        'improve',
         'created_at',
         'updated_at',
     ];
@@ -49,21 +45,5 @@ class Feedback extends Model
         ->where('id', '=', $params['cols']['id'])
         ->update($data);
         return $res;
-    }
-    public function listFeedback($id){
-        $query=DB::table($this->table)
-        ->select($this->fillable)
-        ->where('company_id', $id);
-        $list=$query->get();
-        return $list;
-
-    }
-    public function listFb($id){
-        $query=DB::table($this->table)
-        ->select($this->fillable)
-        ->where('company_id', $id);
-        $list=$query->get();
-        return $list;
-
     }
 }

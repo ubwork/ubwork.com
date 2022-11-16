@@ -49,7 +49,7 @@ class CandidateRequest extends FormRequest
         return $rules;
     }
 
-    public function messages()
+    public function message()
     {
         return [
             'name.required' => 'Vui lòng nhập tên',
