@@ -7,6 +7,7 @@ use App\Http\Requests\Company\JobPostRequest;
 use App\Models\JobPost;
 use App\Models\JobPostActivities;
 use App\Models\Major;
+use App\Models\Skill;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class JobPostController extends Controller
     { 
         $this->v['title'] = 'Đăng tin tuyển dụng';
         $this->v['majors'] = Major::all();
+        $this->v['skills'] = Skill::all();
         return view('company.post.add',$this->v);
     }
 
@@ -41,10 +43,10 @@ class JobPostController extends Controller
             $data = $request->all();
             $data['company_id'] = auth('company')->user()->id;
             $skill = $request->input('skill');
-            unset($data['skill']);
             unset($data['files']);
+            $data['start_date'] = Carbon::now();
             $res = JobPost::create($data);
-            
+            $res->skills()->attach($skill);
             Session::flash('success', 'Thêm thành công!');
             return Redirect()->route('company.post.index');
         } catch (Exception $e) {
@@ -65,7 +67,9 @@ class JobPostController extends Controller
     {
         $this->v['title'] = 'Sửa tin tuyển dụng';
         $this->v['majors'] = Major::all();
-        $this->v['jobPost'] = JobPost::find($id);
+        $this->v['skills'] = Skill::all();
+        $this->v['jobPost'] = JobPost::with('skills')->find($id);
+        $this->v['skillActive'] = $this->v['jobPost']->skills->pluck('id')->toArray();
         return view('company.post.edit',$this->v);
     }
 
@@ -76,10 +80,10 @@ class JobPostController extends Controller
             $data = $request->all();
             $data['company_id'] = auth('company')->user()->id;
             $skill = $request->input('skill');
-            unset($data['skill']);
             unset($data['files']);
+            $model->skills()->sync($skill);
+            $data['start_date'] = Carbon::now();
             $res = $model->update($data);
-            
             Session::flash('success', 'Thêm thành công!');
             return Redirect()->route('company.post.index');
         } catch (Exception $e) {
@@ -91,8 +95,8 @@ class JobPostController extends Controller
 
     public function profileApply($id){
         $this->v['title'] = 'CV ứng tuyển';
-        $model = new JobPostActivities();
-        $this->v['listSeeker'] = $model->getListCandidate($id);
+        $model = JobPost::with('seekerProfiles')->find($id);
+        $this->v['listSeeker'] = $model->seekerProfiles;
         return view('company.post.applied',$this->v);
     }
 
