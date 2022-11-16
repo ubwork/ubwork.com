@@ -92,18 +92,9 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-12 col-md-12">
-                        <label>Điều bạn thích</label>
-                        <textarea type="text" name="like_text" placeholder="Điều bạn thích" value=""></textarea>
+                        <label>Điều bạn thích ở công ty</label>
+                        <textarea type="text" name="like_text" placeholder="Điều bạn thích ở công ty" value=""></textarea>
                         @error('like_text')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                      </div>
-
-                      <!-- Input -->
-                      <div class="form-group col-lg-12 col-md-12">
-                        <label>Điều bạn chưa thích</label>
-                        <textarea type="text" name="dislike_text" placeholder="Điều bạn chưa thích" value=""></textarea>
-                        @error('dislike_text')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                       </div>

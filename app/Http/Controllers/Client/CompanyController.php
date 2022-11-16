@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\FeedbackRequest;
 use App\Models\company;
 use App\Models\Company as ModelsCompany;
 use App\Models\Feedback;
@@ -81,7 +82,7 @@ class CompanyController extends Controller
         $maJor = Major::all();
         return view('client.company.feedback', compact('company_detail', 'company_job', 'maJor'));
     }
-    public function saveFeedback(Request $request, $id)
+    public function saveFeedback(FeedbackRequest $request, $id)
     {
         $id_user = auth('candidate')->user()->id;
         $feedback = new Feedback();

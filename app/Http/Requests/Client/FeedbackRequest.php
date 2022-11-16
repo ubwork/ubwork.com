@@ -59,9 +59,9 @@ class FeedbackRequest extends FormRequest
             'title.required' => 'Chưa nhập tiêu đề',
             'satisfied.required' => 'Chưa nhập điều hài lòng',
             'unsatisfied.required' => 'Chưa nhập điều chưa hài lòng',
-            'like_text.require' => 'Chưa nhập điều bạn thích',
-            'rate.require' => 'Chưa nhập sao',
-            'improve.require' => 'Chưa nhập điều công ty cần cải thiện',
+            'like_text.required' => 'Chưa nhập điều bạn thích',
+            'rate.required' => 'Chưa nhập sao',
+            'improve.required' => 'Chưa nhập điều công ty cần cải thiện',
         ];
     }
 }
