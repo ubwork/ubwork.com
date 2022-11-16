@@ -16,6 +16,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // $schedule->command('request:update-status')->everyMinute();
+        $schedule->call(function(){
+            info('update status post');
+            \DB::table('job_posts')
+            ->where('end_date','<',\Carbon\Carbon::now())
+            ->update(['status'=>0]);
+        })->daily();
     }
 
     /**

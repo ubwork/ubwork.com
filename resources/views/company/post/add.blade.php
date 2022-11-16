@@ -166,7 +166,7 @@
                                                     <div class="form-group col-lg-12 col-md-12">
                                                         <label>Kĩ năng liên quan</label>
                                                         <select data-placeholder="Chọn ... " class="chosen-select" name="skill[]" multiple>
-                                                            @foreach (config('custom.skill') as  $value)
+                                                            @foreach ($skills as  $value)
                                                                 <option value="{{ $value['id']}}">{{ $value['name']}}</option>
                                                            @endforeach
                                                         </select>
