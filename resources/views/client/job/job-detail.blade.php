@@ -20,21 +20,21 @@
                   <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                 </ul>
                 <ul class="job-other-info">
+                  @if($data_job->type_work == 1)
                     <li class="time">
-                        @if($data_job->full_time == 1)
-                            Full Time
-                        @endif
+                        Full Time
                     </li>
+                  @endif
+                  @if($data_job->type_work == 2)
                     <li class="privacy">
-                        @if($data_job->part_time == 1)
-                            Part Time
-                        @endif
+                        Part Time
                     </li>
+                  @endif
+                  @if($data_job->type_work == 0 )
                     <li class="required">
-                        @if($data_job->full_time == 1 && $data_job->part_time == 1 )
-                           Full Time / Part Time
-                        @endif
+                      Intern
                     </li>
+                  @endif
                 </ul>
               </div>
 
