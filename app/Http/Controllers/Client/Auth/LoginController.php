@@ -30,7 +30,7 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        if (auth('candidate')->attempt(['email' => $email, 'password' => $password])) {
+        if (auth('candidate')->attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
             $data = auth('candidate')->user();
             auth('candidate')->login($data);
             Session::flash('success', 'Đăng nhập thành công');
