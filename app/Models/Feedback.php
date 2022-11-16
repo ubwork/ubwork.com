@@ -58,12 +58,4 @@ class Feedback extends Model
         return $list;
 
     }
-    public function listFb($id){
-        $query=DB::table($this->table)
-        ->select($this->fillable)
-        ->where('company_id', $id);
-        $list=$query->get();
-        return $list;
-
-    }
 }
