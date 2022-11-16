@@ -11,30 +11,30 @@
           <div class="job-block-seven">
             <div class="inner-box">
               <div class="content">
-                <span class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}"></span>
+                <span class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}"></span>
                 <h4><a href="{{route('job-detail', ['id' => $data_job->id])}}">{{$data_job->title}}</a></h4>
                 <ul class="job-info">
-                  <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li>
+                  {{-- <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li> --}}
                   <li><span class="icon flaticon-map-locator"></span>{{$data_job->company->address}}</li>
                   <li><span class="icon flaticon-clock-3"></span>{{$data_job->company->working_time}}</li>
                   <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                 </ul>
                 <ul class="job-other-info">
+                  @if($data_job->type_work == 1)
                     <li class="time">
-                        @if($data_job->full_time == 1)
-                            Full Time
-                        @endif
+                        Full Time
                     </li>
+                  @endif
+                  @if($data_job->type_work == 2)
                     <li class="privacy">
-                        @if($data_job->part_time == 1)
-                            Part Time
-                        @endif
+                        Part Time
                     </li>
+                  @endif
+                  @if($data_job->type_work == 0 )
                     <li class="required">
-                        @if($data_job->full_time == 1 && $data_job->part_time == 1 )
-                           Full Time / Part Time
-                        @endif
+                      Intern
                     </li>
+                  @endif
                 </ul>
               </div>
 
@@ -55,10 +55,10 @@
                 @if (auth('candidate')->check()) 
                   @if (!empty($idJobShort[$data_job->id]) )
                     @if($idJobShort[$data_job->id]->job_post_id == $data_job->id)
-                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark" ></span></button></a>
+                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
                     @endif
                   @else
-                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;" ><span class="flaticon-bookmark" style="color: white"></span></button></a>
+                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                   @endif
                 @else
                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
@@ -100,7 +100,7 @@
               <div class="related-jobs">
                 <div class="title-box">
                   <h3>Công việc liên quan</h3>
-                  <div class="text">{{count($total)}} việc làm được đăng tải.</div>
+                  <div class="text">{{count($data_job_relate)}} việc làm.</div>
                 </div>
 
                 <!-- Job Block -->
@@ -108,33 +108,39 @@
                     <div class="job-block">
                         <div class="inner-box">
                             <div class="content">
-                            <span class="company-logo"><img src="{{asset('storage/images/company/'.$item->company->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
+                                {{-- <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li> --}}
                                 <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                 <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ/ngày</li>
                                 <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                @if($item->full_time == 1)
+                                @if($item->type_work == 1)
                                   <li class="time">
-                                    Full Time
+                                      Full Time
                                   </li>
                                 @endif
-                                @if($item->part_time == 1)
+                                @if($item->type_work == 2)
                                   <li class="privacy">
                                       Part Time
                                   </li>
                                 @endif
-                                @if($item->full_time == 1 && $item->part_time == 1 )
+                                @if($item->type_work == 0 )
                                   <li class="required">
-                                  Full Time / Part Time
+                                    Intern
                                   </li>
                                 @endif
                             </ul>
-                            @if (auth('candidate')->check()) 
-                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                           @if (auth('candidate')->check()) 
+                              @if (!empty($idJobShort[$item->id]) )
+                                @if($idJobShort[$item->id]->job_post_id == $item->id)
+                                  <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                                @endif
+                              @else
+                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
+                              @endif
                             @else
                                 <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                             @endif
@@ -166,11 +172,6 @@
                         <i class="icon icon-location"></i>
                         <h5>Địa điểm:</h5>
                         <span>{{$data_job->company->address}}</span>
-                      </li>
-                      <li>
-                        <i class="icon icon-user-2"></i>
-                        <h5>Job Title:</h5>
-                        <span>{{$data_job->title}}</span>
                       </li>
                       <li>
                         <i class="icon icon-clock"></i>
@@ -214,7 +215,7 @@
                 <div class="sidebar-widget company-widget">
                   <div class="widget-content">
                     <div class="company-title">
-                      <div class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}" alt=""></div>
+                      <div class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
                       <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">Thông tin công ty</a>
                     </div>
