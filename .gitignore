@@ -20,3 +20,4 @@ composer.lock
 /public/assets/client-bower
 /public/js
 /public/css
+/public/upload/cv
