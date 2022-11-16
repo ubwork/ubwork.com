@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Client\FeedbackRequest;
 use App\Models\company;
-use App\Models\Feedback;
-use App\Models\JobPost;
 use App\Models\Company as ModelsCompany;
+use App\Models\FeedbackCompany;
+use App\Models\JobPost;
 use App\Models\Major;
 use App\Models\ShortlistCompany;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
@@ -34,16 +32,7 @@ class CompanyController extends Controller
     {
         $company_detail = company::where('id', $id)->first();
         $company_job = JobPost::where('company_id', $company_detail->id)->get();
-        $query = new Feedback();
-        $data = $query->listFeedback($id);
-        $sum = count($data);
-        $u = 0;
-        foreach($data as $list=> $item){
-            $u+=$item->rate;
-        }
-        $average = number_format($u/$sum ,1);
         $maJor = Major::all();
-
         $idCompanyShort = [];
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
@@ -56,8 +45,7 @@ class CompanyController extends Controller
         }
         // dd($idJobApplied[$item->id]);
         // dd($data_job->id);
-        return view('client.company.company-detail', compact('company_detail', 'company_job','average','sum', 'maJor', 'idCompanyShort'));
-
+        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor', 'idCompanyShort'));
     }
     public function filter(Request $request)
     {
@@ -79,26 +67,20 @@ class CompanyController extends Controller
         $maJor = Major::all();
         return view('client.company.feedback', compact('company_detail', 'company_job', 'maJor'));
     }
-    public function saveFeedback(FeedbackRequest $request, $id)
+    public function saveFeedback(Request $request, $id)
     {
         $id_user = auth('candidate')->user()->id;
-        $feedback = new Feedback();
-        $data = Feedback::where('candidate_id',$id_user)->get();
-        if(empty($data)){
-            $feedback->rate = $request->rate;
-            $feedback->candidate_id = $id_user;
-            $feedback->company_id = $id;
-            $feedback->title = $request->title;
-            $feedback->satisfied = $request->satisfied;
-            $feedback->unsatisfied = $request->unsatisfied;
-            $feedback->like_text = $request->like_text;
-            $feedback->improve = $request->improve;
-            $feedback->is_candidate="0";
-            $feedback->save();
-            return redirect()->route('company-detail', ['id' => $id]);
-        }else{
-            Session::flash('error', 'Tài khoản của bạn đã từng gửi feedback đến công ty');
-            return Redirect()->route('feedback', ['id' => $id]);
-        }
+        $feedback = new FeedbackCompany();
+        $feedback->rate = $request->rate;
+        $feedback->candidate_id = $id_user;
+        $feedback->company_id = $id;
+        $feedback->satisfied = $request->satisfied;
+        $feedback->unsatisfied = $request->unsatisfied;
+        $feedback->like_text = $request->like_text;
+        $feedback->dislike_text = $request->dislike_text;
+        $feedback->improve = $request->improve;
+        $feedback->comment = $request->comment;
+        $feedback->save();
+        return redirect()->route('company-detail', ['id' => $id]);
     }
 }
