@@ -27,7 +27,7 @@ class JobController extends Controller
     public function job()
     {
         $job_short = [];
-        $data = JobPost::where('status', 1)->paginate(1);
+        $data = JobPost::where('status', 1)->paginate(6);
         $maJor = Major::all();
         if (auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
