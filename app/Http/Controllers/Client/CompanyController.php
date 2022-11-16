@@ -5,11 +5,12 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Models\company;
 use App\Models\Company as ModelsCompany;
-use App\Models\FeedbackCompany;
+use App\Models\Feedback;
 use App\Models\JobPost;
 use App\Models\Major;
 use App\Models\ShortlistCompany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
@@ -45,7 +46,7 @@ class CompanyController extends Controller
             $average = null;
         }
         $maJor = Major::all();
-<<<<<<<<< Temporary merge branch 1
+
         $idCompanyShort = [];
         if (auth('candidate')->check()) {
             $id_user = auth('candidate')->user()->id;
@@ -58,10 +59,7 @@ class CompanyController extends Controller
         }
         // dd($idJobApplied[$item->id]);
         // dd($data_job->id);
-        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor', 'idCompanyShort'));
-=========
-        return view('client.company.company-detail', compact('company_detail', 'company_job','average','sum', 'maJor'));
->>>>>>>>> Temporary merge branch 2
+        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor','average','sum', 'idCompanyShort'));
     }
     public function filter(Request $request)
     {
