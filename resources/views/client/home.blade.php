@@ -49,7 +49,7 @@
                     <div class="image-box">
                         <figure class="main-image wow fadeIn animated" data-wow-delay="500ms"
                             style="visibility: visible; animation-delay: 500ms; animation-name: fadeIn;"><img
-                                src="{{ asset('storage/' . 'images/banner-img-1.png') }}" alt=""></figure>
+                                src="{{ asset('/assets/client-bower/images/resource/banner-img-1.png') }}" alt=""></figure>
 
                         <!-- Info BLock One -->
                         <div class="info_block anm wow fadeIn animated" data-wow-delay="1000ms" data-speed-x="2"
@@ -64,7 +64,7 @@
                             data-speed-y="1"
                             style="transform: translate3d(-2px, -3.68px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2000ms; animation-name: fadeIn;">
                             <p>10k+ Candidates</p>
-                            <div class="image"><img src="{{ asset('storage/' . 'images/1667320257_multi-logo.png') }}"
+                            <div class="image"><img src="{{ asset('/assets/client-bower/images/resource/multi-peoples.png') }}"
                                     alt=""></div>
                         </div>
 
@@ -128,15 +128,14 @@
                 <h2>Việc làm nổi bật</h2>
                 <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
                 </div>
-
                 <div class="row wow fadeInUp">
                     <!-- Job Block -->
                     @foreach ($data as $item)
-
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <h4><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                    <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}" alt=""></span>
+                                    <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                     </h4>
                                     <ul class="job-info">
                                         <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
@@ -147,19 +146,30 @@
                                             {{ $item->max_salary }} đ</li>
                                     </ul>
                                     <ul class="job-other-info">
-                                        @if ($item->full_time == 1)
+                                        @if($item->type_work == 1)
                                             <li class="time">
                                                 Full Time
                                             </li>
                                         @endif
-                                        @if ($item->part_time == 1)
+                                        @if($item->type_work == 2)
                                             <li class="privacy">
-                                                Part Time </li>
+                                                Part Time
+                                            </li>
+                                        @endif
+                                        @if($item->type_work == 0 )
+                                            <li class="required">
+                                                Intern
+                                            </li>
                                         @endif
                                     </ul>
-                                    @if (auth('candidate')->check())
-                                        <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
-                                                class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
+                                    @if (auth('candidate')->check()) 
+                                        @if (!empty($job_short[$item->id]) )
+                                            @if($job_short[$item->id]->job_post_id == $item->id)
+                                            <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white" ></span></a>
+                                            @endif
+                                        @else
+                                            <a href="{{route('shortlisted', ['id' => $item->id])}}" class="bookmark-btn"><span class="flaticon-bookmark" style="color: white"></span></a>
+                                        @endif
                                     @else
                                         <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                     @endif
@@ -174,6 +184,69 @@
                             thêm</span></a>
                 </div>
             </div>
+            @if (auth('candidate')->check()) 
+                <div class="sec-title text-center">
+                    <h2>Việc làm có thể phù hợp với bạn</h2>
+                    <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
+                    </div>
+
+                    <div class="row wow fadeInUp">
+                        <!-- Job Block -->
+                        @foreach ($dataYour as $item)
+                            <div class="job-block col-lg-6 col-md-12 col-sm-12">
+                                <div class="inner-box">
+                                    <div class="content">
+                                        <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}" alt=""></span>
+                                        <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                        </h4>
+                                        <ul class="job-info">
+                                            <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
+                                            </li>
+                                            <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
+                                                giờ</li>
+                                            <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
+                                                {{ $item->max_salary }} đ</li>
+                                        </ul>
+                                        <ul class="job-other-info">
+                                            @if($item->company->type_work == 1)
+                                                <li class="time">
+                                                    Full Time
+                                                </li>
+                                            @endif
+                                            @if($item->company->type_work == 2)
+                                                <li class="privacy">
+                                                    Part Time
+                                                </li>
+                                            @endif
+                                            @if($item->company->type_work == 0 )
+                                                <li class="required">
+                                                    Intern
+                                                </li>
+                                            @endif
+                                        </ul>
+                                        @if (auth('candidate')->check()) 
+                                        @if (!empty($job_short[$item->id]) )
+                                            @if($job_short[$item->id]->job_post_id == $item->id)
+                                            <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark"style="color: white" ></span></a>
+                                            @endif
+                                        @else
+                                            <a href="{{route('shortlisted', ['id' => $item->id])}}" class="bookmark-btn"><span class="flaticon-bookmark" ></span></a>
+                                        @endif
+                                    @else
+                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                    @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="btn-box">
+                        <a href="{{ route('job') }}" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Xem
+                                thêm</span></a>
+                    </div>
+                </div>
+            @endif
     </section>
     <!-- End Job Section -->
 
