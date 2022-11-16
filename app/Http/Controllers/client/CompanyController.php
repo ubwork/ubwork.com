@@ -41,11 +41,7 @@ class CompanyController extends Controller
         foreach($data as $list=> $item){
             $u+=$item->rate;
         }
-        if($sum !=0 && $sum != null){
-            $average = number_format($u/$sum ,1);
-        }else{
-            $average = null;
-        }
+        $average = number_format($u/$sum ,1);
         $maJor = Major::all();
 
         $idCompanyShort = [];
@@ -87,9 +83,8 @@ class CompanyController extends Controller
     {
         $id_user = auth('candidate')->user()->id;
         $feedback = new Feedback();
-        $data = Feedback::where('candidate_id',$id_user)->where('company_id',$id)->get();
-        $a = count($data);
-        if($a == 0){
+        $data = Feedback::where('candidate_id',$id_user)->get();
+        if(empty($data)){
             $feedback->rate = $request->rate;
             $feedback->candidate_id = $id_user;
             $feedback->company_id = $id;
@@ -100,10 +95,9 @@ class CompanyController extends Controller
             $feedback->improve = $request->improve;
             $feedback->is_candidate="0";
             $feedback->save();
-            Session::flash('success', 'Feedback thành công');
             return redirect()->route('company-detail', ['id' => $id]);
         }else{
-            Session::flash('error', 'Tài khoản của bạn đã từng gửi Feedback đến công ty');
+            Session::flash('error', 'Tài khoản của bạn đã từng gửi feedback đến công ty');
             return Redirect()->route('feedback', ['id' => $id]);
         }
     }
