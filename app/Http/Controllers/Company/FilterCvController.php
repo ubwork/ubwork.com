@@ -8,6 +8,7 @@ use App\Models\Major;
 use App\Models\Experience;
 use App\Models\SeekerProfile;
 use App\Models\Skill;
+use App\Models\SkillSeeker;
 use Illuminate\Http\Request;
 
 class FilterCvController extends Controller
@@ -19,21 +20,33 @@ class FilterCvController extends Controller
         $query = "1=1";
         $exp      = $request->input('experience');
         $major      = $request->input('major');
-        $skill      = $request->input('skill');
-        if($exp) $query .= ' AND id = '. $exp ; 
+        $skills      = $request->input('skill');
         if($major) $query .= ' AND major_id = '. $major;
-        if($skill) $query .= ' AND skill_id LIKE \'%'. $skill . '%\'' ;
-        // dd($query);
-        
+        if($exp)
+        {
+            $exp = Experience::where('id',$exp)->pluck('seeker_id','seeker_id')->toArray();
+            $cvString = !empty($exp) ? implode(',',$exp) : -1;
+            $query .= " AND id IN($cvString)" ;
+        // dd($cvString);
+
+        } 
+        if($skills)
+        {
+            $seekerSkill = SkillSeeker::where('skill_id',$skills)->pluck('seeker_id','seeker_id')->toArray();
+            $cvString = !empty($seekerSkill) ? implode(',',$seekerSkill) : -1;
+            $query .= " AND id IN($cvString)" ;
+        // dd($cvString);
+
+        } 
         $title = "Tìm hồ sơ ứng viên";
         $activeRoute = "filter";
         $exp = Experience::all()->toArray();
         $major = Major::all()->toArray();
         $skill = Skill::all()->toArray();
         
+        
         $candidate = Candidate::all();
         $data = SeekerProfile::with('candidate', 'major')->whereRaw($query)->paginate($perPage);
-        // dd($data[$candidate->id]);
         return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill', 'data', 'candidate'));
 
     }
