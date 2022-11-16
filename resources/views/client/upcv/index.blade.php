@@ -30,7 +30,7 @@
 
 	.top-section{
 		text-align: center;
-		padding: 20px;
+		padding: 10px;
 	}
 	.profile{
 		width: 150px;
@@ -41,7 +41,7 @@
 		font-size: 40px;
 		font-weight: bold;
 		margin: 0px;
-		margin-top: 10px;
+		margin-top: -50px;
 	}
 	.p1 span{
 		font-weight: 100;

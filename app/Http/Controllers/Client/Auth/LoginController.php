@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Candidate;
 use Illuminate\Console\View\Components\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -29,14 +30,16 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        if (auth('candidate')->attempt(['email' => $email, 'password' => $password])) {
+        if (auth('candidate')->attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
             $data = auth('candidate')->user();
             auth('candidate')->login($data);
+            Session::flash('success', 'Đăng nhập thành công');
             return Redirect::to('/');
         } else {
             Session::flash('error', 'Email hoặc mật khẩu không đúng');
             return Redirect::to('/login');
         }
+        
     }
     public function logout()
     {
