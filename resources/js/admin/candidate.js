@@ -61,7 +61,6 @@ $(document).ready(function() {
         var id = $(this).data('id');
         var status = $(this).val();
         console.log($('.stu'));
-        // alert(status);
         var data = {
             "_token": $('meta[name="csrf-token"]').attr('content'),
             "id": id,
@@ -81,3 +80,23 @@ $(document).ready(function() {
     });
 
 });
+
+$(document).ready(function(){
+    var arrayUrl = $(location).attr('pathname').split('/');
+    var model = arrayUrl[arrayUrl.length - 1];
+    $('#statusBox').change(function(){
+        var id = $('#statusBox').val();
+        var data = {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "status": id
+        }
+        $.ajax({
+            type: "POST",
+            url: `${model}/${id}`,
+            data: data,
+            success: function(response) {
+                toastr.success(response.success)
+            },
+        });
+    })
+})
