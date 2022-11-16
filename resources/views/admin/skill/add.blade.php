@@ -19,7 +19,7 @@
                     <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="inputName">{{__('NAME')}} <span class="text-danger">*</span></label>
+                            <label for="inputName">{{__('Tên kỹ năng')}} <span class="text-danger">*</span></label>
                             <input type="text" id="inputName" name="name" class="form-control" value="{{old('name')}}">
                             @error('name')
                             <small class="text-danger">{{$message}}</small>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>{{__('DESCRIPTION')}} <span class="text-danger">*</span></label>
+                            <label>{{__('Mô tả')}} <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="description" value="{{old('description')}}">
                             @error('description')
                             <small class="text-danger">{{$message}}</small>
@@ -37,8 +37,8 @@
                     </div>
                     </div>
                     <div class="mt-3">
-                        <button type="submit" class="btn btn-primary float-left mr-3">{{__('SAVE')}}</button>
-                        <a href="{{route('admin.skill.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                        <button type="submit" class="btn btn-primary float-left mr-3">{{__('Lưu')}}</button>
+                        <a href="{{route('admin.skill.index')}}" class="btn btn-secondary">{{__('Hủy')}}</a>
                     </div>
                   </form>
                 </div>
