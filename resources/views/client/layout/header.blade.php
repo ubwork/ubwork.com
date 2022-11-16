@@ -82,6 +82,7 @@
                         <li><a href="{{ route('detail', ['id' => auth('candidate')->user()->id]) }}"><i class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã lưu</a></li>
+                        <li><a href="{{ route('shortlisted_list_company') }}"><i class="la la-bookmark-o"></i>Công ty đã lưu</a></li>
                         <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
                         <li><a href="{{route('seeker')}}"><i class="la la-file-invoice"></i> Quản lí CV</a></li>
                         <li><a href="{{ route('change_password') }}"><i class="la la-lock"></i>Đổi mật khẩu</a></li>

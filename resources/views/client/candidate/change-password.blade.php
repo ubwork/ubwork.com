@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{ __('UB Work') }} | {{__'Đổi mật khẩu'}}
+    {{ __('UB Work') }} | {{__('Đổi mật khẩu')}}
 @endsection
 @section('content')
     <section class="user-dashboard pt-5 mt-5">
@@ -18,10 +18,6 @@
                   <form class="default-form" action="{{route("update_pass")}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="form-group col-lg-6 col-md-12">
-                        <label>Mật khẩu cũ</label>
-                        <input type="text" name="password_old" placeholder="Mật khẩu cũ" value="">
-                      </div>
                       <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Mật khẩu mới</label>

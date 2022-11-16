@@ -41,6 +41,10 @@ Route::get('/shortlisted-job', 'client\ShortlistedController@shortlisted_job')->
 Route::get('/shortlisted/{id}', 'client\ShortlistedController@shortlisted')->name('shortlisted');
 Route::get('/delete-shortlisted/{id}', 'client\ShortlistedController@destroy')->name('delete_shortlisted');
 
+Route::get('/shortlisted-company/{id}', 'client\ShortlistCompanyController@shortlisted_company')->name('shortlisted_company');
+Route::get('/shortlisted-list-company', 'client\ShortlistCompanyController@shortlisted')->name('shortlisted_list_company');
+Route::get('/delete-shortlisted-company/{id}', 'client\ShortlistCompanyController@destroy')->name('delete_shortlisted_company');
+
 Route::get('/applied/{id}', 'client\JobPostActivitiesController@applied')->name('applied');
 Route::get('/jobApply', 'client\JobPostActivitiesController@jobApply')->name('jobApply');
 Route::get('/delete-applied-job/{id}', 'client\JobPostActivitiesController@destroy')->name('delete_applied_jobs');
