@@ -14,7 +14,7 @@
                 <span class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}"></span>
                 <h4><a href="{{route('job-detail', ['id' => $data_job->id])}}">{{$data_job->title}}</a></h4>
                 <ul class="job-info">
-                  <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li>
+                  {{-- <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li> --}}
                   <li><span class="icon flaticon-map-locator"></span>{{$data_job->company->address}}</li>
                   <li><span class="icon flaticon-clock-3"></span>{{$data_job->company->working_time}}</li>
                   <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
@@ -111,7 +111,7 @@
                             <span class="company-logo"><img src="{{asset('storage/images/company/'.$item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
+                                {{-- <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li> --}}
                                 <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                 <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ/ngày</li>
                                 <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
