@@ -54,44 +54,11 @@
                             </div>
                         </form>
                     </div>
-
-                    <!-- End Call To Action -->
                 </div>
-
-
-                <!-- Content Column -->
+                @endforeach
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
                     <div class="ls-outer">
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
-
-                        <!-- ls Switcher -->
-                        {{-- <div class="ls-switcher">
-                            <div class="showing-result">
-                                <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> employer</div>
-                            </div>
-                            <div class="sort-by">
-                                <select class="chosen-select">
-                                    <option>Most Recent</option>
-                                    <option>Freelance</option>
-                                    <option>Full Time</option>
-                                    <option>Internship</option>
-                                    <option>Part Time</option>
-                                    <option>Temporary</option>
-                                </select>
-
-                                <select class="chosen-select">
-                                    <option>Show 10</option>
-                                    <option>Show 20</option>
-                                    <option>Show 30</option>
-                                    <option>Show 40</option>
-                                    <option>Show 50</option>
-                                    <option>Show 60</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
-
-                        <!-- Block Block -->
                         @foreach ($data as $item)
                             <div class="company-block-three">
                                 <div class="inner-box">
@@ -111,7 +78,6 @@
                                         <ul class="job-other-info">
                                             <li class="privacy">Featured</li>
                                             <li class="time">Open Jobs – {{ count($job) }}</li>
-                                            {{-- <li class="time">Open Jobs – {{count($job)}}</li> --}}
                                         </ul>
                                     </div>
                                     {{-- @dd($job) --}}
