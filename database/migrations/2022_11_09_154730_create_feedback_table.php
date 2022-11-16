@@ -15,12 +15,10 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->integer('candidate_id');
             $table->integer('company_id');
             $table->tinyInteger('rate');
-            $table->string('like_text');
-            $table->string('improve');
+            $table->string('comment');
             $table->string('satisfied')->nullable();
             $table->string('unsatisfied')->nullable();
             $table->integer('is_candidate')->comment('0:feedback candidate, 1:feedback company');
