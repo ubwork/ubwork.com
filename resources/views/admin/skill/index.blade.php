@@ -11,7 +11,6 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <a href="{{route('admin.skill.create')}}" class="btn btn-primary float-right">Tạo mới</a>
               <form action="" class="form-inline float-right mr-3">
                 <div class="form-group">
                     <input class="form-control" name="key" id="key" placeholder="Nhập tên kỹ năng ....">
@@ -27,8 +26,8 @@
                 <thead>
                 <tr>
                   <th>STT</th>
-                  <th>{{__('NAME')}}</th>
-                  <th>{{__('DESCRIPTION')}}</th>
+                  <th>{{__('Tên kỹ năng')}}</th>
+                  <th>{{__('Mô tả')}}</th>
                   <th><a href="{{route('admin.skill.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
                 </thead>

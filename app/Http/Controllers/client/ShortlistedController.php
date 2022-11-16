@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobPost;
+use App\Models\Major;
 use App\Models\Shortlist;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,25 @@ class ShortlistedController extends Controller
                 }
             }
         }
-        return view('client.candidate.shortlisted-job', compact('data', 'job_short'));
+        $maJor = Major::all();
+        return view('client.candidate.shortlisted-job', compact('data', 'job_short', 'maJor'));
+    }
+    public function shortlisted_company()
+    {
+        $data = [];
+        $company_short = [];
+        if (auth('candidate')->check()) {
+            $id = auth('candidate')->user()->id;
+            $data = Shortlist::where('candidate_id', $id)->take(6)->get();
+            if (!empty($data)) {
+                foreach ($data as $item) {
+                    $id_post = $item->job_post_id;
+                    $job_short[$id_post] = JobPost::where('id', $id_post)->first();
+                }
+            }
+        }
+        $maJor = Major::all();
+        return view('client.company.shortlisted-company', compact('data', 'job_short', 'maJor'));
     }
     public function destroy($id)
     {

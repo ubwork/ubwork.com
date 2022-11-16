@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{__('Job')}} | {{$job_cat->name}}
+    {{__('UB Work')}} | {{$job_cat->name}}
 @endsection
 @section('content')
     <section class="page-title">
@@ -8,8 +8,8 @@
             <div class="title-outer">
                 <h1>{{$job_cat->name}}</h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li>Jobs</li>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li>Công việc</li>
                 </ul>
             </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="auto-container">
             <div class="filters-backdrop"></div>
             <div class="row">
-                <div class="filters-column hide-left">
+                {{-- <div class="filters-column hide-left">
                     <div class="inner-column">
                         <div class="filters-outer">
                             <button type="button" class="theme-btn close-filters">X</button>
@@ -156,11 +156,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="content-column col-lg-12">
                     <div class="ls-outer">
                         <!-- ls Switcher -->
-                        <div class="ls-switcher">
+                        {{-- <div class="ls-switcher">
                             <div class="showing-result show-filters">
                                 <button type="button" class="theme-btn toggle-filters"><span
                                         class="icon icon-filter"></span> Filter</button>
@@ -185,7 +185,7 @@
                                     <option>Show 60</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <!-- Job Block -->
@@ -227,24 +227,17 @@
 
                         <!-- Pagination -->
                         <nav class="ls-pagination mb-5">
-                            <ul>
+                            {{-- <ul>
                                 <li class="prev"><a href="#"><i class="fa fa-arrow-left"></i></a></li>
                                 <li><a href="#">1</a></li>
                                 <li><a href="#" class="current-page">2</a></li>
                                 <li><a href="#">3</a></li>
                                 <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-                            </ul>
+                            </ul> --}}
+                            {{$data->links()}}
                         </nav>
 
                         <!-- Call To Action -->
-                        <div class="call-to-action-four style-two">
-                            <h5>Recruiting?</h5>
-                            <p>Advertise your jobs to millions of monthly users and search 15.8 million <br>CVs in our
-                                database.</p>
-                            <a href="#" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Start
-                                    Recruiting Now</span></a>
-                            <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
-                        </div>
                         <!-- End Call To Action -->
                     </div>
                 </div>

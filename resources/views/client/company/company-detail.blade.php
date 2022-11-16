@@ -26,15 +26,27 @@
 
                         <div class="btn-box">
                             @if (auth('candidate')->check()) 
-                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Feedback</a>
+                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Tố cáo</a>
                             @else
-                                <button class="theme-btn btn-style-one">Feedback</button>
+                                <button class="theme-btn btn-style-one">Tố cáo</button>
                             @endif
 
-                            @if (auth('candidate')->check()) 
-                                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                            {{-- @if (auth('candidate')->check()) 
+                                 <a class="bookmark-btn"  href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><i class="flaticon-bookmark"></i></a>
                             @else
+                           
                                 <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+                            @endif --}}
+                            @if (auth('candidate')->check()) 
+                                @if (!empty($idCompanyShort[$company_detail->id]) )
+                                    @if($idCompanyShort[$company_detail->id]->company_id == $company_detail->id)
+                                    <a href="{{route('delete_shortlisted_company', ['id' => $idCompanyShort[$company_detail->id]->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" ></span></button></a>
+                                    @endif
+                                @else
+                                    <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" style="color: white"></span></button></a>
+                                @endif
+                            @else
+                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                             @endif
                         </div>
                     </div>
@@ -47,7 +59,7 @@
                 <div class="row">
                     <div class="content-column col-lg-8 col-md-12 col-sm-12">
                         <div class="job-detail">
-                            <h4>About Company</h4>
+                            <h4>Thông tin công ty</h4>
                             <p>{{$company_detail->about}}
                             </p>
                             <div class="row images-outer">
@@ -87,8 +99,8 @@
                         <!-- Related Jobs -->
                         <div class="related-jobs">
                             <div class="title-box">
-                                <h3>3 jobs at Invision</h3>
-                                <div class="text">2020 jobs live - 293 added today.</div>
+                                <h3>Có {{count($company_job)}} công việc</h3>
+                                <div class="text">Năm 2020 - {{count($company_job)}} công việc được đăng tải.</div>
                             </div>
 
                             <!-- Job Block -->
@@ -136,13 +148,13 @@
                                 <div class="widget-content">
 
                                     <ul class="company-info mt-0">
-                                        <li>Primary industry: <span>{{$company_detail->company_model}}</span></li>
-                                        <li>Company size: <span>{{$company_detail->company_size}}</span></li>
-                                        <li>Founded in: <span>{{$company_detail->founded_in}}</span></li>
-                                        <li>Phone: <span>{{$company_detail->phone}}</span></li>
+                                        <li>Ngành chính: <span>{{$company_detail->company_model}}</span></li>
+                                        <li>Quy mô: <span>{{$company_detail->company_size}}</span></li>
+                                        <li>Thành lập: <span>{{$company_detail->founded_in}}</span></li>
+                                        <li>Số điện thoại: <span>{{$company_detail->phone}}</span></li>
                                         <li>Email: <span>{{$company_detail->email}}</span></li>
-                                        <li>Location: <span>{{$company_detail->address}}</span></li>
-                                        <li>Social media:
+                                        <li>Địa điểm: <span>{{$company_detail->address}}</span></li>
+                                        <li>Truyền thông xã hội:
                                             <div class="social-links">
                                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                                                 <a href="#"><i class="fab fa-twitter"></i></a>
@@ -159,7 +171,7 @@
 
                             <div class="sidebar-widget">
                                 <!-- Map Widget -->
-                                <h4 class="widget-title">Job Location</h4>
+                                <h4 class="widget-title">Địa điểm</h4>
                                 <div class="widget-content">
                                     <div class="map-outer mb-0">
                                         <iframe class="map-canvas" width="100%" src="{{$company_detail->map}}" frameborder="0"></iframe>
