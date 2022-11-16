@@ -75,7 +75,23 @@
                                                 </li>
                                                 <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
                                                     {{ $item->max_salary }}</li>
+                                                @php
+                                                    // sử lý thời gian
+                                                    $end_time = strtotime($item->end_date); // thời gian kết thúc
+                                                    $total = $end_time - $today;
+                                                    $day = floor($total / 60 / 60 / 24);
+                                                @endphp
+                                                <li><i class="icon flaticon-clock-3"></i><span>
+                                                        @if ($day < 0)
+                                                            <b>Hết hạn.</b>
+                                                        @else
+                                                            <b>Còn lại {{ $day }} ngày.</b>
+                                                        @endif
+                                                    </span>
+
+                                                </li>
                                             </ul>
+
                                             <ul class="job-other-info">
                                                 <li class="time">
                                                     @if ($item->full_time == 1)

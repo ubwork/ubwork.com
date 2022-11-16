@@ -12,6 +12,7 @@ use App\Models\SeekerProfile;
 use App\Models\Shortlist;
 use App\Models\Shortlisted;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -26,8 +27,9 @@ class JobController extends Controller
     public function job()
     {
         $data = JobPost::where('status', 1)->paginate(10);
+        $today = strtotime(Carbon::now());
         $maJor = Major::all();
-        return view('client.job.job', compact('data', 'maJor'));
+        return view('client.job.job', compact('data', 'maJor', 'today'));
     }
     public function job_cat($id)
     {
