@@ -59,7 +59,7 @@
 
                   <div class="form-group">
                     <select name="experience" class="select2">
-                        <option disabled selected>Chọn kinh nghiệm</option>
+                        <option disabled selected>Chọn vị trí từng đảm nhiệm</option>
                         @foreach ($exp as $item)
                         <option @if (app('request')->input('experience') == $item['id'])
                             selected 
@@ -100,7 +100,7 @@
                 {{-- @dd($item['candidate']['name']); --}}
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
-                      <span class="thumb"><img src="{{asset('storage/images/company/'. $item['candidate']['avatar'])}}" alt=""></span>
+                      <span class="thumb"><img src="{{asset('storage/'. $item['candidate']['avatar'])}}" alt=""></span>
                       <h3 class="name"><a href="#">{{$item['candidate']['name']}}</a></h3>
                       <span class="cat">{{$item['major']['name']}}</span>
                       <ul class="job-info">
@@ -108,9 +108,12 @@
                         <li><span class="icon flaticon-money"></span> {{$item['candidate']['coin']}}</li>
                       </ul>
                       <ul class="post-tags">
+                        {{-- @foreach ( as )
                         <li><a href="#">App</a></li>
                         <li><a href="#">Design</a></li>
                         <li><a href="#">Digital</a></li>
+                        @endforeach --}}
+                        
                       </ul>
                       <a href="#" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                     </div>
@@ -123,11 +126,7 @@
             <nav class="ls-pagination">
               <ul>
                 {{$data->render()}}
-                {{-- <li class="prev"><a href="#"><i class="fa fa-arrow-left"></i></a></li> --}}
-                {{-- <li><a href="#"></a></li> --}}
-                {{-- <li><a href="#" class="current-page">2</a></li> --}}
-                {{-- <li><a href="#">3</a></li> --}}
-                {{-- <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li> --}}
+               
               </ul>
             </nav>
           </div>
