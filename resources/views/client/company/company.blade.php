@@ -101,12 +101,11 @@
                                             </h4>
                                             <ul class="job-info">
                                                 <li><span class="icon flaticon-map-locator"></span>{{ $item->address }}</li>
-                                                <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                                                <li><span class="icon flaticon-briefcase"></span>{{ $item->company_model }}</li>
                                             </ul>
                                         </div>
 
                                         <ul class="job-other-info">
-                                            <li class="privacy">Featured</li>
                                             <li class="time">Open Jobs – {{ count($job) }}</li>
                                             {{-- <li class="time">Open Jobs – {{count($job)}}</li> --}}
                                         </ul>
