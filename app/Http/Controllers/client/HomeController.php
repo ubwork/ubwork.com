@@ -8,6 +8,7 @@ use App\Models\JobPost;
 use App\Models\Major;
 use App\Models\Shortlist;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -42,7 +43,7 @@ class HomeController extends Controller
     {
         $search = $request->search;
         $major = $request->major;
-
+        $today = strtotime(Carbon::now());
         $maJor = Major::all();
         if (isset($search) && isset($major)) {
             $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
@@ -53,6 +54,6 @@ class HomeController extends Controller
         } else {
             $data = JobPost::where('status', 1)->get();
         }
-        return view('client.job.job', compact('data', 'maJor'));
+        return view('client.job.job', compact('data', 'maJor','today'));
     }
 }

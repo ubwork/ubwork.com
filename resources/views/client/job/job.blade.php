@@ -75,6 +75,7 @@
                                                 </li>
                                                 <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
                                                     {{ $item->max_salary }}</li>
+                                                    {{-- @dd($today) --}}
                                                 @php
                                                     // sử lý thời gian
                                                     $end_time = strtotime($item->end_date); // thời gian kết thúc

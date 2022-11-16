@@ -84,6 +84,7 @@ class JobController extends Controller
         $search = $request->search;
         $major = $request->major;
         $type = $request->type;
+        $today = strtotime(Carbon::now());
         $maJor = Major::all();
         if (isset($search) && isset($major) && isset($type)) {
             $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
@@ -102,6 +103,6 @@ class JobController extends Controller
         } else {
             $data = JobPost::where('status', 1)->get();
         }
-        return view('client.job.job', compact('data', 'maJor'));
+        return view('client.job.job', compact('data', 'maJor','today'));
     }
 }
