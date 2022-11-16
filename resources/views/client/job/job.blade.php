@@ -18,76 +18,41 @@
         <div class="auto-container">
             <div class="filters-backdrop"></div>
             <div class="row">
-                {{-- <div class="filters-column hide-left">
-                    <div class="inner-column">
-                        <div class="filters-outer">
-                            <form action="job-search" method="get">
-                                <button type="button" class="theme-btn close-filters">X</button>
-                                <!-- Filter Block -->
-                                <div class="filter-block">
-                                    <h4>Tìm Kiếm</h4>
-                                    <div class="form-group">
-                                        <input type="text" name="search"
-                                            placeholder="Job title, keywords, or company">
-                                        <span class="icon flaticon-search-3"></span>
-                                    </div>
-                                </div>
-                                <div class="filter-block">
-                                    <h4>Chuyên Ngành</h4>
-                                    <select name="major" id="">
-                                        <option value="">Mời Chọn</option>
-                                        @foreach ($maJor as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <!-- Filter Block -->
-                                <div class="filter-block">
-                                    <h4>Tags</h4>
-                                    <ul class="tags-style-one">
-                                        <li><a href="#">app</a></li>
-                                        <li><a href="#">administrative</a></li>
-                                        <li><a href="#">android</a></li>
-                                        <li><a href="#">wordpress</a></li>
-                                        <li><a href="#">design</a></li>
-                                        <li><a href="#">react</a></li>
-                                    </ul>
-                                </div>
-                                <button type="submit" class="btn btn-danger">Tìm Kiếm</button>
-                            </form>
+                <div class="job-search-form">
+                    <form method="get" action="job-search">
+                        <div class="row">
+                            <!-- Form Group -->
+                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                                <span class="icon flaticon-search-1"></span>
+                                <input type="text" name="search" placeholder="Mời Nhập Từ Khóa">
+                            </div>
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                                <span class="icon fa fa-history"></span>
+                                <select name="type" id="" class="chosen-select">
+                                    <option value="">Mời Chọn</option>
+                                    <option value="1">Intern</option>
+                                    <option value="2">Part Time</option>
+                                    <option value="3">Full Time</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                                <span class="icon flaticon-briefcase"></span>
+                                <select name="major" class="chosen-select">
+                                    <option value="">Chuyên Ngành</option>
+                                    @foreach ($maJor as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <!-- Form Group -->
+                            <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
+                                <button type="submit" class="theme-btn btn-style-one">Tìm Kiếm</button>
+                            </div>
                         </div>
-                    </div>
-                </div> --}}
+                    </form>
+                </div>
                 <div class="content-column col-lg-12">
                     <div class="ls-outer">
-                        <!-- ls Switcher -->
-                        {{-- <div class="ls-switcher">
-                            <div class="showing-result show-filters">
-                                <button type="button" class="theme-btn toggle-filters"><span
-                                        class="icon icon-filter"></span> Filter</button>
-                                <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> jobs</div>
-                            </div>
-                            <div class="sort-by">
-                                <select class="chosen-select">
-                                    <option>New Jobs</option>
-                                    <option>Freelance</option>
-                                    <option>Full Time</option>
-                                    <option>Internship</option>
-                                    <option>Part Time</option>
-                                    <option>Temporary</option>
-                                </select>
-
-                                <select class="chosen-select">
-                                    <option>Show 10</option>
-                                    <option>Show 20</option>
-                                    <option>Show 30</option>
-                                    <option>Show 40</option>
-                                    <option>Show 50</option>
-                                    <option>Show 60</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
                         <div class="row">
                             <!-- Job Block -->
                             @foreach ($data as $item)
@@ -110,36 +75,44 @@
                                                 </li>
                                                 <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
                                                     {{ $item->max_salary }}</li>
+
+                                                @php
+                                                    // sử lý thời gian
+                                                    $end_time = strtotime($item->end_date); // thời gian kết thúc
+                                                    $total = $end_time - $today;
+                                                    $day = floor($total / 60 / 60 / 24);
+                                                @endphp
+                                                <li><i class="icon flaticon-clock-3"></i><span>
+                                                        @if ($day < 0)
+                                                        <b>Hết hạn.</b>
+                                                        @else
+                                                            <b>Còn lại {{ $day }} ngày.</b>
+                                                        @endif
+                                                    </span>
+
+                                                </li>
                                             </ul>
                                             <ul class="job-other-info">
-                                                @if($item->type_work == 1)
                                                 <li class="time">
-                                                    Full Time
+                                                    @if ($item->full_time == 1)
+                                                        Full Time
+                                                    @endif
                                                 </li>
-                                                @endif
-                                                @if($item->type_work == 2)
                                                 <li class="privacy">
-                                                    Part Time
+                                                    @if ($item->part_time == 1)
+                                                        Part Time
+                                                    @endif
                                                 </li>
-                                                @endif
-                                                @if($item->type_work == 0 )
-                                                <li class="required">
-                                                    Intern
-                                                </li>
-                                                @endif
                                                 {{-- <li class="required">Urgent</li> --}}
                                             </ul>
-                                            @if (auth('candidate')->check()) 
-                                        @if (!empty($job_short[$item->id]) )
-                                            @if($job_short[$item->id]->job_post_id == $item->id)
-                                            <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark"style="color: white" ></span></a>
+                                            @if (auth('candidate')->check())
+                                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
+                                                        class="bookmark-btn"><span
+                                                            class="flaticon-bookmark"></span></button></a>
+                                            @else
+                                                <button class="bookmark-btn"><span
+                                                        class="flaticon-bookmark"></span></button>
                                             @endif
-                                        @else
-                                            <a href="{{route('shortlisted', ['id' => $item->id])}}" class="bookmark-btn"><span class="flaticon-bookmark" ></span></a>
-                                        @endif
-                                    @else
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                                    @endif
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +128,7 @@
                                 <li><a href="#">3</a></li>
                                 <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
                             </ul> --}}
-                            {{$data->links()}}
+                            {{-- {{$data->links()}} --}}
                         </nav>
 
                         <!-- Call To Action -->
@@ -167,7 +140,6 @@
                                     Recruiting Now</span></a>
                             <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
                         </div>
-                        <!-- End Call To Action -->
                     </div>
                 </div>
             </div>
