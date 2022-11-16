@@ -50,14 +50,29 @@
                     @csrf
                     <div class="row">
                         <!-- Input -->
-                      <div class="form-group col-lg-6 col-md-12">
-                        <label>Rate</label>
-                        <input type="number" name="rate" placeholder="rate" value="" max="5" min="1">
-                        @error('rate')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                      </div>
-                      <!-- Input -->
+                        <div class="form-group col-lg-12 col-md-3">
+                            <label>Tiêu đề</label>
+                            <input type="text" name="title" placeholder="Tóm tắt đánh giá của bạn ví dụ: 'công ty ảo' hoặc 'bạn hr quá xinh đẹp'" value="">
+                            @error('title')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                          </div>
+                        <!-- Input -->
+                        <div class="form-group col-lg-12 col-md-12 rating-css">
+                            <label>Đánh giá</label>
+                            <div class="star-icon">
+                                <input type="radio" value="1" name="rate" checked id="rating1">
+                                <label for="rating1" class="fa fa-star"></label>
+                                <input type="radio" value="2" name="rate" id="rating2">
+                                <label for="rating2" class="fa fa-star"></label>
+                                <input type="radio" value="3" name="rate" id="rating3">
+                                <label for="rating3" class="fa fa-star"></label>
+                                <input type="radio" value="4" name="rate" id="rating4">
+                                <label for="rating4" class="fa fa-star"></label>
+                                <input type="radio" value="5" name="rate" id="rating5">
+                                <label for="rating5" class="fa fa-star"></label>
+                            </div>
+                        </div>
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Hài Lòng</label>
                         <input type="text" name="satisfied" placeholder="Điều bạn hài lòng" value="">
