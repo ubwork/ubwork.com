@@ -18,7 +18,7 @@
 	clear: both;
 }
 .main{
-	height: 1150px;
+	height: auto;
 	width: 800px;
 	background-color: white;
 	box-shadow: 5px 7px 15px 5px #b9b6b6;
@@ -32,7 +32,9 @@
 	padding: 20px;
 }
 .profile{
-	width: 150px;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
 	border-radius: 50%;
 }
 .p1{
@@ -98,14 +100,24 @@
 	font-size: 14px;
 	color: #7b7b7b;
 }
+.p-title{
+	font-size: 16px;
+	font-weight: bold;
+}
 	</style>
 </head>
 <body>
 	<div class="main">
 		<div class="top-section">
-			<img src="image/profile.png" class="profile" />
-			<p class="p1">MANOJ <span style="color: red;">ADHIKARI</span></p>
-			<p class="p2">UI / UX Designer</p>
+			@if($candidate->avatar != "")
+			<img src="{{asset('storage/'. $candidate->avatar)}}" class="profile" />
+			@endif
+			<p class="p1">{{$seekerProfile->name}}</span></p>
+			<p class="p2">
+				@foreach($major as $mj)
+				{{ $seekerProfile->major_id == $mj->id ? $mj->name : "" }}
+				@endforeach
+			</p>
 		</div>
 		<div class="clearfix"></div>
 
@@ -113,70 +125,77 @@
 			<div class="content-box" style="padding-left: 40px;">
 
 				
-			<p class="head">Contact</p>
-			<p class="p3"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;&nbsp;898392888</p>
-			<p class="p3"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;&nbsp;dummymail.com</p>
-			<p class="p3"><i class="fa fa-home" aria-hidden="true"></i> &nbsp;&nbsp;United Kingdom</p>
+			<p class="head">Liên hệ</p>
+			<p style="word-wrap: break-word;" class="p3"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;&nbsp;+{{$seekerProfile->phone}}</p>
+			<p style="word-wrap: break-word;" class="p3"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;&nbsp;{{$seekerProfile->email}}</p>
+			<p style="word-wrap: break-word;" class="p3"><i class="fa fa-home" aria-hidden="true"></i> &nbsp;&nbsp;{{$seekerProfile->address}}</p>
 			
 
 			<br/>
-			<p class="head">my skills</p>
+			<p class="head">Kỹ năng</p>
 			<ul class="skills">
-				<li><span>Web Design</span></li>
-				<li><span>Grapic Design</span></li>
-				<li><span>HTML-5</span></li>
-				<li><span>CSS-3</span></li>
-				<li><span>Java Script</span></li>
-				<li><span>Jquery</span></li>
+				@foreach($list_skill as $sk)
+				<li><span>{{$sk->getNameSkill->name}}</span></li>
+				@endforeach
 
 			</ul>
 
 			<br/>
-			<p class="head">awards</p>
-				<p class="p3">CSS Design Awards</p>
-				<p class="p3">D&AD Awards</p>
-				<p class="p3">CSS Winner Awards</p>
-				<p class="p3">The Shorty Awards</p>
-				<p class="p3">Awwwards</p>
+			<p class="head">Chứng chỉ</p>
+			@foreach($certificates as $cer)
+			<p class="p3">{{$cer->name}} - {{$cer->time}}</p>
+			@endforeach
 
 				
 
 			<br/>
-			<p class="head">Languages</p>
-			<p class="p3">Hindi</p>
-			<p class="p3">English</p>
 			</div>
 		</div>
 		<div class="line"></div>
 		<div class="col-div-8">
 			<div class="content-box">
-			<p class="head">profile</p>
-			<p class="p3" style="font-size: 14px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br/>
-
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+			<p class="head">Mục tiêu nghề nghiệp</p>
+			<p class="p3" style="font-size: 14px;line-height: 22px;">{{$seekerProfile->description}}</p>
 			<br/>
-			<p class="head">EXPERIENCE</p>
+			<p class="head">Kinh nghiệm</p>
 
-			<p>UI DESIGNER IN LOREM IPSUM (2018 - NOW)</p>
-			<p class="p-4">
-			Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.</p>
-
-			<p>UI DESIGNER (2013 - 2015)</p>
-			<p class="p-4">
-			Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s
-			</p>
-
-			<p>GRAPIC DESIGNER(2010)</p>
-			<p class="p-4">
-			Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book.</p>
+			@foreach($experiences as $exp)
+			<div class="box-exp" style="border-bottom: 1px solid #dbdbdbcc;width: 60%;">
+				<p class="p-title">Công ty: {{$exp->company_name}} ({{date("m-Y", strtotime($exp->start_date))}} / @if($exp->end_date == null) Hiện tại @else {{date("m-Y", strtotime($exp->end_date))}} @endif)</p>
+				<p>Vị trí: {{$exp->position}}</p>
+				<p class="p-4">Mô tả: {{$exp->description}}</p>
+			</div>
+			@endforeach
 
 
 			<br/>
 
-			<p class="head">Education</p>
-			<p class="p-4" >HIGH SCHOOL OF CBSE (2009 - 2010)</p>
-			<p class="p-4" >BACHELOR OF COMPUTER APPLICATION (2013 - 2015)</p>
-			<p class="p-4" >MASTER OF COMPUTER APPLICATION (2015 - 2018)</p>
+			<p class="head">Học Vấn</p>
+			@foreach($educations as $edu)
+			<p class="p-title" >{{$edu->name_education}} ({{date("m-Y", strtotime($edu->start_date))}} / @if($edu->end_date == null) Hiện tại @else {{date("m-Y", strtotime($edu->end_date))}} @endif)</p>
+			<div>
+				@if(!empty($edu->major_id))
+					@foreach($major as $mjE)
+						@if($edu->major_id == $mjE->id)
+						Chuyên ngành: {{$mjE->name}}
+						@endif
+					@endforeach
+				@endif
+			</div>
+			<div>
+				@if(!empty($edu->type_degree))
+				Loại bằng: {{$edu->type_degree}}
+				@endif
+			</div>
+			<div>
+				@if(!empty($edu->gpa))
+				Điểm trung bình: {{$edu->gpa}}
+				@endif
+			</div>
+			<div>
+				Mô tả: {{$edu->description}}
+			</div>
+			@endforeach
 
 
 			</div>
