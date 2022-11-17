@@ -3,6 +3,20 @@
     {{__('UB Work')}} | {{$job_cat->name}}
 @endsection
 @section('content')
+<style>
+    .page-link{
+        border-radius:50%;
+        padding: 0px;
+    }
+    .page-item:last-child .page-link{
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+    }
+    .page-item:first-child .page-link{
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+    }
+</style>
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
