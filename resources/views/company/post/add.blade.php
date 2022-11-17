@@ -186,16 +186,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group col-lg-4 col-md-12">
-                                                        <label>Thời gian bắt đầu </label>
-                                                        <div class="row"><input type="date"  name="start_date" value="{{old('start_date',date('Y-m-d'))}}"></div>
-                                                        @error('start_date')
-                                                                <div class="text-danger pl-4">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                    </div>
-                                                    <div class="form-group col-lg-4 col-md-12">
-                                                        <label>Thời gian kết thức </label>
+                                                        <label>Hạn tuyển dụng</label>
                                                         <input type="date" name="end_date" value="{{old('end_date',date('Y-m-d'))}}">
                                                         @error('end_date')
                                                                 <div class="text-danger pl-4">
