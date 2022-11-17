@@ -23,6 +23,8 @@ Route::get('/logout', ['as' => 'logout', 'uses' => 'Client\Auth\LoginController@
 
 //candidate
 Route::get('/', 'client\HomeController@index')->name('index');
+Route::get('search', 'client\HomeController@search')->name('search');
+
 Route::get('/job', 'client\JobController@job')->name('job');
 Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
 Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');
