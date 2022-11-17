@@ -26,9 +26,9 @@
 
                         <div class="btn-box">
                             @if (auth('candidate')->check()) 
-                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Tố cáo</a>
+                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Đánh giá</a>
                             @else
-                                <button class="theme-btn btn-style-one">Tố cáo</button>
+                                <button class="theme-btn btn-style-one">Đánh giá</button>
                             @endif
 
                             {{-- @if (auth('candidate')->check()) 
@@ -80,7 +80,7 @@
                                         <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
                                         <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                         <ul class="job-info">
-                                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                                            <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
                                             <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($item->max_salary)}}</li>

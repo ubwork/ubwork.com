@@ -3,6 +3,20 @@
     {{__('UB Work')}} | {{$job_cat->name}}
 @endsection
 @section('content')
+<style>
+    .page-link{
+        border-radius:50%;
+        padding: 0px;
+    }
+    .page-item:last-child .page-link{
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+    }
+    .page-item:first-child .page-link{
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+    }
+</style>
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
@@ -197,7 +211,7 @@
                                                 alt=""></span>
                                         <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                         <ul class="job-info">
-                                            <li><span class="icon flaticon-briefcase"></span>{{$item->company->company_model}}</li>
+                                            <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
                                             <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
