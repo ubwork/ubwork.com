@@ -3,6 +3,26 @@
     {{ __('UB Work') }} | {{ __('Danh sách Công ty') }}
 @endsection
 @section('content')
+<style>
+    .page-link{
+        border-radius: 50%;
+        padding: 5px 15px;
+        margin: 10px; 
+    }
+    .page-link:hover{
+            background-color: #C46F01;
+        }
+    .page-item:last-child .page-link{
+        border-top-right-radius: 50%;
+         padding: 5px 17px;
+        border-bottom-right-radius: 50%;
+    }
+    .page-item:first-child .page-link{
+        border-top-left-radius: 50%;
+         padding: 5px 17px;
+        border-bottom-left-radius: 50%;
+    }
+</style>
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
@@ -48,6 +68,13 @@
                                     <span class="icon flaticon-briefcase"></span>
                                 </div>
                             </div>
+                            <div class="filter-block">
+                                <h4>Tìm theo địa điểm</h4>
+                                <div class="form-group">
+                                    <input type="text" name="address" placeholder="Địa điểm">
+                                    <span class="icon flaticon-search-3"></span>
+                                </div>
+                            </div>
                             <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
                                 <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
                                         công ty</span></button>
@@ -55,6 +82,7 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
                     <div class="ls-outer">
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
@@ -70,13 +98,14 @@
                                             </h4>
                                             <ul class="job-info">
                                                 <li><span class="icon flaticon-map-locator"></span>{{ $item->address }}</li>
-                                                <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                                                <li><span class="icon flaticon-briefcase"></span>{{ $item->company_model }}</li>
+                                                <li><span class="icon flaticon-clock-3"></span>{{$item->working_time}}</li>
                                             </ul>
                                         </div>
 
                                         <ul class="job-other-info">
-                                            <li class="privacy">Featured</li>
-                                            <li class="time">Open Jobs – {{ count($job) }}</li>
+                                            <li class="time">Công việc – {{ count($job) }}</li>
+                                            {{-- <li class="time">Open Jobs – {{count($job)}}</li> --}}
                                         </ul>
                                     </div>
                                     {{-- @dd($job) --}}
