@@ -354,23 +354,4 @@ class CreateCvController extends Controller
         Session::flash('success', 'Cập nhật CV thành công!');
         return redirect()->route('seeker');
     }
-
-    public function viewProfile() {
-        $id = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id)->first();
-        $this->v['seeker'] = $seeker;
-        $this->v['skills'] = Skill::all();
-        $this->v['major'] = Major::all();
-        $this->v['maJor'] = Major::all();
-
-        if (!empty($seeker)) {
-            $this->v['experiences'] = Experience::where('seeker_id', $seeker->id)->get();
-            $this->v['educations'] = Education::where('seeker_id', $seeker->id)->get();
-            $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seeker->id)->get();
-            $this->v['certificates'] = Certificate::where('seeker_id', $seeker->id)->get();
-
-            //active skills
-            $this->v['skillActive'] = $this->v['list_skill']->pluck('skill_id')->toArray();
-        }
-    }
 }

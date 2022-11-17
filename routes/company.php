@@ -29,3 +29,5 @@ Route::get('filter',['as'=>'filter','uses'=>'Company\FilterCvController@index'])
 
 Route::get('image-paper',['as'=>'image-paper','uses'=>'Company\ImagePaperController@index']);
 Route::post('image-paper',['as'=>'image-paper.update','uses'=>'Company\ImagePaperController@update']);
+
+Route::get('view-profile-candidate/{id}', 'Company\ViewCvController@viewProfile')->name('viewProfile');
