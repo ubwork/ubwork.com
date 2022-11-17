@@ -37,7 +37,7 @@ class JobPostController extends Controller
         return view('company.post.add',$this->v);
     }
 
-    public function store(Request $request)
+    public function store(JobPostRequest $request)
     {
         try {
             $data = $request->all();
@@ -51,8 +51,8 @@ class JobPostController extends Controller
             return Redirect()->route('company.post.index');
         } catch (Exception $e) {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('company.post.create');
             throw new Exception($e->getMessage());
+            return Redirect()->route('company.post.create');
         }
 
     }
@@ -82,14 +82,13 @@ class JobPostController extends Controller
             $skill = $request->input('skill');
             unset($data['files']);
             $model->skills()->sync($skill);
-            $data['start_date'] = Carbon::now();
             $res = $model->update($data);
-            Session::flash('success', 'Thêm thành công!');
+            Session::flash('success', 'Sửa thành công!');
             return Redirect()->route('company.post.index');
         } catch (Exception $e) {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('company.post.edit',$id);
             throw new Exception($e->getMessage());
+            return Redirect()->route('company.post.edit',$id);
         }
     }
 

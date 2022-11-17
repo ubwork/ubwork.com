@@ -207,25 +207,6 @@
                                                             </div>
                                                         @enderror
                                                     </div>
-                                                    <div class="form-group col-lg-4 col-md-12">
-                                                        <label>Thời gian bắt đầu </label>
-                                                        <div class="row"><input type="date" name="start_date" value="{{ $jobPost->start_date }}">
-                                                        </div>
-                                                        @error('start_date')
-                                                            <div class="text-danger pl-4">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group col-lg-4 col-md-12">
-                                                        <label>Thời gian kết thức </label>
-                                                        <input type="date" name="end_date" value="{{ $jobPost->end_date }}">
-                                                        @error('end_date')
-                                                            <div class="text-danger pl-4">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -239,7 +220,7 @@
                                 <!-- Input -->
                                 <div class="form-group col-lg-12 col-md-12 text-right clearfix">
                                     <button type="submit" class="theme-btn btn-style-one float-end"
-                                        id="buttonSubmit">Thêm</button>
+                                        id="buttonSubmit">Sửa</button>
 
                                 </div>
                             </div>

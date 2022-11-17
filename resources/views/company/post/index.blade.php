@@ -40,7 +40,7 @@
                     <td>
                       <div class="option-box">
                         <ul class="option-list d-block text-center">
-                          <li class="mb-2"><button data-text="Chi tiết"><span class="la la-eye"></span></button></li>
+                          <li class="mb-2"><a href="{{route('job-detail',$item->id)}}"><button data-text="Chi tiết"><span class="la la-eye"></span></button></a></li>
                           <li><a href="{{route('company.post.edit',$item->id)}}"><button data-text="Chỉnh sửa tin"><span class="la la-pencil"></span></button></a></li>
                           {{-- <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li> --}}
                         </ul>

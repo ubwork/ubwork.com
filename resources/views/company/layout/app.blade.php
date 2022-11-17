@@ -37,7 +37,6 @@
         <!-- End Dashboard -->
 
     </div><!-- End Page Wrapper -->
-    @include('admin.layout.toastr')
     @section('script')
         @include('company.layout.script')
         <script>
@@ -45,6 +44,7 @@
                 'width' : '100%',
             });
         </script>
+        @include('admin.layout.toastr')
     @show
 </body>
 
