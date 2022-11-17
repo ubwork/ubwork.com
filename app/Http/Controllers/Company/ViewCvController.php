@@ -39,6 +39,8 @@ class ViewCvController extends Controller
             $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seekerProfile->id)->get();
             $this->v['certificates'] = Certificate::where('seeker_id', $seekerProfile->id)->get();
 
+            $this->v['title_CV'] = "CV-".$this->v['seekerProfile']->name;
+
             return view('company.view-cv.index', $this->v);
 
         }else {
