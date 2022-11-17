@@ -3,6 +3,26 @@
     {{ __('UB Work') }} | {{ __('Danh sách Công ty') }}
 @endsection
 @section('content')
+<style>
+    .page-link{
+        border-radius: 50%;
+        padding: 5px 15px;
+        margin: 10px; 
+    }
+    .page-link:hover{
+            background-color: #C46F01;
+        }
+    .page-item:last-child .page-link{
+        border-top-right-radius: 50%;
+         padding: 5px 17px;
+        border-bottom-right-radius: 50%;
+    }
+    .page-item:first-child .page-link{
+        border-top-left-radius: 50%;
+         padding: 5px 17px;
+        border-bottom-left-radius: 50%;
+    }
+</style>
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
@@ -26,69 +46,45 @@
                 <!-- Filters Column -->
                 <div class="filters-column col-lg-4 col-md-12 col-sm-12">
                     <div class="inner-column pd-right">
-                            <form action="{{route('company-filter')}}" method="post">
-                                @csrf
-                                <div class="filter-block">
+                        <form action="" method="get">
+                            <div class="filter-block">
                                 <h4>Tìm theo tên</h4>
                                 <div class="form-group">
-                                    <input type="text" name="keyword"
-                                        placeholder="Tên công ty">
+                                    <input type="text" name="search" placeholder="Tên công ty">
                                     <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
-
-                            <!-- Filter Block -->
                             <div class="filter-block">
-                                <h4>Tìm theo địa điểm</h4>
+                                <h4>Quy mô công ty</h4>
                                 <div class="form-group">
-                                    <input type="text" name="address" placeholder="Thành phố">
-                                    <span class="icon flaticon-map-locator"></span>
+                                    <select name="size" class="chosen-select">
+                                        <option value="">Mời Chọn</option>
+                                        <option value="1">1-50 Nhân viên</option>
+                                        <option value="2" >50-100 Nhân Viên</option>
+                                        <option value="3" >100-200 Nhân Viên</option>
+                                        <option value="4" >200-500 Nhân Viên</option>
+                                        <option value="5" >500-1000 Nhân Viên</option>
+                                    </select>
+                                    <span class="icon flaticon-briefcase"></span>
+                                </div>
+                            </div>
+                            <div class="filter-block">
+                                <h4>Tìm theo tên</h4>
+                                <div class="form-group">
+                                    <input type="text" name="address" placeholder="Địa điểm">
+                                    <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
                             <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
                                 <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
                                         công ty</span></button>
                             </div>
-                            </form>
-                        </div>
-
-                        <!-- End Call To Action -->
+                        </form>
                     </div>
-                
-
-                <!-- Content Column -->
+                </div>
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
                     <div class="ls-outer">
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
-
-                        <!-- ls Switcher -->
-                        {{-- <div class="ls-switcher">
-                            <div class="showing-result">
-                                <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> employer</div>
-                            </div>
-                            <div class="sort-by">
-                                <select class="chosen-select">
-                                    <option>Most Recent</option>
-                                    <option>Freelance</option>
-                                    <option>Full Time</option>
-                                    <option>Internship</option>
-                                    <option>Part Time</option>
-                                    <option>Temporary</option>
-                                </select>
-
-                                <select class="chosen-select">
-                                    <option>Show 10</option>
-                                    <option>Show 20</option>
-                                    <option>Show 30</option>
-                                    <option>Show 40</option>
-                                    <option>Show 50</option>
-                                    <option>Show 60</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
-
-                        <!-- Block Block -->
                         @foreach ($data as $item)
                             <div class="company-block-three">
                                 <div class="inner-box">
@@ -112,7 +108,6 @@
                                         </ul>
                                     </div>
                                     {{-- @dd($job) --}}
-                                    <div class="text">Mô Tả Chưa Có</div>
                                     <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
@@ -122,12 +117,12 @@
                             {{-- <p>Showing 36 of 497 Jobs</p>
                             <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
                             <button class="show-more">Xem thêm</button> --}}
-                            {{$data->links()}}
+                            {{ $data->links() }}
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
     </section>
 @endsection

@@ -9,24 +9,32 @@
                 <div class="content-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column wow fadeInUp" data-wow-delay="1000ms">
                         <div class="title-box">
-                            <h3>Có<span class="colored">{{ count($data) }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
+                            <h3>Có<span class="colored"> {{ count($data) }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
                             <div class="text">Tìm việc làm, Cơ hội việc làm & Nghề nghiệp</div>
                         </div>
                         <!-- Job Search Form -->
                         <div class="job-search-form">
-                            <form method="get">
-                                @csrf
+                            <form method="get" action="search">
                                 <div class="row">
                                     <div class="form-group col-lg-5 col-md-12 col-sm-12">
                                         <span class="icon flaticon-search-1"></span>
-                                        <input type="text" name="search"
-                                            placeholder="Job title, keywords, or company">
+                                        <input type="text" name="search" placeholder="Mời Nhập Từ Khóa">
+                                    </div>
+                                    <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
+                                        <span class="icon flaticon-briefcase"></span>
+                                        <select name="major" class="chosen-select">
+                                            <option value="">Chuyên Ngành</option>
+                                            @foreach ($maJor as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
-                                        <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Find
-                                                Jobs</span></button>
+                                        <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Tìm
+                                                Kiếm</span></button>
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                         <!-- Job Search Form -->
@@ -49,7 +57,8 @@
                     <div class="image-box">
                         <figure class="main-image wow fadeIn animated" data-wow-delay="500ms"
                             style="visibility: visible; animation-delay: 500ms; animation-name: fadeIn;"><img
-                                src="{{ asset('/assets/client-bower/images/resource/banner-img-1.png') }}" alt=""></figure>
+                                src="{{ asset('/assets/client-bower/images/resource/banner-img-1.png') }}" alt="">
+                        </figure>
 
                         <!-- Info BLock One -->
                         <div class="info_block anm wow fadeIn animated" data-wow-delay="1000ms" data-speed-x="2"
@@ -64,7 +73,8 @@
                             data-speed-y="1"
                             style="transform: translate3d(-2px, -3.68px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2000ms; animation-name: fadeIn;">
                             <p>10k+ Candidates</p>
-                            <div class="image"><img src="{{ asset('/assets/client-bower/images/resource/multi-peoples.png') }}"
+                            <div class="image"><img
+                                    src="{{ asset('/assets/client-bower/images/resource/multi-peoples.png') }}"
                                     alt=""></div>
                         </div>
 
@@ -100,7 +110,7 @@
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Các chuyên ngành công việc phổ biến</h2>
-                <div class="text">{{ $data != "" ? count($data) : 0 }} việc làm được đăng tải</div>
+                <div class="text">{{ $data != '' ? count($data) : 0 }} việc làm được đăng tải</div>
             </div>
 
             <div class="row wow fadeInUp">
@@ -128,14 +138,16 @@
                 <h2>Việc làm nổi bật</h2>
                 <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
                 </div>
-                <div class="row wow fadeInUp">
+                <div class="row wow fadeInUp mt-3">
                     <!-- Job Block -->
                     @foreach ($data as $item)
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}" alt=""></span>
-                                    <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                    <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}"
+                                            alt=""></span>
+                                    <h4 style="text-align: left;"><a
+                                            href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                     </h4>
                                     <ul class="job-info">
                                         <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
@@ -147,29 +159,33 @@
                                             {{ $item->max_salary }} đ</li>
                                     </ul>
                                     <ul class="job-other-info">
-                                        @if($item->type_work == 1)
+                                        @if ($item->type_work == 1)
                                             <li class="time">
                                                 Full Time
                                             </li>
                                         @endif
-                                        @if($item->type_work == 2)
+                                        @if ($item->type_work == 2)
                                             <li class="privacy">
                                                 Part Time
                                             </li>
                                         @endif
-                                        @if($item->type_work == 0 )
+                                        @if ($item->type_work == 0)
                                             <li class="required">
                                                 Intern
                                             </li>
                                         @endif
                                     </ul>
-                                    @if (auth('candidate')->check()) 
-                                        @if (!empty($job_short[$item->id]) )
-                                            @if($job_short[$item->id]->job_post_id == $item->id)
-                                            <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white" ></span></a>
+                                    @if (auth('candidate')->check())
+                                        @if (!empty($job_short[$item->id]))
+                                            @if ($job_short[$item->id]->job_post_id == $item->id)
+                                                <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
+                                                    class="bookmark-btn" style="background-color: #f7941d;"><span
+                                                        class="flaticon-bookmark" style="color: white"></span></a>
                                             @endif
                                         @else
-                                            <a href="{{route('shortlisted', ['id' => $item->id])}}" class="bookmark-btn"><span class="flaticon-bookmark" style="color: white"></span></a>
+                                            <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
+                                                class="bookmark-btn"><span class="flaticon-bookmark"
+                                                    style="color: white"></span></a>
                                         @endif
                                     @else
                                         <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
@@ -185,68 +201,76 @@
                             thêm</span></a>
                 </div>
             </div>
-            @if (auth('candidate')->check()) 
+            @if (auth('candidate')->check())
                 <div class="sec-title text-center">
                     <h2>Việc làm có thể phù hợp với bạn</h2>
                     <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
                     </div>
 
-                    <div class="row wow fadeInUp">
+                    <div class="row wow fadeInUp mt-3">
                         <!-- Job Block -->
                         @foreach ($dataYour as $item)
                             <div class="job-block col-lg-6 col-md-12 col-sm-12">
                                 <div class="inner-box">
                                     <div class="content">
-                                        <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}" alt=""></span>
-                                        <h4 style="text-align: left;"><a href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                        <span class="company-logo"><img
+                                                src="{{ asset('storage/' . $item->company->logo) }}"
+                                                alt=""></span>
+                                        <h4 style="text-align: left;"><a
+                                                href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                         </h4>
                                         <ul class="job-info">
                                             <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                             </li>
-                                            <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
+                                            <li><span
+                                                    class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                                 giờ</li>
                                             <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
                                                 {{ $item->max_salary }} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if($item->company->type_work == 1)
+                                            @if ($item->company->type_work == 1)
                                                 <li class="time">
                                                     Full Time
                                                 </li>
                                             @endif
-                                            @if($item->company->type_work == 2)
+                                            @if ($item->company->type_work == 2)
                                                 <li class="privacy">
                                                     Part Time
                                                 </li>
                                             @endif
-                                            @if($item->company->type_work == 0 )
+                                            @if ($item->company->type_work == 0)
                                                 <li class="required">
                                                     Intern
                                                 </li>
                                             @endif
                                         </ul>
-                                        @if (auth('candidate')->check()) 
-                                        @if (!empty($job_short[$item->id]) )
-                                            @if($job_short[$item->id]->job_post_id == $item->id)
-                                            <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark"style="color: white" ></span></a>
+                                        @if (auth('candidate')->check())
+                                            @if (!empty($job_short[$item->id]))
+                                                @if ($job_short[$item->id]->job_post_id == $item->id)
+                                                    <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
+                                                        class="bookmark-btn" style="background-color: #f7941d;"><span
+                                                            class="flaticon-bookmark"style="color: white"></span></a>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
+                                                    class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
                                             @endif
                                         @else
-                                            <a href="{{route('shortlisted', ['id' => $item->id])}}" class="bookmark-btn"><span class="flaticon-bookmark" ></span></a>
+                                            <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                         @endif
-                                    @else
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                                    @endif
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
 
-                    <div class="btn-box">
-                        <a href="{{ route('job') }}" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Xem
+                    {{-- <div class="btn-box">
+                        <a href="{{ route('job') }}" class="theme-btn btn-style-one bg-blue"><span
+                                class="btn-title">Xem
                                 thêm</span></a>
-                    </div>
+                    </div> --}}
                 </div>
             @endif
     </section>
