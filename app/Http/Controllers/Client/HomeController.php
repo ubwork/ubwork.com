@@ -24,13 +24,13 @@ class HomeController extends Controller
         // dd(isset($search));
         $search = $request->search;
         if (isset($search)) {
-            $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title', 'like', '%' . $search . '%')->paginate(1);
+            $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title', 'like', '%' . $search . '%')->paginate(10);
         } else {
-            $data = JobPost::inRandomOrder()->limit(5)->get();
+            $data = JobPost::inRandomOrder()->where('status', 1)->limit(5)->get();
         }
         foreach ($data_job_type as $item) {
             if (!empty($item)) {
-                $count[$item->id] = JobPost::where('major_id', $item->id)->count();
+                $count[$item->id] = JobPost::where('major_id', $item->id)->where('status', 1)->count();
             } else {
                 $count[$item->id] = 0;
             }
@@ -47,7 +47,7 @@ class HomeController extends Controller
             }
             if (!empty($dataUser)) {
                 $maJor_id = $dataUser->major_id;
-                $dataYour = JobPost::where('major_id', $maJor_id)->get();
+                $dataYour = JobPost::where('major_id', $maJor_id)->where('status', 1)->get();
             }
         }
         $maJor = Major::all();
@@ -61,13 +61,13 @@ class HomeController extends Controller
         $maJor = Major::all();
         if (isset($search) && isset($major)) {
             $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
-        }elseif(isset($search) && $major == null){
+        } elseif (isset($search) && $major == null) {
             $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
-        }elseif($search == null && isset($major)){
+        } elseif ($search == null && isset($major)) {
             $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->paginate(10);
         } else {
             $data = JobPost::where('status', 1)->get();
         }
-        return view('client.job.job', compact('data', 'maJor','today'));
+        return view('client.job.job', compact('data', 'maJor', 'today'));
     }
 }

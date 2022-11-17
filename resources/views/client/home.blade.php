@@ -9,7 +9,7 @@
                 <div class="content-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column wow fadeInUp" data-wow-delay="1000ms">
                         <div class="title-box">
-                            <h3>Có<span class="colored">{{ count($data) }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
+                            <h3>Có<span class="colored"> {{ count($data) }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
                             <div class="text">Tìm việc làm, Cơ hội việc làm & Nghề nghiệp</div>
                         </div>
                         <!-- Job Search Form -->
@@ -138,7 +138,7 @@
                 <h2>Việc làm nổi bật</h2>
                 <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
                 </div>
-                <div class="row wow fadeInUp">
+                <div class="row wow fadeInUp mt-3">
                     <!-- Job Block -->
                     @foreach ($data as $item)
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
@@ -150,6 +150,7 @@
                                             href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                     </h4>
                                     <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                         <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                         </li>
                                         <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
@@ -178,16 +179,16 @@
                                         @if (!empty($job_short[$item->id]))
                                             @if ($job_short[$item->id]->job_post_id == $item->id)
                                                 <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                    class="bookmark-btn" style="background-color: #f7941d;"><span
-                                                        class="flaticon-bookmark" style="color: white"></span></a>
+                                                    class="bookmark-btn"><span
+                                                        class="flaticon-bookmark" style="color: #f7941d"></span></a>
                                             @endif
                                         @else
                                             <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
                                                 class="bookmark-btn"><span class="flaticon-bookmark"
-                                                    style="color: white"></span></a>
+                                                    style="color: black"></span></a>
                                         @endif
                                     @else
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                        <button class="bookmark-btn"><span class="flaticon-bookmark" style="color: black"></span></button>
                                     @endif
                                 </div>
                             </div>
@@ -206,7 +207,7 @@
                     <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
                     </div>
 
-                    <div class="row wow fadeInUp">
+                    <div class="row wow fadeInUp mt-3">
                         <!-- Job Block -->
                         @foreach ($dataYour as $item)
                             <div class="job-block col-lg-6 col-md-12 col-sm-12">
@@ -219,8 +220,8 @@
                                                 href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                         </h4>
                                         <ul class="job-info">
-                                            <li><span
-                                                    class="icon flaticon-map-locator"></span>{{ $item->company->address }}
+                                            <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
+                                            <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                             </li>
                                             <li><span
                                                     class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
@@ -249,15 +250,15 @@
                                             @if (!empty($job_short[$item->id]))
                                                 @if ($job_short[$item->id]->job_post_id == $item->id)
                                                     <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                        class="bookmark-btn" style="background-color: #f7941d;"><span
-                                                            class="flaticon-bookmark"style="color: white"></span></a>
+                                                        class="bookmark-btn" ><span
+                                                            class="flaticon-bookmark" style="color: #f7941d"></span></a>
                                                 @endif
                                             @else
                                                 <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
-                                                    class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
+                                                    class="bookmark-btn"><span class="flaticon-bookmark " style="color: black"></span></a>
                                             @endif
                                         @else
-                                            <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                            <button class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></button>
                                         @endif
                                     </div>
                                 </div>
@@ -265,11 +266,11 @@
                         @endforeach
                     </div>
 
-                    <div class="btn-box">
+                    {{-- <div class="btn-box">
                         <a href="{{ route('job') }}" class="theme-btn btn-style-one bg-blue"><span
                                 class="btn-title">Xem
                                 thêm</span></a>
-                    </div>
+                    </div> --}}
                 </div>
             @endif
     </section>
