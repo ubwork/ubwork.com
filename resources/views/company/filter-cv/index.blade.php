@@ -131,7 +131,7 @@
                         @endforeach --}}
                         
                       </ul>
-                      <a href="#" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+                      <a target="_blank" href="{{route('company.viewProfile', ['id' => $item->id])}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                     </div>
                   </div>
                 @endforeach
