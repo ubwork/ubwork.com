@@ -25,13 +25,15 @@ class ViewCvController extends Controller
     public function viewProfile($id)
     {
         $seekerProfile = SeekerProfile::where('id', $id)->first();
-        $candidate = Candidate::where('id', $seekerProfile->candidate_id)->first();
-        $this->v['seekerProfile'] = $seekerProfile;
+
         $this->v['skills'] = Skill::all();
         $this->v['major'] = Major::all();
         $this->v['maJor'] = Major::all();
 
         if (!empty($seekerProfile)) {
+            $this->v['candidate'] = Candidate::where('id', $seekerProfile->candidate_id)->first();
+            $this->v['seekerProfile'] = $seekerProfile;
+
             $this->v['experiences'] = Experience::where('seeker_id', $seekerProfile->id)->get();
             $this->v['educations'] = Education::where('seeker_id', $seekerProfile->id)->get();
             $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seekerProfile->id)->get();
