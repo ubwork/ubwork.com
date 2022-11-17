@@ -26,3 +26,6 @@ Route::get('profile',['as'=>'profile','uses'=>'Company\ProfileController@edit'])
 Route::post('profile',['as'=>'profile.update','uses'=>'Company\ProfileController@update']);
 Route::get('filter',['as'=>'filter','uses'=>'Company\FilterCvController@index']);
 // Route::post('filter',['as'=>'filter.update','uses'=>'Company\ProfileController@update']);
+
+Route::get('image-paper',['as'=>'image-paper','uses'=>'Company\ImagePaperController@index']);
+Route::post('image-paper',['as'=>'image-paper.update','uses'=>'Company\ImagePaperController@update']);
