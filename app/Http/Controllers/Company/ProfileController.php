@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\ProfileRequest;
 use App\Models\Company;
+use App\Models\Major;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -40,15 +41,20 @@ class ProfileController extends Controller
             Session::flash('alert-class', 'danger');
             return redirect()->route('company.profile');
         }
-        // dd($data);
-            $team = [
-                50 => '50-100 người',
-                100 => '100-150 người',
-                200 => '200-250 người',
-                300 => '300-350 người',
-                500 => '500-1000 người',
-            ];
-            return view('company.profile.edit', compact('data', 'team', 'title', 'activeRoute'));
+        // dd($data->toArray());
+        $team = [
+            50 => '50-100 người',
+            100 => '100-150 người',
+            200 => '200-250 người',
+            300 => '300-350 người',
+            500 => '500-1000 người',
+        ];
+        $workingTime = [
+            6 => '6 giờ',
+            7 => '7 giờ',
+            8 => '8 giờ',
+        ];
+            return view('company.profile.edit', compact('data', 'team', 'title', 'activeRoute', 'workingTime'));
         
     }
 
@@ -70,7 +76,10 @@ class ProfileController extends Controller
         }else{
             $name = $request->logo_old;
         }
+        // dd($data);
         $data['logo'] = $name;
+        $data['status'] = 0;
+
         $company->update($data);
         Session::flash('message', trans('system.success'));
         Session::flash('alert-class', 'success');
@@ -91,5 +100,17 @@ class ProfileController extends Controller
     {
         $fileName = time() . '_' . $file->getClientOriginalName();
         return $file->storeAs('images', $fileName, 'public');
+    }
+    public function imagePaper(ProfileRequest $request)
+    {
+        if ($request->hasFile('logo')) {
+            $image = $request->file('logo');
+            $name = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('images/company', $name, 'public');
+        }else{
+            $name = $request->logo_old;
+        }
+        $data['logo'] = $name;
+        $data['status'] = 0;
     }
 }
