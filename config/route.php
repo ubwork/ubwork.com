@@ -26,6 +26,11 @@ return [
                 'title' => "Giấy phép kinh doanh",
                 'route' => 'company.image-paper',
                 'icon'  => 'la la-file',
+            ],
+            'view-open-cv' => [
+                'title' => "Quản lý CV",
+                'route' => 'company.viewOpenCv',
+                'icon'  => 'la la-home',
             ]
         ]
     ]
