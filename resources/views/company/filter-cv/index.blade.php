@@ -49,22 +49,26 @@
                     {{-- @dd(app('request')->input('major')) --}}
                     <select name="major" class="select2">
                       <option disabled selected>Chọn chuyên ngành</option>
+                      @if (count($major) > 0)
                       @foreach ($major as $item)
                       <option @if (app('request')->input('major') == $item['id'])
                           selected 
                       @endif value="{{$item['id']}}"> {{$item['name']}} </option>
                       @endforeach
+                      @endif
                     </select>
                 </div>
 
                   <div class="form-group">
                     <select name="experience" class="select2">
                         <option disabled selected>Chọn vị trí từng đảm nhiệm</option>
+                        @if(count($exp) > 0)
                         @foreach ($exp as $item)
                         <option @if (app('request')->input('experience') == $item['id'])
                             selected 
                         @endif value="{{$item['id']}}"> {{$item['position']}} </option>
                         @endforeach
+                        @endif
                       </select>
                   </div>
 
@@ -96,13 +100,14 @@
             </div>
             
             <div class="row">
+              @if (count($data) > 0)
                 @foreach ($data as $item)
                 {{-- @dd($item['candidate']['name']); --}}
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                       <span class="thumb"><img src="{{asset('storage/'. $item['candidate']['avatar'])}}" alt=""></span>
                       <h3 class="name"><a href="#">{{$item['candidate']['name']}}</a></h3>
-                      <span class="cat">{{$item['major']['name']}}</span>
+                      <span class="cat">{{isset($item['major']['name']) ? $item['major']['name'] : ''}}</span>
                       <ul class="job-info">
                         <li><span class="icon flaticon-map-locator"></span> {{$item['candidate']['address']}}</li>
                         <li><span class="icon flaticon-money"></span> {{$item['candidate']['coin']}}</li>
@@ -119,6 +124,7 @@
                     </div>
                   </div>
                 @endforeach
+                @endif
               <!-- Candidate block Four -->
             </div>
 

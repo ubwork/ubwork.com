@@ -55,7 +55,7 @@
                         </form>
                     </div>
                 </div>
-                @endforeach
+
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
                     <div class="ls-outer">
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
