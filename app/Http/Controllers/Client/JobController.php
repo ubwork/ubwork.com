@@ -43,13 +43,13 @@ class JobController extends Controller
                 }
             }
         }
-        return view('client.job.job', compact('data', 'maJor', 'job_short','today'));
+        return view('client.job.job', compact('data', 'maJor', 'job_short', 'today'));
     }
     public function job_cat($id)
     {
 
         $job_cat = Major::where('id', $id)->first();
-        $data = JobPost::where('major_id', $id)->paginate(6);
+        $data = JobPost::where('major_id', $id)->where('status', 1)->paginate(10);
 
         $maJor = Major::all();
         return view('client.job.job-cat', compact('data', 'job_cat', 'maJor'));
@@ -118,6 +118,6 @@ class JobController extends Controller
         } else {
             $data = JobPost::where('status', 1)->get();
         }
-        return view('client.job.job', compact('data', 'maJor','today'));
+        return view('client.job.job', compact('data', 'maJor', 'today'));
     }
 }

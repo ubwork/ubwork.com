@@ -31,3 +31,9 @@ Route::get('image-paper',['as'=>'image-paper','uses'=>'Company\ImagePaperControl
 Route::post('image-paper',['as'=>'image-paper.update','uses'=>'Company\ImagePaperController@update']);
 
 Route::get('view-profile-candidate/{id}', 'Company\ViewCvController@viewProfile')->name('viewProfile');
+
+Route::get('view-info-candidate/{id}', 'Company\ViewCvController@viewProfileHidden')->name('viewProfileHidden');
+
+Route::get('view-open-cv', 'Company\OpenCvController@index')->name('viewOpenCv');
+
+Route::get('view-open-cv/save-open/{id}', 'Company\OpenCvController@store')->name('SaveOpenCv');
