@@ -204,7 +204,7 @@
             @if (auth('candidate')->check())
                 <div class="sec-title text-center">
                     <h2>Việc làm có thể phù hợp với bạn</h2>
-                    <div class="text">Biết giá trị của bạn và tìm công việc phù hợp với cuộc sống của bạn
+                    <div class="text">Dựa trên thông tin của bạn. Vậy nên hãy nhập đúng thông tin cá nhân của mình!
                     </div>
 
                     <div class="row wow fadeInUp mt-3">

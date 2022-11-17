@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="filter-block">
-                                <h4>Tìm theo tên</h4>
+                                <h4>Tìm theo địa điểm</h4>
                                 <div class="form-group">
                                     <input type="text" name="address" placeholder="Địa điểm">
                                     <span class="icon flaticon-search-3"></span>

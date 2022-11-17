@@ -28,7 +28,7 @@
                                             </td>
                                             <td>{{ $item->phone }} <br>{{ $item->email }}
                                             </td>
-                                            <td><a href="{{route('company.viewProfile', ['id' => $item->id])}}">Chi tiết</a></td>
+                                            <td><a target="_blank" href="{{route('company.viewProfile', ['id' => $item->id])}}">Chi tiết</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
