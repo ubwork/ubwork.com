@@ -179,16 +179,16 @@
                                         @if (!empty($job_short[$item->id]))
                                             @if ($job_short[$item->id]->job_post_id == $item->id)
                                                 <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                    class="bookmark-btn" style="background-color: #f7941d;"><span
-                                                        class="flaticon-bookmark" style="color: white"></span></a>
+                                                    class="bookmark-btn"><span
+                                                        class="flaticon-bookmark" style="color: #f7941d"></span></a>
                                             @endif
                                         @else
                                             <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
                                                 class="bookmark-btn"><span class="flaticon-bookmark"
-                                                    style="color: white"></span></a>
+                                                    style="color: black"></span></a>
                                         @endif
                                     @else
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                        <button class="bookmark-btn"><span class="flaticon-bookmark" style="color: black"></span></button>
                                     @endif
                                 </div>
                             </div>
@@ -250,15 +250,15 @@
                                             @if (!empty($job_short[$item->id]))
                                                 @if ($job_short[$item->id]->job_post_id == $item->id)
                                                     <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                        class="bookmark-btn" style="background-color: #f7941d;"><span
-                                                            class="flaticon-bookmark"style="color: white"></span></a>
+                                                        class="bookmark-btn" ><span
+                                                            class="flaticon-bookmark" style="color: #f7941d"></span></a>
                                                 @endif
                                             @else
                                                 <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
-                                                    class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
+                                                    class="bookmark-btn"><span class="flaticon-bookmark " style="color: black"></span></a>
                                             @endif
                                         @else
-                                            <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                            <button class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></button>
                                         @endif
                                     </div>
                                 </div>
