@@ -7,6 +7,7 @@ use App\Models\Candidate;
 use App\Models\Company;
 use App\Models\Major;
 use App\Models\Experience;
+use App\Models\OpenCv;
 use App\Models\SeekerProfile;
 use App\Models\Skill;
 use App\Models\SkillSeeker;
@@ -48,7 +49,10 @@ class FilterCvController extends Controller
         // dd($company);
         $candidate = Candidate::all();
         $data = SeekerProfile::with('candidate', 'major')->whereRaw($query)->paginate($perPage);
-        return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill', 'data', 'candidate', 'company'));
+
+
+        return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill', 
+        'data', 'candidate', 'company'));
 
     }
 
