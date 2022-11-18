@@ -50,9 +50,9 @@ class ProfileController extends Controller
             500 => '500-1000 người',
         ];
         $workingTime = [
-            6 => '6 giờ',
-            7 => '7 giờ',
-            8 => '8 giờ',
+            6 => '6 tiếng',
+            7 => '7 tiếng',
+            8 => '8 tiếng',
         ];
             return view('company.profile.edit', compact('data', 'team', 'title', 'activeRoute', 'workingTime'));
         
