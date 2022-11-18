@@ -15,7 +15,7 @@
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
-                                <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                                <li><span class="icon flaticon-briefcase"></span> {{$company_detail->company_model}}</li>
                                 <li><span class="icon flaticon-telephone-1"></span>{{$company_detail->phone}}</li>
                                 <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
@@ -50,14 +50,29 @@
                     @csrf
                     <div class="row">
                         <!-- Input -->
-                      <div class="form-group col-lg-6 col-md-12">
-                        <label>Rate</label>
-                        <input type="number" name="rate" placeholder="rate" value="" max="5" min="1">
-                        @error('rate')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                      </div>
-                      <!-- Input -->
+                        <div class="form-group col-lg-12 col-md-3">
+                            <label>Tiêu đề</label>
+                            <input type="text" name="title" placeholder="Tóm tắt đánh giá của bạn ví dụ: 'công ty ảo' hoặc 'bạn hr quá xinh đẹp'" value="">
+                            @error('title')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                          </div>
+                        <!-- Input -->
+                        <div class="form-group col-lg-12 col-md-12 rating-css">
+                            <label>Đánh giá</label>
+                            <div class="star-icon">
+                                <input type="radio" value="1" name="rate" checked id="rating1">
+                                <label for="rating1" class="fa fa-star"></label>
+                                <input type="radio" value="2" name="rate" id="rating2">
+                                <label for="rating2" class="fa fa-star"></label>
+                                <input type="radio" value="3" name="rate" id="rating3">
+                                <label for="rating3" class="fa fa-star"></label>
+                                <input type="radio" value="4" name="rate" id="rating4">
+                                <label for="rating4" class="fa fa-star"></label>
+                                <input type="radio" value="5" name="rate" id="rating5">
+                                <label for="rating5" class="fa fa-star"></label>
+                            </div>
+                        </div>
                       <div class="form-group col-lg-6 col-md-12">
                         <label>Hài Lòng</label>
                         <input type="text" name="satisfied" placeholder="Điều bạn hài lòng" value="">
@@ -77,18 +92,9 @@
 
                       <!-- Input -->
                       <div class="form-group col-lg-12 col-md-12">
-                        <label>Điều bạn thích</label>
-                        <textarea type="text" name="like_text" placeholder="Điều bạn thích" value=""></textarea>
+                        <label>Điều bạn thích ở công ty</label>
+                        <textarea type="text" name="like_text" placeholder="Điều bạn thích ở công ty" value=""></textarea>
                         @error('like_text')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                      </div>
-
-                      <!-- Input -->
-                      <div class="form-group col-lg-12 col-md-12">
-                        <label>Điều bạn chưa thích</label>
-                        <textarea type="text" name="dislike_text" placeholder="Điều bạn chưa thích" value=""></textarea>
-                        @error('dislike_text')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                       </div>
@@ -102,39 +108,6 @@
                         @enderror
                       </div>
 
-                      <!-- Input -->
-                      <div class="form-group col-lg-12 col-md-12">
-                        <label>Bình luận</label>
-                        <textarea type="text" name="comment" placeholder="Bình luận" value=""></textarea>
-                        @error('comment')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                      </div>
-
-                        @if ( Session::has('success') )
-                            <div class="alert alert-success alert-outline alert-dismissible" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                <div class="alert-icon">
-                                    <i class="far fa-fw fa-bell"></i>
-                                </div>
-                                <div class="alert-message">
-                                    <strong>{{ Session::get('success') }}</strong>
-                                </div>
-                            </div>
-                        @endif
-                        <?php //Hiển thị thông báo lỗi?>
-                        @if ( Session::has('error') )
-                            <div class="alert alert-danger alert-outline alert-dismissible" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                <div class="alert-icon">
-                                    <i class="far fa-fw fa-bell"></i>
-                                </div>
-                                <div class="alert-message">
-                                    <strong>{{ Session::get('error') }}</strong>
-                                </div>
-                            </div>
-                        @endif
-                      <!-- Input -->
                       <div class="form-group col-lg-6 col-md-12">
                         <button type="submit" class="theme-btn btn-style-one">Save</button>
                       </div>
@@ -153,8 +126,8 @@
                                         <div style="font-size: 16px; ">>Xin vui lòng:</div>
                                     <ul class="notification-list">
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không sử dụng từ ngữ mang ý </strong><span class="colored">xúc phạm, miệt thị</span></li>
-                                    <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không cung cấp</strong><span class="colored">thông tin cá nhân</span></li>
-                                    <li class="success" style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;">Không cung cấp<strong>thông tin bảo mật,</strong><span class="colored">bí mật kinh doanh của công ty</span></li>
+                                    <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không cung cấp</strong><span class="colored"> thông tin cá nhân</span></li>
+                                    <li class="success" style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;">Không cung cấp<strong>thông tin bảo mật, </strong><span class="colored">bí mật kinh doanh của công ty</span></li>
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"><strong>Cảm ơn bạn đã đưa ra những đánh giá chân thực nhất. </strong> applied for a job <span class="colored">Xem thêm thông tin chi tiết về Hướng Dẫn & Điều Kiện về đánh giá</span></li>
                                     </ul>
                                 </div>
