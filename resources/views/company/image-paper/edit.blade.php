@@ -22,10 +22,16 @@
                 <form class="default-form" action="{{route('company.image-paper.update')}}" method="post" enctype="multipart/form-data">
                   @csrf
                 <div class="form-group col-lg-6 col-md-12">
-                      <label>Trạng thái :</label> 
+                  @if ($data->image_paper)
+                    <label>Trạng thái :</label> 
                       @if ($data->status == 0)
                       <span class="text-warning" style="font-weight: 900">Chờ duyệt</span>
+                      @elseif ( $data->status == 1)
+                      <span class="text-success" style="font-weight: 900">Xác thực thành công</span>
+                      @else
+                      <span class="text-danger" style="font-weight: 900">Xác thực thất bại</span>
                       @endif
+                  @endif
                 </div>
                 <div class="form-group col-lg-6 col-md-12">
                     <label>Giấy phép kinh doanh / Giấy ủy quyền / Thẻ nhân viên</label>    
