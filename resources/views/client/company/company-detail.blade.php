@@ -26,9 +26,9 @@
 
                         <div class="btn-box">
                             @if (auth('candidate')->check()) 
-                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Tố cáo</a>
+                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Đánh giá</a>
                             @else
-                                <button class="theme-btn btn-style-one">Tố cáo</button>
+                                <button class="theme-btn btn-style-one">Đánh giá</button>
                             @endif
 
                             {{-- @if (auth('candidate')->check()) 
@@ -80,7 +80,7 @@
                                         <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
                                         <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                         <ul class="job-info">
-                                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                                            <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
                                             <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($item->max_salary)}}</li>
@@ -115,8 +115,25 @@
                         <aside class="sidebar">
                             <div class="sidebar-widget company-widget">
                                 <div class="widget-content">
-
                                     <ul class="company-info mt-0">
+                                        @if($sum >= 10)
+                                        <li class="rating-css">
+                                            <label>Rating:</label>
+                                            <div class="star-icon">
+                                                <input @if($average > 0 && $average <= 1.5) checked @endif type="radio" value="1" name="rate"id="rating1" disabled>
+                                                <label for="rating1" class="fa fa-star"></label>
+                                                <input @if($average > 1.5 && $average <= 2.5) checked @endif type="radio" value="2" name="rate" id="rating2" disabled>
+                                                <label for="rating2" class="fa fa-star"></label>
+                                                <input @if($average > 2.5 && $average <= 3.5) checked @endif type="radio" value="3" name="rate" id="rating3" disabled>
+                                                <label for="rating3" class="fa fa-star"></label>
+                                                <input @if($average > 3.5 && $average <= 4.5) checked @endif type="radio" value="4" name="rate" id="rating4" disabled>
+                                                <label for="rating4" class="fa fa-star"></label>
+                                                <input @if($average > 4.5 && $average <= 5) checked @endif type="radio" value="5" name="rate" id="rating5" disabled>
+                                                <label for="rating5" class="fa fa-star"></label>
+                                            </div>
+                                            <span>(<?php echo $average?>)</span>
+                                        </li>
+                                        @endif
                                         <li>Ngành chính: <span>{{$company_detail->company_model}}</span></li>
                                         <li>Quy mô: <span>{{$company_detail->team}}</span></li>
                                         <li>Thành lập: <span>{{$company_detail->founded_in}}</span></li>
