@@ -152,7 +152,7 @@
     </div>
   </section>
   @elseif ($company->status == 2)
-  <span class="text-warning" style="font-weight: 900">Bạn đã bị khóa tài khoản, Vui lòng liên hệ admin</span>
+  <span class="text-warning" style="font-weight: 900">Bạn chưa đủ điều kiện xét duyệt, Vui lòng liên hệ admin</span>
   @else
   <span class="text-warning" style="font-weight: 900">Bạn cần chờ xét duyệt</span>
 
