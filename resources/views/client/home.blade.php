@@ -37,6 +37,14 @@
 
                             </form>
                         </div>
+
+                        <div class="row">
+                <div class="col-md-12">
+                    <form class="typeahead" role="search">
+                    <input type="search" name="q" class="form-control search-input" placeholder="Type something..." autocomplete="off">
+                </form>
+                </div>
+            </div>
                         <!-- Job Search Form -->
 
                         <!-- Popular Search -->
@@ -177,7 +185,7 @@
                                     </ul>
                                     @if (auth('candidate')->check())
                                         @if (!empty($job_short[$item->id]))
-                                            @if ($job_short[$item->id]->job_post_id == $item->id)
+                                           @if ($job_short[$item->id]->job_post_id == $item->id)
                                                 <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
                                                     class="bookmark-btn"><span
                                                         class="flaticon-bookmark" style="color: #f7941d"></span></a>
@@ -276,4 +284,49 @@
     </section>
     <!-- End Job Section -->
 
+@endsection
+@section('script')
+@parent
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script>
+$(document).ready(function($) {
+    var engine1 = new Bloodhound({
+        remote: {
+            url: '/search/name?value=%QUERY%',
+            wildcard: '%QUERY%'
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+    });
+
+    $(".search-input").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, [
+        {
+            source: engine1.ttAdapter(),
+            name: 'students-name',
+            display: function(data) {
+                return data.title;
+            },
+            templates: {
+                empty: [
+                    '<div class="header-title">Name</div><div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
+                ],
+                header: [
+                    '<div class="header-title">Name</div><div class="list-group search-results-dropdown"></div>'
+                ],
+                suggestion: function (data) {
+                    return '<a href="/students/' + data.id + '" class="list-group-item">' + data.title + '</a>';
+                }
+            }
+        }, 
+    ]);
+});
+
+</script>
 @endsection
