@@ -157,8 +157,6 @@
                                                 </div>
                                             </div>
                                         </li>
-
-                                        <!--Block-->
                                         <li class="accordion block">
                                             <div class="acc-btn"> Nội dung tuyển dụng chi tiết <span
                                                     class="icon flaticon-add"></span></div>
@@ -213,11 +211,6 @@
 
                                     </ul>
                                 </div>
-                                <!-- Input -->
-
-                                <!-- About Company -->
-
-                                <!-- Input -->
                                 <div class="form-group col-lg-12 col-md-12 text-right clearfix">
                                     <button type="submit" class="theme-btn btn-style-one float-end"
                                         id="buttonSubmit">Sửa</button>

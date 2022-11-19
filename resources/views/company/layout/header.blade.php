@@ -5,7 +5,7 @@
             <!--Nav Outer -->
             <div class="nav-outer">
                 <div class="logo-box">
-                    <div class="logo"><a href="index.html"><img src="{{ asset('images/logo_ubwork.png') }}"
+                    <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}"
                                 alt="" title=""></a></div>
                 </div>
 
@@ -51,7 +51,7 @@
 
     <!-- Mobile Header -->
     <div class="mobile-header">
-        <div class="logo"><a href="index.html"><img src="{{ asset('assets/client-bower/images/logo.svg') }}"
+        <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}"
                     alt="" title=""></a></div>
 
         <!--Nav Box-->
