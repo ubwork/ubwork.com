@@ -23,12 +23,18 @@ class MailController extends Controller
         $seeker = SeekerProfile::where('candidate_id', $subject)->first();
         $major = $seeker->major_id;
         $job = JobPost::where('major_id', $major)->get();
+        $jobpost = JobPost::where('major_id', $major)->first();
         $coin = $bitcoin;
+        $date = date('Y/m/d', time());
+        $jobspeed = JobSpeed::where('seeker_id', $subject)->first();
+        $jobspeed = JobSpeed::where('seeker_id', $subject)->whereDate('created_at', $date)->first();
         if (!empty($seeker)) {
             if ($coin - 30 < 0) {
                 return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
-            }elseif(!empty($job)){
+            } elseif (!isset($jobpost)) {
                 return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
+            }elseif(!empty($jobspeed)){
+                return back()->with('error', 'Hôm Nay Bạn Đã Sử Dụng Phương Thức Này Rồi Vui Lòng Quay Lại Vào Ngày Mai !');
             } else {
                 foreach ($job as $item) {
                     $email = $item->company->email;
@@ -37,12 +43,11 @@ class MailController extends Controller
                     $speed->job_post_id = $item->id;
                     $speed->seeker_id = $seeker->id;
                     $speed->status = '1';
-                    // dd($speed);
-                    $candidate->update([
-                        'coin' => $coin - 30,
-                    ]);
                     $speed->save();
                 }
+                $candidate->update([
+                    'coin' => $coin - 30,
+                ]);
             }
 
             return back()->with('success', 'Tìm Kiếm Thành Công');
