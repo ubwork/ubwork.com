@@ -7,6 +7,7 @@ use App\Models\Candidate;
 use App\Models\Company;
 use App\Models\JobPost;
 use App\Models\Major;
+use App\Models\SeekerProfile;
 use App\Models\Shortlist;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -46,8 +47,10 @@ class HomeController extends Controller
                 }
             }
             if (!empty($dataUser)) {
-                $maJor_id = $dataUser->major_id;
-                $dataYour = JobPost::where('major_id', $maJor_id)->where('status', 1)->get();
+                $seeker = SeekerProfile::where('candidate_id', $id)->first();
+                if (!empty($seeker)) {
+                    $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
+                }
             }
         }
         $maJor = Major::all();
