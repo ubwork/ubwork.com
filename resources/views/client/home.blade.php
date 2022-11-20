@@ -3,6 +3,26 @@
     {{ __('UB Work') }}
 @endsection
 @section('content')
+<style>
+    .form-control:focus{
+        box-shadow: none;
+    }
+    .tt-menu{
+        left: -15px !important;
+        top: 80px !important;
+        width: 305px;
+        border-radius: 5px;
+    }
+    .tt-dataset{
+        border-radius: 5px; 
+    }
+    .tt-dataset a{
+        font-family: 'Roboto', sans-serif;
+    }
+    .tt-dataset a:hover{
+            color:#f7941d;
+    }
+</style>
     <section class="banner-section">
         <div class="auto-container">
             <div class="row">
@@ -18,7 +38,7 @@
                                 <div class="row">
                                     <div class="form-group col-lg-5 col-md-12 col-sm-12">
                                         <span class="icon flaticon-search-1"></span>
-                                        <input type="text" name="search" placeholder="Mời Nhập Từ Khóa">
+                                        <input type="text" class="form-control search-input" name="search" placeholder="Mời Nhập Từ Khóa">
                                     </div>
                                     <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
                                         <span class="icon flaticon-briefcase"></span>
@@ -38,13 +58,7 @@
                             </form>
                         </div>
 
-                        <div class="row">
-                <div class="col-md-12">
-                    <form class="typeahead" role="search">
-                    <input type="search" name="q" class="form-control search-input" placeholder="Type something..." autocomplete="off">
-                </form>
-                </div>
-            </div>
+                        
                         <!-- Job Search Form -->
 
                         <!-- Popular Search -->
@@ -314,14 +328,8 @@ $(document).ready(function($) {
                 return data.title;
             },
             templates: {
-                empty: [
-                    '<div class="header-title">Name</div><div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
-                ],
-                header: [
-                    '<div class="header-title">Name</div><div class="list-group search-results-dropdown"></div>'
-                ],
                 suggestion: function (data) {
-                    return '<a href="/students/' + data.id + '" class="list-group-item">' + data.title + '</a>';
+                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
                 }
             }
         }, 
