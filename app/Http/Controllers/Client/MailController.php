@@ -26,8 +26,7 @@ class MailController extends Controller
         $jobpost = JobPost::where('major_id', $major)->first();
         $coin = $bitcoin;
         $date = date('Y/m/d', time());
-        $jobspeed = JobSpeed::where('seeker_id', $subject)->first();
-        $jobspeed = JobSpeed::where('seeker_id', $subject)->whereDate('created_at', $date)->first();
+        $jobspeed = JobSpeed::where('seeker_id', $subject)->whereDate('created_at', $date)->first(); // hàm sử lý thời gian
         if (!empty($seeker)) {
             if ($coin - 30 < 0) {
                 return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
