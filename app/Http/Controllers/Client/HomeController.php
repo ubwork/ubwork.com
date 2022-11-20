@@ -73,7 +73,6 @@ class HomeController extends Controller
     public function searchByName(Request $request)
     {
         $students = JobPost::where('title', 'like', '%' . $request->value . '%')->get();
-
         return response()->json($students);
     }
 }
