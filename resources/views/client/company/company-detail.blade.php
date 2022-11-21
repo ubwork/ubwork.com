@@ -26,9 +26,9 @@
 
                         <div class="btn-box">
                             @if (auth('candidate')->check()) 
-                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Tố cáo</a>
+                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Đánh giá</a>
                             @else
-                                <button class="theme-btn btn-style-one">Tố cáo</button>
+                                <button class="theme-btn btn-style-one">Đánh giá</button>
                             @endif
 
                             {{-- @if (auth('candidate')->check()) 

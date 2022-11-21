@@ -22,6 +22,7 @@ class HomeController extends Controller
         $dataYour = [];
         $job_short = [];
         $data = [];
+        $seeker = [];
         // dd(isset($search));
         $search = $request->search;
         if (isset($search)) {
