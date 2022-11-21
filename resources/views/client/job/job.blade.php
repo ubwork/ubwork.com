@@ -188,7 +188,7 @@
 $(document).ready(function($) {
     var engine1 = new Bloodhound({
         remote: {
-            url: '/search/name?value=%QUERY%',
+            url: '/search/title?value=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
