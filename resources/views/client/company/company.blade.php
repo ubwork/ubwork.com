@@ -7,7 +7,7 @@
     .page-link{
         border-radius: 50%;
         padding: 5px 15px;
-        margin: 10px; 
+        margin: 10px;
     }
     .page-link:hover{
             background-color: #C46F01;
@@ -82,7 +82,6 @@
                         </form>
                     </div>
                 </div>
-
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
                     <div class="ls-outer">
                         <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
