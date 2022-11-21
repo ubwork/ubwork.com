@@ -1,6 +1,6 @@
 @extends('client.layout.app')
 @section('title')
-    {{__('UB Work')}} | 
+    {{__('UB Work')}} | {{$job_cat->name}}
 @endsection
 @section('content')
 <style>
@@ -20,9 +20,9 @@
         box-shadow: none;
     }
     .tt-menu{
-        left: -15px !important;
+        left: -25px !important;
         top: 80px !important;
-        width: 305px;
+        width: 435px;
         border-radius: 5px;
     }
     .tt-dataset{
@@ -149,7 +149,7 @@
                                         @if (auth('candidate')->check()) 
                                             <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
                                         @else
-                                            <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                         <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
                                         @endif
                                     </div>
                                 </div>
@@ -176,18 +176,21 @@
             </div>
         </div>
     </section>
+    <input type="hidden" id="value_id" value="{{$job_cat->id}}">
 @endsection
 @section('script')
 @parent
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
 $(document).ready(function($) {
+    var id = document.getElementById('value_id').value
+    console.log(id);
+
     var engine1 = new Bloodhound({
         remote: {
-            url: '/search/name?value=%QUERY%',
+            url:`/search/title-cat/${id}?value=%QUERY%`,
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('value'),

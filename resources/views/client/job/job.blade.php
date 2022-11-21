@@ -142,8 +142,8 @@
                                                         class="bookmark-btn"><span
                                                             class="flaticon-bookmark"></span></button></a>
                                             @else
-                                                <button class="bookmark-btn"><span
-                                                        class="flaticon-bookmark"></span></button>
+                                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span
+                                                        class="flaticon-bookmark"></span></a>
                                             @endif
                                         </div>
                                     </div>
