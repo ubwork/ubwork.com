@@ -21,7 +21,6 @@ class OpenCvController extends Controller
         $activeRoute = "view-open-cv";
         $idCompany = auth('company')->user()->id;
         $data = OpenCv::where('company_id', $idCompany)->get();
-        // dd($data);
         $com_short = [];
         if (!empty($data)) {
             foreach ($data as $item) {

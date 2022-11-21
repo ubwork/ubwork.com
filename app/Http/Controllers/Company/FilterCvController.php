@@ -17,7 +17,6 @@ class FilterCvController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request->all());
         $perPage = intval($request->input('page_num', 10));
         $query = "1=1";
         $exp      = $request->input('experience');
@@ -29,19 +28,14 @@ class FilterCvController extends Controller
             $exp = Experience::where('id',$exp)->pluck('seeker_id','seeker_id')->toArray();
             $cvString = !empty($exp) ? implode(',',$exp) : -1;
             $query .= " AND id IN($cvString)" ;
-        // dd($cvString);
         }
         if($skills && $skills <> -1)
         {
             $seekerSkill = SkillSeeker::where('skill_id',$skills)->pluck('seeker_id','seeker_id')->toArray();
             $cvString = !empty($seekerSkill) ? implode(',',$seekerSkill) : -1;
             $query .= " AND id IN($cvString)" ;
-        // dd($cvString);
         }
         $allProfile = SeekerProfile::get()->keyBy('candidate_id')->toArray();
-        // $opencv = SeekerProfile::get()->keyBy('id')->toArray();
-        // $opencv = SeekerProfile::where('id')->first();
-        // dd($allProfile);
         $title = "Tìm hồ sơ ứng viên";
         $activeRoute = "filter";
         $exp = Experience::all()->toArray();
@@ -50,11 +44,8 @@ class FilterCvController extends Controller
         
 
         $company = Company::find(auth('company')->user()->id);
-        // dd($company);
         $candidate = Candidate::all();
         $data = Candidate::with('seeker', 'major')->whereRaw($query)->paginate($perPage);
-        // dd($data->toArray());
-
         return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill', 
         'data', 'candidate', 'company', 'allProfile'));
 
