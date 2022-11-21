@@ -109,4 +109,6 @@ Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@delete
 
 Route::get('create-cv/getPdf', 'Client\CreateCvController@getPdf')->name('getPdf');
 
+
+
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');

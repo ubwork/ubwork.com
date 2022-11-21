@@ -29,7 +29,7 @@
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                       {{-- <span class="thumb"><img src="{{asset('storage/'. $com_short[$item->seeker_id]->image)}}" alt=""></span> --}}
-                      <h3 class="name"><a href="#">{{$com_short[$item->seeker_id]->name}}</a></h3>
+                      <h3 class="name"><a href="#">{{$com_short[$item->seeker_id]->name ?? ''}}</a></h3>
                       {{-- <span class="cat" style="min-height: 22px">{{isset($item['major']['name']) ? $item['major']['name'] : ''}}</span> --}}
                       <ul class="job-info">
                         
