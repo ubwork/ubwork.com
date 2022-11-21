@@ -15,7 +15,7 @@
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
-                                <li><span class="icon flaticon-briefcase"></span> Accounting / Finance</li>
+                                <li><span class="icon flaticon-briefcase"></span> {{$company_detail->company_model}}</li>
                                 <li><span class="icon flaticon-telephone-1"></span>{{$company_detail->phone}}</li>
                                 <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
@@ -126,8 +126,8 @@
                                         <div style="font-size: 16px; ">>Xin vui lòng:</div>
                                     <ul class="notification-list">
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không sử dụng từ ngữ mang ý </strong><span class="colored">xúc phạm, miệt thị</span></li>
-                                    <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không cung cấp</strong><span class="colored">thông tin cá nhân</span></li>
-                                    <li class="success" style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;">Không cung cấp<strong>thông tin bảo mật,</strong><span class="colored">bí mật kinh doanh của công ty</span></li>
+                                    <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không cung cấp</strong><span class="colored"> thông tin cá nhân</span></li>
+                                    <li class="success" style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;">Không cung cấp<strong>thông tin bảo mật, </strong><span class="colored">bí mật kinh doanh của công ty</span></li>
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"><strong>Cảm ơn bạn đã đưa ra những đánh giá chân thực nhất. </strong> applied for a job <span class="colored">Xem thêm thông tin chi tiết về Hướng Dẫn & Điều Kiện về đánh giá</span></li>
                                     </ul>
                                 </div>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\client\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/search/title', 'client\HomeController@searchByTitle');
+Route::get('/search/title-cat/{id}', 'client\JobController@searchByTitle');
 // Register client
 Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
@@ -24,6 +27,7 @@ Route::get('/logout', ['as' => 'logout', 'uses' => 'Client\Auth\LoginController@
 //candidate
 Route::get('/', 'client\HomeController@index')->name('index');
 Route::get('search', 'client\HomeController@search')->name('search');
+Route::get('send', 'client\MailController@send')->name('send');
 
 Route::get('/job', 'client\JobController@job')->name('job');
 Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
@@ -104,5 +108,7 @@ Route::post('create-cv/updateCertificate/{id}', 'Client\CreateCvController@updat
 Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
 
 Route::get('create-cv/getPdf', 'Client\CreateCvController@getPdf')->name('getPdf');
+
+
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');

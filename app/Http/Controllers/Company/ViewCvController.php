@@ -48,4 +48,30 @@ class ViewCvController extends Controller
             return redirect()->route('company.filter');
         }
     }
+
+    public function viewProfileHidden($id)
+    {
+        $seekerProfile = SeekerProfile::where('candidate_id', $id)->first();
+        $this->v['skills'] = Skill::all();
+        $this->v['major'] = Major::all();
+        $this->v['maJor'] = Major::all();
+
+        if (!empty($seekerProfile)) {
+            $this->v['candidate'] = Candidate::where('id', $seekerProfile->id)->first();
+            $this->v['seekerProfile'] = $seekerProfile;
+
+            $this->v['experiences'] = Experience::where('seeker_id', $seekerProfile->id)->get();
+            $this->v['educations'] = Education::where('seeker_id', $seekerProfile->id)->get();
+            $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seekerProfile->id)->get();
+            $this->v['certificates'] = Certificate::where('seeker_id', $seekerProfile->id)->get();
+
+            $this->v['title_CV'] = "CV-".$this->v['seekerProfile']->name;
+
+            return view('company.view-cv.cvHiddenInfo', $this->v);
+
+        }else {
+            Session::flash('error', 'Không tìm thấy CV!');
+            return redirect()->route('company.filter');
+        }
+    }
 }
