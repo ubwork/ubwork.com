@@ -3,6 +3,8 @@
     {{ __('UB Work') }}
 @endsection
 @section('content')
+@section('style')
+@parent
 <style>
     .form-control:focus{
         box-shadow: none;
@@ -23,6 +25,7 @@
             color:#f7941d;
     }
 </style>
+@endsection
     <section class="banner-section">
         <div class="auto-container">
             <div class="row">
