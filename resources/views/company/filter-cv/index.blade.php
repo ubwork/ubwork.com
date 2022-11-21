@@ -47,7 +47,6 @@
               <div class="showing-result">
                 <div class="top-filters">
                   <div class="form-group">
-                    {{-- @dd(app('request')->input('major')) --}}
                     <select name="major" class="select2">
                       <option value="-1" selected>Chọn chuyên ngành</option>
                       @if (count($major) > 0)
@@ -99,26 +98,30 @@
                 </select>
               </div>
             </div>
-            
             <div class="row">
               @if (count($data) > 0)
                 @foreach ($data as $item)
-                {{-- @dd($item['candidate']['name']); --}}
-
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
-                      <span class="thumb"><img src="{{asset('storage/'. $item['candidate']['avatar'])}}" alt=""></span>
-                      <h3 class="name"><a href="#">{{$item['candidate']['name']}}</a></h3>
+                     
+                      <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : ''}}" alt=""></span>
+                      <h3 class="name"><a href="#">
+                        @php
+                        $nameAt = $item['name'];
+                        $count = mb_substr($nameAt, 0, 4,'UTF-8');
+                        echo $count."**********";
+                        @endphp
+                      </a></h3>
                       <span class="cat" style="min-height: 22px">{{isset($item['major']['name']) ? $item['major']['name'] : ''}}</span>
                       <ul class="job-info">
                         <li style="min-height: 22px">
-                        @if ($item['candidate']['address'])
-                        <span class="icon flaticon-map-locator"></span> {{$item['candidate']['address']}}
+                        @if ($item['address'])
+                        <span class="icon flaticon-map-locator"></span> {{$item['address']}}
                         @endif
                       </li>
                       <li style="min-height: 22px">
-                        @if ($item['candidate']['coin'])
-                        <span class="icon flaticon-money"></span> {{$item['candidate']['coin']}}
+                        @if ($item['coin'])
+                        <span class="icon flaticon-money"></span> {{$item['coin']}}
                         @endif
                       </li>
                         
@@ -131,7 +134,21 @@
                         @endforeach --}}
                         
                       </ul>
-                      <a target="_blank" href="{{route('company.viewProfile', ['id' => $item->id])}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+                      
+                      <div class="d-flex justify-content-between">
+                        @if (!empty($allProfile[$item->id]))
+                        <a style="width: 49%;" class="theme-btn btn-style-three" href="{{route('company.SaveOpenCv', ['id' => $allProfile[$item->id]]['id'])}}">Mở khóa</a>
+                        @else
+                        <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three" >Mở khóa</a>
+                       @endif
+                        @if (!empty($allProfile[$item->id]))
+                        <a style="width: 49%;" href="{{route('company.detail-candidate.index', $item->id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+                        @else
+
+                        <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+                        @endif
+
+                      </div>
                     </div>
                   </div>
                 @endforeach
@@ -152,7 +169,7 @@
     </div>
   </section>
   @elseif ($company->status == 2)
-  <span class="text-warning" style="font-weight: 900">Bạn đã bị khóa tài khoản, Vui lòng liên hệ admin</span>
+  <span class="text-warning" style="font-weight: 900">Bạn chưa đủ điều kiện xét duyệt, Vui lòng liên hệ admin</span>
   @else
   <span class="text-warning" style="font-weight: 900">Bạn cần chờ xét duyệt</span>
 

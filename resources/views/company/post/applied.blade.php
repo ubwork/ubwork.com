@@ -27,7 +27,8 @@
                                                 <span>{{ $item->pivot->is_see == 1 ? "Đã xem" : "Chưa xem" }}</span>
                                             </td>
                                             <td>{{ $item->phone }} <br>{{ $item->email }}
-                                            <td>
+                                            </td>
+                                            <td><a target="_blank" href="{{route('company.viewProfile', ['id' => $item->id])}}">Chi tiết</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -45,11 +45,10 @@
                       <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
                     @else
-                    
                       <a  @if(!empty($seeker->id)) href="{{route('applied', ['id' => $data_job->id])}}" @else href="{{route('CreateCV')}}" @endif class="theme-btn btn-style-one">Ứng tuyển ngay</a>
                     @endif
                 @else
-                    <button class="theme-btn btn-style-one">Ứng tuyển ngay</button>
+                  <a class="theme-btn btn-style-one" href="{{route('candidate.login')}}">Ứng tuyển ngay</a>
                 @endif
                 
                 @if (auth('candidate')->check()) 
@@ -61,7 +60,7 @@
                     <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                   @endif
                 @else
-                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                    <a class="bookmark-btn" href="{{route('candidate.login')}}"><span class="flaticon-bookmark"></span></a>
                 @endif
               </div>
             </div>
@@ -142,7 +141,7 @@
                                 <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                               @endif
                             @else
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                              <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
                             @endif
                             </div>
                         </div>

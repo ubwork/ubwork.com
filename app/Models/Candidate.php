@@ -30,6 +30,18 @@ class Candidate extends Authenticatable
         $res = DB::table($this->table)->insert($data);
         return $res;
     }
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
+    public function skill()
+    {
+        return $this->belongsTo(Skill::class);
+    }
+    public function seeker()
+    {
+        return $this->belongsTo(SeekerProfile::class);
+    }
 
     // lưu cập nhật
     public function saveUpdate($params)
