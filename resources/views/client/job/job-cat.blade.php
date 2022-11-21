@@ -3,6 +3,8 @@
     {{__('UB Work')}} | {{$job_cat->name}}
 @endsection
 @section('content')
+@section('style')
+@parent
 <style>
     .page-link{
         border-radius:50%;
@@ -35,6 +37,7 @@
             color:#f7941d;
     }
 </style>
+@endsection
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
