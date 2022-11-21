@@ -22,7 +22,6 @@ class DetailCandidateController extends Controller
         $education = Education::where('seeker_id', $data->id)->get()->toArray();
 
         $exp = Experience::where('seeker_id', $data->id)->get()->toArray();
-        // dd($data);
         return view('company.detail-candidate.index', compact('title', 'activeRoute', 'maJor', 'data', 'education', 'exp'));
     }
 }

@@ -47,7 +47,6 @@
               <div class="showing-result">
                 <div class="top-filters">
                   <div class="form-group">
-                    {{-- @dd(app('request')->input('major')) --}}
                     <select name="major" class="select2">
                       <option value="-1" selected>Chọn chuyên ngành</option>
                       @if (count($major) > 0)
@@ -99,11 +98,9 @@
                 </select>
               </div>
             </div>
-            {{-- @dd($data); --}}
             <div class="row">
               @if (count($data) > 0)
                 @foreach ($data as $item)
-                {{-- @dd($item['name']); --}}
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                      
@@ -140,7 +137,6 @@
                       
                       <div class="d-flex justify-content-between">
                         @if (!empty($allProfile[$item->id]))
-                        {{-- @dd($allProfile[$item->id]['id']); --}}
                         <a style="width: 49%;" class="theme-btn btn-style-three" href="{{route('company.SaveOpenCv', ['id' => $allProfile[$item->id]]['id'])}}">Mở khóa</a>
                         @else
                         <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three" >Mở khóa</a>
