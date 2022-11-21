@@ -16,7 +16,6 @@ class CandidateController extends Controller
     public function index()
     {
         $data = Candidate::where('status', 1)->get();
-        // dd($data);
         $maJor = Major::all();
         return view('client.candidate.candi-list', compact('data', 'maJor'));
     }
@@ -24,9 +23,7 @@ class CandidateController extends Controller
     {
         $id = auth('candidate')->user()->id;
         $detail = Candidate::where('id', $id)->first();
-        // dd($data);
         $maJor = Major::all();
-        dd($maJor);
         return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
     }
     public function update(CandidateRequest $request, $id)
