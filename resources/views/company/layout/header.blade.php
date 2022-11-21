@@ -35,6 +35,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="dashboard-company-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
+                        <li><a href="{{route('company.listPackage')}}"><i class="fa fa-cube"></i>Gói dịch vụ</a></li>
                         <li>
                             <form action="{{ route('company.logOut') }}" method="post">
                                 @csrf
