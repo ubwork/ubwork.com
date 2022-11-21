@@ -9,7 +9,7 @@
         <div class="form-inner">
           <h3>Tìm Kiếm Công Việc Nhanh</h3>
             <div class="form-group">
-              <button class="theme-btn btn-style-one" type="submit" name="log-in"><a href="{{route('send')}}" style="color: black" onclick="return confirm('Bạn Có Chắc Chắn Có Muốn Chọn Không ?');">Tìm Kiếm</a></button>
+              <button class="theme-btn btn-style-one" type="submit" name="log-in"><a href="{{route('send')}}" style="color: #fff">Tìm Kiếm</a></button>
             </div>
         </div>
       </div>

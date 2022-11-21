@@ -25,7 +25,6 @@ Route::get('/', 'client\HomeController@index')->name('index');
 Route::get('/search', 'client\HomeController@search')->name('search');
 Route::get('/send', 'client\MailController@send')->name('send');
 Route::get('/job-speed', 'client\MailController@jobspeed')->name('jobspeed');
-
 Route::get('/job', 'client\JobController@job')->name('job');
 Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
 Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');

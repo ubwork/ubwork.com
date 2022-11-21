@@ -37,7 +37,10 @@ class MailController extends Controller
             } else {
                 foreach ($job as $item) {
                     $email = $item->company->email;
-                    Mail::to($email)->send(new SendMail($subject));
+                    $company_name = $item->company->company_name;
+                    $message =  'D:\xampp\htdocs\doan\ubwork.com\public\images\logo_ubwork.png';
+                    // dd($message);
+                    Mail::to($email)->send(new SendMail($subject,$company_name,$message));
                     $speed = new JobSpeed();
                     $speed->job_post_id = $item->id;
                     $speed->seeker_id = $seeker->id;
@@ -48,10 +51,8 @@ class MailController extends Controller
                     'coin' => $coin - 30,
                 ]);
             }
-
             return back()->with('success', 'Tìm Kiếm Thành Công');
         }
-        // return back();
     }
     public function jobspeed()
     {
