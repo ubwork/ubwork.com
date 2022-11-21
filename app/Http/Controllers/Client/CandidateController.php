@@ -26,6 +26,7 @@ class CandidateController extends Controller
         $detail = Candidate::where('id', $id)->first();
         // dd($data);
         $maJor = Major::all();
+        dd($maJor);
         return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
     }
     public function update(CandidateRequest $request, $id)

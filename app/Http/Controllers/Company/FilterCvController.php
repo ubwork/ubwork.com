@@ -37,7 +37,11 @@ class FilterCvController extends Controller
             $cvString = !empty($seekerSkill) ? implode(',',$seekerSkill) : -1;
             $query .= " AND id IN($cvString)" ;
         // dd($cvString);
-        } 
+        }
+        $allProfile = SeekerProfile::get()->keyBy('candidate_id')->toArray();
+        // $opencv = SeekerProfile::get()->keyBy('id')->toArray();
+        // $opencv = SeekerProfile::where('id')->first();
+        // dd($allProfile);
         $title = "Tìm hồ sơ ứng viên";
         $activeRoute = "filter";
         $exp = Experience::all()->toArray();
@@ -48,11 +52,11 @@ class FilterCvController extends Controller
         $company = Company::find(auth('company')->user()->id);
         // dd($company);
         $candidate = Candidate::all();
-        $data = SeekerProfile::with('candidate', 'major')->whereRaw($query)->paginate($perPage);
-
+        $data = Candidate::with('seeker', 'major')->whereRaw($query)->paginate($perPage);
+        // dd($data->toArray());
 
         return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill', 
-        'data', 'candidate', 'company'));
+        'data', 'candidate', 'company', 'allProfile'));
 
     }
 
