@@ -37,6 +37,10 @@ class SeekerProfile extends Model
     {
         return $this->belongsTo(Major::class);
     }
+    public function skill()
+    {
+        return $this->belongsTo(Skill::class);
+    }
 
     // lưu tạo
     public function saveAdd($params) {
