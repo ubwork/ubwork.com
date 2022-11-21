@@ -73,9 +73,9 @@ class HomeController extends Controller
         }
         return view('client.job.job', compact('data', 'maJor', 'today'));
     }
-    public function searchByName(Request $request)
+    public function searchByTitle($id, Request $request)
     {
-        $students = JobPost::where('title', 'like', '%' . $request->value . '%')->get();
-        return response()->json($students);
+        $job = JobPost::where('major_id', $id)->where('title', 'like', '%' . $request->value . '%')->get();
+        return response()->json($job);
     }
 }

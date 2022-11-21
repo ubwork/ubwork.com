@@ -210,7 +210,7 @@
                                                     style="color: black"></span></a>
                                         @endif
                                     @else
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark" style="color: black"></span></button>
+                                        <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark" style="color: black"></span></a>
                                     @endif
                                 </div>
                             </div>
@@ -280,7 +280,7 @@
                                                     class="bookmark-btn"><span class="flaticon-bookmark " style="color: black"></span></a>
                                             @endif
                                         @else
-                                            <button class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></button>
+                                            <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
                                         @endif
                                     </div>
                                 </div>
@@ -323,7 +323,7 @@ $(document).ready(function($) {
     }, [
         {
             source: engine1.ttAdapter(),
-            name: 'students-name',
+            name: 'job-name',
             display: function(data) {
                 return data.title;
             },
