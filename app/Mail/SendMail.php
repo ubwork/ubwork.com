@@ -16,9 +16,8 @@ class SendMail extends Mailable
     use Queueable, SerializesModels;
     public $subject;
     public $company_name;
-    public $message;
 
-    public function __construct($subject, $company_name,$message)
+    public function __construct($subject, $company_name)
     {
         $this->subject = $subject;
         $this->company_name = $company_name;

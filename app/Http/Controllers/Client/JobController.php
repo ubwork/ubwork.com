@@ -8,6 +8,7 @@ use App\Models\company;
 use App\Models\JobPost;
 use App\Models\JobPostActivities;
 use App\Models\JobSkill;
+use App\Models\JobSpeed;
 use App\Models\Major;
 use App\Models\SeekerProfile;
 use App\Models\Shortlist;
@@ -29,11 +30,14 @@ class JobController extends Controller
     public function job()
     {
         $job_short = [];
+        $jobspeed = [];
         $data = JobPost::where('status', 1)->paginate(10);
         $today = strtotime(Carbon::now());
         $maJor = Major::all();
+        $date = date('Y/m/d', time());
         if (auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
+            $jobspeed = JobSpeed::where('seeker_id', $id)->whereDate('created_at', $date)->first();
             $dataUser = Candidate::where('id', $id)->first();
             $data_short = Shortlist::where('candidate_id', $id)->get();
             if (!empty($data_short)) {
@@ -43,7 +47,7 @@ class JobController extends Controller
                 }
             }
         }
-        return view('client.job.job', compact('data', 'maJor', 'job_short', 'today'));
+        return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed'));
     }
     public function job_cat($id)
     {
@@ -79,8 +83,6 @@ class JobController extends Controller
                     }
                 }
             }
-            // dd($idJobApplied[$item->id]);
-            // dd($data_job->id);
         }
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)
             ->where('id', '!=', $data_job->id)->take(3)->get();
