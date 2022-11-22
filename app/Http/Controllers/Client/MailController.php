@@ -38,9 +38,7 @@ class MailController extends Controller
                 foreach ($job as $item) {
                     $email = $item->company->email;
                     $company_name = $item->company->company_name;
-                    $message =  'D:\xampp\htdocs\doan\ubwork.com\public\images\logo_ubwork.png';
-                    // dd($message);
-                    Mail::to($email)->send(new SendMail($subject,$company_name,$message));
+                    Mail::to($email)->send(new SendMail($subject,$company_name));
                     $speed = new JobSpeed();
                     $speed->job_post_id = $item->id;
                     $speed->seeker_id = $seeker->id;
@@ -58,5 +56,23 @@ class MailController extends Controller
     {
         $maJor = Major::all();
         return view('email.job-speed', compact('maJor'));
+    }
+    public function speedapply(){
+        $id_user = auth('candidate')->user()->id;
+        $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
+        $data = [];
+        $job_applied = [];
+        if (!empty($seeker)) {
+            $job_applied = [];
+            $data = JobSpeed::where('seeker_id', $seeker->id)->get();
+            if (!empty($data)) {
+                foreach ($data as $item) {
+                    $id_post = $item->job_post_id;
+                    $job_applied[$id_post] = JobPost::where('id', $id_post)->first();
+                }
+            }
+        }
+        $maJor = Major::all();
+        return view('client.job.job-speed',compact('data', 'job_applied', 'maJor'));
     }
 }

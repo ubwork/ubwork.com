@@ -40,17 +40,6 @@
                         <!-- Job Search Form -->
 
                         <!-- Popular Search -->
-                        <div class="popular-searches">
-                            <span class="title">Popular Searches : </span>
-                            <a href="#">Designer</a>,
-                            <a href="#">Developer</a>,
-                            <a href="#">Web</a>,
-                            <a href="#">IOS</a>,
-                            <a href="#">PHP</a>,
-                            <a href="#">Senior</a>,
-                            <a href="#">Engineer</a>,
-                        </div>
-                        <!-- End Popular Search -->
                     </div>
                 </div>
                 <div class="image-column col-lg-5 col-md-12">
@@ -108,6 +97,47 @@
     <!-- Job Categories -->
     <section class="job-categories">
         <div class="auto-container">
+            <div class="row wow fadeInUp">
+                <div class="sec-title text-center">
+                    <h2>Về Chúng Tôi</h2>
+                    <div class="text">Ubwork là website công nghệ nhân sự (HR Tech). Với năng lực lõi là
+                        công nghệ, sứ mệnh của Ubwork đặt ra cho mình là thay đổi thị
+                        trường tuyển dụng - nhân sự ngày một hiệu quả hơn. Bằng công nghệ, chúng tôi tạo ra nền tảng cho
+                        phép người lao động tạo CV, phát triển được các kỹ năng cá nhân, xây dựng hình ảnh chuyên nghiệp
+                        trong mắt nhà tuyển dụng và tiếp cận với các cơ hội việc làm phù hợp.</div>
+                </div>
+                <div class="job-carousel owl-carousel owl-theme default-dots category-block col-lg-4 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                        <div class="content">
+                            <span class="icon fas fa-user"></span>
+                            <h4><a href="#">Ứng Viên</a></h4>
+                            <p>Có {{ count($user) }} ứng viên sử dụng dịch vụ.</p>
+                        </div>
+                    </div>
+                    <div class="inner-box">
+                        <div class="content">
+                            <span class="icon fas fa-building"></span>
+                            <h4><a href="#">Doanh Nghiệp</a></h4>
+                            <p>Có {{ count($company) }} doanh nghiệp sử dụng dịch vụ.</p>
+                        </div>
+                    </div>
+                    <div class="inner-box">
+                        <div class="content">
+                            <span class="icon fas fa-clipboard-list"></span>
+                            <h4><a href="#">Bài Đăng</a></h4>
+                            <p>Có {{ count($job_post) }} bài đăng đã được đăng tải.</p>
+                        </div>
+                    </div>
+                    <div class="inner-box">
+                        <div class="content">
+                            <span class="icon fas fa-search"></span>
+                            <h4><a href="#">Tìm Việc</a></h4>
+                            <p>Có {{ count($user_type) }} người dùng đang bật chế độ tìm việc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="sec-title text-center">
                 <h2>Các chuyên ngành công việc phổ biến</h2>
                 <div class="text">{{ $data != '' ? count($data) : 0 }} việc làm được đăng tải</div>
@@ -120,7 +150,8 @@
                         <div class="inner-box">
                             <div class="content">
                                 <span class="{{ $item_job->icon }}"></span>
-                                <h4><a href="{{ route('job-cat', ['id' => $item_job->id]) }}">{{ $item_job->name }}</a></h4>
+                                <h4><a href="{{ route('job-cat', ['id' => $item_job->id]) }}">{{ $item_job->name }}</a>
+                                </h4>
                                 <p>( {{ $count[$item_job->id] }} bài đăng)</p>
                             </div>
                         </div>
@@ -150,7 +181,7 @@
                                             href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                     </h4>
                                     <ul class="job-info">
-                                        <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
+                                        <li><span class="icon flaticon-briefcase"></span>{{ $item->major->name }}</li>
                                         <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                         </li>
                                         <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
@@ -179,8 +210,8 @@
                                         @if (!empty($job_short[$item->id]))
                                             @if ($job_short[$item->id]->job_post_id == $item->id)
                                                 <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                    class="bookmark-btn"><span
-                                                        class="flaticon-bookmark" style="color: #f7941d"></span></a>
+                                                    class="bookmark-btn"><span class="flaticon-bookmark"
+                                                        style="color: #f7941d"></span></a>
                                             @endif
                                         @else
                                             <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
@@ -188,7 +219,8 @@
                                                     style="color: black"></span></a>
                                         @endif
                                     @else
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark" style="color: black"></span></button>
+                                        <button class="bookmark-btn"><span class="flaticon-bookmark"
+                                                style="color: black"></span></button>
                                     @endif
                                 </div>
                             </div>
@@ -220,8 +252,9 @@
                                                 href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                         </h4>
                                         <ul class="job-info">
-                                            <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
-                                            <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
+                                            <li><span class="icon flaticon-briefcase"></span>{{ $item->major->name }}</li>
+                                            <li><span
+                                                    class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                             </li>
                                             <li><span
                                                     class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
@@ -250,15 +283,17 @@
                                             @if (!empty($job_short[$item->id]))
                                                 @if ($job_short[$item->id]->job_post_id == $item->id)
                                                     <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                        class="bookmark-btn" ><span
-                                                            class="flaticon-bookmark" style="color: #f7941d"></span></a>
+                                                        class="bookmark-btn"><span class="flaticon-bookmark"
+                                                            style="color: #f7941d"></span></a>
                                                 @endif
                                             @else
                                                 <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
-                                                    class="bookmark-btn"><span class="flaticon-bookmark " style="color: black"></span></a>
+                                                    class="bookmark-btn"><span class="flaticon-bookmark "
+                                                        style="color: black"></span></a>
                                             @endif
                                         @else
-                                            <button class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></button>
+                                            <button class="bookmark-btn"><span class="flaticon-bookmark"
+                                                    style="color: black"></span></button>
                                         @endif
                                     </div>
                                 </div>

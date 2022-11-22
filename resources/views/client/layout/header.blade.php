@@ -79,6 +79,7 @@
                                     class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng
                                 tuyển</a></li>
+                        <li><a href="{{ route('speedapply') }}"><i class="la la-briefcase"></i>Công đã tìm kiếm nhanh</a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã
                                 lưu</a></li>
                         <li><a href="{{ route('shortlisted_list_company') }}"><i class="la la-bookmark-o"></i>Công ty

@@ -53,7 +53,7 @@
                       @if (count($major) > 0)
                       @foreach ($major as $item)
                       <option @if (app('request')->input('major') == $item['id'])
-                          selected 
+                          selected
                       @endif value="{{$item['id']}}"> {{$item['name']}} </option>
                       @endforeach
                       @endif
@@ -66,7 +66,7 @@
                         @if(count($exp) > 0)
                         @foreach ($exp as $item)
                         <option @if (app('request')->input('experience') == $item['id'])
-                            selected 
+                            selected
                         @endif value="{{$item['id']}}"> {{$item['position']}} </option>
                         @endforeach
                         @endif
@@ -77,9 +77,9 @@
                     <select name="skill" class="select2">
                         <option value="-1" selected>Chọn kỹ năng</option>
                         @foreach ($skill as $item)
-                        <option 
+                        <option
                         @if (app('request')->input('skill') == $item['id'])
-                          selected 
+                          selected
                       @endif value="{{$item['id']}}"> {{$item['name']}} </option>
                         @endforeach
                     </select>
@@ -99,11 +99,10 @@
                 </select>
               </div>
             </div>
-            
+
             <div class="row">
               @if (count($data) > 0)
                 @foreach ($data as $item)
-
                 {{-- @dd($item['candidate']['name']); --}}
 
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
@@ -128,7 +127,7 @@
                         <span class="icon flaticon-money"></span> {{$item['candidate']['coin']}}
                         @endif
                       </li>
-                        
+
                       </ul>
                       <ul class="post-tags">
                         {{-- @foreach ( as )
@@ -136,7 +135,7 @@
                         <li><a href="#">Design</a></li>
                         <li><a href="#">Digital</a></li>
                         @endforeach --}}
-                        
+
                       </ul>
                       <div class="d-flex justify-content-between">
                         <a style="width: 49%;" class="theme-btn btn-style-three" href="{{route('company.SaveOpenCv', ['id' => $item->id])}}">Mở khóa</a>
@@ -153,7 +152,7 @@
             <nav class="ls-pagination">
               <ul>
                 {{$data->render()}}
-               
+
               </ul>
             </nav>
           </div>

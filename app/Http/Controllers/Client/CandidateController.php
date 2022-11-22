@@ -111,4 +111,13 @@ class CandidateController extends Controller
         $fileName = time() . '_' . $file->getClientOriginalName();
         return $file->storeAs('images', $fileName, 'public');
     }
+    public function status(Candidate $candidate, $type){
+        if ($candidate->type == 1) {
+            $candidate->update(['type' => 0]);
+            return redirect()->back();
+        } else {
+            $candidate->update(['type' => 1]);
+            return redirect()->back();
+        }
+    }
 }
