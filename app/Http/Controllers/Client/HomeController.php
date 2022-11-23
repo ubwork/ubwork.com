@@ -24,7 +24,7 @@ class HomeController extends Controller
         $data = [];
         $seeker = [];
         $user = Candidate::where('status', 1)->get();
-        $user_type = Candidate::where('status', 1)->where('type',1)->get();
+        $user_type = Candidate::where('status', 1)->where('type', 1)->get();
         $company = Company::where('status', 1)->get();
         $job_post = JobPost::where('status', 1)->get();
         $search = $request->search;
@@ -51,14 +51,20 @@ class HomeController extends Controller
                 }
             }
             if (!empty($dataUser->major_id)) {
-                $seeker = SeekerProfile::where('candidate_id', $id )->first();
+                $seeker = SeekerProfile::where('candidate_id', $id)->first();
                 $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
-            }else{
+            } else {
                 $dataYour = JobPost::where('status', 1)->get();
+                if (!empty($dataUser)) {
+                    $seeker = SeekerProfile::where('candidate_id', $id)->first();
+                    if (!empty($seeker)) {
+                        $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
+                    }
+                }
             }
+            $maJor = Major::all();
+            return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'user', 'company', 'job_post', 'user_type'));
         }
-        $maJor = Major::all();
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour','user','company','job_post','user_type'));
     }
     public function search(Request $request)
     {
@@ -76,5 +82,10 @@ class HomeController extends Controller
             $data = JobPost::where('status', 1)->get();
         }
         return view('client.job.job', compact('data', 'maJor', 'today'));
+    }
+    public function searchByTitle(Request $request)
+    {
+        $job = JobPost::where('title', 'like', '%' . $request->value . '%')->get();
+        return response()->json($job);
     }
 }

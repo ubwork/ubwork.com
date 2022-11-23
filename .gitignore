@@ -21,3 +21,4 @@ composer.lock
 /public/js
 /public/css
 /public/upload/cv
+public/mix-manifest.json
