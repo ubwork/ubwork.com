@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -17,41 +19,22 @@ class CoinController extends Controller
     }
     public function getListPackage(){
         $this->v['title'] = "Gói cước";
-        $this->v['packages'] = [
-            [
-                'id' => '1',
-                'title' => "Gói 100 điểm",
-                // 'description' => ''
-                'coin' => 100,
-                'money' => 1500000,
-                'discount' => 100000,
-                'expired' => "6 tháng"
-            ] ,
-            [
-                'id' => '2',
-                'title' => "Gói 200 điểm",
-                // 'description' => ''
-                'coin' => 200,
-                'money' => 2500000,
-                'discount' => 2500000,
-                'expired' => "8 tháng"
-            ] ,
-            [
-                'id' => '3',
-                'title' => "Gói 300 điểm",
-                // 'description' => ''
-                'coin' => 300,
-                'money' => 3500000,
-                'discount' => 3500000,
-                'expired' => "6 tháng"
-            ] ,
-        ];
+        $this->v['packages'] = Package::where('status',1)->get()->toArray();
         return view('company.coin.package',$this->v);
     }
     public function insertInvoice(Request $request){
-        $this->v['invoice'] = [
-            'id' => 10,
+        $user_id = auth('company')->user()->id;
+        $package_id = $request->id;
+        $package = Package::find($package_id);
+        $data = [
+            'user_id'=>$user_id,
+            'package_id'=>$package_id,
+            'status'=> 0,
+            'amount'=> $package->amount, 
+            'total' => 1
         ];
+        $invoice = Invoice::create($data);
+        $this->v['invoice'] = Invoice::with('package')->where('id',$invoice->id)->first();
         return view('company.coin.invoice',$this->v);
     }
     public function payment(Request $request){
@@ -62,10 +45,12 @@ class CoinController extends Controller
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
 
+        $Amount = 
+
         $startTime = date("YmdHis");
         $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
-        $vnp_TxnRef = rand(100,999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = "Thanh toan hoa don";
+        $vnp_TxnRef = $request->invoice_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = "Thanh toan hoa don".$request->invoice_id;
         $vnp_OrderType = "billpayment";
         $vnp_Amount = rand(10000,990000) *100; // Thay 200000 bằng import
         $vnp_Locale = 'vn';
