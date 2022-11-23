@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Invoice;
 use App\Models\Package;
+use App\Models\Payment_vnpay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CoinController extends Controller
 {
@@ -45,14 +48,14 @@ class CoinController extends Controller
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
 
-        $Amount = 
+        $Amount = $request->amount;
 
         $startTime = date("YmdHis");
         $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
         $vnp_TxnRef = $request->invoice_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toan hoa don".$request->invoice_id;
         $vnp_OrderType = "billpayment";
-        $vnp_Amount = rand(10000,990000) *100; // Thay 200000 bằng import
+        $vnp_Amount = $Amount *100; //
         $vnp_Locale = 'vn';
         $vnp_BankCode = '';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -180,44 +183,57 @@ class CoinController extends Controller
             //Kiểm tra checksum của dữ liệu
             if ($secureHash == $vnp_SecureHash) {
                 
-                $invoice = Invoice::find($orderId);
-                $invoice = NULL;
+                $invoice = Invoice::with('package')->find($orderId);
                 if ($invoice != NULL) {
-                    if($invoice["total"] == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
+                    if($invoice["amount"] == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
                     {
-                        if ($invoice["status"] != NULL && $invoice["status"] == 0) {
+                        if ($invoice["status"] == NULL && $invoice["status"] == 0) {
                             if ($inputData['vnp_ResponseCode'] == '00' && $inputData['vnp_TransactionStatus'] == '00') {
                                 $Status = 1; // Trạng thái thanh toán thành công
                             } else {
                                 $Status = 2; // Trạng thái thanh toán thất bại / lỗi
                             }
-                            $invoice->update('status',$Status);
+                            $invoice->update(['status',$Status]);
+                            $company = Company::where('id',auth('company')->user()->id)->first();
+                            $company->coin = $company->coin+$invoice->package->coin;
+                            $company->save();
+                            updateProcess(auth('company')->user()->id,"Thực hiện nạp {$invoice->package->coin} coin vào tài khoản",$invoice->package->coin,1,0);
+                            Payment_vnpay::create($request->all());
 
                             $returnData['RspCode'] = '00';
-                            $returnData['Message'] = 'Confirm Success';
+                            $returnData['Message'] = 'Xác nhận thành công';
                         } else {
                             $returnData['RspCode'] = '02';
-                            $returnData['Message'] = 'Order already confirmed';
+                            $returnData['Message'] = 'Đơn đặt hàng đã được xác nhận';
                         }
                     }
                     else {
                         $returnData['RspCode'] = '04';
-                        $returnData['Message'] = 'invalid amount';
+                        $returnData['Message'] = 'Số tiền không hợp lệ';
                     }
                 } else {
                     $returnData['RspCode'] = '01';
-                    $returnData['Message'] = 'Order not found';
+                    $returnData['Message'] = 'Không tồn tại hóa đơn';
                 }
             } else {
                 $returnData['RspCode'] = '97';
-                $returnData['Message'] = 'Invalid signature';
+                $returnData['Message'] = 'Chữ ký không hợp lệ';
             }
         } catch (Exception $e) {
             $returnData['RspCode'] = '99';
-            $returnData['Message'] = 'Unknow error';
+            $returnData['Message'] = 'Lỗi không xác định';
         }
-        //Trả lại VNPAY theo định dạng JSON
-        echo json_encode($returnData);
+       if( $returnData['RspCode']!=00){
+        Session::flash('error',  $returnData['Message']);
+       }else{
+        Session::flash('success',  $returnData['Message']);
+       }
+       return redirect()->route('company.listPackage');
         
+    }
+    public function historyPayment(){
+        $this->v['activeRoute'] = 'history-payment';
+        $this->v['title'] = 'Lịch sử giao dịch';
+        return view('company.coin.history',$this->v);
     }
 }
