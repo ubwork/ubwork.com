@@ -22,13 +22,13 @@
                                                 <div class="title">{{ $package['title'] }}</div>
                                                 <div class="price row mb-0">
                                                     <div class="col-12">
-                                                        {{ number_format($package['discount'], 0, ',', '.') }} vnđ<span
-                                                            class="duration">/ {{ $package['expired'] }}</span>
+                                                        {{ number_format(($package['amount']-$package['discount']), 0, ',', '.') }} vnđ<span
+                                                            class="duration">/ {{ $package['expired'] }} tháng</span>
                                                     </div>
 
                                                     <p style="text-decoration-line:line-through" class="col-12">
-                                                        {{ number_format($package['money'], 0, ',', '.') }}vnđ <span
-                                                            class="">/ {{ $package['expired'] }}</span>
+                                                        {{ number_format($package['amount'], 0, ',', '.') }}vnđ <span
+                                                            class="">/ {{ $package['expired'] }} tháng</span>
                                                     </p>
                                                 </div>
                                                 <div class="table-footer">
