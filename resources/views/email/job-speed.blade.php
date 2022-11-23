@@ -8,7 +8,7 @@
       <div class="login-form default-form">
         <div class="form-inner">
           <h3>Tìm Kiếm Công Việc Nhanh</h3>
-          <h5>Cách sử dụng:</h5>
+          <h5>Cách sử dụng:</h5> 
           <div class="sec-title text-center">
             <div class="text">Mỗi ngày chỉ được sử dụng tìm kiếm nhanh một lần, và mỗi lần sử dũng ứng viên sẽ phải trả 30 coin.
                 Nếu ứng viên đã sử dụng tìm kiếm nhanh sẽ được kích hoạt chế độ lọc các job có công việc đang có nhu cầu tìm việc gấp có thời gian đăng nhỏ hơn 5 ngày <a href="{{route('job')}}">tại đây!</a>
