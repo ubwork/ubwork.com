@@ -40,6 +40,7 @@ Route::post('payment','COmpany\CoinController@payment')->name('payment');
 Route::get('vnpay_return','COmpany\CoinController@vnpay_return')->name('vnpay_return');
 Route::get('vnpay_ipn','COmpany\CoinController@vnpay_ipn')->name('vnpay_ipn');
 Route::get('detail-candidates/{id}', 'Company\DetailCandidateController@index')->name('detail-candidate.index');
+Route::get('historyPayment', 'Company\CoinController@historyPayment')->name('historyPayment');
 
 // Route::get('detail-candidates/{$id}',['as'=>'detail-candidate.index', 'uses'=>'Company\DetailCandidateController@index']);
 
