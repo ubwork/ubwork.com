@@ -109,7 +109,8 @@
 <body>
 	<div class="main">
 		<div class="top-section">
-			@if($candidate->avatar != "")
+			{{-- @dd($candidate); --}}
+			@if(!empty($candidate->avatar))
 			<img src="{{asset('storage/'. $candidate->avatar)}}" class="profile" />
 			@endif
 			<p class="p1">

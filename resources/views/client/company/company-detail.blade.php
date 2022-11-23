@@ -102,7 +102,17 @@
                                                 </li>
                                             @endif
                                         </ul>
-                                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                        @if (auth('candidate')->check()) 
+                                            @if (!empty($job_short[$item->id]) )
+                                                @if($job_short[$item->id]->job_post_id == $item->id)
+                                                <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                                                @endif
+                                            @else
+                                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
+                                            @endif
+                                        @else
+                                                <a class="bookmark-btn" href="{{route('candidate.login')}}"><span class="flaticon-bookmark"></span></a>
+                                        @endif
                                         </div>
                                     </div>
                                 </div>

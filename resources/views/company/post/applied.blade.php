@@ -7,36 +7,52 @@
                 <div class="tabs-box">
                     <div class="widget-title">
                         <h4>{{ $title }}</h4>
+                        <div class="chosen-outer ">
+                            <form action="">
+                                <div class="input-group " >
+                                    <input class="form-control border-end-5 border  ml-2" type="text" name="search"
+                                    style="border-radius:20px 0px 0px 20px" 
+                                        id="search" placeholder="Tìm kiếm">
+                                    <span class="input-group-append">
+                                        <button
+                                            class="btn btn-outline-warning bg-white border-start-0 border  "
+                                            style="border-radius:0px 20px 20px 0px" 
+                                            type="button"
+                                            href="{{url("company/post/profileApply/$postId")}}"
+                                            id="button_search">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
                     <div class="widget-content">
                         <div class="table-outer">
-                            <table class="default-table manage-job-table">
-                                <thead>
-                                    <tr>
-                                        <th>Ứng viên</th>
-                                        <th>Thông tin liên hệ </th>
-                                        <th>Chi tiết</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($listSeeker as $item)
-                                        <tr>
-                                            <td>
-                                                <h6>{{ $item->name }}</h6>
-                                                <span>{{ $item->pivot->is_see == 1 ? "Đã xem" : "Chưa xem" }}</span>
-                                            </td>
-                                            <td>{{ $item->phone }} <br>{{ $item->email }}
-                                            </td>
-                                            <td><a target="_blank" href="{{route('company.viewProfile', ['id' => $item->id])}}">Chi tiết</a></td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                          @include('company.post.tableApplied')
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Info Section -->
-    @endsection
+    </div>
+</div>
+@endsection
+@section('script')
+  @parent
+  <script src="{{asset('js/paginate.js')}}"></script>
+  <script>
+      $(function() {
+        $(document).on("click",".pagination li a,#button_search", function(e) {
+            e.preventDefault();
+            var url=$(this).attr("href");
+            var append = url.indexOf("?") == -1 ? "?" : "&";
+            var finalURL = url + append + $("#search").serialize();
+            window.history.pushState({}, null, finalURL);
+            $.get(finalURL, function(data) {
+                $(".table-outer").html(data);
+            });
+            return false;
+        })})
+  </script>
+@endsection

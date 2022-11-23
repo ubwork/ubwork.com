@@ -51,14 +51,13 @@ class ViewCvController extends Controller
 
     public function viewProfileHidden($id)
     {
-        $seekerProfile = SeekerProfile::where('id', $id)->first();
-
+        $seekerProfile = SeekerProfile::where('candidate_id', $id)->first();
         $this->v['skills'] = Skill::all();
         $this->v['major'] = Major::all();
         $this->v['maJor'] = Major::all();
 
         if (!empty($seekerProfile)) {
-            $this->v['candidate'] = Candidate::where('id', $seekerProfile->candidate_id)->first();
+            $this->v['candidate'] = Candidate::where('id', $seekerProfile->id)->first();
             $this->v['seekerProfile'] = $seekerProfile;
 
             $this->v['experiences'] = Experience::where('seeker_id', $seekerProfile->id)->get();
