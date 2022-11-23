@@ -8,5 +8,9 @@ return [
     ],
     'role' => [
         'index' => 6
+    ],
+    'post' => [
+        'index' => 5,
+        "profileApply" => 5
     ]
 ];
