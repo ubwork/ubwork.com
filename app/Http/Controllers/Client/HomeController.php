@@ -50,9 +50,11 @@ class HomeController extends Controller
                     $job_short[$id_post] = $item;
                 }
             }
-            if (!empty($dataUser)) {
+            if (!empty($dataUser->major_id)) {
                 $seeker = SeekerProfile::where('candidate_id', $id )->first();
                 $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
+            }else{
+                $dataYour = JobPost::where('status', 1)->get();
             }
         }
         $maJor = Major::all();

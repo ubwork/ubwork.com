@@ -39,7 +39,7 @@ class LoginController extends Controller
             Session::flash('error', 'Email hoặc mật khẩu không đúng');
             return Redirect::to('/login');
         }
-        
+
     }
     public function logout()
     {

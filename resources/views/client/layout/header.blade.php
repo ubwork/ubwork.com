@@ -68,9 +68,15 @@
 
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                        <img style="object-fit: cover;"
-                            src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
-                            class="thumb">
+                        @if (isset(auth('candidate')->user()->avatar))
+                            <img style="object-fit: cover;"
+                                src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
+                                class="thumb">
+                        @else
+                            <img style="object-fit: cover;" src="{{ asset('images/user.png') }}" alt="avatar"
+                                class="thumb">
+                        @endif
+
                         <span class="name">{{ auth('candidate')->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -79,7 +85,7 @@
                                     class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng
                                 tuyển</a></li>
-                        <li><a href="{{ route('speedapply') }}"><i class="la la-briefcase"></i>Công đã tìm kiếm nhanh</a></li>
+                        <li><a href="{{ route('speedapply') }}"><i class="la la-briefcase"></i> Công việc đã tìm kiếm nhanh</a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã
                                 lưu</a></li>
                         <li><a href="{{ route('shortlisted_list_company') }}"><i class="la la-bookmark-o"></i>Công ty
