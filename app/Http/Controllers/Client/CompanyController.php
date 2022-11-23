@@ -4,11 +4,13 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\FeedbackRequest;
+use App\Models\Candidate;
 use App\Models\company;
 use App\Models\Company as ModelsCompany;
 use App\Models\Feedback;
 use App\Models\JobPost;
 use App\Models\Major;
+use App\Models\Shortlist;
 use App\Models\ShortlistCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -49,6 +51,7 @@ class CompanyController extends Controller
     }
     public function detail($id)
     {
+        $job_short = [];
         $company_detail = company::where('id', $id)->first();
         $company_job = JobPost::where('company_id', $company_detail->id)->get();
         $query = new Feedback();
@@ -75,9 +78,19 @@ class CompanyController extends Controller
                 }
             }
         }
+        if (auth('candidate')->check()) {
+            $id = auth('candidate')->user()->id;
+            $data_short = Shortlist::where('candidate_id', $id)->get();
+            if (!empty($data_short)) {
+                foreach ($data_short as $item) {
+                    $id_post = $item->job_post_id;
+                    $job_short[$id_post] = $item;
+                }
+            }
+        }
         // dd($idJobApplied[$item->id]);
         // dd($data_job->id);
-        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor', 'average', 'sum', 'idCompanyShort'));
+        return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor', 'average', 'sum', 'idCompanyShort', 'job_short'));
     }
     public function filter(Request $request)
     {

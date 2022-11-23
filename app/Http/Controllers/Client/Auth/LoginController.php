@@ -34,12 +34,11 @@ class LoginController extends Controller
             $data = auth('candidate')->user();
             auth('candidate')->login($data);
             Session::flash('success', 'Đăng nhập thành công');
-            return Redirect::to('/');
+            return redirect()->back();
         } else {
             Session::flash('error', 'Email hoặc mật khẩu không đúng');
             return Redirect::to('/login');
         }
-        
     }
     public function logout()
     {
