@@ -21,6 +21,7 @@
                         Số tiền thanh toán :{{ number_format($invoice->package->amount, 0, ',', '.') }} vnđ 
                     </div>
                     <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                    <input type="hidden" name="amount" value="{{$invoice->package->amount}}">
                     <input type="hidden" name="redirect" value="1">
                     <button class="btn btn-primary btn_payment">Thanh toán</button>
                     <br>
