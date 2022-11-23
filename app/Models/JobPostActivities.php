@@ -13,6 +13,11 @@ class JobPostActivities extends Model
     protected $fillable = [
         'job_post_id',
         'seeker_id',
+        'company_id',
+        'created_at',
+        'updated_at',
+        'time',
+        'is_function'
     ];
     public function company()
     {
