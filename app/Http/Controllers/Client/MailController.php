@@ -21,24 +21,24 @@ class MailController extends Controller
         $bitcoin = auth('candidate')->user()->coin;
         $candidate = Candidate::where('status', 1)->where('id', $subject)->first();
         $seeker = SeekerProfile::where('candidate_id', $subject)->first();
-        $major = $seeker->major_id;
-        $job = JobPost::where('major_id', $major)->get();
-        $jobpost = JobPost::where('major_id', $major)->first();
         $coin = $bitcoin;
         $date = date('Y/m/d', time());
         $jobspeed = JobSpeed::where('seeker_id', $subject)->whereDate('created_at', $date)->first(); // hàm sử lý thời gian
         if (!empty($seeker)) {
+            $major = $seeker->major_id;
+            $job = JobPost::where('major_id', $major)->get();
+            $jobpost = JobPost::where('major_id', $major)->first();
             if ($coin - 30 < 0) {
                 return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
             } elseif (!isset($jobpost)) {
                 return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
-            }elseif(!empty($jobspeed)){
+            } elseif (!empty($jobspeed)) {
                 return back()->with('error', 'Hôm Nay Bạn Đã Sử Dụng Phương Thức Này Rồi Vui Lòng Quay Lại Vào Ngày Mai !');
             } else {
                 foreach ($job as $item) {
                     $email = $item->company->email;
                     $company_name = $item->company->company_name;
-                    Mail::to($email)->send(new SendMail($subject,$company_name));
+                    Mail::to($email)->send(new SendMail($subject, $company_name));
                     $speed = new JobSpeed();
                     $speed->job_post_id = $item->id;
                     $speed->seeker_id = $seeker->id;
@@ -50,6 +50,8 @@ class MailController extends Controller
                 ]);
             }
             return back()->with('success', 'Tìm Kiếm Thành Công');
+        } else {
+            return back()->with('error', 'Bạn chưa tạo cv vui lòng tạo cv để sử dụng tính năng này!');
         }
     }
     public function jobspeed()
@@ -57,7 +59,8 @@ class MailController extends Controller
         $maJor = Major::all();
         return view('email.job-speed', compact('maJor'));
     }
-    public function speedapply(){
+    public function speedapply()
+    {
         $id_user = auth('candidate')->user()->id;
         $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
         $data = [];
@@ -73,6 +76,6 @@ class MailController extends Controller
             }
         }
         $maJor = Major::all();
-        return view('client.job.job-speed',compact('data', 'job_applied', 'maJor'));
+        return view('client.job.job-speed', compact('data', 'job_applied', 'maJor'));
     }
 }
