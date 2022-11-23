@@ -105,6 +105,7 @@ class JobPostController extends Controller
         $this->v['postId'] = $id;
         $this->v['pageApplied'] = '';
         $this->v['listSeeker'] = $model->seekerProfiles()
+                ->where('is_function',0)
                 ->when($request->has("search"),function($q)use($request){
                     return $q->where("name","like","%".$request->get("search")."%");
                 })->orderBy('created_at', 'DESC')->paginate(config('paginate.post.profileApply'));
