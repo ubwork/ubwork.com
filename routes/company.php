@@ -39,3 +39,8 @@ Route::post('insertInvoice','COmpany\CoinController@insertInvoice')->name('inser
 Route::post('payment','COmpany\CoinController@payment')->name('payment');
 Route::get('vnpay_return','COmpany\CoinController@vnpay_return')->name('vnpay_return');
 Route::get('vnpay_ipn','COmpany\CoinController@vnpay_ipn')->name('vnpay_ipn');
+Route::get('detail-candidates/{id}', 'Company\DetailCandidateController@index')->name('detail-candidate.index');
+
+// Route::get('detail-candidates/{$id}',['as'=>'detail-candidate.index', 'uses'=>'Company\DetailCandidateController@index']);
+
+// Route::post('image-paper',['as'=>'image-paper.update','uses'=>'Company\DetailCandidateController@update']);

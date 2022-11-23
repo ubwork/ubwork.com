@@ -3,6 +3,8 @@
     {{ __('UB Work') }} | {{ __('Danh sách công việc') }}
 @endsection
 @section('content')
+@section('style')
+@parent
 <style>
     .page-link{
         border-radius:50%;
@@ -16,7 +18,26 @@
         border-top-left-radius: 50%;
         border-bottom-left-radius: 50%;
     }
+    .form-control:focus{
+        box-shadow: none;
+    }
+    .tt-menu{
+        left: -15px !important;
+        top: 80px !important;
+        width: 305px;
+        border-radius: 5px;
+    }
+    .tt-dataset{
+        border-radius: 5px; 
+    }
+    .tt-dataset a{
+        font-family: 'Roboto', sans-serif;
+    }
+    .tt-dataset a:hover{
+            color:#f7941d;
+    }
 </style>
+@endsection
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
@@ -38,7 +59,7 @@
                             <!-- Form Group -->
                             <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                 <span class="icon flaticon-search-1"></span>
-                                <input type="text" name="search" placeholder="Mời Nhập Từ Khóa">
+                                <input type="text" class="form-control search-input" name="search" placeholder="Mời Nhập Từ Khóa">
                             </div>
                             <div class="form-group col-lg-3 col-md-12 col-sm-12">
                                 <span class="icon fa fa-history"></span>
@@ -124,8 +145,8 @@
                                                         class="bookmark-btn"><span
                                                             class="flaticon-bookmark"></span></button></a>
                                             @else
-                                                <button class="bookmark-btn"><span
-                                                        class="flaticon-bookmark"></span></button>
+                                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span
+                                                        class="flaticon-bookmark"></span></a>
                                             @endif
                                         </div>
                                     </div>
@@ -159,4 +180,43 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+@parent
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script>
+$(document).ready(function($) {
+    var engine1 = new Bloodhound({
+        remote: {
+            url: '/search/title?value=%QUERY%',
+            wildcard: '%QUERY%'
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+    });
+
+    $(".search-input").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, [
+        {
+            source: engine1.ttAdapter(),
+            name: 'students-name',
+            display: function(data) {
+                return data.title;
+            },
+            templates: {
+                suggestion: function (data) {
+                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
+                }
+            }
+        }, 
+    ]);
+});
+
+</script>
 @endsection
