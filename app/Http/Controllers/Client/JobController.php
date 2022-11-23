@@ -46,8 +46,10 @@ class JobController extends Controller
                     $job_short[$id_post] = $item;
                 }
             }
+            return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed'));
+        }else{
+            return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed'));
         }
-        return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed'));
     }
     public function job_cat($id)
     {
@@ -117,7 +119,7 @@ class JobController extends Controller
         } elseif ($search == null && isset($major) && isset($type)) {
             $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
         } else {
-            $data = JobPost::where('status', 1)->get();
+            $data = JobPost::where('status', 1)->paginate(10);
         }
         return view('client.job.job', compact('data', 'maJor', 'today'));
     }
