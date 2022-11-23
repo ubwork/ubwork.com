@@ -145,7 +145,7 @@ class CoinController extends Controller
         }
         return redirect()->route('company.home');
     }
-    public function vnpay_ipn(){
+    public function vnpay_ipn(Request $request){
         $inputData = array();
         $returnData = array();
         foreach ($_GET as $key => $value) {
@@ -179,25 +179,20 @@ class CoinController extends Controller
             //Check Orderid    
             //Kiểm tra checksum của dữ liệu
             if ($secureHash == $vnp_SecureHash) {
-                //Lấy thông tin đơn hàng lưu trong Database và kiểm tra trạng thái của đơn hàng, mã đơn hàng là: $orderId            
-                //Việc kiểm tra trạng thái của đơn hàng giúp hệ thống không xử lý trùng lặp, xử lý nhiều lần một giao dịch
-                //Giả sử: $order = mysqli_fetch_assoc($result);   
-        
-                $order = NULL;
-                if ($order != NULL) {
-                    if($order["Amount"] == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
+                
+                $invoice = Invoice::find($orderId);
+                $invoice = NULL;
+                if ($invoice != NULL) {
+                    if($invoice["total"] == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
                     {
-                        if ($order["Status"] != NULL && $order["Status"] == 0) {
+                        if ($invoice["status"] != NULL && $invoice["status"] == 0) {
                             if ($inputData['vnp_ResponseCode'] == '00' && $inputData['vnp_TransactionStatus'] == '00') {
                                 $Status = 1; // Trạng thái thanh toán thành công
                             } else {
                                 $Status = 2; // Trạng thái thanh toán thất bại / lỗi
                             }
-                            //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
-                            //
-                            //
-                            //
-                            //Trả kết quả về cho VNPAY: Website/APP TMĐT ghi nhận yêu cầu thành công                
+                            $invoice->update('status',$Status);
+
                             $returnData['RspCode'] = '00';
                             $returnData['Message'] = 'Confirm Success';
                         } else {
