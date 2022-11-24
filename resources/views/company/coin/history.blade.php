@@ -16,21 +16,24 @@
                             <div class="content">
                                 <div class="row">
                                     <!-- Pricing Table -->
+                                    @foreach ($history as $item)
                                     <div class="resume-block">
                                         <div class="inner">
-                                          <span class="name"></span>
+                                          <span class="name" style="">{{ $item['type_coin'] == 0 ? "+" : "-"}}</span>
                                           <div class="title-box">
                                             <div class="info-box">
-                                              <h3>Bachlors in Fine Arts</h3>
-                                              <span>Modern College</span>
                                             </div>
                                             <div class="edit-box">
-                                              <span class="year">2012 - 2014</span>
+                                              <span class="year">{{date_format($item['created_at'],"d-m-Y")}}</span>
                                             </div>
                                           </div>
-                                          <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante<br> ipsum primis in faucibus.</div>
+                                          <div class="text">
+                                            {{$item['note']}}
+                                        </div>
                                         </div>
                                       </div>
+                                    @endforeach
+                                      
                                 </div>
                             </div>
                         </div>
