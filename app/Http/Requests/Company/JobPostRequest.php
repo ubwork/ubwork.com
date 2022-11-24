@@ -34,7 +34,6 @@ class JobPostRequest extends FormRequest
                     'description' => 'required',
                     'requirement' => 'required',
                     'benefits' => 'required',
-                    'start_date' => 'required',
                     'end_date' => 'required'
                 ];
                 break;
@@ -47,7 +46,6 @@ class JobPostRequest extends FormRequest
                     'requirement' => 'required',
                     'benefits' => 'required',
                     'skill' => 'required',
-                    'start_date' => 'required',
                     'end_date' => 'required'
                 ];
                 break;
