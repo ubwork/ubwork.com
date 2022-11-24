@@ -132,21 +132,21 @@
                                             <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if($item->type_work == 1)
-                                                <li class="time">
-                                                    Full Time
-                                                </li>
-                                            @endif
-                                            @if($item->type_work == 2)
-                                                <li class="privacy">
-                                                    Part Time
-                                                </li>
-                                            @endif
-                                            @if($item->type_work == 0 )
-                                                <li class="required">
-                                                    Intern
-                                                </li>
-                                            @endif
+                                            @if ($item->type_work == 0)
+                                            <li class="time">
+                                                Toàn thời gian
+                                            </li>
+                                        @endif
+                                        @if ($item->type_work == 1)
+                                            <li class="privacy">
+                                                Bán thời gian
+                                            </li>
+                                        @endif
+                                        @if ($item->type_work == 2)
+                                            <li class="required">
+                                                Thực tập
+                                            </li>
+                                        @endif
                                             {{-- <li class="required">Urgent</li> --}}
                                         </ul>
                                         @if (auth('candidate')->check()) 
