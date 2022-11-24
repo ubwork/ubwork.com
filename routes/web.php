@@ -26,8 +26,10 @@ Route::get('/logout', ['as' => 'logout', 'uses' => 'Client\Auth\LoginController@
 
 //candidate
 Route::get('/', 'client\HomeController@index')->name('index');
-Route::get('search', 'client\HomeController@search')->name('search');
-Route::get('send', 'client\MailController@send')->name('send');
+Route::get('/search', 'client\HomeController@search')->name('search');
+Route::get('/send', 'client\MailController@send')->name('send');
+Route::get('/job-speed', 'client\MailController@jobspeed')->name('jobspeed');
+Route::get('/job-speed-apply', 'client\MailController@speedapply')->name('speedapply');
 
 Route::get('/job', 'client\JobController@job')->name('job');
 Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
@@ -38,6 +40,7 @@ Route::get('/change-password', 'client\CandidateController@change')->name('chang
 Route::post('/update_password', 'client\CandidateController@update_pass')->name('update_pass');
 Route::get('/candidate-detail/{id}', 'client\CandidateController@detail')->name('detail');
 Route::post('/candidate-profile-edit/{id}', 'client\CandidateController@update')->name('update');
+Route::post('/status/{candidate}&{type}', 'client\CandidateController@status')->name('status');
 
 Route::get('/seeker', 'client\SeekerController@index')->name('seeker');
 Route::post('/seeker', 'client\SeekerController@store')->name('store');

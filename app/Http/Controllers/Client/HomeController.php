@@ -23,7 +23,10 @@ class HomeController extends Controller
         $job_short = [];
         $data = [];
         $seeker = [];
-        // dd(isset($search));
+        $user = Candidate::where('status', 1)->get();
+        $user_type = Candidate::where('status', 1)->where('type', 1)->get();
+        $company = Company::where('status', 1)->get();
+        $job_post = JobPost::where('status', 1)->get();
         $search = $request->search;
         if (isset($search)) {
             $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title', 'like', '%' . $search . '%')->paginate(10);
@@ -47,15 +50,21 @@ class HomeController extends Controller
                     $job_short[$id_post] = $item;
                 }
             }
-            if (!empty($dataUser)) {
+            if (!empty($dataUser->major_id)) {
                 $seeker = SeekerProfile::where('candidate_id', $id)->first();
-                if (!empty($seeker)) {
-                    $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
+                $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
+            } else {
+                $dataYour = JobPost::where('status', 1)->get();
+                if (!empty($dataUser)) {
+                    $seeker = SeekerProfile::where('candidate_id', $id)->first();
+                    if (!empty($seeker)) {
+                        $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
+                    }
                 }
             }
         }
         $maJor = Major::all();
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour'));
+            return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'user', 'company', 'job_post', 'user_type'));
     }
     public function search(Request $request)
     {
