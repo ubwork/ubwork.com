@@ -128,16 +128,21 @@
                                                 </li>
                                             </ul>
                                             <ul class="job-other-info">
+                                                @if ($item->type_work == 0)
                                                 <li class="time">
-                                                    @if ($item->full_time == 1)
-                                                        Full Time
-                                                    @endif
+                                                    Toàn thời gian
                                                 </li>
+                                            @endif
+                                            @if ($item->type_work == 1)
                                                 <li class="privacy">
-                                                    @if ($item->part_time == 1)
-                                                        Part Time
-                                                    @endif
+                                                    Bán thời gian
                                                 </li>
+                                            @endif
+                                            @if ($item->type_work == 2)
+                                                <li class="required">
+                                                    Thực tập
+                                                </li>
+                                            @endif
                                                 {{-- <li class="required">Urgent</li> --}}
                                             </ul>
                                             @if (auth('candidate')->check())
