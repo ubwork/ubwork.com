@@ -62,9 +62,9 @@ class HomeController extends Controller
                     }
                 }
             }
-            $maJor = Major::all();
-            return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'user', 'company', 'job_post', 'user_type'));
         }
+        $maJor = Major::all();
+            return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'user', 'company', 'job_post', 'user_type'));
     }
     public function search(Request $request)
     {

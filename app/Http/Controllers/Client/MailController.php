@@ -7,6 +7,7 @@ use App\Mail\SendMail;
 use App\Models\Candidate;
 use App\Models\Company;
 use App\Models\JobPost;
+use App\Models\JobPostActivities;
 use App\Models\JobSpeed;
 use App\Models\Major;
 use App\Models\SeekerProfile;
@@ -24,7 +25,7 @@ class MailController extends Controller
             $seeker = SeekerProfile::where('candidate_id', $subject)->first();
             $coin = $bitcoin;
             $date = date('Y/m/d', time());
-            $jobspeed = JobSpeed::where('seeker_id', $subject)->whereDate('created_at', $date)->first(); // hàm sử lý thời gian
+            $jobspeed = JobPostActivities::where('seeker_id', $subject)->whereDate('created_at', $date)->where('is_function', 2)->first(); // hàm sử lý thời gian
             if (!empty($seeker)) {
                 $major = $seeker->major_id;
                 $job = JobPost::where('major_id', $major)->get();
@@ -35,17 +36,19 @@ class MailController extends Controller
                     return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
                 } elseif (!empty($jobspeed)) {
                     return back()->with('error', 'Hôm Nay Bạn Đã Sử Dụng Phương Thức Này Rồi Vui Lòng Quay Lại Vào Ngày Mai !');
-                } elseif (!empty($seeker->major)) {
+                } elseif ($major == "") {
                     return back()->with('error', 'Vui lòng điền chuyên ngành bạn muốn tìm kiếm vào cv!');
                 } else {
                     foreach ($job as $item) {
                         $email = $item->company->email;
                         $company_name = $item->company->company_name;
                         Mail::to($email)->send(new SendMail($subject, $company_name));
-                        $speed = new JobSpeed();
+                        $speed = new JobPostActivities();
                         $speed->job_post_id = $item->id;
                         $speed->seeker_id = $seeker->id;
-                        $speed->status = '1';
+                        $speed->is_function = 2;
+                        $speed->company_id = $item->company_id;
+                        $speed->is_see = 0;
                         $speed->save();
                     }
                     $candidate->update([
@@ -73,11 +76,11 @@ class MailController extends Controller
         $job_applied = [];
         if (!empty($seeker)) {
             $job_applied = [];
-            $data = JobSpeed::where('seeker_id', $seeker->id)->get();
+            $data = JobPostActivities::where('seeker_id', $seeker->id)->where('is_function', 2)->get();
             if (!empty($data)) {
                 foreach ($data as $item) {
                     $id_post = $item->job_post_id;
-                    $job_applied[$id_post] = JobPost::where('id', $id_post)->first();
+                    $job_applied[$id_post] = JobPostActivities::where('id', $id_post)->first();
                 }
             }
         }

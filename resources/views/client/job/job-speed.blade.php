@@ -46,16 +46,16 @@
                                                             <div class="inner-box">
                                                                 <div class="content">
                                                                     <span class="company-logo"><img
-                                                                            src="{{ asset('storage/' . $job_applied[$item->job_post_id]->company->logo) }}"
+                                                                            src="{{ asset('storage/' . $item->company->logo) }}"
                                                                             alt=""></span>
                                                                     <h4><a
-                                                                            href="{{ route('job-detail', ['id' => $item->job_post_id]) }}">{{ $job_applied[$item->job_post_id]->title }}</a>
+                                                                            href="{{ route('job-detail', ['id' => $item->job_post_id]) }}">{{ $item->company->name }}</a>
                                                                     </h4>
                                                                     <ul class="job-info">
                                                                         <li><span class="icon flaticon-briefcase"></span>
                                                                             Segment</li>
                                                                         <li><span
-                                                                                class="icon flaticon-map-locator"></span>{{ $job_applied[$item->job_post_id]->company->address }}
+                                                                                class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -67,8 +67,7 @@
                                                     <td>
                                                         <div class="option-box">
                                                             <ul class="option-list">
-                                                                <li><a
-                                                                        href=""><button
+                                                                <li><a href=""><button
                                                                             data-text="Delete Aplication"><span
                                                                                 class="la la-trash"></span></button></a>
                                                                 </li>
