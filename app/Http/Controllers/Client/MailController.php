@@ -25,7 +25,8 @@ class MailController extends Controller
             $seeker = SeekerProfile::where('candidate_id', $subject)->first();
             $coin = $bitcoin;
             $date = date('Y/m/d', time());
-            $jobspeed = JobPostActivities::where('seeker_id', $subject)->whereDate('created_at', $date)->where('is_function', 2)->first(); // hàm sử lý thời gian
+            $jobspeed = JobPostActivities::whereDate('created_at', $date)->where('is_function', 2)->first(); // hàm sử lý thời gian
+            // dd($jobspeed );
             if (!empty($seeker)) {
                 $major = $seeker->major_id;
                 $job = JobPost::where('major_id', $major)->get();
