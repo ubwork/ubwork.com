@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\HistoryPayment;
 use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\Payment_vnpay;
@@ -234,6 +235,7 @@ class CoinController extends Controller
     public function historyPayment(){
         $this->v['activeRoute'] = 'history-payment';
         $this->v['title'] = 'Lịch sử giao dịch';
+        $this->v['history'] = HistoryPayment::where([['user_id',auth('company')->user()->id],['type_account',0]])->orderby('created_at','DESC')->get();
         return view('company.coin.history',$this->v);
     }
 }
