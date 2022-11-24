@@ -24,11 +24,12 @@ class MailController extends Controller
             $candidate = Candidate::where('status', 1)->where('id', $subject)->first();
             $seeker = SeekerProfile::where('candidate_id', $subject)->first();
             $coin = $bitcoin;
-            $date = date('Y/m/d', time());
-            $jobspeed = JobPostActivities::whereDate('created_at', $date)->where('is_function', 2)->first(); // hàm sử lý thời gian
+            
             // dd($jobspeed );
             if (!empty($seeker)) {
                 $major = $seeker->major_id;
+                $date = date('Y/m/d', time());
+                $jobspeed = JobPostActivities::where('seeker_id', $seeker->id)->whereDate('created_at', $date)->where('is_function', 2)->first(); // hàm sử lý thời gian
                 $job = JobPost::where('major_id', $major)->get();
                 $jobpost = JobPost::where('major_id', $major)->first();
                 if ($coin - 30 < 0) {
