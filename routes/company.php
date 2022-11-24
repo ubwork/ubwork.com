@@ -40,6 +40,10 @@ Route::get('view-open-cv/save-open/{id}', 'Company\OpenCvController@store')->nam
 
 Route::get('detail-candidates/{id}', 'Company\DetailCandidateController@index')->name('detail-candidate.index');
 
+Route::get('/candidates-feedback/{id}', 'Company\DetailCandidateController@feedback')->name('feedback');
+
+Route::post('/feedback/{id}', 'Company\DetailCandidateController@saveFeedback')->name('saveFeedback');
+
 // Route::get('detail-candidates/{$id}',['as'=>'detail-candidate.index', 'uses'=>'Company\DetailCandidateController@index']);
 
 // Route::post('image-paper',['as'=>'image-paper.update','uses'=>'Company\DetailCandidateController@update']);

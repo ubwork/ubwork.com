@@ -10,8 +10,8 @@
         <!-- Candidate block Six -->
         <div class="candidate-block-six">
           <div class="inner-box">
-            <figure class="image"><img src="{{!empty($data->avatar) ? asset('storage/'. $data->avatar) : '' }}" alt=""></figure>
-            <h4 class="name"><a href="#">{{$data->name ?? ''}}</a></h4>
+            <figure class="image"><img src="{{!empty($can->avatar) ? asset('storage/'. $can->avatar) : '' }}" alt=""></figure>
+            <h4 class="name"><a href="#">{{$can->name ?? ''}}</a></h4>
 
             <span class="designation">{{$data['major']->name ?? ''}}</span>
             <div class="content">
@@ -26,22 +26,27 @@
               </ul>
 
               <ul class="candidate-info">
-                @if ($data->address ?? '')
-                <li><span class="icon flaticon-map-locator"></span>{{$data->address ?? ''}}</li>
+                @if ($can->address ?? '')
+                <li><span class="icon flaticon-map-locator"></span>{{$can->address ?? ''}}</li>
                 @endif
                 @if ($data->coin ?? '')
                 <li><span class="icon flaticon-money"></span>{{$data->coin ?? ''}}</li>
                 @endif
-                @if ($data->birthday ?? '')
-                <li><span class="icon flaticon-clock"></span>{{$data->birthday ?? ''}}</li>
+                @if ($can->birthday ?? '')
+                <li><span class="icon flaticon-clock"></span>{{$can->birthday ?? ''}}</li>
                 @endif
               </ul>
 
               <div class="btn-box">
                 {{-- <a href="#" class="theme-btn btn-style-one">Download CV</a> --}}
                 {{-- @dd($data); --}}
+                @if (auth('company')->check()) 
+                    <a href="{{route('company.feedback', ['id' => $can->id])}}" style="width: 49%;margin-right:20px" class="theme-btn btn-style-one">Đánh giá</a>
+                @else
+                <a style="width: 49%;margin-right:20px" href="" class="theme-btn btn-style-one mr-3">Đánh giá</a>
+                @endif
+
                 <a style="width: 49%;" target="_blank" href="{{route('company.viewProfileHidden', $data->candidate_id)}}" class="theme-btn btn-style-one">Xem CV</a>
-                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
               </div>
             </div>
           </div>
