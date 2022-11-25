@@ -80,8 +80,10 @@
                                     $start_time = strtotime($item->start_date);
                                     $days = floor(($today - $start_time) / 60 / 60 / 24);
                                 @endphp
+                                {{-- @dd(!empty($jobspeed)) --}}
                                 @if (!empty($jobspeed))
-                                    @if ($days > 5 || $day <= 0)
+                                    @if ($days < 5 || $day <= 0)
+                                    
                                         <div class="job-block col-lg-6 col-md-12 col-sm-12" hidden>
 
                                             <div class="inner-box">
@@ -210,77 +212,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="job-block col-lg-6 col-md-12 col-sm-12">
-
-                                        <div class="inner-box">
-                                            <div class="content">
-                                                <span class="company-logo"><img
-                                                        src="{{ asset('storage/' . $item->company->logo) }}"
-                                                        alt=""></span>
-                                                <h4><a
-                                                        href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
-                                                </h4>
-                                                <ul class="job-info">
-                                                    <li><span
-                                                            class="icon flaticon-briefcase"></span>{{ $item->major->name }}
-                                                    </li>
-                                                    <li><span
-                                                            class="icon flaticon-map-locator"></span>{{ $item->company->address }}
-                                                    </li>
-                                                    <li><span
-                                                            class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
-                                                    </li>
-                                                    <li><span class="icon flaticon-money"></span>
-                                                        {{ $item->min_salary }} -
-                                                        {{ $item->max_salary }}</li>
-
-                                                    <li><i class="icon flaticon-clock-3"></i><span>
-                                                            @if ($day < 0)
-                                                                <b>Hết hạn.</b>
-                                                            @else
-                                                                <b>Còn lại {{ $day }} ngày.</b>
-                                                            @endif
-                                                        </span>
-
-                                                    </li>
-                                                </ul>
-                                                <ul class="job-other-info">
-                                                    <li class="time">
-                                                        @if ($item->full_time == 1)
-                                                            Full Time
-                                                        @endif
-                                                    </span>
-
-                                                </li>
-                                            </ul>
-                                            <ul class="job-other-info">
-                                                @if ($item->type_work == 0)
-                                                <li class="time">
-                                                    Toàn thời gian
-                                                </li>
-                                            @endif
-                                            @if ($item->type_work == 1)
-                                                <li class="privacy">
-                                                    Bán thời gian
-                                                </li>
-                                            @endif
-                                            @if ($item->type_work == 2)
-                                                <li class="required">
-                                                    Thực tập
-                                                </li>
-                                            @endif
-                                                {{-- <li class="required">Urgent</li> --}}
-                                            </ul>
-                                            @if (auth('candidate')->check())
-                                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
-                                                        class="bookmark-btn"><span
-                                                            class="flaticon-bookmark"></span></button></a>
-                                            @else
-                                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span
-                                                        class="flaticon-bookmark"></span></a>
-                                            @endif
-                                        </div>
-                                    </div>
+                                    
                                 @else
                                     <div class="job-block col-lg-6 col-md-12 col-sm-12">
                                         <div class="inner-box">

@@ -37,7 +37,7 @@ class JobController extends Controller
         $date = date('Y/m/d', time());
         if (auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
-            $jobspeed = JobSpeed::where('seeker_id', $id)->whereDate('created_at', $date)->first();
+            $jobspeed = JobPostActivities::where('seeker_id', $id)->whereDate('created_at', $date)->first();
             $dataUser = Candidate::where('id', $id)->first();
             $data_short = Shortlist::where('candidate_id', $id)->get();
             if (!empty($data_short)) {
