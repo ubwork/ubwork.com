@@ -3,41 +3,22 @@
     {{ __('UB Work') }} | {{ __('Danh sách công việc') }}
 @endsection
 @section('content')
-@section('style')
-@parent
-<style>
-    .page-link{
-        border-radius:50%;
-        padding: 0px;
-    }
-    .page-item:last-child .page-link{
-        border-top-right-radius: 50%;
-        border-bottom-right-radius: 50%;
-    }
-    .page-item:first-child .page-link{
-        border-top-left-radius: 50%;
-        border-bottom-left-radius: 50%;
-    }
-    .form-control:focus{
-        box-shadow: none;
-    }
-    .tt-menu{
-        left: -15px !important;
-        top: 80px !important;
-        width: 305px;
-        border-radius: 5px;
-    }
-    .tt-dataset{
-        border-radius: 5px; 
-    }
-    .tt-dataset a{
-        font-family: 'Roboto', sans-serif;
-    }
-    .tt-dataset a:hover{
-            color:#f7941d;
-    }
-</style>
-@endsection
+    <style>
+        .page-link {
+            border-radius: 50%;
+            padding: 0px;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+
+        .page-item:first-child .page-link {
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+    </style>
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
@@ -59,7 +40,8 @@
                             <!-- Form Group -->
                             <div class="form-group col-lg-4 col-md-12 col-sm-12">
                                 <span class="icon flaticon-search-1"></span>
-                                <input type="text" class="form-control search-input" name="search" placeholder="Mời Nhập Từ Khóa">
+                                <input type="text" class="form-control search-input" name="search"
+                                    placeholder="Mời Nhập Từ Khóa">
                             </div>
                             <div class="form-group col-lg-3 col-md-12 col-sm-12">
                                 <span class="icon fa fa-history"></span>
@@ -91,71 +73,216 @@
                         <div class="row">
                             <!-- Job Block -->
                             @foreach ($data as $item)
-                                <div class="job-block col-lg-6 col-md-12 col-sm-12">
-                                    <div class="inner-box">
-                                        <div class="content">
-                                            <span class="company-logo"><img
-                                                    src="{{ asset('storage/' . $item->company->logo) }}"
-                                                    alt=""></span>
-                                            <h4><a
-                                                    href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
-                                            </h4>
-                                            <ul class="job-info">
-                                                <li><span class="icon flaticon-briefcase"></span>{{ $item->major->name }}</li>
-                                                <li><span
-                                                    class="icon flaticon-map-locator"></span>{{ $item->company->address }}
-                                                </li>
-                                                <li><span
-                                                    class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
-                                                </li>
-                                                <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
-                                                    {{ $item->max_salary }}</li>
+                                @php
+                                    $end_time = strtotime($item->end_date); // thời gian kết thúc
+                                    $total = $end_time - $today;
+                                    $day = floor($total / 60 / 60 / 24);
+                                    $start_time = strtotime($item->start_date);
+                                    $days = floor(($today - $start_time) / 60 / 60 / 24);
+                                @endphp
+                                {{-- @dd(!empty($jobspeed)) --}}
+                                @if (!empty($jobspeed))
+                                    @if ($days < 5 || $day <= 0)
+                                    
+                                        <div class="job-block col-lg-6 col-md-12 col-sm-12" hidden>
 
-                                                @php
-                                                    // sử lý thời gian
-                                                    $end_time = strtotime($item->end_date); // thời gian kết thúc
-                                                    $total = $end_time - $today;
-                                                    $day = floor($total / 60 / 60 / 24);
-                                                @endphp
-                                                <li><i class="icon flaticon-clock-3"></i><span>
-                                                        @if ($day < 0)
-                                                        <b>Hết hạn.</b>
-                                                        @else
-                                                            <b>Còn lại {{ $day }} ngày.</b>
+                                            <div class="inner-box">
+                                                <div class="content">
+                                                    <span class="company-logo"><img
+                                                            src="{{ asset('storage/' . $item->company->logo) }}"
+                                                            alt=""></span>
+                                                    <h4><a
+                                                            href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                    </h4>
+                                                    <ul class="job-info">
+                                                        <li><span
+                                                                class="icon flaticon-briefcase"></span>{{ $item->major->name }}
+                                                        </li>
+                                                        <li><span
+                                                                class="icon flaticon-map-locator"></span>{{ $item->company->address }}
+                                                        </li>
+                                                        <li><span
+                                                                class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
+                                                        </li>
+                                                        <li><span class="icon flaticon-money"></span>
+                                                            {{ $item->min_salary }} -
+                                                            {{ $item->max_salary }}</li>
+
+                                                        <li><i class="icon flaticon-clock-3"></i><span>
+                                                                @if ($day < 0)
+                                                                    <b>Hết hạn.</b>
+                                                                @else
+                                                                    <b>Còn lại {{ $day }} ngày.</b>
+                                                                @endif
+                                                            </span>
+
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="job-other-info">
+                                                        <li class="time">
+                                                            @if ($item->full_time == 1)
+                                                                Full Time
+                                                            @endif
+                                                        </li>
+                                                        <li class="privacy">
+                                                            @if ($item->part_time == 1)
+                                                                Part Time
+                                                            @endif
+                                                        </li>
+                                                        {{-- <li class="required">Urgent</li> --}}
+                                                    </ul>
+                                                    @if (auth('candidate')->check())
+                                                        <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
+                                                                class="bookmark-btn"><span
+                                                                    class="flaticon-bookmark"></span></button></a>
+                                                    @else
+                                                        <button class="bookmark-btn"><span
+                                                                class="flaticon-bookmark"></span></button>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="job-block col-lg-6 col-md-12 col-sm-12">
+                                            <div class="inner-box">
+                                                <div class="content">
+                                                    <span class="company-logo"><img
+                                                            src="{{ asset('storage/' . $item->company->logo) }}"
+                                                            alt=""></span>
+                                                    <h4><a
+                                                            href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                    </h4>
+                                                    <ul class="job-info">
+                                                        <li><span
+                                                                class="icon flaticon-briefcase"></span>{{ $item->major->name }}
+                                                        </li>
+                                                        <li><span
+                                                                class="icon flaticon-map-locator"></span>{{ $item->company->address }}
+                                                        </li>
+                                                        <li><span
+                                                                class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
+                                                        </li>
+                                                        <li><span class="icon flaticon-money"></span>
+                                                            {{ $item->min_salary }} -
+                                                            {{ $item->max_salary }}</li>
+
+                                                        <li><i class="icon flaticon-clock-3"></i><span>
+                                                                @if ($day < 0)
+                                                                    <b>Hết hạn.</b>
+                                                                @else
+                                                                    <b>Còn lại {{ $day }} ngày.</b>
+                                                                @endif
+                                                            </span>
+
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="job-other-info">
+                                                        <li class="time">
+                                                            @if ($item->full_time == 1)
+                                                                Full Time
+                                                            @endif
+                                                        </li>
+                                                        <li class="privacy">
+                                                            @if ($item->part_time == 1)
+                                                                Part Time
+                                                            @endif
+                                                        </li>
+                                                        {{-- <li class="required">Urgent</li> --}}
+                                                    </ul>
+                                                    @if (auth('candidate')->check())
+                                                        <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
+                                                                class="bookmark-btn"><span
+                                                                    class="flaticon-bookmark"></span></button></a>
+                                                    @else
+                                                        <button class="bookmark-btn"><span
+                                                                class="flaticon-bookmark"></span></button>
+                                                    @endif
+                                                    </li>
+                                                    {{-- <li class="required">Urgent</li> --}}
+                                                    </ul>
+                                                    @if (auth('candidate')->check())
+                                                        <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
+                                                                class="bookmark-btn"><span
+                                                                    class="flaticon-bookmark"></span></button></a>
+                                                    @else
+                                                        <button class="bookmark-btn"><span
+                                                                class="flaticon-bookmark"></span></button>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    
+                                @else
+                                    <div class="job-block col-lg-6 col-md-12 col-sm-12">
+                                        <div class="inner-box">
+                                            <div class="content">
+                                                <span class="company-logo"><img
+                                                        src="{{ asset('storage/' . $item->company->logo) }}"
+                                                        alt=""></span>
+                                                <h4><a
+                                                        href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                </h4>
+                                                <ul class="job-info">
+                                                    <li><span
+                                                            class="icon flaticon-briefcase"></span>{{ $item->major->name }}
+                                                    </li>
+                                                    <li><span
+                                                            class="icon flaticon-map-locator"></span>{{ $item->company->address }}
+                                                    </li>
+                                                    <li><span
+                                                            class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
+                                                    </li>
+                                                    <li><span class="icon flaticon-money"></span>
+                                                        {{ $item->min_salary }} -
+                                                        {{ $item->max_salary }}</li>
+
+                                                    <li><i class="icon flaticon-clock-3"></i><span>
+                                                            @if ($day < 0)
+                                                                <b>Hết hạn.</b>
+                                                            @else
+                                                                <b>Còn lại {{ $day }} ngày.</b>
+                                                            @endif
+                                                        </span>
+
+                                                    </li>
+                                                </ul>
+                                                <ul class="job-other-info">
+                                                    <li class="time">
+                                                        @if ($item->full_time == 1)
+                                                            Full Time
                                                         @endif
-                                                    </span>
-
+                                                    </li>
+                                                    <li class="privacy">
+                                                        @if ($item->part_time == 1)
+                                                            Part Time
+                                                        @endif
+                                                    </li>
+                                                    {{-- <li class="required">Urgent</li> --}}
+                                                </ul>
+                                                @if (auth('candidate')->check())
+                                                    <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
+                                                            class="bookmark-btn"><span
+                                                                class="flaticon-bookmark"></span></button></a>
+                                                @else
+                                                    <button class="bookmark-btn"><span
+                                                            class="flaticon-bookmark"></span></button>
+                                                @endif
                                                 </li>
-                                            </ul>
-                                            <ul class="job-other-info">
-                                                @if ($item->type_work == 0)
-                                                <li class="time">
-                                                    Toàn thời gian
-                                                </li>
-                                            @endif
-                                            @if ($item->type_work == 1)
-                                                <li class="privacy">
-                                                    Bán thời gian
-                                                </li>
-                                            @endif
-                                            @if ($item->type_work == 2)
-                                                <li class="required">
-                                                    Thực tập
-                                                </li>
-                                            @endif
                                                 {{-- <li class="required">Urgent</li> --}}
-                                            </ul>
-                                            @if (auth('candidate')->check())
-                                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
-                                                        class="bookmark-btn"><span
-                                                            class="flaticon-bookmark"></span></button></a>
-                                            @else
-                                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span
-                                                        class="flaticon-bookmark"></span></a>
-                                            @endif
+                                                </ul>
+                                                @if (auth('candidate')->check())
+                                                    <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
+                                                            class="bookmark-btn"><span
+                                                                class="flaticon-bookmark"></span></button></a>
+                                                @else
+                                                    <button class="bookmark-btn"><span
+                                                            class="flaticon-bookmark"></span></button>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
 
@@ -168,7 +295,7 @@
                                 <li><a href="#">3</a></li>
                                 <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
                             </ul> --}}
-                            {{$data->links()}}
+                            {{ $data->links() }}
                         </nav>
 
                         <!-- Call To Action -->
@@ -185,43 +312,4 @@
             </div>
         </div>
     </section>
-@endsection
-@section('script')
-@parent
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-<script>
-$(document).ready(function($) {
-    var engine1 = new Bloodhound({
-        remote: {
-            url: '/search/title?value=%QUERY%',
-            wildcard: '%QUERY%'
-        },
-        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace
-    });
-
-    $(".search-input").typeahead({
-        hint: true,
-        highlight: true,
-        minLength: 1
-    }, [
-        {
-            source: engine1.ttAdapter(),
-            name: 'students-name',
-            display: function(data) {
-                return data.title;
-            },
-            templates: {
-                suggestion: function (data) {
-                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
-                }
-            }
-        }, 
-    ]);
-});
-
-</script>
 @endsection
