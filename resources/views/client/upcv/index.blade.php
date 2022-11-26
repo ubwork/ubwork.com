@@ -138,7 +138,7 @@
 			</div>
 		</div>
 		<div class="line"></div>
-		<div class="col-div-8">
+		<div class="col-div-8" style="float: right">
 			<div class="content-box">
 			<p class="head">Mục tiêu nghề nghiệp</p>
 			<p class="p3" style="font-size: 14px;line-height: 20px;">
