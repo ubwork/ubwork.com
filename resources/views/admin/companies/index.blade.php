@@ -19,8 +19,8 @@
                   <th>Tên công ty</th>
                   <th>Ảnh</th>
                   <th>Email</th>
+                  <th>Số điện thoại</th>
                   <th>Trạng thái</th>
-                  <th>Số Feedback nhận được</th>
                   <th><a href="{{route('admin.company.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
                 </thead>
@@ -32,6 +32,7 @@
                         <td>{{$item->company_name}}</td>
                         <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->logo)}}" alt=""></td>
                         <td>{{$item->email}}</td>
+                        <td>{{$item->phone}}</td>
                         <td>
                             <form action="{{route('admin.company.status', ['id' => $item->id])}}" method="post">
                               @csrf
@@ -43,7 +44,6 @@
                               </select>
                             </form>
                         </td>
-                        <td>{{}}</td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
                           <a class="btn btn-info mr-3" href="{{route('admin.company.edit', ['id' => $item->id])}}">
                             <i class="fa fa-edit"></i>
