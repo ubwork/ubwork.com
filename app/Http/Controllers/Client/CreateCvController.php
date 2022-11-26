@@ -167,9 +167,8 @@ class CreateCvController extends Controller
         return redirect()->route('CreateCV');
     }
 
-    public function saveSkills(CreateCvRequest $request)
+    public function saveSkills(Request $request)
     {
-
         $data = $request->all();
         $data['created_at'] = Carbon::now()->toDateTimeString();
         $data['updated_at'] = Carbon::now()->toDateTimeString();
@@ -183,8 +182,7 @@ class CreateCvController extends Controller
                 'skill_id' => $skill,
             ]);
         }
-        Session::flash('success', 'Thêm thành công!');
-        return back();
+        return response()->json(['success' => 'Cập nhật thành công!']);
     }
 
     public function DeleteAllSkill($id)
