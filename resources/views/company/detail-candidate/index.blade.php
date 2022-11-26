@@ -42,6 +42,7 @@
                 {{-- @dd($data); --}}
 
                 <a style="width: 49%;" target="_blank" href="{{route('company.viewProfileHidden', $data->candidate_id)}}" class="theme-btn btn-style-one">Xem CV</a>
+                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
               </div>
             </div>
           </div>
