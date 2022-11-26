@@ -27,7 +27,7 @@ class SeekerProfileController extends Controller
 
     public function edit($id)
     {
-        $this->v['title'] = "Cập nhật số coin";
+        $this->v['title'] = "Cập nhật giá trị CV";
         $model = new SeekerProfile();
         $this->v['obj'] = SeekerProfile::find($id);
         return view('admin.seekerProfile.edit', $this->v);
