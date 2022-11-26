@@ -5,40 +5,92 @@
 @section('content')
     <div class="row">
         @php
-        $admin = \Illuminate\Support\Facades\Auth::User();
-        // if($objUser){
-        //         echo "Bạn không có quyền truy cập vào chức năng này";
-        //         return false;
-        //     }
-        // echo $admin->email;
+            $admin = \Illuminate\Support\Facades\Auth::User();
+            // if($objUser){
+            //         echo "Bạn không có quyền truy cập vào chức năng này";
+            //         return false;
+            //     }
+            // echo $admin->email;
         @endphp
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
-              <div class="inner">
-                <h3>{{count($countCandidate)}}</h3>
+                <div class="inner">
+                    <h3>{{ count($countCandidate) }}</h3>
 
-                <p>Ứng viên có trong hệ thống</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{{route('admin.candidate.index')}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                    <p>Ứng viên có trong hệ thống</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="{{ route('admin.candidate.index') }}" class="small-box-footer">Xem chi tiết <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>{{count($contCompany)}}</h3>
+            <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3>{{ count($countCompany) }}</h3>
 
-                <p>Công ty có trong hệ thống</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{{route('admin.company.index')}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                    <p>Công ty có trong hệ thống</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="{{ route('admin.company.index') }}" class="small-box-footer">Xem chi tiết <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
+
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ count($countCV) }}</h3>
+
+                    <p> CV có trong hệ thống</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="{{ route('admin.seekerProfile.index') }}" class="small-box-footer">Xem chi tiết <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Tổng số kĩ năng</span>
+                    <span class="info-box-number">
+                        {{ count($countSkill) }}
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Tổng số chuyên ngành</span>
+                    <span class="info-box-number">
+                      {{ count($countMajor) }}
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 @endsection
