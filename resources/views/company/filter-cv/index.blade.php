@@ -19,7 +19,7 @@
             <!-- Form Group -->
             <div class="form-group col-lg-10 col-md-12 col-sm-12 location">
               <span class="icon flaticon-briefcase"></span>
-              <input name="name" type="text" placeholder="Tìm Kiếm...">
+              <input name="name_education" value="{!! app('request')->input('name_education') !!}" type="text" placeholder="Tìm kiếm theo trường học...">
             </div>
             <!-- Form Group -->
             <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
@@ -58,9 +58,9 @@
                     </select>
                 </div>
 
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <select name="experience" class="select2">
-                        <option value="-1" selected>Chọn vị trí từng đảm nhiệm</option>
+                        <option value="-1" selected>Chọn vị trí muốn ứng tuyển</option>
                         @if(count($exp) > 0)
                         @foreach ($exp as $item)
                         <option @if (app('request')->input('experience') == $item['id'])
@@ -68,6 +68,13 @@
                         @endif value="{{$item['id']}}"> {{$item['position']}} </option>
                         @endforeach
                         @endif
+                      </select>
+                  </div> --}}
+                  <div class="form-group">
+                    <select name="gender" class="select2">
+                        <option value="-1" selected>Giới Tính</option>
+                        <option value="1"> Nam </option>
+                        <option value="2"> Nữ </option>
                       </select>
                   </div>
 
