@@ -20,19 +20,19 @@
                   <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                 </ul>
                 <ul class="job-other-info">
-                  @if($data_job->type_work == 1)
+                  @if($data_job->type_work == 0)
                     <li class="time">
-                        Full Time
+                        Toàn thời gian
                     </li>
                   @endif
-                  @if($data_job->type_work == 2)
+                  @if($data_job->type_work == 1)
                     <li class="privacy">
-                        Part Time
+                        Bán thời gian
                     </li>
                   @endif
-                  @if($data_job->type_work == 0 )
+                  @if($data_job->type_work == 2 )
                     <li class="required">
-                      Intern
+                      Thực tập
                     </li>
                   @endif
                 </ul>
@@ -45,11 +45,10 @@
                       <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
                     @else
-                    
                       <a  @if(!empty($seeker->id)) href="{{route('applied', ['id' => $data_job->id])}}" @else href="{{route('CreateCV')}}" @endif class="theme-btn btn-style-one">Ứng tuyển ngay</a>
                     @endif
                 @else
-                    <button class="theme-btn btn-style-one">Ứng tuyển ngay</button>
+                  <a class="theme-btn btn-style-one" href="{{route('candidate.login')}}">Ứng tuyển ngay</a>
                 @endif
                 
                 @if (auth('candidate')->check()) 
@@ -61,7 +60,7 @@
                     <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                   @endif
                 @else
-                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                    <a class="bookmark-btn" href="{{route('candidate.login')}}"><span class="flaticon-bookmark"></span></a>
                 @endif
               </div>
             </div>
@@ -80,9 +79,15 @@
                 <ul class="list-style-three">
                   {!! $data_job->requirement !!}
                 </ul>
+                @if(!empty($data_job->benefits))
+                <h4>Quyền lợi</h4>
+                <ul class="list-style-three">
+                  {!! $data_job->benefits !!}
+                </ul>
+                @endif
                 <h4>Kĩ năng và kinh nghiệm</h4>
                 <ul class="list-style-three">
-                  <li>{!! $data_job->experience !!}
+                  <li>Y/C: {!! $data_job->experience !!} {{ $data_job->experience ==0 ? "Không yêu cầu kinh nghiệm" : "năm kinh nghiệm"}}
                 </ul>
               </div>
 
@@ -117,21 +122,21 @@
                                 <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                @if($item->type_work == 1)
-                                  <li class="time">
-                                      Full Time
-                                  </li>
-                                @endif
-                                @if($item->type_work == 2)
-                                  <li class="privacy">
-                                      Part Time
-                                  </li>
-                                @endif
-                                @if($item->type_work == 0 )
-                                  <li class="required">
-                                    Intern
-                                  </li>
-                                @endif
+                              @if ($item->type_work == 0)
+                              <li class="time">
+                                  Toàn thời gian
+                              </li>
+                          @endif
+                          @if ($item->type_work == 1)
+                              <li class="privacy">
+                                  Bán thời gian
+                              </li>
+                          @endif
+                          @if ($item->type_work == 2)
+                              <li class="required">
+                                  Thực tập
+                              </li>
+                          @endif
                             </ul>
                            @if (auth('candidate')->check()) 
                               @if (!empty($idJobShort[$item->id]) )
@@ -142,7 +147,7 @@
                                 <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                               @endif
                             @else
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                              <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
                             @endif
                             </div>
                         </div>
@@ -192,17 +197,17 @@
                   </div>
 
                   <!-- Map Widget -->
-                  <h4 class="widget-title">Đia điểm</h4>
+                  {{-- <h4 class="widget-title">Đia điểm</h4>
                   <div class="widget-content">
                     <div class="map-outer">
                       <div class="map-canvas">
                         <iframe class="map-canvas" width="100%" src="{{$data_job->company->map}}" frameborder="0"></iframe>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
 
                   <!-- Job Skills -->
-                  <h4 class="widget-title">Kĩ năng</h4>
+                  {{-- <h4 class="widget-title">Kĩ năng</h4> --}}
                   <div class="widget-content">
                     <ul class="job-skills">
                       {{-- @foreach($job_skills as $item)
@@ -221,22 +226,22 @@
                     </div>
 
                     <ul class="company-info">
-                      <li>Ngành chính: <span>{{$data_job->company->company_model}}</span></li>
-                      <li>Quy mô: <span>{{$data_job->company->company_size}}</span></li>
-                      <li>Thành lập: <span>{{$data_job->company->founded_in}}</span></li>
+                      <li>Loại hình doanh nghiệp: <span>{{$data_job->company->company_model}}</span></li>
+                      {{-- <li>Quy mô: <span>{{$data_job->company->company_size}}</span></li> --}}
+                      <li>Thành lập: <span>{{date('d-m-Y', strtotime($data_job->company->founded_in))}}</span></li>
                       <li>Số điện thoại: <span>{{$data_job->company->phone}}</span></li>
                       <li>Email: <span>{{$data_job->company->email}}</span></li>
                       <li>Địa điểm: <span>{{$data_job->company->address}}</span></li>
-                      <li>Truyền thông xã hội:
+                      {{-- <li>Truyền thông xã hội:
                         <div class="social-links">
                           <a href="#"><i class="fab fa-facebook-f"></i></a>
                           <a href="#"><i class="fab fa-twitter"></i></a>
                           <a href="#"><i class="fab fa-instagram"></i></a>
                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
-                      </li>
+                      </li> --}}
                     </ul>
-                    <div class="btn-box"><a href="#" class="theme-btn btn-style-three">{{$data_job->company->link_web}}</a></div>
+                    <div class="btn-box"><a target="_blank" href="{{$data_job->company->link_web}}" class="theme-btn btn-style-three">Website công ty</a></div>
                   </div>
                 </div>
               </aside>

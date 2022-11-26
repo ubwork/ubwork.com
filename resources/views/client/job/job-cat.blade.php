@@ -3,6 +3,8 @@
     {{__('UB Work')}} | {{$job_cat->name}}
 @endsection
 @section('content')
+@section('style')
+@parent
 <style>
     .page-link{
         border-radius:50%;
@@ -16,7 +18,26 @@
         border-top-left-radius: 50%;
         border-bottom-left-radius: 50%;
     }
+    .form-control:focus{
+        box-shadow: none;
+    }
+    .tt-menu{
+        left: -25px !important;
+        top: 80px !important;
+        width: 435px;
+        border-radius: 5px;
+    }
+    .tt-dataset{
+        border-radius: 5px; 
+    }
+    .tt-dataset a{
+        font-family: 'Roboto', sans-serif;
+    }
+    .tt-dataset a:hover{
+            color:#f7941d;
+    }
 </style>
+@endsection
     <section class="page-title">
         <div class="auto-container">
             <div class="title-outer">
@@ -32,145 +53,39 @@
         <div class="auto-container">
             <div class="filters-backdrop"></div>
             <div class="row">
-                {{-- <div class="filters-column hide-left">
-                    <div class="inner-column">
-                        <div class="filters-outer">
-                            <button type="button" class="theme-btn close-filters">X</button>
-                            <!-- Filter Block -->
-                            <div class="filter-block">
-                                <h4>Search by Keywords</h4>
-                                <div class="form-group">
-                                    <input type="text" name="listing-search"
-                                        placeholder="Job title, keywords, or company">
-                                    <span class="icon flaticon-search-3"></span>
-                                </div>
+                <div class="job-search-form">
+                    <form method="get" action="job-search">
+                        <div class="row">
+                            <!-- Form Group -->
+                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                                <span class="icon flaticon-search-1"></span>
+                                <input type="text" class="form-control search-input" name="search" placeholder="Mời Nhập Từ Khóa">
                             </div>
-                            <div class="filter-block">
-                                <h4>Category</h4>
-                                <div class="form-group">
-                                    <select class="chosen-select">
-                                        <option>Choose a category</option>
-                                        <option>Residential</option>
-                                        <option>Commercial</option>
-                                        <option>Industrial</option>
-                                        <option>Apartments</option>
-                                    </select>
-                                    <span class="icon flaticon-briefcase"></span>
-                                </div>
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                                <span class="icon fa fa-history"></span>
+                                <select name="type" id="" class="chosen-select">
+                                    <option value="">Mời Chọn</option>
+                                    <option value="1">Intern</option>
+                                    <option value="2">Part Time</option>
+                                    <option value="3">Full Time</option>
+                                </select>
                             </div>
-                            <div class="switchbox-outer">
-                                <h4>Job type</h4>
-                                <ul class="switchbox">
-                                    <li>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                            <span class="title">Freelance</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                            <span class="title">Full Time</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                            <span class="title">Internship</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                            <span class="title">Part Time</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                            <span class="title">Temporary</span>
-                                        </label>
-                                    </li>
-                                </ul>
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                                <span class="icon flaticon-briefcase"></span>
+                                <select name="major" class="chosen-select">
+                                    <option value="">Chuyên Ngành</option>
+                                    @foreach ($maJor as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="checkbox-outer">
-                                <h4>Date Posted</h4>
-                                <ul class="checkboxes">
-                                    <li>
-                                        <input id="check-f" type="checkbox" name="check">
-                                        <label for="check-f">All</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-a" type="checkbox" name="check">
-                                        <label for="check-a">Last Hour</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-b" type="checkbox" name="check">
-                                        <label for="check-b">Last 24 Hours</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-c" type="checkbox" name="check">
-                                        <label for="check-c">Last 7 Days</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-d" type="checkbox" name="check">
-                                        <label for="check-d">Last 14 Days</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-e" type="checkbox" name="check">
-                                        <label for="check-e">Last 30 Days</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="checkbox-outer">
-                                <h4>Experience Level</h4>
-                                <ul class="checkboxes square">
-                                    <li>
-                                        <input id="check-ba" type="checkbox" name="check">
-                                        <label for="check-ba">All</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-bb" type="checkbox" name="check">
-                                        <label for="check-bb">Internship</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-bc" type="checkbox" name="check">
-                                        <label for="check-bc">Entry level</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-bd" type="checkbox" name="check">
-                                        <label for="check-bd">Associate</label>
-                                    </li>
-                                    <li>
-                                        <input id="check-be" type="checkbox" name="check">
-                                        <label for="check-be">Mid-Senior level4</label>
-                                    </li>
-                                    <li>
-                                        <button class="view-more"><span class="icon flaticon-plus"></span> View
-                                            More</button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Filter Block -->
-                            <div class="filter-block">
-                                <h4>Tags</h4>
-                                <ul class="tags-style-one">
-                                    <li><a href="#">app</a></li>
-                                    <li><a href="#">administrative</a></li>
-                                    <li><a href="#">android</a></li>
-                                    <li><a href="#">wordpress</a></li>
-                                    <li><a href="#">design</a></li>
-                                    <li><a href="#">react</a></li>
-                                </ul>
+                            <!-- Form Group -->
+                            <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
+                                <button type="submit" class="theme-btn btn-style-one">Tìm Kiếm</button>
                             </div>
                         </div>
-                    </div>
-                </div> --}}
+                    </form>
+                </div>
                 <div class="content-column col-lg-12">
                     <div class="ls-outer">
                         <!-- ls Switcher -->
@@ -217,27 +132,27 @@
                                             <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if($item->type_work == 1)
-                                                <li class="time">
-                                                    Full Time
-                                                </li>
-                                            @endif
-                                            @if($item->type_work == 2)
-                                                <li class="privacy">
-                                                    Part Time
-                                                </li>
-                                            @endif
-                                            @if($item->type_work == 0 )
-                                                <li class="required">
-                                                    Intern
-                                                </li>
-                                            @endif
+                                            @if ($item->type_work == 0)
+                                            <li class="time">
+                                                Toàn thời gian
+                                            </li>
+                                        @endif
+                                        @if ($item->type_work == 1)
+                                            <li class="privacy">
+                                                Bán thời gian
+                                            </li>
+                                        @endif
+                                        @if ($item->type_work == 2)
+                                            <li class="required">
+                                                Thực tập
+                                            </li>
+                                        @endif
                                             {{-- <li class="required">Urgent</li> --}}
                                         </ul>
                                         @if (auth('candidate')->check()) 
                                             <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
                                         @else
-                                            <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                         <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
                                         @endif
                                     </div>
                                 </div>
@@ -264,4 +179,46 @@
             </div>
         </div>
     </section>
+    <input type="hidden" id="value_id" value="{{$job_cat->id}}">
+@endsection
+@section('script')
+@parent
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script>
+$(document).ready(function($) {
+    var id = document.getElementById('value_id').value
+    console.log(id);
+
+    var engine1 = new Bloodhound({
+        remote: {
+            url:`/search/title-cat/${id}?value=%QUERY%`,
+            wildcard: '%QUERY%'
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+    });
+
+    $(".search-input").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, [
+        {
+            source: engine1.ttAdapter(),
+            name: 'students-name',
+            display: function(data) {
+                return data.title;
+            },
+            templates: {
+                suggestion: function (data) {
+                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
+                }
+            }
+        }, 
+    ]);
+});
+
+</script>
 @endsection

@@ -48,8 +48,10 @@ class HomeController extends Controller
                 }
             }
             if (!empty($dataUser)) {
-                $seeker = SeekerProfile::where('candidate_id', $id )->first();
-                $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
+                $seeker = SeekerProfile::where('candidate_id', $id)->first();
+                if (!empty($seeker)) {
+                    $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
+                }
             }
         }
         $maJor = Major::all();
@@ -71,5 +73,10 @@ class HomeController extends Controller
             $data = JobPost::where('status', 1)->get();
         }
         return view('client.job.job', compact('data', 'maJor', 'today'));
+    }
+    public function searchByTitle(Request $request)
+    {
+        $job = JobPost::where('title', 'like', '%' . $request->value . '%')->get();
+        return response()->json($job);
     }
 }
