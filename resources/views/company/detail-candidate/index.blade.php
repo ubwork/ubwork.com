@@ -3,16 +3,15 @@
 {{__('UB Work')}} | {{$title}}
 @endsection
 @section('content')
-<section class="candidate-detail-section style-three">
-    <!-- Upper Box -->
-    <div class="upper-box">
-      <div class="auto-container">
-        <!-- Candidate block Six -->
-        <div class="candidate-block-six">
-          <div class="inner-box">
-            <figure class="image"><img src="{{!empty($data->avatar) ? asset('storage/'. $data->avatar) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
-            <h4 class="name"><a href="#">{{$data->name ?? ''}}</a></h4>
 
+<section class="candidate-detail-section style-three" style="background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000');">
+    <div class="upper-box mb-0">
+      <div class="auto-container">
+        <div class="candidate-block-six" >
+          <div class="inner-box">
+            {{-- @dd($data['candidate']) --}}
+            <figure class="image"><img src="{{!empty($data['candidate']->avatar) ? asset('storage/'. $data['candidate']->avatar) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
+            <h4 class="name" style="bottom: 15px"><a href="#">{{$data->name ?? ''}}</a></h4>
             <span class="designation">{!!$data['major']->name ?? ''!!}</span>
             <div class="content">
               <ul class="post-tags">
@@ -34,10 +33,8 @@
                 <li><span class="icon flaticon-clock"></span>{{$data->birthday ?? ''}}</li>
                 @endif
               </ul>
-
               <div class="btn-box">
                 <a style="width: 49%;" target="_blank" href="{{route('company.viewProfileHidden', $data->candidate_id)}}" class="theme-btn btn-style-one">Xem CV</a>
-                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
               </div>
             </div>
           </div>
@@ -151,31 +148,7 @@
                 </div>
 
               </div>
-              <div class="sidebar-widget contact-widget">
-                <h4 class="widget-title">Contact Us</h4>
-                <div class="widget-content">
-                  <!-- Comment Form -->
-                  <div class="default-form">
-                    <!--Comment Form-->
-                    <form>
-                      <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                          <input type="text" name="username" placeholder="Your Name" required>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                          <input type="email" name="email" placeholder="Email Address" required>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                          <textarea class="darma" name="message" placeholder="Message"></textarea>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                          <button class="theme-btn btn-style-one" type="submit" name="submit-form">Send Message</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+              
             </aside>
           </div>
         </div>
