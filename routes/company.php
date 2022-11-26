@@ -42,9 +42,6 @@ Route::get('vnpay_ipn','COmpany\CoinController@vnpay_ipn')->name('vnpay_ipn');
 Route::get('detail-candidates/{id}', 'Company\DetailCandidateController@index')->name('detail-candidate.index');
 Route::get('historyPayment', 'Company\CoinController@historyPayment')->name('historyPayment');
 
-Route::get('/candidates-feedback/{id}', 'Company\DetailCandidateController@feedback')->name('feedback');
-
-Route::post('/feedback/{id}', 'Company\DetailCandidateController@saveFeedback')->name('saveFeedback');
 
 // Route::get('detail-candidates/{$id}',['as'=>'detail-candidate.index', 'uses'=>'Company\DetailCandidateController@index']);
 

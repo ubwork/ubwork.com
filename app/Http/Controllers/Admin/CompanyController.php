@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
-use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
