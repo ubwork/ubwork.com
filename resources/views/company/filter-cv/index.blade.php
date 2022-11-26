@@ -1,6 +1,5 @@
 @extends('company.layout.app')
 @section('title')
-    {{-- {{ __('Sửa Công ty') }} --}}
 @endsection
 @section('content')
 <style>
@@ -10,8 +9,8 @@
 </style>
 
 @if ($company->status == 1)
-<section class="page-title style-two">
-    <div class="auto-container">
+{{-- <section class="page-title style-two"> --}}
+    <div class="auto-container mb-0" >
       <!-- Job Search Form -->
       <div class="job-search-form">
         <form method="get" action="{{ route('company.filter') }}">
@@ -30,11 +29,11 @@
       </div>
       <!-- Job Search Form -->
     </div>
-  </section>
+  {{-- </section> --}}
   <!--End Page Title-->
 
   <!-- Listing Section -->
-  <section class="ls-section">
+  <section class="ls-section pt-0" >
     <div class="auto-container">
       <div class="filters-backdrop"></div>
 
@@ -101,10 +100,11 @@
             <div class="row">
               @if (count($data) > 0)
                 @foreach ($data as $item)
+                @if (!empty($allProfile[$item->id]))      
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                      
-                      <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : ''}}" alt=""></span>
+                      <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png'}}" alt=""></span>
                       <h3 class="name"><a href="#">
                         @php
                         $nameAt = $item['name'];
@@ -145,12 +145,13 @@
                         <a style="width: 49%;" href="{{route('company.detail-candidate.index', $item->id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                         @else
 
-                        <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+                        <a style="width: 49%; opacity: 0.5;" target="_blank" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                         @endif
 
                       </div>
                     </div>
                   </div>
+                @endif
                 @endforeach
                 @endif
               <!-- Candidate block Four -->
