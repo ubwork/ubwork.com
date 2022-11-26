@@ -4,14 +4,6 @@
 @endsection
 @section('content')
     <div class="row">
-        @php
-            $admin = \Illuminate\Support\Facades\Auth::User();
-            // if($objUser){
-            //         echo "Bạn không có quyền truy cập vào chức năng này";
-            //         return false;
-            //     }
-            // echo $admin->email;
-        @endphp
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
