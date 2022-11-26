@@ -115,7 +115,7 @@
                                                 <div class="form-group mt-3">
                                                     <label for="">Chuyên ngành *</label>
                                                     <select name="major_id" class="form-select">
-                                                        @foreach($major as $mj)
+                                                        @foreach($maJor as $mj)
                                                             <option @if(!empty($seeker)) @if($seeker->major_id == $mj->id) selected @endif @endif value="{{$mj->id}}">{{$mj->name}}</option>
                                                         @endforeach
                                                     </select>

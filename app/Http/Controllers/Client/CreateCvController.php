@@ -36,7 +36,6 @@ class CreateCvController extends Controller
             $seeker = SeekerProfile::where('candidate_id', $id)->first();
             $this->v['seeker'] = $seeker;
             $this->v['skills'] = Skill::all();
-            $this->v['major'] = Major::all();
             $this->v['maJor'] = Major::all();
 
             if (!empty($seeker)) {
