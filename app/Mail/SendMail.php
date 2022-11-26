@@ -6,6 +6,7 @@ use App\Models\JobPost;
 use App\Models\SeekerProfile;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -22,7 +23,7 @@ class SendMail extends Mailable
         $this->subject = $subject;
         $this->company_name = $company_name;
     }
-    public function build(){
+    public function build(Request $request){
         $user = auth('candidate')->user()->id;
         $name = auth('candidate')->user()->name;
         $company_name = $this->company_name;

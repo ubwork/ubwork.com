@@ -41,7 +41,6 @@
                                             @foreach ($data as $item)
                                                 <tr>
                                                     <td>
-                                                        <!-- Job Block -->
                                                         <div class="job-block">
                                                             <div class="inner-box">
                                                                 <div class="content">
@@ -49,7 +48,7 @@
                                                                             src="{{ asset('storage/' . $item->company->logo) }}"
                                                                             alt=""></span>
                                                                     <h4><a
-                                                                            href="{{ route('job-detail', ['id' => $item->job_post_id]) }}">{{ $item->company->name }}</a>
+                                                                            href="{{ route('job-detail', ['id' => $item->job_post_id]) }}">{{ $item->job_post->title }}</a>
                                                                     </h4>
                                                                     <ul class="job-info">
                                                                         <li><span class="icon flaticon-briefcase"></span>
