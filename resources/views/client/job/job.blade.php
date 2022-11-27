@@ -128,16 +128,14 @@
                                                 </li>
                                             </ul>
                                             <ul class="job-other-info">
-                                                <li class="time">
-                                                    @if ($item->full_time == 1)
-                                                        Full Time
+                                                @foreach (config('custom.type_work') as $value)
+                                                
+                                                    @if($value['id'] == $item->type_work)
+                                                        <li class="time">
+                                                            {{$value['name']}}
+                                                        </li>
                                                     @endif
-                                                </li>
-                                                <li class="privacy">
-                                                    @if ($item->part_time == 1)
-                                                        Part Time
-                                                    @endif
-                                                </li>
+                                                @endforeach
                                                 {{-- <li class="required">Urgent</li> --}}
                                             </ul>
                                             @if (auth('candidate')->check())

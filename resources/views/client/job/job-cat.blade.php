@@ -132,22 +132,13 @@
                                             <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if($item->type_work == 1)
-                                                <li class="time">
-                                                    Full Time
-                                                </li>
-                                            @endif
-                                            @if($item->type_work == 2)
-                                                <li class="privacy">
-                                                    Part Time
-                                                </li>
-                                            @endif
-                                            @if($item->type_work == 0 )
-                                                <li class="required">
-                                                    Intern
-                                                </li>
-                                            @endif
-                                            {{-- <li class="required">Urgent</li> --}}
+                                            @foreach (config('custom.type_work') as $value)
+                                                @if($value['id'] == $item->type_work)
+                                                    <li class="time">
+                                                        {{$value['name']}}
+                                                    </li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                         @if (auth('candidate')->check()) 
                                             <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
@@ -187,6 +178,39 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
+$(document).ready(function($) {
+    var id = document.getElementById('value_id').value
+    console.log(id);
+
+    var engine1 = new Bloodhound({
+        remote: {
+            url:`/search/title-cat/${id}?value=%QUERY%`,
+            wildcard: '%QUERY%'
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+    });
+
+    $(".search-input").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, [
+        {
+            source: engine1.ttAdapter(),
+            name: 'students-name',
+            display: function(data) {
+                return data.title;
+            },
+            templates: {
+                suggestion: function (data) {
+                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
+                }
+            }
+        }, 
+    ]);
+});
+
 $(document).ready(function($) {
     var id = document.getElementById('value_id').value
     console.log(id);
