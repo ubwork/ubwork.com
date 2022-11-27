@@ -57,11 +57,25 @@ class MailController extends Controller
                 }
                 return back()->with('success', 'Tìm Kiếm Thành Công');
             } elseif (!empty($seeker) && $major == "") {
-                $jobpost = JobPost::where('major_id', $request->major)->first();
+                $jobpost = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
+                    ->where(function ($q) use ($request) {
+                        $major = $request->major;
+                        $skill = $request->skill;
+                        if (!empty($major)) {
+                            $q->where('job_posts.major_id', '=', $major);
+                        }
+                        if (!empty($skill)) {
+                            $q->where('skills.id', '=', $skill);
+                        }
+                    })
+                    ->distinct()
+                    ->select('job_posts.*')
+                    ->get();
+                dd($jobpost);
                 if ($coin - 30 < 0) {
                     return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
                 }
-                if ($major == "" && $request->major == null) {
+                if ($major == "" && $request->major == null && $request->skill == null) {
                     return back()->with('error', 'Bạn Chưa Tạo cv trên hệ thống vui lòng chọn chuyên ngành bạn muốn tìm!');
                 } elseif (!empty($jobspeed)) {
                     return back()->with('error', 'Hôm Nay Bạn Đã Sử Dụng Phương Thức Này Rồi Vui Lòng Quay Lại Vào Ngày Mai !');
@@ -69,10 +83,19 @@ class MailController extends Controller
                     return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
                 } else {
                     $job = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
-                        ->where('job_posts.major_id', '=', $request->major)
-                        ->where('skills.id', '=', $request->skill)
-                        ->distinct()->select('job_posts.*')->get();
-                    dd($job);
+                        ->where(function ($q) use ($request) {
+                            $major = $request->major;
+                            $skill = $request->skill;
+                            if (!empty($major)) {
+                                $q->where('job_posts.major_id', '=', $major);
+                            }
+                            if (!empty($skill)) {
+                                $q->where('skills.id', '=', $skill);
+                            }
+                        })
+                        ->distinct()
+                        ->select('job_posts.*')
+                        ->get();
                     foreach ($job as $item) {
                         // dd($item->company_id);
                         $email = $item->company->email;
