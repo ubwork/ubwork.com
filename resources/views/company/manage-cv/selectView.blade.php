@@ -1,20 +1,17 @@
 <div class="row">
     @foreach($listCV as $item)
-    {{-- @if($item->row_no != 1)
-    @continue
-    @endif --}}
     <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
-      <div class="inner-box">
+      <div class="inner-box p-4">
         <div class="content">
-          <figure class="image"><img src="{{asset('storage/'. $getSeeker[$item->seeker_id]->image)}}" alt=""></figure>
-          <h4 class="name"><a href="#">{{$getSeeker[$item->seeker_id]->name}}</a></h4>
+          <figure class="image"><img src="{{asset('storage/'.  $item->seeker_profile->image)}}" alt=""></figure>
+          <h4 class="name"><a href="#">{{$item->seeker_profile->name}}</a></h4>
           <ul class="candidate-info">
             <li class="designation">
               @foreach($major as $mj)
-              {{ $getSeeker[$item->seeker_id]->major_id == $mj->id ? $mj->name : ''}}
+              {{  $item->seeker_profile->major_id == $mj->id ? $mj->name : ''}}
               @endforeach
             </li>
-            <li><span class="icon flaticon-map-locator"></span> {{$getSeeker[$item->seeker_id]->address}}</li>
+            <li><span class="icon flaticon-map-locator"></span> {{$item->seeker_profile->address}}</li>
           </ul>
           <ul class="post-tags" style="">
             @foreach($list_skill[$item->seeker_id] as $sk)
@@ -34,3 +31,4 @@
     </div>
     @endforeach
   </div>
+  <div class="ls-pagination">{{ $listCV->links('company.layout.paginate'); }}</div>
