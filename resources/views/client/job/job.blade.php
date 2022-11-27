@@ -18,6 +18,77 @@
             border-top-left-radius: 50%;
             border-bottom-left-radius: 50%;
         }
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  margin: 0;
+  color: #27253d;
+  background: #e6f3f8;
+}
+
+main {
+  position: relative;
+  padding: 1rem 1rem 3rem;
+  min-height: calc(100vh - 4rem);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.pagination-container {
+  width: calc(100% - 2rem);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  padding: 1rem 0;
+  justify-content: center;
+}
+
+.pagination-number,
+.pagination-button{
+  font-size: 1.1rem;
+  background-color: transparent;
+  border: none;
+  margin: 0.25rem 0.25rem;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: .2rem;
+}
+
+.pagination-number:hover,
+.pagination-button:not(.disabled):hover {
+  background: #fff;
+}
+
+.pagination-number.active {
+  color: #fff;
+  background: #0085b6;
+}
+
+footer {
+  padding: 1em;
+  text-align: center;
+  background-color: #FFDFB9;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer .heart {
+  color: #DC143C;
+}
     </style>
     <section class="page-title">
         <div class="auto-container">
@@ -78,8 +149,8 @@
                     {{-- </form> --}}
                 </div>
                 <div class="content-column col-lg-12">
-                    <div class="ls-outer">
-                        <div class="row" id="searchpate">
+                    <div class="ls-outer" data-current-page="1" aria-live="polite">
+                        <div class="row searchpate" id="paginated-list" >
                             <!-- Job Block -->
                             @foreach ($data as $item)
                                 @php
@@ -89,7 +160,7 @@
                                     $start_time = strtotime($item->start_date);
                                     $days = floor(($today - $start_time) / 60 / 60 / 24);
                                 @endphp
-                                    <div class="job-block col-lg-6 col-md-12 col-sm-12">
+                                    <div class="job-block col-lg-6 col-md-12 col-sm-12 pagi">
                                         <div class="inner-box" style="height:200px">
                                             <div class="content">
                                                 <span class="company-logo"><img
@@ -159,12 +230,20 @@
                                     </div>
                             @endforeach
                         </div>
-                        <nav class="ls-pagination mb-5" id="demo">
-                            {!! $data->links('company.layout.paginate') !!}
-                        </nav>
                     </div>
                 </div>
             </div>
+            <nav class="pagination-container">
+                <button class="pagination-button" id="prev-button" aria-label="Previous page" title="Previous page">
+
+                </button>
+                <div id="pagination-numbers">
+
+                </div>
+                <button class="pagination-button" id="next-button" aria-label="Next page" title="Next page">
+                </button>
+              </nav>
+            </main>
         </div>
     </section>
 @endsection
@@ -198,9 +277,9 @@
                     dataType: "json",
                     success: function(data) {
                         var searchpateAjax = '';
-                        $('#searchpate').show();
-                        for (job of data.data) {
-                            searchpateAjax += `<div class="job-block col-lg-6 col-md-12 col-sm-12" style="height:200px">
+                        $('.searchpate').show();
+                        for (job of data) {
+                            searchpateAjax += `<div class="job-block col-lg-6 col-md-12 col-sm-12 pagi" style="height:200px">
                                         <div class="inner-box">
                                             <div class="content">
                                                 <span class="company-logo"><img
@@ -267,23 +346,112 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>`
+                                        </div>
+                                    `
                         }
-                        $('#searchpate').html(searchpateAjax);
-                        // $('#demo').pagination({
-                        //     dataSource: [data.data],
-                        //     pageSize: 5,
-                        //     autoHidePrevious: true,
-                        //     autoHideNext: true,
-                        //     callback: function(data, pagination) {
-                        //         // template method of yourself
-                        //         var html = template(data);
-                        //         dataContainer.html(html);
-                        //     }
-                        // })
+                        $('.searchpate').html(searchpateAjax);
+
                     }
                 })
         })
-        // $(document)
+        const paginationNumbers = document.getElementById("pagination-numbers");
+        const paginatedList = document.getElementById("paginated-list");
+        const listItems = paginatedList.querySelectorAll(".pagi");
+        const nextButton = document.getElementById("next-button");
+        const prevButton = document.getElementById("prev-button");
+
+        const paginationLimit = 5;
+        const pageCount = Math.ceil(listItems.length / paginationLimit);
+        let currentPage = 1;
+
+        const disableButton = (button) => {
+        button.classList.add("disabled");
+        button.setAttribute("disabled", true);
+        };
+
+        const enableButton = (button) => {
+        button.classList.remove("disabled");
+        button.removeAttribute("disabled");
+        };
+
+        const handlePageButtonsStatus = () => {
+        if (currentPage === 1) {
+            disableButton(prevButton);
+        } else {
+            enableButton(prevButton);
+        }
+
+        if (pageCount === currentPage) {
+            disableButton(nextButton);
+        } else {
+            enableButton(nextButton);
+        }
+        };
+
+        const handleActivePageNumber = () => {
+        document.querySelectorAll(".pagination-number").forEach((button) => {
+            button.classList.remove("active");
+            const pageIndex = Number(button.getAttribute("page-index"));
+            if (pageIndex == currentPage) {
+            button.classList.add("active");
+            }
+        });
+        };
+
+        const appendPageNumber = (index) => {
+        const pageNumber = document.createElement("button");
+        pageNumber.className = "pagination-number";
+        pageNumber.innerHTML = index;
+        pageNumber.setAttribute("page-index", index);
+        pageNumber.setAttribute("aria-label", "Page " + index);
+
+        paginationNumbers.appendChild(pageNumber);
+        };
+
+        const getPaginationNumbers = () => {
+        for (let i = 1; i <= pageCount; i++) {
+            appendPageNumber(i);
+        }
+        };
+
+        const setCurrentPage = (pageNum) => {
+        currentPage = pageNum;
+
+        handleActivePageNumber();
+        handlePageButtonsStatus();
+
+        const prevRange = (pageNum - 1) * paginationLimit;
+        const currRange = pageNum * paginationLimit;
+
+        listItems.forEach((item, index) => {
+            item.classList.add("hidden");
+            if (index >= prevRange && index < currRange) {
+            item.classList.remove("hidden");
+            }
+        });
+        };
+
+        window.addEventListener("load", () => {
+        getPaginationNumbers();
+        setCurrentPage(1);
+
+        prevButton.addEventListener("click", () => {
+            setCurrentPage(currentPage - 1);
+        });
+
+        nextButton.addEventListener("click", () => {
+            setCurrentPage(currentPage + 1);
+        });
+
+        document.querySelectorAll(".pagination-number").forEach((button) => {
+            const pageIndex = Number(button.getAttribute("page-index"));
+
+            if (pageIndex) {
+            button.addEventListener("click", () => {
+                setCurrentPage(pageIndex);
+            });
+            }
+        });
+        });
     </script>
 @endsection

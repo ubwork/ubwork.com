@@ -30,8 +30,8 @@ function getData(page){
     $.ajax(
     {
         url: '?page=' + page,
-        type: "get",
-        datatype: "html"
+        type: "post",
+        datatype:"html"
     }).done(function(data){
         $(".table-outer").empty().html(data);
         location.hash = page;
