@@ -23,6 +23,9 @@ Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\Reg
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@postLogin']);
 Route::get('/logout', ['as' => 'logout', 'uses' => 'Client\Auth\LoginController@logout']);
+// login google
+Route::get('/googleLogin','Client\Auth\LoginGoogleController@getGoogleLoginClient')->name('getGoogleLoginClient');
+Route::get('/googleLogin/callback','Client\Auth\LoginGoogleController@loginClientCallback');
 
 //candidate
 Route::get('/', 'client\HomeController@index')->name('index');
