@@ -59,7 +59,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="text-center">{{ $listCV->links(); }}</div>
               </div>
             </div>
           </div>
@@ -73,23 +72,44 @@
   @parent
   <script src="{{asset('js/paginate.js')}}"></script>
   <script>
+    $(function() {
+        $(document).on("click",".pagination li a,#button_search", function(e) {
+            e.preventDefault();
+            var url=$(this).attr("href");
+            var append = url.indexOf("?") == -1 ? "?" : "&";
+            var finalURL = url + append + $("#search").serialize();
+            window.history.pushState({}, null, finalURL);
+            $.get(finalURL, function(data) {
+                $(".rowView").html(data);
+            });
+            return false;
+        })})
       $( document ).ready(function() {
         $('#selectView').change(function() {
           var id = $(this).val();
           var data = {
-                    "_token": $('meta[name="csrf-token"]').attr('content'),
-                    "id": id,
+                    // "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "is_see": id,
                 }
             $.ajax({
-              url: "manage-cv/selectView",
-              type: "post",
+              url: "manage-cv",
+              type: "get",
               data: data,
               success: function(data)
               {
                 $(".rowView").html(data);
               },
               error: function(){
-                alert("Lỗi !!!");
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Cảnh báo',
+                        text: 'Dữ liệu bị lỗi',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        confirmButtonText: 'Đồng ý',
+                        confirmButtonColor: '#C46F01',
+                        cancelButtonText: 'Không'
+                    })
               }
             });
         });
