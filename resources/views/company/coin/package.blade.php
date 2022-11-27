@@ -1,6 +1,6 @@
 @extends('company.layout.app')
 @section('title')
-    {{ __('Sửa Công ty') }}
+    {{ __('Gói cước') }}
 @endsection
 @section('content')
     <div class="row view-invoice">

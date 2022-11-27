@@ -109,6 +109,12 @@ Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@delete
 
 Route::get('create-cv/getPdf', 'Client\CreateCvController@getPdf')->name('getPdf');
 
-
+Route::get('package','Client\CoinController@getListPackage')->name('listPackage');
+Route::post('insertInvoice','Client\CoinController@insertInvoice')->name('insertInvoice');
+Route::post('payment','Client\CoinController@payment')->name('payment');
+Route::get('vnpay_return','Client\CoinController@vnpay_return')->name('vnpay_return');
+Route::get('vnpay_ipn','Client\CoinController@vnpay_ipn')->name('vnpay_ipn');
+Route::get('detail-candidates/{id}', 'Client\DetailCandidateController@index')->name('detail-candidate.index');
+Route::get('historyPayment', 'Client\CoinController@historyPayment')->name('historyPayment');
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
