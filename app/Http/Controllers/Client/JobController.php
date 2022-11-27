@@ -17,7 +17,7 @@ use App\Models\Skill;
 use App\Models\SkillPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
 {
@@ -27,12 +27,12 @@ class JobController extends Controller
         $maJor = Major::all();
         return view('client.home', compact('data', 'maJor'));
     }
-    public function job()
+    public function job(Request $request)
     {
         $job_short = [];
         $jobspeed = [];
         $Skill = Skill::all();
-        $data = JobPost::where('status', 1)->paginate(10);
+        $data = JobPost::where('status', 1)->paginate(5);
         $today = strtotime(Carbon::now());
         $maJor = Major::all();
         $date = date('Y/m/d', time());
@@ -47,9 +47,17 @@ class JobController extends Controller
                     $job_short[$id_post] = $item;
                 }
             }
-            return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed', 'Skill'));
+            if ($request->ajax()) {
+                return response()->json($data);
+            } else {
+                return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed', 'Skill'));
+            }
         } else {
-            return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed', 'Skill'));
+            if ($request->ajax()) {
+                return response()->json($data);
+            } else {
+                return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed', 'Skill'));
+            }
         }
     }
     public function job_cat($id)
@@ -97,38 +105,16 @@ class JobController extends Controller
             'seeker'
         ));
     }
-    public function search(Request $request)
-    {
-        $today = strtotime(Carbon::now());
-        $maJor = Major::all();
-        $Skill = Skill::all();
-        $data = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
-            ->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
-            ->where('status', 1)
-            ->where(function ($q) use ($request) {
-                if (!empty($request->search)) {
-                    $q->orwhere('job_posts.title', 'LIKE', '%' . $request->search . '%');
-                }
-                if (!empty($request->major)) {
-                    $q->where('job_posts.major_id', '=', $request->major);
-                }
-                if (!empty($request->type)) {
-                    $q->where('job_posts.type_work', '=', $request->type);
-                }
-                if (!empty($request->skill)) {
-                    $q->where('skills.id', '=', $request->skill);
-                }
-            })
-            ->select('job_posts.*')
-            ->paginate(5);
-        // return response()->json($data);
-        return view('client.job.job', compact('data', 'maJor', 'today', 'Skill'));
-    }
     public function searchs(Request $request)
     {
-        $data = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
-            ->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
-            ->where('status', 1)
+        $job_short = [];
+        $jobspeed = [];
+        $Skill = Skill::all();
+        $today = strtotime(Carbon::now());
+        $maJor = Major::all();
+        $date = date('Y/m/d', time());
+        $data = Skill::join('skill_posts', 'skills.id', '=', 'skill_posts.skill_id')
+            ->join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
             ->where(function ($q) use ($request) {
                 $search = $request['searchText'];
                 $major = $request['searchMajor'];
@@ -147,11 +133,27 @@ class JobController extends Controller
                     $q->where('skills.id', '=', $skill);
                 }
             })
-            ->select('job_posts.*')
             ->distinct()
-            ->with(['company','major'])
-            ->get();
-            return response()->json($data);
+            ->with(['company', 'major'])
+            ->paginate(2);
+        // if (auth('candidate')->check()) {
+        //     $id = auth('candidate')->user()->id;
+        //     $jobspeed = JobPostActivities::where('seeker_id', $id)->whereDate('created_at', $date)->first();
+        //     $dataUser = Candidate::where('id', $id)->first();
+        //     $data_short = Shortlist::where('candidate_id', $id)->get();
+        //     if (!empty($data_short)) {
+        //         foreach ($data_short as $item) {
+        //             $id_post = $item->job_post_id;
+        //             $job_short[$id_post] = $item;
+        //         }
+        //     }
+        // }
+        // if ($request->ajax()) {
+        //     return response()->json($data);
+        // } else {
+        //     return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed', 'Skill'));
+        // }
+        return response()->json($data);
     }
     public function searchByTitle($id, Request $request)
     {
