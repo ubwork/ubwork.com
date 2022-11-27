@@ -72,7 +72,7 @@ class MailController extends Controller
                         ->where('job_posts.major_id', '=', $request->major)
                         ->where('skills.id', '=', $request->skill)
                         ->distinct()->select('job_posts.*')->get();
-                    // dd($job);
+                    dd($job);
                     foreach ($job as $item) {
                         // dd($item->company_id);
                         $email = $item->company->email;

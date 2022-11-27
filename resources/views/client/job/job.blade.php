@@ -72,7 +72,7 @@
                         </div>
                         <!-- Form Group -->
                         <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
-                            <button type="submit"  class="theme-btn btn-style-one btn-search">Tìm Kiếm</button>
+                            <button type="submit" class="theme-btn btn-style-one btn-search">Tìm Kiếm</button>
                         </div>
                     </div>
                     {{-- </form> --}}
@@ -159,8 +159,8 @@
                                     </div>
                             @endforeach
                         </div>
-                        <nav class="ls-pagination mb-5" id="pahinate">
-                            {{$data->links('company.layout.paginate')}}
+                        <nav class="ls-pagination mb-5" id="demo">
+                            {!! $data->links('company.layout.paginate') !!}
                         </nav>
                     </div>
                 </div>
@@ -176,14 +176,15 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('.btn-search').on('click', function(e) {
+        $('.btn-search').on('click',function(){
             var searchText = $('#search-text').val();
             var searchType = $('#search-type').val();
             var searchMajor = $('#search-major').val();
             var searchSkill = $('#search-skill').val();
+            var url=$(this).attr("href");
                 $.ajax({
                     method: "post",
-                    url: 'job-searchs',
+                    url:'job-searchs',
                     data: JSON.stringify({
                         searchText:searchText,
                         searchMajor:searchMajor,
@@ -194,12 +195,11 @@
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
+                    dataType: "json",
                     success: function(data) {
                         var searchpateAjax = '';
-                        // data = JSON.parse(data);
-                        // console.log(data);
                         $('#searchpate').show();
-                        for (job of data) {
+                        for (job of data.data) {
                             searchpateAjax += `<div class="job-block col-lg-6 col-md-12 col-sm-12" style="height:200px">
                                         <div class="inner-box">
                                             <div class="content">
@@ -270,8 +270,20 @@
                                     </div>`
                         }
                         $('#searchpate').html(searchpateAjax);
+                        // $('#demo').pagination({
+                        //     dataSource: [data.data],
+                        //     pageSize: 5,
+                        //     autoHidePrevious: true,
+                        //     autoHideNext: true,
+                        //     callback: function(data, pagination) {
+                        //         // template method of yourself
+                        //         var html = template(data);
+                        //         dataContainer.html(html);
+                        //     }
+                        // })
                     }
                 })
         })
+        // $(document)
     </script>
 @endsection
