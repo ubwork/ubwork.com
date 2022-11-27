@@ -3,11 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Company\ProfileController;
 
-Route::get('', function () {
-    $activeRoute='dashboard';
-    $title = "Tổng quản";
-    return view('company.dashboard',compact('activeRoute','title'));
-})->name('home');
+Route::get('',"Company\DashboardController@home")->name('home');
 Route::get('/dashboard', function () {
     return redirect()->route('company.home');
 });
@@ -38,7 +34,14 @@ Route::get('view-open-cv', 'Company\OpenCvController@index')->name('viewOpenCv')
 
 Route::get('view-open-cv/save-open/{id}', 'Company\OpenCvController@store')->name('SaveOpenCv');
 
+Route::get('package','Company\CoinController@getListPackage')->name('listPackage');
+Route::post('insertInvoice','Company\CoinController@insertInvoice')->name('insertInvoice');
+Route::post('payment','Company\CoinController@payment')->name('payment');
+Route::get('vnpay_return','Company\CoinController@vnpay_return')->name('vnpay_return');
+Route::get('vnpay_ipn','Company\CoinController@vnpay_ipn')->name('vnpay_ipn');
 Route::get('detail-candidates/{id}', 'Company\DetailCandidateController@index')->name('detail-candidate.index');
+Route::get('historyPayment', 'Company\CoinController@historyPayment')->name('historyPayment');
+
 
 // Route::get('detail-candidates/{$id}',['as'=>'detail-candidate.index', 'uses'=>'Company\DetailCandidateController@index']);
 
