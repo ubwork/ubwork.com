@@ -14,7 +14,7 @@ class Company  extends Authenticatable
     protected $table = "companies";
     protected $fillable = ['id', 'name', 'company_name', 'address', 'company_model', 'working_time',
     'phone', 'email', 'password', 'logo', 'link_web', 'coin', 'tax_code', 'team', 'image_paper',
-    'status', 'about', 'founded_in','map','career', 'created_at', 'updated_at','google_id'];
+    'status', 'about', 'founded_in','map','career', 'created_at', 'updated_at'];
 
     public function companyDetail($id)
     {
