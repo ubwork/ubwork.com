@@ -32,7 +32,7 @@
                 <div class="content-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column wow fadeInUp" data-wow-delay="1000ms">
                         <div class="title-box">
-                            <h3>Có<span class="colored"> {{ count($data) }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
+                            <h3>Có<span class="colored"> {{ $countJob }}</span> Bài đăng ở đây<br>dành cho bạn</h3>
                             <div class="text">Tìm việc làm, Cơ hội việc làm & Nghề nghiệp</div>
                         </div>
                         <!-- Job Search Form -->
@@ -90,14 +90,14 @@
                             data-speed-y="2"
                             style="transform: translate3d(-4px, -7.36px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 1000ms; animation-name: fadeIn;">
                             <span class="icon flaticon-email-3"></span>
-                            <p>Work Inquiry From <br>Ali Tufan</p>
+                            <p>{{$countJobActive}} công việc <br>được ứng tuyển</p>
                         </div>
 
                         <!-- Info BLock Two -->
                         <div class="info_block_two anm wow fadeIn animated" data-wow-delay="2000ms" data-speed-x="1"
                             data-speed-y="1"
                             style="transform: translate3d(-2px, -3.68px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2000ms; animation-name: fadeIn;">
-                            <p>10k+ Candidates</p>
+                            <p>{{$countCandidate}}+ Ứng viên</p>
                             <div class="image"><img
                                     src="{{ asset('/assets/client-bower/images/resource/multi-peoples.png') }}"
                                     alt=""></div>
@@ -108,8 +108,8 @@
                             data-speed-y="4"
                             style="transform: translate3d(-8px, -14.72px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 1500ms; animation-name: fadeIn;">
                             <span class="icon flaticon-briefcase"></span>
-                            <p>Creative Agency</p>
-                            <span class="sub-text">Startup</span>
+                            <p>{{$countJob}}+ Công việc</p>
+                            <span class="sub-text">Hãy tìm <span style="color=#f7941d;">công việc</span> phù hợp với bạn</span>
                             <span class="right_icon fa fa-check"></span>
                         </div>
 
@@ -119,8 +119,8 @@
                             style="transform: translate3d(-6px, -11.04px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 2500ms; animation-name: fadeIn;">
                             <span class="icon flaticon-file"></span>
                             <div class="inner">
-                                <p>Upload Your CV</p>
-                                <span class="sub-text">It only takes a few seconds</span>
+                                <p>Tải lên CV của bạn</p>
+                                <span class="sub-text">Chỉ mất vài giây CV của bạn sẽ được đăng tải</span>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Các chuyên ngành công việc phổ biến</h2>
-                <div class="text">{{ $data != '' ? count($data) : 0 }} việc làm được đăng tải</div>
+                <div class="text">{{ $data != '' ? $countJob : 0 }} việc làm được đăng tải</div>
             </div>
 
             <div class="row wow fadeInUp">
@@ -184,21 +184,13 @@
                                             {{ $item->max_salary }} đ</li>
                                     </ul>
                                     <ul class="job-other-info">
-                                        @if ($item->type_work == 1)
-                                            <li class="time">
-                                                Full Time
-                                            </li>
-                                        @endif
-                                        @if ($item->type_work == 2)
-                                            <li class="privacy">
-                                                Part Time
-                                            </li>
-                                        @endif
-                                        @if ($item->type_work == 0)
-                                            <li class="required">
-                                                Intern
-                                            </li>
-                                        @endif
+                                        @foreach (config('custom.type_work') as $value)
+                                            @if($value['id'] == $item->type_work)
+                                                <li class="time">
+                                                    {{$value['name']}}
+                                                </li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                     @if (auth('candidate')->check())
                                         @if (!empty($job_short[$item->id]))
@@ -255,21 +247,13 @@
                                                 {{ $item->max_salary }} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if ($item->company->type_work == 1)
-                                                <li class="time">
-                                                    Full Time
-                                                </li>
-                                            @endif
-                                            @if ($item->company->type_work == 2)
-                                                <li class="privacy">
-                                                    Part Time
-                                                </li>
-                                            @endif
-                                            @if ($item->company->type_work == 0)
-                                                <li class="required">
-                                                    Intern
-                                                </li>
-                                            @endif
+                                            @foreach (config('custom.type_work') as $value)
+                                                @if($value['id'] == $item->type_work)
+                                                    <li class="time">
+                                                        {{$value['name']}}
+                                                    </li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                         @if (auth('candidate')->check())
                                             @if (!empty($job_short[$item->id]))
