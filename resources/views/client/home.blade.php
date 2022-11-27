@@ -184,19 +184,19 @@
                                             {{ $item->max_salary }} đ</li>
                                     </ul>
                                     <ul class="job-other-info">
-                                        @if ($item->type_work == 1)
+                                        @if ($item->type_work == 0)
                                             <li class="time">
-                                                Full Time
+                                                Toàn thời gian
+                                            </li>
+                                        @endif
+                                        @if ($item->type_work == 1)
+                                            <li class="privacy">
+                                                Bán thời gian
                                             </li>
                                         @endif
                                         @if ($item->type_work == 2)
-                                            <li class="privacy">
-                                                Part Time
-                                            </li>
-                                        @endif
-                                        @if ($item->type_work == 0)
                                             <li class="required">
-                                                Intern
+                                                Thực tập
                                             </li>
                                         @endif
                                     </ul>
@@ -255,19 +255,19 @@
                                                 {{ $item->max_salary }} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if ($item->company->type_work == 1)
+                                            @if ($item->company->type_work == 0)
                                                 <li class="time">
-                                                    Full Time
+                                                    Toàn thời gian
+                                                </li>
+                                            @endif
+                                            @if ($item->company->type_work == 1)
+                                                <li class="privacy">
+                                                    Bán thời gian
                                                 </li>
                                             @endif
                                             @if ($item->company->type_work == 2)
-                                                <li class="privacy">
-                                                    Part Time
-                                                </li>
-                                            @endif
-                                            @if ($item->company->type_work == 0)
                                                 <li class="required">
-                                                    Intern
+                                                    Thực tập
                                                 </li>
                                             @endif
                                         </ul>
