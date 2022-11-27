@@ -79,4 +79,9 @@ class HomeController extends Controller
         $job = JobPost::where('title', 'like', '%' . $request->value . '%')->get();
         return response()->json($job);
     }
+
+    public function choose() {
+        $maJor = Major::all();
+        return view('client.choose', compact('maJor'));
+    } 
 }

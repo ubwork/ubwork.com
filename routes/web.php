@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/search/title', 'client\HomeController@searchByTitle');
 Route::get('/search/title-cat/{id}', 'client\JobController@searchByTitle');
+
+Route::get('/choose-login', 'client\HomeController@choose')->name('choose');
+
 // Register client
 Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
