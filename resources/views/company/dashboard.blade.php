@@ -7,8 +7,8 @@
                     <i class="icon flaticon-briefcase"></i>
                 </div>
                 <div class="right">
-                    <h4>22</h4>
-                    <p>Posted Jobs</p>
+                    <h4>{{$JobPost->count()}}</h4>
+                    <p>Tin tuyển dụng</p>
                 </div>
             </div>
         </div>
@@ -18,12 +18,12 @@
                     <i class="icon la la-file-invoice"></i>
                 </div>
                 <div class="right">
-                    <h4>9382</h4>
-                    <p>Application</p>
+                    <h4>{{$Applied}}</h4>
+                    <p>Ứng tuyển</p>
                 </div>
             </div>
         </div>
-        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+        {{-- <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
             <div class="ui-item ui-yellow">
                 <div class="left">
                     <i class="icon la la-comment-o"></i>
@@ -44,9 +44,9 @@
                     <p>Shortlist</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-lg-12">
             <!-- applicants Widget -->
             <div class="applicants-widget ls-widget">
@@ -123,7 +123,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="image-layer" style="background-image: url({{ asset('/assets/client-bower/images/background/12.jpg') }});">
     </div>
     </div>

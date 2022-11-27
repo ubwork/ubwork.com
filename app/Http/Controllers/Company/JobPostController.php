@@ -22,10 +22,17 @@ class JobPostController extends Controller
         $this->v['activeRoute'] = 'post';
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $company_id = auth('company')->user()->id;
         $this->v['title'] = 'Quản lý tin tuyển dụng';
-        $this->v['posts'] = JobPost::with('activities')->get();
+        $this->v['posts'] = JobPost::with('activities')->where('company_id',$company_id)
+                    ->when($request->has("search"),function($q)use($request){
+                        return $q->where("title","like","%".$request->get("search")."%");
+                    })->orderBy('created_at', 'DESC')->paginate(config('paginate.post.index'));
+        if ($request->ajax()) {
+            return view('company.post.tablePost',$this->v);
+        }
         return view('company.post.index',$this->v);
     }
 
@@ -37,7 +44,7 @@ class JobPostController extends Controller
         return view('company.post.add',$this->v);
     }
 
-    public function store(Request $request)
+    public function store(JobPostRequest $request)
     {
         try {
             $data = $request->all();
@@ -51,8 +58,8 @@ class JobPostController extends Controller
             return Redirect()->route('company.post.index');
         } catch (Exception $e) {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('company.post.create');
             throw new Exception($e->getMessage());
+            return Redirect()->route('company.post.create');
         }
 
     }
@@ -82,21 +89,43 @@ class JobPostController extends Controller
             $skill = $request->input('skill');
             unset($data['files']);
             $model->skills()->sync($skill);
-            $data['start_date'] = Carbon::now();
             $res = $model->update($data);
-            Session::flash('success', 'Thêm thành công!');
+            Session::flash('success', 'Sửa thành công!');
             return Redirect()->route('company.post.index');
         } catch (Exception $e) {
             Session::flash('error', 'Lỗi thêm mới!');
-            return Redirect()->route('company.post.edit',$id);
             throw new Exception($e->getMessage());
+            return Redirect()->route('company.post.edit',$id);
         }
     }
 
-    public function profileApply($id){
+    public function profileApply(Request $request,$id){
         $this->v['title'] = 'CV ứng tuyển';
         $model = JobPost::with('seekerProfiles')->find($id);
-        $this->v['listSeeker'] = $model->seekerProfiles;
+        $this->v['postId'] = $id;
+        $this->v['pageApplied'] = '';
+        $this->v['listSeeker'] = $model->seekerProfiles()
+                ->where('is_function',0)
+                ->when($request->has("search"),function($q)use($request){
+                    return $q->where("name","like","%".$request->get("search")."%");
+                })->orderBy('created_at', 'DESC')->paginate(config('paginate.post.profileApply'));
+        if ($request->ajax()) {
+            $array_url = explode('/',session()->all()['_previous']['url']);
+            if(session()->all()['_previous']['url'] == url()->current()){
+                return view('company.post.tableApplied',$this->v);
+            }else{
+                if (empty($request->get('showTable'))) {
+                    $this->v['pageApplied'] = 'table';
+                    return view('company.post.rowApplied',$this->v);
+                }else{
+                    if ($request->has("showTable")) {
+                        $this->v['pageApplied'] = 'table';
+                    }
+                    return view('company.post.tableApplied',$this->v);
+                }
+                
+            }
+        }
         return view('company.post.applied',$this->v);
     }
 

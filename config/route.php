@@ -31,6 +31,11 @@ return [
                 'title' => "Quản lý CV",
                 'route' => 'company.viewOpenCv',
                 'icon'  => 'la la-home',
+            ],
+            'history-payment' => [
+                'title' => "Lịch sử giao dịch",
+                'route' => 'company.historyPayment',
+                'icon'  => 'la la-history',
             ]
         ]
     ]
