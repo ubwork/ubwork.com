@@ -51,6 +51,7 @@ class HomeController extends Controller
                 }
             }
             if (!empty($dataUser)) {
+
                 $seeker = SeekerProfile::where('candidate_id', $id)->first();
                 if (!empty($seeker)) {
                     $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
@@ -61,7 +62,7 @@ class HomeController extends Controller
         $countCandidate = Candidate::all()->count();
         $countJob = JobPost::all()->count();
         $countJobActive = JobPostActivities::all()->count();
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive'));
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive', 'seeker'));
     }
     public function search(Request $request)
     {
