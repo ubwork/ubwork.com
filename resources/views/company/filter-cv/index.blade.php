@@ -1,6 +1,5 @@
 @extends('company.layout.app')
 @section('title')
-    {{-- {{ __('Sửa Công ty') }} --}}
 @endsection
 @section('content')
 <style>
@@ -10,8 +9,8 @@
 </style>
 
 @if ($company->status == 1)
-<section class="page-title style-two">
-    <div class="auto-container">
+{{-- <section class="page-title style-two"> --}}
+    <div class="auto-container mb-0" >
       <!-- Job Search Form -->
       <div class="job-search-form">
         <form method="get" action="{{ route('company.filter') }}">
@@ -20,7 +19,7 @@
             <!-- Form Group -->
             <div class="form-group col-lg-10 col-md-12 col-sm-12 location">
               <span class="icon flaticon-briefcase"></span>
-              <input name="name" type="text" placeholder="Tìm Kiếm...">
+              <input name="name_education" value="{!! app('request')->input('name_education') !!}" type="text" placeholder="Tìm kiếm theo trường học...">
             </div>
             <!-- Form Group -->
             <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
@@ -30,11 +29,11 @@
       </div>
       <!-- Job Search Form -->
     </div>
-  </section>
+  {{-- </section> --}}
   <!--End Page Title-->
 
   <!-- Listing Section -->
-  <section class="ls-section">
+  <section class="ls-section pt-0" >
     <div class="auto-container">
       <div class="filters-backdrop"></div>
 
@@ -59,9 +58,9 @@
                     </select>
                 </div>
 
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <select name="experience" class="select2">
-                        <option value="-1" selected>Chọn vị trí từng đảm nhiệm</option>
+                        <option value="-1" selected>Chọn vị trí muốn ứng tuyển</option>
                         @if(count($exp) > 0)
                         @foreach ($exp as $item)
                         <option @if (app('request')->input('experience') == $item['id'])
@@ -69,6 +68,13 @@
                         @endif value="{{$item['id']}}"> {{$item['position']}} </option>
                         @endforeach
                         @endif
+                      </select>
+                  </div> --}}
+                  <div class="form-group">
+                    <select name="gender" class="select2">
+                        <option value="-1" selected>Giới Tính</option>
+                        <option value="1"> Nam </option>
+                        <option value="2"> Nữ </option>
                       </select>
                   </div>
 
@@ -101,10 +107,11 @@
             <div class="row">
               @if (count($data) > 0)
                 @foreach ($data as $item)
+                @if (!empty($allProfile[$item->id]))      
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                      
-                      <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : ''}}" alt=""></span>
+                      <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png'}}" alt=""></span>
                       <h3 class="name"><a href="#">
                         @php
                         $nameAt = $item['name'];
@@ -145,12 +152,13 @@
                         <a style="width: 49%;" href="{{route('company.detail-candidate.index', $item->id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                         @else
 
-                        <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+                        <a style="width: 49%; opacity: 0.5;" target="_blank" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                         @endif
 
                       </div>
                     </div>
                   </div>
+                @endif
                 @endforeach
                 @endif
               <!-- Candidate block Four -->

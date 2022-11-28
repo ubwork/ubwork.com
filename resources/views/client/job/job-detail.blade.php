@@ -20,21 +20,13 @@
                   <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                 </ul>
                 <ul class="job-other-info">
-                  @if($data_job->type_work == 0)
-                    <li class="time">
-                        Toàn thời gian
-                    </li>
-                  @endif
-                  @if($data_job->type_work == 1)
-                    <li class="privacy">
-                        Bán thời gian
-                    </li>
-                  @endif
-                  @if($data_job->type_work == 2 )
-                    <li class="required">
-                      Thực tập
-                    </li>
-                  @endif
+                  @foreach (config('custom.type_work') as $value)
+                      @if($value['id'] == $data_job->type_work)
+                          <li class="time">
+                              {{$value['name']}}
+                          </li>
+                      @endif
+                  @endforeach
                 </ul>
               </div>
 
@@ -122,21 +114,13 @@
                                 <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
                             </ul>
                             <ul class="job-other-info">
-                              @if ($item->type_work == 0)
-                              <li class="time">
-                                  Toàn thời gian
-                              </li>
-                          @endif
-                          @if ($item->type_work == 1)
-                              <li class="privacy">
-                                  Bán thời gian
-                              </li>
-                          @endif
-                          @if ($item->type_work == 2)
-                              <li class="required">
-                                  Thực tập
-                              </li>
-                          @endif
+                                 @foreach (config('custom.type_work') as $value)
+                                      @if($value['id'] == $item->type_work)
+                                          <li class="time">
+                                              {{$value['name']}}
+                                          </li>
+                                      @endif
+                                  @endforeach
                             </ul>
                            @if (auth('candidate')->check()) 
                               @if (!empty($idJobShort[$item->id]) )
@@ -166,7 +150,7 @@
                       <li>
                         <i class="icon icon-calendar"></i>
                         <h5>Ngày đăng:</h5>
-                        <span>{{date("d-m-Y", strtotime($data_job->start_date))}}</span>
+                        <span>{{date("d-m-Y", strtotime($data_job->created_at))}}</span>
                       </li>
                       <li>
                         <i class="icon icon-expiry"></i>
@@ -186,12 +170,12 @@
                       <li>
                         <i class="icon icon-salary"></i>
                         <h5>Lương:</h5>
-                        <span>{{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}} đ</span>
+                         <span>{{number_format($data_job->min_salary, 0, ',', '.')}} - {{number_format($data_job->max_salary, 0, ',', '.')}} đ</span>
                       </li>
                       <li>
                         <i class="icon icon-rate"></i>
                         <h5>Trung bình:</h5>
-                        <span>{{number_format($data_job->min_salary/8/27)}} - {{number_format($data_job->max_salary/8/27)}} đ / giờ</span>
+                         <span>{{number_format($data_job->min_salary/8/27, 0, ',', '.')}} - {{number_format($data_job->max_salary/8/27, 0, ',', '.')}} đ / giờ</span>
                       </li>
                     </ul>
                   </div>
