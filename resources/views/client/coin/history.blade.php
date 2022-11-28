@@ -1,20 +1,22 @@
-@extends('company.layout.app')
+@extends('client.layout.app')
 @section('title')
     {{ __('Lịch sử giao dịch') }}
 @endsection
 @section('content')
-    <div class="row view-invoice">
-        <div class="col-lg-12">
-            <!-- Ls widget -->
-            <div class="ls-widget">
-                <div class="tabs-box">
-                    <div class="widget-title">
-                        <h4>Lịch sử giao dịch</h4>
-                    </div>
-                    <div class="widget-content">
-                        <div class="tab active-tab" id="monthly">
-                            <div class="content">
-                                <div class="row resume-outer theme-blue">
+    <section class="pricing-section">
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <h2>Lịch sử giao dịch</h2>
+            </div>
+            <div class="pricing-tabs tabs-box">
+                <!--Tabs Container-->
+                <div class="tabs-content view-invoice ">
+                    <!--Tab / Active Tab-->
+                    <div class="content">
+                        <!-- Ls widget -->
+                        <div class="ls-widget">
+                            <div class="tabs-box">
+                                <div class="row resume-outer theme-blue p-5 mt-4">
                                     <!-- Pricing Table -->
                                     @foreach ($history as $item)
                                         <div class="resume-block">
@@ -43,5 +45,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection

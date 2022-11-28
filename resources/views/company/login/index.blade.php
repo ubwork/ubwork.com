@@ -84,6 +84,12 @@
             </form>
             <div class="bottom-box">
               <div class="text">Bạn chưa có tài khoản? <a href="{{route('company.register')}}">Đăng ký</a></div>
+              <div class="divider"><span>hoặc</span></div>
+              <div class="btn-box row">
+                <div class="col-lg-12 col-md-12">
+                  <a href="{{route('getGoogleLoginClient')}}" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Google</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -105,12 +111,6 @@
   <script src="{{ asset('assets/client-bower/js/jquery.modal.min.js')}}"></script>
   <script src="{{ asset('assets/client-bower/js/mmenu.polyfills.js')}}"></script>
   <script src="{{ asset('assets/client-bower/js/mmenu.js')}}"></script>
-  <script src="{{ asset('assets/client-bower/js/appear.js')}}"></script>
-  <script src="{{ asset('assets/client-bower/js/ScrollMagic.min.js')}}"></script>
-  <script src="{{ asset('assets/client-bower/js/rellax.min.js')}}"></script>
-  <script src="{{ asset('assets/client-bower/js/owl.js')}}"></script>
-  <script src="{{ asset('assets/client-bower/js/wow.js')}}"></script>
-  <script src="{{ asset('assets/client-bower/js/script.js')}}"></script>
   <script src="{{ asset('assets/admin-bower/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
   <script src="{{ asset('assets/admin-bower/plugins/toastr/toastr.min.js') }}"></script>
 </body>
