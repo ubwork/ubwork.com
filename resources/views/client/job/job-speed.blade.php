@@ -12,7 +12,6 @@
                         <div class="tabs-box">
                             <div class="widget-title">
                                 <h4>Công việc đã tìm kiếm nhanh</h4>
-
                                 <div class="chosen-outer">
                                     <!--Tabs Box-->
                                     <select class="chosen-select">

@@ -64,7 +64,6 @@ h1 {
   width: 2.5rem;
   border-radius: .2rem;
 }
-
 .pagination-number:hover,
 .pagination-button:not(.disabled):hover {
   background: #fff;
@@ -90,7 +89,7 @@ footer .heart {
   color: #DC143C;
 }
     </style>
-    <section class="page-title">
+    <section class="page-title" style="margin-top: 100px">
         <div class="auto-container">
             <div class="title-outer">
                 <h1>Danh sách công việc </h1>
@@ -106,9 +105,7 @@ footer .heart {
             <div class="filters-backdrop"></div>
             <div class="row">
                 <div class="job-search-form">
-                    {{-- <form method="get" action="job-search"> --}}
                     <div class="row">
-                        <!-- Form Group -->
                         <div class="form-group col-lg-4 col-md-12 col-sm-12" style="width:370px">
                             <span class="icon flaticon-search-1"></span>
                             <input type="text" class="form-control search-input" id="search-text" name="search"
@@ -141,20 +138,17 @@ footer .heart {
                                 @endforeach
                             </select>
                         </div>
-                        <!-- Form Group -->
                         <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
                             <button type="submit" class="theme-btn btn-style-one btn-search">Tìm Kiếm</button>
                         </div>
                     </div>
-                    {{-- </form> --}}
                 </div>
                 <div class="content-column col-lg-12">
                     <div class="ls-outer" data-current-page="1" aria-live="polite">
                         <div class="row searchpate" id="paginated-list" >
-                            <!-- Job Block -->
                             @foreach ($data as $item)
                                 @php
-                                    $end_time = strtotime($item->end_date); // thời gian kết thúc
+                                    $end_time = strtotime($item->end_date);
                                     $total = $end_time - $today;
                                     $day = floor($total / 60 / 60 / 24);
                                     $start_time = strtotime($item->start_date);
@@ -192,7 +186,6 @@ footer .heart {
 
                                                     </li>
                                                 </ul>
-                                    
                                             <ul class="job-other-info">
                                                 @foreach (config('custom.type_work') as $value)
 
@@ -202,7 +195,6 @@ footer .heart {
                                                         </li>
                                                     @endif
                                                 @endforeach
-                                                {{-- <li class="required">Urgent</li> --}}
                                                 </ul>
                                                 @if (auth('candidate')->check())
                                                     <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
@@ -347,7 +339,7 @@ footer .heart {
         const nextButton = document.getElementById("next-button");
         const prevButton = document.getElementById("prev-button");
 
-        const paginationLimit = 5;
+        const paginationLimit = 6;
         const pageCount = Math.ceil(listItems.length / paginationLimit);
         let currentPage = 1;
 
