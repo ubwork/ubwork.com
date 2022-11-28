@@ -73,8 +73,16 @@
                 <!-- Dashboard Option -->
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                        <img style="object-fit: cover;" src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
-                            class="thumb">
+                        @if(Storage::exists(auth('candidate')->user()->avatar))
+                            <img style="object-fit: cover;" src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
+                                class="thumb">
+                        @elseif(!empty(auth('candidate')->user()->avatar))
+                            <img style="object-fit: cover;" src="{{  auth('candidate')->user()->avatar }}" alt="avatar"
+                                class="thumb">
+                        @else
+                            <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
+                                 class="thumb">
+                        @endif
                         <span class="name">{{auth('candidate')->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -85,6 +93,8 @@
                         <li><a href="{{ route('shortlisted_list_company') }}"><i class="la la-bookmark-o"></i>Công ty đã lưu</a></li>
                         <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
                         <li><a href="{{route('seeker')}}"><i class="la la-file-invoice"></i> Quản lí CV</a></li>
+                        <li><a href="{{route('listPackage')}}"><i class="fa fa-cube"></i>Gói cước</a></li>
+                        <li><a href="{{route('historyPayment')}}"><i class="la la-history"></i>Lịch sử giao dịch</a></li>
                         <li><a href="{{ route('change_password') }}"><i class="la la-lock"></i>Đổi mật khẩu</a></li>
                         <li><a href="{{ route('logout') }}"><i class="la la-sign-out"></i>Đăng xuất</a></li>
                     </ul>
@@ -103,9 +113,9 @@
     @endif
     <!-- Mobile Header -->
     <div class="mobile-header">
-        <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}" alt=""
+        {{-- <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}" alt=""
                     title=""></a>
-        </div>
+        </div> --}}
 
         <!--Nav Box-->
         <div class="nav-outer clearfix">
