@@ -1,5 +1,5 @@
 {{-- @dd($skillActive) --}}
-<form action="{{route('saveSkills')}}" method="post" enctype="multipart/form-data">
+<form id="formSkill" action="{{route('saveSkills')}}" method="post" enctype="multipart/form-data">
     @if(!empty($seeker)) <input type="hidden" name="seeker_id" value="{{$seeker->id}}"> @endif
     @if(!empty($list_skill)) <input type="hidden" name="id" value="{{$seeker->id}}"> @endif
     @csrf
@@ -24,7 +24,7 @@
             <div class="d-flex mt-3 flex-row-reverse">
                 <div class="hide-button-sk btn btn-warning">Hủy</div>
                 <a class="btn btn-danger" onclick="return Del(9999999)" href="{{route('DeleteAllSkill', ['id' => $seeker->id])}}" style="margin-right: 5px;">Xóa tất cả</a>
-                <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Lưu</button>
+                <button type="submit" id="saveSkill" class="btn btn-primary" style="margin-right: 5px;">Lưu</button>
             </div>
         </div>
     </div>

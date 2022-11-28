@@ -5,17 +5,15 @@
 @section('content')
 <section class="user-dashboard">
     <div class="dashboard-outer">
-      <div class="upper-title-box">
-        <h3>Company Profile!</h3>
-      </div>
-
       <div class="row">
         <div class="col-lg-12">
           <!-- Ls widget -->
           <div class="ls-widget">
             <div class="tabs-box">
               <div class="widget-title">
-                <h4>My Profile</h4>
+                <div class="upper-title-box">
+                  <h3>Tài khoản công ty!</h3>
+                </div>
               </div>
               <div class="widget-content">
                 <form class="default-form" action="{{route('company.profile.update')}}" method="post" enctype="multipart/form-data">

@@ -20,17 +20,23 @@
                 </nav>
                 <!-- Main Menu End-->
             </div>
-
             <div class="outer-box">
                 <button class="menu-btn">
                     <span class="icon la la-bell"></span>
                 </button>
-
                 <!-- Dashboard Option -->
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/client-bower/images/resource/company-6.png') }}" alt="avatar"
-                            class="thumb">
+                        @if(Storage::exists(auth('company')->user()->logo))
+                            <img style="object-fit: cover;" src="{{ asset('storage/' . auth('company')->user()->logo) }}" alt="logo"
+                                class="thumb">
+                        @elseif(!empty(auth('company')->user()->logo))
+                            <img style="object-fit: cover;" src="{{  auth('company')->user()->logo }}" alt="logo"
+                                class="thumb">
+                        @else
+                            <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
+                                 class="thumb">
+                        @endif
                         <span class="name">{{ auth('company')->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
