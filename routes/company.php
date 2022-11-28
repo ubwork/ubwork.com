@@ -31,7 +31,6 @@ Route::get('view-profile-candidate/{id}', 'Company\ViewCvController@viewProfile'
 Route::get('view-info-candidate/{id}', 'Company\ViewCvController@viewProfileHidden')->name('viewProfileHidden');
 
 Route::get('manage-cv/', 'Company\ManageCVController@index')->name('manageCV');
-Route::post('manage-cv/selectView', 'Company\ManageCVController@selectView')->name('selectView');
 
 Route::get('package','Company\CoinController@getListPackage')->name('listPackage');
 Route::post('insertInvoice','Company\CoinController@insertInvoice')->name('insertInvoice');
