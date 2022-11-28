@@ -115,7 +115,7 @@
                                                 <div class="form-group mt-3">
                                                     <label for="">Chuyên ngành *</label>
                                                     <select name="major_id" class="form-select">
-                                                        @foreach($major as $mj)
+                                                        @foreach($maJor as $mj)
                                                             <option @if(!empty($seeker)) @if($seeker->major_id == $mj->id) selected @endif @endif value="{{$mj->id}}">{{$mj->name}}</option>
                                                         @endforeach
                                                     </select>
@@ -183,6 +183,33 @@
     @parent
     <script>
         $(document).ready(function(){
+
+            $('#formSkill').submit(function(e){
+                e.preventDefault();
+                var url = $('#formSkill').attr('action');
+                var seeker_id = $('input[name=seeker_id]').val();
+                var skill_id = [];
+                $("#skills option:selected").each(function() {
+                    skill_id.push($(this).val());
+                });
+                var data = {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "skill_id": skill_id,
+                    "seeker_id": seeker_id
+                }
+                $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                    success: function(response) {
+                        toastr.success(response.success)
+                    },
+                    error: function(response) {
+                        toastr.error("Cập nhật thất bại")
+                    }
+                });
+            });
+
             $("#block-p").click(function(){
                 $("#desc").toggle(300);
             });

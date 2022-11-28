@@ -11,9 +11,10 @@ return [
         ['id'=>'7','name'=>'Trên 5 năm kinh nghiệm'],
     ],
     'type_work' => [
-        ['id'=>'0','name'=>'Toàn thời gian'],
+        ['id'=>'0','name'=>'Thực tập'],
         ['id'=>'1','name'=>'Bán thời gian'],
-        ['id'=>'2','name'=>'Thực tập'],
+        ['id'=>'2','name'=>'Toàn thời gian'],
+        ['id'=>'3','name'=>'Tại nhà'],
     ],
     'gender' => [
         ['id'=>'0','name'=>'--Chọn--'],
@@ -51,5 +52,13 @@ return [
     'job_post_status' => [
         'block' => '0',
         'active' => '1',
+    ],
+    'type_degree' => [
+        ['id'=>'Đại học','name'=>'Đại học'],
+        ['id'=>'Cao đẳng','name'=>'Cao đẳng'],
+        ['id'=>'Trung cấp','name'=>'Trung cấp'],
+        ['id'=>'Sau đại học (Thạc sỹ/Tiến sĩ)','name'=>'Sau đại học (Thạc sỹ/Tiến sĩ)'],
+        ['id'=>'Trung tâm đào tạo','name'=>'Trung tâm đào tạo'],
+        ['id'=>'Du học','name'=>'Du học'],
     ],
 ];
