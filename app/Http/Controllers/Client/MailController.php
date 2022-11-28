@@ -23,14 +23,16 @@ class MailController extends Controller
             $bitcoin = auth('candidate')->user()->coin;
             $candidate = Candidate::where('status', 1)->where('id', $subject)->first();
             $seeker = SeekerProfile::where('candidate_id', $subject)->first();
+            $job_atv = JobPostActivities::where('seeker_id', $seeker->id)->where('is_function', 1)->get();
             $coin = $bitcoin;
             $date = date('Y/m/d', time());
-            $jobspeed = JobPostActivities::where('seeker_id', $seeker->id)->whereDate('created_at', $date)->where('is_function', 2)->first(); // hàm sử lý thời gian
+            $jobspeed = JobPostActivities::where('seeker_id', $seeker->id)->whereDate('created_at', $date)->where('is_function', 1)->first(); // hàm sử lý thời gian
             $major = $seeker->major_id;
+            $path_cv = $seeker->path_cv;
             $tien = 30;
             $job = JobPost::where('major_id', $major)->get();
             $jobpost = JobPost::where('major_id', $major)->first();
-            if (!empty($seeker) && $major != null) {
+            if (!empty($seeker) && $major != null && $path_cv != null) {
                 if ($coin - $tien < 0) {
                     return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
                 } elseif (!empty($jobspeed)) {
@@ -53,19 +55,21 @@ class MailController extends Controller
                     $candidate->update([
                         'coin' => $coin - $tien,
                     ]);
-                    updateProcess(auth('candidate')->user()->id,"Thực hiện nạp $tien coin vào tài khoản",$tien,0,1);
+                    updateProcess(auth('candidate')->user()->id, "Thực hiện nạp $tien coin vào tài khoản", $tien, 0, 1);
                 }
                 return back()->with('success', 'Tìm Kiếm Thành Công');
-            } elseif (!empty($seeker) && $major == "") {
+            } elseif (!empty($seeker) && $major == "" && $path_cv != null) {
                 $jobpost = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
-                    ->where(function ($q) use ($request) {
+                    ->where(function ($q) use ($request, $job_atv) {
                         $major = $request->major;
                         $skill = $request->skill;
-                        if (!empty($major)) {
-                            $q->where('job_posts.major_id', '=', $major);
-                        }
                         if (!empty($skill)) {
                             $q->where('skills.id', '=', $skill);
+                        }
+                        foreach ($job_atv as $row) {
+                            if (!empty($major)) {
+                                $q->where('job_posts.major_id', '=', $major);
+                            }
                         }
                     })
                     ->distinct()
@@ -81,22 +85,26 @@ class MailController extends Controller
                 } elseif (!isset($jobpost)) {
                     return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
                 } else {
-                    $job = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
-                        ->where(function ($q) use ($request) {
+                    $job = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
+                        ->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
+                        ->where(function ($q) use ($request, $job_atv) {
                             $major = $request->major;
                             $skill = $request->skill;
-                            if (!empty($major)) {
-                                $q->where('job_posts.major_id', '=', $major);
-                            }
                             if (!empty($skill)) {
-                                $q->where('skills.id', '=', $skill);
+                                $q->where('skill_posts.skill_id', '=', $skill);
+                            }
+                            foreach ($job_atv as $row) {
+                                $q->where('job_posts.id', '!=', $row->job_post_id);
+                                if (!empty($major)) {
+                                    $q->where('job_posts.major_id', '=', $major);
+                                }
                             }
                         })
                         ->distinct()
                         ->select('job_posts.*')
                         ->get();
                     foreach ($job as $item) {
-                        // dd($item->company_id);
+
                         $email = $item->company->email;
                         $company_name = $item->company->company_name;
                         Mail::to($email)->send(new SendMail($subject, $company_name));
@@ -111,7 +119,7 @@ class MailController extends Controller
                     $candidate->update([
                         'coin' => $coin - $tien,
                     ]);
-                    updateProcess(auth('candidate')->user()->id,"Thực hiện nạp $tien coin vào tài khoản",$tien,0,1);
+                    updateProcess(auth('candidate')->user()->id, "Thực hiện nạp $tien coin vào tài khoản", $tien, 0, 1);
                     return back()->with('success', 'Tìm Kiếm Thành Công');
                 }
             } else {
@@ -125,10 +133,20 @@ class MailController extends Controller
     {
         $maJor = Major::all();
         $skill = Skill::all();
-        return view('email.job-speed', compact('maJor', 'skill'));
+        $seeker = [];
+        $major = [];
+        $skills = [];
+        if (auth('candidate')->check()) {
+            $user_id = auth('candidate')->user()->id;
+            $seeker = SeekerProfile::where('candidate_id', $user_id)->first();
+            $major = $seeker->major_id;
+            $skills = $seeker->skill_id;
+        }
+        return view('email.job-speed', compact('maJor', 'skill', 'seeker','major','skills'));
     }
     public function speedapply()
     {
+
         $id_user = auth('candidate')->user()->id;
         $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
         $data = [];
