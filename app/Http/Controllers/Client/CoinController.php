@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Company;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company;
+use App\Models\Candidate;
 use App\Models\HistoryPayment;
 use App\Models\Invoice;
+use App\Models\Major;
 use App\Models\Package;
 use App\Models\Payment_vnpay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class CoinController extends Controller
 {
@@ -19,15 +19,18 @@ class CoinController extends Controller
     private $vnp_HashSecret = "RAPNIYTGEOHTNCTYNVPGUDIYCALAKMEH";
     public function __construct(){
         $this->v = [];
-        $this->v['activeRoute'] = 'coin';
+        $this->v['maJor'] = Major::all();
     }
     public function getListPackage(){
         $this->v['title'] = "Gói cước";
-        $this->v['packages'] = Package::where([['status','=',1],['type_account','=',0]])->get()->toArray();
-        return view('company.coin.package',$this->v);
+        $this->v['packages'] = Package::where([['status','=',1],['type_account','=',1]])->get()->toArray();
+        return view('client.coin.package',$this->v);
     }
     public function insertInvoice(Request $request){
-        $user_id = auth('company')->user()->id;
+        if (!auth('candidate')->check()) {
+            return response()->json('',401);
+        }
+        $user_id = auth('candidate')->user()->id;
         $package_id = $request->id;
         $package = Package::find($package_id);
         $data = [
@@ -39,11 +42,11 @@ class CoinController extends Controller
         ];
         $invoice = Invoice::create($data);
         $this->v['invoice'] = Invoice::with('package')->where('id',$invoice->id)->first();
-        return view('company.coin.invoice',$this->v);
+        return view('client.coin.invoice',$this->v);
     }
     public function payment(Request $request){
         $host = $request->getHttpHost() ;   
-        $vnp_Returnurl = "http://".$host."/company/vnpay_return";
+        $vnp_Returnurl = "http://".$host."/vnpay_return";
         $vnp_TmnCode = $this->vnp_TmnCode; //Website ID in VNPAY System
         $vnp_HashSecret = $this->vnp_HashSecret; //Secret key
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -147,7 +150,7 @@ class CoinController extends Controller
         } else {
             Session::flash('error', 'Chu ky khong hop le!');
         }
-        return redirect()->route('company.home');
+        return redirect()->route('index');
     }
     public function vnpay_ipn(Request $request){
         $inputData = array();
@@ -195,10 +198,10 @@ class CoinController extends Controller
                                 $Status = 2; // Trạng thái thanh toán thất bại / lỗi
                             }
                             $invoice->update(['status',$Status]);
-                            $company = Company::where('id',auth('company')->user()->id)->first();
-                            $company->coin = $company->coin+$invoice->package->coin;
-                            $company->save();
-                            updateProcess(auth('company')->user()->id,"Thực hiện nạp {$invoice->package->coin} coin vào tài khoản",$invoice->package->coin,1,0);
+                            $candidate = Candidate::where('id',auth('candidate')->user()->id)->first();
+                            $candidate->coin = $candidate->coin+$invoice->package->coin;
+                            $candidate->save();
+                            updateProcess(auth('candidate')->user()->id,"Thực hiện nạp {$invoice->package->coin} coin vào tài khoản",$invoice->package->coin,1,1);
                             Payment_vnpay::create($request->all());
 
                             $returnData['RspCode'] = '00';
@@ -229,17 +232,17 @@ class CoinController extends Controller
        }else{
         Session::flash('success',  $returnData['Message']);
        }
-       return redirect()->route('company.listPackage');
+       return redirect()->route('listPackage');
         
     }
     public function historyPayment(){
         $this->v['activeRoute'] = 'history-payment';
         $this->v['title'] = 'Lịch sử giao dịch';
-        $this->v['history'] = HistoryPayment::where([['user_id',auth('company')->user()->id],['type_account',0]])->take(5)->orderby('created_at','DESC')->get();
+        $this->v['history'] = HistoryPayment::where([['user_id',auth('candidate')->user()->id],['type_account',1]])->take(5)->orderby('created_at','DESC')->get();
         if ($this->v['history']->count()==0) {
             Session::flash('info', "Bạn chưa thực hiện giao dịch!" );
             return redirect()->back();
         }
-        return view('company.coin.history',$this->v);
+        return view('client.coin.history',$this->v);
     }
 }

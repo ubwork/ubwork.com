@@ -43,6 +43,12 @@
 
           <div class="bottom-box">
             <div class="text">Bạn chưa có tài khoản? <a href="{{route('candidate.register')}}">Đăng ký</a></div>
+            <div class="divider"><span>hoặc</span></div>
+            <div class="btn-box row">
+              <div class="col-lg-12 col-md-12">
+                <a href="{{route('getGoogleLoginClient')}}" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Google</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
