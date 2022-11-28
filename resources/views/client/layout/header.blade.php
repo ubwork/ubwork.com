@@ -19,20 +19,24 @@
                     <li class="dropdown">
                         <span><a href="{{ route('job') }}">Việc làm</a></span>
                         <ul>
-                        <li class="dropdown">
-                            <span>Chuyên ngành</span>
-                            <ul>
-                                @foreach ($maJor as $item)
-                                    <li><a href="{{route('job-cat', ['id' => $item->id])}}">{{$item->name}}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
+                            <li class="dropdown">
+                                <span>Chuyên ngành</span>
+                                <ul>
+                                    @foreach ($maJor as $item)
+                                        <li><a
+                                                href="{{ route('job-cat', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        {{-- <span>Employers</span> --}}
                         <a href="{{ route('company-list') }}">Công ty</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{{ route('jobspeed') }}">Tìm Kiếm Nhanh</a>
                     </li>
 
                     <!-- Only for Mobile View -->
@@ -61,16 +65,7 @@
 
         @if (auth('candidate')->check())
             <div class="outer-box">
-                {{-- <button class="menu-btn">
-                    <span class="count">1</span>
-                    <span class="icon la la-heart-o"></span>
-                </button> --}}
 
-                {{-- <button class="menu-btn">
-                    <span class="icon la la-bell"></span>
-                </button> --}}
-
-                <!-- Dashboard Option -->
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
                         @if(Storage::exists(auth('candidate')->user()->avatar))
@@ -90,6 +85,7 @@
                         <li><a href="{{ route('detail', ['id' => auth('candidate')->user()->id]) }}"><i class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã lưu</a></li>
+                        <li><a href="{{ route('speedapply') }}"><i class="la la-briefcase"></i> Công việc đã tìm kiếm nhanh</a></li>
                         <li><a href="{{ route('shortlisted_list_company') }}"><i class="la la-bookmark-o"></i>Công ty đã lưu</a></li>
                         <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
                         <li><a href="{{route('seeker')}}"><i class="la la-file-invoice"></i> Quản lí CV</a></li>
@@ -107,8 +103,7 @@
                 <!-- Login/Register -->
                 <div class="btn-box">
                     <a href="{{ route('candidate.login') }}" class="theme-btn btn-style-three">Đăng nhập</a>
-                    <a href="{{ route('candidate.register') }}"
-                        class="theme-btn btn-style-three">Đăng kí</a>
+                    <a href="{{ route('candidate.register') }}" class="theme-btn btn-style-three">Đăng kí</a>
                 </div>
             </div>
     </div>
