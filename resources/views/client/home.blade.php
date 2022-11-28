@@ -250,7 +250,7 @@
                 </div>
             </div>
             @if (auth('candidate')->check())
-                @if(!empty(auth('candidate')->seeker()->major_id))
+                @if(!empty($seeker->major_id))
                     <div class="sec-title text-center">
                     <h2>Việc làm có thể phù hợp với bạn</h2>
                     <div class="text">Dựa trên thông tin của bạn. Vậy nên hãy nhập đúng thông tin cá nhân của mình!

@@ -55,7 +55,8 @@ class HomeController extends Controller
                     $job_short[$id_post] = $item;
                 }
             }
-            if (!empty($dataUser->major_id)) {
+            if (!empty($dataUser)) {
+
                 $seeker = SeekerProfile::where('candidate_id', $id)->first();
                 $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
             } else {
@@ -63,7 +64,7 @@ class HomeController extends Controller
                 if (!empty($dataUser)) {
                     $seeker = SeekerProfile::where('candidate_id', $id)->first();
                     if (!empty($seeker)) {
-                        $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
+                        $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
                     }
                 }
             }
@@ -72,7 +73,7 @@ class HomeController extends Controller
         $countCandidate = Candidate::all()->count();
         $countJob = JobPost::all()->count();
         $countJobActive = JobPostActivities::all()->count();
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive','user', 'company', 'job_post', 'user_type'));
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive','user', 'company','seeker','job_post', 'user_type'));
     }
     public function search(Request $request)
     {
