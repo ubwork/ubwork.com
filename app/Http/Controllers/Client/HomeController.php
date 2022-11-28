@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\Company;
 use App\Models\JobPost;
+use App\Models\JobPostActives;
+use App\Models\JobPostActivities;
 use App\Models\Major;
 use App\Models\SeekerProfile;
 use App\Models\Shortlist;
@@ -23,12 +25,13 @@ class HomeController extends Controller
         $job_short = [];
         $data = [];
         $seeker = [];
+        $countCandidate = [];
         // dd(isset($search));
         $search = $request->search;
         if (isset($search)) {
             $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title', 'like', '%' . $search . '%')->paginate(10);
         } else {
-            $data = JobPost::inRandomOrder()->where('status', 1)->limit(5)->get();
+            $data = JobPost::inRandomOrder()->where('status', 1)->limit(6)->get();
         }
         foreach ($data_job_type as $item) {
             if (!empty($item)) {
@@ -55,7 +58,10 @@ class HomeController extends Controller
             }
         }
         $maJor = Major::all();
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour'));
+        $countCandidate = Candidate::all()->count();
+        $countJob = JobPost::all()->count();
+        $countJobActive = JobPostActivities::all()->count();
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive'));
     }
     public function search(Request $request)
     {
