@@ -5,15 +5,15 @@
 @section('content')
 <section class="user-dashboard">
     <div class="dashboard-outer">
-      <div class="upper-title-box">
-        <h3>Giấy phép kinh doanh</h3>
-      </div>
-
+      
       <div class="row">
         <div class="col-lg-12">
           <!-- Ls widget -->
           <div class="ls-widget">
             <div class="tabs-box">
+              <div class="upper-title-box">
+                <h3 style="text-align: center; top: 20px">Giấy phép kinh doanh</h3>
+              </div>
               <div class="widget-title">
                 <h4>Thông tin giấy phép kinh doanh</h4>
               </div>

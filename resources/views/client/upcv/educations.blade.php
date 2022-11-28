@@ -21,7 +21,7 @@
                     <label for="">Chuyên ngành</label>
                     <select name="major_id" class="form-select">
                         <option value="">-- Chọn</option>
-                        @foreach($major as $mj)
+                        @foreach($maJor as $mj)
                             <option value="{{$mj->id}}">{{$mj->name}}</option>
                         @endforeach
                     </select>
@@ -51,7 +51,11 @@
                 </div>
                 <div class="form-group">
                     <label for="">Loại bằng</label>
-                    <input type="text" name="type_degree" class="form-control">
+                    <select class="form-select" name="type_degree">
+                        @foreach (config('custom.type_degree') as $value)
+                            <option value="{{ $value['id']}}">{{ $value['name']}}</option>
+                        @endforeach
+                    </select>
                 </div>
                <div class="form-group mt-3">
                     <label for="">Mô tả học vấn *</label>
@@ -86,7 +90,7 @@
                     </div>
                     <div>
                         @if(!empty($edu->major_id))
-                            @foreach($major as $mjE)
+                            @foreach($maJor as $mjE)
                                 @if($edu->major_id == $mjE->id)
                                 Chuyên ngành: {{$mjE->name}}
                                 @endif
@@ -131,7 +135,7 @@
                         <label for="">Chuyên ngành</label>
                         <select name="major_id" class="form-select">
                             <option value="">-- Chọn</option>
-                            @foreach($major as $mj)
+                            @foreach($maJor as $mj)
                             <option @if(!empty($seeker)) @if($edu->major_id == $mj->id) selected @endif @endif value="{{$mj->id}}">{{$mj->name}}</option>
                             @endforeach
                         </select>
