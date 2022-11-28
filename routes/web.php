@@ -97,7 +97,6 @@ Route::get('create-cv/deleteExperience/{id}', 'Client\CreateCvController@deleteE
 
 //skills
 Route::post('create-cv/saveSkills', 'Client\CreateCvController@saveSkills')->name('saveSkills');
-Route::post('create-cv/updateSkills/{id}', 'Client\CreateCvController@updateSkills')->name('updateSkills');
 Route::get('create-cv/DeleteAllSkill/{id}', 'Client\CreateCvController@DeleteAllSkill')->name('DeleteAllSkill');
 
 //educations

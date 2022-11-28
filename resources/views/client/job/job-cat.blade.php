@@ -129,25 +129,16 @@
                                             <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
-                                            <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                            @if ($item->type_work == 0)
-                                            <li class="time">
-                                                Toàn thời gian
-                                            </li>
-                                        @endif
-                                        @if ($item->type_work == 1)
-                                            <li class="privacy">
-                                                Bán thời gian
-                                            </li>
-                                        @endif
-                                        @if ($item->type_work == 2)
-                                            <li class="required">
-                                                Thực tập
-                                            </li>
-                                        @endif
-                                            {{-- <li class="required">Urgent</li> --}}
+                                            @foreach (config('custom.type_work') as $value)
+                                                @if($value['id'] == $item->type_work)
+                                                    <li class="time">
+                                                        {{$value['name']}}
+                                                    </li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                         @if (auth('candidate')->check()) 
                                             <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"><span class="flaticon-bookmark"></span></button></a>
@@ -187,6 +178,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
+
 $(document).ready(function($) {
     var id = document.getElementById('value_id').value
     console.log(id);

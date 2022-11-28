@@ -108,8 +108,7 @@
                                                 <li><span
                                                     class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                                 </li>
-                                                <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
-                                                    {{ $item->max_salary }}</li>
+                                                <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
 
                                                 @php
                                                     // sử lý thời gian
@@ -128,21 +127,14 @@
                                                 </li>
                                             </ul>
                                             <ul class="job-other-info">
-                                                @if ($item->type_work == 0)
-                                                <li class="time">
-                                                    Toàn thời gian
-                                                </li>
-                                            @endif
-                                            @if ($item->type_work == 1)
-                                                <li class="privacy">
-                                                    Bán thời gian
-                                                </li>
-                                            @endif
-                                            @if ($item->type_work == 2)
-                                                <li class="required">
-                                                    Thực tập
-                                                </li>
-                                            @endif
+                                                @foreach (config('custom.type_work') as $value)
+                                                
+                                                    @if($value['id'] == $item->type_work)
+                                                        <li class="time">
+                                                            {{$value['name']}}
+                                                        </li>
+                                                    @endif
+                                                @endforeach
                                                 {{-- <li class="required">Urgent</li> --}}
                                             </ul>
                                             @if (auth('candidate')->check())

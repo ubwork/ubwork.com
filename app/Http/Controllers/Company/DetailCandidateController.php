@@ -8,6 +8,7 @@ use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Major;
 use App\Models\SeekerProfile;
+use App\Models\SkillSeeker;
 use Illuminate\Http\Request;
 
 class DetailCandidateController extends Controller
@@ -20,9 +21,10 @@ class DetailCandidateController extends Controller
         $activeRoute = "Profile";
         $maJor  = Major::all();
         $education = Education::where('seeker_id', $data->id)->get()->toArray();
-
+        $seekerSkill = SkillSeeker::where('seeker_id', $data->id)->get();
+        // dd($seekerSkill);
         $exp = Experience::where('seeker_id', $data->id)->get()->toArray();
-        return view('company.detail-candidate.index', compact('title', 'activeRoute', 'maJor', 'data', 'education', 'exp'));
+        return view('company.detail-candidate.index', compact('title', 'activeRoute', 'maJor', 'data', 'education', 'exp', 'seekerSkill'));
     }
 
 }
