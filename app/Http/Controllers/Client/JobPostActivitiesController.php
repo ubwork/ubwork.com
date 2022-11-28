@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\job;
 use App\Models\JobPost;
 use App\Models\JobPostActivities;
@@ -16,11 +17,14 @@ class JobPostActivitiesController extends Controller
     {
         $id_user = auth('candidate')->user()->id;
         $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
+        $job = JobPost::where('id', $id)->first();
         $seeker_id = $seeker->id;
         $applied = new JobPostActivities();
         $applied->job_post_id = $id;
+        $applied->company_id = $job->company_id;
         $applied->seeker_id = $seeker_id;
-        $applied->is_see = '1';
+        $applied->is_see = '0';
+        $applied->is_function = '0';
         $applied->save();
         return back();
     }

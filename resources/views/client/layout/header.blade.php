@@ -85,7 +85,7 @@
                         @endif
                         <span class="name">{{auth('candidate')->user()->name }}</span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="min-width: 330px;">
                         <li class="active"><a href=""> <i class="la la-home"></i> Dashboard</a></li>
                         <li><a href="{{ route('detail', ['id' => auth('candidate')->user()->id]) }}"><i class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>

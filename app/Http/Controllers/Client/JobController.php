@@ -47,11 +47,22 @@ class JobController extends Controller
     }
     public function job_cat($id)
     {
-
+        $job_short = [];
         $job_cat = Major::where('id', $id)->first();
         $data = JobPost::where('major_id', $id)->where('status', 1)->paginate(10);
         $maJor = Major::all();
-        return view('client.job.job-cat', compact('data', 'job_cat', 'maJor'));
+        if (auth('candidate')->check()) {
+            $id = auth('candidate')->user()->id;
+            $dataUser = Candidate::where('id', $id)->first();
+            $data_short = Shortlist::where('candidate_id', $id)->get();
+            if (!empty($data_short)) {
+                foreach ($data_short as $item) {
+                    $id_post = $item->job_post_id;
+                    $job_short[$id_post] = $item;
+                }
+            }
+        }
+        return view('client.job.job-cat', compact('data', 'job_cat', 'maJor', 'job_short'));
     }
     public function detail($id)
     {

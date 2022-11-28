@@ -137,13 +137,16 @@
                                                 @endforeach
                                                 {{-- <li class="required">Urgent</li> --}}
                                             </ul>
-                                            @if (auth('candidate')->check())
-                                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
-                                                        class="bookmark-btn"><span
-                                                            class="flaticon-bookmark"></span></button></a>
+                                            @if (auth('candidate')->check()) 
+                                                @if (!empty($job_short[$item->id]) )
+                                                    @if($job_short[$item->id]->job_post_id == $item->id)
+                                                    <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark"style="color: white" ></span></a>
+                                                    @endif
+                                                @else
+                                                    <a href="{{route('shortlisted', ['id' => $item->id])}}" class="bookmark-btn"><span class="flaticon-bookmark" ></span></a>
+                                                @endif
                                             @else
-                                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span
-                                                        class="flaticon-bookmark"></span></a>
+                                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
                                             @endif
                                         </div>
                                     </div>
@@ -153,13 +156,6 @@
 
                         <!-- Pagination -->
                         <nav class="ls-pagination mb-5">
-                            {{-- <ul>
-                                <li class="prev"><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#" class="current-page">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-                            </ul> --}}
                             {{$data->links()}}
                         </nav>
 

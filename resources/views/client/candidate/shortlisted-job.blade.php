@@ -48,14 +48,14 @@
                                   <span class="company-logo"><img src="{{asset('storage/'.$job_short[$item->job_post_id]->company->logo)}}" alt=""></span>
                                   <h4><a href="{{route('job-detail', ['id' => $job_short[$item->job_post_id]->id])}}">{{$job_short[$item->job_post_id]->title}}</a></h4>
                                   <ul class="job-info">
-                                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                                    <li><span class="icon flaticon-briefcase"></span>{{$job_short[$item->job_post_id]->major->name}}</li>
                                     <li><span class="icon flaticon-map-locator"></span>{{$job_short[$item->job_post_id]->company->address}}</li>
                                   </ul>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td>Dec 5, 2020</td>
+                          <td>{{$job_short[$item->job_post_id]->created_at}}</td>
                           <td class="status">Active</td>
                           <td>
                             <div class="option-box">
