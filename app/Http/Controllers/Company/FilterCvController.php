@@ -25,15 +25,15 @@ class FilterCvController extends Controller
         $skills      = $request->input('skill');
         $gender      = $request->input('gender');
         $education      = trim($request->input('name_education'));
-        
 
-        if($major && $major <> -1) 
+
+        if($major && $major <> -1)
         {
             $major = SeekerProfile::where('major_id', $major)->pluck('candidate_id', 'candidate_id')->toArray();
             $cvString = !empty($major) ? implode(',',$major) : -1;
             $query .= " AND id IN($cvString)" ;
         }
-        
+
         if($gender && $gender <> -1) $query .= ' AND gender = '. $gender;
         if($education && $education <> '' )
         {
@@ -56,19 +56,24 @@ class FilterCvController extends Controller
             $cvString = !empty($seekerSkills) ? implode(',',$seekerSkills) : -1;
             $query .= " AND id IN($cvString)" ;
         }
-        
+
         $allProfile = SeekerProfile::get()->keyBy('candidate_id')->toArray();
         $title = "Tìm hồ sơ ứng viên";
         $activeRoute = "filter";
         $exp = Experience::all()->toArray();
         $major = Major::all()->toArray();
         $skill = Skill::all()->toArray();
-        
+
 
         $company = Company::find(auth('company')->user()->id);
         $candidate = Candidate::all();
+        $data = SeekerProfile::with('candidate', 'major')->whereRaw($query)->paginate($perPage);
+
+
+        return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill',
+        'data', 'candidate', 'company'));
         $data = Candidate::with('seeker', 'major')->whereRaw($query)->paginate($perPage);
-        return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill', 
+        return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill',
         'data', 'candidate', 'company', 'allProfile'));
 
     }
