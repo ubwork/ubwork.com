@@ -170,12 +170,12 @@
                       <li>
                         <i class="icon icon-salary"></i>
                         <h5>Lương:</h5>
-                        <span>{{number_format($data_job->min_salary, 0, ',', '.')}} - {{number_format($data_job->max_salary, 0, ',', '.')}} đ</span>
+                         <span>{{number_format($data_job->min_salary, 0, ',', '.')}} - {{number_format($data_job->max_salary, 0, ',', '.')}} đ</span>
                       </li>
                       <li>
                         <i class="icon icon-rate"></i>
                         <h5>Trung bình:</h5>
-                        <span>{{number_format($data_job->min_salary/8/27, 0, ',', '.')}} - {{number_format($data_job->max_salary/8/27, 0, ',', '.')}} đ / giờ</span>
+                         <span>{{number_format($data_job->min_salary/8/27, 0, ',', '.')}} - {{number_format($data_job->max_salary/8/27, 0, ',', '.')}} đ / giờ</span>
                       </li>
                     </ul>
                   </div>
