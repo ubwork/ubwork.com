@@ -32,6 +32,10 @@ Route::get('view-info-candidate/{id}', 'Company\ViewCvController@viewProfileHidd
 
 Route::get('manage-cv/', 'Company\ManageCVController@index')->name('manageCV');
 
+Route::get('view-open-cv', 'Company\OpenCvController@index')->name('viewOpenCv');
+
+Route::get('view-open-cv/save-open/{id}', 'Company\OpenCvController@store')->name('SaveOpenCv');
+
 Route::get('package','Company\CoinController@getListPackage')->name('listPackage');
 Route::post('insertInvoice','Company\CoinController@insertInvoice')->name('insertInvoice');
 Route::post('payment','Company\CoinController@payment')->name('payment');
