@@ -23,11 +23,19 @@ class JobPostActivities extends Model
     {
         return $this->belongsTo(company::class);
     }
+    public function job_post()
+    {
+        return $this->belongsTo(JobPost::class);
+    }
     public function job()
     {
-        return $this->belongsToMany(job::class);
+        return $this->belongsToMany(JobPost::class);
     }
-    
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
+
     public function getListCandidate($post_id){
        $jobActive = DB::table($this->table)->where('job_post_id',$post_id)->get();
        $data = $jobActive;
