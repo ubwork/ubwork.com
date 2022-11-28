@@ -18,7 +18,6 @@ class MailController extends Controller
 {
     public function send(Request $request)
     {
-        // dd($request->all());
         if (auth('candidate')->check()) {
             $subject = auth('candidate')->user()->id;
             $bitcoin = auth('candidate')->user()->coin;
@@ -28,11 +27,11 @@ class MailController extends Controller
             $date = date('Y/m/d', time());
             $jobspeed = JobPostActivities::where('seeker_id', $seeker->id)->whereDate('created_at', $date)->where('is_function', 2)->first(); // hàm sử lý thời gian
             $major = $seeker->major_id;
-            // dd($major);
+            $tien = 30;
             $job = JobPost::where('major_id', $major)->get();
             $jobpost = JobPost::where('major_id', $major)->first();
             if (!empty($seeker) && $major != null) {
-                if ($coin - 30 < 0) {
+                if ($coin - $tien < 0) {
                     return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
                 } elseif (!empty($jobspeed)) {
                     return back()->with('error', 'Hôm Nay Bạn Đã Sử Dụng Phương Thức Này Rồi Vui Lòng Quay Lại Vào Ngày Mai !');
@@ -46,14 +45,15 @@ class MailController extends Controller
                         $speed = new JobPostActivities();
                         $speed->job_post_id = $item->id;
                         $speed->seeker_id = $seeker->id;
-                        $speed->is_function = 2;
+                        $speed->is_function = 1;
                         $speed->company_id = $item->company_id;
                         $speed->is_see = 0;
                         $speed->save();
                     }
                     $candidate->update([
-                        'coin' => $coin - 30,
+                        'coin' => $coin - $tien,
                     ]);
+                    updateProcess(auth('candidate')->user()->id,"Thực hiện nạp $tien coin vào tài khoản",$tien,0,1);
                 }
                 return back()->with('success', 'Tìm Kiếm Thành Công');
             } elseif (!empty($seeker) && $major == "") {
@@ -71,7 +71,6 @@ class MailController extends Controller
                     ->distinct()
                     ->select('job_posts.*')
                     ->get();
-                dd($jobpost);
                 if ($coin - 30 < 0) {
                     return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
                 }
@@ -104,14 +103,15 @@ class MailController extends Controller
                         $speed = new JobPostActivities();
                         $speed->job_post_id = $item->id;
                         $speed->seeker_id = $seeker->id;
-                        $speed->is_function = 2;
+                        $speed->is_function = 1;
                         $speed->company_id = $item->company_id;
                         $speed->is_see = 0;
                         $speed->save();
                     }
                     $candidate->update([
-                        'coin' => $coin - 30,
+                        'coin' => $coin - $tien,
                     ]);
+                    updateProcess(auth('candidate')->user()->id,"Thực hiện nạp $tien coin vào tài khoản",$tien,0,1);
                     return back()->with('success', 'Tìm Kiếm Thành Công');
                 }
             } else {
