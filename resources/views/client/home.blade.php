@@ -180,8 +180,7 @@
                                         </li>
                                         <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                             giờ</li>
-                                        <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
-                                            {{ $item->max_salary }} đ</li>
+                                        <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
                                     </ul>
                                     <ul class="job-other-info">
                                         @foreach (config('custom.type_work') as $value)
@@ -219,7 +218,8 @@
                 </div>
             </div>
             @if (auth('candidate')->check())
-                <div class="sec-title text-center">
+                @if(!empty(auth('candidate')->seeker()->major_id))
+                    <div class="sec-title text-center">
                     <h2>Việc làm có thể phù hợp với bạn</h2>
                     <div class="text">Dựa trên thông tin của bạn. Vậy nên hãy nhập đúng thông tin cá nhân của mình!
                     </div>
@@ -243,8 +243,7 @@
                                             <li><span
                                                     class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                                 giờ</li>
-                                            <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
-                                                {{ $item->max_salary }} đ</li>
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
                                             @foreach (config('custom.type_work') as $value)
@@ -281,6 +280,7 @@
                                 thêm</span></a>
                     </div> --}}
                 </div>
+                @endif
             @endif
     </section>
     <!-- End Job Section -->

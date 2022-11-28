@@ -129,7 +129,7 @@
                                             <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
-                                            <li><span class="icon flaticon-money"></span> {{$item->min_salary}} - {{$item->max_salary}}</li>
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
                                             @foreach (config('custom.type_work') as $value)
@@ -178,38 +178,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
-$(document).ready(function($) {
-    var id = document.getElementById('value_id').value
-    console.log(id);
-
-    var engine1 = new Bloodhound({
-        remote: {
-            url:`/search/title-cat/${id}?value=%QUERY%`,
-            wildcard: '%QUERY%'
-        },
-        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace
-    });
-
-    $(".search-input").typeahead({
-        hint: true,
-        highlight: true,
-        minLength: 1
-    }, [
-        {
-            source: engine1.ttAdapter(),
-            name: 'students-name',
-            display: function(data) {
-                return data.title;
-            },
-            templates: {
-                suggestion: function (data) {
-                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
-                }
-            }
-        }, 
-    ]);
-});
 
 $(document).ready(function($) {
     var id = document.getElementById('value_id').value

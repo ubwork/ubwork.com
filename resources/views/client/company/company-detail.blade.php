@@ -83,24 +83,16 @@
                                             <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
-                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($item->max_salary)}}</li>
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
                                         </ul>
                                         <ul class="job-other-info">
-                                             @if($item->full_time == 1)
-                                                <li class="time">
-                                                    Full Time
-                                                </li>
+                                             @foreach (config('custom.type_work') as $value)
+                                                @if($value['id'] == $item->type_work)
+                                                    <li class="time">
+                                                        {{$value['name']}}
+                                                    </li>
                                                 @endif
-                                                @if($item->part_time == 1)
-                                                <li class="privacy">
-                                                    Part Time
-                                                </li>
-                                                @endif
-                                                @if($item->full_time == 1 && $item->part_time == 1 )
-                                                <li class="required">
-                                                Full Time / Part Time
-                                                </li>
-                                            @endif
+                                            @endforeach
                                         </ul>
                                         @if (auth('candidate')->check()) 
                                             @if (!empty($job_short[$item->id]) )
@@ -165,7 +157,8 @@
                                 </div>
                             </div>
 
-                            <div class="sidebar-widget">
+                            @if(!empty($company_detail->map))
+                                <div class="sidebar-widget">
                                 <!-- Map Widget -->
                                 <h4 class="widget-title">Địa điểm</h4>
                                 <div class="widget-content">
@@ -174,6 +167,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </aside>
                     </div>
                 </div>

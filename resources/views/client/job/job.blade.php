@@ -108,8 +108,7 @@
                                                 <li><span
                                                     class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                                 </li>
-                                                <li><span class="icon flaticon-money"></span> {{ $item->min_salary }} -
-                                                    {{ $item->max_salary }}</li>
+                                                <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
 
                                                 @php
                                                     // sử lý thời gian
