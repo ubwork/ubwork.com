@@ -47,6 +47,23 @@ class PackageRequest extends FormRequest
                             'expired' => 'required',
                         ];
                         break;
+                        case 'storec':
+                            $rules = [
+                                'title' => 'required|unique:packages',
+                                'coin' => 'required',
+                                'amount' => 'required',
+                                'expired' => 'required',
+                            ];
+                            break;
+    
+                        case 'updatec':
+                            $rules = [
+                                'title' => 'required|unique:packages',
+                                'coin' => 'required',
+                                'amount' => 'required',
+                                'expired' => 'required',
+                            ];
+                            break;
 
                         
                     default:
@@ -56,7 +73,7 @@ class PackageRequest extends FormRequest
 
                 default:
                     break;
-                    
+
                 endswitch;
                 return $rules;
     }

@@ -48,6 +48,14 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label>{{__('Giá mới')}}</label>
+                                <input type="number" class="form-control" name="discount" value="{{old('discount')}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label>{{__('Hạn sử dụng (trong bao nhiêu tháng)')}} <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" name="expired" value="{{old('expired')}}">
                                 @error('expired')
@@ -55,8 +63,6 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-sm-6">
                             <label class="form-label w-100">{{__('STATUS')}}</label>
                             <div class="d-flex">
