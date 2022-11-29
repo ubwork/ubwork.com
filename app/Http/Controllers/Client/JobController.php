@@ -115,7 +115,7 @@ class JobController extends Controller
             $id_user = auth('candidate')->user()->id;
             $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
             if (!empty($seeker->id)) {
-                $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->get();
+                $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->where('is_function', 0)->get();
                 if (!empty($dataActive)) {
                     foreach ($dataActive as $item) {
                         $idJobApplied[$item->job_post_id] = $item;
