@@ -27,7 +27,8 @@
                   <th>STT</th>
                   <th>{{__('Tên gói nạp')}}</th>
                   <th>{{__('Số coin')}}</th>
-                  <th>{{__('Giá')}}</th>
+                  <th>{{__('Giá cũ')}}</th>
+                  <th>{{__('Giá mới')}}</th>
                   <th>{{__('Ngày tạo')}}</th>
                   <th>{{__('Hạn sử dụng')}}</th>
                   <th>{{__('Trạng thái')}}</th>
@@ -41,7 +42,7 @@
                         <td>{{$item->title}}</td>
                         <td>{{$item->coin}}</td>
                         <td><?php echo number_format($item->amount, 0, '.', '.')?>đ</td>
-                        {{-- <td>{{$item->created_at}}</td> --}}
+                        <td><?php echo number_format($item->discount, 0, '.', '.')?>đ</td>
                         <td><?php echo date_format($item->created_at,"Y/m/d H:i:s") ?></td>
                         <td>{{$item->expired}} tháng</td>
                         <td>
