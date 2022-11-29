@@ -8,32 +8,61 @@ use App\Models\company;
 use App\Models\JobPost;
 use App\Models\JobPostActivities;
 use App\Models\JobSkill;
+use App\Models\JobSpeed;
 use App\Models\Major;
 use App\Models\SeekerProfile;
 use App\Models\Shortlist;
 use App\Models\Shortlisted;
+use App\Models\Skill;
+use App\Models\SkillPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
 {
     public function index()
     {
         $data = JobPost::where('status', 1)->get();
-        // dd($data->company->id);
-        // dd(company::all());
         $maJor = Major::all();
         return view('client.home', compact('data', 'maJor'));
     }
-    public function job()
+    public function job(Request $request)
     {
         $job_short = [];
-        $data = JobPost::where('status', 1)->paginate(10);
+        $jobspeed = [];
+        $Skill = Skill::all();
+        $data = Skill::join('skill_posts', 'skills.id', '=', 'skill_posts.skill_id')
+            ->join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
+            ->where(function ($q) use ($request) {
+                $search = $request['searchText'];
+                $major = $request['searchMajor'];
+                $type = $request['searchType'];
+                $skill = $request['searchSkill'];
+                if (!empty($search)) {
+                    $q->orwhere('job_posts.title', 'LIKE', '%' . $search . '%');
+                }
+                if (!empty($major)) {
+                    $q->where('job_posts.major_id', '=', $major);
+                }
+                if (!empty($type)) {
+                    $q->where('job_posts.type_work', '=', $type);
+                }
+                if (!empty($skill)) {
+                    $q->where('skills.id', '=', $skill);
+                }
+            })
+            ->select('job_posts.*')
+            ->distinct()
+            ->with(['company', 'major'])
+            ->get();
+        // dd($data);
         $today = strtotime(Carbon::now());
         $maJor = Major::all();
+        $date = date('Y/m/d', time());
         if (auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
+            $jobspeed = JobPostActivities::where('seeker_id', $id)->whereDate('created_at', $date)->first();
             $dataUser = Candidate::where('id', $id)->first();
             $data_short = Shortlist::where('candidate_id', $id)->get();
             if (!empty($data_short)) {
@@ -42,8 +71,18 @@ class JobController extends Controller
                     $job_short[$id_post] = $item;
                 }
             }
+            if ($request->ajax()) {
+                return response()->json($data);
+            } else {
+                return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed', 'Skill'));
+            }
+        } else {
+            if ($request->ajax()) {
+                return response()->json($data);
+            } else {
+                return view('client.job.job', compact('data', 'maJor', 'job_short', 'today', 'jobspeed', 'Skill'));
+            }
         }
-        return view('client.job.job', compact('data', 'maJor', 'job_short', 'today'));
     }
     public function job_cat($id)
     {
@@ -89,8 +128,6 @@ class JobController extends Controller
                     }
                 }
             }
-            // dd($idJobApplied[$item->id]);
-            // dd($data_job->id);
         }
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)
             ->where('id', '!=', $data_job->id)->take(3)->get();
@@ -104,31 +141,33 @@ class JobController extends Controller
             'seeker'
         ));
     }
-    public function search(Request $request)
+    public function searchs(Request $request)
     {
-        $search = $request->search;
-        $major = $request->major;
-        $type = $request->type;
-        $today = strtotime(Carbon::now());
-        $maJor = Major::all();
-        if (isset($search) && isset($major) && isset($type)) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
-        } elseif (isset($search) && $major == null && $type == null) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
-        } elseif ($search == null && isset($major) && $type == null) {
-            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->paginate(10);
-        } elseif ($search == null && $major == null && isset($type)) {
-            $data = JobPost::where('status', 1)->where('type_work', 'like', '%' . $type . '%')->paginate(10);
-        } elseif (isset($search) && isset($major) && $type == null) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
-        } elseif (isset($search) && $major == null && isset($type)) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
-        } elseif ($search == null && isset($major) && isset($type)) {
-            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->where('type_work', 'like', '%' . $type . '%')->paginate(10);
-        } else {
-            $data = JobPost::where('status', 1)->get();
-        }
-        return view('client.job.job', compact('data', 'maJor', 'today'));
+        $data = Skill::join('skill_posts', 'skills.id', '=', 'skill_posts.skill_id')
+            ->join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
+            ->where(function ($q) use ($request) {
+                $search = $request['searchText'];
+                $major = $request['searchMajor'];
+                $type = $request['searchType'];
+                $skill = $request['searchSkill'];
+                if (!empty($search)) {
+                    $q->orwhere('job_posts.title', 'LIKE', '%' . $search . '%');
+                }
+                if (!empty($major)) {
+                    $q->where('job_posts.major_id', '=', $major);
+                }
+                if (!empty($type)) {
+                    $q->where('job_posts.type_work', '=', $type);
+                }
+                if (!empty($skill)) {
+                    $q->where('skills.id', '=', $skill);
+                }
+            })
+            ->select('job_posts.*')
+            ->distinct()
+            ->with(['company', 'major'])
+            ->get();
+        return response()->json($data);
     }
     public function searchByTitle($id, Request $request)
     {
