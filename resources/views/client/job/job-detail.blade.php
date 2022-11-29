@@ -33,7 +33,7 @@
               <div class="btn-box">
                 @if (auth('candidate')->check())
                     @if (!empty($idJobApplied[$data_job->id]) )
-                      @if($idJobApplied[$data_job->id]->job_post_id == $data_job->id)
+                      @if($idJobApplied[$data_job->id]->job_post_id == $data_job->id )
                       <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
                     @else
