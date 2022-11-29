@@ -11,6 +11,8 @@ use App\Models\JobPostActivities;
 use App\Models\Major;
 use App\Models\SeekerProfile;
 use App\Models\Shortlist;
+use App\Models\Skill;
+use App\Models\SkillPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -26,7 +28,10 @@ class HomeController extends Controller
         $data = [];
         $seeker = [];
         $countCandidate = [];
-        // dd(isset($search));
+        $user = Candidate::where('status', 1)->get();
+        $user_type = Candidate::where('status', 1)->where('type', 1)->get();
+        $company = Company::where('status', 1)->get();
+        $job_post = JobPost::where('status', 1)->get();
         $search = $request->search;
         if (isset($search)) {
             $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title', 'like', '%' . $search . '%')->paginate(10);
@@ -53,8 +58,14 @@ class HomeController extends Controller
             if (!empty($dataUser)) {
 
                 $seeker = SeekerProfile::where('candidate_id', $id)->first();
-                if (!empty($seeker)) {
-                    $dataYour = JobPost::where('major_id', $seeker->maJor_id)->where('status', 1)->get();
+                $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
+            } else {
+                $dataYour = JobPost::where('status', 1)->get();
+                if (!empty($dataUser)) {
+                    $seeker = SeekerProfile::where('candidate_id', $id)->first();
+                    if (!empty($seeker)) {
+                        $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
+                    }
                 }
             }
         }
@@ -62,24 +73,33 @@ class HomeController extends Controller
         $countCandidate = Candidate::all()->count();
         $countJob = JobPost::all()->count();
         $countJobActive = JobPostActivities::all()->count();
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive', 'seeker'));
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive','user', 'company','seeker','job_post', 'user_type'));
     }
     public function search(Request $request)
     {
-        $search = $request->search;
-        $major = $request->major;
         $today = strtotime(Carbon::now());
         $maJor = Major::all();
-        if (isset($search) && isset($major)) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->where('major_id', 'like', '%' . $major . '%')->paginate(10);
-        } elseif (isset($search) && $major == null) {
-            $data = JobPost::where('status', 1)->where('title', 'like', '%' . $search . '%')->paginate(10);
-        } elseif ($search == null && isset($major)) {
-            $data = JobPost::where('status', 1)->where('major_id', 'like', '%' . $major . '%')->paginate(10);
-        } else {
-            $data = JobPost::where('status', 1)->get();
-        }
-        return view('client.job.job', compact('data', 'maJor', 'today'));
+        $Skill = Skill::all();
+        $data = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
+            ->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
+            ->where('status', 1)
+            ->where(function ($q) use ($request) {
+                if (!empty($request->search)) {
+                    $q->orwhere('job_posts.title', 'LIKE', '%' . $request->search . '%');
+                }
+                if (!empty($request->major)) {
+                    $q->where('job_posts.major_id', '=', $request->major);
+                }
+                if (!empty($request->type)) {
+                    $q->where('job_posts.type_work', '=', $request->type);
+                }
+                if (!empty($request->skill)) {
+                    $q->where('skills.id', '=', $request->skill);
+                }
+            })
+            ->select('job_posts.*')
+            ->paginate(10);
+        return view('client.job.job', compact('data', 'maJor', 'today', 'Skill'));
     }
     public function searchByTitle(Request $request)
     {
