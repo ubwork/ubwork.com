@@ -34,7 +34,7 @@ Route::get('/send', 'client\MailController@send')->name('send');
 Route::get('/job-speed', 'client\MailController@jobspeed')->name('jobspeed');
 Route::get('/job-speed-apply', 'client\MailController@speedapply')->name('speedapply');
 
-Route::get('/job', 'client\JobController@job')->name('job');
+Route::get('/job', 'client\JobController@jobPost')->name('job');
 Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
 Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');
 Route::post('/job-searchs', 'client\JobController@searchs')->name('searchs');

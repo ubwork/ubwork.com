@@ -52,3 +52,25 @@ Route::prefix('seekerProfile')->name('seekerProfile.')->group(function () {
     Route::get('edit/{id}', 'Admin\SeekerProfileController@edit')->name('edit');
     Route::post('update/{id}', 'Admin\SeekerProfileController@update')->name('update');
 });
+Route::prefix('package')->name('package.')->group(function () {
+    // candidate
+    Route::prefix('candidate')->name('candidate.')->group(function () {
+        Route::get('/', 'Admin\PackageController@index')->name('index');
+        Route::get('create', 'Admin\PackageController@create')->name('create');
+        Route::post('store', 'Admin\PackageController@store')->name('store');
+        Route::get('edit/{id}', 'Admin\PackageController@edit')->name('edit');
+        Route::post('update/{id}', 'Admin\PackageController@update')->name('update');
+        Route::delete('/{id}', 'Admin\PackageController@destroy')->name('destroy');
+        Route::post('/{id}', 'Admin\PackageController@status')->name('status');
+    });
+    // company
+    Route::prefix('company')->name('company.')->group(function () {
+        Route::get('/', 'Admin\PackageController@indexc')->name('indexc');
+        Route::get('create', 'Admin\PackageController@createc')->name('createc');
+        Route::post('store', 'Admin\PackageController@storec')->name('storec');
+        Route::get('edit/{id}', 'Admin\PackageController@editc')->name('editc');
+        Route::post('update/{id}', 'Admin\PackageController@updatec')->name('updatec');
+        Route::delete('/{id}', 'Admin\PackageController@destroy')->name('destroy');
+        Route::post('/{id}', 'Admin\PackageController@status')->name('status');
+    });
+});
