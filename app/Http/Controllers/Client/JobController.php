@@ -206,7 +206,7 @@ class JobController extends Controller
                     $q->where('job_posts.area', '=', $area);
                     $this->v['urlWith'] .= '?area='.$area;
                 }
-            })->paginate(config('paginate.JobPostClient.index'));
+            })->where('status',1)->paginate(config('paginate.JobPostClient.index'));
         }else{
             $this->v['data'] = JobPost::with('skills')->where(function ($q) use ($request) {
                 $search = $request['search'];
@@ -226,7 +226,7 @@ class JobController extends Controller
                 }
             })->whereHas('skills', function ($q) use ($skill) {
                 $q->where('skill_id', $skill);
-            })->paginate(config('paginate.JobPostClient.index'));
+            })->where('status',1)->paginate(config('paginate.JobPostClient.index'));
             $this->v['urlWith'] .= '?skill='.$skill;
         }
         
