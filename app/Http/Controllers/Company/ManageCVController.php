@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidate;
 use App\Models\JobPostActivities;
 use App\Models\Major;
 use App\Models\SeekerProfile;
@@ -24,25 +25,41 @@ class ManageCVController extends Controller
         $this->v['major'] = Major::all();
         $this->v['skill'] = Skill::all();
         $company_id = auth('company')->user()->id;
-        if($request->ajax() && !empty($request->get('is_see')) && $request->get('is_see') != -1){
+        if($request->ajax() && !empty($request->get('is_see')) && !empty($request->get('is_function')) ){
+
+            $is_function = $request->get('is_function') == 5 ? 0 : $request->get('is_function');
+            $is_see = $request->get('is_see') == 3 ? 0 : $request->get('is_see');
+
+            $dk_fun = $request->get('is_function') == -1 ? $dk = "!=" : $dk = "=";
+            $dk_see = $request->get('is_see') == -1 ? $dk = "!=" : $dk = "=";
+            
+
             $this->v['listCV'] = JobPostActivities::with('seeker_profile')
                             ->where('company_id',$company_id)
-                            ->where('is_see',$request->get('is_see'))
+                            ->where('is_see', $dk_see,$is_see)
+                            ->where('is_function',$dk_fun,$is_function)
+                            ->orderBy('id', 'DESC')
                             ->groupby('seeker_id')
                             ->select(['seeker_id'])
                             ->paginate(10);
-        }else{
+        }
+        else{
             $this->v['listCV'] = JobPostActivities::with('seeker_profile')
                                 ->where('company_id',$company_id)
-                                // ->where('is_see',1)
+                                ->orderBy('id', 'DESC')
                                 ->groupby('seeker_id')
                                 ->select(['seeker_id'])
                                 ->paginate(10);
         }
         if (!empty($this->v['listCV'] )) {
+            $this->v['getDataCV'] = JobPostActivities::where('company_id', $company_id)->get();
+            foreach ($this->v['getDataCV']  as $data) {
+                $this->v['get_data'][$data->seeker_id] = ['is_see' => $data->is_see, 'is_function' => $data->is_function, 
+                                                          'time' =>  $data->time];
+            }
             foreach ($this->v['listCV']  as $item) {
                 $seeker_id = $item->seeker_id;    
-                $this->v['list_skill'][$seeker_id] = SkillSeeker::where('seeker_id', $seeker_id)->get();
+                $this->v['list_skill'][$seeker_id] = SkillSeeker::where('seeker_id', $seeker_id)->paginate(4);
             }
         }
         if ($request->ajax()) {
