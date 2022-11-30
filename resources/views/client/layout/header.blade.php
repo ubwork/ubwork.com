@@ -36,7 +36,7 @@
                         <a href="{{ route('company-list') }}">Công ty</a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ route('jobspeed') }}">Tìm Kiếm Nhanh</a>
+                        <a href="{{ route('jobspeed') }}">Tìm Việc Nhanh</a>
                     </li>
 
                     <!-- Only for Mobile View -->
