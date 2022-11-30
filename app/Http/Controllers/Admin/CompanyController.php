@@ -111,7 +111,7 @@ class CompanyController extends Controller
     public function uploadFile($file)
     {
         $fileName = time() . '_' . $file->getClientOriginalName();
-        return $file->storeAs('images', $fileName, 'public');
+        return $file->storeAs('images/company', $fileName, 'public');
     }
 
     public function status(Request $request, $id) {
