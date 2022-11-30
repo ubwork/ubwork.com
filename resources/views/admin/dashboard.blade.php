@@ -83,6 +83,40 @@
             </div>
 
         </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-toggle-on"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Tổng số Công Ty chờ xét duyệt</span>
+                    <span class="info-box-number">
+                      {{ count($countPendingImagePaper) }}
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-check"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Tổng số Công Ty đã xét duyệt</span>
+                    <span class="info-box-number">
+                      {{ count($countActiveImagePaper) }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-solid fa-ban"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Tổng số Công Ty bị chặn</span>
+                    <span class="info-box-number">
+                      {{ count($countBlockImagePaper) }}
+                    </span>
+                </div>
+            </div>
+        </div>
 
     </div>
 @endsection
