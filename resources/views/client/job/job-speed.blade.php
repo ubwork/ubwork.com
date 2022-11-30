@@ -12,16 +12,7 @@
                         <div class="tabs-box">
                             <div class="widget-title">
                                 <h4>Công việc đã tìm kiếm nhanh</h4>
-                                <div class="chosen-outer">
-                                    <!--Tabs Box-->
-                                    <select class="chosen-select">
-                                        <option>Last 6 Months</option>
-                                        <option>Last 12 Months</option>
-                                        <option>Last 16 Months</option>
-                                        <option>Last 24 Months</option>
-                                        <option>Last 5 year</option>
-                                    </select>
-                                </div>
+
                             </div>
 
                             <div class="widget-content">
@@ -61,7 +52,15 @@
                                                         </div>
                                                     </td>
                                                     <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                                                    <td class="status">Active</td>
+                                                    <td class="status">
+                                                        @if ($item->is_see == 0)
+                                                            <span class="text-warning">Waiting</span>
+                                                        @elseif ($item->is_see == 1)
+                                                            <span>Pass</span>
+                                                        @else
+                                                            <span class="text-danger">Fail</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <div class="option-box">
                                                             <ul class="option-list">
