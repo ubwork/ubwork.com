@@ -19,7 +19,7 @@ class Candidate extends Authenticatable
     protected $table = 'candidates';
     protected $fillable = [
         'id', 'name', 'avatar', 'email', 'password', 'phone', 'address', 'gender',
-        'birthday', 'coin', 'deleted_at', 'status', 'created_at', 'updated_at','google_id'
+        'birthday', 'coin', 'deleted_at', 'status', 'created_at', 'updated_at','google_id','type'
     ];
     // lưu tạo
     public function saveAdd($params)

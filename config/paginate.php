@@ -12,5 +12,8 @@ return [
     'post' => [
         'index' => 5,
         "profileApply" => 5
+    ],
+    'JobPostClient' => [
+        'index' => 6
     ]
 ];
