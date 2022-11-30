@@ -48,28 +48,12 @@
                   <div class="form-group">
                     <select name="major" class="select2">
                       <option value="-1" selected>Chọn chuyên ngành</option>
-                      @if (count($major) > 0)
                       @foreach ($major as $item)
-                      <option @if (app('request')->input('major') == $item['id'])
-                          selected 
-                      @endif value="{{$item['id']}}"> {{$item['name']}} </option>
+                      <option value="{{$item->id}}">{{$item->name}}</option>
                       @endforeach
-                      @endif
                     </select>
                 </div>
 
-                  {{-- <div class="form-group">
-                    <select name="experience" class="select2">
-                        <option value="-1" selected>Chọn vị trí muốn ứng tuyển</option>
-                        @if(count($exp) > 0)
-                        @foreach ($exp as $item)
-                        <option @if (app('request')->input('experience') == $item['id'])
-                            selected 
-                        @endif value="{{$item['id']}}"> {{$item['position']}} </option>
-                        @endforeach
-                        @endif
-                      </select>
-                  </div> --}}
                   <div class="form-group">
                     <select name="gender" class="select2">
                         <option value="-1" selected>Giới Tính</option>
@@ -82,10 +66,7 @@
                     <select name="skill" class="select2">
                         <option value="-1" selected>Chọn kỹ năng</option>
                         @foreach ($skill as $item)
-                        <option 
-                        @if (app('request')->input('skill') == $item['id'])
-                          selected 
-                      @endif value="{{$item['id']}}"> {{$item['name']}} </option>
+                        <option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                   </div>
@@ -94,41 +75,29 @@
             </form>
               <div class="sort-by">
 
-                <select class="chosen-select" name="page_num">
-                  <option value="10">10 mục</option>
-                  <option value="20">20 mục</option>
-                  <option value="30">30 mục</option>
-                  <option value="40">40 mục</option>
-                  <option value="50">50 mục</option>
-                  <option value="60">60 mục</option>
-                </select>
               </div>
             </div>
             <div class="row">
-              @if (count($data) > 0)
-                @foreach ($data as $item)
-                @if (!empty($allProfile[$item->id]))      
+                @foreach ($seekerProfile as $item)
                 <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
-                     
-                      <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png'}}" alt=""></span>
+                      @if(!empty($item->image))
+                      <span class="thumb"><img src="{{ !empty($item->image) ? asset('storage/'. $item->image) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png'}}" alt=""></span>
+                      @else
+                      <span class="thumb"><img src="{{ !empty($getCandidate[$item->candidate_id]->avatar) ? asset('storage/'. $getCandidate[$item->candidate_id]->avatar) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png'}}" alt=""></span>
+                      @endif
                       <h3 class="name"><a href="#">
                         @php
                         $nameAt = $item['name'];
                         $count = mb_substr($nameAt, 0, 4,'UTF-8');
-                        echo $count."**********";
+                        echo $count."...";
                         @endphp
                       </a></h3>
-                      <span class="cat" style="min-height: 22px">{{isset($item['major']['name']) ? $item['major']['name'] : ''}}</span>
+                      <span class="cat" style="min-height: 22px">Chuyên ngành</span>
                       <ul class="job-info">
                         <li style="min-height: 22px">
-                        @if ($item['address'])
-                        <span class="icon flaticon-map-locator"></span> {{$item['address']}}
-                        @endif
-                      </li>
-                      <li style="min-height: 22px">
-                        @if ($item['coin'])
-                        <span class="icon flaticon-money"></span> {{$item['coin']}}
+                        @if (!empty($item->address))
+                        <span class="icon flaticon-map-locator"></span>{{$item->address}}
                         @endif
                       </li>
                         
@@ -144,30 +113,22 @@
                       
                       <div class="d-flex justify-content-between">
                         @if (!empty($allProfile[$item->id]))
-                        <a style="width: 49%;" class="theme-btn btn-style-three" href="{{route('company.SaveOpenCv', ['id' => $allProfile[$item->id]]['id'])}}">Mở khóa</a>
+                        <a href="{{route('company.detail-profile.hidden', $item->id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                         @else
-                        <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three" >Mở khóa</a>
-                       @endif
-                        @if (!empty($allProfile[$item->id]))
-                        <a style="width: 49%;" href="{{route('company.detail-candidate.index', $item->id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
-                        @else
-
-                        <a style="width: 49%; opacity: 0.5;" target="_blank" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+                        <a style="opacity: 0.5;" target="_blank" class="theme-btn btn-style-three">Xem Chi Tiết</a>
                         @endif
 
                       </div>
                     </div>
                   </div>
-                @endif
                 @endforeach
-                @endif
               <!-- Candidate block Four -->
             </div>
 
             <!-- Pagination -->
             <nav class="ls-pagination">
               <ul>
-                {{$data->render()}}
+                {{-- {{$data->render()}} --}}
                
               </ul>
             </nav>
