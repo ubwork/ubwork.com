@@ -56,16 +56,9 @@ class HomeController extends Controller
                 }
             }
             if (!empty($dataUser)) {
-
                 $seeker = SeekerProfile::where('candidate_id', $id)->first();
-                $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
-            } else {
-                $dataYour = JobPost::where('status', 1)->get();
-                if (!empty($dataUser)) {
-                    $seeker = SeekerProfile::where('candidate_id', $id)->first();
-                    if (!empty($seeker)) {
-                        $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
-                    }
+                if (!empty($seeker)) {
+                    $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
                 }
             }
         }
