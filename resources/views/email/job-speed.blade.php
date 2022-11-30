@@ -7,9 +7,16 @@
     <section class="page-title style-three" style="margin-top:100px ">
         <h1>Tìm Kiếm Nhanh</h1>
         <form action="send" method="GET">
-            <div class="auto-container">
+            <div class="auto-container" style="width:800px">
+                Mỗi lần sử dụng bạn sẽ mất 30 coin. Tối đa bạn chỉ được sử dụng 1 lần / 1 ngày. Sử dụng chức năng sẽ giúp
+                bạn apply vào bài tuyển dụng phù hợp một cách nhanh chống mà bạn không phải tìm xem từng bài tuyển dụng nào
+                phù hợp với bạn.
+                <br>
                 @if (auth('candidate')->check())
                     @if ($major == null || $skills == null)
+                        <span>Do bạn chưa tạo cv trên hệ thống. nên bạn hãy tìm kiếm bằng cách chọn chuyên ngành hoặc chọn
+                            kỹ năng bên dưới để sử dụng chức năng hoặc bạn có thể tạo cv <a
+                                href="{{ route('CreateCV') }}">tại đây!</a></span>
                         <div class="top-filters" style="margin-top: 100px ">
                             <div class="form-group">
                                 <select class="chosen-select" name="major">
@@ -19,7 +26,15 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group" style="width:181px">
+                            <div class="form-group" style="width:220px">
+                                <select class="chosen-select" name="type">
+                                    <option value="">Mời Chọn</option>
+                                    @foreach (config('custom.type_work') as $value)
+                                        <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group" style="width:220px">
                                 <select class="chosen-select" name="skill">
                                     <option value="">Mời Chọn Kỹ Năng</option>
                                     @foreach ($skill as $item)
