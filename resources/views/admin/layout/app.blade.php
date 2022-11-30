@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin-bower/plugins/select2-master/select2.min.css') !!}" />
     <title>@yield('title', 'Dashboard')</title>
     @section('style')
         @include('admin.layout.style')
@@ -49,11 +48,6 @@
     <!-- ./wrapper -->
     @section('script')
         @include('admin.layout.script')
-        <script>
-            $('.select2').select2({
-                'width' : '100%',
-            });
-        </script>
     @show
     @include('admin.layout.toastr')
 </body>
