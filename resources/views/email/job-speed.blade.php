@@ -18,9 +18,9 @@
                             kỹ năng bên dưới để sử dụng chức năng hoặc bạn có thể tạo cv <a
                                 href="{{ route('CreateCV') }}">tại đây!</a></span>
                         <div class="top-filters" style="margin-top: 100px ">
-                            <div class="form-group">
+                            <div class="form-group" style="width:220px">
                                 <select class="chosen-select" name="major">
-                                    <option value="">Mời Chọn Chuyên Ngành</option>
+                                    <option value="">Chuyên Ngành</option>
                                     @foreach ($maJor as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group" style="width:220px">
                                 <select class="chosen-select" name="type">
-                                    <option value="">Mời Chọn</option>
+                                    <option value="">Loại Hình</option>
                                     @foreach (config('custom.type_work') as $value)
                                         <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
                                     @endforeach
@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group" style="width:220px">
                                 <select class="chosen-select" name="skill">
-                                    <option value="">Mời Chọn Kỹ Năng</option>
+                                    <option value="">Kỹ Năng</option>
                                     @foreach ($skill as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
