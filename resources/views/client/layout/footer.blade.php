@@ -19,14 +19,12 @@
                     <div class="row">
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Candidates</h4>
+                                <h4 class="widget-title">Về Chúng Tôi</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Browse Jobs</a></li>
-                                        <li><a href="#">Browse Categories</a></li>
-                                        <li><a href="#">Candidate Dashboard</a></li>
-                                        <li><a href="#">Job Alerts</a></li>
-                                        <li><a href="#">My Bookmarks</a></li>
+                                        <li><a href="{{ route('index') }}">Trnag chủ</a></li>
+                                        <li><a href="{{ route('job') }}">Việc làm</a></li>
+                                        <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
