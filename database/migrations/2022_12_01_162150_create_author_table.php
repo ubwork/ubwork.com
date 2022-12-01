@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('avatar');
             $table->string('slogan');
+            $table->integer('status')->default(1)->comment(' 1:active ,2:block');
+            $table->integer('gender')->default(1);
             $table->timestamps();
         });
     }

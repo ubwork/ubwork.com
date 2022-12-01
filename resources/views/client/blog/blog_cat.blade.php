@@ -33,7 +33,7 @@
                     </div>
                     <div class="lower-content">
                       <ul class="post-meta">
-                        <li><a href="#">{{$item->created_at}}</a></li>
+                        <li><a href="#">{{date("d-m-Y", strtotime($item->created_at))}}</a></li>
                       </ul>
                       <h3><a href="blog-single.html">{{$item->title}}</a></h3>
                       <p class="text">{{$item->description}}</p>

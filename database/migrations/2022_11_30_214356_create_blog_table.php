@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('title');
             $table->string('content');
+            $table->integer('status')->default(1)->comment(' 1:active ,2:block');
             $table->string('description');
             $table->integer('author_id');
             $table->timestamps();

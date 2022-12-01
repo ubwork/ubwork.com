@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
-Route::get('/logout', ['as'=>'logout','uses'=> 'Admin\LoginController@getLogOut']);
+Route::get('/logout', ['as' => 'logout', 'uses' => 'Admin\LoginController@getLogOut']);
 
 Route::resource('user', 'Admin\UserController');
 Route::resource('role', 'Admin\RoleController');
@@ -51,4 +51,25 @@ Route::prefix('seekerProfile')->name('seekerProfile.')->group(function () {
     Route::get('/', 'Admin\SeekerProfileController@index')->name('index');
     Route::get('edit/{id}', 'Admin\SeekerProfileController@edit')->name('edit');
     Route::post('update/{id}', 'Admin\SeekerProfileController@update')->name('update');
+});
+
+Route::get('contact', 'Admin\ContactController@index')->name('contact');
+Route::prefix('blog')->name('blog.')->group(function () {
+    Route::get('/', 'Admin\BlogController@index')->name('index');
+    Route::get('create', 'Admin\BlogController@create')->name('create');
+    Route::post('store', 'Admin\BlogController@store')->name('store');
+    Route::get('edit/{id}', 'Admin\BlogController@edit')->name('edit');
+    Route::post('update/{id}', 'Admin\BlogController@update')->name('update');
+    Route::delete('/{id}', 'Admin\BlogController@destroy')->name('destroy');
+    Route::post('/{id}', 'Admin\BlogController@status')->name('status');
+});
+
+Route::prefix('author')->name('author.')->group(function () {
+    Route::get('/', 'Admin\AuthorController@index')->name('index');
+    Route::get('create', 'Admin\AuthorController@create')->name('create');
+    Route::post('store', 'Admin\AuthorController@store')->name('store');
+    Route::get('edit/{id}', 'Admin\AuthorController@edit')->name('edit');
+    Route::post('update/{id}', 'Admin\AuthorController@update')->name('update');
+    Route::delete('/{id}', 'Admin\AuthorController@destroy')->name('destroy');
+    Route::post('/{id}', 'Admin\AuthorController@status')->name('status');
 });

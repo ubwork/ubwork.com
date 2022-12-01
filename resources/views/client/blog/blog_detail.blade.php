@@ -8,12 +8,12 @@
         <div class="upper-box">
           <h3>{{$data->title}}</h3>
           <ul class="post-info">
-            <li><span class="thumb"><img src="images/resource/thumb-1.png" alt=""></span>{{$author->name}}</li>
-            <li>{{$data->created_at}}</li>
+            <li><span class="thumb"><img src="{{ asset('storage/' .$author->avatar) }}" alt=""></span>{{$author->name}}</li>
+            <li>{{date("d-m-Y", strtotime($data->created_at))}}</li>
           </ul>
         </div>
       </div>
-      <figure class="main-image"><img src="images/resource/blog-single.jpg" alt=""></figure>
+      <figure class="main-image"><img src="{{ asset('storage/' .$data->banner) }}" alt=""></figure>
       <div class="auto-container">
         <h4>Course Description</h4>
         <p>{{$data->description}}</p>
@@ -22,7 +22,7 @@
           <p>{{$author->name}}</p>
           <cite>{{$author->slogan}}</cite>
         </blockquote>
-        <figure class="image"><img src="images/resource/post-img.jpg" alt=""></figure>
+        <figure class="image"><img src="{{ asset('storage/' .$data->image) }}" alt=""></figure>
 
         <!-- Other Options -->
         <div class="other-options">
