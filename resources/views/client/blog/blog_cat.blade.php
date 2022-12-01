@@ -2,6 +2,44 @@
 @section('title')
     {{__('UB Work')}} | Bài viết
 @endsection
+@section('style')
+@parent
+<style>
+    .page-link{
+        border-radius:50%;
+        padding: 0px;
+    }
+    .page-item:last-child .page-link{
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+    }
+    .page-item:first-child .page-link{
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+    }
+    .form-control:focus{
+        box-shadow: none;
+    }
+    .tt-menu{
+        left: -0px !important;
+        top: 65px !important;
+        width: 330px;
+        border-radius: 5px;
+    }
+    .tt-dataset{
+        border-radius: 5px; 
+    }
+    .tt-dataset a{
+        font-family: 'Roboto', sans-serif;
+    }
+    .tt-dataset a:hover{
+            color:#f7941d;
+    }
+    .twitter-typeahead{
+      width: 100%;
+    }
+</style>
+@endsection
 @section('content')
         <section class="page-title">
       <div class="auto-container">
@@ -64,7 +102,7 @@
               <!-- Recent Post -->
               <div class="sidebar-widget search-widget">
                 <div class="sidebar-title">
-                  <h4>Search by Keywords</h4>
+                  <h4>Tìm kiếm bài viết</h4>
                 </div>
 
                 <!--search box-->
@@ -72,12 +110,12 @@
                   <form method="post" action="https://creativelayers.net/themes/superio/blog.html">
                     <div class="form-group">
                       <span class="icon flaticon-search-1"></span>
-                      <input type="search" name="search-field" value="" placeholder="keywords" required="">
+                      <input type="search" class="search-input" name="search" value="" placeholder="Tiêu đề" required="">
                     </div>
                   </form>
                 </div>
               </div>
-              <!-- Recent Post -->
+              {{-- <!-- Recent Post -->
               <div class="sidebar-widget recent-post">
                 <div class="sidebar-title">
                   <h4>Recent Posts</h4>
@@ -102,11 +140,47 @@
                     <div class="post-info">August 9, 2021</div>
                   </article>
                 </div>
-              </div>
+              </div> --}}
             </aside>
           </div>
         </div>
       </div>
     </div>
 @endsection
+@section('script')
+@parent
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script>
+$(document).ready(function($) {
+    var engine1 = new Bloodhound({
+        remote: {
+            url: '/search_blog?value=%QUERY%',
+            wildcard: '%QUERY%'
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+    });
+    $(".search-input").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, [
+        {
+            source: engine1.ttAdapter(),
+            name: 'students-name',
+            display: function(data) {
+                return data.title;
+            },
+            templates: {
+                suggestion: function (data) {
+                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
+                }
+            }
+        }, 
+    ]);
+});
+</script>
+@endsection

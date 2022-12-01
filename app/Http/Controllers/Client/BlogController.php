@@ -28,4 +28,9 @@ class BlogController extends Controller
         $author = Author::find($data->author_id);
         return view('client.blog.blog_detail', compact('maJor', 'data', 'author'));
     }
+    public function searchByTitle(Request $request)
+    {
+        $job = Blog::where('title', 'like', '%' . $request->value . '%')->get();
+        return response()->json($job);
+    }
 }
