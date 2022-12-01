@@ -22,8 +22,9 @@
                                 <h4 class="widget-title">Về Chúng Tôi</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="{{ route('index') }}">Trnag chủ</a></li>
+                                        <li><a href="{{ route('index') }}">Trang chủ</a></li>
                                         <li><a href="{{ route('job') }}">Việc làm</a></li>
+                                        <li><a href="{{ route('blog') }}">Bài viết</a></li>
                                         <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
                                     </ul>
                                 </div>
@@ -33,13 +34,13 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Employers</h4>
+                                <h4 class="widget-title">Chính sách</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Browse Candidates</a></li>
-                                        <li><a href="#">Employer Dashboard</a></li>
-                                        <li><a href="#">Add Job</a></li>
-                                        <li><a href="#">Job Packages</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 1]) }}">Chính sách bảo mật</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 2]) }}">Quy chế hoạt dộng</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 3]) }}">Chính sách giải quyết khiếu nại</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 4]) }}">Thỏa thuận sử dụng</a></li>
                                     </ul>
                                 </div>
                             </div>

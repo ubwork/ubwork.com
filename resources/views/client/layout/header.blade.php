@@ -38,6 +38,12 @@
                     <li class="dropdown">
                         <a href="{{ route('jobspeed') }}">Tìm Kiếm Nhanh</a>
                     </li>
+                    <li class="dropdown">
+                        <a href="{{ route('blog') }}">Bài viết</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{{ route('contact') }}">Liên Hệ</a>
+                    </li>
 
                     <!-- Only for Mobile View -->
                     <li class="mm-add-listing">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Author;
 use App\Models\Blog;
 use App\Models\Major;
 use Illuminate\Http\Request;
@@ -21,8 +22,10 @@ class BlogController extends Controller
     {
         $data = [];
         $maJor = [];
+        $author = [];
         $maJor = Major::all();
         $data = Blog::where('id', $id)->first();
-        return view('client.blog.blog_detail', compact('maJor', 'data'));
+        $author = Author::find($data->author_id);
+        return view('client.blog.blog_detail', compact('maJor', 'data', 'author'));
     }
 }

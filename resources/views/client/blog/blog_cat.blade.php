@@ -77,24 +77,6 @@
                   </form>
                 </div>
               </div>
-
-              <!-- Shop Widget -->
-              <div class="sidebar-widget catagory-widget">
-                <div class="sidebar-title">
-                  <h4>Categories</h4>
-                </div>
-                <ul class="catagory-list">
-                  <li><a href="#">Education</a></li>
-                  <li><a href="#">Information</a></li>
-                  <li><a href="#">Interview</a></li>
-                  <li><a href="#">Job Seeking</a></li>
-                  <li><a href="#">Jobs</a></li>
-                  <li><a href="#">Learn</a></li>
-                  <li><a href="#">Skill</a></li>
-                  <li><a href="#">Travel</a></li>
-                </ul>
-              </div>
-
               <!-- Recent Post -->
               <div class="sidebar-widget recent-post">
                 <div class="sidebar-title">
@@ -120,21 +102,6 @@
                     <div class="post-info">August 9, 2021</div>
                   </article>
                 </div>
-              </div>
-
-              <!-- Shop Widget -->
-              <div class="sidebar-widget">
-                <div class="sidebar-title">
-                  <h4>Tags</h4>
-                </div>
-                <ul class="tag-list">
-                  <li><a href="#">app</a></li>
-                  <li><a href="#">administrative</a></li>
-                  <li><a href="#">android</a></li>
-                  <li><a href="#">wordpress</a></li>
-                  <li><a href="#">design</a></li>
-                  <li><a href="#">react</a></li>
-                </ul>
               </div>
             </aside>
           </div>
