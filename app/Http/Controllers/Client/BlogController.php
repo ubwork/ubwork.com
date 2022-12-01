@@ -12,6 +12,7 @@ class BlogController extends Controller
     public function index()
     {
         $data = [];
+        $maJor = [];
         $maJor = Major::all();
         $data = Blog::all();
         return view('client.blog.blog_cat', compact('maJor', 'data'));
@@ -19,6 +20,7 @@ class BlogController extends Controller
     public function detail($id)
     {
         $data = [];
+        $maJor = [];
         $maJor = Major::all();
         $data = Blog::where('id', $id)->first();
         return view('client.blog.blog_detail', compact('maJor', 'data'));
