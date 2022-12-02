@@ -19,7 +19,8 @@
                   <th>Tên công ty</th>
                   <th>Ảnh</th>
                   <th>Email</th>
-                  <th>Số điện thoại</th>
+                  {{-- <th>Số điện thoại</th> --}}
+                  <th>Đánh giá</th>
                   <th>Trạng thái</th>
                   <th><a href="{{route('admin.company.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
@@ -32,7 +33,24 @@
                         <td>{{$item->company_name}}</td>
                         <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->logo)}}" alt=""></td>
                         <td>{{$item->email}}</td>
-                        <td>{{$item->phone}}</td>
+                        {{-- <td>{{$item->phone}}</td> --}}
+                        <td>
+                          {{-- hàm sử lý mảng --}}
+                          <?php $k=[]?>
+                          @foreach ($feed as $u )
+                            @if ($u->company_id == $item->id)
+                            
+                              <?php $k[]=$u->id;?>                
+                            @endif 
+                          @endforeach
+                          {{-- <?php dd($k)?> --}}
+                          {{-- hàm hiển thị count --}}
+                          @foreach ($feed as $u )
+                            @if ($u->company_id == $item->id)
+                            <a href="{{route('admin.feedback.company.indexc',['id' => $item->id])}}"><?php echo count($k).' bài';break;?></a>              
+                            @endif
+                          @endforeach
+                        </td>
                         <td>
                             <form action="{{route('admin.company.status', ['id' => $item->id])}}" method="post">
                               @csrf
