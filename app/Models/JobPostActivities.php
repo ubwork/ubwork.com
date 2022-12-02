@@ -31,6 +31,10 @@ class JobPostActivities extends Model
     {
         return $this->belongsToMany(JobPost::class);
     }
+    public function seeker_profile()
+    {
+        return $this->belongsTo(SeekerProfile::class,'seeker_id');
+    }
     public function major()
     {
         return $this->belongsTo(Major::class);

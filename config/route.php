@@ -27,9 +27,9 @@ return [
                 'route' => 'company.image-paper',
                 'icon'  => 'la la-file',
             ],
-            'view-open-cv' => [
+            'manage-cv' => [
                 'title' => "Quản lý CV",
-                'route' => 'company.viewOpenCv',
+                'route' => 'company.manageCV',
                 'icon'  => 'la la-home',
             ],
             'history-payment' => [

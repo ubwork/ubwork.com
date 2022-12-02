@@ -18,12 +18,19 @@ class DashboardController extends Controller
         $cv = SeekerProfile::all();
         $skill = Skill::all();
         $major = Major::all();
+        $pendingImagePaper = Company::where('status', 0)->get()->toArray();
+        $activeImagePaper = Company::where('status', 1)->get()->toArray();
+        $blockImagePaper = Company::where('status', 2)->get()->toArray();
+        // dd($companyImagePaper);
         return view('admin.dashboard', [
             'countCandidate' => $candidates,
             'countCompany' => $companies,
-            'countCV'=>$cv,
-            'countSkill'=>$skill,
-            'countMajor'=>$major,
+            'countCV'=> $cv,
+            'countSkill'=> $skill,
+            'countMajor'=> $major,
+            'countPendingImagePaper'=> $pendingImagePaper,
+            'countActiveImagePaper'=> $activeImagePaper,
+            'countBlockImagePaper'=> $blockImagePaper,
         ]);
     }
 }

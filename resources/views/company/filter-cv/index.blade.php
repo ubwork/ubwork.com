@@ -2,32 +2,10 @@
 @section('title')
 @endsection
 @section('content')
-    <style>
-        .ls-pagination li a {
-            border-radius: unset !important;
-        }
-    </style>
 
 @if ($company->status == 1)
 {{-- <section class="page-title style-two"> --}}
     <div class="auto-container mb-0" >
-      <!-- Job Search Form -->
-      <div class="job-search-form">
-        <form method="get" action="{{ route('company.filter') }}">
-          <div class="row">
-
-            <!-- Form Group -->
-            <div class="form-group col-lg-10 col-md-12 col-sm-12 location">
-              <span class="icon flaticon-briefcase"></span>
-              <input name="name_education" value="{!! app('request')->input('name_education') !!}" type="text" placeholder="Tìm kiếm theo trường học...">
-            </div>
-            <!-- Form Group -->
-            <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
-              <button type="submit" class="theme-btn btn-style-one">Tìm kiếm</button>
-            </div>
-          </div>
-      </div>
-      <!-- Job Search Form -->
     </div>
   {{-- </section> --}}
   <!--End Page Title-->
@@ -44,274 +22,171 @@
             <!-- ls Switcher -->
             <div class="ls-switcher">
               <div class="showing-result">
-                <div class="top-filters">
-                  <div class="form-group">
-                    <select name="major" class="select2">
-                      <option value="-1" selected>Chọn chuyên ngành</option>
-                      @if (count($major) > 0)
+                <div class="top-filters justify-content-center">
+
+                  <div class="form-group mt-3">
+                    <input style="padding: 13px; border: 2px solid #e6e8ed;border-radius: 10px;"
+                    type="text" class="search_address form-control" id="search-text" name="search_address" placeholder="Tìm theo địa chỉ">
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <select name="major" class="selectMajor select2">
+                      <option value="">Chọn chuyên ngành</option>
                       @foreach ($major as $item)
-                      <option @if (app('request')->input('major') == $item['id'])
-                          selected
-                      @endif value="{{$item['id']}}"> {{$item['name']}} </option>
+                      <option value="{{$item->id}}">{{$item->name}}</option>
                       @endforeach
-                      @endif
                     </select>
                 </div>
 
-                  {{-- <div class="form-group">
-                    <select name="experience" class="select2">
-                        <option value="-1" selected>Chọn vị trí muốn ứng tuyển</option>
-                        @if(count($exp) > 0)
-                        @foreach ($exp as $item)
-                        <option @if (app('request')->input('experience') == $item['id'])
-                            selected
-                        @endif value="{{$item['id']}}"> {{$item['position']}} </option>
-                        @endforeach
-                        @endif
-                      </select>
-                  </div> --}}
-                  <div class="form-group">
-                    <select name="gender" class="select2">
-                        <option value="-1" selected>Giới Tính</option>
+
+                  <div class="form-group mt-3">
+                    <select name="gender" class="selectGender select2">
+                        <option value="">Giới Tính</option>
                         <option value="1"> Nam </option>
                         <option value="2"> Nữ </option>
                       </select>
                   </div>
 
-                  <div class="form-group">
-                    <select name="skill" class="select2">
-                        <option value="-1" selected>Chọn kỹ năng</option>
+                  <div class="form-group mt-3">
+                    <select name="skill" class="selectSkill select2">
+                        <option value="">Kỹ năng</option>
                         @foreach ($skill as $item)
-                        <option
-                        @if (app('request')->input('skill') == $item['id'])
-                          selected
-                      @endif value="{{$item['id']}}"> {{$item['name']}} </option>
+                        <option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                   </div>
+                  <div class="form-group mt-3">
+                    <select name="experience" class="selectYearKn select2">
+                        <option value="">Năm kinh nghiệm</option>
+                        @foreach (config('custom.experience') as $value)
+                            <option value="{{ $value['id']}}">{{ $value['name']}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <select name="type_degree" class="select_type_degree select2">
+                        <option value="">Trình độ học vấn</option>
+                        @foreach (config('custom.type_degree') as $value)
+                            <option value="{{ $value['id']}}">{{ $value['name']}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <select name="name_cty" class="select_name_cty select2">
+                        <option value="">Từng làm tại công ty</option>
+                        @foreach ($getNameCty as $item)
+                            <option value="{{$item->company_name}}">{{ $item->company_name }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <select name="name_edu" class="select_name_edu select2">
+                        <option value="">Từng học tại trường</option>
+                        @foreach ($nameEdu as $item)
+                            <option value="{{$item->name_education}}">{{ $item->name_education }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                  
+                  <form class="mt-3" onsubmit="return false">
+                    <div class="form-group " >
+                        <span class="input-group-append">
+                            <button
+                                class="theme-btn btn-style-one  "
+                                type="button"
+                                href="{{url("company/filter")}}"
+                                id="search_filter">
+                                Tìm kiếm
+                            </button>
+                        </span>
+                    </div>
+                </form>
+
                 </div>
               </div>
             </form>
-              <div class="sort-by">
-
-                <select class="chosen-select" name="page_num">
-                  <option value="10">10 mục</option>
-                  <option value="20">20 mục</option>
-                  <option value="30">30 mục</option>
-                  <option value="40">40 mục</option>
-                  <option value="50">50 mục</option>
-                  <option value="60">60 mục</option>
-                </select>
-              </div>
             </div>
-            <div class="row">
-              @if (count($data) > 0)
-                @foreach ($data as $item)
-                @if (!empty($allProfile[$item->id]))
-                <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-
-                      <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png'}}" alt=""></span>
-                      <h3 class="name"><a href="#">
-                        @php
-                        $nameAt = $item['name'];
-                        $count = mb_substr($nameAt, 0, 4,'UTF-8');
-                        echo $count."**********";
-                        @endphp
-                      </a></h3>
-                      <span class="cat" style="min-height: 22px">{{isset($item['major']['name']) ? $item['major']['name'] : ''}}</span>
-                      <ul class="job-info">
-                        <li style="min-height: 22px">
-                        @if ($item['address'])
-                        <span class="icon flaticon-map-locator"></span> {{$item['address']}}
-                        @endif
-                      </li>
-                      <li style="min-height: 22px">
-                        @if ($item['coin'])
-                        <span class="icon flaticon-money"></span> {{$item['coin']}}
-                        @endif
-                      </li>
-
-                      </ul>
-                      <ul class="post-tags">
-                        {{-- @foreach ( as )
-                        <li><a href="#">App</a></li>
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Digital</a></li>
-                        @endforeach --}}
-
-                      </ul>
-
-                      <div class="d-flex justify-content-between">
-                        @if (!empty($allProfile[$item->id]))
-                        <a style="width: 49%;" class="theme-btn btn-style-three" href="{{route('company.SaveOpenCv', ['id' => $allProfile[$item->id]]['id'])}}">Mở khóa</a>
-                        @else
-                        <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three" >Mở khóa</a>
-                       @endif
-                        @if (!empty($allProfile[$item->id]))
-                        <a style="width: 49%;" href="{{route('company.detail-candidate.index', $item->id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
-                        @else
-
-                        <a style="width: 49%; opacity: 0.5;" target="_blank" class="theme-btn btn-style-three">Xem Chi Tiết</a>
-                        @endif
-
-                      </div>
-                    </div>
-                  </div>
-                @endif
-                @endforeach
-                @endif
-              <!-- Candidate block Four -->
+            <div class="viewList">
+              @include('company.filter-cv.list-view')
             </div>
+          </div>
         </div>
-        <!-- Job Search Form -->
-        </div>
-    </section>
-    <!--End Page Title-->
+      </div>
+    </div>
+  </section>
+  @elseif ($company->status == 2)
+  <span class="text-warning" style="font-weight: 900">Bạn chưa đủ điều kiện xét duyệt, Vui lòng liên hệ admin</span>
+  @else
+  <span class="text-warning" style="font-weight: 900">Bạn cần chờ xét duyệt</span>
 
-    <!-- Listing Section -->
-    <section class="ls-section">
-        <div class="auto-container">
-        <div class="filters-backdrop"></div>
+  @endif
+@endsection
+@section('script')
+  @parent
+  <script src="{{asset('js/paginate.js')}}"></script>
+  <script>
+    $(function() {
+        $(document).on("click",".pagination li a,#button_search", function(e) {
+            e.preventDefault();
+            var url=$(this).attr("href");
+            var append = url.indexOf("?") == -1 ? "?" : "&";
+            var finalURL = url + append + $("#search").serialize();
+            window.history.pushState({}, null, finalURL);
+            $.get(finalURL, function(data) {
+                $(".viewList").html(data);
+            });
+            return false;
+        })})
 
-        <div class="row">
-            <!-- Content Column -->
-            <div class="content-column col-lg-12">
-            <div class="ls-outer">
-                <!-- ls Switcher -->
-                <div class="ls-switcher">
-                <div class="showing-result">
-                    <div class="top-filters">
-                    <div class="form-group">
-                        <select name="major" class="select2">
-                        <option value="-1" selected>Chọn chuyên ngành</option>
-                        @if (count($major) > 0)
-                        @foreach ($major as $item)
-                        <option @if (app('request')->input('major') == $item['id'])
-                            selected
-                        @endif value="{{$item['id']}}"> {{$item['name']}} </option>
-                        @endforeach
-                        @endif
-                        </select>
-                    </div>
+      $( document ).ready(function() {
 
-                    <div class="form-group">
-                        <select name="experience" class="select2">
-                            <option value="-1" selected>Chọn vị trí từng đảm nhiệm</option>
-                            @if(count($exp) > 0)
-                            @foreach ($exp as $item)
-                            <option @if (app('request')->input('experience') == $item['id'])
-                                selected
-                            @endif value="{{$item['id']}}"> {{$item['position']}} </option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
+          $('#search_filter').click(function (e){
+            e.preventDefault();
+            var id_gender = $('.selectGender').find(":selected").val();
+            var id_major = $('.selectMajor').find(":selected").val();
+            var id_skill = $('.selectSkill').find(":selected").val();
+            var type_degree = $('.select_type_degree').find(":selected").val();
+            var name_edu = $('.select_name_edu').find(":selected").val();
+            var name_cty = $('.select_name_cty').find(":selected").val();
+            var search_address = $('.search_address').val();
+            var selectYearKn = $('.selectYearKn').find(":selected").val();
+            var data = {
+                    "id_major": id_major,
+                    "id_gender": id_gender,
+                    "id_skill": id_skill,
+                    "type_degree": type_degree,
+                    "name_edu": name_edu,
+                    "name_cty": name_cty,
+                    "search_address" : search_address,
+                    "selectYearKn" : selectYearKn,
+                }
+            $.ajax({
+              url: "filter",
+              type: "get",
+              data: data,
+              success: function(data)
+              {
+                $(".viewList").html(data);
+              },
+              error: function(){
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Cảnh báo',
+                        text: 'Dữ liệu bị lỗi',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        confirmButtonText: 'Đồng ý',
+                        confirmButtonColor: '#C46F01',
+                        cancelButtonText: 'Không'
+                    })
+              }
+            });
 
-                    <div class="form-group">
-                        <select name="skill" class="select2">
-                            <option value="-1" selected>Chọn kỹ năng</option>
-                            @foreach ($skill as $item)
-                            <option
-                            @if (app('request')->input('skill') == $item['id'])
-                            selected
-                        @endif value="{{$item['id']}}"> {{$item['name']}} </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    </div>
-                </div>
-                </form>
-                <div class="sort-by">
+          });
 
-                    <select class="chosen-select" name="page_num">
-                    <option value="10">10 mục</option>
-                    <option value="20">20 mục</option>
-                    <option value="30">30 mục</option>
-                    <option value="40">40 mục</option>
-                    <option value="50">50 mục</option>
-                    <option value="60">60 mục</option>
-                    </select>
-                </div>
-                </div>
-
-                <div class="row">
-                @if (count($data) > 0)
-                    @foreach ($data as $item)
-                    {{-- @dd($item['candidate']['name']); --}}
-                <div class="row">
-                @if (count($data) > 0)
-                    @foreach ($data as $item)
-                    <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
-                        <div class="inner-box">
-
-                        <span class="thumb"><img src="{{ !empty($item['avatar']) ? asset('storage/'. $item['avatar']) : ''}}" alt=""></span>
-                        <h3 class="name"><a href="#">
-                            @php
-                            $nameAt = $item['name'];
-                            $count = mb_substr($nameAt, 0, 4,'UTF-8');
-                            echo $count."**********";
-                            @endphp
-                        </a></h3>
-                        <span class="cat" style="min-height: 22px">{{isset($item['major']['name']) ? $item['major']['name'] : ''}}</span>
-                        <ul class="job-info">
-                            <li style="min-height: 22px">
-                            @if ($item['address'])
-                            <span class="icon flaticon-map-locator"></span> {{$item['address']}}
-                            @endif
-                        </li>
-                        <li style="min-height: 22px">
-                            @if ($item['coin'])
-                            <span class="icon flaticon-money"></span> {{$item['coin']}}
-                            @endif
-                        </li>
-
-                        </ul>
-                        <ul class="post-tags">
-                            {{-- @foreach ( as )
-                            <li><a href="#">App</a></li>
-                            <li><a href="#">Design</a></li>
-                            <li><a href="#">Digital</a></li>
-                            @endforeach --}}
-
-                        </ul>
-
-                        <div class="d-flex justify-content-between">
-                            @if (!empty($allProfile[$item->id]))
-                            <a style="width: 49%;" class="theme-btn btn-style-three" href="{{route('company.SaveOpenCv', ['id' => $allProfile[$item->id]]['id'])}}">Mở khóa</a>
-                            @else
-                            <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three" >Mở khóa</a>
-                        @endif
-                            @if (!empty($allProfile[$item->id]))
-                            <a style="width: 49%;" href="{{route('company.detail-candidate.index', $item->id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
-                            @else
-
-                            <a style="width: 49%; opacity: 0.5;" class="theme-btn btn-style-three">Xem Chi Tiết</a>
-                            @endif
-
-                        </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    @endif
-                <!-- Candidate block Four -->
-                </div>
-
-                <!-- Pagination -->
-                <nav class="ls-pagination">
-                <ul>
-                    {{$data->render()}}
-
-                </ul>
-                </nav>
-            </div>
-            </div>
-        </div>
-        </div>
-    </section>
-    @elseif ($company->status == 2)
-    <span class="text-warning" style="font-weight: 900">Bạn chưa đủ điều kiện xét duyệt, Vui lòng liên hệ admin</span>
-    @else
-    <span class="text-warning" style="font-weight: 900">Bạn cần chờ xét duyệt</span>
-    @endif
+      });
+  </script>
 @endsection
