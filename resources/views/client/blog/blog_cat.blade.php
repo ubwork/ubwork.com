@@ -176,7 +176,7 @@ $(document).ready(function($) {
             },
             templates: {
                 suggestion: function (data) {
-                    return '<a href="/job-detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
+                    return '<a href="/blog_detail/' + data.id + '" class="list-group-item">' + data.title + '</a>';
                 }
             }
         }, 

@@ -3,14 +3,16 @@
     {{__('UB Work')}} | Liên hệ
 @endsection
 @section('content')
-    <!-- Map Section -->
-    <section class="map-section" style="margin-top: 70px;">
+    <section class="map-section" style="margin-top: 80px;">
       <div class="map-outer">
-         <iframe class="map-canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.8639810443356!2d105.74459841485445!3d21.038127785993236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b991d80fd5%3A0x53cefc99d6b0bf6f!2sFPT%20Polytechnic%20Hanoi!5e0!3m2!1sen!2s!4v1669817951321!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-canvas" >
+          <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.8639810443356!2d105.74459841485445!3d21.038127785993236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b991d80fd5%3A0x53cefc99d6b0bf6f!2sFPT%20Polytechnic%20Hanoi!5e0!3m2!1sen!2s!4v1669817951321!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </section>
     <!-- End Map Section -->
+
+
     <!-- Contact Section -->
     <section class="contact-section">
       <div class="auto-container">
@@ -19,22 +21,22 @@
             <div class="contact-block col-lg-4 col-md-6 col-sm-12">
               <div class="inner-box">
                 <span class="icon"><img src="{{ asset('/assets/client-bower/images/icons/placeholder.svg')}}" alt=""></span>
-                <h4>Address</h4>
-                <p>329 Queensberry Street, North<br> Melbourne VIC 3051, Australia.</p>
+                <h4>Địa chỉ</h4>
+                <p>Trịnh Văn Bô Hà Nội.</p>
               </div>
             </div>
             <div class="contact-block col-lg-4 col-md-6 col-sm-12">
               <div class="inner-box">
                 <span class="icon"><img src="{{ asset('/assets/client-bower/images/icons/smartphone.svg')}}" alt=""></span>
-                <h4>Call Us</h4>
-                <p><a href="#" class="phone">123 456 7890</a></p>
+                <h4>Số điện thoại</h4>
+                <p><a href="#" class="phone">036868686868</a></p>
               </div>
             </div>
             <div class="contact-block col-lg-4 col-md-6 col-sm-12">
               <div class="inner-box">
                 <span class="icon"><img src="{{ asset('/assets/client-bower/images/icons/letter.svg')}}" alt=""></span>
                 <h4>Email</h4>
-                <p><a href="#">contact.london@example.com</a></p>
+                <p><a href="#">ubwork@gmail.com</a></p>
               </div>
             </div>
           </div>
@@ -107,6 +109,5 @@
         </div>
       </div>
     </section>
-    <!-- End Call To Action -->
 @endsection
 
