@@ -11,19 +11,24 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Mail;
 
 class RegisterController extends Controller
 {
     //
     private $v;
-    public function __construct(){
+    public function __construct()
+    {
         $this->v = [];
     }
-    public function getRegister(){
+    public function getRegister()
+    {
         return view('client.register.index');
     }
-    
-    public function postRegister(Request $request){
+
+    public function postRegister(Request $request)
+    {
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:candidates',
@@ -44,21 +49,21 @@ class RegisterController extends Controller
         if ($validator->fails()) {
             return redirect()->route('candidate.register')->withErrors($validator);
         } else {
-            $name = $request->input('name');
-            $email = $request->input('email');
-            $password = $request->input('password');
-            $phone = $request->input('phone');
-            $gender = $request->input('gender');
-            $params = [];
-            $params['cols'] = $request->post();
-            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
-            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
-            unset($params['cols']['_token']);
-            $modelSv = new Candidate();
-            $res = $modelSv->saveAdd($params);
-            if ($res == null) {
+            $users = new Candidate();
+            $data = $request->only('name', 'email', 'phone', 'password', 'gender');
+            $token = strtoupper(Str::random(10));
+            $data['token'] = strtoupper(Str::random(10));
+            $data['password'] = bcrypt($request->password);
+            $data['status'] = 0;
+            if ($candidate = Candidate::create($data)) {
+                Mail::send('email.active-acc', compact('candidate'), function ($email) use ($candidate) {
+                    $email->subject('UbWork - Xác nhận tài khoản');
+                    $email->to($candidate->email, $candidate->name);
+                });
+            }
+            if ($users == null) {
                 return redirect()->route('candidate.register');
-            } elseif ($res > 0) {
+            } elseif ($users != null) {
                 Session::flash('success', 'Đăng ký thành công');
                 return redirect()->route('candidate.login');
             } else {
@@ -66,6 +71,18 @@ class RegisterController extends Controller
                 return redirect()->route('candidate.register');
             }
         }
-    
-}
+    }
+    public function actived(Candidate $candidate, $token)
+    {
+        if ($candidate->token === $token) {
+            $candidate->update([
+                'status' => 1,
+                'verify_time' => Carbon::now(),
+                'token' => null
+            ]);
+            return redirect()->route('candidate.login')->with('success', 'Kích Hoạt Tài Khoản Thành Công');
+        } else {
+            return redirect()->route('candidate.register')->with('error', 'Sai mã kích hoạt vui lòng thử lại');
+        }
+    }
 }

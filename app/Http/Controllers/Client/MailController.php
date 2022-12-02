@@ -32,7 +32,6 @@ class MailController extends Controller
                 $jobspeed = JobPostActivities::where('seeker_id', $seeker->id)->whereDate('created_at', $date)->where('is_function', 1)->first(); // hàm sử lý thời gian
                 $major = $seeker->major_id;
                 $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->first();
-                $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->pluck('skill_id')->toArray();
                 $path_cv = $seeker->path_cv;
                 $tien = 30;
                 $ad = Skill::join('skill_seekers', 'skill_seekers.skill_id', '=', 'skills.id')
@@ -76,11 +75,11 @@ class MailController extends Controller
                                 $speed->is_function = 1;
                                 $speed->company_id = $item->company_id;
                                 foreach ($job_atv as $rows) {
-                                    if ($rows->company_id != $item->company_id) {
+                                    if ($rows->company_id != $item->company_id && $rows->seeker_id != $seeker->id) {
                                         $speed->is_see = 0;
-                                    } elseif ($rows->company_id == $item->company_id && $rows->is_see == 0) {
+                                    } elseif ($rows->company_id == $item->company_id && $rows->seeker_id == $seeker->id && $rows->is_see == 0) {
                                         $speed->is_see = 0;
-                                    } elseif ($rows->company_id == $item->company_id && $rows->is_see == 1) {
+                                    } elseif ($rows->company_id == $item->company_id && $rows->seeker_id == $seeker->id && $rows->is_see == 1) {
                                         $speed->is_see = 1;
                                     }
                                 }
@@ -152,17 +151,15 @@ class MailController extends Controller
                                 $speed->seeker_id = $seeker->id;
                                 $speed->is_function = 1;
                                 $speed->company_id = $item->company_id;
-
                                 foreach ($job_atv as $rows) {
-                                    if ($rows->company_id != $item->company_id) {
+                                    if ($rows->company_id != $item->company_id && $rows->seeker_id != $seeker->id) {
                                         $speed->is_see = 0;
-                                    } elseif ($rows->company_id == $item->company_id && $rows->is_see == 0) {
+                                    } elseif ($rows->company_id == $item->company_id && $rows->seeker_id == $seeker->id && $rows->is_see == 0) {
                                         $speed->is_see = 0;
-                                    } elseif ($rows->company_id == $item->company_id && $rows->is_see == 1) {
+                                    } elseif ($rows->company_id == $item->company_id && $rows->seeker_id == $seeker->id && $rows->is_see == 1) {
                                         $speed->is_see = 1;
                                     }
                                 }
-
                                 $speed->save();
                             }
                         }
@@ -170,7 +167,7 @@ class MailController extends Controller
                             'coin' => $coin - $tien,
                         ]);
                         updateProcess(auth('candidate')->user()->id, "- $tien coin sử dụng chức năng tìm việc nhanh", $tien, 0, 1);
-                        return back()->with('success', 'Tìm Kiếm Thành Công');
+                        return redirect()->route('speedapply')->with('success', 'Tìm Kiếm Thành Công');
                     }
                 } else {
                     return back()->with('error', 'Bạn chưa tạo cv trên hệ thống vui lòng tạo cv để sử dụng tính năng này!');
