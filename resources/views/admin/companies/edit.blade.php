@@ -100,7 +100,7 @@
                           <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="form-label w-100">Logo</label>
-                                <img id="image" src="{{ $obj->logo?''.Storage::url($obj->logo):'http://placehold.it/100x100' }}" alt="your image"
+                                <img id="image" src="{{ $obj->logo?''.Storage::url('images/company/'.$obj->logo):'http://placehold.it/100x100' }}" alt="your image"
                                     style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
                                 <input name="image" type="file" id="img">
                                 <small class="form-text text-muted">Chọn ảnh kích thước nhỏ hơn 5mb</small>
