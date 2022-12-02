@@ -41,7 +41,7 @@
 </style>
 @endsection
 @section('content')
-        <section class="page-title mt-5">
+        <section class="page-title" style="margin-top:80px;">
       <div class="auto-container">
         <div class="title-outer">
           <h1>Blog</h1>

@@ -3,7 +3,7 @@
 {{__('UB Work')}} | {{$data->title}}
 @endsection
 @section('content')
-    <section class="blog-single mt-5">
+    <section class="blog-single" style="margin-top:80px;">
       <div class="auto-container">
         <div class="upper-box">
           <h3>{{$data->title}}</h3>

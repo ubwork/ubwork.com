@@ -1,14 +1,3 @@
-@php
-use App\Models\Config;
-
-$config = [];
-$config = [];
-$configList = Config::where('status', 1)->get();
-foreach ($configList as $item) {
-    $config[$item->name] = Config::where('name', $item->name)->first();
-}
-@endphp
-
 <footer class="main-footer">
     <div class="auto-container">
         <!--Widgets Section-->
@@ -19,7 +8,7 @@ foreach ($configList as $item) {
                         <div class="logo"><a href="#"><img src="{{ asset('images/logo_ubwork.png') }}"
                                     alt="" style="max-height: 40px;"></a>
                         </div>
-                        <p class="phone-num"><span>Call us </span><a href="">0395167635</a></p>
+                        <p class="phone-num"><span>Hotline: </span><a href="">0395167635</a></p>
                         <p class="address">Trịnh Văn Bô
                             <br><a href="" class="email">datmv202@gmail.com</a>
                         </p>
@@ -73,7 +62,7 @@ foreach ($configList as $item) {
                                 <h4 class="widget-title">Đối tác</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="{{$config['Facebook']->content}}">Shark Tank</a></li>
+                                        <li><a href="">Shark Tank</a></li>
                                         <li><a href="#">Doanh nghiệp</a></li>
                                         <li><a href="#">Trường Đại Học</a></li>
                                         <li><a href="#">Các nhà hảo tâm</a></li>

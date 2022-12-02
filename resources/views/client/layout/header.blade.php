@@ -71,9 +71,9 @@
 
         @if (auth('candidate')->check())
             <div class="outer-box">
-
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+
                         @if(!is_null(auth('candidate')->user()->avatar) && Storage::exists(auth('candidate')->user()->avatar))
                             <img style="object-fit: cover;" src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
                                 class="thumb">
