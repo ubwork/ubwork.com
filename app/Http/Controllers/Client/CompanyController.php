@@ -5,8 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\FeedbackRequest;
 use App\Models\Candidate;
-use App\Models\company;
-use App\Models\Company as ModelsCompany;
+use App\Models\Company;
 use App\Models\Feedback;
 use App\Models\JobPost;
 use App\Models\Major;
@@ -21,38 +20,36 @@ class CompanyController extends Controller
     {
         $data = [];
         $job = [];
-        $data = company::where('status', 1)->paginate(10);
+        $data = Company::where('status', 1)->paginate(10);
         // dd($data['id']);
         $search = $request->search;
         $size = $request->size;
         $address = $request->address;
         if (isset($search) && isset($size) && $address == null) {
-            $data = company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->where('team', 'like', '%' . $size . '%')->paginate(10);
+            $data = Company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->where('team', 'like', '%' . $size . '%')->paginate(10);
         } elseif (isset($search) && $size == null && $address == null) {
-            $data = company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->paginate(10);
+            $data = Company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->paginate(10);
         } elseif ($search == null && isset($size) && $address == null) {
-            $data = company::where('status', 1)->where('team', 'like', '%' . $size . '%')->paginate(10);
+            $data = Company::where('status', 1)->where('team', 'like', '%' . $size . '%')->paginate(10);
         } elseif ($search == null && isset($address) && $size == null) {
-            $data = company::where('status', 1)->where('address', 'like', '%' . $address . '%')->paginate(10);
+            $data = Company::where('status', 1)->where('address', 'like', '%' . $address . '%')->paginate(10);
         } elseif (isset($search) && isset($address) && $size == null) {
-            $data = company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->where('address', 'like', '%' . $address . '%')->paginate(10);
+            $data = Company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->where('address', 'like', '%' . $address . '%')->paginate(10);
         } elseif (isset($size) && isset($address) && $search == null) {
-            $data = company::where('status', 1)->where('team', 'like', '%' . $size . '%')->where('address', 'like', '%' . $address . '%')->paginate(10);
+            $data = Company::where('status', 1)->where('team', 'like', '%' . $size . '%')->where('address', 'like', '%' . $address . '%')->paginate(10);
         } else {
-            $data = company::where('status', 1)->paginate(10);
+            $data = Company::where('status', 1)->paginate(10);
         }
         foreach ($data as $item) {
-            // dd($item->id);
             $job = JobPost::where('company_id', $item->id)->get();
         }
-        // dd(count($job));
         $maJor = Major::all();
         return view('client.company.company', compact('data', 'job', 'maJor'));
     }
     public function detail($id)
     {
         $job_short = [];
-        $company_detail = company::where('id', $id)->first();
+        $company_detail = Company::where('id', $id)->first();
         $company_job = JobPost::where('company_id', $company_detail->id)->get();
         $query = new Feedback();
         $data = $query->listFeedback($id);
@@ -88,8 +85,6 @@ class CompanyController extends Controller
                 }
             }
         }
-        // dd($idJobApplied[$item->id]);
-        // dd($data_job->id);
         return view('client.company.company-detail', compact('company_detail', 'company_job', 'maJor', 'average', 'sum', 'idCompanyShort', 'job_short'));
     }
     public function filter(Request $request)
@@ -97,10 +92,9 @@ class CompanyController extends Controller
         $keyword = $request->keyword;
         $address = $request->address;
         $job = [];
-        $data = company::where('name', 'like', '%' . $keyword . '%')->Where('address', 'like', '%' . $address . '%')->get();
+        $data = Company::where('name', 'like', '%' . $keyword . '%')->Where('address', 'like', '%' . $address . '%')->get();
         $maJor = Major::all();
         foreach ($data as $item) {
-            // dd($item->id);
             $job = JobPost::where('company_id', $item->id)->get();
         }
         return view('client.company.company', compact('data', 'maJor', 'job'));
