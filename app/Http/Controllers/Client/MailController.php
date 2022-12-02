@@ -15,7 +15,6 @@ use App\Models\SkillSeeker;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mail;
-
 class MailController extends Controller
 {
     public function send(Request $request)
