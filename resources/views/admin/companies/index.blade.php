@@ -10,7 +10,12 @@
     cursor: pointer;
     transition: 0.3s;
   }
-  
+  .cursoi {
+    cursor: pointer;
+  }
+  .ds-block {
+    display: block !important;
+  }
   #myImg:hover {opacity: 0.7;}
   
   /* The Modal (background) */
@@ -122,7 +127,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->company_name}}</td>
                         @if ($item->logo)
-                        <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->logo)}}" alt=""></td>
+                        <td class="text-center"><img width="100px" src="{{asset('storage/images/company/'. $item->logo)}}" alt=""></td>
                         @else
                         <td class="text-center"><img width="100px" src="https://vnpi-hcm.vn/wp-content/uploads/2018/01/no-image-800x600.png" alt=""></td>
                         @endif
@@ -130,11 +135,10 @@
                         <td>{{$item->email}}</td>
                         <td>{{$item->phone}}</td>
                         @if ($item->image_paper)
-                          <td><img id="myImg" width="100px" src="{{asset('storage/images/image_paper/'. $item->image_paper)}}" alt=""></td>
-                          <div id="myModal" class="modal">
+                          <td><img onclick="modalImg({{$item->id}})" class="myImg{{$item->id}} cursoi" width="100px" src="{{asset('storage/images/image_paper/'. $item->image_paper)}}" alt=""></td>
+                          <div id="myModal" class="myModal{{$item->id}} modal">
                             <span class="close">&times;</span>
-                            <img class="modal-content" id="img01">
-                            <div id="caption"></div>
+                            <img class="modal-content" id="img01{{$item->id}}">
                           </div>
                         @else
                         <td>Chưa có ảnh</td>
@@ -144,7 +148,7 @@
                             <form action="{{route('admin.company.status', ['id' => $item->id])}}" method="post">
                               @csrf
                               @method('post')
-                              <select class="select2" name="status" data-id="{{$item->id}}">
+                              <select class="stu" name="status" data-id="{{$item->id}}">
                                 <option @if($item->status == 0) selected @endif value="0">Chưa kích hoạt</option>
                                 <option @if($item->status == 1) selected @endif value="1">Đã kích hoạt</option>
                                 <option @if($item->status == 2) selected @endif value="2">Chặn</option>
@@ -177,25 +181,14 @@
 @parent
 <script src="{{asset('js/admin/candidate.js')}}"></script>
 <script>
-  // Get the modal
-  var modal = document.getElementById("myModal");
-  
-  // Get the image and insert it inside the modal - use its "alt" text as a caption
-  var img = document.getElementById("myImg");
-  var modalImg = document.getElementById("img01");
-  var captionText = document.getElementById("caption");
-  img.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
-  }
-  
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-  
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() { 
-    modal.style.display = "none";
+  function modalImg(id) {
+    $('.myModal'+id).addClass('ds-block');
+    var srcImg = $('.myImg'+id).prop('src');
+    $('#img01'+id).attr('src', srcImg);
+
+    $('.close').click(function () {
+      $('.myModal'+id).removeClass('ds-block');
+    })
   }
   </script>
 @endsection

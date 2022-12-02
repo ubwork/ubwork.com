@@ -21,9 +21,12 @@
                 <!-- Main Menu End-->
             </div>
             <div class="outer-box">
-                <button class="menu-btn">
+                {{-- <button class="menu-btn">
                     <span class="icon la la-bell"></span>
-                </button>
+                </button> --}}
+                <div>
+                    <span style="font-size:20px" class="icon la la-money"> <span style="font-size:16px;">{{auth('company')->user()->coin}} coin</span></span>
+                </div>
                 <!-- Dashboard Option -->
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -31,13 +34,13 @@
                             <img style="object-fit: cover;" src="{{ asset('storage/' . auth('company')->user()->logo) }}" alt="logo"
                                 class="thumb">
                         @elseif(!empty(auth('company')->user()->logo))
-                            <img style="object-fit: cover;" src="{{  auth('company')->user()->logo }}" alt="logo"
+                            <img style="object-fit: cover;" src="{{  asset('storage/images/company/'.auth('company')->user()->logo) }}" alt="logo"
                                 class="thumb">
                         @else
                             <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
                                  class="thumb">
                         @endif
-                        <span class="name">{{ auth('company')->user()->name }}</span>
+                        <span class="name">{{ auth('company')->user()->company_name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="dashboard-company-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
