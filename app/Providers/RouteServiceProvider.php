@@ -49,9 +49,9 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web','auth.company')
                 ->prefix('company')
-		->domain('company.ubwork.me')
+		        // ->domain('company.ubwork.me')
                 ->name('company.')
-               // ->namespace($this->namespace)
+               ->namespace($this->namespace)
                 ->group(base_path('routes/company.php'));
         });
     }
