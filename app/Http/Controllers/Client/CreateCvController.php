@@ -119,6 +119,23 @@ class CreateCvController extends Controller
         $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
         $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
+        $bat_dau = strtotime($params['cols']['start_date']);
+        if(empty($ket_thuc)){
+            $ket_thuc = Carbon::now()->toDateTimeString();
+        }else {
+            $ket_thuc = $params['cols']['end_date'];
+        }
+        $ket_thuc = strtotime($ket_thuc);
+        $tong = $ket_thuc - $bat_dau;
+        $day = floor($tong / 60 / 60 / 24);
+        $day = round($day /30/12, 1);
+
+        $params['cols']['time_exp'] =  $day;
+        
+        $seeker = SeekerProfile::where('id', auth('candidate')->user()->id)->first();
+        $seeker->total_exp = $seeker->total_exp += $day;
+        $seeker->save();
+
         unset($params['cols']['_token']);
         $model = new Experience();
 
@@ -140,6 +157,25 @@ class CreateCvController extends Controller
         $params = [];
         $params['cols'] = $request->post();
 
+        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+        $bat_dau = strtotime($params['cols']['start_date']);
+        if(empty($ket_thuc)){
+            $ket_thuc = Carbon::now()->toDateTimeString();
+        }else {
+            $ket_thuc = $params['cols']['end_date'];
+        }
+        $ket_thuc = strtotime($ket_thuc);
+        $tong = $ket_thuc - $bat_dau;
+        $day = floor($tong / 60 / 60 / 24);
+        $day = round($day /30/12, 1);
+
+        $params['cols']['time_exp'] =  $day;
+
+        $seeker = SeekerProfile::where('id', $params['cols']['seeker_id'])->first();
+        $seeker->total_exp = $seeker->total_exp += $day;
+        $seeker->save();
+
         unset($params['cols']['_token']);
         $model = new Experience();
         $params['cols']['id'] = $id;
@@ -160,9 +196,27 @@ class CreateCvController extends Controller
     public function deleteExperience($id)
     {
         if (isset($id)) {
-            Experience::find($id)->delete();
+            $exp = Experience::find($id);
+            $bat_dau = strtotime($exp->start_date);
+            if(empty($ket_thuc)){
+                $ket_thuc = Carbon::now()->toDateTimeString();
+            }else {
+                $ket_thuc = $exp->end_date;
+            }
+            $ket_thuc = strtotime($ket_thuc);
+            $tong = $ket_thuc - $bat_dau;
+            $day = floor($tong / 60 / 60 / 24);
+            $day = round($day /30/12, 1);
+
+            $seeker = SeekerProfile::where('id', $exp->seeker_id)->first();
+            $seeker->total_exp = $seeker->total_exp -= $day;
+            $seeker->save();
+
+            $exp->delete();
+            Session::flash('success', 'Xóa thành công!');
             return redirect()->route('CreateCV');
         }
+        Session::flash('error', 'Xóa thất bại!');
         return redirect()->route('CreateCV');
     }
 
@@ -219,6 +273,7 @@ class CreateCvController extends Controller
     {
         $params = [];
         $params['cols'] = $request->post();
+        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
         unset($params['cols']['_token']);
         $model = new Education();
@@ -276,6 +331,7 @@ class CreateCvController extends Controller
     {
         $params = [];
         $params['cols'] = $request->post();
+        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
         unset($params['cols']['_token']);
         $model = new Certificate();

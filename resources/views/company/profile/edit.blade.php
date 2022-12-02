@@ -107,7 +107,7 @@
 
                     <!-- Input -->
                     <div class="form-group col-lg-6 col-md-12">
-                      <label>Team Size</label>
+                      <label>Số lượng nhân viên</label>
                       <select name="team" class="chosen-select">
                         @foreach ($team as $k => $v)
                         <option  value="{{$k}}" @if (isset($data->team) && $data->team == $k ) selected @endif>
