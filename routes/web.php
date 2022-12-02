@@ -20,6 +20,7 @@ Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');
 // Register Client
 Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
+Route::get('/actived/{candidate}/{token}', 'Candidate\RegisterController@actived')->name('actived');
 //login
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@postLogin']);
