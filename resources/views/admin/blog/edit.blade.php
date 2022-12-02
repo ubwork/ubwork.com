@@ -50,8 +50,13 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                               <label class="form-label w-100">{{__('IMAGE')}}</label>
-                              <img id="image" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt="your image"
+                              @if(!empty($obj->banner))
+                                <img id="image" src="{{ asset('storage/' .$obj->image) }}" alt="your image"
                                   style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
+                              @else
+                                <img id="image" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt="your image"
+                                  style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
+                              @endif
                               <input name="image" type="file" id="img">
                               <small class="form-text text-muted">{{__('Choose an image smaller than 5mb')}}</small>
                               @error('image')
@@ -62,9 +67,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                               <label class="form-label w-100">{{__('BANNER')}}</label>
-                              <img id="banner" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt="your image"
+                              @if(!empty($obj->banner))
+                                <img id="banner" src="{{ asset('storage/' .$obj->banner) }}" alt="your image"
                                   style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
-                              <input name="banner" type="file" id="img">
+                              @else
+                                <img id="banner" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt="your image"
+                                  style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
+                              @endif
+                              <input name="banner" type="file" id="img_banner">
                               <small class="form-text text-muted">{{__('Choose an image smaller than 5mb')}}</small>
                               @error('banner')
                               <small class="text-danger">{{$message}}</small>

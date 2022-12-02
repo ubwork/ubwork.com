@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\AuthorRequest;
+use App\Http\Requests\AuthRequest;
 use App\Models\Author;
 use App\Models\Blog;
 use Carbon\Carbon;
@@ -34,7 +36,7 @@ class AuthorController extends Controller
         return view('admin.author.add', $this->v);
     }
 
-    public function store(Request $request)
+    public function store(AuthorRequest $request)
     {
         $params = [];
         $params['cols'] = $request->post();
@@ -73,7 +75,7 @@ class AuthorController extends Controller
         return view('admin.author.edit', $this->v);
     }
 
-    public function update(Request $request, $id)
+    public function update(AuthorRequest $request, $id)
     {
         $method_route = 'admin.author.edit';
         $params = [];

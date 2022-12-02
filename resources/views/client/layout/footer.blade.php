@@ -1,3 +1,14 @@
+@php
+use App\Models\Config;
+
+$config = [];
+$config = [];
+$configList = Config::where('status', 1)->get();
+foreach ($configList as $item) {
+    $config[$item->name] = Config::where('name', $item->name)->first();
+}
+@endphp
+
 <footer class="main-footer">
     <div class="auto-container">
         <!--Widgets Section-->
@@ -23,7 +34,6 @@
                                 <div class="widget-content">
                                     <ul class="list">
                                         <li><a href="{{ route('index') }}">Trang chủ</a></li>
-                                        <li><a href="{{ route('job') }}">Việc làm</a></li>
                                         <li><a href="{{ route('blog') }}">Bài viết</a></li>
                                         <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
                                     </ul>
@@ -31,6 +41,18 @@
                             </div>
                         </div>
 
+                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
+                            <div class="footer-widget links-widget">
+                                <h4 class="widget-title">Ứng viên</h4>
+                                <div class="widget-content">
+                                    <ul class="list">
+                                        <li><a href="{{ route('job')}}">Việc làm</a></li>
+                                        <li><a href="{{ route('company-list')}}">Công ty</a></li>
+                                        <li><a href="{{ route('jobspeed')}}">Tìm việc nhanh</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
@@ -39,7 +61,7 @@
                                     <ul class="list">
                                         <li><a href="{{ route('blog_detail', ['id' => 1]) }}">Chính sách bảo mật</a></li>
                                         <li><a href="{{ route('blog_detail', ['id' => 2]) }}">Quy chế hoạt dộng</a></li>
-                                        <li><a href="{{ route('blog_detail', ['id' => 3]) }}">Chính sách giải quyết khiếu nại</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 3]) }}">Chính sách khiếu nại</a></li>
                                         <li><a href="{{ route('blog_detail', ['id' => 4]) }}">Thỏa thuận sử dụng</a></li>
                                     </ul>
                                 </div>
@@ -48,30 +70,13 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">About Us</h4>
+                                <h4 class="widget-title">Đối tác</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Job Page</a></li>
-                                        <li><a href="#">Job Page Alternative</a></li>
-                                        <li><a href="#">Resume Page</a></li>
-                                        <li><a href="#">Blog</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
-                            <div class="footer-widget links-widget">
-                                <h4 class="widget-title">Helpful Resources</h4>
-                                <div class="widget-content">
-                                    <ul class="list">
-                                        <li><a href="#">Site Map</a></li>
-                                        <li><a href="#">Terms of Use</a></li>
-                                        <li><a href="#">Privacy Center</a></li>
-                                        <li><a href="#">Security Center</a></li>
-                                        <li><a href="#">Accessibility Center</a></li>
+                                        <li><a href="{{$config['Facebook']->content}}">Shark Tank</a></li>
+                                        <li><a href="#">Doanh nghiệp</a></li>
+                                        <li><a href="#">Trường Đại Học</a></li>
+                                        <li><a href="#">Các nhà hảo tâm</a></li>
                                     </ul>
                                 </div>
                             </div>

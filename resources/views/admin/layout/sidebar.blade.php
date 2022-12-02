@@ -134,6 +134,14 @@
                         </li>
                     </ul>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{ route('admin.config.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>
+                            {{ __('Danh sách cấu hình') }}
+                        </p>
+                    </a>
+                  </li>
                   <li class="nav-item ">
                     <a href="{{route('admin.logout')}}" class="nav-link">
                         <i class="fa fa-sign-out-alt"></i>

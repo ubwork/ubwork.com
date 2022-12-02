@@ -90,18 +90,15 @@
                       <div class="col-sm-6">
                         <label class="form-label w-100">{{__('Tác Giả')}}</label>
                         <div class="d-flex">
-                          @foreach($author as $item)
-                          <div class="form-check mr-3">
-                            <input type="radio" class="form-check-input" id="author_id" name="author_id" value="{{$item->id}}" checked>{{$item->name}}
-                            <label class="form-check-label" for="author_id"></label>
-                          </div>
-                          @endforeach
+                          <select class="form-select" name="author">
+                            @foreach($author as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                          </select>
                         </div>
                       </div>
                     </div>
-
                     <div class="mt-3">
-                        
                         <button type="submit" class="btn btn-primary float-left mr-3">{{__('SAVE')}}</button>
                         <a href="{{route('admin.blog.index')}}" class="btn btn-secondary">{{__('Hủy')}}</a>
                     </div>

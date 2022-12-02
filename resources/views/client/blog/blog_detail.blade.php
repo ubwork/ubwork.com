@@ -3,7 +3,7 @@
 {{__('UB Work')}} | {{$data->title}}
 @endsection
 @section('content')
-    <section class="blog-single">
+    <section class="blog-single mt-5">
       <div class="auto-container">
         <div class="upper-box">
           <h3>{{$data->title}}</h3>
@@ -15,7 +15,7 @@
       </div>
       <figure class="main-image"><img src="{{ asset('storage/' .$data->banner) }}" alt=""></figure>
       <div class="auto-container">
-        <h4>Course Description</h4>
+        <h4>{{$data->title}}</h4>
         <p>{{$data->description}}</p>
         <p>{{$data->content}}</p>
         <blockquote class="blockquote-style-one mb-5 mt-5">

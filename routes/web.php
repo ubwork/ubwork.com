@@ -18,7 +18,7 @@ Route::post('/contact', 'client\ContactController@contact')->name('post_contact'
 
 Route::get('/blog', 'client\BlogController@index')->name('blog');
 Route::get('/blog_detail/{id}', 'client\BlogController@detail')->name('blog_detail');
-Route::get('/search_blog', 'client\BlogController@searchByTitle')->name('blog_detail');
+Route::get('/search_blog', 'client\BlogController@searchByTitle');
 
 Route::get('/search/title', 'client\HomeController@searchByTitle');
 Route::get('/search/title-cat/{id}', 'client\JobController@searchByTitle');

@@ -73,3 +73,11 @@ Route::prefix('author')->name('author.')->group(function () {
     Route::delete('/{id}', 'Admin\AuthorController@destroy')->name('destroy');
     Route::post('/{id}', 'Admin\AuthorController@status')->name('status');
 });
+
+Route::prefix('config')->name('config.')->group(function () {
+    Route::get('/', 'Admin\ConfigController@index')->name('index');
+    Route::get('edit/{id}', 'Admin\ConfigController@edit')->name('edit');
+    Route::post('update/{id}', 'Admin\ConfigController@update')->name('update');
+    Route::delete('/{id}', 'Admin\ConfigController@destroy')->name('destroy');
+    Route::post('/{id}', 'Admin\ConfigController@status')->name('status');
+});

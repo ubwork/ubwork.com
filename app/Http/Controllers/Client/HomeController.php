@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Candidate;
 use App\Models\Company;
+use App\Models\Config;
 use App\Models\JobPost;
 use App\Models\JobPostActives;
 use App\Models\JobPostActivities;
@@ -69,7 +70,6 @@ class HomeController extends Controller
         $countJob = JobPost::all()->count();
         $countJobActive = JobPostActivities::all()->count();
         $news = Blog::where('status', 1)->take(3)->get();
-
         return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive', 'user', 'company', 'seeker', 'job_post', 'user_type', 'news'));
     }
     public function search(Request $request)

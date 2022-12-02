@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
     function readURL(input, selector) {
         if (input.files && input.files[0]) {
             let reader = new FileReader();
@@ -16,7 +16,25 @@ $(function(){
 
 });
 
-$(document).ready(function() {
+$(function () {
+    function readURL(input, selector) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+
+            reader.onload = function (e) {
+                $(selector).attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#img_banner").change(function () {
+        readURL(this, '#banner');
+    });
+
+});
+
+$(document).ready(function () {
     $('.btn-delete').click(function (e) {
         e.preventDefault();
         var arrayUrl = $(location).attr('pathname').split('/');
@@ -29,33 +47,33 @@ $(document).ready(function() {
             confirmButtonText: 'Yes',
             confirmButtonColor: '#e3342f',
             cancelButtonText: 'No'
-          })
-          .then((results) => {
-            if (results.isConfirmed) {
-                var data = {
-                    "_token": $('meta[name="csrf-token"]').attr('content'),
-                    "id": id,
-                }
-                $.ajax({
-                    type: "DELETE",
-                    url: `${model}/${id}`,
-                    data: data,
-                    success: function(response) {
-                        Swal.fire(response.success, {
-                            icon: "success",
-                        })
-                        .then((result) => {
-                            location.reload();
-                        });
+        })
+            .then((results) => {
+                if (results.isConfirmed) {
+                    var data = {
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                        "id": id,
                     }
-                });
+                    $.ajax({
+                        type: "DELETE",
+                        url: `${model}/${id}`,
+                        data: data,
+                        success: function (response) {
+                            Swal.fire(response.success, {
+                                icon: "success",
+                            })
+                                .then((result) => {
+                                    location.reload();
+                                });
+                        }
+                    });
 
-            }
-          });
+                }
+            });
 
     });
 
-    $('.stu').change(function(){
+    $('.stu').change(function () {
         var arrayUrl = $(location).attr('pathname').split('/');
         var model = arrayUrl[arrayUrl.length - 1];
         var id = $(this).data('id');
@@ -68,13 +86,13 @@ $(document).ready(function() {
             "status": status
         }
         $.ajax({
-          type: "POST",
-          url: `${model}/${id}`,
-          data: data,
-            success: function(response) {
+            type: "POST",
+            url: `${model}/${id}`,
+            data: data,
+            success: function (response) {
                 toastr.success(response.success)
             },
-            error: function(response) {
+            error: function (response) {
                 toastr.error("Cập nhật trạng thái thất bại")
             }
         });

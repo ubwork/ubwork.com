@@ -45,7 +45,7 @@
                               <label class="form-label w-100">{{__('avatar')}}</label>
                               <img id="image" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt="your image"
                                   style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
-                              <input name="image" type="file" id="img">
+                              <input name="avatar" type="file" id="img">
                               <small class="form-text text-muted">{{__('Choose an image smaller than 5mb')}}</small>
                               @error('avatar')
                               <small class="text-danger">{{$message}}</small>
