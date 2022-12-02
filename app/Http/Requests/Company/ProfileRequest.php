@@ -36,7 +36,7 @@ class ProfileRequest extends FormRequest
                             'name' => 'required|unique:companies',
                             'company_name' => 'required|unique:companies',
                             'email' => 'required|email|unique:companies',
-                            'phone' => 'required | min:10 ',
+                            'phone' => 'required',
                         ];
                         break;
                     case 'update':
@@ -44,7 +44,7 @@ class ProfileRequest extends FormRequest
                             'name' => 'required',
                             'company_name' => 'required',
                             'email' => 'required|email|unique:companies,email,' . $id . ',id',
-                            'phone' => 'required | min:10 ',
+                            'phone' => 'required',
                         ];
                         break;
                     default:
@@ -66,7 +66,6 @@ class ProfileRequest extends FormRequest
             'email.required' => 'Bắt Buộc Phải Nhập Email',
             'email.unique' => 'Email Đã Tồn Tại',
             'phone.required' => 'Bắt Buộc Phải Nhập Số Điện Thoại',
-            'phone.min' => 'Số Điện Thoại Tối Thiểu 10 Số',
         ];
     }
 }

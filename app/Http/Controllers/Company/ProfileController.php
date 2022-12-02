@@ -78,11 +78,10 @@ class ProfileController extends Controller
         }
         // dd($data);
         $data['logo'] = $name;
-        $data['status'] = 0;
+        $data['status'] = $company->status;
 
         $company->update($data);
-        Session::flash('message', trans('system.success'));
-        Session::flash('alert-class', 'success');
+        Session::flash('message', "Cập nhật thành công");
         return redirect()->back();
     }
 
