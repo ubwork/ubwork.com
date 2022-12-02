@@ -165,7 +165,19 @@
                     </div>
                     <div class="form-group">
                         <label for="">Loại bằng</label>
-                        <input type="text" value="{{$edu->type_degree}}" name="type_degree" class="form-control">
+                        <select class="form-select" name="type_degree">
+                            @foreach (config('custom.type_degree') as $value)
+                                <option 
+                                @if(!empty($edu->type_degree))
+                                @if($edu->type_degree == $value['id'])
+                                selected
+                                @endif
+                                @endif
+                                value="{{ $value['id']}}">
+                                    {{ $value['name']}}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                    <div class="form-group mt-3">
                         <label for="">Mô tả học vấn *</label>
