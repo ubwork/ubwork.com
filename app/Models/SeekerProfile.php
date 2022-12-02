@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\Candidate;
 use App\Models\Major;
+use App\Models\JobPostActivities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class SeekerProfile extends Model
         'phone',
         'image',
         'address',
+        'total_exp',
     ];
     public function candidate()
     {
@@ -41,7 +43,21 @@ class SeekerProfile extends Model
     {
         return $this->belongsTo(Skill::class);
     }
-
+    public function seekerSkill()
+    {
+        return $this->belongsTo(SkillSeeker::class ,'id','seeker_id');
+    }
+    public function education()
+    {
+        return $this->belongsTo(Education::class ,'id','seeker_id');
+    }
+    public function experience()
+    {
+        return $this->belongsTo(Experience::class ,'id','seeker_id');
+    }
+    public function job_post_activities(){
+        return $this->belongsToMany(JobPostActivities::class,'job_post_activities','id','seeker_id');
+    }
     // lưu tạo
     public function saveAdd($params) {
         $data = $params['cols'];

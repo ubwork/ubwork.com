@@ -30,6 +30,8 @@ Route::get('view-profile-candidate/{id}', 'Company\ViewCvController@viewProfile'
 
 Route::get('view-info-candidate/{id}', 'Company\ViewCvController@viewProfileHidden')->name('viewProfileHidden');
 
+Route::get('manage-cv/', 'Company\ManageCVController@index')->name('manageCV');
+
 Route::get('view-open-cv', 'Company\OpenCvController@index')->name('viewOpenCv');
 
 Route::get('view-open-cv/save-open/{id}', 'Company\OpenCvController@store')->name('SaveOpenCv');
@@ -40,6 +42,9 @@ Route::post('payment','Company\CoinController@payment')->name('payment');
 Route::get('vnpay_return','Company\CoinController@vnpay_return')->name('vnpay_return');
 Route::get('vnpay_ipn','Company\CoinController@vnpay_ipn')->name('vnpay_ipn');
 Route::get('detail-candidates/{id}', 'Company\DetailCandidateController@index')->name('detail-candidate.index');
+
+Route::get('detail-profile/{id}', 'Company\DetailCandidateController@viewHidden')->name('detail-profile.hidden');
+
 Route::get('historyPayment', 'Company\CoinController@historyPayment')->name('historyPayment');
 
 
