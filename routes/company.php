@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Company\ProfileController;
 
-Route::get('',"Company\DashboardController@home")->name('home');
-Route::get('/dashboard', function () {
-    return redirect()->route('company.home');
-});
+Route::get('/dashboard',"Company\DashboardController@home")->name('home');
+// Route::get('', function () {
+//     return redirect()->route('company.home');
+// });
 Route::post('/logout',"Company\LoginController@logOut")->name('logOut');
 Route::prefix('post')->name('post.')->group(function () {
     Route::get('/','Company\JobPostController@index')->name('index');
