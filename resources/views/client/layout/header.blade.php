@@ -5,33 +5,39 @@
         <!--Nav Outer -->
         <div class="nav-outer">
             <div class="logo-box">
-                <div class="logo"><a href=""><img src="{{ asset('assets/client-bower/images/logo.svg') }}"
-                            alt="" title=""></a></div>
+                <div class="logo"><a href="/"><img src="{{ asset('images/logo_ubwork.png') }}" alt=""
+                            title="" style="max-height: 40px;"></a></div>
             </div>
 
             <nav class="nav main-menu">
                 <ul class="navigation" id="navbar">
                     <li class="current dropdown">
                         {{-- <span>Home</span> --}}
-                        <a href="/">Home</a>
-                    </li>
-
-                    <li class="dropdown has-mega-menu" id="has-mega-menu">
-                        {{-- <span>Find Jobs</span> --}}
-                        <a href="/job">Find Jobs</a>
+                        <a href="/">Trang chủ</a>
                     </li>
 
                     <li class="dropdown">
-                        {{-- <span>Employers</span> --}}
-                        <a href="/company">Company</a>
+                        <span><a href="{{ route('job') }}">Việc làm</a></span>
+                        <ul>
+                            <li class="dropdown">
+                                <span>Chuyên ngành</span>
+                                <ul>
+                                    @foreach ($maJor as $item)
+                                        <li><a
+                                                href="{{ route('job-cat', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="dropdown">
-                        {{-- <span>Candidates</span> --}}
-                        <a href="/candi">Candidates</a>
+                        <a href="{{ route('company-list') }}">Công ty</a>
                     </li>
-
-
+                    <li class="dropdown">
+                        <a href="{{ route('jobspeed') }}">Tìm Việc Nhanh</a>
+                    </li>
 
                     <!-- Only for Mobile View -->
                     <li class="mm-add-listing">
@@ -57,22 +63,56 @@
             <!-- Main Menu End-->
         </div>
 
-        <div class="outer-box">
-            <!-- Add Listing -->
-            <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a>
-            <!-- Login/Register -->
-            <div class="btn-box">
-                <a href="" class="theme-btn btn-style-three call-modal">Login / Register</a>
-                <a href="" class="theme-btn btn-style-one">Job Post</a>
-            </div>
-        </div>
-    </div>
+        @if (auth('candidate')->check())
+            <div class="outer-box">
 
+                <div class="dropdown dashboard-option">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                        @if(!is_null(auth('candidate')->user()->avatar) && Storage::exists(auth('candidate')->user()->avatar))
+                            <img style="object-fit: cover;" src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
+                                class="thumb">
+                        @elseif(!empty(auth('candidate')->user()->avatar))
+                            <img style="object-fit: cover;" src="{{  auth('candidate')->user()->avatar }}" alt="avatar"
+                                class="thumb">
+                        @else
+                            <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
+                                 class="thumb">
+                        @endif
+                        <span class="name">{{auth('candidate')->user()->name }}</span>
+                    </a>
+                    <ul class="dropdown-menu" style="min-width: 330px;">
+                        <li class="active"><a href=""> <i class="la la-home"></i> Dashboard</a></li>
+                        <li><a href="{{ route('detail', ['id' => auth('candidate')->user()->id]) }}"><i class="la la-user-tie"></i>Thông tin</a></li>
+                        <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>
+                        <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã lưu</a></li>
+                        <li><a href="{{ route('speedapply') }}"><i class="la la-briefcase"></i> Công việc đã tìm kiếm nhanh</a></li>
+                        <li><a href="{{ route('shortlisted_list_company') }}"><i class="icon fas fa-building"></i>Công ty đã lưu</a></li>
+                        <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
+                        <li><a href="{{route('seeker')}}"><i class="la la-file-invoice"></i> Quản lí CV</a></li>
+                        <li><a href="{{route('listPackage')}}"><i class="fa fa-cube"></i>Gói cước</a></li>
+                        <li><a href="{{route('historyPayment')}}"><i class="la la-history"></i>Lịch sử giao dịch</a></li>
+                        <li><a href="{{ route('change_password') }}"><i class="la la-lock"></i>Đổi mật khẩu</a></li>
+                        <li><a href="{{ route('logout') }}"><i class="la la-sign-out"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </div>
+        @else
+            <div class="outer-box">
+                <!-- Add Listing -->
+                {{-- <a href="candidate-dashboard-cv-manager.html" class="upload-cv"> Upload your CV</a> --}}
+                <!-- Login/Register -->
+                <div class="btn-box">
+                    <a href="{{ route('candidate.login') }}" class="theme-btn btn-style-three">Đăng nhập</a>
+                    <a href="{{ route('candidate.register') }}" class="theme-btn btn-style-three">Đăng kí</a>
+                </div>
+            </div>
+    </div>
+    @endif
     <!-- Mobile Header -->
     <div class="mobile-header">
-        <div class="logo"><a href=""><img src="{{ asset('assets/client-bower/images/logo.svg') }}"
-                    alt="" title=""></a>
-        </div>
+        {{-- <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}" alt=""
+                    title=""></a>
+        </div> --}}
 
         <!--Nav Box-->
         <div class="nav-outer clearfix">

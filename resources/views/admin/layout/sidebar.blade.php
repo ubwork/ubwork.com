@@ -3,7 +3,7 @@
     <a href="" class="brand-link">
         <img src="{{ asset('assets/admin-bower/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Hotel</span>
+        <span class="brand-text font-weight-light">UBWORK</span>
     </a>
 
     <!-- Sidebar -->
@@ -16,7 +16,7 @@
                 --}}
             </div>
             <div class="info">
-                {{-- <a href="#" class="d-block">{{ Auth::user()->name }}</a> --}}
+                <a href="#" class="d-block">Hello, {{ Auth::User()->name }}</a>
             </div>
         </div>
 
@@ -41,7 +41,96 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            {{ __('DASHBOARD') }}
+                            {{ __('Tổng quan') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.company.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p> Công ty </p>
+                    </a>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.candidate.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            {{ __('Ứng viên') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.skill.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            {{ __('Kỹ năng') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.major.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            {{ __('Chuyên ngành') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            {{ __('Gói nạp') }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.package.candidate.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Ứng viên') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.package.company.indexc') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Công ty') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                  </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.user.index') }}" class="nav-link">
+                        <i class="fas fa-users nav-icon"></i>
+                        <p>{{ __('Người dùng') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-shield"></i>
+                        <p>
+                            {{ __('Quản lý ACL') }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.role.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Vai trò') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.permission.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Quyền') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item ">
+                    <a href="{{route('admin.logout')}}" class="nav-link">
+                        <i class="fa fa-sign-out-alt"></i>
+                        <p>
+                            {{ __('Đăng xuất') }}
                         </p>
                     </a>
                 </li>
