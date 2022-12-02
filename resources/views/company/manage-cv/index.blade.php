@@ -3,11 +3,6 @@
     {{-- {{ __('Sửa Công ty') }} --}}
 @endsection
 @section('content')
-<style>
-    .ls-pagination li a {
-        border-radius: unset !important;
-    }
-</style>
 
 <section class="user-dashboard">
   <div class="">
@@ -76,8 +71,6 @@
           var idsee = $('#selectView').find(":selected").val();
           call_ajax(idsee, idfun);
         });
-          // var idsee = $('#selectView').find(":selected").val();
-          // var idfun = $('#selectFunction').find(":selected").val();
           function call_ajax(idsee, idfun) {
             var data = {
                     "is_see": idsee,

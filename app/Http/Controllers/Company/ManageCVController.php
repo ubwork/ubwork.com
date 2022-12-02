@@ -30,8 +30,8 @@ class ManageCVController extends Controller
             $is_function = $request->get('is_function') == 5 ? 0 : $request->get('is_function');
             $is_see = $request->get('is_see') == 3 ? 0 : $request->get('is_see');
 
-            $dk_fun = $request->get('is_function') == -1 ? $dk = "!=" : $dk = "=";
-            $dk_see = $request->get('is_see') == -1 ? $dk = "!=" : $dk = "=";
+            $dk_fun = $request->get('is_function') == -1 ? "!=" : "=";
+            $dk_see = $request->get('is_see') == -1 ? "!=" : "=";
             
 
             $this->v['listCV'] = JobPostActivities::with('seeker_profile')

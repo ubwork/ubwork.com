@@ -10,31 +10,25 @@
         <div class="candidate-block-six" >
           <div class="inner-box">
             {{-- @dd($data['candidate']) --}}
+            @if(empty($data->image))
             <figure class="image"><img src="{{!empty($data['candidate']->avatar) ? asset('storage/'. $data['candidate']->avatar) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
-            <h4 class="name" style="bottom: 15px"><a href="#">{{$data->name ?? ''}}</a></h4>
+            @else
+            <figure class="image"><img src="{{!empty($data->image) ? asset('storage/'. $data->image) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
+            @endif
+            <h4 id="nameSeeker" class="name" style="bottom: 15px">
+              {{$data->name}}
+            </h4>
             <span class="designation">{!!$data['major']->name ?? ''!!}</span>
             <div class="content">
-              <ul class="post-tags">
-                  @forelse ($seekerSkill as $item)
-                  <li><a href="#">{!!$item->getNameSkill->name!!}</a></li>
-                  @empty
-                  <li><a href="#">Không có kĩ năng nào</a></li>
-                  @endforelse
-              </ul>
-
-              <ul class="candidate-info">
+              <ul class="candidate-info justify-content-center">
                 @if ($data->address ?? '')
-                <li><span class="icon flaticon-map-locator"></span>{{$data->address ?? ''}}</li>
-                @endif
-                @if ($data->coin ?? '')
-                <li><span class="icon flaticon-money"></span>{{$data->coin ?? ''}}</li>
-                @endif
-                @if ($data->birthday ?? '')
-                <li><span class="icon flaticon-clock"></span>{{$data->birthday ?? ''}}</li>
+                <li><span class="icon flaticon-map-locator"> </span>{{$data->address ?? ''}}</li>
                 @endif
               </ul>
               <div class="btn-box">
-                <a style="width: 49%;" target="_blank" href="{{route('company.viewProfileHidden', $data->candidate_id)}}" class="theme-btn btn-style-one">Xem CV</a>
+              @if(!empty($data->path_cv))
+                <a href="{{asset('upload/cv/'.$data->path_cv)}}" target="_blank" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Xem CV</a>
+              @endif
               </div>
             </div>
           </div>
@@ -48,12 +42,13 @@
           <div class="content-column col-lg-8 col-md-12 col-sm-12 order-2">
             <div class="job-detail">
               <h4>Giới Thiệu</h4>
-              <p>{{$data->description ?? ''}}</p>
+              <p>{{$data->description ?? 'Chưa cập nhật'}}</p>
               <div class="resume-outer">
                 <div class="upper-title">
                   <h4>Học vấn</h4>
                 </div>
                 <!-- Resume BLock -->
+                @if(count($education) > 0)
                 @foreach ($education as $item)
                 <div class="resume-block">
                   <div class="inner">
@@ -62,14 +57,13 @@
                       <div class="info-box">
                         
                         <h3>{{$item['name_education'] ?? ''}}</h3>
-                        {{-- @dd($education) --}}
                         <span>{{$item['type_degree']}}</span>
                         
                         
                       </div>
                       
                       <div class="edit-box">
-                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}}</span>
+                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} @if(!empty($item['end_date'])) - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}} @else - Hiện tại @endif</span>
                         <div class="edit-btns">
                         </div>
                       </div>
@@ -78,6 +72,9 @@
                   </div>
                 </div>
                 @endforeach
+                @else
+                Chưa cập nhật
+                @endif
               </div>
 
               <!-- Resume / Work & Experience -->
@@ -86,6 +83,7 @@
                   <h4>Kinh nghiệm làm việc</h4>
                 </div>
                 <!-- Resume BLock -->
+                @if(count($exp) > 0)
                 @foreach ($exp as $item)
                 <div class="resume-block">
                   <div class="inner">
@@ -96,46 +94,80 @@
                         <span>{{$item['position']}}</span>
                       </div>
                       <div class="edit-box">
-                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}}</span>
+                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} @if(!empty($item['end_date'])) - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}} @else - Hiện tại @endif </span>
                       </div>
                     </div>
                     <div class="text">{{$item['description']}}</div>
                   </div>
                 </div>
                 @endforeach
+                @else
+                Chưa cập nhật
+                @endif
 
                 <!-- Resume BLock -->
               </div>
               <!-- Resume / Awards -->
+              <div class="resume-outer theme-yellow">
+                <div class="upper-title">
+                  <h4>Chứng chỉ</h4>
+                </div>
+                @if(count($exp) > 0)
+                @foreach($certificate as $cer)
+                <!-- Resume BLock -->
+                <div class="resume-block">
+                  <div class="inner">
+                    <span class="name"></span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3>{{$cer->name}}</h3>
+                        <span></span>
+                      </div>
+                      <div class="edit-box">
+                        <span class="year">{{$cer->time}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                @endforeach
+                @else
+                Chưa cập nhật
+                @endif
+              </div>
               <!-- Video Box -->
             </div>
           </div>
 
           <div class="sidebar-column col-lg-3 col-md-12 col-sm-12">
             <aside class="sidebar">
+
               <div class="sidebar-widget">
                 <div class="widget-content">
                   <ul class="job-overview">
-                    {{-- <li>
+                    @if(!empty($data->total_exp))
+                    <li>
                       <i class="icon icon-calendar"></i>
                       <h5>Kinh nghiệm:</h5>
-                      <span>0-2 năm</span>
+                      <span>{{$data->total_exp}} Năm</span>
                     </li>
-
+                    @endif
+                    @if(!empty($data['candidate']->birthday))
                     <li>
-                      <i class="icon icon-expiry"></i>
+                      <i style="color: #1967d2;font-size: 20px;" class="icon icon-expiry"></i>
                       <h5>Tuổi:</h5>
-                      <span>28-33 năm</span>
-                    </li>
+                      @php
+                      $sn = strtotime($data['candidate']->birthday);
+                      $timeNow = strtotime($timeNow);
 
-                    <li>
-                      <i class="icon icon-rate"></i>
-                      <h5>Mức Lương:</h5>
-                      <span>11K - 15K</span>
-                    </li> --}}
+                      $tong = $timeNow - $sn;
+                      $day = floor($tong / 60 / 60 / 24 /30/12);
+                      @endphp
+                      <span>{{$day}}</span>
+                    </li>
+                    @endif
                     @isset($data['candidate']->gender)
                     <li>
-                      <i class="icon icon-user-2"></i>
+                      <i style="color: #1967d2;font-size: 20px;"  class="icon fa fa-user"></i>
                       <h5>Giới Tính:</h5>
                       @if ($data['candidate']->gender == 1 )
                       <span>Nam</span>
@@ -144,11 +176,39 @@
                       @endif
                     </li>
                     @endisset
+                    
+                    @if(!empty($data->email))
+                    <li>
+                      <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-mail-bulk"></i>
+                      <h5>Email:</h5>
+                      {{$data->email}}
+                    </li>
+                    @endif
+
+                    @isset($data->phone)
+                    <li>
+                      <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-phone"></i>
+                      <h5>Số điện thoại:</h5>
+                      +{{$data->phone}}
+                    </li>
+                    @endisset
+
                   </ul>
                 </div>
-
               </div>
-              
+              <div class="sidebar-widget">
+                  <!-- Job Skills -->
+                  <h4 class="widget-title">Kỹ năng</h4>
+                  <div class="widget-content">
+                    <ul class="job-skills">
+                      @forelse ($seekerSkill as $item)
+                      <li><a href="javascript:void(0)">{!!$item->getNameSkill->name!!}</a></li>
+                      @empty
+                      <li><a href="javascript:void(0)">Chưa cập nhật</a></li>
+                      @endforelse
+                    </ul>
+                  </div>
+                </div>
             </aside>
           </div>
         </div>
