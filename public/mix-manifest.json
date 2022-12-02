@@ -1,4 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/admin/candidate.js": "/js/admin/candidate.js",
+    "/js/admin/skills.js": "/js/admin/skills.js",
+    "/js/admin/blacklist.js": "/js/admin/blacklist.js",
+    "/js/remove-ajax.js": "/js/remove-ajax.js",
+    "/js/paginate.js": "/js/paginate.js",
+    "/js/company/search.js": "/js/company/search.js",
+    "/css/client_style.css": "/css/client_style.css",
     "/css/app.css": "/css/app.css"
 }

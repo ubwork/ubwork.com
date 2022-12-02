@@ -19,3 +19,11 @@ mix.js("resources/js/app.js", "public/js").postCss(
     ]
 );
 
+mix.js("resources/js/admin/candidate.js", "public/js/admin");
+mix.js("resources/js/admin/skills.js", "public/js/admin");
+mix.js("resources/js/admin/blacklist.js", "public/js/admin");
+mix.js("resources/js/remove-ajax.js", "public/js");
+mix.css("resources/css/client_style.css", "public/css");
+mix.js("resources/js/paginate.js", "public/js");
+mix.js("resources/js/company/search.js", "public/js/company");
+
