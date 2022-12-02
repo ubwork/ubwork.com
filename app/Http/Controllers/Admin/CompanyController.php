@@ -39,6 +39,7 @@ class CompanyController extends Controller
             unset($params['cols']['_token']);
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $params['cols']['logo'] = $this->uploadFile($request->file('image'));
+                $params['cols']['logo'] = basename($params['cols']['logo'], "images/company/");
             }
             $modelTest = new Company();
             $res = $modelTest->saveAdd($params);
@@ -81,6 +82,7 @@ class CompanyController extends Controller
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
             $params['cols']['logo'] = $this->uploadFile($request->file('image'));
+            $params['cols']['logo'] = basename($params['cols']['logo'], "images/company/");
         }
 
         unset($params['cols']['_token']);
