@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Company\ProfileController;
 
-Route::get('/dashboard',"Company\DashboardController@home")->name('home');
-Route::get('', function () {
+Route::get('',"Company\DashboardController@home")->name('home');
+Route::get('/dashboard', function () {
     return redirect()->route('company.home');
 });
 Route::post('/logout',"Company\LoginController@logOut")->name('logOut');
