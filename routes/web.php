@@ -13,13 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/search/title', 'client\HomeController@searchByTitle');
-Route::get('/search/title-cat/{id}', 'client\JobController@searchByTitle');
-
 Route::get('/choose-login', 'client\HomeController@choose')->name('choose');
-
-// Register client
+Route::get('/search/title', 'Client\HomeController@searchByTitle');
+Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');
+// Register Client
 Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
 //login
@@ -31,53 +28,53 @@ Route::get('/googleLogin','Client\Auth\LoginGoogleController@getGoogleLoginClien
 Route::get('/googleLogin/callback','Client\Auth\LoginGoogleController@loginClientCallback');
 
 //candidate
-Route::get('/', 'client\HomeController@index')->name('index');
-Route::get('/search', 'client\HomeController@search')->name('search');
-Route::get('/send', 'client\MailController@send')->name('send');
-Route::get('/job-speed', 'client\MailController@jobspeed')->name('jobspeed');
-Route::get('/job-speed-apply', 'client\MailController@speedapply')->name('speedapply');
+Route::get('/', 'Client\HomeController@index')->name('index');
+Route::get('/search', 'Client\HomeController@search')->name('search');
+Route::get('/send', 'Client\MailController@send')->name('send');
+Route::get('/job-speed', 'Client\MailController@jobspeed')->name('jobspeed');
+Route::get('/job-speed-apply', 'Client\MailController@speedapply')->name('speedapply');
 
-Route::get('/job', 'client\JobController@jobPost')->name('job');
-Route::get('/job-cat/{id}', 'client\JobController@job_cat')->name('job-cat');
-Route::get('/job-detail/{id}', 'client\JobController@detail')->name('job-detail');
-Route::post('/job-searchs', 'client\JobController@searchs')->name('searchs');
+Route::get('/job', 'Client\JobController@jobPost')->name('job');
+Route::get('/job-cat/{id}', 'Client\JobController@job_cat')->name('job-cat');
+Route::get('/job-detail/{id}', 'Client\JobController@detail')->name('job-detail');
+Route::post('/job-searchs', 'Client\JobController@searchs')->name('searchs');
 
-Route::get('/change-password', 'client\CandidateController@change')->name('change_password');
-Route::post('/update_password', 'client\CandidateController@update_pass')->name('update_pass');
-Route::get('/candidate-detail/{id}', 'client\CandidateController@detail')->name('detail');
-Route::post('/candidate-profile-edit/{id}', 'client\CandidateController@update')->name('update');
-Route::post('/status/{candidate}&{type}', 'client\CandidateController@status')->name('status');
+Route::get('/change-password', 'Client\CandidateController@change')->name('change_password');
+Route::post('/update_password', 'Client\CandidateController@update_pass')->name('update_pass');
+Route::get('/candidate-detail/{id}', 'Client\CandidateController@detail')->name('detail');
+Route::post('/candidate-profile-edit/{id}', 'Client\CandidateController@update')->name('update');
+Route::post('/status/{candidate}&{type}', 'Client\CandidateController@status')->name('status');
 
-Route::get('/seeker', 'client\SeekerController@index')->name('seeker');
-Route::post('/seeker', 'client\SeekerController@store')->name('store');
-Route::get('/delete-seeker/{id}', 'client\SeekerController@destroy')->name('delete_seeker');
+Route::get('/seeker', 'Client\SeekerController@index')->name('seeker');
+Route::post('/seeker', 'Client\SeekerController@store')->name('store');
+Route::get('/delete-seeker/{id}', 'Client\SeekerController@destroy')->name('delete_seeker');
 
-Route::get('/shortlisted-job', 'client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
-Route::get('/shortlisted/{id}', 'client\ShortlistedController@shortlisted')->name('shortlisted');
-Route::get('/delete-shortlisted/{id}', 'client\ShortlistedController@destroy')->name('delete_shortlisted');
+Route::get('/shortlisted-job', 'Client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
+Route::get('/shortlisted/{id}', 'Client\ShortlistedController@shortlisted')->name('shortlisted');
+Route::get('/delete-shortlisted/{id}', 'Client\ShortlistedController@destroy')->name('delete_shortlisted');
 
-Route::get('/shortlisted-company/{id}', 'client\ShortlistCompanyController@shortlisted_company')->name('shortlisted_company');
-Route::get('/shortlisted-list-company', 'client\ShortlistCompanyController@shortlisted')->name('shortlisted_list_company');
-Route::get('/delete-shortlisted-company/{id}', 'client\ShortlistCompanyController@destroy')->name('delete_shortlisted_company');
+Route::get('/shortlisted-company/{id}', 'Client\ShortlistCompanyController@shortlisted_company')->name('shortlisted_company');
+Route::get('/shortlisted-list-company', 'Client\ShortlistCompanyController@shortlisted')->name('shortlisted_list_company');
+Route::get('/delete-shortlisted-company/{id}', 'Client\ShortlistCompanyController@destroy')->name('delete_shortlisted_company');
 
-Route::get('/applied/{id}', 'client\JobPostActivitiesController@applied')->name('applied');
-Route::get('/jobApply', 'client\JobPostActivitiesController@jobApply')->name('jobApply');
-Route::get('/delete-applied-job/{id}', 'client\JobPostActivitiesController@destroy')->name('delete_applied_jobs');
+Route::get('/applied/{id}', 'Client\JobPostActivitiesController@applied')->name('applied');
+Route::get('/jobApply', 'Client\JobPostActivitiesController@jobApply')->name('jobApply');
+Route::get('/delete-applied-job/{id}', 'Client\JobPostActivitiesController@destroy')->name('delete_applied_jobs');
 
 Route::get('/applied-job', function () {
-    return view('client.candidate.applied-job');
+    return view('Client.candidate.applied-job');
 });
 
 Route::get('/candi-detail', function () {
-    return view('client.candidate.candi-detail');
+    return view('Client.candidate.candi-detail');
 });
-//client/company
-Route::get('/company-list', 'client\CompanyController@index')->name('company-list');
-Route::post('/company-filter', 'client\CompanyController@filter')->name('company-filter');
+//Client/company
+Route::get('/company-list', 'Client\CompanyController@index')->name('company-list');
+Route::post('/company-filter', 'Client\CompanyController@filter')->name('company-filter');
 
-Route::get('/company-detail/{id}', 'client\CompanyController@detail')->name('company-detail');
-Route::get('/company-feedback/{id}', 'client\CompanyController@feedback')->name('feedback');
-Route::post('/feedback/{id}', 'client\CompanyController@saveFeedback')->name('saveFeedback');
+Route::get('/company-detail/{id}', 'Client\CompanyController@detail')->name('company-detail');
+Route::get('/company-feedback/{id}', 'Client\CompanyController@feedback')->name('feedback');
+Route::post('/feedback/{id}', 'Client\CompanyController@saveFeedback')->name('saveFeedback');
 
 //company
 Route::get('company/register', ['as' => 'company.register', 'uses' => 'Company\RegisterController@getRegister']);
