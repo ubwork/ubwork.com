@@ -89,7 +89,7 @@ class CandidateController extends Controller
         $model = new Candidate();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
-        $res = $model->saveUpdate($params);
+        $res = $model->saveUpdateAdmin($params);
         if ($res == null) {
             Session::flash('success', 'Cập nhật thành công!');
             return Redirect()->route($method_route, ['id' => $id]);
