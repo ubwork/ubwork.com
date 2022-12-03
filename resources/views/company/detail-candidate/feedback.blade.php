@@ -25,7 +25,7 @@
 
         <div style="padding: 30px 30px;" class="job-detail-outer">
             <div class="auto-container">
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="content-column col-lg-8 col-md-12 col-sm-12">
                         <form class="default-form" action="{{ route('company.saveFeedback', ['id'=> $data->id]) }}" method="post" enctype="multipart/form-data">
                     @csrf

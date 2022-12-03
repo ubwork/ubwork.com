@@ -140,7 +140,7 @@ class DetailCandidateController extends Controller
             $company->coin += 2;
             //
             $history->user_id = $id_user;
-                $history->note = "Thực hiện feedback ứng viên + coin số dư còn lại ".$company->coin." coin";
+                $history->note = "Thực hiện feedback ứng viên +2 coin còn lại ".$company->coin." coin";
                 $history->coin = $company->coin;
                 $history->type_coin = 0;
                 $history->type_account = 0;
@@ -153,7 +153,7 @@ class DetailCandidateController extends Controller
             Session::flash('success', 'Feedback thành công');
             return redirect()->route('company.detail-candidate.index', ['id' => $id]);
         } else {
-            Session::flash('error', 'Tài khoản của bạn đã từng gửi Feedback đến công ty');
+            Session::flash('error', 'Bạn đã feedback ứng viên này rồi');
             return Redirect()->route('company.feedback', ['id' => $id]);
         }
     }
