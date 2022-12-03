@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/contact', 'client\ContactController@index')->name('contact');
+Route::post('/contact', 'client\ContactController@contact')->name('post_contact');
+
+Route::get('/blog', 'client\BlogController@index')->name('blog');
+Route::get('/blog_detail/{id}', 'client\BlogController@detail')->name('blog_detail');
+Route::get('/search_blog', 'client\BlogController@searchByTitle');
+
+Route::get('/search/title', 'client\HomeController@searchByTitle');
+Route::get('/search/title-cat/{id}', 'client\JobController@searchByTitle');
+
 Route::get('/choose-login', 'client\HomeController@choose')->name('choose');
 Route::get('/search/title', 'Client\HomeController@searchByTitle');
 Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');
@@ -21,7 +31,7 @@ Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');
 Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
 Route::get('/actived/{candidate}/{token}', 'Candidate\RegisterController@actived')->name('actived');
-Route::get('404', function(){
+Route::get('404', function () {
     return view('email.404');
 });
 Route::get('refresh-pass', 'Candidate\RegisterController@refresh')->name('refresh');
