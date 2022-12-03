@@ -37,7 +37,7 @@
                         </div>
                         <!-- Job Search Form -->
                         <div class="job-search-form">
-                            <form method="get" action="search">
+                            <form method="get" action="job">
                                 <div class="row">
                                     <div class="form-group col-lg-5 col-md-12 col-sm-12">
                                         <span class="icon flaticon-search-1"></span>
