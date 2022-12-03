@@ -111,7 +111,7 @@ class FilterCvController extends Controller
                 $query = $query->where('address', 'like', "%{$search_address}%");
             }
             if(isset($selectYearKn)) {
-                $query = $query->where('total_exp','<', $value);
+                $query = $query->where('total_exp',$dk, $value);
             }
 
         }
