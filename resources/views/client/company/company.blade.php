@@ -23,7 +23,7 @@
         border-bottom-left-radius: 50%;
     }
 </style>
-    <section class="page-title">
+    <section class="page-title " style="margin-top:80px;">
         <div class="auto-container">
             <div class="title-outer">
                 <h1>Danh sách công ty</h1>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="filter-block">
                                 <h4>Quy mô công ty</h4>
-                                <div class="form-group">
+                                <div class="form-group" style="border: 1px solid #ECEDF2;border-radius: 8px;">
                                     <select name="size" class="chosen-select">
                                         <option value="">Mời Chọn</option>
                                         <option value="1">1-50 Nhân viên</option>

@@ -26,7 +26,7 @@ class CandidateController extends Controller
         $maJor = Major::all();
         return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
     }
-    public function update(CandidateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $id = auth('candidate')->user()->id;
         $method_route = 'detail';
@@ -99,7 +99,7 @@ class CandidateController extends Controller
                 Session::flash('error', 'Lỗi cập nhật!');
                 return Redirect()->back();
             }
-        }else {
+        } else {
             Session::flash('error', 'Mật khẩu cũ không đúng!');
             return Redirect()->back();
         }
@@ -109,7 +109,8 @@ class CandidateController extends Controller
         $fileName = time() . '_' . $file->getClientOriginalName();
         return $file->storeAs('images', $fileName, 'public');
     }
-    public function status(Candidate $candidate, $type){
+    public function status(Candidate $candidate, $type)
+    {
         if ($candidate->type == 1) {
             $candidate->update(['type' => 0]);
             return redirect()->back();

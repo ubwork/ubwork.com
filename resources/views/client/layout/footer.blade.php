@@ -8,7 +8,7 @@
                         <div class="logo"><a href="#"><img src="{{ asset('images/logo_ubwork.png') }}"
                                     alt="" style="max-height: 40px;"></a>
                         </div>
-                        <p class="phone-num"><span>Call us </span><a href="">0395167635</a></p>
+                        <p class="phone-num"><span>Hotline: </span><a href="">0395167635</a></p>
                         <p class="address">Trịnh Văn Bô
                             <br><a href="" class="email">datmv202@gmail.com</a>
                         </p>
@@ -19,29 +19,12 @@
                     <div class="row">
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Candidates</h4>
+                                <h4 class="widget-title">Về Chúng Tôi</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Browse Jobs</a></li>
-                                        <li><a href="#">Browse Categories</a></li>
-                                        <li><a href="#">Candidate Dashboard</a></li>
-                                        <li><a href="#">Job Alerts</a></li>
-                                        <li><a href="#">My Bookmarks</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
-                            <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Employers</h4>
-                                <div class="widget-content">
-                                    <ul class="list">
-                                        <li><a href="#">Browse Candidates</a></li>
-                                        <li><a href="#">Employer Dashboard</a></li>
-                                        <li><a href="#">Add Job</a></li>
-                                        <li><a href="#">Job Packages</a></li>
+                                        <li><a href="{{ route('index') }}">Trang chủ</a></li>
+                                        <li><a href="{{ route('blog') }}">Bài viết</a></li>
+                                        <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -49,30 +32,40 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">About Us</h4>
+                                <h4 class="widget-title">Ứng viên</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Job Page</a></li>
-                                        <li><a href="#">Job Page Alternative</a></li>
-                                        <li><a href="#">Resume Page</a></li>
-                                        <li><a href="#">Blog</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="{{ route('job')}}">Việc làm</a></li>
+                                        <li><a href="{{ route('company-list')}}">Công ty</a></li>
+                                        <li><a href="{{ route('jobspeed')}}">Tìm việc nhanh</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
+                            <div class="footer-widget links-widget">
+                                <h4 class="widget-title">Chính sách</h4>
+                                <div class="widget-content">
+                                    <ul class="list">
+                                        <li><a href="{{ route('blog_detail', ['id' => 1]) }}">Chính sách bảo mật</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 2]) }}">Quy chế hoạt dộng</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 3]) }}">Chính sách khiếu nại</a></li>
+                                        <li><a href="{{ route('blog_detail', ['id' => 4]) }}">Thỏa thuận sử dụng</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">Helpful Resources</h4>
+                                <h4 class="widget-title">Đối tác</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Site Map</a></li>
-                                        <li><a href="#">Terms of Use</a></li>
-                                        <li><a href="#">Privacy Center</a></li>
-                                        <li><a href="#">Security Center</a></li>
-                                        <li><a href="#">Accessibility Center</a></li>
+                                        <li><a href="">Shark Tank</a></li>
+                                        <li><a href="#">Doanh nghiệp</a></li>
+                                        <li><a href="#">Trường Đại Học</a></li>
+                                        <li><a href="#">Các nhà hảo tâm</a></li>
                                     </ul>
                                 </div>
                             </div>

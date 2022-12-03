@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Candidate;
 use App\Models\Company;
+use App\Models\Config;
 use App\Models\JobPost;
 use App\Models\JobPostActives;
 use App\Models\JobPostActivities;
@@ -28,6 +30,7 @@ class HomeController extends Controller
         $data = [];
         $seeker = [];
         $countCandidate = [];
+        $news = [];
         $user = Candidate::where('status', 1)->get();
         $user_type = Candidate::where('status', 1)->where('type', 1)->get();
         $company = Company::where('status', 1)->get();
@@ -55,16 +58,19 @@ class HomeController extends Controller
                     $job_short[$id_post] = $item;
                 }
             }
-            $seeker = SeekerProfile::where('candidate_id', $id)->first();
-            if (!empty($seeker)) {
-                $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
+            if (!empty($dataUser)) {
+                $seeker = SeekerProfile::where('candidate_id', $id)->first();
+                if (!empty($seeker)) {
+                    $dataYour = JobPost::where('major_id', $seeker->major_id)->where('status', 1)->get();
+                }
             }
         }
         $maJor = Major::all();
         $countCandidate = Candidate::all()->count();
         $countJob = JobPost::all()->count();
         $countJobActive = JobPostActivities::all()->count();
-        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive', 'user', 'company', 'seeker', 'job_post', 'user_type'));
+        $news = Blog::where('status', 1)->take(3)->get();
+        return view('client.home', compact('data', 'data_job_type', 'count', 'job_short', 'maJor', 'dataYour', 'countCandidate', 'countJob', 'countJobActive', 'user', 'company', 'seeker', 'job_post', 'user_type', 'news'));
     }
     public function search(Request $request)
     {

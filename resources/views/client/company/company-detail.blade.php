@@ -3,7 +3,7 @@
     {{__('UB work')}} | {{$company_detail->company_name}}
 @endsection
 @section('content')
-    <section class="job-detail-section">
+    <section class="job-detail-section" style="margin-top:80px;">
         <!-- Upper Box -->
         <div class="upper-box">
             <div class="auto-container">

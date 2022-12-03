@@ -321,6 +321,38 @@
     </section>
     <!-- End Job Section -->
 
+        <section class="news-section">
+      <div class="auto-container">
+        <div class="sec-title text-center">
+          <h2>Bài viết</h2>
+          <div class="text">Nội dung tin tức liên quan đến công việc mới được đăng mỗi ngày.</div>
+        </div>
+
+        <div class="row wow fadeInUp">
+            @foreach($news as $item)
+
+            <!-- News Block -->
+            <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                <div class="inner-box">
+                <div class="image-box">
+                    <figure class="image"><img src="{{ asset('storage/' . $item->image) }}" alt="" /></figure>
+                </div>
+                <div class="lower-content">
+                    <ul class="post-meta">
+                    <li><a href="#">{{date("d-m-Y", strtotime($item->created_at))}}</a></li>
+
+                    </ul>
+                    <h3><a href="{{ route('blog_detail', ['id' => $item->id]) }}">{{$item->title}}</a></h3>
+                    <p class="text">{{$item->description}}</p>
+                    <a href="{{ route('blog_detail', ['id' => $item->id]) }}" class="read-more">Xem thêm <i class="fa fa-angle-right"></i></a>
+                </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+      </div>
+    </section>
+
 @endsection
 @section('script')
 @parent
