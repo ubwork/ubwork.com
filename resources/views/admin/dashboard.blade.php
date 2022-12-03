@@ -106,7 +106,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-3">
+        {{-- <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-solid fa-ban"></i></span>
                 <div class="info-box-content">
@@ -116,7 +116,106 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title" id="btn-client">Doanh thu</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="position-relative mb-4">
+                        <canvas id="sales-chart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    @parent
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="{{ asset('assets/admin-bower/plugins/chart.js/Chart.min.js') }}"></script>
+    <script>
+        $(function() {
+            'use strict'
+            var months = {!!json_encode($months)!!};
+            var totalMoney = {!!json_encode($totalMoneyMonth)!!};
+          
+            var ticksStyle = {
+                fontColor: '#495057',
+                fontStyle: 'bold'
+            }
+
+            var mode = 'index'
+            var intersect = true
+
+            var $salesChart = $('#sales-chart')
+            var salesChart = new Chart($salesChart, {
+                type: 'bar',
+                data: {
+                    labels: months,
+                    datasets: [{
+                            backgroundColor: '#007bff',
+                            borderColor: '#007bff',
+                            data: totalMoney
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        mode: mode,
+                        intersect: intersect
+                    },
+                    hover: {
+                        mode: mode,
+                        intersect: intersect
+                    },
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            // display: false,
+                            gridLines: {
+                                display: true,
+                                lineWidth: '4px',
+                                color: 'rgba(0, 0, 0, .2)',
+                                zeroLineColor: 'transparent'
+                            },
+                            ticks: $.extend({
+                                beginAtZero: true,
+
+                                // Include a dollar sign in the ticks
+                                callback: function(value) {
+                                    if (value >= 1000000) {
+                                        value /= 1000000
+                                        value += 'm'
+                                    }else if(value >= 1000){
+                                        value /= 1000
+                                        value += 'k'
+                                    }
+
+                                    return   value
+                                }
+                            }, ticksStyle)
+                        }],
+                        xAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: ticksStyle
+                        }]
+                    }
+                }
+            })
+        })
+    </script>
 @endsection
