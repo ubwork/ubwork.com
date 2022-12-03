@@ -16,7 +16,11 @@
             <figure class="image"><img src="{{!empty($data->image) ? asset('storage/'. $data->image) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
             @endif
             <h4 id="nameSeeker" class="name" style="bottom: 15px">
+              @if(!empty($data->name))
               {{$data->name}}
+              @else
+              {{$data['candidate']->name}}
+              @endif
             </h4>
             <span class="designation">{!!$data['major']->name ?? ''!!}</span>
             <div class="content">

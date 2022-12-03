@@ -60,6 +60,8 @@ class ManageCVController extends Controller
             foreach ($this->v['listCV']  as $item) {
                 $seeker_id = $item->seeker_id;    
                 $this->v['list_skill'][$seeker_id] = SkillSeeker::where('seeker_id', $seeker_id)->paginate(4);
+
+                $this->v['infoCandidate'][$item->seeker_profile->candidate_id] = Candidate::where('id', $item->seeker_profile->candidate_id)->first();
             }
         }
         if ($request->ajax()) {
