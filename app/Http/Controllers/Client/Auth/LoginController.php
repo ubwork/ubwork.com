@@ -35,6 +35,10 @@ class LoginController extends Controller
             auth('candidate')->login($data);
             Session::flash('success', 'Đăng nhập thành công');
             return redirect()->back();
+        } elseif (auth('candidate')->attempt(['email' => $email, 'password' => $password, 'status' => 0])) {
+            auth('candidate')->logout();
+            Session::flash('error', 'Tài Khoản Của bạn chưa được kích hoạt. Vui lòng kích hoạt tài khoản');
+            return redirect()->back();
         } else {
             Session::flash('error', 'Email hoặc mật khẩu không đúng');
             return Redirect::to('/login');
