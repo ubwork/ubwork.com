@@ -44,13 +44,7 @@ h1 {
 }
 
 .pagination-container {
-  width: calc(100% - 2rem);
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  padding: 1rem 0;
-  justify-content: center;
+    text-align: center
 }
 
 .pagination-number,
@@ -146,7 +140,9 @@ footer .heart {
                 <div class="content-column col-lg-12">
                     <div class="ls-outer" data-current-page="1" aria-live="polite">
                         <div class="row searchpate" id="paginated-list" >
-                            @foreach ($data as $item)
+
+                            @if (!empty($data))
+                                @foreach ($data as $item)
                                 @php
                                     $end_time = strtotime($item->end_date);
                                     $total = $end_time - $today;
@@ -208,6 +204,8 @@ footer .heart {
                                         </div>
                                     </div>
                             @endforeach
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -281,15 +279,6 @@ footer .heart {
                                                         `+job.min_salary+` -
                                                         `+job.max_salary+`
                                                         </li>
-
-                                                    <li><i class="icon flaticon-clock-3"></i><span>
-                                                            @if ($day < 0)
-                                                                <b>Hết hạn.</b>
-                                                            @else
-                                                                <b>Còn lại {{ $day }} ngày.</b>
-                                                            @endif
-                                                        </span>
-                                                    </li>
                                                 </ul>
                                                 <ul class="job-other-info">
                                                     <li class="time">
