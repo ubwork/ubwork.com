@@ -28,7 +28,6 @@ class DetailCandidateController extends Controller
         $check = JobPostActivities::where([
             ['company_id','=',$company_id],
             ['seeker_id','=', $data->id],
-            ['is_function','=',2]
             ])->get()->count();
 
         if($check == 0) {
