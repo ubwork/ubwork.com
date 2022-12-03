@@ -9,8 +9,12 @@
 </head>
 
 <body>
+    <span>Vui Lòng Không Chia sẽ mã này cho bất cứ ai</span>
     Xin Chào {{ $candidate->name }}
-    <a href="{{ route('actived', ['candidate' => $candidate->id, 'token' => $candidate->token]) }}">kích hoạt</a>
+
+    mã xác nhận <span style="color: red">{{ $candidate->token }}</span>
+
+    <a href="{{ route('getPass', ['candidate' => $candidate->id, 'token' => $candidate->token]) }}">Đặt Lại Mật Khẩu</a>
 </body>
 
 </html>
