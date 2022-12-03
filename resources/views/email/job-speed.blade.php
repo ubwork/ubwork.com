@@ -12,7 +12,7 @@
                 phù hợp với bạn.
                 <br>
                 @if (auth('candidate')->check())
-                    @if ($major == null || $skill_seeker == null)
+                    @if ($major == null && $skill_seeker == null)
                         <span>Do bạn chưa tạo cv trên hệ thống. nên bạn hãy tìm kiếm bằng cách chọn chuyên ngành hoặc chọn
                             kỹ năng bên dưới để sử dụng chức năng hoặc bạn có thể tạo cv <a
                                 href="{{ route('CreateCV') }}">tại đây!</a></span>
