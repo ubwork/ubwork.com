@@ -69,7 +69,7 @@
             <h2 class="fcf-h3">Ubwork gửi lời chào đến công ty {{$company_name}}</h2>
             <span>Hiện đang có người dùng tên {{$name}} ứng tuyển vào công việc tốc độ của bạn</span>
             <div class="fcf-form-group">
-                <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block"><a href="{{route('company-list')}}" style="color: #fff">Xem Chi Tiết</a></button>
+                <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block"><a href="{{asset('upload/cv/'.$seeker->path_cv)}}" style="color: #fff">Xem Chi Tiết</a></button>
             </div>
         </div>
 
