@@ -16,15 +16,29 @@
           <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
             <div class="inner-box p-4">
               <div class="content">
-                <figure class="image"><img src="{{asset('storage/'.  $item->seeker_profile->image)}}" alt=""></figure>
-                <h4 class="name"><a href="#">{{$item->seeker_profile->name}}</a></h4>
+                <figure class="image"><img src="{{!empty($item->seeker_profile->image) ? asset('storage/'.  $item->seeker_profile->image) : asset('assets/admin-bower/dist/img/avatar.png') }}" alt=""></figure>
+                <h4 class="name"><a href="#">
+                  @if(!empty($item->seeker_profile->name))
+                  {{$item->seeker_profile->name}}
+                  @else
+                  {{$infoCandidate[$item->seeker_profile->candidate_id]->name}}
+                  @endif
+                </a></h4>
                 <ul class="candidate-info">
                   <li class="designation">
                     @foreach($major as $mj)
                     {{  $item->seeker_profile->major_id == $mj->id ? $mj->name : ''}}
                     @endforeach
                   </li>
-                  <li><span class="icon flaticon-map-locator"></span> {{$item->seeker_profile->address}}</li>
+                  @if(!empty($item->seeker_profile->address))
+                  <li><span class="icon flaticon-map-locator"></span> 
+                    {{$item->seeker_profile->address}}
+                  </li>
+                  @elseif($infoCandidate[$item->seeker_profile->candidate_id]->address)
+                  <li><span class="icon flaticon-map-locator"></span> 
+                    {{$infoCandidate[$item->seeker_profile->candidate_id]->address}}
+                  </li>
+                  @endif
                 </ul>
                 <ul class="post-tags" style="">
                   @foreach($list_skill[$item->seeker_id] as $sk)
