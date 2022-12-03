@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -17,6 +18,7 @@ class CompanyController extends Controller
     }
     public function index()
     {
+        $this->v['feed']=Feedback::where('is_candidate',0)->get();
         $this->v['list'] = Company::paginate(9);
         $this->v['title'] = "Danh sách công ty";
         return view("admin.companies.index", $this->v);

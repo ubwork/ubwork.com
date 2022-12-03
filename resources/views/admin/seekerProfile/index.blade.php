@@ -35,9 +35,9 @@
                 </thead>
                 <tbody>
                     @foreach($can as $kcan)
+                      <tr>
+                        <td>{{$loop->iteration}}</td>
                         @foreach ($kcan as $item )
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->email}}</td>
                             <td>{{$item->phone}}</td>
@@ -61,8 +61,8 @@
                                     @endif
                                 @endforeach
                             </td>
-                        </tr>
                         @endforeach
+                      </tr>
                     @endforeach
                 </tbody>
               </table>

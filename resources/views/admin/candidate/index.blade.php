@@ -30,6 +30,7 @@
                   <th>{{__('Ảnh')}}</th>
                   <th>Email</th>
                   <th>{{__('Số điện thoại')}}</th>
+                  <th>Đánh giá</th>
                   <th>{{__('Trạng thái')}}</th>
                   <th><a href="{{route('admin.candidate.create')}}"><i class="fa fa-plus"></i></a></th>
                 </tr>
@@ -42,6 +43,21 @@
                         <td class="text-center"><img width="100px" src="{{asset('storage/'. $item->avatar)}}" alt=""></td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->phone}}</td>
+                        <td>
+                          {{-- hàm sử lý mảng --}}
+                          <?php $k=[]?>
+                          @foreach ($feed as $u )
+                            @if ($u->candidate_id == $item->id)
+                              <?php $k[]=$u->id;?>                
+                            @endif 
+                          @endforeach
+                          {{-- hàm hiển thị count --}}
+                          @foreach ($feed as $u )
+                            @if ($u->candidate_id == $item->id)
+                            <a href="{{route('admin.feedback.candidate.index',['id' => $item->id])}}"><?php echo count($k).' bài';break;?></a>              
+                            @endif
+                          @endforeach
+                        </td>
                         <td>
                           <form action="{{route('admin.candidate.status', ['id' => $item->id])}}" method="post">
                             @csrf

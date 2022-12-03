@@ -112,8 +112,8 @@
                   <th>Tên</th>
                   <th>Tên công ty</th>
                   <th>Ảnh</th>
-                  <th>Email</th>
-                  <th>Số điện thoại</th>
+                  <th>Email / Số điện thoại</th>
+                  <th>Đánh giá</th>
                   <th>Ảnh xác thực</th>
                   <th>Trạng thái</th>
                   <th><a href="{{route('admin.company.create')}}"><i class="fa fa-plus"></i></a></th>
@@ -132,8 +132,29 @@
                         <td class="text-center"><img width="100px" src="https://vnpi-hcm.vn/wp-content/uploads/2018/01/no-image-800x600.png" alt=""></td>
                         @endif
                         
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->phone}}</td>
+                        <td>
+                          <label for="">Email:</label>
+                          <p>{{$item->email}}</p>
+                          <label for="">SĐT:</label>
+                          <p>{{$item->phone}}</p>
+                        </td>
+                        {{-- <td>{{$item->phone}}</td> --}}
+                        <td>
+                          {{-- hàm sử lý mảng --}}
+                          <?php $k=[]?>
+                          @foreach ($feed as $u )
+                            @if ($u->company_id == $item->id)
+                            
+                              <?php $k[]=$u->id;?>                
+                            @endif 
+                          @endforeach
+                          {{-- hàm hiển thị count --}}
+                          @foreach ($feed as $u )
+                            @if ($u->company_id == $item->id)
+                            <a href="{{route('admin.feedback.company.indexc',['id' => $item->id])}}"><?php echo count($k).' bài';break;?></a>              
+                            @endif
+                          @endforeach
+                        </td>
                         @if ($item->image_paper)
                           <td><img onclick="modalImg({{$item->id}})" class="myImg{{$item->id}} cursoi" width="100px" src="{{asset('storage/images/image_paper/'. $item->image_paper)}}" alt=""></td>
                           <div id="myModal" class="myModal{{$item->id}} modal">
