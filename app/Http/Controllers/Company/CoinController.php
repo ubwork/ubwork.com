@@ -242,4 +242,52 @@ class CoinController extends Controller
         }
         return view('company.coin.history',$this->v);
     }
+    public function refund(){
+       
+        $vnp_TmnCode = $this->vnp_TmnCode; //Website ID in VNPAY System
+        $vnp_HashSecret = $this->vnp_HashSecret; //Secret key
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
+
+        $amount = ($_POST["amount"]) * 100;
+        $ipaddr = $_SERVER['REMOTE_ADDR'];
+        $inputData = array(
+            "vnp_Version" => '2.1.0',
+            "vnp_TransactionType" => $_POST["trantype"],
+            "vnp_Command" => "refund",
+            "vnp_CreateBy" => $_POST["mail"],
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_TxnRef" => $_POST["orderid"],
+            "vnp_Amount" => $amount,
+            "vnp_OrderInfo" => 'Noi dung thanh toan',
+            "vnp_TransDate" => $_POST['paymentdate'],
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_IpAddr" => $ipaddr
+        );
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_apiUrl = $vnp_apiUrl . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
+            $vnp_apiUrl .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        $ch = curl_init($vnp_apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        echo $data;
+    }
 }
