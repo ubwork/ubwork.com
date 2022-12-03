@@ -27,6 +27,8 @@
               </ul>
               <div class="btn-box">
               @if(!empty($data->path_cv))
+                <a href="{{route('company.feedback',['id' => $data->candidate_id])}}" style="width: 49%;cursor: pointer; margin-right:30px" class="btn_unlock theme-btn btn-style-one">Đánh giá</a>
+
                 <a href="{{asset('upload/cv/'.$data->path_cv)}}" target="_blank" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Xem CV</a>
               @endif
               </div>

@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>{{__('Giá tiền')}} <span class="text-danger">*</span></label>
+                                <label>{{__('Giá')}} <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" name="amount" value="{{old('amount')}}">
                                 @error('amount')
                                 <small class="text-danger">{{$message}}</small>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>{{__('Giá mới')}}</label>
+                                <label>{{__('Giá giảm (không được nhỏ hơn giá)')}}</label>
                                 <input type="number" class="form-control" name="discount" value="{{old('discount')}}">
                             </div>
                         </div>
