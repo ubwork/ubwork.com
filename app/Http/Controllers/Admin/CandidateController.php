@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CandidateRequest;
 use App\Models\Candidate;
+use App\Models\Feedback;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -24,6 +25,7 @@ class CandidateController extends Controller
         if ($key = request()->key);
         $this->v['list'] = Candidate::where('name', 'like', '%' . $key . '%')->paginate(9);
         $this->v['title'] = "Danh sách ứng viên";
+        $this->v['feed']=Feedback::where('is_candidate',1)->get();
         return view('admin.candidate.index', $this->v);
     }
 
@@ -87,7 +89,7 @@ class CandidateController extends Controller
         $model = new Candidate();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
-        $res = $model->saveUpdate($params);
+        $res = $model->saveUpdateAdmin($params);
         if ($res == null) {
             Session::flash('success', 'Cập nhật thành công!');
             return Redirect()->route($method_route, ['id' => $id]);
