@@ -90,7 +90,7 @@
                       <div class="col-sm-6">
                         <label class="form-label w-100">{{__('Tác Giả')}}</label>
                         <div class="d-flex">
-                          <select class="form-select" name="author">
+                          <select class="form-select" id="author_id" name="author_id">
                             @foreach($author as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
