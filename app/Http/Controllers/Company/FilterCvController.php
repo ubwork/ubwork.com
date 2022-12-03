@@ -8,73 +8,140 @@ use App\Models\Company;
 use App\Models\Education;
 use App\Models\Major;
 use App\Models\Experience;
+use App\Models\JobPostActivities;
 use App\Models\OpenCv;
 use App\Models\SeekerProfile;
 use App\Models\Skill;
 use App\Models\SkillSeeker;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FilterCvController extends Controller
 {
+    private $v;
+    public function __construct(){
+        $this->v = [];
+        $this->v['activeRoute'] = 'filter';
+    }
     public function index(Request $request)
     {
-        $perPage = intval($request->input('page_num', 10));
-        $query = "1=1";
-        $exp      = $request->input('experience');
-        $major      = $request->input('major');
-        $skills      = $request->input('skill');
-        $gender      = $request->input('gender');
-        $education      = trim($request->input('name_education'));
+        $this->v['title'] = 'Tìm kiếm ứng viên phù hợp';
+        $company_id = auth('company')->user()->id;
+        $this->v['company'] = Company::find($company_id);
 
+        $data = DB::table('job_post_activities')->where('company_id', $company_id)->select('seeker_id')->groupby('seeker_id')->pluck('seeker_id')->toArray();
+        
+        if($request->ajax()) {
+            $gender = $request->get('id_gender');
+            $skill = $request->get('id_skill');
+            $major = $request->get('id_major');
+            $type_degree = $request->get('type_degree');
+            $name_edu = $request->get('name_edu');
+            $name_cty = $request->get('name_cty');
+            $search_address = $request->get('search_address');
+            $selectYearKn = $request->get('selectYearKn');
+            switch($selectYearKn) {
+                case 0:
+                    $dk = "=";
+                    $value = '0';
+                    break;
+                case 1:
+                    $dk = "<";
+                    $value = '1';
+                    break;
+                case 2:
+                    $dk = "<=";
+                    $value = '1';
+                    break;
+                case 3:
+                    $dk = "<=";
+                    $value = '2';
+                    break;
+                case 4:
+                    $dk = "<=";
+                    $value = '3';
+                    break;
+                case 5:
+                    $dk = "<=";
+                    $value = '4';
+                    break;
+                case 6:
+                    $dk = "<=";
+                    $value = '5';
+                    break;
+                case 7:
+                    $dk = "!>";
+                    $value = '5';
+                    break;
 
-        if($major && $major <> -1)
-        {
-            $major = SeekerProfile::where('major_id', $major)->pluck('candidate_id', 'candidate_id')->toArray();
-            $cvString = !empty($major) ? implode(',',$major) : -1;
-            $query .= " AND id IN($cvString)" ;
+                    default:
+                    $dk = ">";
+                    $value = '0';
+            }
+            $dk = $selectYearKn == 1 ? "<" : "<=";
+
+            $query = SeekerProfile::whereNotIn('id',$data)->with('candidate');
+            if(!empty($skill)) {
+                $query = $query->whereHas('seekerSkill', function($q) use ($skill) {
+                    $q->where('skill_id', $skill);
+                });
+            }
+            if(!empty($gender)){
+                $query = $query->whereHas('candidate', function($q) use ($gender) {
+                    $q->where('gender', $gender);
+                });
+            }
+            if(!empty($major)) {
+                $query = $query->where('major_id', $major);
+            }
+            if(!empty($type_degree)) {
+                $query = $query->whereHas('education', function($q) use ($type_degree) {
+                    $q->where('type_degree', 'like', "%{$type_degree}%");
+                });
+            }
+            if(!empty($name_edu)) {
+                $query = $query->whereHas('education', function($q) use ($name_edu) {
+                    $q->where('name_education', 'like', "%{$name_edu}%");
+                });
+            }
+            if(!empty($name_cty)) {
+                $query = $query->whereHas('experience', function($q) use ($name_cty) {
+                    $q->where('company_name', 'like', "%{$name_cty}%");
+                });
+            }
+            if(!empty($search_address)) {
+                $query = $query->where('address', 'like', "%{$search_address}%");
+            }
+            if(isset($value)) { //lỗi chưa check đúng, nếu để isset thì các cv k có kinh nghiệm sẽ lọc sai
+                $query = $query->where('total_exp', $dk, $value);
+            }
+
+            $this->v['seekerProfile'] = $query->paginate(9);
+
         }
-
-        if($gender && $gender <> -1) $query .= ' AND gender = '. $gender;
-        if($education && $education <> '' )
-        {
-            $education = Education::where('name_education', 'like', '%'. $education .'%' )->pluck('seeker_id','seeker_id')->toArray();
-            $nameEducation = SeekerProfile::whereIN('id', $education)->pluck('candidate_id','candidate_id')->toArray();
-            $cvString = !empty($nameEducation) ? implode(',',$nameEducation) : -1;
-            $query .= " AND id IN($cvString)" ;
+        else {
+            $this->v['seekerProfile'] = SeekerProfile::whereNotIn('id',$data)->with('candidate')->paginate(9);
         }
-        if($exp && $exp <> -1)
-        {
-            $exp = Experience::where('id',$exp)->pluck('seeker_id','seeker_id')->toArray();
-            $exps = SeekerProfile::whereIN('id', $exp)->pluck('candidate_id','candidate_id')->toArray();
-            $cvString = !empty($exps) ? implode(',',$exps) : -1;
-            $query .= " AND id IN($cvString)" ;
+        
+                                 
+        $this->v['major'] = Major::all();
+        $this->v['skill'] = Skill::all();
+        $this->v['nameEdu'] = Education::distinct()->select('name_education')->get();
+        $this->v['getNameCty'] = Experience::distinct()->select('company_name')->get();
+        if(!empty($this->v['seekerProfile'])){
+            foreach($this->v['seekerProfile'] as $item) {
+                $this->v['list_skill'][$item->id] = SkillSeeker::where('seeker_id', $item->id)->paginate(2);
+                $this->v['getMajor'][$item->major_id] = Major::where('id', $item->major_id)->first();
+
+                $this->v['getExperience'][$item->id] = Experience::where('seeker_id', $item->id)->get();
+            }
         }
-        if($skills && $skills <> -1)
-        {
-            $seekerSkill = SkillSeeker::where('skill_id',$skills)->pluck('seeker_id','seeker_id')->toArray();
-            $seekerSkills = SeekerProfile::whereIN('id', $seekerSkill)->pluck('candidate_id','candidate_id')->toArray();
-            $cvString = !empty($seekerSkills) ? implode(',',$seekerSkills) : -1;
-            $query .= " AND id IN($cvString)" ;
+        
+        if ($request->ajax()) {
+            return view('company.filter-cv.list-view',$this->v);
         }
-
-        $allProfile = SeekerProfile::get()->keyBy('candidate_id')->toArray();
-        $title = "Tìm hồ sơ ứng viên";
-        $activeRoute = "filter";
-        $exp = Experience::all()->toArray();
-        $major = Major::all()->toArray();
-        $skill = Skill::all()->toArray();
-
-
-        $company = Company::find(auth('company')->user()->id);
-        $candidate = Candidate::all();
-        $data = SeekerProfile::with('candidate', 'major')->whereRaw($query)->paginate($perPage);
-
-
-        return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill',
-        'data', 'candidate', 'company'));
-        $data = Candidate::with('seeker', 'major')->whereRaw($query)->paginate($perPage);
-        return view('company.filter-cv.index', compact('title', 'activeRoute', 'major','exp', 'skill',
-        'data', 'candidate', 'company', 'allProfile'));
+        return view('company.filter-cv.index', $this->v);
 
     }
 

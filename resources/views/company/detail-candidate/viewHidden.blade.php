@@ -16,7 +16,17 @@
             <figure class="image"><img src="{{!empty($data->image) ? asset('storage/'. $data->image) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
             @endif
             <h4 id="nameSeeker" class="name" style="bottom: 15px">
-              {{$data->name}}
+              @php
+                if(!empty($data->name)){
+                  $nameAt = $data->name;
+                  $count = mb_substr($nameAt, 0, 4,'UTF-8');
+                  echo $count."...";
+                }else {
+                  $nameAt = $data['candidate']->name;
+                  $count = mb_substr($nameAt, 0, 4,'UTF-8');
+                  echo $count."...";
+                }
+              @endphp 
             </h4>
             <span class="designation">{!!$data['major']->name ?? ''!!}</span>
             <div class="content">
@@ -24,11 +34,12 @@
                 @if ($data->address ?? '')
                 <li><span class="icon flaticon-map-locator"> </span>{{$data->address ?? ''}}</li>
                 @endif
+                @if (isset($data->coin))
+                <li><span class="icon flaticon-money"></span>{{$data->coin}}</li>
+                @endif
               </ul>
               <div class="btn-box">
-              @if(!empty($data->path_cv))
-                <a href="{{asset('upload/cv/'.$data->path_cv)}}" target="_blank" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Xem CV</a>
-              @endif
+                <div data-url="{{$data['candidate']->id}}" data-coin="{{$data->coin}}" data-id="{{$data->id}}" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Mở khóa</div>
               </div>
             </div>
           </div>
@@ -63,7 +74,7 @@
                       </div>
                       
                       <div class="edit-box">
-                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} @if(!empty($item['end_date'])) - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}} @else - Hiện tại @endif</span>
+                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} @if(!empty($item['end_date'])) - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}} @else Đang học tại đây @endif</span>
                         <div class="edit-btns">
                         </div>
                       </div>
@@ -94,7 +105,7 @@
                         <span>{{$item['position']}}</span>
                       </div>
                       <div class="edit-box">
-                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} @if(!empty($item['end_date'])) - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}} @else - Hiện tại @endif </span>
+                        <span class="year">{{\Carbon\Carbon::parse($item['start_date'])->format('d/m/Y')}} @if(!empty($item['end_date'])) - {{\Carbon\Carbon::parse($item['end_date'])->format('d/m/Y')}} @else - Đang làm việc tại đây @endif </span>
                       </div>
                     </div>
                     <div class="text">{{$item['description']}}</div>
@@ -153,7 +164,7 @@
                     @endif
                     @if(!empty($data['candidate']->birthday))
                     <li>
-                      <i style="color: #1967d2;font-size: 20px;" class="icon icon-expiry"></i>
+                      <i class="icon icon-expiry"></i>
                       <h5>Tuổi:</h5>
                       @php
                       $sn = strtotime($data['candidate']->birthday);
@@ -167,7 +178,7 @@
                     @endif
                     @isset($data['candidate']->gender)
                     <li>
-                      <i style="color: #1967d2;font-size: 20px;"  class="icon fa fa-user"></i>
+                      <i class="icon icon-user-2"></i>
                       <h5>Giới Tính:</h5>
                       @if ($data['candidate']->gender == 1 )
                       <span>Nam</span>
@@ -176,23 +187,6 @@
                       @endif
                     </li>
                     @endisset
-                    
-                    @if(!empty($data->email))
-                    <li>
-                      <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-mail-bulk"></i>
-                      <h5>Email:</h5>
-                      {{$data->email}}
-                    </li>
-                    @endif
-
-                    @isset($data->phone)
-                    <li>
-                      <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-phone"></i>
-                      <h5>Số điện thoại:</h5>
-                      +{{$data->phone}}
-                    </li>
-                    @endisset
-
                   </ul>
                 </div>
               </div>
@@ -215,4 +209,68 @@
       </div>
     </div>
   </section>
+@endsection
+@section('script')
+  @parent
+<script>
+$( document ).ready(function() {
+  $('.btn_unlock').click(function (e){
+    e.preventDefault();
+    var idURL = $(this).attr('data-url')
+    var coin = $(this).attr('data-coin');
+    var idseeker = $(this).attr('data-id');
+    var data = {
+                  "idseeker": idseeker,
+                  "coin": coin,
+                }
+    Swal.fire({
+        icon: 'warning',
+        title: 'Bạn có chắc chắn mua hồ sơ này với giá '+coin+' coin?',
+        text: 'Nhấn đồng ý sẽ mua được hồ sơ này!',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: 'Đồng ý',
+        confirmButtonColor: '#C46F01',
+        cancelButtonText: 'Không'
+    }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: ""+idURL,
+                    type: "get",
+                    data: data,
+                    // dataType: 'JSON',
+                    success: function(results) {
+                        if (results.success === true) {
+                          
+                            Swal.fire({
+                                title: 'Mở khóa ứng viên thành công',
+                                icon: 'success',
+                                type: 'success',
+                                text: results.message,
+                                showConfirmButton: false,
+                                timer: 3500
+                            }, setTimeout(function() {
+                              //  tr.remove();
+                            }, 500)).then(function() {
+                              $('#nameSeeker').text(results.nameSeeker);
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Lỗi',
+                                type: 'error',
+                                icon: 'error',
+                                text: results.message,
+                                timer: 3500
+                            });
+
+                        }
+                    }
+                });
+
+            }
+        });
+  });
+});
+</script>
+@parent
 @endsection

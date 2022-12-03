@@ -13,13 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/contact', 'client\ContactController@index')->name('contact');
-Route::post('/contact', 'client\ContactController@contact')->name('post_contact');
-
-Route::get('/blog', 'client\BlogController@index')->name('blog');
-Route::get('/blog_detail/{id}', 'client\BlogController@detail')->name('blog_detail');
-Route::get('/search_blog', 'client\BlogController@searchByTitle');
-
+Route::get('/choose-login', 'client\HomeController@choose')->name('choose');
 Route::get('/search/title', 'Client\HomeController@searchByTitle');
 Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');
 // Register Client
