@@ -81,8 +81,54 @@ class RegisterController extends Controller
                 'token' => null
             ]);
             return redirect()->route('candidate.login')->with('success', 'Kích Hoạt Tài Khoản Thành Công');
+        } elseif ($candidate->token == null && $candidate->staus == 1) {
+            return view('email.404');
         } else {
-            return redirect()->route('candidate.register')->with('error', 'Sai mã kích hoạt vui lòng thử lại');
+            return redirect('404');
+        }
+    }
+    public function refresh()
+    {
+        return view('client.login.refresh-pass');
+    }
+    public function refreshPass(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|exists:candidates',
+        ], [
+            'email.required' => 'Email không được để trống',
+            'email.exists' => 'Email không tồn tại trên hệ thống'
+        ]);
+        $candidate = Candidate::where('email', $request->email)->first();
+        $token = strtoupper(Str::random(10));
+        $candidate->update([
+            'token' => $token,
+        ]);
+        Mail::send('email.forget-pass', compact('candidate'), function ($email) use ($candidate) {
+            $email->subject('UbWork - Lấy Lại Mật Khẩu');
+            $email->to($candidate->email, $candidate->name);
+        });
+        return redirect()->route('candidate.login')->with('success', 'Vui Lòng Kiểm Tra Mail Để Thực Hiện Thay Đổi Mật Khẩu');
+    }
+    public function getPass()
+    {
+        return view('email.get-pass');
+    }
+    public function postPass(Candidate $candidate, Request $request)
+    {
+        if ($candidate->token === $request->token) {
+            if ($request->password === $request->password2) {
+                $candidate->update([
+                    'token' => null,
+                    'password' => bcrypt($request->password)
+
+                ]);
+                return redirect()->route('candidate.login')->with('success', 'Đổi mật khẩu thành công');
+            } else {
+                return back()->with('error','Mật khẩu không trùng khớp');
+            }
+        } else {
+            return view('email.404');
         }
     }
 }

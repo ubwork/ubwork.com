@@ -21,6 +21,13 @@ Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');
 Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
 Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
 Route::get('/actived/{candidate}/{token}', 'Candidate\RegisterController@actived')->name('actived');
+Route::get('404', function(){
+    return view('email.404');
+});
+Route::get('refresh-pass', 'Candidate\RegisterController@refresh')->name('refresh');
+Route::post('refresh-pass', 'Candidate\RegisterController@refreshPass')->name('refreshPass');
+Route::get('get-pass/{candidate}/{token}', 'Candidate\RegisterController@getPass')->name('getPass');
+Route::post('get-pass/{candidate}/{token}', 'Candidate\RegisterController@postPass')->name('postPass');
 //login
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@postLogin']);
