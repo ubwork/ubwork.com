@@ -52,7 +52,6 @@ class MailController extends Controller
                     ->distinct()
                     ->select('job_posts.*')
                     ->get();
-                // dd($ad);
                 if (!empty($seeker) && $major != null && $path_cv != null && $skill_seeker != null) {
                     if ($coin - $tien < 0) {
                         return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
@@ -192,7 +191,6 @@ class MailController extends Controller
             $seeker = SeekerProfile::where('candidate_id', $user_id)->first();
             if (!empty($seeker)) {
                 $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->first();
-
             }
         }
         return view('email.job-speed', compact('maJor', 'skill', 'seeker', 'major', 'skill_seeker'));
