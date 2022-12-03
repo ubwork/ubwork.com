@@ -15,6 +15,7 @@ use App\Models\SkillSeeker;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mail;
+
 class MailController extends Controller
 {
     public function send(Request $request)
@@ -189,8 +190,10 @@ class MailController extends Controller
         if (auth('candidate')->check()) {
             $user_id = auth('candidate')->user()->id;
             $seeker = SeekerProfile::where('candidate_id', $user_id)->first();
-            $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->first();
-            $major = $seeker->major_id;
+            if (!empty($seeker)) {
+                $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->first();
+
+            }
         }
         return view('email.job-speed', compact('maJor', 'skill', 'seeker', 'major', 'skill_seeker'));
     }
