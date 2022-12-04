@@ -32,7 +32,7 @@ class LoginController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
-            return redirect('admin/login')->withErrors($validator);
+            return redirect('admin/login')->withErrors($validator)->withInput();
         } else {
             $email = $request->input('email');
             $password = $request->input('password');
@@ -40,7 +40,7 @@ class LoginController extends Controller
                 return redirect('admin');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng');
-                return redirect('admin/login');
+                return redirect('admin/login')->withInput();
             }
         }
 
