@@ -10,7 +10,7 @@
                 <div class="form-inner">
                     <h3>Đăng nhập vào UbWork</h3>
                     <!--Login Form-->
-                    <form method="post" action="{{ route('candidate.login') }}">
+                    <form method="post" action="{{ route('candidate.login.post') }}">
                         @csrf
                         <div class="form-group">
                             <label>Email</label>
