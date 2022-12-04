@@ -30,15 +30,12 @@
             <div class="graph-widget ls-widget">
                 <div class="tabs-box">
                     <div class="widget-title">
-                        <h4>Your Profile Views</h4>
+                        <h4>Thống kê</h4>
                         <div class="chosen-outer">
                             <!--Tabs Box-->
-                            <select class="chosen-select">
-                                <option>Last 6 Months</option>
-                                <option>Last 12 Months</option>
-                                <option>Last 16 Months</option>
-                                <option>Last 24 Months</option>
-                                <option>Last 5 year</option>
+                            <select id="time-search" class="chosen-select">
+                                <option value="7">7 ngày trước</option>
+                                <option value="28">28 ngày trước</option>
                             </select>
                         </div>
                     </div>
@@ -62,78 +59,98 @@
         Chart.defaults.global.defaultFontFamily = "Sofia Pro";
         Chart.defaults.global.defaultFontColor = '#888';
         Chart.defaults.global.defaultFontSize = '14';
+        var date = {!!json_encode($arrayDate)!!};
+        var applied = {!!json_encode($totalApplied)!!};
+        showChart(date,applied)
+        function showChart(date,applied){
+            var ctx = document.getElementById('chart').getContext('2d');
+            var chart = new Chart(ctx, {
 
-        var ctx = document.getElementById('chart').getContext('2d');
-
-        var chart = new Chart(ctx, {
-
-            type: 'line',
-            // The data for our dataset
-            data: {
-                labels: ["January", "February", "March", "April", "May", "June"],
-                // Information about the dataset
-                datasets: [{
-                    label: "Views",
-                    backgroundColor: 'transparent',
-                    borderColor: '#1967D2',
-                    borderWidth: "1",
-                    data: [196, 132, 215, 362, 210, 252],
-                    pointRadius: 3,
-                    pointHoverRadius: 3,
-                    pointHitRadius: 10,
-                    pointBackgroundColor: "#1967D2",
-                    pointHoverBackgroundColor: "#1967D2",
-                    pointBorderWidth: "2",
-                }]
-            },
-
-            // Configuration options
-            options: {
-
-                layout: {
-                    padding: 10,
+                type: 'line',
+                // The data for our dataset
+                data: {
+                    labels: date,
+                    // Information about the dataset
+                    datasets: [{
+                        label: "Ứng tuyển",
+                        backgroundColor: 'transparent',
+                        borderColor: '#1967D2',
+                        borderWidth: "1",
+                        data: applied,
+                        pointRadius: 3,
+                        pointHoverRadius: 3,
+                        pointHitRadius: 10,
+                        pointBackgroundColor: "#1967D2",
+                        pointHoverBackgroundColor: "#1967D2",
+                        pointBorderWidth: "2",
+                    }]
                 },
 
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: false
-                },
+                // Configuration options
+                options: {
 
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: false
-                        },
-                        gridLines: {
-                            borderDash: [6, 10],
-                            color: "#d8d8d8",
-                            lineWidth: 1,
-                        },
-                    }],
-                    xAxes: [{
-                        scaleLabel: {
-                            display: false
-                        },
-                        gridLines: {
-                            display: false
-                        },
-                    }],
-                },
+                    layout: {
+                        padding: 10,
+                    },
 
-                tooltips: {
-                    backgroundColor: '#333',
-                    titleFontSize: 13,
-                    titleFontColor: '#fff',
-                    bodyFontColor: '#fff',
-                    bodyFontSize: 13,
-                    displayColors: false,
-                    xPadding: 10,
-                    yPadding: 10,
-                    intersect: false
-                }
-            },
-        });
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: false
+                    },
+
+                    scales: {
+                        yAxes: [{
+                            scaleLabel: {
+                                display: false
+                            },
+                            gridLines: {
+                                borderDash: [6, 10],
+                                color: "#d8d8d8",
+                                lineWidth: 1,
+                            },
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: false
+                            },
+                            gridLines: {
+                                display: false
+                            },
+                        }],
+                    },
+
+                    tooltips: {
+                        backgroundColor: '#333',
+                        titleFontSize: 13,
+                        titleFontColor: '#fff',
+                        bodyFontColor: '#fff',
+                        bodyFontSize: 13,
+                        displayColors: false,
+                        xPadding: 10,
+                        yPadding: 10,
+                        intersect: false
+                    }
+                },
+            });
+        }
+        $('#time-search').on('change',function(){
+           var time_filter = $('#time-search').val();
+            $.ajax({
+                type: "GET",
+                url: "",
+                data: {'time_filter':time_filter},
+                    success: function(response) {
+                        var date = response.arrayDate;
+                        var applied = response.totalApplied;
+                        showChart(date,applied)
+                        toastr.success("Cập nhật dữ liệu")
+                    },
+                    error: function(response) {
+                        toastr.error("Lỗi dữ liệu")
+                    }
+                });
+        })
     </script>
 @endsection
