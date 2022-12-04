@@ -11,37 +11,16 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
     public function edit()
     {
-        $data = Company::find(auth('company')->user()->id);
+        $data = auth('company')->user();
         $title = "Sửa thông tin";
-        $activeRoute = "Profile";
+        $activeRoute = "profile";
         if (is_null($data)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
             return redirect()->route('company.profile');
         }
-        // dd($data->toArray());
         $team = [
             50 => '50-100 người',
             100 => '100-150 người',
@@ -62,7 +41,7 @@ class ProfileController extends Controller
     {
 
         $data = auth('company')->user()->id;
-        $company = Company::find(auth('company')->user()->id);
+        $company = auth('company')->user();
         if (is_null($company)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');

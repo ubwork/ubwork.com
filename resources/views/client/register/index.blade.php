@@ -86,7 +86,7 @@
                   </div> --}}
                 </div>
               </div>
-              <form method="post" action="{{ route('candidate.register') }}" class="candidate">
+              <form method="post" action="{{ route('candidate.register.post') }}" class="candidate">
                 @csrf
                 <div class="form-group">
                     <label>Họ tên</label>

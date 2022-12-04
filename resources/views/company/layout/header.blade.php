@@ -27,15 +27,24 @@
                 <!-- Dashboard Option -->
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                        @if(Storage::exists(auth('company')->user()->logo))
-                            <img style="object-fit: cover;" src="{{ asset('storage/' . auth('company')->user()->logo) }}" alt="logo"
-                                class="thumb">
-                        @elseif(!empty(auth('company')->user()->logo))
-                            <img style="object-fit: cover;" src="{{  asset('storage/images/company/'.auth('company')->user()->logo) }}" alt="logo"
-                                class="thumb">
-                        @else
+                        @if(auth('company')->user()->logo == null || empty(auth('company')->user()->logo))
                             <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
-                                 class="thumb">
+                                    class="thumb">
+                        @else
+                            @php
+                                $pattern = "/(http(s?):)/";
+                                $m = preg_match($pattern,auth('company')->user()->logo);
+                            @endphp
+                            @if($m)
+                                <img style="object-fit: cover;" src="{{  auth('company')->user()->logo }}" alt="logo"
+                                    class="thumb">
+                            @elseif(Storage::exists(auth('company')->user()->logo) )
+                                <img style="object-fit: cover;" src="{{ asset('storage/images/'. auth('company')->user()->logo) }}" alt="logo"
+                                    class="thumb">
+                            @else
+                                <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
+                                        class="thumb">
+                            @endif
                         @endif
                         <span class="name">{{ auth('company')->user()->company_name }}</span>
                     </a>
@@ -70,16 +79,7 @@
                 </div>
 
                 <button id="toggle-user-sidebar">
-                    @if(Storage::exists(auth('company')->user()->logo))
-                            <img style="object-fit: cover;" src="{{ asset('storage/' . auth('company')->user()->logo) }}" alt="logo"
-                                class="thumb">
-                        @elseif(!empty(auth('company')->user()->logo))
-                            <img style="object-fit: cover;" src="{{  asset('storage/images/company/'.auth('company')->user()->logo) }}" alt="logo"
-                                class="thumb">
-                        @else
-                            <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
-                                 class="thumb">
-                        @endif
+                 
                 </button>
                 <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
                         class="flaticon-menu-1"></span></a>
