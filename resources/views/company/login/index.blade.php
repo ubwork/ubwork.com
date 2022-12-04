@@ -40,11 +40,6 @@
         </div>
       </div>
 
-      <!-- Mobile Header -->
-      <div class="mobile-header">
-        <div class="logo"><a href="index.html"><img src="{{ asset('assets/client-bower/images/logo.svg')}}" alt="" title=""></a></div>
-      </div>
-
       <!-- Mobile Nav -->
       <div id="nav-mobile"></div>
     </header>
@@ -62,7 +57,7 @@
             <form method="post" action="{{ url('company/login') }}">
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Email" >
+                <input type="email" name="email" placeholder="Email" value="{{old('email')}}" >
                 @error('email')
                   <small class="text-danger">{{$message}}</small>
                 @enderror
@@ -115,6 +110,4 @@
   <script src="{{ asset('assets/admin-bower/plugins/toastr/toastr.min.js') }}"></script>
 </body>
 @include('admin.layout.toastr')
-
-<!-- Mirrored from creativelayers.net/themes/superio/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 Aug 2022 09:27:55 GMT -->
 </html>

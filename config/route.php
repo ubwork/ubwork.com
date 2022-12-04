@@ -12,20 +12,10 @@ return [
                 'route' => 'company.post.index',
                 'icon'  => 'la la-paper-plane',
             ],
-            'profile' => [
-                'title' => "Sửa thông tin",
-                'route' => 'company.profile',
-                'icon'  => 'la la-user-tie',
-            ],
             'filter' => [
                 'title' => "Tìm CV",
                 'route' => 'company.filter',
                 'icon'  => 'la la-search',
-            ],
-            'image-paper' => [
-                'title' => "Giấy phép kinh doanh",
-                'route' => 'company.image-paper',
-                'icon'  => 'la la-file',
             ],
             'manage-cv' => [
                 'title' => "Quản lý CV",
@@ -36,7 +26,17 @@ return [
                 'title' => "Lịch sử giao dịch",
                 'route' => 'company.historyPayment',
                 'icon'  => 'la la-history',
-            ]
+            ],
+            'profile' => [
+                'title' => "Sửa thông tin",
+                'route' => 'company.profile',
+                'icon'  => 'la la-user-tie',
+            ],
+            'image-paper' => [
+                'title' => "Giấy phép kinh doanh",
+                'route' => 'company.image-paper',
+                'icon'  => 'la la-file',
+            ],
         ]
     ]
 ];
