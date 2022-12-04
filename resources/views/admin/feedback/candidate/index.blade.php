@@ -25,7 +25,7 @@
                 <tr>
                   <th>STT</th>
                   <th>{{__('Tên công ty')}}</th>
-                  <th>{{__('Tiêu đề / Số sao đánh giá')}}</th>
+                  <th>{{__('Tiêu đề / Số sao đánh giá / Sát thực tế ?')}}</th>
                   <th>{{__('Điều hài lòng / chưa hài lòng')}}</th>
                   <th>{{__('Điều thích / cần cải thiện')}}</th>
                 </tr>
@@ -57,6 +57,13 @@
                                                     <label for="rating5" class="fa fa-star"></label>
                                                 </div>
                                             </div>
+                                            <label class=""> CV có sát với thực tế : </label>
+                                            <input class="form-control" rows="3" cols="30" 
+                                              value="<?php if($data->is_reality == 0){
+                                                echo 'Sát thực tế';
+                                              }else{
+                                                echo 'Không sát thực tế';
+                                              }?>" disabled>
                                         </td>
                                         <td>
                                             <label class="">Điều hài lòng: </label>
