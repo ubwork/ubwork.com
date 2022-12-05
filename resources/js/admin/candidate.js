@@ -36,7 +36,6 @@ $(document).ready(function() {
                     "_token": $('meta[name="csrf-token"]').attr('content'),
                     "id": id,
                 }
-                console.log(id);
                 $.ajax({
                     type: "DELETE",
                     url: `${model}/${id}`,
