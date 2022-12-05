@@ -521,7 +521,7 @@
                                         </p>
                                         <button
                                             style="background-color:#C46F01;border:none;width: 150px;height: 40px;color: #fff;border-radius: 8px;"><a
-                                                href="{{ route('getPass', ['candidate' => $candidate->id, 'token' => $candidate->token]) }}" style="color: #fff">Đặt lại mật khẩu</a></button>
+                                                href="{{ route('getPass', ['candidate' => $candidate->id, 'token' => $candidate->token]) }}" style="color: #fff;text-decoration: none">Đặt lại mật khẩu</a></button>
 
                                     </div>
                                     <center>

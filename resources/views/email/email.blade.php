@@ -516,11 +516,11 @@
                                 <td>
                                     <div class="text" style="padding: 0 3em; text-align: center;color: black;">
                                         <h2 style="color: black;">Ubwork Xin chào công ty {{$company_name}}!</h2>
-                                        <p>Hiện đang có ứng viên {{$name}} đã ứng tuyển vào bài tuyển dụng {{$post_name}} của bạn thông qua chức năng tìm việc nhanh.</p>
+                                        <p>Hiện đang có ứng viên <p>{{$name}}</p> đã ứng tuyển vào bài tuyển dụng <a href=""><b>{{$post_name}}</b></a> của bạn thông qua chức năng tìm việc nhanh.</p>
                                         </p>
                                         <button
                                             style="background-color:#C46F01;border:none;width: 150px;height: 40px;color: #fff;border-radius: 8px;"><a
-                                                href="{{asset('upload/cv/'.$seeker->path_cv)}}" style="color: #fff">Xem chi tiết</a></button>
+                                                href="{{asset('upload/cv/'.$seeker->path_cv)}}" style="color: #fff;text-decoration: none">Xem chi tiết</a></button>
                                     </div>
                                     <center>
                                         <p>Lưu ý không chia sẻ email này cho bất kỳ ai.</p>
