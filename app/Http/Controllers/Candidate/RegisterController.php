@@ -30,20 +30,24 @@ class RegisterController extends Controller
     public function postRegister(Request $request)
     {
         $rules = [
-            'name' => 'required',
+            'name' => 'required|alpha',
             'email' => 'required|email|unique:candidates',
-            'password' => 'required',
-            'phone' => 'required|unique:candidates',
+            'password' => 'required|min:6',
+            'phone' => 'required|unique:candidates|digits:10',
             'gender' => 'required',
         ];
         $messages = [
             'name.required' => 'Mời bạn nhập vào tên',
+            'name.alpha' => 'Tên không hợp lệ',
             'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Mời bạn nhập đúng định dạnh email',
             'email.unique' => 'Email bạn nhập đã tồn tại',
             'password.required' => 'Mời bạn nhập password',
+            'password.min' => 'Mật khẩu yêu cầu tối thiểu 6 ký tự',
             'phone.required' => 'Mời bạn nhập vào số điện thoại',
             'phone.unique' => 'Số điện thoại bạn nhập đã tồn tại',
+            'phone.digits' => 'Số điện thoại không tồn tại',
+
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
