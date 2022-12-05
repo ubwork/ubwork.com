@@ -16,6 +16,15 @@
                         <!-- Ls widget -->
                         <div class="ls-widget">
                             <div class="tabs-box">
+                                <div class="content ml-5">
+                                    <div class="row resume-outer">
+                                        <div class="text col-3" style="margin-left: 5px; padding-top:7px">
+                                            Số dư hiện tại : {{auth('company')->user()->coin}}
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="theme-btn btn-style-one btn-sm" style="padding: 7px 15px 5px 15px;" >Rút tiền</button>
+                                        </div>
+                                    </div>
                                 <div class="row resume-outer theme-blue p-5 mt-4">
                                     <!-- Pricing Table -->
                                     @foreach ($history as $item)
