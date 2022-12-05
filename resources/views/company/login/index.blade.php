@@ -73,12 +73,13 @@
 
               <div class="form-group">
                 <button class="theme-btn btn-style-one" type="submit">Đăng nhập</button>
-                
+
               </div>
               <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             </form>
             <div class="bottom-box">
-              <div class="text">Bạn chưa có tài khoản? <a href="{{route('company.register')}}">Đăng ký</a></div>
+                <div class="text"><a href="{{ route('PassCompany') }}">Quên Mật Khẩu?</a><span> Hoặc</span> Bạn chưa có tài khoản? <a href="{{ route('company.register') }}">Đăng ký</a>
+                </div>
               <div class="divider"><span>hoặc</span></div>
               <div class="btn-box row">
                 <div class="col-lg-12 col-md-12">

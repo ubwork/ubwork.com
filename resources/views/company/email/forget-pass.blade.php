@@ -515,12 +515,14 @@
                             <tr>
                                 <td>
                                     <div class="text" style="padding: 0 3em; text-align: center;color: black;">
-                                        <h2 style="color: black;">Ubwork Xin chào công ty {{$company_name}}!</h2>
-                                        <p>Hiện đang có ứng viên {{$name}} đã ứng tuyển vào bài tuyển dụng {{$post_name}} của bạn thông qua chức năng tìm việc nhanh.</p>
+                                        <h2 style="color: black;">Ubwork Xin chào!</h2>
+                                        <p>Dưới đây là mã xác nhận. Vui lòng không chia sẻ mã này cho bất kỳ ai!</p>
+                                        <p><b>Mã xác nhận: <span style="color: red">{{$candidate->token}}</span></b>
                                         </p>
                                         <button
                                             style="background-color:#C46F01;border:none;width: 150px;height: 40px;color: #fff;border-radius: 8px;"><a
-                                                href="{{asset('upload/cv/'.$seeker->path_cv)}}" style="color: #fff">Xem chi tiết</a></button>
+                                                href="{{ route('getPassCompany', ['candidate' => $candidate->id, 'token' => $candidate->token]) }}" style="color: #fff">Đặt lại mật khẩu</a></button>
+
                                     </div>
                                     <center>
                                         <p>Lưu ý không chia sẻ email này cho bất kỳ ai.</p>
@@ -536,5 +538,4 @@
 </body>
 
 </html>
-
 
