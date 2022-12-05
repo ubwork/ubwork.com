@@ -78,11 +78,7 @@
                                             <textarea class="form-control" rows="3" cols="30" disabled>{{$data->improve}}</textarea>
                                         </td>
                                         <td class="project-actions xoa text-right d-flex align-items-center">
-                                            <button class="btn btn-danger btn-deletef">
-                                              <a href="{{route('admin.feedback.candidate.destroy',['id'=>$data->id])}}">
-                                                <i class="fa fa-trash"></i>
-                                              </a>
-                                            </button>
+                                            <button data-id="{{$data->id}}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
                                         </td>
                                     @endif
                                 @endforeach
