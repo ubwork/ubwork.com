@@ -68,8 +68,8 @@ class MailController extends Controller
                                 $email = $item->company->email;
                                 $speed = new JobPostActivities();
                                 $company_name = $item->company->company_name;
-                                // dd($company_name);
-                                Mail::to($email)->send(new SendMail($subject, $company_name));
+                                $post_name = $item->title;
+                                Mail::to($email)->send(new SendMail($subject, $company_name,$post_name));
                                 $speed->job_post_id = $item->id;
                                 $speed->seeker_id = $seeker->id;
                                 $speed->is_function = 1;
@@ -105,6 +105,7 @@ class MailController extends Controller
                         })
                         ->distinct()
                         ->select('job_posts.*')
+                        ->groupBy('job_posts.company_id')
                         ->get();
                     if ($coin - 30 < 0) {
                         return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
@@ -146,7 +147,8 @@ class MailController extends Controller
                                 $email = $item->company->email;
                                 $speed = new JobPostActivities();
                                 $company_name = $item->company->company_name;
-                                Mail::to($email)->send(new SendMail($subject, $company_name));
+                                $post_name = $item->title;
+                                Mail::to($email)->send(new SendMail($subject, $company_name,$post_name));
                                 $speed->job_post_id = $item->id;
                                 $speed->seeker_id = $seeker->id;
                                 $speed->is_function = 1;

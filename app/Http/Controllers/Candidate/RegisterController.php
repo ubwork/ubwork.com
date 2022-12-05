@@ -125,7 +125,7 @@ class RegisterController extends Controller
                 ]);
                 return redirect()->route('candidate.login')->with('success', 'Đổi mật khẩu thành công');
             } else {
-                return back()->with('error','Mật khẩu không trùng khớp');
+                return back()->with('error', 'Mật khẩu không trùng khớp');
             }
         } else {
             return view('email.404');
