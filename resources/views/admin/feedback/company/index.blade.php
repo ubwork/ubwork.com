@@ -43,21 +43,21 @@
                                             <textarea class="form-control" rows="3" cols="30" disabled>{{$data->title}}</textarea>
 
                                             <div class="rating-css">
-                                                <label class="">Số sao: </label>
-                                                <?php echo $data->rate?>
-                                                <div class="star-icon">
-                                                    <input @if($data->rate == 1) echo $k @endif type="radio" value="1" id="rating1" disabled>
-                                                    <label for="rating1" class="fa fa-star"></label>
-                                                    <input @if($data->rate == 2) checked @endif type="radio" value="2" id="rating2" disabled>
-                                                    <label for="rating2" class="fa fa-star"></label>
-                                                    <input @if($data->rate == 3) checked  @endif type="radio" value="3" id="rating3" disabled>
-                                                    <label for="rating3" class="fa fa-star"></label>
-                                                    <input @if($data->rate == 4) checked @endif type="radio" value="4" id="rating4" disabled>
-                                                    <label for="rating4" class="fa fa-star"></label>
-                                                    <input @if($data->rate == 5) checked @endif type="radio" value="5" id="rating5" disabled>
-                                                    <label for="rating5" class="fa fa-star"></label>
-                                                </div>
-                                            </div>
+                                              <label class="">Số sao: </label>
+                                              <?php echo $data->rate?>
+                                              <div class="star-icon">
+                                                  <input @if($data->rate == 1) checked  @endif type="radio" value="1" id="rating1" disabled>
+                                                  <label for="rating1" class="fa fa-star"></label>
+                                                  <input @if($data->rate == 2) checked @endif type="radio" value="2" id="rating2" disabled>
+                                                  <label for="rating2" class="fa fa-star"></label>
+                                                  <input @if($data->rate == 3) checked @endif type="radio" value="3" id="rating3" disabled>
+                                                  <label for="rating3" class="fa fa-star"></label>
+                                                  <input @if($data->rate == 4) checked @endif type="radio" value="4" id="rating4" disabled>
+                                                  <label for="rating4" class="fa fa-star"></label>
+                                                  <input @if($data->rate == 5) checked @endif type="radio" value="5" id="rating5" disabled>
+                                                  <label for="rating5" class="fa fa-star"></label>
+                                              </div>
+                                          </div>
                                         </td>
                                         <td>
                                             <label class="">Điều hài lòng: </label>
@@ -71,11 +71,11 @@
                                             <label class="">Điều cần cải thiện: </label>
                                             <textarea class="form-control" rows="3" cols="30" disabled>{{$data->improve}}</textarea>
                                         </td>
+                                        <td class="project-actions xoa text-right d-flex align-items-center">
+                                          <button data-id="{{$data->id}}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
+                                      </td>
                                     @endif
                                 @endforeach
-                                <td class="project-actions xoa text-right d-flex align-items-center">
-                                    <button data-id="{{$item->id}}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
-                                </td>
                             
                             @endforeach
                         </tr>
