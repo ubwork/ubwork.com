@@ -17,18 +17,21 @@ class SendMail extends Mailable
     use Queueable, SerializesModels;
     public $subject;
     public $company_name;
+    public $post_name;
 
-    public function __construct($subject, $company_name)
+    public function __construct($subject, $company_name,$post_name)
     {
         $this->subject = $subject;
         $this->company_name = $company_name;
+        $this->post_name = $post_name;
     }
     public function build(Request $request){
         $user = auth('candidate')->user()->id;
         $name = auth('candidate')->user()->name;
         $seeker = SeekerProfile::where('candidate_id', $user)->first();
         $company_name = $this->company_name;
+        $post_name = $this->post_name;
         return $this->subject('UbWork')
-                    ->view('email.email', compact('name','company_name','seeker'));
+                    ->view('email.email', compact('name','company_name','seeker','post_name'));
     }
 }
