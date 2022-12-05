@@ -84,7 +84,7 @@ class RegisterController extends Controller
         } elseif ($candidate->token == null && $candidate->staus == 1) {
             return view('email.404');
         } else {
-            return redirect('404');
+            return view('email.404');
         }
     }
     public function refresh()
