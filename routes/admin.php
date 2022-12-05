@@ -83,6 +83,6 @@ Route::prefix('feedback')->name('feedback.')->group(function () {
     // candidate
     Route::prefix('candidate')->name('candidate.')->group(function () {
         Route::get('/{id}', 'Admin\FeedbackController@index')->name('index');
-        Route::delete('/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
+        Route::get('destroy/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
     });
 });

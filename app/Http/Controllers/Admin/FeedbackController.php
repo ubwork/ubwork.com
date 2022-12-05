@@ -44,7 +44,9 @@ class FeedbackController extends Controller
     }
     public function destroy($id)
     {
-        Feedback::where('id', $id)->delete();
-        return response()->json(['success'=>'Xóa thành công!']);
+        $feedback = Feedback::where('id', $id)->first();
+        $id = Candidate::where('id',$feedback->candidate_id)->first();
+        $feedback->delete();
+        return Redirect()->route('admin.feedback.candidate.index', ['id' => $id]);
     }
 }
