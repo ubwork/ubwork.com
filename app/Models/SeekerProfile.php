@@ -30,6 +30,7 @@ class SeekerProfile extends Model
         'image',
         'address',
         'total_exp',
+        'is_active',
     ];
     public function candidate()
     {
