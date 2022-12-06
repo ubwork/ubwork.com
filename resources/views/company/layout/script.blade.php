@@ -3,7 +3,7 @@
 <script src="{{asset('assets/client-bower/js/chosen.min.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/jquery-ui.min.js')}}"></script>
-{{--    
+   
 <script src="{{asset('assets/client-bower/js/jquery.fancybox.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/jquery.modal.min.js')}}"></script>
 
@@ -12,7 +12,7 @@
 <script src="{{asset('assets/client-bower/js/rellax.min.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/owl.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/wow.js')}}"></script>
---}}
+
 <script src="{{asset('assets/client-bower/js/mmenu.polyfills.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/mmenu.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/script.js')}}"></script>

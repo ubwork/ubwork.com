@@ -45,7 +45,9 @@
                                     @if ($item->id == $u->candidate_id)
                                     <td>{{$u->coin}}</td>
                                     <td>
-                                       <a target="_blank" href="../upload/cv/{{ $u->path_cv }}">Xem CV</a>
+                                      @if(!empty($u->path_cv))
+                                        <a target="_blank" href="../upload/cv/{{ $u->path_cv }}">Xem CV</a>
+                                      @endif
                                     </td>
                                     @endif
                                 @endforeach
