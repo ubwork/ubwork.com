@@ -147,7 +147,7 @@
           <div class="sidebar-column col-lg-3 col-md-12 col-sm-12">
             <aside class="sidebar">
 
-              <div class="sidebar-widget">
+              <div class="sidebar-widget" style="word-break:break-word;">
                 <div class="widget-content">
                   <ul class="job-overview">
                     @if(!empty($data->total_exp))

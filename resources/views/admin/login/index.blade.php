@@ -33,11 +33,6 @@
 
       </div>
 
-      <!-- Mobile Header -->
-      <div class="mobile-header">
-        <div class="logo"><a href="index.html"><img src="{{ asset('assets/client-bower/images/logo.svg')}}" alt="" title=""></a></div>
-      </div>
-
       <!-- Mobile Nav -->
       <div id="nav-mobile"></div>
     </header>
@@ -50,17 +45,24 @@
         <!-- Login Form -->
         <div class="login-form default-form">
           <div class="form-inner">
-            <h3>Login to Admin</h3>
+            <h3>Đăng nhập admin </h3>
             <!--Login Form-->
+            
             <form method="post" action="{{ url('admin/login') }}">
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Email" >
+                <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                @error('email')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
               </div>
 
               <div class="form-group">
-                <label>Password</label>
+                <label>Mật khẩu</label>
                 <input id="password-field" type="password" name="password" value="" placeholder="Password">
+                @error('password')
+                  <small class="text-danger">{{$message}}</small>
+                @enderror
               </div>
 
               <div class="form-group">
@@ -74,23 +76,11 @@
               </div>
 
               <div class="form-group">
-                <button class="theme-btn btn-style-one" type="submit">Log In</button>
+                <button class="theme-btn btn-style-one" type="submit">Đăng nhập</button>
                 
               </div>
               <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             </form>
-            {{-- <div class="bottom-box">
-              <div class="text">Don't have an account? <a href="">Signup</a></div>
-              <div class="divider"><span>or</span></div>
-              <div class="btn-box row">
-                <div class="col-lg-6 col-md-12">
-                  <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log In via Facebook</a>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
-                </div>
-              </div>
-            </div> --}}
           </div>
         </div>
         <!--End Login Form -->

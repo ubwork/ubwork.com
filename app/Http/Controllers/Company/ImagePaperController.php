@@ -11,9 +11,9 @@ class ImagePaperController extends Controller
 {
     public function index()
     {
-        $data = Company::find(auth('company')->user()->id);
+        $data = auth('company')->user();
         $title = "Sửa thông tin";
-        $activeRoute = "Profile";
+        $activeRoute = "image-paper";
         return view('company.image-paper.edit', compact('data', 'title', 'activeRoute'));
     }
     public function update(Request $request)
