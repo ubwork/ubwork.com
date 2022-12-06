@@ -17,8 +17,8 @@
                     </li>
 
                     <li class="dropdown">
-                        <span><a href="{{ route('job') }}">Việc làm</a></span>
-                        <ul>
+                        <a href="{{ route('job') }}">Việc làm</a>
+                        {{-- <ul>
                             <li class="dropdown">
                                 <span>Chuyên ngành</span>
                                 <ul>
@@ -29,7 +29,7 @@
                                     @endforeach
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </li>
 
                     <li class="dropdown">
