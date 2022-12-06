@@ -381,11 +381,11 @@ class CreateCvController extends Controller
         return response()->json(['success' => 'Cập nhật thành công!']);
     }
 
-    public function DeleteAllSkill($id)
+    public function DeleteAllSkill($idsee)
     {
-        SkillSeeker::where('seeker_id', $id)->delete();
+        SkillSeeker::where('seeker_id', $idsee)->delete();
         Session::flash('success', 'Xóa thành công!');
-        return redirect()->route('CreateCV');
+        return redirect()->route('CreateCV', ['idsee' => $idsee]);
     }
 
     public function saveEducation(CreateCvRequest $request)
