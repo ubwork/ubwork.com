@@ -28,7 +28,7 @@ class SendMail extends Mailable
     public function build(Request $request){
         $user = auth('candidate')->user()->id;
         $name = auth('candidate')->user()->name;
-        $seeker = SeekerProfile::where('candidate_id', $user)->first();
+        $seeker = SeekerProfile::where('candidate_id', $user)->where('is_active',1)->first();
         $company_name = $this->company_name;
         $post_name = $this->post_name;
         return $this->subject('UbWork')
