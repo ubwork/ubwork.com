@@ -78,11 +78,11 @@ Route::prefix('feedback')->name('feedback.')->group(function () {
     // company
     Route::prefix('company')->name('company.')->group(function () {
         Route::get('/{id}', 'Admin\FeedbackController@indexc')->name('indexc');
-        Route::delete('/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
+        Route::delete('/{ida}/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
     });
     // candidate
     Route::prefix('candidate')->name('candidate.')->group(function () {
         Route::get('/{id}', 'Admin\FeedbackController@index')->name('index');
-        Route::delete('/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
+        Route::delete('/{ida}/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
     });
 });

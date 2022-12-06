@@ -124,7 +124,7 @@ class DetailCandidateController extends Controller
         $history = new HistoryPayment();
         $company  = Company::where('id', $id_user)->first(); 
         $data = Feedback::where('company_id', $id_user)->where('candidate_id', $id)->get();
-        // dd($data);
+        $seeker = SeekerProfile::where('candidate_id', $id)->first();
         $a = count($data);
         if ($a == 0) {
             $feedback->rate = $request->rate;
@@ -136,10 +136,25 @@ class DetailCandidateController extends Controller
             $feedback->like_text = $request->like_text;
             $feedback->improve = $request->improve;
             $feedback->is_candidate = "1";
+            $feedback->is_reality = $request->reality;
             $company->coin += 2;
-            //
+            // 
+            if($request->rate == 1){
+                if($seeker->coin >0){
+                    $seeker->coin -= 2;
+                }
+            }else if($request->rate == 2){
+                if($seeker->coin >0){
+                    $seeker->coin -= 1;
+                }
+            }else if($request->rate == 4){
+                $seeker->coin += 1;
+            }else if($request->rate == 5){
+                $seeker->coin += 2;
+            }
+            //    
             $history->user_id = $id_user;
-                $history->note = "Thực hiện feedback ứng viên + coin số dư còn lại ".$company->coin." coin";
+                $history->note = "Thực hiện feedback ứng viên +2 coin còn lại ".$company->coin." coin";
                 $history->coin = $company->coin;
                 $history->type_coin = 0;
                 $history->type_account = 0;
@@ -149,10 +164,11 @@ class DetailCandidateController extends Controller
             $feedback->save();
             $company->save();
             $history->save();
+            $seeker->save();
             Session::flash('success', 'Feedback thành công');
             return redirect()->route('company.detail-candidate.index', ['id' => $id]);
         } else {
-            Session::flash('error', 'Tài khoản của bạn đã từng gửi Feedback đến công ty');
+            Session::flash('error', 'Bạn đã feedback ứng viên này rồi');
             return Redirect()->route('company.feedback', ['id' => $id]);
         }
     }
