@@ -116,11 +116,11 @@ Route::post('update-cv/updateInfo', 'Client\CreateCvController@updateInfo')->nam
 //experiences
 Route::post('update-cv/saveExperience', 'Client\CreateCvController@saveExperience')->name('saveExperience');
 Route::post('update-cv/updateExperience/{id}', 'Client\CreateCvController@updateExperience')->name('updateExperience');
-Route::get('update-cv/deleteExperience', 'Client\CreateCvController@deleteExperience')->name('deleteExperience');
+Route::get('update-cv/deleteExperience/{idsee}', 'Client\CreateCvController@deleteExperience')->name('deleteExperience');
 
 //skills
 Route::post('update-cv/saveSkills', 'Client\CreateCvController@saveSkills')->name('saveSkills');
-Route::get('update-cv/DeleteAllSkill/{id}', 'Client\CreateCvController@DeleteAllSkill')->name('DeleteAllSkill');
+Route::get('update-cv/DeleteAllSkill/{idsee}', 'Client\CreateCvController@DeleteAllSkill')->name('DeleteAllSkill');
 
 //educations
 Route::post('update-cv/saveEducation', 'Client\CreateCvController@saveEducation')->name('saveEducation');
