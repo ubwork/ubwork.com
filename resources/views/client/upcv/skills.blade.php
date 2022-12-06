@@ -23,7 +23,7 @@
             </div>
             <div class="d-flex mt-3 flex-row-reverse">
                 <div class="hide-button-sk btn btn-warning">Hủy</div>
-                <a class="btn btn-danger" onclick="return Del(9999999)" href="{{route('DeleteAllSkill', ['id' => $seeker->id])}}" style="margin-right: 5px;">Xóa tất cả</a>
+                <a class="btn btn-danger" href="{{route('DeleteAllSkill', ['idsee' => $seeker->id])}}" style="margin-right: 5px;">Xóa tất cả</a>
                 <button type="submit" id="saveSkill" class="btn btn-primary" style="margin-right: 5px;">Lưu</button>
             </div>
         </div>
