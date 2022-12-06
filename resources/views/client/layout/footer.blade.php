@@ -8,25 +8,51 @@
                         <div class="logo"><a href="#"><img src="{{ asset('images/logo_ubwork.png') }}"
                                     alt="" style="max-height: 40px;"></a>
                         </div>
-                        <p class="phone-num"><span>Call us </span><a href="">0395167635</a></p>
+                        <p class="phone-num"><span>Liên hệ chúng tôi: </span><a href="">0395167635</a></p>
                         <p class="address">Trịnh Văn Bô
                             <br><a href="" class="email">datmv202@gmail.com</a>
                         </p>
                     </div>
                 </div>
-
+                
                 <div class="big-column col-xl-8 col-lg-9 col-md-12">
                     <div class="row">
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Candidates</h4>
+                                <h4 class="widget-title"></h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Browse Jobs</a></li>
-                                        <li><a href="#">Browse Categories</a></li>
-                                        <li><a href="#">Candidate Dashboard</a></li>
-                                        <li><a href="#">Job Alerts</a></li>
-                                        <li><a href="#">My Bookmarks</a></li>
+                                        {{-- <li><a href="#">Job Page</a></li>
+                                        <li><a href="#">Job Page Alternative</a></li>
+                                        <li><a href="#">Resume Page</a></li>
+                                        <li><a href="#">Blog</a></li>
+                                        <li><a href="#">Contact</a></li> --}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
+                            <div class="footer-widget links-widget">
+                                <h4 class="widget-title"></h4>
+                                <div class="widget-content">
+                                    <ul class="list">
+                                        {{-- <li><a href="#">Job Page</a></li>
+                                        <li><a href="#">Job Page Alternative</a></li>
+                                        <li><a href="#">Resume Page</a></li>
+                                        <li><a href="#">Blog</a></li>
+                                        <li><a href="#">Contact</a></li> --}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
+                            <div class="footer-widget links-widget">
+                                <h4 class="widget-title">Về chúng tôi</h4>
+                                <div class="widget-content">
+                                    <ul class="list">
+                                        <li><a href="{{route('index')}}">Trang chủ</a></li>
+                                        <li><a href="">Liên Hệ</a></li>
+    
                                     </ul>
                                 </div>
                             </div>
@@ -35,19 +61,18 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Employers</h4>
+                                <h4 class="widget-title">Dành cho bạn</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Browse Candidates</a></li>
-                                        <li><a href="#">Employer Dashboard</a></li>
-                                        <li><a href="#">Add Job</a></li>
-                                        <li><a href="#">Job Packages</a></li>
+                                        <li><a href="{{route('job')}}">Danh sách công việc</a></li>
+                                        <li><a href="{{route('company-list')}}">Danh sách công ty</a></li>
+                                        <li><a href="{{route('jobspeed')}}">Tìm việc nhanh</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
+                        {{-- <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
                                 <h4 class="widget-title">About Us</h4>
                                 <div class="widget-content">
@@ -60,10 +85,10 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
 
-                        <div class="footer-column col-lg-3 col-md-6 col-sm-12">
+                        {{-- <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
                                 <h4 class="widget-title">Helpful Resources</h4>
                                 <div class="widget-content">
@@ -76,7 +101,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

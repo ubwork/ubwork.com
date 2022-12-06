@@ -69,10 +69,10 @@
                 <div class="dropdown dashboard-option">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
                         @if(!is_null(auth('candidate')->user()->avatar) && Storage::exists(auth('candidate')->user()->avatar))
-                            <img style="object-fit: cover;" src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
+                            <img style="object-fit: cover;" src="{{ asset('storage/' .auth('candidate')->user()->avatar) }}" alt="avatar"
                                 class="thumb">
                         @elseif(!empty(auth('candidate')->user()->avatar))
-                            <img style="object-fit: cover;" src="{{  auth('candidate')->user()->avatar }}" alt="avatar"
+                            <img style="object-fit: cover;" src="{{ 'storage/'  .auth('candidate')->user()->avatar }}" alt="avatar"
                                 class="thumb">
                         @else
                             <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"

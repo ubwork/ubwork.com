@@ -199,7 +199,7 @@
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}"
+                                    <span class="company-logo"><img src="{{ asset('images/company/' . $item->company->logo) }}"
                                             alt=""></span>
                                     <h4 style="text-align: left;"><a
                                             href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -263,7 +263,7 @@
                                 <div class="inner-box">
                                     <div class="content">
                                         <span class="company-logo"><img
-                                                src="{{ asset('storage/' . $item->company->logo) }}"
+                                                src="{{ asset('storage/images/company/' . $item->company->logo) }}"
                                                 alt=""></span>
                                         <h4 style="text-align: left;"><a
                                                 href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
