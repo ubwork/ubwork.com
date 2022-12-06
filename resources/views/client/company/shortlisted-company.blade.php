@@ -45,7 +45,7 @@
                             <div class="job-block">
                               <div class="inner-box">
                                 <div class="content">
-                                  <span class="company-logo"><img src="" alt=""></span>
+                                  <span class="company-logo"><img src="{{asset('images/company/'.$item->company->logo)}}" alt=""></span>
                                   <h4><a href="{{route('job-detail', ['id' => $com_short[$item->company_id]->id])}}">{{$com_short[$item->company_id]->company_name}}</a></h4>
                                   <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span> Segment</li>

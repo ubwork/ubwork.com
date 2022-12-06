@@ -173,7 +173,7 @@
                     <div class="category-block col-lg-4 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="content">
-                                <span class="{{ $item_job->icon }}"></span>
+                                <span class="icon flaticon-web-programming"></span>
                                 <h4><a href="{{ route('job-cat', ['id' => $item_job->id]) }}">{{ $item_job->name }}</a>
                                 </h4>
                                 <p>( {{ $count[$item_job->id] }} bài đăng)</p>
@@ -199,7 +199,7 @@
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}"
+                                    <span class="company-logo"><img src="{{ asset('images/company/' . $item->company->logo) }}"
                                             alt=""></span>
                                     <h4 style="text-align: left;"><a
                                             href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -263,7 +263,7 @@
                                 <div class="inner-box">
                                     <div class="content">
                                         <span class="company-logo"><img
-                                                src="{{ asset('storage/' . $item->company->logo) }}"
+                                                src="{{ asset('images/company/' . $item->company->logo) }}"
                                                 alt=""></span>
                                         <h4 style="text-align: left;"><a
                                                 href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>

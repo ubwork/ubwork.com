@@ -154,7 +154,7 @@ footer .heart {
                                         <div class="inner-box" style="height:200px">
                                             <div class="content">
                                                 <span class="company-logo"><img
-                                                        src="{{ asset('storage/' . $item->company->logo) }}"
+                                                        src="{{ asset('images/company/' . $item->company->logo) }}"
                                                         alt=""></span>
                                                 <h4><a
                                                         href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -260,7 +260,7 @@ footer .heart {
                                         <div class="inner-box">
                                             <div class="content">
                                                 <span class="company-logo"><img
-                                                        src="storage/`+job.company.logo+`"
+                                                        src="images/company/`+job.company.logo+`"
                                                         alt=""></span>
                                                 <h4><a
                                                         href="{{url('/job-detail/`+job.id+`')}}">`+job.title+`</a>

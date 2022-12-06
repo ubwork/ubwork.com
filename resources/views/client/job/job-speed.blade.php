@@ -35,7 +35,7 @@
                                                             <div class="inner-box">
                                                                 <div class="content">
                                                                     <span class="company-logo"><img
-                                                                            src="{{ asset('storage/' . $item->company->logo) }}"
+                                                                            src="{{ asset('images/company/' . $item->company->logo) }}"
                                                                             alt=""></span>
                                                                     <h4><a
                                                                             href="{{ route('job-detail', ['id' => $item->job_post_id]) }}">{{ $item->job_post->title }}</a>

@@ -19,14 +19,14 @@
                     <div class="row">
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Candidates</h4>
+                                {{-- <h4 class="widget-title">For Candidates</h4> --}}
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Browse Jobs</a></li>
+                                        {{-- <li><a href="#">Browse Jobs</a></li>
                                         <li><a href="#">Browse Categories</a></li>
                                         <li><a href="#">Candidate Dashboard</a></li>
                                         <li><a href="#">Job Alerts</a></li>
-                                        <li><a href="#">My Bookmarks</a></li>
+                                        <li><a href="#">My Bookmarks</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
@@ -35,13 +35,13 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">For Employers</h4>
+                                {{-- <h4 class="widget-title">For Employers</h4> --}}
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Browse Candidates</a></li>
+                                        {{-- <li><a href="#">Browse Candidates</a></li>
                                         <li><a href="#">Employer Dashboard</a></li>
                                         <li><a href="#">Add Job</a></li>
-                                        <li><a href="#">Job Packages</a></li>
+                                        <li><a href="#">Job Packages</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
@@ -49,14 +49,11 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">About Us</h4>
+                                <h4 class="widget-title">Về Chúng Tôi</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Job Page</a></li>
-                                        <li><a href="#">Job Page Alternative</a></li>
-                                        <li><a href="#">Resume Page</a></li>
-                                        <li><a href="#">Blog</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="{{route('index')}}">Trang chủ</a></li>
+                                        <li><a href="{{route('index')}}">Liên Hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -68,11 +65,9 @@
                                 <h4 class="widget-title">Helpful Resources</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Site Map</a></li>
-                                        <li><a href="#">Terms of Use</a></li>
-                                        <li><a href="#">Privacy Center</a></li>
-                                        <li><a href="#">Security Center</a></li>
-                                        <li><a href="#">Accessibility Center</a></li>
+                                         <li><a href="{{route('job')}}">Công việc</a></li>
+                                        <li><a href="{{route('company-list')}}">Công ty</a></li>
+                                         <li><a href="{{route('jobspeed')}}">Tìm Việc Nhanh</a></li>
                                     </ul>
                                 </div>
                             </div>
