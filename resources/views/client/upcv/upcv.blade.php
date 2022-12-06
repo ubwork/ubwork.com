@@ -61,7 +61,7 @@
                                             Bật
                                         </a>
                                         @else
-                                        <a class="btn btn-primary" href="{{route('unActiveCV', ['idsee' => $item->id])}}">
+                                        <a class="btn btn-success" href="{{route('unActiveCV', ['idsee' => $item->id])}}">
                                             Tắt
                                         </a>
                                         @endif
