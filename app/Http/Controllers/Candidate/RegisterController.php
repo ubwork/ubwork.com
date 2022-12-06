@@ -30,7 +30,7 @@ class RegisterController extends Controller
     public function postRegister(Request $request)
     {
         $rules = [
-            'name' => 'required|alpha',
+            'name' => 'required',
             'email' => 'required|email|unique:candidates',
             'password' => 'required|min:6',
             'phone' => 'required|unique:candidates|digits:10',
@@ -38,7 +38,6 @@ class RegisterController extends Controller
         ];
         $messages = [
             'name.required' => 'Mời bạn nhập vào tên',
-            'name.alpha' => 'Tên không hợp lệ',
             'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Mời bạn nhập đúng định dạnh email',
             'email.unique' => 'Email bạn nhập đã tồn tại',
@@ -59,12 +58,7 @@ class RegisterController extends Controller
             $data['token'] = strtoupper(Str::random(10));
             $data['password'] = bcrypt($request->password);
             $data['status'] = 0;
-            if ($candidate = Candidate::create($data)) {
-                Mail::send('email.active-acc', compact('candidate'), function ($email) use ($candidate) {
-                    $email->subject('UbWork - Xác nhận tài khoản');
-                    $email->to($candidate->email, $candidate->name);
-                });
-            }
+
             if ($users == null) {
                 return redirect()->route('candidate.register');
             } elseif ($users != null) {
@@ -129,7 +123,7 @@ class RegisterController extends Controller
                 ]);
                 return redirect()->route('candidate.login')->with('success', 'Đổi mật khẩu thành công');
             } else {
-                return back()->with('error','Mật khẩu không trùng khớp');
+                return back()->with('error', 'Mật khẩu không trùng khớp');
             }
         } else {
             return view('email.404');
