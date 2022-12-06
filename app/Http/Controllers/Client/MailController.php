@@ -86,6 +86,9 @@ class MailController extends Controller
                                 $speed->save();
                             }
                         }
+                        $candidate->update([
+                            'coin' => $coin - $tien,
+                        ]);
                         updateProcess(auth('candidate')->user()->id, "- $tien coin sử dụng chức năng tìm việc nhanh", $tien, 0, 1);
                         return redirect()->route('speedapply')->with('success', 'Tìm Kiếm Thành Công');
                     }
@@ -199,12 +202,13 @@ class MailController extends Controller
     public function speedapply()
     {
         $id_user = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
+        $seeker = SeekerProfile::where('candidate_id', $id_user)->pluck('id')->toArray();
+        // dd($seeker);
         $data = [];
         $job_applied = [];
-        if (!empty($seeker)) {
+        if ($seeker != []) {
             $job_applied = [];
-            $data = JobPostActivities::where('seeker_id', $seeker->id)->where('is_function', 1)->paginate(5);
+            $data = JobPostActivities::whereIn('seeker_id', $seeker)->where('is_function', 1)->paginate(5);
             if (!empty($data)) {
                 foreach ($data as $item) {
                     $id_post = $item->job_post_id;
