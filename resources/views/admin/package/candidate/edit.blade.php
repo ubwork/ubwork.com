@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>{{__('Giá giảm')}}</label>
+                                <label>{{__('Giá giảm (không được nhỏ hơn giá)')}}</label>
                                 <input type="number" class="form-control" name="discount" value="{{$obj->discount}}">
                             </div>
                         </div>

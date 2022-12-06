@@ -12,10 +12,10 @@
       </div>
     </div>
 
-    <!-- Mobile Header -->
+    {{-- <!-- Mobile Header -->
     <div class="mobile-header">
       <div class="logo"><a href="index.html"><img src="{{ asset('/assets/client-bower/images/logo.svg')}}" alt="" title=""></a></div>
-    </div>
+    </div> --}}
 
     <!-- Mobile Nav -->
     <div id="nav-mobile"></div>

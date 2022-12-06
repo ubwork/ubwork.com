@@ -24,6 +24,7 @@ class Feedback extends Model
         'is_candidate',
         'created_at',
         'updated_at',
+        'is_reality'
     ];
     // lưu tạo
     public function saveAdd($params) {

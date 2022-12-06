@@ -17,24 +17,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/choose-login', 'client\HomeController@choose')->name('choose');
 Route::get('/search/title', 'Client\HomeController@searchByTitle');
 Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');
-// Register Client
-Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister'])->name('register');
-Route::post('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@postRegister']);
+
 Route::get('/actived/{candidate}/{token}', 'Candidate\RegisterController@actived')->name('actived');
-Route::get('404', function(){
+Route::get('404', function () {
     return view('email.404');
 });
 Route::get('refresh-pass', 'Candidate\RegisterController@refresh')->name('refresh');
 Route::post('refresh-pass', 'Candidate\RegisterController@refreshPass')->name('refreshPass');
 Route::get('get-pass/{candidate}/{token}', 'Candidate\RegisterController@getPass')->name('getPass');
 Route::post('get-pass/{candidate}/{token}', 'Candidate\RegisterController@postPass')->name('postPass');
-//login
-Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
-Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@postLogin']);
+
 Route::get('/logout', ['as' => 'logout', 'uses' => 'Client\Auth\LoginController@logout']);
 // login google
-Route::get('/googleLogin','Client\Auth\LoginGoogleController@getGoogleLoginClient')->name('getGoogleLoginClient');
-Route::get('/googleLogin/callback','Client\Auth\LoginGoogleController@loginClientCallback');
+Route::get('/googleLogin', 'Client\Auth\LoginGoogleController@getGoogleLoginClient')->name('getGoogleLoginClient');
+Route::get('/googleLogin/callback', 'Client\Auth\LoginGoogleController@loginClientCallback');
 
 //candidate
 Route::get('/', 'Client\HomeController@index')->name('index');
@@ -85,16 +81,30 @@ Route::get('/company-detail/{id}', 'Client\CompanyController@detail')->name('com
 Route::get('/company-feedback/{id}', 'Client\CompanyController@feedback')->name('feedback');
 Route::post('/feedback/{id}', 'Client\CompanyController@saveFeedback')->name('saveFeedback');
 
+// Register Client
+Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\RegisterController@getRegister']);
+Route::post('/register', ['as' => 'candidate.register.post', 'uses' => 'Candidate\RegisterController@postRegister']);
+
+// login
+Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
+Route::post('/login', ['as' => 'candidate.login.post', 'uses' => 'Client\Auth\LoginController@postLogin']);
+
 //company
 Route::get('company/register', ['as' => 'company.register', 'uses' => 'Company\RegisterController@getRegister']);
 Route::post('company/register', ['as' => 'register.store', 'uses' => 'Company\RegisterController@postRegister']);
 
+Route::get('/actived-company/{candidate}/{token}', 'Company\RegisterController@activeCompany')->name('activeCompany');
+Route::get('refresh-pass-company', 'Company\RegisterController@PassCompany')->name('PassCompany');
+Route::post('refresh-pass-company', 'Company\RegisterController@PassCompanies')->name('PassCompanies');
+Route::get('get-pass-company/{candidate}/{token}', 'Company\RegisterController@getPassCompany')->name('getPassCompany');
+Route::post('get-pass-company/{candidate}/{token}', 'Company\RegisterController@postPassCompany')->name('postPassCompany');
+
 Route::get('company/login', ['as' => 'company.login', 'uses' => 'Company\LoginController@getLogin']);
-Route::post('company/login', ['as' => 'company.login', 'uses' => 'Company\LoginController@postLogin']);
+Route::post('company/login', ['as' => 'company.login.post', 'uses' => 'Company\LoginController@postLogin']);
 
 //admin
 Route::get('admin/login', ['as' => 'login', 'uses' => 'Admin\LoginController@getLogin']);
-Route::post('admin/login', ['as' => 'login', 'uses' => 'Admin\LoginController@postLogin']);
+Route::post('admin/login', ['as' => 'login.post', 'uses' => 'Admin\LoginController@postLogin']);
 
 // create CV
 Route::get('create-cv', 'Client\CreateCvController@createNew')->name('createNew');
@@ -128,11 +138,11 @@ Route::get('update-cv/active-cv/{idsee}', 'Client\SeekerController@activeCV')->n
 
 Route::get('update-cv/un-active-cv/{idsee}', 'Client\SeekerController@unActiveCV')->name('unActiveCV');
 
-Route::get('package','Client\CoinController@getListPackage')->name('listPackage');
-Route::post('insertInvoice','Client\CoinController@insertInvoice')->name('insertInvoice');
-Route::post('payment','Client\CoinController@payment')->name('payment');
-Route::get('vnpay_return','Client\CoinController@vnpay_return')->name('vnpay_return');
-Route::get('vnpay_ipn','Client\CoinController@vnpay_ipn')->name('vnpay_ipn');
+Route::get('package', 'Client\CoinController@getListPackage')->name('listPackage');
+Route::post('insertInvoice', 'Client\CoinController@insertInvoice')->name('insertInvoice');
+Route::post('payment', 'Client\CoinController@payment')->name('payment');
+Route::get('vnpay_return', 'Client\CoinController@vnpay_return')->name('vnpay_return');
+Route::get('vnpay_ipn', 'Client\CoinController@vnpay_ipn')->name('vnpay_ipn');
 Route::get('detail-candidates/{id}', 'Client\DetailCandidateController@index')->name('detail-candidate.index');
 Route::get('historyPayment', 'Client\CoinController@historyPayment')->name('historyPayment');
 

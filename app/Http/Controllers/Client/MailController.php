@@ -68,8 +68,8 @@ class MailController extends Controller
                                 $email = $item->company->email;
                                 $speed = new JobPostActivities();
                                 $company_name = $item->company->company_name;
-                                // dd($company_name);
-                                Mail::to($email)->send(new SendMail($subject, $company_name));
+                                $post_name = $item->title;
+                                Mail::to($email)->send(new SendMail($subject, $company_name,$post_name));
                                 $speed->job_post_id = $item->id;
                                 $speed->seeker_id = $seeker->id;
                                 $speed->is_function = 1;
@@ -146,7 +146,8 @@ class MailController extends Controller
                                 $email = $item->company->email;
                                 $speed = new JobPostActivities();
                                 $company_name = $item->company->company_name;
-                                Mail::to($email)->send(new SendMail($subject, $company_name));
+                                $post_name = $item->title;
+                                Mail::to($email)->send(new SendMail($subject, $company_name,$post_name));
                                 $speed->job_post_id = $item->id;
                                 $speed->seeker_id = $seeker->id;
                                 $speed->is_function = 1;
