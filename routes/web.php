@@ -107,31 +107,36 @@ Route::get('admin/login', ['as' => 'login', 'uses' => 'Admin\LoginController@get
 Route::post('admin/login', ['as' => 'login.post', 'uses' => 'Admin\LoginController@postLogin']);
 
 // create CV
+Route::get('create-cv', 'Client\CreateCvController@createNew')->name('createNew');
 // info CV
-Route::get('create-cv', 'Client\CreateCvController@index')->name('CreateCV');
-Route::post('create-cv/saveInfo', 'Client\CreateCvController@saveInfo')->name('saveInfo');
-Route::post('create-cv/updateInfo', 'Client\CreateCvController@updateInfo')->name('updateInfo');
+Route::get('update-cv/{idsee}', 'Client\CreateCvController@index')->name('CreateCV');
+Route::post('update-cv/saveInfo', 'Client\CreateCvController@saveInfo')->name('saveInfo');
+Route::post('update-cv/updateInfo', 'Client\CreateCvController@updateInfo')->name('updateInfo');
 
 //experiences
-Route::post('create-cv/saveExperience', 'Client\CreateCvController@saveExperience')->name('saveExperience');
-Route::post('create-cv/updateExperience/{id}', 'Client\CreateCvController@updateExperience')->name('updateExperience');
-Route::get('create-cv/deleteExperience/{id}', 'Client\CreateCvController@deleteExperience')->name('deleteExperience');
+Route::post('update-cv/saveExperience', 'Client\CreateCvController@saveExperience')->name('saveExperience');
+Route::post('update-cv/updateExperience/{id}', 'Client\CreateCvController@updateExperience')->name('updateExperience');
+Route::get('update-cv/deleteExperience', 'Client\CreateCvController@deleteExperience')->name('deleteExperience');
 
 //skills
-Route::post('create-cv/saveSkills', 'Client\CreateCvController@saveSkills')->name('saveSkills');
-Route::get('create-cv/DeleteAllSkill/{id}', 'Client\CreateCvController@DeleteAllSkill')->name('DeleteAllSkill');
+Route::post('update-cv/saveSkills', 'Client\CreateCvController@saveSkills')->name('saveSkills');
+Route::get('update-cv/DeleteAllSkill/{id}', 'Client\CreateCvController@DeleteAllSkill')->name('DeleteAllSkill');
 
 //educations
-Route::post('create-cv/saveEducation', 'Client\CreateCvController@saveEducation')->name('saveEducation');
-Route::post('create-cv/updateEducation/{id}', 'Client\CreateCvController@updateEducation')->name('updateEducation');
-Route::get('create-cv/deleteEducation/{id}', 'Client\CreateCvController@deleteEducation')->name('deleteEducation');
+Route::post('update-cv/saveEducation', 'Client\CreateCvController@saveEducation')->name('saveEducation');
+Route::post('update-cv/updateEducation/{id}', 'Client\CreateCvController@updateEducation')->name('updateEducation');
+Route::get('update-cv/deleteEducation/{id}', 'Client\CreateCvController@deleteEducation')->name('deleteEducation');
 
 //certificates
-Route::post('create-cv/saveCertificate', 'Client\CreateCvController@saveCertificate')->name('saveCertificate');
-Route::post('create-cv/updateCertificate/{id}', 'Client\CreateCvController@updateCertificate')->name('updateCertificate');
-Route::get('create-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
+Route::post('update-cv/saveCertificate', 'Client\CreateCvController@saveCertificate')->name('saveCertificate');
+Route::post('update-cv/updateCertificate/{id}', 'Client\CreateCvController@updateCertificate')->name('updateCertificate');
+Route::get('update-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
 
-Route::get('create-cv/getPdf', 'Client\CreateCvController@getPdf')->name('getPdf');
+Route::get('update-cv/getPdf/{idsee}', 'Client\CreateCvController@getPdf')->name('getPdf');
+
+Route::get('update-cv/active-cv/{idsee}', 'Client\SeekerController@activeCV')->name('activeCV');
+
+Route::get('update-cv/un-active-cv/{idsee}', 'Client\SeekerController@unActiveCV')->name('unActiveCV');
 
 Route::get('package', 'Client\CoinController@getListPackage')->name('listPackage');
 Route::post('insertInvoice', 'Client\CoinController@insertInvoice')->name('insertInvoice');
