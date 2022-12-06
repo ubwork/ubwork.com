@@ -22,7 +22,7 @@ class MailController extends Controller
     {
         if (auth('candidate')->check()) {
             $subject = auth('candidate')->user()->id;
-            $seeker = SeekerProfile::where('candidate_id', $subject)->first();
+            $seeker = SeekerProfile::where('candidate_id', $subject)->where('is_active', 1)->first();
             if (!empty($seeker)) {
                 $bitcoin = auth('candidate')->user()->coin;
                 $candidate = Candidate::where('status', 1)->where('id', $subject)->first();
@@ -189,7 +189,7 @@ class MailController extends Controller
         $major = [];
         if (auth('candidate')->check()) {
             $user_id = auth('candidate')->user()->id;
-            $seeker = SeekerProfile::where('  ', $user_id)->first();
+            $seeker = SeekerProfile::where('candidate_id', $user_id)->first();
             if (!empty($seeker)) {
                 $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->first();
             }
@@ -199,7 +199,7 @@ class MailController extends Controller
     public function speedapply()
     {
         $id_user = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
+        $seeker = SeekerProfile::where('candidate_id', $id_user)->where('is_active', 1)->first();
         $data = [];
         $job_applied = [];
         if (!empty($seeker)) {
