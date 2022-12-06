@@ -189,7 +189,7 @@ class MailController extends Controller
         $major = [];
         if (auth('candidate')->check()) {
             $user_id = auth('candidate')->user()->id;
-            $seeker = SeekerProfile::where('candidate_id', $user_id)->first();
+            $seeker = SeekerProfile::where('  ', $user_id)->first();
             if (!empty($seeker)) {
                 $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->first();
             }
