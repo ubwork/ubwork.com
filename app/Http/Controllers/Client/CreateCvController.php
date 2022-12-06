@@ -24,16 +24,63 @@ use Illuminate\Support\Facades\File;
 class CreateCvController extends Controller
 {
     private $v;
+    private $message_val;
     public function __construct()
     {
         $this->v = [];
+        $this->message_val = [
+            'name.required' => 'Vui lòng nhập tên!',
+            'company_name.required' => 'Vui lòng nhập tên công ty!',
+            'major_id.required' => 'Vui lòng chọn chuyên ngành!',
+            'image.required' => 'Vui lòng up ảnh!',
+            'image.image' => 'Chọn file ảnh!',
+            'image.mimes' => 'Chọn file ảnh có định dạng jpg,png,jpeg!',
+            'image.max' => 'Chọn ảnh có kích thước nhỏ hơn 5mb!',
+            'name_education.required' => 'Vui lòng nhập tên trường!',
+            'majors.required' => 'Vui lòng nhập ngành học!',
+            'position.required' => 'Vui lòng nhập vị trí!',
+            'start_date.required' => 'Vui lòng nhập ngày bắt đầu!',
+            'end_date.required' => 'Vui lòng nhập ngày kết thúc!',
+            'phone.required' => 'Vui lòng nhập số điện thoại!',
+            'phone.max' => 'Số điện thoại chỉ có 10 số!',
+            'phone.numeric' => 'Số điện thoại phải là số!',
+            'email.required' => 'Vui lòng nhập email!',
+            'description.required' => 'Vui lòng nhập mô tả!',
+            'skill_id.required' => 'Vui lòng chọn kỹ năng!',
+            'address.required' => 'Vui lòng nhập địa chỉ!',
+            'gpa.max' => 'Điểm không quá 10!',
+            'time.required' => 'Vui lòng nhập thời gian!',
+        ];
     }
 
-    public function index()
+    public function createNew() {
+        if(auth('candidate')->check()) {
+            $candidate_id = auth('candidate')->user()->id;
+            $seeker = new SeekerProfile();
+            $seeker->candidate_id = $candidate_id;
+
+            $check_count = SeekerProfile::where('candidate_id', $candidate_id)->count();
+            if($check_count >= 3) {
+                Session::flash('error', 'Bạn đã đạt giới hạn 3 CV !');
+                return redirect()->route('seeker');
+            }else {
+                $seeker->name = auth('candidate')->user()->name;
+                $seeker->email = auth('candidate')->user()->email;
+                $seeker->phone = auth('candidate')->user()->phone;
+                $seeker->save();
+                $id_new = $seeker->id;
+                return redirect()->route('CreateCV', ['idsee' => $id_new]);
+            }
+        }
+        return redirect()->route('candidate.login');
+    }
+
+    public function index(Request $request)
     {
         if(auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
-            $seeker = SeekerProfile::where('candidate_id', $id)->first();
+            $idsee = $request->route('idsee');
+            $seeker = SeekerProfile::where('id', $idsee)->first();
             $this->v['seeker'] = $seeker;
             $this->v['skills'] = Skill::all();
             $this->v['maJor'] = Major::all();
@@ -48,155 +95,246 @@ class CreateCvController extends Controller
                 $this->v['skillActive'] = $this->v['list_skill']->pluck('skill_id')->toArray();
             }
             return view('client.upcv.cv', $this->v);
+            
         }
         return redirect()->route('candidate.login');
     }
 
-    public function saveInfo(CreateCvRequest $request)
+    public function saveInfo(Request $request)
     {
-        $id = auth('candidate')->user()->id;
-        $params = [];
-        $params['cols'] = $request->post();
-        $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
-        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
-
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['cols']['image'] = $this->uploadFile($request->file('image'));
-        }
-
-        $candidateImage = Candidate::where('id', $id)->first();
-        if($candidateImage->avatar == "" && $params['cols']['image'] != "") {
-            $candidateImage->avatar = $params['cols']['image'];
-            $candidateImage->save();
-        }
-
-        unset($params['cols']['_token']);
-        $model = new SeekerProfile();
-        $res = $model->saveAdd($params);
-        if ($res == null) {
-            Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return back();
-        } else if ($res > 0) {
-            Session::flash('success', 'Thêm thành công!');
-            return back();
-        } else {
-            Session::flash('error', 'Lỗi thêm mới!');
-            return back();
-        }
-    }
-
-    public function updateInfo(CreateCvRequest $request)
-    {
-
-        $params = [];
-        $params['cols'] = $request->post();
-
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['cols']['image'] = $this->uploadFile($request->file('image'));
-        }
-
-        unset($params['cols']['_token']);
-        $model = new SeekerProfile();
-        $res = $model->saveUpdate($params);
-        if ($res == null) {
-            Session::flash('success', 'Cập nhật thành công!');
-            return back();
-        }
-        if ($res == 1) {
-            Session::flash('success', 'Cập nhật thành công!');
-            return back();
-        } else {
-            Session::flash('error', 'Lỗi cập nhật!');
-            return back();
-        }
-    }
-
-    public function saveExperience(CreateCvRequest $request)
-    {
-        $params = [];
-        $params['cols'] = $request->post();
-
-        $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
-        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
-
-        $bat_dau = strtotime($params['cols']['start_date']);
-        if(empty($ket_thuc)){
-            $ket_thuc = Carbon::now()->toDateTimeString();
+        $rules = [
+            'name' => 'required',
+            'phone' => 'required|numeric|max:10',
+            'email' => 'required',
+            'description' => 'required',
+            'candidate_id' => 'required',
+            'major_id' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5000',
+            'address' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
         }else {
-            $ket_thuc = $params['cols']['end_date'];
-        }
-        $ket_thuc = strtotime($ket_thuc);
-        $tong = $ket_thuc - $bat_dau;
-        $day = floor($tong / 60 / 60 / 24);
-        $day = round($day /30/12, 1);
+            $params = [];
+            $params['cols'] = $request->post();
+            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
-        $params['cols']['time_exp'] =  $day;
-        
-        $seeker = SeekerProfile::where('id', auth('candidate')->user()->id)->first();
-        $seeker->total_exp = $seeker->total_exp += $day;
-        $seeker->save();
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $params['cols']['image'] = $this->uploadFile($request->file('image'));
+            } 
 
-        unset($params['cols']['_token']);
-        $model = new Experience();
-
-        $res = $model->saveAdd($params);
-        if ($res == null) {
-            Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return back();
-        } else if ($res > 0) {
-            Session::flash('success', 'Thêm thành công!');
-            return back();
-        } else {
-            Session::flash('error', 'Lỗi thêm mới!');
-            return back();
+            unset($params['cols']['_token']);
+            $model = new SeekerProfile();
+            $res = $model->saveAdd($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Tạo mới thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Tạo mới thành công!',
+                    'data' => $params['cols'],
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
         }
     }
 
-    public function updateExperience(CreateCvRequest $request, $id)
+    public function updateInfo(Request $request)
     {
-        $params = [];
-        $params['cols'] = $request->post();
 
-        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
-
-        $bat_dau = strtotime($params['cols']['start_date']);
-        if(empty($ket_thuc)){
-            $ket_thuc = Carbon::now()->toDateTimeString();
+        $rules = [
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'description' => 'required',
+            'candidate_id' => 'required',
+            'major_id' => 'required',
+            'image' => 'image|mimes:jpg,png,jpeg|max:5000',
+            'address' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
         }else {
-            $ket_thuc = $params['cols']['end_date'];
-        }
-        $ket_thuc = strtotime($ket_thuc);
-        $tong = $ket_thuc - $bat_dau;
-        $day = floor($tong / 60 / 60 / 24);
-        $day = round($day /30/12, 1);
+            $params = [];
+            $params['cols'] = $request->post();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
-        $params['cols']['time_exp'] =  $day;
-
-        $seeker = SeekerProfile::where('id', $params['cols']['seeker_id'])->first();
-        $seeker->total_exp = $seeker->total_exp += $day;
-        $seeker->save();
-
-        unset($params['cols']['_token']);
-        $model = new Experience();
-        $params['cols']['id'] = $id;
-        $res = $model->saveUpdate($params);
-        if ($res == null) {
-            Session::flash('success', 'Cập nhật thành công!');
-            return back();
-        }
-        if ($res == 1) {
-            Session::flash('success', 'Cập nhật thành công!');
-            return back();
-        } else {
-            Session::flash('error', 'Lỗi cập nhật!');
-            return back();
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $params['cols']['image'] = $this->uploadFile($request->file('image'));
+            }
+            unset($params['cols']['_token']);
+            $model = new SeekerProfile();
+            $res = $model->saveUpdate($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Tạo mới thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Tạo mới thành công!',
+                    'data' => $params['cols'],
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
         }
     }
 
-    public function deleteExperience($id)
+    public function saveExperience(Request $request)
     {
+        $seeker_id = $request->get('seeker_id');
+        $check_max = Experience::where('seeker_id', $seeker_id)->count();
+        if($check_max >= 5) {
+            return response()->json([
+                'is_max' => true,
+                'error' => 'Tối đa 5 mục kinh nghiệm!'
+            ]);
+        }else {
+            $rules = [
+                'company_name' => 'required',
+                'position' => 'required',
+                'start_date' => 'required',
+                'description' => 'required',
+            ];
+            $messages =  $this->message_val;
+            $validator = Validator::make($request->all(), $rules, $messages);
+            if ($validator->fails()) {
+                return response()->json(['error'=>$validator->errors()]);
+            }else {
+                $params = [];
+                $params['cols'] = $request->post();
+                $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
+                $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+    
+                $bat_dau = strtotime($params['cols']['start_date']);
+                if(empty($ket_thuc)){
+                    $ket_thuc = Carbon::now()->toDateTimeString();
+                }else {
+                    $ket_thuc = $params['cols']['end_date'];
+                }
+                $ket_thuc = strtotime($ket_thuc);
+                $tong = $ket_thuc - $bat_dau;
+                $day = floor($tong / 60 / 60 / 24);
+                $day = round($day /30/12, 1);
+    
+                $params['cols']['time_exp'] =  $day;
+                
+                $seeker = SeekerProfile::where('id', $params['cols']['seeker_id'])->first();
+                $seeker->total_exp = $seeker->total_exp += $day;
+                $seeker->save();
+    
+                unset($params['cols']['_token']);
+                $model = new Experience();
+    
+                $res = $model->saveAdd($params);
+                if ($res == null) {
+                    return response()->json([
+                        'is_check' => false,
+                        'error' => 'Tạo mới thất bại!'
+                    ]);
+                }
+                if ($res == 1) {
+                    return response()->json([
+                        'is_check' => true,
+                        'success' => 'Tạo mới thành công!',
+                    ]);
+                } else {
+                    return response()->json([
+                        'is_check' => false,
+                        'error' => 'Lỗi tạo mới!'
+                    ]);
+                }
+            }
+        }
+    }
+
+    public function updateExperience(Request $request, $id)
+    {
+
+        $rules = [
+            'company_name' => 'required',
+            'position' => 'required',
+            'start_date' => 'required',
+            'description' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        }else {
+            $params = [];
+            $params['cols'] = $request->post();
+
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+            $bat_dau = strtotime($params['cols']['start_date']);
+            if(empty($ket_thuc)){
+                $ket_thuc = Carbon::now()->toDateTimeString();
+            }else {
+                $ket_thuc = $params['cols']['end_date'];
+            }
+            $ket_thuc = strtotime($ket_thuc);
+            $tong = $ket_thuc - $bat_dau;
+            $day = floor($tong / 60 / 60 / 24);
+            $day = round($day /30/12, 1);
+
+            $params['cols']['time_exp'] =  $day;
+
+            $seeker = SeekerProfile::where('id', $params['cols']['seeker_id'])->first();
+            $seeker->total_exp = $seeker->total_exp += $day;
+            $seeker->save();
+
+            unset($params['cols']['_token']);
+            $model = new Experience();
+            $params['cols']['id'] = $id;
+            $res = $model->saveUpdate($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Cập nhật thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Cập nhật thành công!',
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
+        }
+    }
+
+    public function deleteExperience(Request $request)
+    {
+        $id = $request->id;
         if (isset($id)) {
             $exp = Experience::find($id);
+            if(!isset($exp)){
+                return redirect()->route('CreateCV');
+            }
             $bat_dau = strtotime($exp->start_date);
             if(empty($ket_thuc)){
                 $ket_thuc = Carbon::now()->toDateTimeString();
@@ -213,11 +351,16 @@ class CreateCvController extends Controller
             $seeker->save();
 
             $exp->delete();
-            Session::flash('success', 'Xóa thành công!');
-            return redirect()->route('CreateCV');
+
+            return response()->json([
+                'is_check' => true,
+                'success' => 'Xóa thành công!',
+            ]);
         }
-        Session::flash('error', 'Xóa thất bại!');
-        return redirect()->route('CreateCV');
+        return response()->json([
+            'is_check' => false,
+            'error' => 'Xóa thất bại!'
+        ]);
     }
 
     public function saveSkills(Request $request)
@@ -238,11 +381,11 @@ class CreateCvController extends Controller
         return response()->json(['success' => 'Cập nhật thành công!']);
     }
 
-    public function DeleteAllSkill($id)
+    public function DeleteAllSkill($idsee)
     {
-        SkillSeeker::where('seeker_id', $id)->delete();
+        SkillSeeker::where('seeker_id', $idsee)->delete();
         Session::flash('success', 'Xóa thành công!');
-        return redirect()->route('CreateCV');
+        return redirect()->route('CreateCV', ['idsee' => $idsee]);
     }
 
     public function saveEducation(CreateCvRequest $request)
@@ -296,10 +439,16 @@ class CreateCvController extends Controller
     {
         if (isset($id)) {
             Education::find($id)->delete();
-            return redirect()->route('CreateCV');
+
+            return response()->json([
+                'is_check' => true,
+                'success' => 'Xóa thành công!',
+            ]);
         }
-        Session::flash('success', 'Xóa thành công!');
-        return redirect()->route('CreateCV');
+        return response()->json([
+            'is_check' => false,
+            'error' => 'Xóa thất bại!'
+        ]);
     }
 
     //certificates
@@ -354,9 +503,15 @@ class CreateCvController extends Controller
     {
         if (isset($id)) {
             Certificate::find($id)->delete();
-            return redirect()->route('CreateCV');
+            return response()->json([
+                'is_check' => true,
+                'success' => 'Xóa thành công!',
+            ]);
         }
-        return redirect()->route('CreateCV');
+        return response()->json([
+            'is_check' => false,
+            'error' => 'Xóa thất bại!'
+        ]);
     }
 
     // up ảnh
@@ -369,7 +524,8 @@ class CreateCvController extends Controller
     public function getPdf(Request $request)
     {
         $id = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id)->first();
+        $idsee = $request->route('idsee');
+        $seeker = SeekerProfile::where('id', $idsee)->first();
         $this->v['seeker'] = $seeker;
         $this->v['skills'] = Skill::all();
         $this->v['major'] = Major::all();
@@ -390,14 +546,14 @@ class CreateCvController extends Controller
         $pdf = Pdf::loadView('client.upcv.index', $this->v);
         $fileName = 'CV-' . $seeker->name .'_'. time() . rand('0', '99') . '.pdf';
 
-        $seekerA = SeekerProfile::where('candidate_id', $id)->first();
+        $seekerA = SeekerProfile::where('id', $idsee)->first();
         $file_path = public_path('upload/cv/'.$seekerA->path_cv);
 
         if (is_file($file_path)) {
             unlink($file_path);
         }
 
-        SeekerProfile::where('candidate_id', $id)->update([
+        SeekerProfile::where('id', $idsee)->update([
             'path_cv' => $fileName
         ]);
 
