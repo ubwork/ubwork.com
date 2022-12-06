@@ -15,7 +15,7 @@
                     @if ($major == null && $skill_seeker == null)
                         <span>Do bạn chưa tạo cv trên hệ thống. nên bạn hãy tìm kiếm bằng cách chọn chuyên ngành hoặc chọn
                             kỹ năng bên dưới để sử dụng chức năng hoặc bạn có thể tạo cv <a
-                                href="{{ route('CreateCV') }}">tại đây!</a></span>
+                                href="{{ route('createNew') }}">tại đây!</a></span>
                         <div class="top-filters" style="margin-top: 100px ">
                             <div class="form-group" style="width:220px">
                                 <select class="chosen-select" name="major">
