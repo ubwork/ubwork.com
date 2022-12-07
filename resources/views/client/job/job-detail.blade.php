@@ -11,7 +11,7 @@
           <div class="job-block-seven">
             <div class="inner-box">
               <div class="content">
-                <span class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}"></span>
+                <span class="company-logo"><img src="{{asset('images/company/'.$data_job->company->logo)}}"></span>
                 <h4><a href="{{route('job-detail', ['id' => $data_job->id])}}">{{$data_job->title}}</a></h4>
                 <ul class="job-info">
                   {{-- <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li> --}}
@@ -105,7 +105,7 @@
                     <div class="job-block">
                         <div class="inner-box">
                             <div class="content">
-                            <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('images/company/'.$item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
                                 {{-- <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li> --}}
@@ -204,7 +204,7 @@
                 <div class="sidebar-widget company-widget">
                   <div class="widget-content">
                     <div class="company-title">
-                      <div class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}" alt=""></div>
+                      <div class="company-logo"><img src="{{asset('images/company/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
                       <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">Thông tin công ty</a>
                     </div>

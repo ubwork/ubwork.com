@@ -76,6 +76,7 @@ class JobPostActivities extends Model
         $dateArray = $model->getDatesFromRange($from,$to);
         $arrayShow = [];
         foreach ($dateArray as $key => $value) {
+            $data = [];
             foreach($totalApplied as $val){
                 $data['date'] =date('d-m-Y',strtotime($value)) ;
                 if ($value == $val->date) {

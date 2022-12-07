@@ -85,9 +85,8 @@
                 success: function success(results) {
                     if (results.status == false) {
                         $('#nameInput').addClass('is-invalid'),
-                        $('#name-error').text(results.message.name),
+                        $('#name-error').text(results.message.name)
                     } else {
-                        console.log(results);
                         Swal.fire({
                             title: 'Success',
                             icon: 'success',
