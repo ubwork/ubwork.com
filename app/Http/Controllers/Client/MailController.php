@@ -142,7 +142,6 @@ class MailController extends Controller
                             ->distinct()
                             ->select('job_posts.*')
                             ->get();
-                            dd($job);
                         foreach ($job as $item) {
                             $end_time = strtotime($item->end_date);
                             $total = $end_time - $today;
