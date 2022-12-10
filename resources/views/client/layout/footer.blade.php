@@ -37,7 +37,7 @@
                                     <ul class="list">
                                         <li><a href="{{route('job')}}">Danh sách công việc</a></li>
                                         <li><a href="{{route('company-list')}}">Danh sách công ty</a></li>
-                                        <li><a href="{{route('job_speed')}}">Tìm việc nhanh</a></li>
+                                        <li><a href="{{route('jobspeed')}}">Tìm việc nhanh</a></li>
     
                                     </ul>
                                 </div>
@@ -61,7 +61,7 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">Chăm sóc khách hàng</h4>
+                                <h4 class="widget-title">Dịch vụ</h4>
                                 <div class="widget-content">
                                     <ul class="list">
                                         <li><a href="#">Khuyến mãi</a></li>
