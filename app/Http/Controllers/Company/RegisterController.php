@@ -21,14 +21,13 @@ class RegisterController extends Controller
     public function postRegister(Request $request)
     {
         $rules = [
-            'company_name' => 'required|max:255|alpha',
+            'company_name' => 'required|max:255',
             'email' => 'required|string|email|max:255|unique:companies',
             'password' => 'required|string|min:6',
             'phone' => 'required|digits:10|unique:companies',
         ];
         $messages = [
             'company_name.required' => 'Mời bạn nhập vào tên',
-            'company_name.alpha' => 'Tên không hợp lệ',
             'phone.digits' => 'Số điện thoại không tồn tại',
             'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Mời bạn nhập đúng định dạnh email',
