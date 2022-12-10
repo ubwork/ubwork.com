@@ -50,7 +50,7 @@ class RegisterController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
-            return redirect()->route('candidate.register')->withErrors($validator);
+            return redirect()->route('candidate.register')->withErrors($validator)->withInput();
         } else {
             $users = new Candidate();
             $data = $request->only('name', 'email', 'phone', 'password', 'gender');
