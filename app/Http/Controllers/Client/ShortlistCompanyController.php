@@ -25,7 +25,7 @@ class ShortlistCompanyController extends Controller
         $com_short = [];
         if (auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
-            $data = ShortlistCompany::where('candidate_id', $id)->take(6)->get();
+            $data = ShortlistCompany::where('candidate_id', $id)->paginate(6);
             if (!empty($data)) {
                 foreach ($data as $item) {
                     $company_id = $item->company_id;

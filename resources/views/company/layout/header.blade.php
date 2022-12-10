@@ -48,17 +48,6 @@
                         @endif
                         <span class="name">{{ auth('company')->user()->company_name }}</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('company.listPackage')}}"><i class="fa fa-cube"></i>Gói dịch vụ</a></li>
-                        <li>
-                            <form action="{{ route('company.logOut') }}" method="post">
-                                @csrf
-                                <a><button type="submit">
-                                        <i class="la la-sign-out"></i>Đăng xuất
-                                </button></a>
-                            </form>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

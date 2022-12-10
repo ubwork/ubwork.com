@@ -114,7 +114,7 @@
 
               <div class="form-group">
                 <label>Số điện thoại</label>
-                <input id="phone-number" type="number" name="phone" value="" placeholder="Nhập vào số điện thoại">
+                <input id="phone-number" type="number" name="phone" value="{{old('phone')}}" placeholder="Nhập vào số điện thoại">
                 @error('phone')
                   <small class="text-danger">{{$message}}</small>
                 @enderror
