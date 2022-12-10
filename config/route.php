@@ -20,7 +20,7 @@ return [
             'manage-cv' => [
                 'title' => "Quản lý CV",
                 'route' => 'company.manageCV',
-                'icon'  => 'la la-home',
+                'icon'  => 'la la-newspaper-o',
             ],
             'history-payment' => [
                 'title' => "Lịch sử giao dịch",
@@ -32,11 +32,16 @@ return [
                 'route' => 'company.profile',
                 'icon'  => 'la la-user-tie',
             ],
+            'package' => [
+                'title' => "Gói cước",
+                'route' => 'company.listPackage',
+                'icon'  => 'la la-bitcoin',
+            ],
             'image-paper' => [
                 'title' => "Giấy phép kinh doanh",
                 'route' => 'company.image-paper',
                 'icon'  => 'la la-file',
-            ],
+            ]
         ]
     ]
 ];

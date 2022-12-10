@@ -19,6 +19,9 @@ class LoginGoogleController extends Controller
         $arrayUrl = explode('/',session()->all()['_previous']['url']);
         $checkTypeAccount = in_array('company',$arrayUrl);
         Session::flash('typeAccount',$checkTypeAccount);
+        if (Session::has('job_id')) {
+            Session::flash('job_id',Session::get('job_id'));
+        }
         return Socialite::driver('google')->redirect();
     }
 
@@ -30,16 +33,20 @@ class LoginGoogleController extends Controller
             return redirect()->route('company.home');
         }else{
            $this->handleCandidate($user);
-           return redirect()->route('index');
+           if (Session::has('job_id') ) {
+                return redirect()->route('job-detail',Session::get('job_id'));
+            }else{
+                return redirect()->route('index');
+            }
         }
-        
     }
     public function handleCandidate($user){
-        $checkcandidate = Candidate::where('google_id',$user->id)->first();
+        $checkcandidate = Candidate::where('google_id',$user->id)->orWhere('email',$user->email)->first();
         if (!empty($checkcandidate)) {
             auth('candidate')->login($checkcandidate);
             Session::flash('success',"Đăng nhập thành công");
         }else{
+            
             try {
                 $candidate =  Candidate::create([
                     'name' => $user->name,
@@ -50,9 +57,8 @@ class LoginGoogleController extends Controller
                 auth('candidate')->login($candidate);
                 Session::flash('success',"Đăng nhập thành công");
             } catch (\Throwable $th) {
-                Session::flash('error',"Đăng nhập thất bại");
+                Session::flash('error',"Đăng nhập thất bại" . $th->getMessage());
             }
-            
         }
     }
     public function handleCompany($user){

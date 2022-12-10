@@ -23,13 +23,13 @@ class JobPost extends Model
         $customerStatus = null;
         switch ($value) {
             case config('custom.job_post_status.active'):
-                $customerStatus = 'Active';
+                $customerStatus = 'Hiện thị';
                 break;
             case config('custom.job_post_status.block'):
-                $customerStatus = 'Block';
+                $customerStatus = 'Hết hạn';
                 break;
             default:
-                $customerStatus = 'Active';
+                $customerStatus = 'Hiện thị';
                 break;
         }
 

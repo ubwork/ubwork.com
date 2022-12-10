@@ -22,6 +22,7 @@ class CoinController extends Controller
         $this->v['activeRoute'] = 'coin';
     }
     public function getListPackage(){
+        $this->v['activeRoute'] = 'package';
         $this->v['title'] = "Gói cước";
         $this->v['packages'] = Package::where([['status','=',1],['type_account','=',0]])->get()->toArray();
         return view('company.coin.package',$this->v);

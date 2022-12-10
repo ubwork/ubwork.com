@@ -86,7 +86,7 @@ Route::get('/register', ['as' => 'candidate.register', 'uses' => 'Candidate\Regi
 Route::post('/register', ['as' => 'candidate.register.post', 'uses' => 'Candidate\RegisterController@postRegister']);
 
 // login
-Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
+Route::get('/login/{job_id?}', ['as' => 'candidate.login', 'uses' => 'Client\Auth\LoginController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login.post', 'uses' => 'Client\Auth\LoginController@postLogin']);
 
 //company
@@ -143,7 +143,7 @@ Route::post('insertInvoice', 'Client\CoinController@insertInvoice')->name('inser
 Route::post('payment', 'Client\CoinController@payment')->name('payment');
 Route::get('vnpay_return', 'Client\CoinController@vnpay_return')->name('vnpay_return');
 Route::get('vnpay_ipn', 'Client\CoinController@vnpay_ipn')->name('vnpay_ipn');
-Route::get('detail-candidates/{id}', 'Client\DetailCandidateController@index')->name('detail-candidate.index');
+// Route::get('detail-candidates/{id}', 'Client\DetailCandidateController@index')->name('detail-candidate.index');
 Route::get('historyPayment', 'Client\CoinController@historyPayment')->name('historyPayment');
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
