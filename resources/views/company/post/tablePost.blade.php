@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Tin tuyển dụng</th>
+            <th>Vị trí</th>
             <th>Chi tiết</th>
             <th>Trạng thái</th>
             <th>
@@ -17,6 +18,9 @@
                     <h6>{{ $item->title }}</h6>
                     <span><button class="btn bg-light btn-sm btn_profileApplied"
                             href="{{ url("company/post/profileApply/$item->id") }}"> Xem CV</button></span>
+                </td>
+                <td>
+                    {{config('custom.level')[$item->level]['name']}}
                 </td>
                 <td>Lượt ứng tuyển: {{ $item->activities->count() }} <br> Ngày hết hạn:
                     {{ date_format(new DateTime($item->end_date), 'd/m/Y') }} </td>

@@ -44,7 +44,7 @@ class JobPostActivitiesController extends Controller
         $job_applied = [];
         if (!empty($seeker)) {
             $job_applied = [];
-            $data = JobPostActivities::where('seeker_id', $seeker->id)->get();
+            $data = JobPostActivities::where('seeker_id', $seeker->id)->paginate(8);
             if (!empty($data)) {
                 foreach ($data as $item) {
                     $id_post = $item->job_post_id;

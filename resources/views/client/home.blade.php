@@ -2,7 +2,6 @@
 @section('title')
     {{ __('UB Work') }}
 @endsection
-@section('content')
 @section('style')
 @parent
 <style>
@@ -26,6 +25,7 @@
     }
 </style>
 @endsection
+@section('content')
     <section class="banner-section">
         <div class="auto-container">
             <div class="row">
@@ -224,13 +224,13 @@
                                     @if (auth('candidate')->check())
                                         @if (!empty($job_short[$item->id]))
                                            @if ($job_short[$item->id]->job_post_id == $item->id)
-                                                <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                    class="bookmark-btn"><span class="flaticon-bookmark"
+                                                <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                                    class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                         style="color: #f7941d"></span></a>
                                             @endif
                                         @else
-                                            <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
-                                                class="bookmark-btn"><span class="flaticon-bookmark"
+                                            <a  data-id="{{$item->id}}" data-shortlistId=""
+                                                class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                     style="color: black"></span></a>
                                         @endif
                                     @else
@@ -290,13 +290,13 @@
                                         @if (auth('candidate')->check())
                                             @if (!empty($job_short[$item->id]))
                                                 @if ($job_short[$item->id]->job_post_id == $item->id)
-                                                    <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                        class="bookmark-btn"><span class="flaticon-bookmark"
+                                                    <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                                        class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                             style="color: #f7941d"></span></a>
                                                 @endif
                                             @else
-                                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
-                                                    class="bookmark-btn"><span class="flaticon-bookmark "
+                                                <a  data-id="{{$item->id}}" data-shortlistId=""
+                                                    class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                         style="color: black"></span></a>
                                             @endif
                                         @else
@@ -309,12 +309,6 @@
                             </div>
                         @endforeach
                     </div>
-
-                    {{-- <div class="btn-box">
-                        <a href="{{ route('job') }}" class="theme-btn btn-style-one bg-blue"><span
-                                class="btn-title">Xem
-                                thêm</span></a>
-                    </div> --}}
                 </div>
                 @endif
             @endif
@@ -324,10 +318,8 @@
 @endsection
 @section('script')
 @parent
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script> 
+<script src="{{asset('js/client/shortlist.js')}}"></script>
 <script>
 $(document).ready(function($) {
     var engine1 = new Bloodhound({
@@ -358,6 +350,6 @@ $(document).ready(function($) {
         },
     ]);
 });
-
+updateShortList();
 </script>
 @endsection
