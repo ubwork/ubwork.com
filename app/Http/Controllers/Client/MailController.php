@@ -119,6 +119,7 @@ class MailController extends Controller
                     } elseif (!isset($jobpost)) {
                         return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
                     } else {
+                        // dd($request->skill);
                         $job = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
                             ->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
                             ->where(function ($q) use ($request, $job_atv) {
@@ -132,7 +133,7 @@ class MailController extends Controller
                                     }
                                 }
                                 if (!empty($skill)) {
-                                    $q->where('skill_posts.skill_id', '=', $skill);
+                                    $q->whereIn('skill_posts.skill_id', $skill);
                                 }
                                 if (!empty($type)) {
                                     $q->where('job_posts.type_work', '=', $type);

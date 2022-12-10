@@ -30,7 +30,7 @@ class RegisterController extends Controller
     public function postRegister(Request $request)
     {
         $rules = [
-            'name' => 'required|alpha',
+            'name' => 'required',
             'email' => 'required|email|unique:candidates',
             'password' => 'required|min:6',
             'phone' => 'required|unique:candidates|digits:10',
@@ -38,7 +38,6 @@ class RegisterController extends Controller
         ];
         $messages = [
             'name.required' => 'Mời bạn nhập vào tên',
-            'name.alpha' => 'Tên không hợp lệ',
             'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Mời bạn nhập đúng định dạnh email',
             'email.unique' => 'Email bạn nhập đã tồn tại',
