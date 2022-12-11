@@ -11,7 +11,7 @@
                 <div class="job-block-seven">
                     <div class="inner-box">
                         <div class="content">
-                            <span class="company-logo"><img src="{{asset('storage/company/'.$company_detail->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/images/company/' . $company_detail->logo)}}" alt=""></span>
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
@@ -25,19 +25,12 @@
                         </div>
 
                         <div class="btn-box">
-                            @if (auth('candidate')->check()) 
+                            @if (auth('candidate')->check())
                                 <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Đánh giá</a>
                             @else
                                 <button class="theme-btn btn-style-one">Đánh giá</button>
                             @endif
-
-                            {{-- @if (auth('candidate')->check()) 
-                                 <a class="bookmark-btn"  href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><i class="flaticon-bookmark"></i></a>
-                            @else
-                           
-                                <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
-                            @endif --}}
-                            @if (auth('candidate')->check()) 
+                            @if (auth('candidate')->check())
                                 @if (!empty($idCompanyShort[$company_detail->id]) )
                                     @if($idCompanyShort[$company_detail->id]->company_id == $company_detail->id)
                                     <a href="{{route('delete_shortlisted_company', ['id' => $idCompanyShort[$company_detail->id]->id])}}"><button class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white" ></span></button></a>
@@ -60,9 +53,9 @@
                     <div class="content-column col-lg-8 col-md-12 col-sm-12">
                         <div class="job-detail">
                             <h4>Thông tin công ty</h4>
-                            <p>{{$company_detail->about}}
+                            <p>{!! $company_detail->about !!}
                             </p>
-    
+
                         </div>
 
                         <!-- Related Jobs -->
@@ -77,13 +70,13 @@
                                 <div class="job-block">
                                     <div class="inner-box">
                                         <div class="content">
-                                        <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
+                                        <span class="company-logo"><img src="{{asset('storage/images/company/' . $company_detail->logo)}}" alt=""></span>
                                         <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                                         <ul class="job-info">
                                             <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li>
                                             <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                             <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}}</li>
-                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} VNĐ</li>
                                         </ul>
                                         <ul class="job-other-info">
                                              @foreach (config('custom.type_work') as $value)
@@ -94,7 +87,7 @@
                                                 @endif
                                             @endforeach
                                         </ul>
-                                        @if (auth('candidate')->check()) 
+                                        @if (auth('candidate')->check())
                                             @if (!empty($job_short[$item->id]) )
                                                 @if($job_short[$item->id]->job_post_id == $item->id)
                                                 <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
@@ -139,21 +132,15 @@
                                         <li>Ngành chính: <span>{{$company_detail->company_model}}</span></li>
                                         <li>Quy mô: <span>{{$company_detail->team}}</span></li>
                                         <li>Thành lập: <span>{{$company_detail->founded_in}}</span></li>
-                                        <li>Số điện thoại: <span>{{$company_detail->phone}}</span></li>
-                                        <li>Email: <span>{{$company_detail->email}}</span></li>
-                                        <li>Địa điểm: <span>{{$company_detail->address}}</span></li>
-                                        <li>Truyền thông xã hội:
-                                            <div class="social-links">
-                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
 
-                                    <div class="btn-box"><a href=""
-                                            class="theme-btn btn-style-three">{{$company_detail->link_web}}</a></div>
+                                    </ul>
+                                    @if (empty($company_detail->link_web))
+
+                                    @else
+                                    <div class="btn-box"><a href="{{$company_detail->link_web}}"
+                                        class="theme-btn btn-style-three">Xem Trang</a></div>
+                                    @endif
+
                                 </div>
                             </div>
 

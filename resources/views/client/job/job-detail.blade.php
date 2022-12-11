@@ -38,9 +38,9 @@
                       @endif
                     @else
                       <a  @if(!empty($seeker->id))
-                          href="{{route('applied', ['id' => $data_job->id])}}" 
-                         @else 
-                          href="{{route('createNew')}}" 
+                          href="{{route('applied', ['id' => $data_job->id])}}"
+                         @else
+                          href="{{route('createNew')}}"
                          @endif class="theme-btn btn-style-one">Ứng tuyển ngay</a>
                     @endif
                 @else
@@ -114,7 +114,7 @@
                     <div class="job-block">
                         <div class="inner-box">
                             <div class="content">
-                            <span class="company-logo"><img src="{{asset('images/company/'.$item->company->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/images/company/' . $item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
                                 {{-- <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li> --}}
@@ -146,7 +146,7 @@
                             @else
                                 <button class="bookmark-btn"><span class="flaticon-bookmark"
                                         style="color: black"></span></button>
-                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
+                                {{-- <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a> --}}
                             @endif
                             </div>
                         </div>
