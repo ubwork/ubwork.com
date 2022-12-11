@@ -9,9 +9,12 @@ use App\Models\Certificate;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Major;
+use App\Models\Projects;
 use App\Models\SeekerProfile;
 use App\Models\Skill;
+use App\Models\Skill_other;
 use App\Models\SkillSeeker;
+use App\Models\Tools_used;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -42,14 +45,14 @@ class CreateCvController extends Controller
             'start_date.required' => 'Vui lòng nhập ngày bắt đầu!',
             'end_date.required' => 'Vui lòng nhập ngày kết thúc!',
             'phone.required' => 'Vui lòng nhập số điện thoại!',
-            'phone.max' => 'Số điện thoại chỉ có 10 số!',
-            'phone.numeric' => 'Số điện thoại phải là số!',
             'email.required' => 'Vui lòng nhập email!',
             'description.required' => 'Vui lòng nhập mô tả!',
             'skill_id.required' => 'Vui lòng chọn kỹ năng!',
             'address.required' => 'Vui lòng nhập địa chỉ!',
             'gpa.max' => 'Điểm không quá 10!',
             'time.required' => 'Vui lòng nhập thời gian!',
+            'summary.required' => 'Vui lòng nhập mô tả ngắn!',
+            'title.required' => 'Vui lòng nhập tên!'
         ];
     }
 
@@ -67,6 +70,7 @@ class CreateCvController extends Controller
                 $seeker->name = auth('candidate')->user()->name;
                 $seeker->email = auth('candidate')->user()->email;
                 $seeker->phone = auth('candidate')->user()->phone;
+                $seeker->is_active = 0;
                 $seeker->save();
                 $id_new = $seeker->id;
                 return redirect()->route('CreateCV', ['idsee' => $id_new]);
@@ -90,6 +94,9 @@ class CreateCvController extends Controller
                 $this->v['educations'] = Education::where('seeker_id', $seeker->id)->get();
                 $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seeker->id)->get();
                 $this->v['certificates'] = Certificate::where('seeker_id', $seeker->id)->get();
+                $this->v['skill_other'] = Skill_other::where('seeker_id', $seeker->id)->get();
+                $this->v['projects'] = Projects::where('seeker_id', $seeker->id)->get();
+                $this->v['tool_used'] = Tools_used::where('seeker_id', $seeker->id)->get();
 
                 //active skills
                 $this->v['skillActive'] = $this->v['list_skill']->pluck('skill_id')->toArray();
@@ -181,19 +188,19 @@ class CreateCvController extends Controller
             if ($res == null) {
                 return response()->json([
                     'is_check' => false,
-                    'error' => 'Tạo mới thất bại!'
+                    'error' => 'Cập nhật thất bại!'
                 ]);
             }
             if ($res == 1) {
                 return response()->json([
                     'is_check' => true,
-                    'success' => 'Tạo mới thành công!',
+                    'success' => 'Cập nhật thành công!',
                     'data' => $params['cols'],
                 ]);
             } else {
                 return response()->json([
                     'is_check' => false,
-                    'error' => 'Lỗi tạo mới!'
+                    'error' => 'Lỗi Cập nhật!'
                 ]);
             }
         }
@@ -514,6 +521,262 @@ class CreateCvController extends Controller
         ]);
     }
 
+    // project
+    public function saveProject(Request $request) {
+        $rules = [
+            'name' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'summary' => 'required',
+            'description' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        }else {
+            $params = [];
+            $params['cols'] = $request->post();
+
+            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+            unset($params['cols']['_token']);
+            $model = new Projects();
+
+            $res = $model->saveAdd($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Tạo mới thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Tạo mới thành công!',
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
+        }
+    }
+
+    public function updateProject(Request $request, $id)
+    {
+        $rules = [
+            'name' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'summary' => 'required',
+            'description' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        }else {
+            $params = [];
+            $params['cols'] = $request->post();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+            unset($params['cols']['_token']);
+            $model = new Projects();
+            $params['cols']['id'] = $id;
+            $res = $model->saveUpdate($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Cập nhật thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Cập nhật thành công!',
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
+        }
+    }
+
+    public function deleteProject($id)
+    {
+        if (isset($id)) {
+            Projects::find($id)->delete();
+            return response()->json([
+                'is_check' => true,
+                'success' => 'Xóa thành công!',
+            ]);
+        }
+        return response()->json([
+            'is_check' => false,
+            'error' => 'Xóa thất bại!'
+        ]);
+    }
+
+    //skill_other
+    public function saveSkillOther(CreateCvRequest $request) {
+        $params = [];
+        $params['cols'] = $request->post();
+
+        $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
+        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+        unset($params['cols']['_token']);
+        $model = new Skill_other();
+
+        $res = $model->saveAdd($params);
+        if ($res == null) {
+            Session::flash('error', 'Vui lòng nhập dữ liệu!');
+            return back();
+        } else if ($res > 0) {
+            Session::flash('success', 'Thêm thành công!');
+            return back();
+        } else {
+            Session::flash('error', 'Lỗi thêm mới!');
+            return back();
+        }
+    }
+
+    public function updateSkillOther(CreateCvRequest $request, $id)
+    {
+        $params = [];
+        $params['cols'] = $request->post();
+        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+        unset($params['cols']['_token']);
+        $model = new Skill_other();
+        $params['cols']['id'] = $id;
+        $res = $model->saveUpdate($params);
+        if ($res == null) {
+            Session::flash('success', 'Cập nhật thành công!');
+            return back();
+        }
+        if ($res == 1) {
+            Session::flash('success', 'Cập nhật thành công!');
+            return back();
+        } else {
+            Session::flash('error', 'Lỗi cập nhật!');
+            return back();
+        }
+    }
+
+    public function deleteSkillOther($id)
+    {
+        if (isset($id)) {
+            Skill_other::find($id)->delete();
+            return response()->json([
+                'is_check' => true,
+                'success' => 'Xóa thành công!',
+            ]);
+        }
+        return response()->json([
+            'is_check' => false,
+            'error' => 'Xóa thất bại!'
+        ]);
+    }
+
+    // project
+    public function saveTools(Request $request) {
+        $rules = [
+            'title' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        }else {
+            $params = [];
+            $params['cols'] = $request->post();
+
+            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+            unset($params['cols']['_token']);
+            $model = new Tools_used();
+
+            $res = $model->saveAdd($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Tạo mới thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Tạo mới thành công!',
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
+        }
+    }
+
+    public function updateTools(Request $request, $id)
+    {
+        $rules = [
+            'title' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        }else {
+            $params = [];
+            $params['cols'] = $request->post();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+
+            unset($params['cols']['_token']);
+            $model = new Tools_used();
+            $params['cols']['id'] = $id;
+            $res = $model->saveUpdate($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Cập nhật thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Cập nhật thành công!',
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
+        }
+    }
+
+    public function deleteTools($id)
+    {
+        if (isset($id)) {
+            Tools_used::find($id)->delete();
+            return response()->json([
+                'is_check' => true,
+                'success' => 'Xóa thành công!',
+            ]);
+        }
+        return response()->json([
+            'is_check' => false,
+            'error' => 'Xóa thất bại!'
+        ]);
+    }
+
     // up ảnh
     public function uploadFile($file)
     {
@@ -529,21 +792,34 @@ class CreateCvController extends Controller
         $this->v['seeker'] = $seeker;
         $this->v['skills'] = Skill::all();
         $this->v['major'] = Major::all();
-        $this->v['maJor'] = Major::all();
+        $this->v['maJor'] = $this->v['major'] ;
+        
+        if(isset($seeker->image)){
+            $imagePath = public_path("storage/$seeker->image");
+            $this->v['imageCV'] = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+        }
 
         if (!empty($seeker)) {
             $this->v['experiences'] = Experience::where('seeker_id', $seeker->id)->get();
             $this->v['educations'] = Education::where('seeker_id', $seeker->id)->get();
             $this->v['list_skill'] = SkillSeeker::where('seeker_id', $seeker->id)->get();
             $this->v['certificates'] = Certificate::where('seeker_id', $seeker->id)->get();
+            $this->v['skill_other'] = Skill_other::where('seeker_id', $seeker->id)->get();
+            $this->v['projects'] = Projects::where('seeker_id', $seeker->id)->get();
+            $this->v['tool_used'] = Tools_used::where('seeker_id', $seeker->id)->get();
+
+            $this->v['info_candidate'] = Candidate::where('id', $id)->first();
 
             //active skills
             $this->v['skillActive'] = $this->v['list_skill']->pluck('skill_id')->toArray();
         }
 
         //lưu rồi mở file
-
-        $pdf = Pdf::loadView('client.upcv.index', $this->v);
+        $pdf = Pdf::loadView('client.upcv.index', $this->v)
+            ->setOptions([
+            'enable_remote' => true,
+            'chroot'  => public_path('storage/'),
+        ]);
         $fileName = 'CV-' . $seeker->name .'_'. time() . rand('0', '99') . '.pdf';
 
         $seekerA = SeekerProfile::where('id', $idsee)->first();

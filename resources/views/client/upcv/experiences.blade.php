@@ -8,25 +8,29 @@
             </div>
             <div id="experiences" class="mt-3 border-bot form" style="display: none">
                 @if(!empty($seeker)) <input type="hidden" name="seeker_id" value="{{$seeker->id}}"> @endif
-                <div class="form-group">
-                    <label for="">Tên công ty *</label>
-                    <input type="text" name="company_name" class="form-control">
-                        <small class="val_company_name text-danger pl-4"></small>
+                <div class="row">
+                    <div class="col">
+                        <label for="">Tên công ty *</label>
+                        <input type="text" name="company_name" class="form-control">
+                            <small class="val_company_name text-danger pl-4"></small>
+                    </div>
+                    <div class="col">
+                        <label for="">Vị trí *</label>
+                        <input type="text" name="position" class="form-control">
+                        <small class="val_position text-danger pl-4"></small>
+                    </div>
                 </div>
-                <div class="form-group mt-3">
-                    <label for="">Vị trí *</label>
-                    <input type="text" name="position" class="form-control">
-                    <small class="val_position text-danger pl-4"></small>
-                </div>
-                <div class="form-group mt-3">
-                    <label for="">Bắt đầu *</label>
-                    <input type="date" name="start_date" class="form-control" >
-                    <small class="val_start_date text-danger pl-4"></small>
-                </div>
-                <div class="form-group mt-3">
-                    <label for="">Kết thúc</label>
-                    <input type="date" name="end_date" class="form-control">
-                    <small class="text-red"><i>Ghi chú: Nếu không nhập kết thúc sẽ là hiện tại đang làm việc ở đây</i></small>
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="">Bắt đầu *</label>
+                        <input type="date" name="start_date" class="form-control" >
+                        <small class="val_start_date text-danger pl-4"></small>
+                    </div>
+                    <div class="col">
+                        <label for="">Kết thúc</label>
+                        <input type="date" name="end_date" class="form-control">
+                        <small class="text-red"><i>Ghi chú: Không nhập kết thúc sẽ là hiện tại đang làm việc ở đây</i></small>
+                    </div>
                 </div>
                <div class="form-group mt-3">
                     <label for="">Mô tả *</label>
@@ -55,7 +59,7 @@
                                 Tên công ty: <span>{{$exp->company_name}}</span>
                             </div>
                             <div class="d-flex">
-                                Bắt đầu / Kết thúc: {{date("m-Y", strtotime($exp->start_date))}} / @if($exp->end_date == null) Hiện tại @else {{date("m-Y", strtotime($exp->end_date))}} @endif
+                                Từ / đến: {{date("m-Y", strtotime($exp->start_date))}} - @if($exp->end_date == null) Hiện tại @else {{date("m-Y", strtotime($exp->end_date))}} @endif
                             </div>
                             <div>
                                 Vị trí: {{$exp->position}}
@@ -75,25 +79,29 @@
                         @csrf
                         <div id="EditForm{{$exp->id}}" class="mt-3 mb-3 border-dotted-bot form" style="display: none;">
                             @if(!empty($seeker)) <input type="hidden" name="seeker_id" value="{{$seeker->id}}"> @endif
-                            <div class="form-group">
-                                <label for="">Tên công ty *</label>
-                                <input type="text" value="{{$exp->company_name}}" name="company_name" class="form-control">
-                                <small class="val_company_name text-danger pl-4"></small>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">Tên công ty *</label>
+                                    <input type="text" value="{{$exp->company_name}}" name="company_name" class="form-control">
+                                    <small class="val_company_name text-danger pl-4"></small>
+                                </div>
+                                <div class="col">
+                                    <label for="">Vị trí *</label>
+                                    <input type="text" value="{{$exp->position}}" name="position" class="form-control">
+                                    <small class="val_position text-danger pl-4"></small>
+                                </div>
                             </div>
-                            <div class="form-group mt-3">
-                                <label for="">Vị trí *</label>
-                                <input type="text" value="{{$exp->position}}" name="position" class="form-control">
-                                <small class="val_position text-danger pl-4"></small>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="">Bắt đầu *</label>
-                                <input type="date" name="start_date" value="{{date("Y-m-d", strtotime($exp->start_date))}}" class="form-control" >
-                                <small class="val_start_date text-danger pl-4"></small>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="">Kết thúc</label>
-                                <input type="date" @if(!empty($exp->end_date)) value="{{date("Y-m-d", strtotime($exp->end_date))}}" @endif name="end_date" class="form-control">
-                                <small class="text-red"><i>Ghi chú: Nếu không nhập kết thúc sẽ là hiện tại đang làm việc ở đây</i></small>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">Bắt đầu *</label>
+                                    <input type="date" name="start_date" value="{{date("Y-m-d", strtotime($exp->start_date))}}" class="form-control" >
+                                    <small class="val_start_date text-danger pl-4"></small>
+                                </div>
+                                <div class="col">
+                                    <label for="">Kết thúc</label>
+                                    <input type="date" @if(!empty($exp->end_date)) value="{{date("Y-m-d", strtotime($exp->end_date))}}" @endif name="end_date" class="form-control">
+                                    <small class="text-red"><i>Ghi chú: Không nhập kết thúc sẽ là hiện tại đang làm việc ở đây</i></small>
+                                </div>
                             </div>
                            <div class="form-group mt-3">
                                 <label for="">Mô tả *</label>

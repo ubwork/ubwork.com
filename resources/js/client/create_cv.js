@@ -22,9 +22,9 @@ $(document).ready(function(){
     $('#create_info').submit(function(e){
         e.preventDefault();
         var url = $('#create_info').attr('action');
-
         var form = this;
         var dataForm = new FormData(form);
+        var imgOld = $('#image').prop('src');
         $.ajax({
         type: "POST",
         url: url,
@@ -34,9 +34,17 @@ $(document).ready(function(){
             success: function(response) {
                 if(response.is_check === true) {
                     var dataInfo = '';
+                    var printImg = response.data.image;
+                    if(printImg == null) {
+                        printImg = imgOld;
+                    }else {
+                        printImg = `/storage/`+response.data.image;
+                    }
                     var major_name = $('.c_major_id').find(":selected").text();
                         dataInfo += `
                         <div class="mt-3"> <b>Họ tên:</b> `+response.data.name+` </div>
+                        <div style="margin-top: 5px;"> <b>Ảnh:</b> <img style="margin-left: 10px;" width="100px" height="100px" src="`+printImg+`" alt=""></div>
+                        <div style="margin-top: 5px;"> <b>Tình trạng hôn nhân:</b> `+response.data.marital+` </div>
                         <div style="margin-top: 5px;"> <b>Địa chỉ:</b> `+response.data.address+` </div>
                         <div style="margin-top: 5px;"> <b>Số điện thoại:</b> +`+response.data.phone+` </div>
                         <div style="margin-top: 5px;"> <b>Email:</b> `+response.data.email+` </div>
@@ -213,6 +221,138 @@ $(document).ready(function(){
         });
     });
 
+     // công cụ sử dụng
+     $('#create_tool').submit(function(e){
+        e.preventDefault();
+        var url = $('#create_tool').attr('action');
+
+        var form = this;
+        var dataForm = new FormData(form);
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: dataForm,
+        processData: false,
+        contentType: false,
+            success: function(response) {
+                if(response.is_check === true) {
+                    $("#create_tool")[0].reset();
+                    location.reload();
+                    toastr.success(response.success)
+                }else if(response.is_max === true){
+                    toastr.error(response.error)
+                }else{
+                    printErrorMsgTool(response.error);
+                }
+                
+            },
+            error: function(response) {
+                toastr.error("Thêm thất bại")
+            }
+        });
+
+    });
+
+    $('.update_tool').submit(function(e){
+        e.preventDefault();
+        var url = $(this).attr('action');
+
+        var form = this;
+        var dataForm = new FormData(form);
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: dataForm,
+        processData: false,
+        contentType: false,
+            success: function(response) {
+                if(response.is_check === true) {
+                    toastr.success(response.success)
+                    location.reload();
+                }else{
+                    printErrorMsgTool(response.error);
+                }
+                
+            },
+            error: function(response) {
+                toastr.error("Cập nhật thất bại")
+            }
+        });
+
+    });
+
+    function printErrorMsgTool (msg) {
+        $('.val_title_tool').text(msg.title != undefined ? msg.title : '');
+    }
+
+    // dự án đã làm
+    $('#create_proj').submit(function(e){
+        e.preventDefault();
+        var url = $('#create_proj').attr('action');
+
+        var form = this;
+        var dataForm = new FormData(form);
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: dataForm,
+        processData: false,
+        contentType: false,
+            success: function(response) {
+                if(response.is_check === true) {
+                    $("#create_proj")[0].reset();
+                    toastr.success(response.success)
+                    location.reload();
+                }else if(response.is_max === true){
+                    toastr.error(response.error)
+                }else{
+                    printErrorMsgProj(response.error);
+                }
+                
+            },
+            error: function(response) {
+                toastr.error("Thêm thất bại")
+            }
+        });
+
+    });
+
+    $('.update_proj').submit(function(e){
+        e.preventDefault();
+        var url = $(this).attr('action');
+
+        var form = this;
+        var dataForm = new FormData(form);
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: dataForm,
+        processData: false,
+        contentType: false,
+            success: function(response) {
+                if(response.is_check === true) {
+                    toastr.success(response.success)
+                    location.reload();
+                }else{
+                    printErrorMsgProj(response.error);
+                }
+                
+            },
+            error: function(response) {
+                toastr.error("Cập nhật thất bại")
+            }
+        });
+
+    });
+
+    function printErrorMsgProj (msg) {
+        $('.val_name_proj').text(msg.name != undefined ? msg.name : '');
+        $('.val_start_date_proj').text(msg.start_date != undefined ? msg.start_date : '');
+        $('.val_end_date_proj').text(msg.end_date != undefined ? msg.end_date : '');
+        $('.val_summary_proj').text(msg.summary != undefined ? msg.summary : '');
+        $('.val_description_proj').text(msg.description != undefined ? msg.description : '');
+    }
+
     $("#block-p").click(function(){
         $("#desc").toggle(300);
     });
@@ -250,5 +390,29 @@ $(document).ready(function(){
     });
     $(".hide-button-cer").click(function(){
         $("#certificates").hide(300);
+    })
+
+    // kỹ năng khác
+    $("#block-sko").click(function(){
+        $("#skill_other").toggle(300);
+    });
+    $(".hide-button-sko").click(function(){
+        $("#skill_other").hide(300);
+    })
+
+    // dự án đã làm
+    $("#block-proj").click(function(){
+        $("#projects").toggle(300);
+    });
+    $(".hide-button-proj").click(function(){
+        $("#projects").hide(300);
+    })
+
+    // công cụ sử dụng
+    $("#block-tool").click(function(){
+        $("#tools_used").toggle(300);
+    });
+    $(".hide-button-tool").click(function(){
+        $("#tools_used").hide(300);
     })
 });

@@ -132,11 +132,22 @@ Route::post('update-cv/saveCertificate', 'Client\CreateCvController@saveCertific
 Route::post('update-cv/updateCertificate/{id}', 'Client\CreateCvController@updateCertificate')->name('updateCertificate');
 Route::get('update-cv/deleteCertificate/{id}', 'Client\CreateCvController@deleteCertificate')->name('deleteCertificate');
 
+//skill_other
+Route::post('update-cv/saveSkillOther', 'Client\CreateCvController@saveSkillOther')->name('saveSkillOther');
+Route::post('update-cv/updateSkillOther/{id}', 'Client\CreateCvController@updateSkillOther')->name('updateSkillOther');
+Route::get('update-cv/deleteSkillOther/{id}', 'Client\CreateCvController@deleteSkillOther')->name('deleteSkillOther');
+
+//project
+Route::post('update-cv/saveProject', 'Client\CreateCvController@saveProject')->name('saveProject');
+Route::post('update-cv/updateProject/{id}', 'Client\CreateCvController@updateProject')->name('updateProject');
+Route::get('update-cv/deleteProject/{id}', 'Client\CreateCvController@deleteProject')->name('deleteProject');
+
+//tools_used
+Route::post('update-cv/saveTools', 'Client\CreateCvController@saveTools')->name('saveTools');
+Route::post('update-cv/updateTools/{id}', 'Client\CreateCvController@updateTools')->name('updateTools');
+Route::get('update-cv/deleteTools/{id}', 'Client\CreateCvController@deleteTools')->name('deleteTools');
+
 Route::get('update-cv/getPdf/{idsee}', 'Client\CreateCvController@getPdf')->name('getPdf');
-
-Route::get('update-cv/active-cv/{idsee}', 'Client\SeekerController@activeCV')->name('activeCV');
-
-Route::get('update-cv/un-active-cv/{idsee}', 'Client\SeekerController@unActiveCV')->name('unActiveCV');
 
 Route::get('package', 'Client\CoinController@getListPackage')->name('listPackage');
 Route::post('insertInvoice', 'Client\CoinController@insertInvoice')->name('insertInvoice');

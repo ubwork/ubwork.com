@@ -36,16 +36,14 @@
 @endsection
 @section('content')
     <section class="ls-section mt-5">
-        <div class="container-fluid" style="max-width: 670px">
+        <div class="container-fluid" style="max-width: 900px">
             <div class="row">
 
                 <div class="col-lg-12">
                     <!-- CV Manager Widget -->
                     <div class="cv-manager-widget ls-widget">
-                        <div class="widget-title">
-                            <h4>Cập nhật CV</h4>
-                        </div>
-                        <div class="widget-content">
+                       
+                        <div class="mt-3 widget-content">
                             <div class="title">
                                 <h1>Tạo CV trên hệ thống, tăng cơ hội nhận được việc làm !</h1>
                                 <p class="mt-3">
@@ -79,20 +77,28 @@
                                                     <small class="form-text text-muted">Chọn ảnh kích thước nhỏ hơn 5mb</small>
                                                     <small class="val_info_image text-danger"></small>
                                                   </div>
-                                                  <div class="form-group mt-3">
-                                                    <label for="">Địa chỉ *</label>
-                                                    <input type="text" name="address" class="form-control" @if(!empty($seeker)) value="{{$seeker->address}}" @endif>
-                                                    <small class="val_info_address text-danger"></small>
+                                                <div class="row mt-3">
+                                                    <div class="col">
+                                                        <label for="">Địa chỉ *</label>
+                                                        <input type="text" name="address" class="form-control" @if(!empty($seeker)) value="{{$seeker->address}}" @endif>
+                                                        <small class="val_info_address text-danger"></small>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="">Tình trạng hôn nhân</label>
+                                                        <input type="text" name="marital" class="form-control" @if(!empty($seeker)) value="{{$seeker->marital}}" @endif>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group mt-3">
-                                                    <label for="">Số điện thoại *</label>
-                                                    <input type="number" name="phone" class="form-control" @if(!empty($seeker)) value="{{$seeker->phone}}" @endif>
-                                                    <small class="val_info_phone text-danger"></small>
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label for="">Email *</label>
-                                                    <input type="email" name="email" class="form-control" @if(!empty($seeker)) value="{{$seeker->email}}" @endif>
-                                                    <small class="val_info_email text-danger"></small>
+                                                <div class="row mt-3">
+                                                    <div class="col">
+                                                        <label for="">Số điện thoại *</label>
+                                                        <input type="number" name="phone" class="form-control" @if(!empty($seeker)) value="{{$seeker->phone}}" @endif>
+                                                        <small class="val_info_phone text-danger"></small>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="">Email *</label>
+                                                        <input type="email" name="email" class="form-control" @if(!empty($seeker)) value="{{$seeker->email}}" @endif>
+                                                        <small class="val_info_email text-danger"></small>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label for="">Chuyên ngành *</label>
@@ -119,6 +125,8 @@
                                     <div class="info_pro">
                                         @php 
                                         echo !empty($seeker->name) ? '<div class="mt-3"> <b>Họ tên:</b> '.$seeker->name.' </div>' : '';
+                                        echo !empty($seeker->image) ? '<div style="margin-top: 5px;"> <b>Ảnh:</b> <img style="margin-left: 10px;" width="100px" height="100px" src="'.Storage::url($seeker->image).'" alt=""></div>' : '';
+                                        echo !empty($seeker->marital) ? '<div style="margin-top: 5px;"> <b>Tình trạng hôn nhân:</b> '.$seeker->marital.' </div>' : '';
                                         echo !empty($seeker->address) ? '<div style="margin-top: 5px;"> <b>Địa chỉ:</b> '.$seeker->address.' </div>' : '';
                                         echo !empty($seeker->phone) ? '<div style="margin-top: 5px;"> <b>Số điện thoại:</b> +'.$seeker->phone.' </div>' : '';
                                         echo !empty($seeker->email) ? '<div style="margin-top: 5px;"> <b>Email:</b> '.$seeker->email.' </div>' : '';
@@ -129,20 +137,27 @@
                                 </div>
 
                                 @if(!empty($seeker))
-                                <div class="experiences mb-3">
-                                    @include('client.upcv.experiences')
-                                </div>
-
-                                <div class="skills mb-3">
-                                    @include('client.upcv.skills')
-                                </div>
-
                                 <div class="educations mb-3">
                                     @include('client.upcv.educations')
                                 </div>
 
                                 <div class="certificates mb-3">
                                     @include('client.upcv.certificates')
+                                </div>
+                                <div class="experiences mb-3">
+                                    @include('client.upcv.experiences')
+                                </div>
+                                <div class="projects mb-3">
+                                    @include('client.upcv.project')
+                                </div>
+                                <div class="skills mb-3">
+                                    @include('client.upcv.skills')
+                                </div>
+                                <div class="skill_other mb-3">
+                                    @include('client.upcv.skill_other')
+                                </div>
+                                <div class="tool_used mb-3">
+                                    @include('client.upcv.tool_used')
                                 </div>
                                 @else
                                 <small><i>*Vui lòng tạo thông tin cá nhân trước !</i></small>
@@ -265,6 +280,156 @@
                 }
             });
         });
+
+        $('.removeSko').click(function (e) {
+            e.preventDefault();
+            var url = $('.delSko').attr('action');
+            var id = $(this).data('id-sko');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.sko_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.removeProj').click(function (e) {
+            e.preventDefault();
+            var url = $('.delProj').attr('action');
+            var id = $(this).data('id-proj');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.proj_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.removeTool').click(function (e) {
+            e.preventDefault();
+            var url = $('.delTool').attr('action');
+            var id = $(this).data('id-tool');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.tool_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
     
         function EditFormId(id) {
         $('#EditHide'+id).hide(300);
@@ -305,6 +470,48 @@
             $('#EditHideCer'+id).show();
             $('#btnFormCer'+id).show();
             $('#form-border-cer'+id).removeClass('border-none');
+        })
+    }
+
+    function EditFormSkoId(id) {
+        $('#EditHideSko'+id).hide(300);
+        $("#EditFormSko"+id).toggle(300);
+        $('#form-border-sko'+id).addClass('border-none');
+        $('#btnFormSko'+id).hide();
+
+        $('.hide-button-sko'+id).click(function () {
+            $("#EditFormSko"+id).hide(300);
+            $('#EditHideSko'+id).show();
+            $('#btnFormSko'+id).show();
+            $('#form-border-sko'+id).removeClass('border-none');
+        })
+    }
+
+    function EditFormProjId(id) {
+        $('#EditHideProj'+id).hide(300);
+        $("#EditFormProj"+id).toggle(300);
+        $('#form-border-proj'+id).addClass('border-none');
+        $('#btnFormProj'+id).hide();
+
+        $('.hide-button-proj'+id).click(function () {
+            $("#EditFormProj"+id).hide(300);
+            $('#EditHideProj'+id).show();
+            $('#btnFormProj'+id).show();
+            $('#form-border-proj'+id).removeClass('border-none');
+        })
+    }
+
+    function EditFormToolId(id) {
+        $('#EditHideTool'+id).hide(300);
+        $("#EditFormTool"+id).toggle(300);
+        $('#form-border-tool'+id).addClass('border-none');
+        $('#btnFormTool'+id).hide();
+
+        $('.hide-button-tool'+id).click(function () {
+            $("#EditFormTool"+id).hide(300);
+            $('#EditHideTool'+id).show();
+            $('#btnFormTool'+id).show();
+            $('#form-border-tool'+id).removeClass('border-none');
         })
     }
     </script>
