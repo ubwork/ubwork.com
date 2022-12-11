@@ -31,31 +31,35 @@
                         </small>
                     @enderror
                 </div>
-                <div class="form-group mt-3">
-                    <label for="">Bắt đầu *</label>
-                    <input type="date" name="start_date" class="form-control">
-                    @error('start_date')
-                        <small class="text-danger pl-4">
-                            {{ $message }}
-                        </small>
-                    @enderror
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="">Bắt đầu *</label>
+                        <input type="date" name="start_date" class="form-control">
+                        @error('start_date')
+                            <small class="text-danger pl-4">
+                                {{ $message }}
+                            </small>
+                        @enderror
+                    </div>
+                    <div class="col">
+                        <label for="">Kết thúc</label>
+                        <input type="date" name="end_date" class="form-control">
+                        <small class="text-red"><i>Ghi chú: Nếu không nhập kết thúc sẽ là hiện tại đang học ở đây</i></small>
+                    </div>
                 </div>
-                <div class="form-group mt-3">
-                    <label for="">Kết thúc</label>
-                    <input type="date" name="end_date" class="form-control">
-                    <small class="text-red"><i>Ghi chú: Nếu không nhập kết thúc sẽ là hiện tại đang học ở đây</i></small>
-                </div>
-                <div class="form-group">
-                    <label for="">Điểm trung bình</label>
-                    <input type="number" max="10" name="gpa" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="">Loại bằng</label>
-                    <select class="form-select" name="type_degree">
-                        @foreach (config('custom.type_degree') as $value)
-                            <option value="{{ $value['id']}}">{{ $value['name']}}</option>
-                        @endforeach
-                    </select>
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="">Điểm trung bình</label>
+                        <input type="number" max="10" name="gpa" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="">Loại bằng</label>
+                        <select class="form-select" name="type_degree">
+                            @foreach (config('custom.type_degree') as $value)
+                                <option value="{{ $value['id']}}">{{ $value['name']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                <div class="form-group mt-3">
                     <label for="">Mô tả học vấn *</label>
@@ -87,7 +91,7 @@
                             Tên trường: <span>{{$edu->name_education}}</span>
                         </div>
                         <div class="d-flex">
-                            Bắt đầu / Kết thúc: {{date("m-Y", strtotime($edu->start_date))}} / @if($edu->end_date == null) Hiện tại @else {{date("m-Y", strtotime($edu->end_date))}} @endif
+                            Từ / đến: {{date("m-Y", strtotime($edu->start_date))}} / @if($edu->end_date == null) Hiện tại @else {{date("m-Y", strtotime($edu->end_date))}} @endif
                         </div>
                         <div>
                             @if(!empty($edu->major_id))
@@ -146,39 +150,43 @@
                                 </small>
                             @enderror
                         </div>
-                        <div class="form-group mt-3">
-                            <label for="">Bắt đầu *</label>
-                            <input type="date" value="{{date("Y-m-d", strtotime($edu->start_date))}}" name="start_date" class="form-control">
-                            @error('start_date')
-                                <small class="text-danger pl-4">
-                                    {{ $message }}
-                                </small>
-                            @enderror
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label for="">Bắt đầu *</label>
+                                <input type="date" value="{{date("Y-m-d", strtotime($edu->start_date))}}" name="start_date" class="form-control">
+                                @error('start_date')
+                                    <small class="text-danger pl-4">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
+                            <div class="col">
+                                <label for="">Kết thúc</label>
+                                <input type="date" @if(!empty($edu->end_date)) value="{{date("Y-m-d", strtotime($edu->end_date))}}" @endif name="end_date" class="form-control">
+                                <small class="text-red"><i>Ghi chú: Nếu không nhập kết thúc sẽ là hiện tại đang học ở đây</i></small>
+                            </div>
                         </div>
-                        <div class="form-group mt-3">
-                            <label for="">Kết thúc</label>
-                            <input type="date" @if(!empty($edu->end_date)) value="{{date("Y-m-d", strtotime($edu->end_date))}}" @endif name="end_date" class="form-control">
-                            <small class="text-red"><i>Ghi chú: Nếu không nhập kết thúc sẽ là hiện tại đang học ở đây</i></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Điểm trung bình</label>
-                            <input type="number" max="10" value="{{$edu->gpa}}" name="gpa" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Loại bằng</label>
-                            <select class="form-select" name="type_degree">
-                                @foreach (config('custom.type_degree') as $value)
-                                    <option 
-                                    @if(!empty($edu->type_degree))
-                                    @if($edu->type_degree == $value['id'])
-                                    selected
-                                    @endif
-                                    @endif
-                                    value="{{ $value['id']}}">
-                                        {{ $value['name']}}
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label for="">Điểm trung bình</label>
+                                <input type="number" max="10" value="{{$edu->gpa}}" name="gpa" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="">Loại bằng</label>
+                                <select class="form-select" name="type_degree">
+                                    @foreach (config('custom.type_degree') as $value)
+                                        <option 
+                                        @if(!empty($edu->type_degree))
+                                        @if($edu->type_degree == $value['id'])
+                                        selected
+                                        @endif
+                                        @endif
+                                        value="{{ $value['id']}}">
+                                            {{ $value['name']}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                        <div class="form-group mt-3">
                             <label for="">Mô tả học vấn *</label>
