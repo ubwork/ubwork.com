@@ -97,9 +97,6 @@
                     <small class="text-danger">{{$message}}</small>
                     @enderror
               </div>
-              @error('email')
-                    <small class="text-danger">{{$message}}</small>
-                  @enderror
               <div class="form-group">
                 <label>Số điện thoại</label>
                 <input type="number" name="phone" placeholder="Số điện thoại" value="{{old('phone')}}">
