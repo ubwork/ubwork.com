@@ -22,7 +22,7 @@
                                 <h4 class="widget-title">Về chúng tôi</h4>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="{{route('index')}}">Trnag chủ</a></li>
+                                        <li><a href="{{route('index')}}">Trang chủ</a></li>
                                         <li><a href="">Liên hệ</a></li>
                                     </ul>
                                 </div>
@@ -51,7 +51,7 @@
                                     <ul class="list">
                                         <li><a href="#">Chính sách bảo mật</a></li>
                                         <li><a href="#">Chính sách thanh toán</a></li>
-                                        <li><a href="#">Quy chế hoạt dộng</a></li>
+                                        <li><a href="#">Quy chế hoạt động</a></li>
                                         <li><a href="#">Thỏa thuận sử dụng</a></li>
                                     </ul>
                                 </div>
@@ -73,22 +73,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!--Bottom-->
-    <div class="footer-bottom">
-        <div class="auto-container">
-            <div class="outer-box">
-                <div class="copyright-text">© 2022 <a href="#">Datmv</a>. All Right Reserved.</div>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
