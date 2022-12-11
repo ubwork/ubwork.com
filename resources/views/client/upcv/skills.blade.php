@@ -8,7 +8,7 @@
             <div class="font-weight-bold h4" >Kỹ năng</div>
             <div id="block-sk" style="cursor: pointer;"><i class="fas fa-edit"></i></div>
         </div>
-        <div id="skills" class="mt-3" >
+        <div id="skills" class="mt-3">
             <div class="form-group col-lg-12 col-md-12">
                 <select data-placeholder="Chọn ... " class="chosen-select" name="skill_id[]" multiple>
                     @foreach($skills as $sk)

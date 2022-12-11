@@ -31,6 +31,7 @@ class SeekerProfile extends Model
         'address',
         'total_exp',
         'is_active',
+        'marital'
     ];
     public function candidate()
     {
