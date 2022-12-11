@@ -157,7 +157,7 @@
 		<div class="col-div-8" style="float: right">
 			<div class="content-box">
 			<p class="head">Mục tiêu nghề nghiệp</p>
-			<p class="p3" style="font-size: 14px;line-height: 20px;">
+			<p class="p3" style="font-size: 11px;line-height: 20px;">
 			{{$seeker->description}}
 			</p>
 

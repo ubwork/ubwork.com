@@ -158,3 +158,5 @@ Route::get('vnpay_ipn', 'Client\CoinController@vnpay_ipn')->name('vnpay_ipn');
 Route::get('historyPayment', 'Client\CoinController@historyPayment')->name('historyPayment');
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
+
+Route::get('modal_selectCV', 'Client\JobController@modal_selectCV')->name('modal_selectCV');
