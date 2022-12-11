@@ -80,7 +80,7 @@
                                 <div class="inner-box">
                                     <div class="content">
                                         <div class="content-inner">
-                                            <span class="company-logo"><img src="{{ asset('storage/' . $item->logo) }}"
+                                            <span class="company-logo"><img src="{{ asset('storage/images/company/' . $item->logo) }}"
                                                     alt=""></span>
                                             <h4><a
                                                     href="{{ route('company-detail', ['id' => $item->id]) }}">{{ $item->company_name }}</a>

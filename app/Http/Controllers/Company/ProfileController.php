@@ -34,12 +34,12 @@ class ProfileController extends Controller
             8 => '8 tiếng',
         ];
             return view('company.profile.edit', compact('data', 'team', 'title', 'activeRoute', 'workingTime'));
-        
+
     }
 
     public function update(ProfileRequest $request)
     {
-
+        
         $data = auth('company')->user()->id;
         $company = auth('company')->user();
         if (is_null($company)) {
