@@ -21,14 +21,13 @@ class RegisterController extends Controller
     public function postRegister(Request $request)
     {
         $rules = [
-            'company_name' => 'required|max:255|alpha',
+            'company_name' => 'required|max:255',
             'email' => 'required|string|email|max:255|unique:companies',
             'password' => 'required|string|min:6',
             'phone' => 'required|digits:10|unique:companies',
         ];
         $messages = [
             'company_name.required' => 'Mời bạn nhập vào tên',
-            'company_name.alpha' => 'Tên không hợp lệ',
             'phone.digits' => 'Số điện thoại không tồn tại',
             'email.required' => 'Mời bạn nhập vào email',
             'email.email' => 'Mời bạn nhập đúng định dạnh email',
@@ -40,7 +39,7 @@ class RegisterController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
-            return redirect()->route('candidate.register')->withErrors($validator);
+            return redirect()->route('company.register')->withErrors($validator);
         } else {
             $users = new Company();
             $data = $request->only('company_name', 'email', 'phone', 'password', 'gender');

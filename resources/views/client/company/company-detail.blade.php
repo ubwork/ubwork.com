@@ -3,7 +3,7 @@
     {{__('UB work')}} | {{$company_detail->company_name}}
 @endsection
 @section('content')
-    <section class="job-detail-section">
+    <section class="job-detail-section" style="margin-top: 90px">
         <!-- Upper Box -->
         <div class="upper-box">
             <div class="auto-container">
@@ -11,7 +11,7 @@
                 <div class="job-block-seven">
                     <div class="inner-box">
                         <div class="content">
-                            <span class="company-logo"><img src="{{asset('storage/'.$company_detail->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/company/'.$company_detail->logo)}}" alt=""></span>
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
