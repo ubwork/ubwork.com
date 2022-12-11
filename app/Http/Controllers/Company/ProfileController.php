@@ -39,7 +39,6 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request)
     {
-        
         $data = auth('company')->user()->id;
         $company = auth('company')->user();
         if (is_null($company)) {

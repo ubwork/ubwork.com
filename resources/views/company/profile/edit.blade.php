@@ -60,7 +60,7 @@
 
                                         <div class="form-group col-lg-6 col-md-12">
                                             <label>Email</label>
-                                            <input type="text" name="email" value="{!! $data->email !!}">
+                                            <input type="text" disabled name="email" value="{!! $data->email !!}">
                                             @error('email')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror

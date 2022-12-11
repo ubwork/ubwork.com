@@ -16,8 +16,6 @@
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
                                 <li><span class="icon flaticon-briefcase"></span> {{$company_detail->company_model}}</li>
-                                <li><span class="icon flaticon-telephone-1"></span>{{$company_detail->phone}}</li>
-                                <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
                             <ul class="job-other-info">
                                 <li class="time">Công việc – {{count($company_job)}}</li>
