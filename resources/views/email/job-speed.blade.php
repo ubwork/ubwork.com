@@ -34,8 +34,7 @@
                                 </select>
                             </div>
                             <div class="form-group" style="width:220px">
-                                <select class="chosen-select" name="skill">
-                                    <option value="">Kỹ Năng</option>
+                                <select class="chosen-select" name="skill[]" multiple>
                                     @foreach ($skill as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach

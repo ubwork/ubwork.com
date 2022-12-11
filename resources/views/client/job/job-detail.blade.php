@@ -3,7 +3,7 @@
     {{__('UB Work')}} | {{$data_job->title}}
 @endsection
 @section('content')
-    <section class="job-detail-section">
+    <section class="job-detail-section mt-5">
       <!-- Upper Box -->
       <div class="upper-box" style="background-image: url({{asset('storage/images/bg-4.png')}}) ">
         <div class="auto-container">
@@ -37,22 +37,31 @@
                       <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
                     @else
-                      <a  @if(!empty($seeker->id)) href="{{route('applied', ['id' => $data_job->id])}}" @else href="{{route('CreateCV')}}" @endif class="theme-btn btn-style-one">Ứng tuyển ngay</a>
+                      <a  @if(!empty($seeker->id))
+                          href="{{route('applied', ['id' => $data_job->id])}}" 
+                         @else 
+                          href="{{route('createNew')}}" 
+                         @endif class="theme-btn btn-style-one">Ứng tuyển ngay</a>
                     @endif
                 @else
-                  <a class="theme-btn btn-style-one" href="{{route('candidate.login')}}">Ứng tuyển ngay</a>
+                  <a class="theme-btn btn-style-one" href="{{route('candidate.login',['job_id'=>$data_job->id])}}">Ứng tuyển ngay</a>
                 @endif
-
                 @if (auth('candidate')->check())
-                  @if (!empty($idJobShort[$data_job->id]) )
-                    @if($idJobShort[$data_job->id]->job_post_id == $data_job->id)
-                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                    @if (!empty($idJobShort[$data_job->id]))
+                        @if ($idJobShort[$data_job->id]->job_post_id == $data_job->id)
+                            <a data-shortlistId="{{$idJobShort[$data_job->id]->id}}" data-id="{{$data_job->id}}"
+                                class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                    style="color: #f7941d"></span></a>
+                        @endif
+                    @else
+                        <a  data-id="{{$data_job->id}}" data-shortlistId=""
+                            class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                style="color: black"></span></a>
                     @endif
-                  @else
-                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
-                  @endif
                 @else
-                    <a class="bookmark-btn" href="{{route('candidate.login')}}"><span class="flaticon-bookmark"></span></a>
+                    <button class="bookmark-btn"><span class="flaticon-bookmark"
+                            style="color: black"></span></button>
+                    <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
                 @endif
               </div>
             </div>
@@ -122,16 +131,22 @@
                                       @endif
                                   @endforeach
                             </ul>
-                           @if (auth('candidate')->check())
-                              @if (!empty($idJobShort[$item->id]) )
-                                @if($idJobShort[$item->id]->job_post_id == $item->id)
-                                  <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                            @if (auth('candidate')->check())
+                                @if (!empty($job_short[$item->id]))
+                                    @if ($job_short[$item->id]->job_post_id == $item->id)
+                                        <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                            class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                                style="color: #f7941d"></span></a>
+                                    @endif
+                                @else
+                                    <a  data-id="{{$item->id}}" data-shortlistId=""
+                                        class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                            style="color: black"></span></a>
                                 @endif
-                              @else
-                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
-                              @endif
                             @else
-                              <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
+                                <button class="bookmark-btn"><span class="flaticon-bookmark"
+                                        style="color: black"></span></button>
+                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
                             @endif
                             </div>
                         </div>
@@ -171,11 +186,6 @@
                         <i class="icon icon-salary"></i>
                         <h5>Lương:</h5>
                          <span>{{number_format($data_job->min_salary, 0, ',', '.')}} - {{number_format($data_job->max_salary, 0, ',', '.')}} đ</span>
-                      </li>
-                      <li>
-                        <i class="icon icon-rate"></i>
-                        <h5>Trung bình:</h5>
-                         <span>{{number_format($data_job->min_salary/8/27, 0, ',', '.')}} - {{number_format($data_job->max_salary/8/27, 0, ',', '.')}} đ / giờ</span>
                       </li>
                     </ul>
                   </div>
@@ -234,4 +244,11 @@
         </div>
       </div>
     </section>
+@endsection
+@section('script')
+  @parent
+  <script src="{{asset('js/client/shortlist.js')}}"></script>
+  <script>
+    updateShortList();
+  </script>
 @endsection

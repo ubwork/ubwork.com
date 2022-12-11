@@ -50,12 +50,21 @@
                             @endforeach
                             </ul>
                             @if (auth('candidate')->check())
-                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"><button
-                                        class="bookmark-btn"><span
-                                            class="flaticon-bookmark"></span></button></a>
+                                @if (!empty($job_short[$item->id]))
+                                    @if ($job_short[$item->id]->job_post_id == $item->id)
+                                        <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                            class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                                style="color: #f7941d"></span></a>
+                                    @endif
+                                @else
+                                    <a  data-id="{{$item->id}}" data-shortlistId=""
+                                        class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                            style="color: black"></span></a>
+                                @endif
                             @else
-                                <button class="bookmark-btn"><span
-                                        class="flaticon-bookmark"></span></button>
+                                <button class="bookmark-btn"><span class="flaticon-bookmark"
+                                        style="color: black"></span></button>
+                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
                             @endif
                         </div>
                     </div>

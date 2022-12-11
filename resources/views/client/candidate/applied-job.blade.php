@@ -3,28 +3,20 @@
     {{ __('UB Work') }} | {{__('Công việc đã ứng tuyển')}}
 @endsection
 @section('content')
-    <section class="user-dashboard pt-5 mt-5">
+    <section class="page-title" style="margin-top: 90px">
+    <div class="auto-container">
+        <div class="title-outer">
+            <h1>Công việc đã ứng tuyển</h1>
+        </div>
+    </div>
+    </section>
+    <section class="user-dashboard pt-5 ">
       <div class="dashboard-outer">
-        <div class="row pt-5">
-          <div class="col-lg-12">
+        <div class="row ">
+          <div class="col-lg-10 m-auto">
             <!-- Ls widget -->
             <div class="ls-widget">
               <div class="tabs-box">
-                <div class="widget-title">
-                  <h4>Công việc đã ứng tuyển</h4>
-
-                  <div class="chosen-outer">
-                    <!--Tabs Box-->
-                    <select class="chosen-select">
-                      <option>Last 6 Months</option>
-                      <option>Last 12 Months</option>
-                      <option>Last 16 Months</option>
-                      <option>Last 24 Months</option>
-                      <option>Last 5 year</option>
-                    </select>
-                  </div>
-                </div>
-
                 <div class="widget-content">
                   <div class="table-outer">
                     <table class="default-table manage-job-table">
@@ -48,15 +40,15 @@
                                   <span class="company-logo"><img src="{{asset('storage/'.$job_applied[$item->job_post_id]->company->logo)}}" alt=""></span>
                                   <h4><a href="{{route('job-detail', ['id' => $item->job_post_id])}}">{{$job_applied[$item->job_post_id]->title}}</a></h4>
                                   <ul class="job-info">
-                                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                                    <li><span class="icon flaticon-briefcase"></span>  {{config('custom.level')[$job_applied[$item->job_post_id]->level]['name']}}</li>
                                     <li><span class="icon flaticon-map-locator"></span>{{$job_applied[$item->job_post_id]->company->address}}</li>
                                   </ul>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td>{{$item->created_at}}</td>
-                          <td class="status">Active</td>
+                          <td>{{$item->created_at->format('H:m:s d/m/Y')}}</td>
+                          <td class="status">Hoạt động</td>
                           <td>
                             <div class="option-box">
                               <ul class="option-list">
@@ -68,6 +60,13 @@
                         </tr>
                         @endforeach
                       </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="3"><nav class="ls-pagination">
+                            {{ $data->links('company.layout.paginate') }}
+                          </nav></td>
+                        </tr>
+                      </tfoot>
                     </table>
                   </div>
                 </div>
