@@ -44,27 +44,27 @@
                             </form>
                             <div class="files-outer mt-3">
                                 @foreach ($data as $item)
-                                    <div class="file-edit-box">
-                                        <span class="title"><a target="_blank"
-                                                href="upload/cv/{{ $item->path_cv }}">{{ $item->path_cv }}</a></span>
+                                    <div class="file-edit-box div_cv{{$item->id}}">
+                                        
                                         <div class="edit-btns">
+                    
+                                            @if(!empty($item->path_cv))
+                                            <a style="margin-right: 5px" target="_blank"
+                                                href="upload/cv/{{ $item->path_cv }}"><span class="la la-eye"></span></a>
+                                            @endif
                                             <a href="{{ route('CreateCV', ['idsee' => $item->id]) }}"><span class="la la-pencil"></span></a>
-                                            <a href="{{ route('delete_seeker', ['id' => $item->id]) }}">
-                                                <button class="btn-delete-seeker" type="button"><span
+
+                                            <form class="removeCVF" action="{{route('delete_seeker', ['id' => $item->id])}}">
+                                                <button data-id-cv="{{$item->id}}" class="removeCV btn-delete-seeker" type="submit"><span
                                                         class="la la-trash"></span>
                                                 </button>
-                                            </a>
+                                            </form>
                                         </div>
-                                        <small>CV-{{$item->name}}</small>
-                                        @if($item->is_active == 0)
-                                        <a class="btn btn-primary" href="{{route('activeCV', ['idsee' => $item->id])}}">
-                                            Bật
-                                        </a>
-                                        @else
-                                        <a class="btn btn-success" href="{{route('unActiveCV', ['idsee' => $item->id])}}">
-                                            Tắt
-                                        </a>
-                                        @endif
+                                        <small style="-webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box; overflow: hidden; text-align: center;">CV-{{$item->name}}</small>
+                                        <div class="form-check form-check-inline">
+                                            <input data-id-path="{{$item->path_cv}}" @php echo $item->is_active == 1 ? 'checked' : '' @endphp class="form-check-input" onclick="i_active({{$item->id}})" type="radio" name="is_active" id="inlineRadio{{$item->id}}" value="1">
+                                            <label class="form-check-label" for="inlineRadio{{$item->id}}">Bật</label>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
@@ -73,4 +73,82 @@
                 </div>
             </div>
     </section>
+@endsection
+@section('script')
+    @parent
+    <script>
+        function i_active(id) {
+            var url = window.location.href;
+            var path_cv = $('#inlineRadio'+id).data('id-path');
+            if(path_cv == ""){
+                toastr.error("CV chưa hoàn thiện, vui lòng nhấn sửa CV và nhấn tạo file CV!");
+            }else {
+                var data = {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "id": id,
+                }
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: data,
+                    success: function(response) {
+                        toastr.success(response.success)
+                    },
+                    error: function(response) {
+                        toastr.error("Cập nhật thất bại")
+                    }
+                });
+            }
+        }
+
+        $('.removeCV').click(function (e) {
+        e.preventDefault();
+        var url = $('.removeCVF').attr('action');
+        var idcv = $(this).data('id-cv');
+        var data = {
+            id: idcv,
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+        }
+        Swal.fire({
+            icon: 'warning',
+            title: 'Bạn có chắc chắn muốn xóa ?',
+            text: 'Bấm không nếu bạn đổi ý!',
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonText: 'Xóa',
+            confirmButtonColor: '#C46F01',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    type: "get",
+                    data: data,
+                    success: function(results) {
+                        if (results.is_check === true) {
+                            Swal.fire({
+                                title: results.success,
+                                icon: 'success',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }, setTimeout(function() {
+                            
+                            }, 500)).then(function() {
+                                $('.div_cv'+idcv).remove();
+                            });
+                        } else {
+                            Swal.fire({
+                                title: results.error,
+                                type: 'error',
+                                icon: 'error',
+                                timer: 1500
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+    </script>
 @endsection

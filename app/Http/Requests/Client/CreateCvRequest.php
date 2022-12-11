@@ -111,6 +111,38 @@ class CreateCvRequest extends FormRequest
                             'time' => 'required',
                         ];
                         break;
+                    
+                    case 'saveSkillOther':
+                        $rules = [
+                            'title' => 'required',
+                        ];
+                        break;
+
+                    case 'updateSkillOther':
+                        $rules = [
+                            'title' => 'required',
+                        ];
+                        break;
+
+                    case 'saveProject':
+                        $rules = [
+                            'name' => 'required',
+                            'start_date' => 'required',
+                            'end_date' => 'required',
+                            'summary' => 'required',
+                            'description' => 'required',
+                        ];
+                        break;
+
+                    case 'updateProject':
+                        $rules = [
+                            'name' => 'required',
+                            'start_date' => 'required',
+                            'end_date' => 'required',
+                            'summary' => 'required',
+                            'description' => 'required',
+                        ];
+                        break;
 
                         
                         default:
@@ -145,6 +177,8 @@ class CreateCvRequest extends FormRequest
             'address.required' => 'Vui lòng nhập địa chỉ!',
             'gpa.max' => 'Điểm không quá 10!',
             'time.required' => 'Vui lòng nhập thời gian!',
+            'summary.required' => 'Vui lòng nhập mô tả ngắn!',
+            'title.required' => 'Vui lòng nhập tên!'
         ];
     }
 }
