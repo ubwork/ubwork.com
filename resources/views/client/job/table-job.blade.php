@@ -12,7 +12,7 @@
                     <div class="inner-box" style="height:200px">
                         <div class="content">
                             <span class="company-logo"><img
-                                    src="{{ asset('storage/' . $item->company->logo) }}"
+                                    src="{{ asset('storage/images/company/' . $item->company->logo) }}"
                                     alt=""></span>
                             <h4><a
                                     href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
