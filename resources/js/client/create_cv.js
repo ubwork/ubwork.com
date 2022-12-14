@@ -285,6 +285,70 @@ $(document).ready(function(){
         $('.val_title_tool').text(msg.title != undefined ? msg.title : '');
     }
 
+    // kỹ năng khác
+    $('#create_sko').submit(function(e){
+        e.preventDefault();
+        var url = $('#create_sko').attr('action');
+
+        var form = this;
+        var dataForm = new FormData(form);
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: dataForm,
+        processData: false,
+        contentType: false,
+            success: function(response) {
+                if(response.is_check === true) {
+                    $("#create_sko")[0].reset();
+                    location.reload();
+                    toastr.success(response.success)
+                }else if(response.is_max === true){
+                    toastr.error(response.error)
+                }else{
+                    printErrorMsgSko(response.error);
+                }
+                
+            },
+            error: function(response) {
+                toastr.error("Thêm thất bại")
+            }
+        });
+
+    });
+
+    $('.update_sko').submit(function(e){
+        e.preventDefault();
+        var url = $(this).attr('action');
+
+        var form = this;
+        var dataForm = new FormData(form);
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: dataForm,
+        processData: false,
+        contentType: false,
+            success: function(response) {
+                if(response.is_check === true) {
+                    toastr.success(response.success)
+                    location.reload();
+                }else{
+                    printErrorMsgSko(response.error);
+                }
+                
+            },
+            error: function(response) {
+                toastr.error("Cập nhật thất bại")
+            }
+        });
+
+    });
+
+    function printErrorMsgSko (msg) {
+        $('.val_title_sko').text(msg.title != undefined ? msg.title : '');
+    }
+
     // dự án đã làm
     $('#create_proj').submit(function(e){
         e.preventDefault();

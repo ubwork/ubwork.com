@@ -93,14 +93,7 @@
               </div>
 
               <!-- Other Options -->
-              {{-- <div class="other-options">
-                <div class="social-share">
-                  <h5>Chia sẻ công việc</h5>
-                  <a href="#" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-                  <a href="#" class="twitter"><i class="fab fa-twitter"></i> Twitter</a>
-                  <a href="#" class="google"><i class="fab fa-google"></i> Google+</a>
-                </div>
-              </div> --}}
+              
 
               <!-- Related Jobs -->
               <div class="related-jobs">
