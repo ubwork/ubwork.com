@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\client\Upcv;
+use App\Models\JobPostActivities;
 use App\Models\Major;
 use App\Models\SeekerProfile;
 use Illuminate\Http\Request;
@@ -100,6 +101,12 @@ class SeekerController extends Controller
                 }
             }
             if(isset($seeker)){
+                $job_at = JobPostActivities::where('seeker_id' , $id)->get();
+                if(isset($job_at) && $job_at->count() > 0){
+                    foreach ($job_at as $j) {
+                        $j->delete();
+                    }
+                }
                 $seeker->delete();
                 return response()->json([
                     'is_check' => true,

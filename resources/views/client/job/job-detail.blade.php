@@ -148,7 +148,7 @@
                             @else
                                 <button class="bookmark-btn"><span class="flaticon-bookmark"
                                         style="color: black"></span></button>
-                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
+                                {{-- <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a> --}}
                             @endif
                             </div>
                         </div>
