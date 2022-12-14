@@ -34,7 +34,7 @@
                                 </select>
                             </div>
                             <div class="form-group" style="width:220px">
-                                <select data-placeholder="Chọn kỹ năng... " class="chosen-select" name="skill[]" multiple>
+                                <select class="chosen-select" name="skill[]" multiple>
                                     @foreach ($skill as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach

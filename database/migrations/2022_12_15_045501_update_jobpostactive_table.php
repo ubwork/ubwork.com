@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('companies', function (Blueprint $table) {
-            $table->longText('about')->nullable()->change();
+        Schema::table('job_post_activities', function (Blueprint $table) {
+            $table->string('introduct')->nullable();
         });
     }
 

@@ -27,9 +27,12 @@
                                 <li><span
                                         class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                 </li>
+                                @if($item->min_salary > 0 && $item->max_salary > 0)
                                 <li><span class="icon flaticon-money"></span>
                                     {{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}}</li>
-
+                                @else
+                                <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                                @endif
                                 <li><i class="icon flaticon-clock-3"></i><span>
                                         @if ($day < 0)
                                             <b>Hết hạn.</b>

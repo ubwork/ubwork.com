@@ -1,4 +1,4 @@
-<form id="create_sko" action="{{route('saveSkillOther')}}" method="post">
+<form action="{{route('saveSkillOther')}}" method="post">
     @if(!empty($seeker)) <input type="hidden" name="seeker_id" value="{{$seeker->id}}"> @endif
     @csrf
     <div class="form-group">
@@ -10,7 +10,11 @@
             <div class="form-group">
                 <label for="">Tên kỹ năng *</label>
                 <input type="text" name="title" class="form-control">
-                <small class="val_title_sko text-danger pl-4"></small>
+                @error('title')
+                    <small class="text-danger pl-4">
+                        {{ $message }}
+                    </small>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="">Mô tả</label>
@@ -45,14 +49,18 @@
             </div>
         </form>
     
-        <form class="update_sko" action="{{route('updateSkillOther', ['id' => $sko->id])}}" method="post">
+        <form action="{{route('updateSkillOther', ['id' => $sko->id])}}" method="post">
             @csrf
             <div id="EditFormSko{{$sko->id}}" class="mt-3 mb-3 border-dotted-bot form" style="display: none;">
                 @if(!empty($seeker)) <input type="hidden" name="seeker_id" value="{{$seeker->id}}"> @endif
                 <div class="form-group">
                     <label for="">Tên kỹ năng *</label>
                     <input type="text" name="title" value="{{$sko->title}}" class="form-control">
-                    <small class="val_title_sko text-danger pl-4"></small>
+                    @error('title')
+                        <small class="text-danger pl-4">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Mô tả</label>

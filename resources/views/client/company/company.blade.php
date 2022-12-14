@@ -59,9 +59,9 @@
                             </div>
                             </div>
                             <div class="filter-block mt-3">
-                                <h4>Tìm theo địa điểm chi tiết</h4>
+                                <h4>Tìm theo địa điểm</h4>
                                 <div class="form-group">
-                                    <input type="text" name="address" placeholder="Địa điểm chi tiết">
+                                    <input type="text" name="address" placeholder="Địa điểm">
                                     <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                 <div class="inner-box">
                                     <div class="content">
                                         <div class="content-inner">
-                                            <span class="company-logo"><img src="{{ asset('storage/images/company/' . $item->logo) }}"
+                                            <span class="company-logo"><img src="{{ asset('storage/' . $item->logo) }}"
                                                     alt=""></span>
                                             <h4><a
                                                     href="{{ route('company-detail', ['id' => $item->id]) }}">{{ $item->company_name }}</a>
@@ -88,17 +88,12 @@
                                             <ul class="job-info">
                                                 <li><span class="icon flaticon-map-locator"></span>{{ $item->address }}</li>
                                                 <li><span class="icon flaticon-briefcase"></span>{{ $item->company_model }}</li>
-                                                @foreach($workingTime as $wor => $w)
-                                                    @if(isset($item->working_time) && $item->working_time == $wor)
-                                                    <li><span class="icon flaticon-clock-3"></span> {{$w}}</li>
-                                                    @endif
-                                                @endforeach
-                                                
+                                                <li><span class="icon flaticon-clock-3"></span>{{$item->working_time}}</li>
                                             </ul>
                                         </div>
 
                                         <ul class="job-other-info">
-                                            <li class="time">Công việc – {{ count($job[$item->id]) }}</li>
+                                            <li class="time">Công việc – {{ count($job) }}</li>
                                             {{-- <li class="time">Open Jobs – {{count($job)}}</li> --}}
                                         </ul>
                                     </div>

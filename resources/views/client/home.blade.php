@@ -173,7 +173,7 @@
                     <div class="category-block col-lg-4 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="content">
-                                <span class="{{ $item_job->icon }}"></span>
+                                <span class="icon flaticon-headhunting"></span>
                                 <h4><a href="{{ route('job', ['id' => $item_job->id]) }}">{{ $item_job->name }}</a>
                                 </h4>
                                 <p>( {{ $count[$item_job->id] }} bài đăng)</p>
@@ -210,8 +210,12 @@
                                         </li>
                                         <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                             giờ</li>
-                                        <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
-                                    </ul>
+                                            @if($item->min_salary > 0 && $item->max_salary > 0)
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
+                                            @else
+                                            <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                                            @endif
+                                        </ul>
                                     <ul class="job-other-info">
                                         @foreach (config('custom.type_work') as $value)
                                             @if($value['id'] == $item->type_work)
@@ -263,7 +267,7 @@
                                 <div class="inner-box">
                                     <div class="content">
                                         <span class="company-logo"><img
-                                                src="{{ asset('storage/' . $item->company->logo) }}"
+                                                src="{{ asset('storage/images/company/' . $item->company->logo) }}"
                                                 alt=""></span>
                                         <h4 style="text-align: left;"><a
                                                 href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -276,7 +280,11 @@
                                             <li><span
                                                     class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                                 giờ</li>
-                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
+                                                @if($item->min_salary > 0 && $item->max_salary > 0)
+                                                    <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
+                                                @else
+                                                <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                                                @endif
                                         </ul>
                                         <ul class="job-other-info">
                                             @foreach (config('custom.type_work') as $value)
@@ -318,7 +326,7 @@
 @endsection
 @section('script')
 @parent
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script> 
 <script src="{{asset('js/client/shortlist.js')}}"></script>
 <script>
 $(document).ready(function($) {

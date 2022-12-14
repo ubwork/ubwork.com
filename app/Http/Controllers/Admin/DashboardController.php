@@ -9,7 +9,6 @@ use App\Models\Major;
 use App\Models\SeekerProfile;
 use App\Models\Skill;
 use App\Models\Payment_vnpay;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -25,7 +24,6 @@ class DashboardController extends Controller
         $this->v['countCV'] = SeekerProfile::all();
         $this->v['countSkill'] = Skill::all();
         $this->v['countMajor'] = Major::all();
-        $this->v['countUser']= User::all();
         $this->v['countPendingImagePaper'] = Company::where('status', 0)->get()->toArray();
         $this->v['countActiveImagePaper'] = Company::where('status', 1)->get()->toArray();
         $this->v['countBlockImagePaper'] = Company::where('status', 2)->get()->toArray();
