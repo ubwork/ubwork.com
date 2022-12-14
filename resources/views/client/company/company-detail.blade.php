@@ -94,16 +94,22 @@
                                                 @endif
                                             @endforeach
                                         </ul>
-                                        @if (auth('candidate')->check()) 
-                                            @if (!empty($job_short[$item->id]) )
-                                                @if($job_short[$item->id]->job_post_id == $item->id)
-                                                <a href="{{route('delete_shortlisted', ['id' => $job_short[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                                        @if (auth('candidate')->check())
+                                            @if (!empty($job_short[$item->id]))
+                                                @if ($job_short[$item->id]->job_post_id == $item->id)
+                                                    <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                                        class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                                            style="color: #f7941d"></span></a>
                                                 @endif
                                             @else
-                                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
+                                                <a  data-id="{{$item->id}}" data-shortlistId=""
+                                                    class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                                        style="color: black"></span></a>
                                             @endif
                                         @else
-                                                <a class="bookmark-btn" href="{{route('candidate.login')}}"><span class="flaticon-bookmark"></span></a>
+                                            <button class="bookmark-btn"><span class="flaticon-bookmark"
+                                                    style="color: black"></span></button>
+                                            <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
                                         @endif
                                         </div>
                                     </div>
@@ -174,4 +180,24 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+    @parent
+    <script src="{{asset('js/client/shortlist.js')}}"></script>
+  <script>
+    updateShortList();
+    $('.call-modal2').on('click', function(event) {
+	  event.preventDefault();
+	  this.blur();
+    var id = $(this).data('id-job');
+    console.log(id);
+	  $.get(this.href, function(html) {
+          $(html).appendTo('body').modal({
+            closeExisting: true,
+          fadeDuration: 300,
+          fadeDelay: 0.15
+          });
+        });
+      });
+  </script>
 @endsection

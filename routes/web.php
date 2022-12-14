@@ -63,6 +63,7 @@ Route::get('/shortlisted-list-company', 'Client\ShortlistCompanyController@short
 Route::get('/delete-shortlisted-company/{id}', 'Client\ShortlistCompanyController@destroy')->name('delete_shortlisted_company');
 
 Route::get('/applied/{id}', 'Client\JobPostActivitiesController@applied')->name('applied');
+Route::POST('/appliedAJAX', 'Client\JobPostActivitiesController@appliedAjax')->name('appliedAJAX');
 Route::get('/jobApply', 'Client\JobPostActivitiesController@jobApply')->name('jobApply');
 Route::get('/delete-applied-job/{id}', 'Client\JobPostActivitiesController@destroy')->name('delete_applied_jobs');
 
