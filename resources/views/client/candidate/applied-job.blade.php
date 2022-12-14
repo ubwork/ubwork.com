@@ -37,7 +37,7 @@
                             <div class="job-block">
                               <div class="inner-box">
                                 <div class="content">
-                                  <span class="company-logo"><img src="{{asset('storage/'.$job_applied[$item->job_post_id]->company->logo)}}" alt=""></span>
+                                  <span class="company-logo"><img src="{{asset('storage/images/company/'.$job_applied[$item->job_post_id]->company->logo)}}" alt=""></span>
                                   <h4><a href="{{route('job-detail', ['id' => $item->job_post_id])}}">{{$job_applied[$item->job_post_id]->title}}</a></h4>
                                   <ul class="job-info">
                                     <li><span class="icon flaticon-briefcase"></span>  {{config('custom.level')[$job_applied[$item->job_post_id]->level]['name']}}</li>

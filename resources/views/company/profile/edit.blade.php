@@ -113,7 +113,6 @@
                                             <label>Loại hình doanh nghiệp</label>
                                             <input type="text" name="company_model" value="{!! $data->company_model !!}">
                                         </div>
-
                                         <!-- Input -->
                                         <div class="form-group col-lg-6 col-md-12">
                                             <label>Số lượng nhân viên</label>
@@ -126,7 +125,15 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-12 col-md-12">
-                                            <label>About Company</label>
+                                            <label>Nhúng bản đồ</label>
+                                            <textarea name="map" id="" cols="30" rows="10">{!! $data->map !!}</textarea>
+                                        </div>
+                                        <div class="form-group col-lg-12 col-md-12">
+                                            <label>Nhúng video công ty</label>
+                                            <textarea name="iframe_ytb" id="" cols="30" rows="10">{!! $data->iframe_ytb !!}</textarea>
+                                        </div>
+                                        <div class="form-group col-lg-12 col-md-12">
+                                            <label>Chi tiết về công ty</label>
                                                 <textarea type="text" name="about" id="editor">{!! $data->about !!}</textarea>
                                         </div>
 

@@ -623,49 +623,80 @@ class CreateCvController extends Controller
     }
 
     //skill_other
-    public function saveSkillOther(CreateCvRequest $request) {
-        $params = [];
-        $params['cols'] = $request->post();
+    public function saveSkillOther(Request $request) {
+        $rules = [
+            'title' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        }else {
+            $params = [];
+            $params['cols'] = $request->post();
 
-        $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
-        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+            $params['cols']['created_at'] = Carbon::now()->toDateTimeString();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
-        unset($params['cols']['_token']);
-        $model = new Skill_other();
+            unset($params['cols']['_token']);
+            $model = new Skill_other();
 
-        $res = $model->saveAdd($params);
-        if ($res == null) {
-            Session::flash('error', 'Vui lòng nhập dữ liệu!');
-            return back();
-        } else if ($res > 0) {
-            Session::flash('success', 'Thêm thành công!');
-            return back();
-        } else {
-            Session::flash('error', 'Lỗi thêm mới!');
-            return back();
+            $res = $model->saveAdd($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Tạo mới thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Tạo mới thành công!',
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
         }
     }
 
-    public function updateSkillOther(CreateCvRequest $request, $id)
+    public function updateSkillOther(Request $request, $id)
     {
-        $params = [];
-        $params['cols'] = $request->post();
-        $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
+        $rules = [
+            'title' => 'required',
+        ];
+        $messages =  $this->message_val;
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        }else {
+            $params = [];
+            $params['cols'] = $request->post();
+            $params['cols']['updated_at'] = Carbon::now()->toDateTimeString();
 
-        unset($params['cols']['_token']);
-        $model = new Skill_other();
-        $params['cols']['id'] = $id;
-        $res = $model->saveUpdate($params);
-        if ($res == null) {
-            Session::flash('success', 'Cập nhật thành công!');
-            return back();
-        }
-        if ($res == 1) {
-            Session::flash('success', 'Cập nhật thành công!');
-            return back();
-        } else {
-            Session::flash('error', 'Lỗi cập nhật!');
-            return back();
+            unset($params['cols']['_token']);
+            $model = new Skill_other();
+            $params['cols']['id'] = $id;
+            $res = $model->saveUpdate($params);
+            if ($res == null) {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Tạo mới thất bại!'
+                ]);
+            }
+            if ($res == 1) {
+                return response()->json([
+                    'is_check' => true,
+                    'success' => 'Tạo mới thành công!',
+                ]);
+            } else {
+                return response()->json([
+                    'is_check' => false,
+                    'error' => 'Lỗi tạo mới!'
+                ]);
+            }
         }
     }
 
