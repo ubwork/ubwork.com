@@ -359,5 +359,4 @@ $(document).ready(function($) {
     ]);
 });
 updateShortList();
-</script>
 @endsection

@@ -33,7 +33,9 @@ class JobController extends Controller
     }
     
     public function modal_selectCV() {
-        return view('client.job.modal');
+        $id_candidate = auth('candidate')->user()->id;
+        $data = SeekerProfile::where('candidate_id', $id_candidate)->paginate(10);
+        return view('client.job.modal',compact('data'));
     }
 
     public function job(Request $request)
