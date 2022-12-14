@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/contact', 'Client\HomeController@contact')->name('contact');
 Route::get('/choose-login', 'client\HomeController@choose')->name('choose');
 Route::get('/search/title', 'Client\HomeController@searchByTitle');
 Route::get('/search/title-cat/{id}', 'Client\JobController@searchByTitle');

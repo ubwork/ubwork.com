@@ -98,8 +98,13 @@ class HomeController extends Controller
         return response()->json($job);
     }
 
-    public function choose() {
+    public function choose()
+    {
         $maJor = Major::all();
         return view('client.choose', compact('maJor'));
-    } 
+    }
+    public function contact()
+    {
+        return view('client.contact');
+    }
 }
