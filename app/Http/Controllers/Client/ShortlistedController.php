@@ -18,24 +18,26 @@ class ShortlistedController extends Controller
         $shortlisted->job_post_id = $request->id;
         $shortlisted->candidate_id = $id_user;
         $shortlisted->save();
-        return back();
+        return response()->json(['status'=>"success",'shortlistedId'=>$shortlisted->id]);
     }
     public function shortlisted_job()
     {
         $data = [];
         $job_short = [];
+        $major_job = [];
         if (auth('candidate')->check()) {
             $id = auth('candidate')->user()->id;
-            $data = Shortlist::where('candidate_id', $id)->take(6)->get();
+            $data = Shortlist::where('candidate_id', $id)->paginate(5);
             if (!empty($data)) {
                 foreach ($data as $item) {
                     $id_post = $item->job_post_id;
                     $job_short[$id_post] = JobPost::where('id', $id_post)->first();
+                    $major_job[$id_post] = Major::where('id',$job_short[$id_post]->major_id)->pluck('name')->toArray();
                 }
             }
         }
         $maJor = Major::all();
-        return view('client.candidate.shortlisted-job', compact('data', 'job_short', 'maJor'));
+        return view('client.candidate.shortlisted-job', compact('data', 'job_short', 'maJor','major_job'));
     }
     public function shortlisted_company()
     {
@@ -57,6 +59,6 @@ class ShortlistedController extends Controller
     public function destroy($id)
     {
         Shortlist::destroy($id);
-        return back();
+        return response()->json(['status'=>"success"]);
     }
 }

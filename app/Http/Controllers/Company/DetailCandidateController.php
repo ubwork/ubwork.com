@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\FeedbackRequest;
 use App\Models\Candidate;
 use App\Models\Certificate;
 use App\Models\Company;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Feedback;
 use App\Models\HistoryPayment;
 use App\Models\JobPostActivities;
 use App\Models\Major;
@@ -28,7 +30,6 @@ class DetailCandidateController extends Controller
         $check = JobPostActivities::where([
             ['company_id','=',$company_id],
             ['seeker_id','=', $data->id],
-            ['is_function','=',2]
             ])->get()->count();
 
         if($check == 0) {
@@ -108,6 +109,68 @@ class DetailCandidateController extends Controller
         $timeNow = Carbon::now();
         $exp = Experience::where('seeker_id', $data->id)->get()->toArray();
         return view('company.detail-candidate.viewHidden', compact('title', 'activeRoute', 'maJor', 'data', 'education', 'exp', 'seekerSkill','timeNow','certificate'));
+    }
+    public function feedback($id) {
+        $title ='Đánh giá ứng viên';
+        $activeRoute = "Profile";
+        $data = Candidate::where('id',$id)->first();
+        return view('company.detail-candidate.feedback',compact('data','title','activeRoute'));
+
+    }
+    public function saveFeedback(FeedbackRequest $request, $id)
+    {
+        $id_user = auth('company')->user()->id;
+        $feedback = new Feedback();
+        $history = new HistoryPayment();
+        $company  = Company::where('id', $id_user)->first(); 
+        $data = Feedback::where('company_id', $id_user)->where('candidate_id', $id)->get();
+        $seeker = SeekerProfile::where('candidate_id', $id)->first();
+        $a = count($data);
+        if ($a == 0) {
+            $feedback->rate = $request->rate;
+            $feedback->candidate_id = $id;
+            $feedback->company_id = $id_user;
+            $feedback->title = $request->title;
+            $feedback->satisfied = $request->satisfied;
+            $feedback->unsatisfied = $request->unsatisfied;
+            $feedback->like_text = $request->like_text;
+            $feedback->improve = $request->improve;
+            $feedback->is_candidate = "1";
+            $feedback->is_reality = $request->reality;
+            $company->coin += 2;
+            // 
+            if($request->rate == 1){
+                if($seeker->coin >0){
+                    $seeker->coin -= 2;
+                }
+            }else if($request->rate == 2){
+                if($seeker->coin >0){
+                    $seeker->coin -= 1;
+                }
+            }else if($request->rate == 4){
+                $seeker->coin += 1;
+            }else if($request->rate == 5){
+                $seeker->coin += 2;
+            }
+            //    
+            $history->user_id = $id_user;
+                $history->note = "Thực hiện feedback ứng viên +2 coin còn lại ".$company->coin." coin";
+                $history->coin = $company->coin;
+                $history->type_coin = 0;
+                $history->type_account = 0;
+                $history->created_at = Carbon::now()->toDateTimeString();
+                $history->updated_at = Carbon::now()->toDateTimeString();
+            ////
+            $feedback->save();
+            $company->save();
+            $history->save();
+            $seeker->save();
+            Session::flash('success', 'Feedback thành công');
+            return redirect()->route('company.detail-candidate.index', ['id' => $id]);
+        } else {
+            Session::flash('error', 'Bạn đã feedback ứng viên này rồi');
+            return Redirect()->route('company.feedback', ['id' => $id]);
+        }
     }
 
 }

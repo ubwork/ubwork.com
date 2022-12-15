@@ -58,8 +58,11 @@
                                 <td>
                                     <a class="btn btn-primary btn-sm" href="{{ route('admin.user.edit', $user->id) }}"><i
                                             class="fa fa-edit"></i></a>
-                                    <button class="btn btn-danger btn-sm delete-confirm" type="submit"
-                                        value="{{ $user->id }}"><i class="fa fa-trash"></i></button>
+                                    @if(Auth::user()->id != $user->id)
+                                        <button class="btn btn-danger btn-sm delete-confirm" type="submit"
+                                            value="{{ $user->id }}"><i class="fa fa-trash"></i></button>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach

@@ -17,8 +17,8 @@
                     </li>
 
                     <li class="dropdown">
-                        <span><a href="{{ route('job') }}">Việc làm</a></span>
-                        <ul>
+                        <a href="{{ route('job') }}">Việc làm</a>
+                        {{-- <ul>
                             <li class="dropdown">
                                 <span>Chuyên ngành</span>
                                 <ul>
@@ -29,7 +29,7 @@
                                     @endforeach
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </li>
 
                     <li class="dropdown">
@@ -72,7 +72,7 @@
                             <img style="object-fit: cover;" src="{{ asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
                                 class="thumb">
                         @elseif(!empty(auth('candidate')->user()->avatar))
-                            <img style="object-fit: cover;" src="{{  auth('candidate')->user()->avatar }}" alt="avatar"
+                            <img style="object-fit: cover;" src="{{  asset('storage/' . auth('candidate')->user()->avatar) }}" alt="avatar"
                                 class="thumb">
                         @else
                             <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
@@ -81,13 +81,12 @@
                         <span class="name">{{auth('candidate')->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu" style="min-width: 330px;">
-                        <li class="active"><a href=""> <i class="la la-home"></i> Dashboard</a></li>
                         <li><a href="{{ route('detail', ['id' => auth('candidate')->user()->id]) }}"><i class="la la-user-tie"></i>Thông tin</a></li>
                         <li><a href="{{ route('jobApply') }}"><i class="la la-briefcase"></i> Công việc đã ứng tuyển</a></li>
                         <li><a href="{{ route('shortlisted_job') }}"><i class="la la-bookmark-o"></i>Công việc đã lưu</a></li>
                         <li><a href="{{ route('speedapply') }}"><i class="la la-briefcase"></i> Công việc đã tìm kiếm nhanh</a></li>
                         <li><a href="{{ route('shortlisted_list_company') }}"><i class="icon fas fa-building"></i>Công ty đã lưu</a></li>
-                        <li><a href="{{route('CreateCV')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
+                        <li><a href="{{route('createNew')}}"><i class="la la-file-invoice"></i> Tạo CV</a></li>
                         <li><a href="{{route('seeker')}}"><i class="la la-file-invoice"></i> Quản lí CV</a></li>
                         <li><a href="{{route('listPackage')}}"><i class="fa fa-cube"></i>Gói cước</a></li>
                         <li><a href="{{route('historyPayment')}}"><i class="la la-history"></i>Lịch sử giao dịch</a></li>

@@ -52,8 +52,8 @@ Route::prefix('major')->name('major.')->group(function () {
 });
 Route::prefix('seekerProfile')->name('seekerProfile.')->group(function () {
     Route::get('/', 'Admin\SeekerProfileController@index')->name('index');
-    Route::get('edit/{id}', 'Admin\SeekerProfileController@edit')->name('edit');
     Route::post('update/{id}', 'Admin\SeekerProfileController@update')->name('update');
+    Route::delete('/{id}', 'Admin\SeekerProfileController@destroy')->name('destroy');
 });
 Route::prefix('package')->name('package.')->group(function () {
     // candidate
@@ -75,5 +75,17 @@ Route::prefix('package')->name('package.')->group(function () {
         Route::post('update/{id}', 'Admin\PackageController@updatec')->name('updatec');
         Route::delete('/{id}', 'Admin\PackageController@destroy')->name('destroy');
         Route::post('/{id}', 'Admin\PackageController@status')->name('status');
+    });
+});
+Route::prefix('feedback')->name('feedback.')->group(function () {
+    // company
+    Route::prefix('company')->name('company.')->group(function () {
+        Route::get('/{id}', 'Admin\FeedbackController@indexc')->name('indexc');
+        Route::delete('/{ida}/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
+    });
+    // candidate
+    Route::prefix('candidate')->name('candidate.')->group(function () {
+        Route::get('/{id}', 'Admin\FeedbackController@index')->name('index');
+        Route::delete('/{ida}/{id}', 'Admin\FeedbackController@destroy')->name('destroy');
     });
 });

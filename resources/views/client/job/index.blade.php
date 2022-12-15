@@ -8,7 +8,7 @@
             <div class="title-outer">
                 <h1>Danh sách công việc </h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="{{route('index')}}">Trang chủ</a></li>
                     <li>Công việc</li>
                 </ul>
             </div>
@@ -74,9 +74,10 @@
     </section>
 @endsection
 @section('script')
-    @parent
-    <script>
-        $(function() {
+@parent
+<script type="text/javascript" src="{{asset('js/client/shortlist.js')}}"></script>
+<script>
+    updateShortList();
             function isUndefined(value) {
                 return value === undefined || value === null
             }
@@ -108,8 +109,9 @@
                 window.history.pushState({}, null, finalURL);
                 $.get(finalURL, function(data) {
                     $(".view-table").html(data);
+                    updateShortList();
                 });
                 return false;
-            })})
+            })
     </script>
 @endsection

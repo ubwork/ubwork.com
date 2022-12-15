@@ -32,13 +32,12 @@ class FeedbackRequest extends FormRequest
                 switch ($currentAction) {
                     case 'saveFeedback':
                         $rules = [
-                            'candidate_id'=>'unique:feedback',
-                            'title' => 'required',
-                            'satisfied' => 'required',
-                            'unsatisfied' => 'required',
-                            'like_text' => 'required',
-                            'improve' => 'required',
-                            'rate'=>'required',
+                            'title' => 'required|max:120',
+                            'satisfied' => 'required|max:120',
+                            'unsatisfied' => 'required|max:120',
+                            'like_text' => 'required|max:120',
+                            'improve' => 'required|max:120',
+                            'rate'=>'required|max:120',
                         ];
                         break;
                     default:
@@ -60,8 +59,12 @@ class FeedbackRequest extends FormRequest
             'satisfied.required' => 'Chưa nhập điều hài lòng',
             'unsatisfied.required' => 'Chưa nhập điều chưa hài lòng',
             'like_text.required' => 'Chưa nhập điều bạn thích',
-            'rate.required' => 'Chưa nhập sao',
-            'improve.required' => 'Chưa nhập điều công ty cần cải thiện',
+            'improve.required' => 'Chưa nhập điều cần cải thiện',
+            'title.max' => 'Tối đa 120 kí tự',
+            'satisfied.max' => 'Tối đa 120 kí tự',
+            'unsatisfied.max' => 'Tối đa 120 kí tự',
+            'like_text.max' => 'Tối đa 120 kí tự',
+            'improve.max' => 'Tối đa 120 kí tự',
         ];
     }
 }

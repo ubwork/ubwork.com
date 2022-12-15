@@ -16,7 +16,11 @@
             <figure class="image"><img src="{{!empty($data->image) ? asset('storage/'. $data->image) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
             @endif
             <h4 id="nameSeeker" class="name" style="bottom: 15px">
+              @if(!empty($data->name))
               {{$data->name}}
+              @else
+              {{$data['candidate']->name}}
+              @endif
             </h4>
             <span class="designation">{!!$data['major']->name ?? ''!!}</span>
             <div class="content">
@@ -27,7 +31,9 @@
               </ul>
               <div class="btn-box">
               @if(!empty($data->path_cv))
-                <a href="{{asset('upload/cv/'.$data->path_cv)}}" target="_blank" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Xem CV</a>
+                <a href="{{route('company.feedback',['id' => $data->candidate_id])}}" style="width: 49%;cursor: pointer; margin-right:30px" class="btn_unlock theme-btn btn-style-one">Đánh giá</a>
+
+                <a href="{{asset('upload/cv/'.$data->path_cv)}}" target="_blank" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Tải CV</a>
               @endif
               </div>
             </div>
@@ -141,14 +147,14 @@
           <div class="sidebar-column col-lg-3 col-md-12 col-sm-12">
             <aside class="sidebar">
 
-              <div class="sidebar-widget">
+              <div class="sidebar-widget" style="word-break:break-word;">
                 <div class="widget-content">
                   <ul class="job-overview">
                     @if(!empty($data->total_exp))
                     <li>
                       <i class="icon icon-calendar"></i>
                       <h5>Kinh nghiệm:</h5>
-                      <span>{{$data->total_exp}} Năm</span>
+                      <span>{{floor($data->total_exp) == 0 ? 'chưa có kinh nghiệm' : floor($data->total_exp) }} Năm</span>
                     </li>
                     @endif
                     @if(!empty($data['candidate']->birthday))

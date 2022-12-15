@@ -27,8 +27,8 @@
                   <th>STT</th>
                   <th>{{__('Tên gói nạp')}}</th>
                   <th>{{__('Số coin')}}</th>
-                  <th>{{__('Giá cũ')}}</th>
-                  <th>{{__('Giá mới')}}</th>
+                  <th>{{__('Giá')}}</th>
+                  <th>{{__('Giá giảm')}}</th>
                   <th>{{__('Ngày tạo')}}</th>
                   <th>{{__('Hạn sử dụng')}}</th>
                   <th>{{__('Trạng thái')}}</th>

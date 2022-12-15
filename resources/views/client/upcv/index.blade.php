@@ -7,7 +7,7 @@
 	<title>CV - {{$seeker->name}}</title>
 	<style>
     *{ font-family: DejaVu Sans !important; 
-		font-size: 14px;
+		font-size: 12px;
 	}
 		body{
 		margin: 0px;
@@ -73,7 +73,7 @@
 		padding: 20px;
 	}
 	.head{
-		font-size: 20px;
+		font-size: 14px;
 		text-transform: uppercase;
 		/* font-weight: 600; */
 	}
@@ -96,57 +96,74 @@
 		color: #7b7b7b;
 	}
 	.p-4{
-		font-size: 14px;
+		font-size: 11px;
 		color: #7b7b7b;
 	}
 	.mail {
 		width: 50px;
 		display: none;
 	}
+	.cls::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
 	</style>
 </head>
 <body>
 	<div class="main">
 		<div class="top-section">
-			<p class="p1">{{$seeker->name}}</p>
+			@if(isset($imageCV))
+			<div style="margin-bottom: 10px;">
+				<img style="border-radius: 50%; vertical-align: middle;" width="70px" height="70px" src="{{$imageCV}}">
+			</div>
+			@endif
+			<p style="margin-top: 5px;" class="p1">{{$seeker->name}}</p>
 		</div>
 		<div class="clearfix"></div>
-		<img src="" alt="">
 		<div class="col-div-4">
 			<div class="content-box" style="padding-left: 40px;word-wrap: break-word;">
 
 				
-			<p class="head">Liên hệ</p>
-			<p class="p3">+{{$seeker->phone}}</p>
+			<p class="head">Thông tin liên hệ</p>
+			<p class="p3">{{$seeker->marital}}</p>
+			<p class="p3">{{$info_candidate->gender == 1 ? 'Nam' : 'Nữ'}}</p>
+			<p class="p3">{{$seeker->phone}}</p>
 			<p class="p3">{{$seeker->email}}</p>
 			<p class="p3">{{$seeker->address}}</p>
 			
-
+			@if($list_skill->count() > 0)
 			<br/>
 			<p class="head">Kỹ năng</p>
-			<ul class="skills">
+			<ul class="skills cls">
 				@foreach($list_skill as $sk)
 				<li><span>{{$sk->getNameSkill->name}}</span></li>
 				@endforeach
 			</ul>
+			@endif
 
+			@if($certificates->count() > 0)
 			<br/>
 			<p class="head">Chứng chỉ</p>
 			@foreach($certificates as $cer)
 				<p class="p3">{{$cer->name}} - {{$cer->time}}</p>
 			@endforeach
+			@endif
+
+
 			</div>
 		</div>
 		<div class="line"></div>
 		<div class="col-div-8" style="float: right">
 			<div class="content-box">
 			<p class="head">Mục tiêu nghề nghiệp</p>
-			<p class="p3" style="font-size: 14px;line-height: 20px;">
+			<p class="p3" style="font-size: 11px;line-height: 20px;">
 			{{$seeker->description}}
 			</p>
+
+			@if($experiences->count() > 0)
 			<br/>
 			<p class="head">Kinh nghiệm</p>
-
 			@foreach($experiences as $exp)
 			<div class="box-exp" style="border-bottom: 1px solid #dbdbdbcc;width: 60%;">
 				<p>Tên công ty: {{$exp->company_name}} ({{date("m-Y", strtotime($exp->start_date))}} / @if($exp->end_date == null) Hiện tại @else {{date("m-Y", strtotime($exp->end_date))}} @endif)</p>
@@ -154,9 +171,21 @@
 				<p class="p-4">Mô tả: {{$exp->description}}</p>
 			</div>
 			@endforeach
+			<br>
+			@endif
 
+			@if($educations->count() > 0)
+			<p class="head">Dự án</p>
+			@foreach($projects as $proj)
+			<div class="box-exp" style="border-bottom: 1px solid #dbdbdbcc;width: 60%;">
+				<p>Tên dự án: {{$proj->name}} ({{date("m-Y", strtotime($proj->start_date))}} / @if($proj->end_date == null) Hiện tại @else {{date("m-Y", strtotime($proj->end_date))}} @endif)</p>
+				<p class="p-4">Mô tả: {{$proj->summary}}</p>
+				<p class="p-4">Nội dung: {{$proj->description}}</p>
+			</div>
+			@endforeach
 			<br/>
-
+			@endif
+			@if($educations->count() > 0)
 			<p class="head">Học Vấn</p>
 			@foreach($educations as $edu)
 			<p class="p-4" >{{$edu->name_education}} ({{date("m-Y", strtotime($edu->start_date))}} / @if($edu->end_date == null) Hiện tại @else {{date("m-Y", strtotime($edu->end_date))}} @endif)</p>
@@ -183,9 +212,41 @@
 				Mô tả: {{$edu->description}}
 			</div>
 			@endforeach
+			@endif
 
+			<br>
+			@if($skill_other->count() > 0)
+			<p class="head">Các kỹ năng khác</p>
+			@foreach($skill_other as $sko)
+			<div class="box-exp" style="border-bottom: 1px solid #dbdbdbcc;width: 60%;">
+				<div>
+					Tên kỹ năng: {{$sko->title}}
+				</div>
+				<p class="p-4">
+					Mô tả: {{$sko->description}}
+				</p>
 			</div>
+			@endforeach
+			<br/>
+			@endif
+
+			<br>
+			@if($tool_used->count() > 0)
+			<p class="head">Công cụ sử dụng</p>
+			@foreach($tool_used as $sko)
+			<div class="box-exp" style="border-bottom: 1px solid #dbdbdbcc;width: 60%;">
+				<div>
+					Tên công cụ: {{$sko->title}}
+				</div>
+				<p class="p-4">
+					Mô tả: {{$sko->description}}
+				</p>
+			</div>
+			@endforeach
+			<br/>
+			@endif
 		</div>
+	</div>
 
 		<div class="clearfix"></div>
 	</div>
