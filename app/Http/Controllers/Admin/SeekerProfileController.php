@@ -14,10 +14,14 @@ class SeekerProfileController extends Controller
     //
     public function index(){
         $data = SeekerProfile::paginate(9);
+        $a=[];
         foreach($data as $k){
-            $a[]=$k->candidate_id;
+            if(in_array($k->candidate_id, $a)){
+                continue;
+            }else{
+                $a[]=$k->candidate_id;
+            }
         }
-        // dd($a);
         foreach($a as $b=>$c){
             $can[] = Candidate::where('id',$c)->get();
         }
