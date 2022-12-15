@@ -13,7 +13,7 @@ class SeekerProfileController extends Controller
 {
     //
     public function index(){
-        $data = SeekerProfile::all();
+        $data = SeekerProfile::paginate(9);
         foreach($data as $k){
             $a[]=$k->candidate_id;
         }
@@ -25,17 +25,9 @@ class SeekerProfileController extends Controller
         return view('admin.seekerProfile.index',compact('data','can','title'));
     }
 
-    public function edit($id)
-    {
-        $this->v['title'] = "Cập nhật giá trị CV";
-        $model = new SeekerProfile();
-        $this->v['obj'] = SeekerProfile::find($id);
-        return view('admin.seekerProfile.edit', $this->v);
-    }
-
     public function update(SeekerProfileRequest $request, $id)
     {
-        $method_route = 'admin.seekerProfile.edit';
+        $method_route = 'admin.seekerProfile.index';
         $params = [];
         $params['cols'] = $request->post();
 
