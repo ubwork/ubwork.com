@@ -36,7 +36,7 @@
 @endsection
 @section('content')
     <section class="ls-section mt-5">
-        <div class="container-fluid" style="max-width: 900px">
+        <div class="container-fluid" style="max-width: 800px">
             <div class="row">
 
                 <div class="col-lg-12">
@@ -85,7 +85,19 @@
                                                     </div>
                                                     <div class="col">
                                                         <label for="">Tình trạng hôn nhân</label>
-                                                        <input type="text" name="marital" class="form-control" @if(!empty($seeker)) value="{{$seeker->marital}}" @endif>
+                                                        <select name="marital" class="form-select">
+                                                            @foreach (config('custom.marital') as $val_marital)
+                                                                <option 
+                                                                @if(!empty($seeker->marital))
+                                                                @if($seeker->marital == $val_marital['id'])
+                                                                selected
+                                                                @endif
+                                                                @endif
+                                                                value="{{ $val_marital['id']}}">
+                                                                    {{ $val_marital['name']}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">

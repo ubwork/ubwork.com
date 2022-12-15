@@ -154,7 +154,7 @@
                     <li>
                       <i class="icon icon-calendar"></i>
                       <h5>Kinh nghiệm:</h5>
-                      <span>{{$data->total_exp}} Năm</span>
+                      <span>{{floor($data->total_exp) == 0 ? 'chưa có kinh nghiệm' : floor($data->total_exp) }} Năm</span>
                     </li>
                     @endif
                     @if(!empty($data['candidate']->birthday))
