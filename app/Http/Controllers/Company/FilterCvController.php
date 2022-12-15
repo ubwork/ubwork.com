@@ -31,7 +31,7 @@ class FilterCvController extends Controller
         $this->v['company'] = Company::find($company_id);
 
         $data = DB::table('job_post_activities')->where('company_id', $company_id)->select('seeker_id')->groupby('seeker_id')->pluck('seeker_id')->toArray();
-        $query = SeekerProfile::whereNotIn('id',$data)->with('candidate');
+        $query = SeekerProfile::whereNotIn('id',$data)->where('is_active', 1)->with('candidate');
         if($request->ajax()) {
             $gender = $request->get('id_gender');
             $skill = $request->get('id_skill');
