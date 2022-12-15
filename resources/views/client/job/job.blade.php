@@ -44,13 +44,7 @@ h1 {
 }
 
 .pagination-container {
-  width: calc(100% - 2rem);
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  padding: 1rem 0;
-  justify-content: center;
+    text-align: center
 }
 
 .pagination-number,
@@ -94,7 +88,7 @@ footer .heart {
             <div class="title-outer">
                 <h1>Danh sách công việc </h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="{{route('index')}}">Trang chủ</a></li>
                     <li>Công việc</li>
                 </ul>
             </div>
@@ -146,7 +140,9 @@ footer .heart {
                 <div class="content-column col-lg-12">
                     <div class="ls-outer" data-current-page="1" aria-live="polite">
                         <div class="row searchpate" id="paginated-list" >
-                            @foreach ($data as $item)
+
+                            @if (!empty($data))
+                                @foreach ($data as $item)
                                 @php
                                     $end_time = strtotime($item->end_date);
                                     $total = $end_time - $today;
@@ -158,7 +154,7 @@ footer .heart {
                                         <div class="inner-box" style="height:200px">
                                             <div class="content">
                                                 <span class="company-logo"><img
-                                                        src="{{ asset('storage/' . $item->company->logo) }}"
+                                                        src="{{ asset('storage/images/company/' . $item->company->logo) }}"
                                                         alt=""></span>
                                                 <h4><a
                                                         href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -208,6 +204,8 @@ footer .heart {
                                         </div>
                                     </div>
                             @endforeach
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -262,7 +260,7 @@ footer .heart {
                                         <div class="inner-box">
                                             <div class="content">
                                                 <span class="company-logo"><img
-                                                        src="storage/`+job.company.logo+`"
+                                                        src="storage/images/company/`+job.company.logo+`"
                                                         alt=""></span>
                                                 <h4><a
                                                         href="{{url('/job-detail/`+job.id+`')}}">`+job.title+`</a>
@@ -281,15 +279,6 @@ footer .heart {
                                                         `+job.min_salary+` -
                                                         `+job.max_salary+`
                                                         </li>
-
-                                                    <li><i class="icon flaticon-clock-3"></i><span>
-                                                            @if ($day < 0)
-                                                                <b>Hết hạn.</b>
-                                                            @else
-                                                                <b>Còn lại {{ $day }} ngày.</b>
-                                                            @endif
-                                                        </span>
-                                                    </li>
                                                 </ul>
                                                 <ul class="job-other-info">
                                                     <li class="time">

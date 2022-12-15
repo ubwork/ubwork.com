@@ -6,6 +6,8 @@
     "/js/remove-ajax.js": "/js/remove-ajax.js",
     "/js/paginate.js": "/js/paginate.js",
     "/js/company/search.js": "/js/company/search.js",
+    "/js/client/create_cv.js": "/js/client/create_cv.js",
+    "/js/client/shortlist.js": "/js/client/shortlist.js",
     "/css/client_style.css": "/css/client_style.css",
     "/css/app.css": "/css/app.css"
 }

@@ -3,7 +3,6 @@
     {{ __('UB Work') }}
 @endsection
 @section('content')
-    {{-- @dd($seeker) --}}
     <section class="page-title style-three" style="margin-top:100px ">
         <h1>Tìm Kiếm Nhanh</h1>
         <form action="send" method="GET">
@@ -13,10 +12,10 @@
                 phù hợp với bạn.
                 <br>
                 @if (auth('candidate')->check())
-                    @if ($major == null || $skills == null)
+                    @if ($major == null && $skill_seeker == null)
                         <span>Do bạn chưa tạo cv trên hệ thống. nên bạn hãy tìm kiếm bằng cách chọn chuyên ngành hoặc chọn
                             kỹ năng bên dưới để sử dụng chức năng hoặc bạn có thể tạo cv <a
-                                href="{{ route('CreateCV') }}">tại đây!</a></span>
+                                href="{{ route('createNew') }}">tại đây!</a></span>
                         <div class="top-filters" style="margin-top: 100px ">
                             <div class="form-group" style="width:220px">
                                 <select class="chosen-select" name="major">
@@ -35,8 +34,7 @@
                                 </select>
                             </div>
                             <div class="form-group" style="width:220px">
-                                <select class="chosen-select" name="skill">
-                                    <option value="">Kỹ Năng</option>
+                                <select data-placeholder="Chọn kỹ năng... " class="chosen-select" name="skill[]" multiple>
                                     @foreach ($skill as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach

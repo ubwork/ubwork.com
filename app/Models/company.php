@@ -13,8 +13,8 @@ class Company  extends Authenticatable
     use HasFactory;
     protected $table = "companies";
     protected $fillable = ['id', 'name', 'company_name', 'address', 'company_model', 'working_time',
-    'country', 'zipcode', 'phone', 'email', 'password', 'logo', 'link_web', 'coin', 'tax_code', 'is_active', 
-    'status','image_paper', 'career', 'founded_in', 'team', 'about', 'created_at', 'updated_at','google_id'];
+    'country', 'zipcode', 'phone', 'email', 'password', 'logo', 'link_web', 'coin', 'tax_code', 'is_active',
+    'status','image_paper', 'career', 'founded_in', 'team', 'about', 'created_at', 'updated_at','google_id','token','verify_time','map','iframe_ytb'];
 
     public function companyDetail($id)
     {

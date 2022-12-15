@@ -31,7 +31,7 @@ class FilterCvController extends Controller
         $this->v['company'] = Company::find($company_id);
 
         $data = DB::table('job_post_activities')->where('company_id', $company_id)->select('seeker_id')->groupby('seeker_id')->pluck('seeker_id')->toArray();
-        
+        $query = SeekerProfile::whereNotIn('id',$data)->where('is_active', 1)->with('candidate');
         if($request->ajax()) {
             $gender = $request->get('id_gender');
             $skill = $request->get('id_skill');
@@ -71,17 +71,14 @@ class FilterCvController extends Controller
                     $value = '5';
                     break;
                 case 7:
-                    $dk = "!>";
+                    $dk = ">";
                     $value = '5';
                     break;
 
                     default:
-                    $dk = ">";
+                    $dk = "!=";
                     $value = '0';
             }
-            $dk = $selectYearKn == 1 ? "<" : "<=";
-
-            $query = SeekerProfile::whereNotIn('id',$data)->with('candidate');
             if(!empty($skill)) {
                 $query = $query->whereHas('seekerSkill', function($q) use ($skill) {
                     $q->where('skill_id', $skill);
@@ -113,18 +110,12 @@ class FilterCvController extends Controller
             if(!empty($search_address)) {
                 $query = $query->where('address', 'like', "%{$search_address}%");
             }
-            if(isset($value)) { //lỗi chưa check đúng, nếu để isset thì các cv k có kinh nghiệm sẽ lọc sai
-                $query = $query->where('total_exp', $dk, $value);
+            if(isset($selectYearKn)) {
+                $query = $query->where('total_exp',$dk, $value);
             }
 
-            $this->v['seekerProfile'] = $query->paginate(9);
-
         }
-        else {
-            $this->v['seekerProfile'] = SeekerProfile::whereNotIn('id',$data)->with('candidate')->paginate(9);
-        }
-        
-                                 
+        $this->v['seekerProfile'] = $query->paginate(9);
         $this->v['major'] = Major::all();
         $this->v['skill'] = Skill::all();
         $this->v['nameEdu'] = Education::distinct()->select('name_education')->get();

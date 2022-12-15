@@ -41,7 +41,7 @@ class PackageRequest extends FormRequest
 
                     case 'update':
                         $rules = [
-                            'title' => 'required|unique:packages',
+                            'title' => 'required',
                             'coin' => 'required',
                             'amount' => 'required',
                             'expired' => 'required',
@@ -58,7 +58,7 @@ class PackageRequest extends FormRequest
     
                         case 'updatec':
                             $rules = [
-                                'title' => 'required|unique:packages',
+                                'title' => 'required',
                                 'coin' => 'required',
                                 'amount' => 'required',
                                 'expired' => 'required',
@@ -80,10 +80,11 @@ class PackageRequest extends FormRequest
 
     public function messages() {
         return [
-            'title.required' => __('messages.title.required'),
-            'coin.required' => __('messages.coin.required'),
-            'amount.required' => __('messages.amount.required'),
-            'expired.required' => __('messages.expired.required'),
+            'title.required' => __('Không được để trống'),
+            'title.unique' =>__('Đã tồn tại, mời nhập mới'),
+            'coin.required' => __('Không được để trống'),
+            'amount.required' => __('Không được để trống'),
+            'expired.required' => __('Không được để trống'),
         ];
     }
 }

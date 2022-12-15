@@ -3,27 +3,7 @@
     {{ __('UB Work') }} | {{ __('Danh sách Công ty') }}
 @endsection
 @section('content')
-<style>
-    .page-link{
-        border-radius: 50%;
-        padding: 5px 15px;
-        margin: 10px;
-    }
-    .page-link:hover{
-            background-color: #C46F01;
-        }
-    .page-item:last-child .page-link{
-        border-top-right-radius: 50%;
-         padding: 5px 17px;
-        border-bottom-right-radius: 50%;
-    }
-    .page-item:first-child .page-link{
-        border-top-left-radius: 50%;
-         padding: 5px 17px;
-        border-bottom-left-radius: 50%;
-    }
-</style>
-    <section class="page-title">
+    <section class="page-title" style="margin-top: 90px">
         <div class="auto-container">
             <div class="title-outer">
                 <h1>Danh sách công ty</h1>
@@ -54,10 +34,10 @@
                                     <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
-                            <div class="filter-block">
+                            <div class="filter-block2">
                                 <h4>Quy mô công ty</h4>
                                 <div class="form-group">
-                                    <select name="size" class="chosen-select">
+                                    <select name="size" class="chosen-select" style="border: 1px solid #ECEDF2 !importan;">
                                         <option value="">Mời Chọn</option>
                                         <option value="1">1-50 Nhân viên</option>
                                         <option value="2" >50-100 Nhân Viên</option>
@@ -65,13 +45,23 @@
                                         <option value="4" >200-500 Nhân Viên</option>
                                         <option value="5" >500-1000 Nhân Viên</option>
                                     </select>
-                                    <span class="icon flaticon-briefcase"></span>
                                 </div>
                             </div>
-                            <div class="filter-block">
-                                <h4>Tìm theo địa điểm</h4>
+                            <div class="filter-block2 mt-3" >
+                                <h4>Khu vực</h4>
+                            <div class="form-group " >
+                                <select name="area" id="search-area" class="chosen-select">
+                                    <option value="">Khu vực</option>
+                                    @foreach (config('custom.area') as $item)
+                                        <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            </div>
+                            <div class="filter-block mt-3">
+                                <h4>Tìm theo địa điểm chi tiết</h4>
                                 <div class="form-group">
-                                    <input type="text" name="address" placeholder="Địa điểm">
+                                    <input type="text" name="address" placeholder="Địa điểm chi tiết">
                                     <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
@@ -90,7 +80,7 @@
                                 <div class="inner-box">
                                     <div class="content">
                                         <div class="content-inner">
-                                            <span class="company-logo"><img src="{{ asset('storage/' . $item->logo) }}"
+                                            <span class="company-logo"><img src="{{ asset('storage/images/company/' . $item->logo) }}"
                                                     alt=""></span>
                                             <h4><a
                                                     href="{{ route('company-detail', ['id' => $item->id]) }}">{{ $item->company_name }}</a>
@@ -98,25 +88,26 @@
                                             <ul class="job-info">
                                                 <li><span class="icon flaticon-map-locator"></span>{{ $item->address }}</li>
                                                 <li><span class="icon flaticon-briefcase"></span>{{ $item->company_model }}</li>
-                                                <li><span class="icon flaticon-clock-3"></span>{{$item->working_time}}</li>
+                                                @foreach($workingTime as $wor => $w)
+                                                    @if(isset($item->working_time) && $item->working_time == $wor)
+                                                    <li><span class="icon flaticon-clock-3"></span> {{$w}}</li>
+                                                    @endif
+                                                @endforeach
+                                                
                                             </ul>
                                         </div>
 
                                         <ul class="job-other-info">
-                                            <li class="time">Công việc – {{ count($job) }}</li>
+                                            <li class="time">Công việc – {{ count($job[$item->id]) }}</li>
                                             {{-- <li class="time">Open Jobs – {{count($job)}}</li> --}}
                                         </ul>
                                     </div>
-                                    {{-- @dd($job) --}}
-                                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                    {{-- <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button> --}}
                                 </div>
                             </div>
                         @endforeach
                         <!-- Listing Show More -->
                         <div class="ls-show-more">
-                            {{-- <p>Showing 36 of 497 Jobs</p>
-                            <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
-                            <button class="show-more">Xem thêm</button> --}}
                             {{ $data->links() }}
                         </div>
                     </div>

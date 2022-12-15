@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin-bower/plugins/select2-master/select2.min.css') !!}" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
     @section('style')
         @include('company.layout.style')
     @show

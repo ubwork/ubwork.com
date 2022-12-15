@@ -24,6 +24,7 @@ class Feedback extends Model
         'is_candidate',
         'created_at',
         'updated_at',
+        'is_reality'
     ];
     // lưu tạo
     public function saveAdd($params) {
@@ -55,6 +56,26 @@ class Feedback extends Model
         ->select($this->fillable)
         ->where('company_id', $id);
         $list=$query->get();
+        return $list;
+
+    }
+    
+    public function getFeedbackCompany($id){
+        $query=DB::table($this->table)
+        ->select($this->fillable)
+        ->where('company_id', $id)
+        ->where('is_candidate', 0);
+        $list=$query->paginate(5);
+        return $list;
+
+    }
+
+    public function getCountFeedbackCompany($id){
+        $query=DB::table($this->table)
+        ->select($this->fillable)
+        ->where('company_id', $id)
+        ->where('is_candidate', 0);
+        $list=$query->count();
         return $list;
 
     }

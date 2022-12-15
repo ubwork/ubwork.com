@@ -26,4 +26,6 @@ mix.js("resources/js/remove-ajax.js", "public/js");
 mix.css("resources/css/client_style.css", "public/css");
 mix.js("resources/js/paginate.js", "public/js");
 mix.js("resources/js/company/search.js", "public/js/company");
+mix.js("resources/js/client/create_cv.js", "public/js/client");
+mix.js("resources/js/client/shortlist.js", "public/js/client");
 

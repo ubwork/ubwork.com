@@ -32,20 +32,18 @@
 @parent
 @endsection
 @section('title')
-    {{ __('UB Work') }} | {{__('Tạo CV')}}
+    {{ __('UB Work') }} | {{__('Cập nhật CV')}}
 @endsection
 @section('content')
     <section class="ls-section mt-5">
-        <div class="container-fluid" style="max-width: 670px">
+        <div class="container-fluid" style="max-width: 800px">
             <div class="row">
 
                 <div class="col-lg-12">
                     <!-- CV Manager Widget -->
                     <div class="cv-manager-widget ls-widget">
-                        <div class="widget-title">
-                            <h4>Tạo CV</h4>
-                        </div>
-                        <div class="widget-content">
+                       
+                        <div class="mt-3 widget-content">
                             <div class="title">
                                 <h1>Tạo CV trên hệ thống, tăng cơ hội nhận được việc làm !</h1>
                                 <p class="mt-3">
@@ -56,10 +54,10 @@
 
                             <div class="create-cv">
                                 <div class="info mb-3">
-                                    <form @if(!empty($seeker)) action="{{route('updateInfo')}}" @else action="{{route('saveInfo')}}" @endif method="post" enctype="multipart/form-data">
+                                    <form id="create_info" action="{{route('updateInfo', ['id' => $seeker->id])}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <div class="d-flex justify-content-between">
+                                            <div class="d-flex justify-content-between border-bot">
                                                 <div class="font-weight-bold h4" >Thông tin cá nhân</div>
                                                 <div id="block-p" style="cursor: pointer;"><i class="fas fa-edit"></i></div>
                                             </div>
@@ -69,71 +67,64 @@
                                                 <div class="form-group">
                                                     <label for="">Họ và tên *</label>
                                                     <input type="text" name="name" class="form-control" @if(!empty($seeker)) value="{{$seeker->name}}" @endif>
-                                                    @error('name')
-                                                        <small class="text-danger pl-4">
-                                                            {{ $message }}
-                                                        </small>
-                                                    @enderror
+                                                        <small class="val_info_name text-danger pl-4"></small>
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label class="form-label w-100">Ảnh</label>
-                                                    <img id="image" @if(!empty($seeker)) src="{{ $seeker->image?''.Storage::url($seeker->image):'http://placehold.it/100x100' }}" @else src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" @endif alt="your image"
+                                                    <img id="image" @if(!empty($seeker)) src="{{ $seeker->image?''.Storage::url($seeker->image):'https://via.placeholder.com/100' }}" @else src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" @endif alt="your image"
                                                         style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
                                                     <input name="image" type="file" id="img">
                                                     <small class="form-text text-muted">Chọn ảnh kích thước nhỏ hơn 5mb</small>
-                                                    @error('image')
-                                                    <small class="text-danger">{{$message}}</small>
-                                                    @enderror
+                                                    <small class="val_info_image text-danger"></small>
                                                   </div>
-                                                  <div class="form-group mt-3">
-                                                    <label for="">Địa chỉ *</label>
-                                                    <input type="text" name="address" class="form-control" @if(!empty($seeker)) value="{{$seeker->address}}" @endif>
-                                                    @error('address')
-                                                        <small class="text-danger pl-4">
-                                                            {{ $message }}
-                                                        </small>
-                                                    @enderror
+                                                <div class="row mt-3">
+                                                    <div class="col">
+                                                        <label for="">Địa chỉ *</label>
+                                                        <input type="text" name="address" class="form-control" @if(!empty($seeker)) value="{{$seeker->address}}" @endif>
+                                                        <small class="val_info_address text-danger"></small>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="">Tình trạng hôn nhân</label>
+                                                        <select name="marital" class="form-select">
+                                                            @foreach (config('custom.marital') as $val_marital)
+                                                                <option 
+                                                                @if(!empty($seeker->marital))
+                                                                @if($seeker->marital == $val_marital['id'])
+                                                                selected
+                                                                @endif
+                                                                @endif
+                                                                value="{{ $val_marital['id']}}">
+                                                                    {{ $val_marital['name']}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group mt-3">
-                                                    <label for="">Số điện thoại *</label>
-                                                    <input type="number" name="phone" class="form-control" @if(!empty($seeker)) value="{{$seeker->phone}}" @endif>
-                                                    @error('phone')
-                                                        <small class="text-danger pl-4">
-                                                            {{ $message }}
-                                                        </small>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label for="">Email *</label>
-                                                    <input type="email" name="email" class="form-control" @if(!empty($seeker)) value="{{$seeker->email}}" @endif>
-                                                    @error('email')
-                                                        <small class="text-danger pl-4">
-                                                            {{ $message }}
-                                                        </small>
-                                                    @enderror
+                                                <div class="row mt-3">
+                                                    <div class="col">
+                                                        <label for="">Số điện thoại *</label>
+                                                        <input type="number" name="phone" class="form-control" @if(!empty($seeker)) value="{{$seeker->phone}}" @endif>
+                                                        <small class="val_info_phone text-danger"></small>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="">Email *</label>
+                                                        <input type="email" name="email" class="form-control" @if(!empty($seeker)) value="{{$seeker->email}}" @endif>
+                                                        <small class="val_info_email text-danger"></small>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label for="">Chuyên ngành *</label>
-                                                    <select name="major_id" class="form-select">
+                                                    <select name="major_id" class="c_major_id form-select">
                                                         @foreach($maJor as $mj)
                                                             <option @if(!empty($seeker)) @if($seeker->major_id == $mj->id) selected @endif @endif value="{{$mj->id}}">{{$mj->name}}</option>
                                                         @endforeach
                                                     </select>
-                                                    @error('major_id')
-                                                        <small class="text-danger pl-4">
-                                                            {{ $message }}
-                                                        </small>
-                                                    @enderror
+                                                    <small class="val_info_major_id text-danger"></small>
                                                 </div>
                                                <div class="form-group mt-3">
                                                     <label for="">Giới thiệu chung *</label>
                                                     <textarea name="description" class="form-control" rows="3">@if(!empty($seeker)) {{$seeker->description}} @endif </textarea>
-                                                    @error('description')
-                                                        <small class="text-danger pl-4">
-                                                            {{ $message }}
-                                                            <br>
-                                                        </small>
-                                                    @enderror
+                                                    <small class="val_info_description text-danger"></small>
                                                     <small class="text-red"><i>Gợi ý: Giới thiệu số năm kinh nghiệm làm việc và mục tiêu của bản thân</i></small>
                                                </div>
                                                 <div class="d-flex mt-3 flex-row-reverse">
@@ -143,17 +134,21 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <div class="info_pro">
+                                        @php 
+                                        echo !empty($seeker->name) ? '<div class="mt-3"> <b>Họ tên:</b> '.$seeker->name.' </div>' : '';
+                                        echo !empty($seeker->image) ? '<div style="margin-top: 5px;"> <b>Ảnh:</b> <img style="margin-left: 10px;" width="100px" height="100px" src="'.Storage::url($seeker->image).'" alt=""></div>' : '';
+                                        echo !empty($seeker->marital) ? '<div style="margin-top: 5px;"> <b>Tình trạng hôn nhân:</b> '.$seeker->marital.' </div>' : '';
+                                        echo !empty($seeker->address) ? '<div style="margin-top: 5px;"> <b>Địa chỉ:</b> '.$seeker->address.' </div>' : '';
+                                        echo !empty($seeker->phone) ? '<div style="margin-top: 5px;"> <b>Số điện thoại:</b> +'.$seeker->phone.' </div>' : '';
+                                        echo !empty($seeker->email) ? '<div style="margin-top: 5px;"> <b>Email:</b> '.$seeker->email.' </div>' : '';
+                                        echo !empty($seeker->major_id) ? '<div style="margin-top: 5px;"> <b>Chuyên ngành:</b> '.$seeker->major->name.' </div>' : '';
+                                        echo !empty($seeker->description) ? '<div style="margin-top: 5px;"> <b>Giới thiệu chung:</b> '.$seeker->description.' </div>' : '';
+                                        @endphp
+                                    </div>
                                 </div>
 
                                 @if(!empty($seeker))
-                                <div class="experiences mb-3">
-                                    @include('client.upcv.experiences')
-                                </div>
-
-                                <div class="skills mb-3">
-                                    @include('client.upcv.skills')
-                                </div>
-
                                 <div class="educations mb-3">
                                     @include('client.upcv.educations')
                                 </div>
@@ -161,13 +156,28 @@
                                 <div class="certificates mb-3">
                                     @include('client.upcv.certificates')
                                 </div>
+                                <div class="experiences mb-3">
+                                    @include('client.upcv.experiences')
+                                </div>
+                                <div class="projects mb-3">
+                                    @include('client.upcv.project')
+                                </div>
+                                <div class="skills mb-3">
+                                    @include('client.upcv.skills')
+                                </div>
+                                <div class="skill_other mb-3">
+                                    @include('client.upcv.skill_other')
+                                </div>
+                                <div class="tool_used mb-3">
+                                    @include('client.upcv.tool_used')
+                                </div>
                                 @else
                                 <small><i>*Vui lòng tạo thông tin cá nhân trước !</i></small>
                                 @endif
                             </div>
                             @if(!empty($seeker))
                             <div class="mt-5 text-center">
-                                <a href="{{route('getPdf')}}" class="btn btn-primary">Cập nhật CV</a>
+                                <a href="{{route('getPdf',['idsee' => $seeker->id])}}" class="btn btn-primary">Tạo file CV</a>
                                 
                             </div>
                             @endif
@@ -181,139 +191,340 @@
 @endsection
 @section('script')
     @parent
+    <script src="{{asset('js/client/create_cv.js')}}"></script>
     <script>
-        $(document).ready(function(){
-
-            $('#formSkill').submit(function(e){
-                e.preventDefault();
-                var url = $('#formSkill').attr('action');
-                var seeker_id = $('input[name=seeker_id]').val();
-                var skill_id = [];
-                $("#skills option:selected").each(function() {
-                    skill_id.push($(this).val());
-                });
-                var data = {
-                    "_token": $('meta[name="csrf-token"]').attr('content'),
-                    "skill_id": skill_id,
-                    "seeker_id": seeker_id
+        $('.removeEdu').click(function (e) {
+            e.preventDefault();
+            var url = $('.delEdu').attr('action');
+            var id = $(this).data('id-edu');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.edu_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
                 }
-                $.ajax({
-                type: "POST",
-                url: url,
-                data: data,
-                    success: function(response) {
-                        toastr.success(response.success)
-                    },
-                    error: function(response) {
-                        toastr.error("Cập nhật thất bại")
-                    }
-                });
             });
-
-            $("#block-p").click(function(){
-                $("#desc").toggle(300);
-            });
-            $(".hide-button").click(function(){
-                $("#desc").hide(300);
-            });
-
-            // kinh nghiệm làm việc
-            $("#block-kn").click(function(){
-                $("#experiences").toggle(300);
-            });
-            $(".hide-button-kn").click(function(){
-                $("#experiences").hide(300);
-            })
-
-            // kỹ năng
-            $("#block-sk").click(function(){
-                $("#skills").toggle(300);
-            });
-            $(".hide-button-sk").click(function(){
-                $("#skills").hide(300);
-            })
-
-            // trường học
-            $("#block-edu").click(function(){
-                $("#educations").toggle(300);
-            });
-            $(".hide-button-edu").click(function(){
-                $("#educations").hide(300);
-            })
-
-            // chứng chỉ
-            $("#block-cer").click(function(){
-                $("#certificates").toggle(300);
-            });
-            $(".hide-button-cer").click(function(){
-                $("#certificates").hide(300);
-            })
         });
 
-        $(function(){
-            function readURL(input, selector) {
-                if (input.files && input.files[0]) {
-                    let reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $(selector).attr('src', e.target.result);
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
+        $('.removeCer').click(function (e) {
+            e.preventDefault();
+            var url = $('.delCer').attr('action');
+            var id = $(this).data('id-cer');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
             }
-            $("#img").change(function () {
-                readURL(this, '#image');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.cer_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
+                }
             });
-
         });
 
-        function Del(id) {
-            if(!confirm('Bạn có muốn xóa?')){
-                return false;
+        $('.removeSko').click(function (e) {
+            e.preventDefault();
+            var url = $('.delSko').attr('action');
+            var id = $(this).data('id-sko');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
             }
-        }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.sko_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
 
+        $('.removeProj').click(function (e) {
+            e.preventDefault();
+            var url = $('.delProj').attr('action');
+            var id = $(this).data('id-proj');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.proj_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.removeTool').click(function (e) {
+            e.preventDefault();
+            var url = $('.delTool').attr('action');
+            var id = $(this).data('id-tool');
+            var data = {
+                id: id,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: 'Bấm không nếu bạn đổi ý!',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Xóa',
+                confirmButtonColor: '#C46F01',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        data: data,
+                        success: function(results) {
+                            if (results.is_check === true) {
+                                Swal.fire({
+                                    title: results.success,
+                                    icon: 'success',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }, setTimeout(function() {
+                                
+                                }, 500)).then(function() {
+                                    $('.tool_div'+id).remove();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: results.error,
+                                    type: 'error',
+                                    icon: 'error',
+                                    timer: 1500
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    
         function EditFormId(id) {
-            $('#EditHide'+id).hide(300);
-            $("#EditForm"+id).toggle(300);
-            $('#form-border'+id).addClass('border-none');
-            $('#btnForm'+id).hide();
+        $('#EditHide'+id).hide(300);
+        $("#EditForm"+id).toggle(300);
+        $('#form-border'+id).addClass('border-none');
+        $('#btnForm'+id).hide();
 
-            $('.hide-button-exp'+id).click(function () {
-                $("#EditForm"+id).hide(300);
-                $('#EditHide'+id).show();
-                $('#btnForm'+id).show();
-                $('#form-border'+id).removeClass('border-none');
-            })
-        }
+        $('.hide-button-exp'+id).click(function () {
+            $("#EditForm"+id).hide(300);
+            $('#EditHide'+id).show();
+            $('#btnForm'+id).show();
+            $('#form-border'+id).removeClass('border-none');
+        })
+    }
 
-        function EditFormEduEduId(id) {
-            $('#EditHideEdu'+id).hide(300);
-            $("#EditFormEdu"+id).toggle(300);
-            $('#form-border-edu'+id).addClass('border-none');
-            $('#btnFormEdu'+id).hide();
+    function EditFormEduEduId(id) {
+        $('#EditHideEdu'+id).hide(300);
+        $("#EditFormEdu"+id).toggle(300);
+        $('#form-border-edu'+id).addClass('border-none');
+        $('#btnFormEdu'+id).hide();
 
-            $('.hide-button-exp'+id).click(function () {
-                $("#EditFormEdu"+id).hide(300);
-                $('#EditHideEdu'+id).show();
-                $('#btnFormEdu'+id).show();
-                $('#form-border-edu'+id).removeClass('border-none');
-            })
-        }
+        $('.hide-button-exp'+id).click(function () {
+            $("#EditFormEdu"+id).hide(300);
+            $('#EditHideEdu'+id).show();
+            $('#btnFormEdu'+id).show();
+            $('#form-border-edu'+id).removeClass('border-none');
+        })
+    }
 
-        function EditFormCerId(id) {
-            $('#EditHideCer'+id).hide(300);
-            $("#EditFormCer"+id).toggle(300);
-            $('#form-border-cer'+id).addClass('border-none');
-            $('#btnFormCer'+id).hide();
+    function EditFormCerId(id) {
+        $('#EditHideCer'+id).hide(300);
+        $("#EditFormCer"+id).toggle(300);
+        $('#form-border-cer'+id).addClass('border-none');
+        $('#btnFormCer'+id).hide();
 
-            $('.hide-button-cer'+id).click(function () {
-                $("#EditFormCer"+id).hide(300);
-                $('#EditHideCer'+id).show();
-                $('#btnFormCer'+id).show();
-                $('#form-border-cer'+id).removeClass('border-none');
-            })
-        }
+        $('.hide-button-cer'+id).click(function () {
+            $("#EditFormCer"+id).hide(300);
+            $('#EditHideCer'+id).show();
+            $('#btnFormCer'+id).show();
+            $('#form-border-cer'+id).removeClass('border-none');
+        })
+    }
+
+    function EditFormSkoId(id) {
+        $('#EditHideSko'+id).hide(300);
+        $("#EditFormSko"+id).toggle(300);
+        $('#form-border-sko'+id).addClass('border-none');
+        $('#btnFormSko'+id).hide();
+
+        $('.hide-button-sko'+id).click(function () {
+            $("#EditFormSko"+id).hide(300);
+            $('#EditHideSko'+id).show();
+            $('#btnFormSko'+id).show();
+            $('#form-border-sko'+id).removeClass('border-none');
+        })
+    }
+
+    function EditFormProjId(id) {
+        $('#EditHideProj'+id).hide(300);
+        $("#EditFormProj"+id).toggle(300);
+        $('#form-border-proj'+id).addClass('border-none');
+        $('#btnFormProj'+id).hide();
+
+        $('.hide-button-proj'+id).click(function () {
+            $("#EditFormProj"+id).hide(300);
+            $('#EditHideProj'+id).show();
+            $('#btnFormProj'+id).show();
+            $('#form-border-proj'+id).removeClass('border-none');
+        })
+    }
+
+    function EditFormToolId(id) {
+        $('#EditHideTool'+id).hide(300);
+        $("#EditFormTool"+id).toggle(300);
+        $('#form-border-tool'+id).addClass('border-none');
+        $('#btnFormTool'+id).hide();
+
+        $('.hide-button-tool'+id).click(function () {
+            $("#EditFormTool"+id).hide(300);
+            $('#EditHideTool'+id).show();
+            $('#btnFormTool'+id).show();
+            $('#form-border-tool'+id).removeClass('border-none');
+        })
+    }
     </script>
 @endsection

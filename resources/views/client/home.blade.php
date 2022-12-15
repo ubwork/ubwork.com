@@ -2,7 +2,6 @@
 @section('title')
     {{ __('UB Work') }}
 @endsection
-@section('content')
 @section('style')
 @parent
 <style>
@@ -26,6 +25,7 @@
     }
 </style>
 @endsection
+@section('content')
     <section class="banner-section">
         <div class="auto-container">
             <div class="row">
@@ -37,7 +37,7 @@
                         </div>
                         <!-- Job Search Form -->
                         <div class="job-search-form">
-                            <form method="get" action="search">
+                            <form method="get" action="job">
                                 <div class="row">
                                     <div class="form-group col-lg-5 col-md-12 col-sm-12">
                                         <span class="icon flaticon-search-1"></span>
@@ -173,8 +173,8 @@
                     <div class="category-block col-lg-4 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="content">
-                                <span class="{{ $item_job->icon }}"></span>
-                                <h4><a href="{{ route('job-cat', ['id' => $item_job->id]) }}">{{ $item_job->name }}</a>
+                                <span class="icon flaticon-headhunting"></span>
+                                <h4><a href="{{ route('job', ['id' => $item_job->id]) }}">{{ $item_job->name }}</a>
                                 </h4>
                                 <p>( {{ $count[$item_job->id] }} bài đăng)</p>
                             </div>
@@ -199,7 +199,7 @@
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <span class="company-logo"><img src="{{ asset('storage/' . $item->company->logo) }}"
+                                    <span class="company-logo"><img src="{{ asset('storage/images/company/' . $item->company->logo) }}"
                                             alt=""></span>
                                     <h4 style="text-align: left;"><a
                                             href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -210,8 +210,12 @@
                                         </li>
                                         <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                             giờ</li>
-                                        <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
-                                    </ul>
+                                            @if($item->min_salary > 0 && $item->max_salary > 0)
+                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
+                                            @else
+                                            <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                                            @endif
+                                        </ul>
                                     <ul class="job-other-info">
                                         @foreach (config('custom.type_work') as $value)
                                             @if($value['id'] == $item->type_work)
@@ -224,13 +228,13 @@
                                     @if (auth('candidate')->check())
                                         @if (!empty($job_short[$item->id]))
                                            @if ($job_short[$item->id]->job_post_id == $item->id)
-                                                <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                    class="bookmark-btn"><span class="flaticon-bookmark"
+                                                <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                                    class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                         style="color: #f7941d"></span></a>
                                             @endif
                                         @else
-                                            <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
-                                                class="bookmark-btn"><span class="flaticon-bookmark"
+                                            <a  data-id="{{$item->id}}" data-shortlistId=""
+                                                class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                     style="color: black"></span></a>
                                         @endif
                                     @else
@@ -263,7 +267,7 @@
                                 <div class="inner-box">
                                     <div class="content">
                                         <span class="company-logo"><img
-                                                src="{{ asset('storage/' . $item->company->logo) }}"
+                                                src="{{ asset('storage/images/company/' . $item->company->logo) }}"
                                                 alt=""></span>
                                         <h4 style="text-align: left;"><a
                                                 href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -276,7 +280,11 @@
                                             <li><span
                                                     class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
                                                 giờ</li>
-                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
+                                                @if($item->min_salary > 0 && $item->max_salary > 0)
+                                                    <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
+                                                @else
+                                                <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                                                @endif
                                         </ul>
                                         <ul class="job-other-info">
                                             @foreach (config('custom.type_work') as $value)
@@ -290,13 +298,13 @@
                                         @if (auth('candidate')->check())
                                             @if (!empty($job_short[$item->id]))
                                                 @if ($job_short[$item->id]->job_post_id == $item->id)
-                                                    <a href="{{ route('delete_shortlisted', ['id' => $job_short[$item->id]->id]) }}"
-                                                        class="bookmark-btn"><span class="flaticon-bookmark"
+                                                    <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                                        class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                             style="color: #f7941d"></span></a>
                                                 @endif
                                             @else
-                                                <a href="{{ route('shortlisted', ['id' => $item->id]) }}"
-                                                    class="bookmark-btn"><span class="flaticon-bookmark "
+                                                <a  data-id="{{$item->id}}" data-shortlistId=""
+                                                    class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
                                                         style="color: black"></span></a>
                                             @endif
                                         @else
@@ -309,12 +317,6 @@
                             </div>
                         @endforeach
                     </div>
-
-                    {{-- <div class="btn-box">
-                        <a href="{{ route('job') }}" class="theme-btn btn-style-one bg-blue"><span
-                                class="btn-title">Xem
-                                thêm</span></a>
-                    </div> --}}
                 </div>
                 @endif
             @endif
@@ -324,10 +326,8 @@
 @endsection
 @section('script')
 @parent
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script> 
+<script src="{{asset('js/client/shortlist.js')}}"></script>
 <script>
 $(document).ready(function($) {
     var engine1 = new Bloodhound({
@@ -358,6 +358,6 @@ $(document).ready(function($) {
         },
     ]);
 });
-
+updateShortList();
 </script>
 @endsection

@@ -3,7 +3,7 @@
     {{__('UB Work')}} | {{$data_job->title}}
 @endsection
 @section('content')
-    <section class="job-detail-section">
+    <section class="job-detail-section mt-5">
       <!-- Upper Box -->
       <div class="upper-box" style="background-image: url({{asset('storage/images/bg-4.png')}}) ">
         <div class="auto-container">
@@ -11,13 +11,17 @@
           <div class="job-block-seven">
             <div class="inner-box">
               <div class="content">
-                <span class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}"></span>
+                <span class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}"></span>
                 <h4><a href="{{route('job-detail', ['id' => $data_job->id])}}">{{$data_job->title}}</a></h4>
                 <ul class="job-info">
                   {{-- <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li> --}}
                   <li><span class="icon flaticon-map-locator"></span>{{$data_job->company->address}}</li>
-                  <li><span class="icon flaticon-clock-3"></span>{{$data_job->company->working_time}}</li>
+                  <li><span class="icon flaticon-clock-3"></span>{{$data_job->company->working_time}}h/ngày</li>
+                  @if($data_job->min_salary > 0 && $data_job->max_salary > 0)
                   <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
+                  @else
+                  <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                  @endif
                 </ul>
                 <ul class="job-other-info">
                   @foreach (config('custom.type_work') as $value)
@@ -37,22 +41,30 @@
                       <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
                     @else
-                      <a  @if(!empty($seeker->id)) href="{{route('applied', ['id' => $data_job->id])}}" @else href="{{route('CreateCV')}}" @endif class="theme-btn btn-style-one">Ứng tuyển ngay</a>
+                      @if(!empty($seeker->id))
+                      <a href="{{route('modal_selectCV')}}" data-id-job="{{$data_job->id}}" class="theme-btn btn-style-one call-modal">Ứng tuyển ngay</a>
+                      @else 
+                      <a href="{{route('createNew')}}" class="theme-btn btn-style-one">Ứng tuyển ngay</a>
+                      @endif
                     @endif
                 @else
-                  <a class="theme-btn btn-style-one" href="{{route('candidate.login')}}">Ứng tuyển ngay</a>
+                  <a class="theme-btn btn-style-one" href="{{route('candidate.login',['job_id'=>$data_job->id])}}">Ứng tuyển ngay</a>
                 @endif
-
                 @if (auth('candidate')->check())
-                  @if (!empty($idJobShort[$data_job->id]) )
-                    @if($idJobShort[$data_job->id]->job_post_id == $data_job->id)
-                      <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$data_job->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                    @if (!empty($idJobShort[$data_job->id]))
+                        @if ($idJobShort[$data_job->id]->job_post_id == $data_job->id)
+                            <a data-shortlistId="{{$idJobShort[$data_job->id]->id}}" data-id="{{$data_job->id}}"
+                                class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                    style="color: #f7941d"></span></a>
+                        @endif
+                    @else
+                        <a  data-id="{{$data_job->id}}" data-shortlistId=""
+                            class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                style="color: black"></span></a>
                     @endif
-                  @else
-                    <a href="{{route('shortlisted', ['id' => $data_job->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
-                  @endif
                 @else
-                    <a class="bookmark-btn" href="{{route('candidate.login')}}"><span class="flaticon-bookmark"></span></a>
+                
+                    <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
                 @endif
               </div>
             </div>
@@ -77,21 +89,16 @@
                   {!! $data_job->benefits !!}
                 </ul>
                 @endif
-                <h4>Kĩ năng và kinh nghiệm</h4>
+                <h4>Kinh nghiệm</h4>
                 <ul class="list-style-three">
-                  <li>Y/C: {!! $data_job->experience !!} {{ $data_job->experience ==0 ? "Không yêu cầu kinh nghiệm" : "năm kinh nghiệm"}}
+                  @foreach (config('custom.experience') as $value)
+                  @if($data_job->experience == $value['id'])
+                  <li>{{$value['name']}}</li>
+                  @endif
+                  @endforeach
                 </ul>
               </div>
 
-              <!-- Other Options -->
-              {{-- <div class="other-options">
-                <div class="social-share">
-                  <h5>Chia sẻ công việc</h5>
-                  <a href="#" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-                  <a href="#" class="twitter"><i class="fab fa-twitter"></i> Twitter</a>
-                  <a href="#" class="google"><i class="fab fa-google"></i> Google+</a>
-                </div>
-              </div> --}}
 
               <!-- Related Jobs -->
               <div class="related-jobs">
@@ -105,14 +112,18 @@
                     <div class="job-block">
                         <div class="inner-box">
                             <div class="content">
-                            <span class="company-logo"><img src="{{asset('storage/'.$item->company->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/images/company/'.$item->company->logo)}}" alt=""></span>
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
                                 {{-- <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li> --}}
                                 <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                 <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ/ngày</li>
-                                <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
-                            </ul>
+                                @if($item->min_salary > 0 && $item->max_salary > 0)
+                                <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($item->max_salary)}}</li>
+                                @else
+                                <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                                @endif
+                              </ul>
                             <ul class="job-other-info">
                                  @foreach (config('custom.type_work') as $value)
                                       @if($value['id'] == $item->type_work)
@@ -122,16 +133,22 @@
                                       @endif
                                   @endforeach
                             </ul>
-                           @if (auth('candidate')->check())
-                              @if (!empty($idJobShort[$item->id]) )
-                                @if($idJobShort[$item->id]->job_post_id == $item->id)
-                                  <a href="{{route('delete_shortlisted', ['id' => $idJobShort[$item->id]->id])}}" class="bookmark-btn" style="background-color: #f7941d;"><span class="flaticon-bookmark" style="color: white"></span></a>
+                            @if (auth('candidate')->check())
+                                @if (!empty($job_short[$item->id]))
+                                    @if ($job_short[$item->id]->job_post_id == $item->id)
+                                        <a data-shortlistId="{{$job_short[$item->id]->id}}" data-id="{{$item->id}}"
+                                            class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                                style="color: #f7941d"></span></a>
+                                    @endif
+                                @else
+                                    <a  data-id="{{$item->id}}" data-shortlistId=""
+                                        class="bookmark-btn btn-shortlisted"><span class="flaticon-bookmark"
+                                            style="color: black"></span></a>
                                 @endif
-                              @else
-                                <a href="{{route('shortlisted', ['id' => $item->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
-                              @endif
                             @else
-                              <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"></span></a>
+                                <button class="bookmark-btn"><span class="flaticon-bookmark"
+                                        style="color: black"></span></button>
+                                <a href="{{route('candidate.login')}}" class="bookmark-btn"><span class="flaticon-bookmark"  style="color: black"></span></a>
                             @endif
                             </div>
                         </div>
@@ -170,13 +187,12 @@
                       <li>
                         <i class="icon icon-salary"></i>
                         <h5>Lương:</h5>
+                        @if($data_job->min_salary > 0 && $data_job->max_salary > 0)
                          <span>{{number_format($data_job->min_salary, 0, ',', '.')}} - {{number_format($data_job->max_salary, 0, ',', '.')}} đ</span>
-                      </li>
-                      <li>
-                        <i class="icon icon-rate"></i>
-                        <h5>Trung bình:</h5>
-                         <span>{{number_format($data_job->min_salary/8/27, 0, ',', '.')}} - {{number_format($data_job->max_salary/8/27, 0, ',', '.')}} đ / giờ</span>
-                      </li>
+                         @else
+                         <li>Thỏa thuận</li>
+                         @endif
+                        </li>
                     </ul>
                   </div>
 
@@ -191,20 +207,24 @@
                   </div> --}}
 
                   <!-- Job Skills -->
-                  {{-- <h4 class="widget-title">Kĩ năng</h4> --}}
+                  <h4 class="widget-title">Kỹ năng</h4>
+                  
                   <div class="widget-content">
                     <ul class="job-skills">
-                      {{-- @foreach($job_skills as $item)
-                      <li><a href="#">{{$item->name}}</a></li>
-                      @endforeach --}}
+                      @foreach($skills as $item)
+                      @if(in_array($item['id'],$skillActive))
+                      <li><a href="javascript:void(0)">{{$item->name}}</a></li>
+                      @endif
+                      @endforeach
                     </ul>
                   </div>
+
                 </div>
 
                 <div class="sidebar-widget company-widget">
                   <div class="widget-content">
                     <div class="company-title">
-                      <div class="company-logo"><img src="{{asset('storage/'.$data_job->company->logo)}}" alt=""></div>
+                      <div class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
                       <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">Thông tin công ty</a>
                     </div>
@@ -213,8 +233,6 @@
                       <li>Loại hình doanh nghiệp: <span>{{$data_job->company->company_model}}</span></li>
                       {{-- <li>Quy mô: <span>{{$data_job->company->company_size}}</span></li> --}}
                       <li>Thành lập: <span>{{date('d-m-Y', strtotime($data_job->company->founded_in))}}</span></li>
-                      <li>Số điện thoại: <span>{{$data_job->company->phone}}</span></li>
-                      <li>Email: <span>{{$data_job->company->email}}</span></li>
                       <li>Địa điểm: <span>{{$data_job->company->address}}</span></li>
                       {{-- <li>Truyền thông xã hội:
                         <div class="social-links">
@@ -234,4 +252,27 @@
         </div>
       </div>
     </section>
+@endsection
+@section('script')
+  @parent
+  <script src="{{asset('js/client/shortlist.js')}}"></script>
+  <script>
+    updateShortList();
+    $('.call-modal2').on('click', function(event) {
+	  event.preventDefault();
+	  this.blur();
+    var id = $(this).data('id-job');
+    console.log(id);
+	  $.get(this.href, function(html) {
+          $(html).appendTo('body').modal({
+            closeExisting: true,
+          fadeDuration: 300,
+          fadeDelay: 0.15
+          });
+        });
+      });
+  </script>
+  <script>
+    
+  </script>
 @endsection
