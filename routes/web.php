@@ -63,6 +63,7 @@ Route::get('/shortlisted-list-company', 'Client\ShortlistCompanyController@short
 Route::get('/delete-shortlisted-company/{id}', 'Client\ShortlistCompanyController@destroy')->name('delete_shortlisted_company');
 
 Route::get('/applied/{id}', 'Client\JobPostActivitiesController@applied')->name('applied');
+Route::POST('/appliedAJAX', 'Client\JobPostActivitiesController@appliedAjax')->name('appliedAJAX');
 Route::get('/jobApply', 'Client\JobPostActivitiesController@jobApply')->name('jobApply');
 Route::get('/delete-applied-job/{id}', 'Client\JobPostActivitiesController@destroy')->name('delete_applied_jobs');
 
@@ -76,7 +77,6 @@ Route::get('/candi-detail', function () {
 //Client/company
 Route::get('/company-list', 'Client\CompanyController@index')->name('company-list');
 Route::post('/company-filter', 'Client\CompanyController@filter')->name('company-filter');
-Route::get('/company-rate/{id}', 'Client\CompanyController@getRate')->name('getRate');
 
 Route::get('/company-detail/{id}', 'Client\CompanyController@detail')->name('company-detail');
 Route::get('/company-feedback/{id}', 'Client\CompanyController@feedback')->name('feedback');
@@ -159,3 +159,5 @@ Route::get('vnpay_ipn', 'Client\CoinController@vnpay_ipn')->name('vnpay_ipn');
 Route::get('historyPayment', 'Client\CoinController@historyPayment')->name('historyPayment');
 
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
+
+Route::get('modal_selectCV', 'Client\JobController@modal_selectCV')->name('modal_selectCV');

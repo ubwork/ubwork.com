@@ -22,7 +22,8 @@ class JobPostActivities extends Model
         'created_at',
         'updated_at',
         'time',
-        'is_function'
+        'is_function',
+        'introduct'
     ];
     public function company()
     {

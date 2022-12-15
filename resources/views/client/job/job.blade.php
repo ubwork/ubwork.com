@@ -88,7 +88,7 @@ footer .heart {
             <div class="title-outer">
                 <h1>Danh sách công việc </h1>
                 <ul class="page-breadcrumb">
-                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="{{route('index')}}">Trang chủ</a></li>
                     <li>Công việc</li>
                 </ul>
             </div>
@@ -154,7 +154,7 @@ footer .heart {
                                         <div class="inner-box" style="height:200px">
                                             <div class="content">
                                                 <span class="company-logo"><img
-                                                        src="{{ asset('storage/' . $item->company->logo) }}"
+                                                        src="{{ asset('storage/images/company/' . $item->company->logo) }}"
                                                         alt=""></span>
                                                 <h4><a
                                                         href="{{ route('job-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -260,7 +260,7 @@ footer .heart {
                                         <div class="inner-box">
                                             <div class="content">
                                                 <span class="company-logo"><img
-                                                        src="storage/`+job.company.logo+`"
+                                                        src="storage/images/company/`+job.company.logo+`"
                                                         alt=""></span>
                                                 <h4><a
                                                         href="{{url('/job-detail/`+job.id+`')}}">`+job.title+`</a>
