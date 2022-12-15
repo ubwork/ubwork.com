@@ -193,7 +193,7 @@
                       <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
                         <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-mail-bulk"></i>
                         <h5>Email:</h5>
-                        ***********************
+                        **************
                       </a>
                     </li>
                     @endif
@@ -203,7 +203,7 @@
                       <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
                         <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-phone"></i>
                         <h5>Số điện thoại:</h5>
-                        +**************
+                        +**********
                       </a>
                     </li>
                     @endisset
