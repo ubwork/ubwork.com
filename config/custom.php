@@ -61,4 +61,14 @@ return [
         ['id'=>'Trung tâm đào tạo','name'=>'Trung tâm đào tạo'],
         ['id'=>'Du học','name'=>'Du học'],
     ],
+    'marital' => [
+        ['id'=>'Độc thân', 'name'=> 'Độc thân'],
+        ['id'=>'Đã kết hôn','name' => 'Đã kết hôn'],
+        ['id'=>'Hẹn hò','name' => 'Hẹn hò'],
+        ['id'=>'Tìm hiểu','name' => 'Tìm hiểu'],
+        ['id'=>'Đã đính hôn','name' => 'Đã đính hôn'],
+        ['id'=>'Đã ly thân','name' => 'Đã ly thân'],
+        ['id'=>'Đã ly hôn','name' => 'Đã ly hôn'],
+        ['id'=>'Góa','name' => 'Góa'],
+    ],
 ];
