@@ -152,14 +152,14 @@
           <div class="sidebar-column col-lg-3 col-md-12 col-sm-12">
             <aside class="sidebar">
 
-              <div class="sidebar-widget">
+              <div class="sidebar-widget"  style="word-break:break-word;">
                 <div class="widget-content">
                   <ul class="job-overview">
                     @if(!empty($data->total_exp))
                     <li>
                       <i class="icon icon-calendar"></i>
                       <h5>Kinh nghiệm:</h5>
-                      <span>{{$data->total_exp}} Năm</span>
+                      <span>{{floor($data->total_exp) == 0 ? 'chưa có kinh nghiệm' : floor($data->total_exp) .' Năm' }}</span>
                     </li>
                     @endif
                     @if(!empty($data['candidate']->birthday))
@@ -187,6 +187,27 @@
                       @endif
                     </li>
                     @endisset
+
+                    @if(!empty($data->email))
+                    <li>
+                      <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
+                        <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-mail-bulk"></i>
+                        <h5>Email:</h5>
+                        ***********************
+                      </a>
+                    </li>
+                    @endif
+
+                    @isset($data->phone)
+                    <li>
+                      <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
+                        <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-phone"></i>
+                        <h5>Số điện thoại:</h5>
+                        +**************
+                      </a>
+                    </li>
+                    @endisset
+
                   </ul>
                 </div>
               </div>
@@ -248,7 +269,7 @@ $( document ).ready(function() {
                                 type: 'success',
                                 text: results.message,
                                 showConfirmButton: false,
-                                timer: 3500
+                                timer: 1500
                             }, setTimeout(function() {
                               //  tr.remove();
                             }, 500)).then(function() {
@@ -260,7 +281,7 @@ $( document ).ready(function() {
                                 type: 'error',
                                 icon: 'error',
                                 text: results.message,
-                                timer: 3500
+                                timer: 1500
                             });
 
                         }
