@@ -10,7 +10,7 @@
                         </div>
                         <p class="phone-num"><span>Hotline: </span><a href="">0395167635</a></p>
                         <p class="address">Trịnh Văn Bô
-                            <br><a href="" class="email">datmv202@gmail.com</a>
+                            <br><a href="" class="email">ubworksuperjob@gmail.com</a>
                         </p>
                     </div>
                 </div>
@@ -23,7 +23,9 @@
                                 <div class="widget-content">
                                     <ul class="list">
                                         <li><a href="{{route('index')}}">Trang chủ</a></li>
-                                        <li><a href="">Liên hệ</a></li>
+                                        <li><a href="tel:0395167635">Liên hệ</a></li>
+                                        <li><a target="_blank" href="https://www.facebook.com/ubwork.it/">Fanpage</a></li>
+                                        <li><a target="_blank" href="https://www.facebook.com/groups/2286082138215440">Group</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -37,6 +39,7 @@
                                     <ul class="list">
                                         <li><a href="{{route('job')}}">Danh sách công việc</a></li>
                                         <li><a href="{{route('company-list')}}">Danh sách công ty</a></li>
+                                        <li><a href="{{route('job')}}">Việc làm</a></li>
                                         <li><a href="{{route('jobspeed')}}">Tìm việc nhanh</a></li>
     
                                     </ul>
@@ -46,7 +49,7 @@
 
                         <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
-                                <h4 class="widget-title">Chính sách</h4>
+                                <h4 class="widget-title">Thông tin</h4>
                                 <div class="widget-content">
                                     <ul class="list">
                                         <li><a href="#">Chính sách bảo mật</a></li>

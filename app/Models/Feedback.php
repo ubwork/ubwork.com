@@ -59,5 +59,25 @@ class Feedback extends Model
         return $list;
 
     }
+    
+    public function getFeedbackCompany($id){
+        $query=DB::table($this->table)
+        ->select($this->fillable)
+        ->where('company_id', $id)
+        ->where('is_candidate', 0);
+        $list=$query->paginate(5);
+        return $list;
+
+    }
+
+    public function getCountFeedbackCompany($id){
+        $query=DB::table($this->table)
+        ->select($this->fillable)
+        ->where('company_id', $id)
+        ->where('is_candidate', 0);
+        $list=$query->count();
+        return $list;
+
+    }
 
 }

@@ -98,7 +98,7 @@
                         </div>
 
                         <div class="form-group col-lg-6 col-md-12">
-                            <button type="submit" class="theme-btn btn-style-one">Save</button>
+                            <button type="submit" class="theme-btn btn-style-one">Gửi</button>
                             <a style="margin-left:30px" href="{{route('company.detail-candidate.index', ['id' => $data->id ])}}" class="btn btn-theme-btn btn-style-one">Quay lại</a>
                         </div>
                     </div>

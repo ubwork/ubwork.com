@@ -34,7 +34,7 @@
                   @endif
                 </div>
                 <div class="form-group col-lg-6 col-md-12">
-                    <label>Giấy phép kinh doanh / Giấy ủy quyền / Thẻ nhân viên</label>    
+                    <label>Giấy phép kinh doanh / Giấy ủy quyền</label>    
                 </div>
                   
                   <div class="uploading-outer">
@@ -48,9 +48,13 @@
                   </div>
 
                 <input type="hidden" name="image_paper_old" value="{{$data->image_paper}}">
-                    <div class="form-group col-lg-6 col-md-12">
-                      <button class="theme-btn btn-style-one">Lưu</button>
-                    </div>
+                @if($data->status == 1)
+                    
+                @else
+                <div class="form-group col-lg-6 col-md-12">
+                  <button class="theme-btn btn-style-one">Lưu</button>
+                </div>
+                @endif
                     {{-- <div class="form-group col-lg-6 col-md-12">
                       <label>Tài liệu hướng dẫn</label>    
                   </div> --}}
