@@ -31,6 +31,13 @@ class JobController extends Controller
         $maJor = Major::all();
         return view('client.home', compact('data', 'maJor'));
     }
+    
+    public function modal_selectCV() {
+        $id_candidate = auth('candidate')->user()->id;
+        $data = SeekerProfile::where('candidate_id', $id_candidate)->paginate(10);
+        return view('client.job.modal',compact('data'));
+    }
+
     public function job(Request $request)
     {
         $job_short = [];
@@ -133,6 +140,10 @@ class JobController extends Controller
                 }
             }
         }
+        $skills = Skill::all();
+        $jobPost = JobPost::with('skills')->find($id);
+        $skillActive = $jobPost->skills->pluck('id')->toArray();
+
         $data_job_relate = JobPost::where('major_id', $data_job->major_id)
             ->where('id', '!=', $data_job->id)->take(3)->get();
 
@@ -142,7 +153,9 @@ class JobController extends Controller
             'maJor',
             'idJobApplied',
             'idJobShort',
-            'seeker'
+            'seeker',
+            'skills',
+            'skillActive'
         ));
     }
     public function searchs(Request $request)

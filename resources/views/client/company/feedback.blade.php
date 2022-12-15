@@ -11,22 +11,24 @@
                 <div class="job-block-seven">
                     <div class="inner-box">
                         <div class="content">
-                            <span class="company-logo"><img src="{{asset('storage/images/company/'.$company_detail->logo)}}" alt=""></span>
+                            <span class="company-logo"><img src="{{asset('storage/'.$company_detail->logo)}}" alt=""></span>
                             <h4><a href="#">{{$company_detail->company_name}}</a></h4>
                             <ul class="job-info">
                                 <li><span class="icon flaticon-map-locator"></span> {{$company_detail->address}}</li>
                                 <li><span class="icon flaticon-briefcase"></span> {{$company_detail->company_model}}</li>
+                                <li><span class="icon flaticon-telephone-1"></span>{{$company_detail->phone}}</li>
+                                <li><span class="icon flaticon-mail"></span>{{$company_detail->email}}</li>
                             </ul>
                             <ul class="job-other-info">
-                                <li class="time">Công việc – {{count($company_job)}}</li>
+                                <li class="time">Open Jobs – </li>
                             </ul>
                         </div>
 
                         <div class="btn-box">
                             @if (auth('candidate')->check()) 
-                                <a href="{{route('company-detail', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Quay lại</a>
+                                <a href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Feedback</a>
                             @else
-                                <button class="theme-btn btn-style-one">Quay lại</button>
+                                <button class="theme-btn btn-style-one">Feedback</button>
                             @endif
 
                             @if (auth('candidate')->check()) 
@@ -50,7 +52,7 @@
                         <!-- Input -->
                         <div class="form-group col-lg-12 col-md-3">
                             <label>Tiêu đề</label>
-                            <input type="text" name="title" placeholder="Tóm tắt đánh giá của bạn ví dụ: 'công ty chất' hoặc 'sếp tốt...'" value="">
+                            <input type="text" name="title" placeholder="Tóm tắt đánh giá của bạn ví dụ: 'công ty ảo' hoặc 'bạn hr quá xinh đẹp'" value="">
                             @error('title')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -107,7 +109,7 @@
                       </div>
 
                       <div class="form-group col-lg-6 col-md-12">
-                        <button type="submit" class="theme-btn btn-style-one">Gửi</button>
+                        <button type="submit" class="theme-btn btn-style-one">Save</button>
                       </div>
                     </div>
                   </form>
@@ -126,7 +128,7 @@
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không sử dụng từ ngữ mang ý </strong><span class="colored">xúc phạm, miệt thị</span></li>
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không cung cấp</strong><span class="colored"> thông tin cá nhân</span></li>
                                     <li class="success" style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;">Không cung cấp<strong>thông tin bảo mật, </strong><span class="colored">bí mật kinh doanh của công ty</span></li>
-                                    <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"><strong>Cảm ơn bạn đã đưa ra những đánh giá chân thực nhất. </strong> </li>
+                                    <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"><strong>Cảm ơn bạn đã đưa ra những đánh giá chân thực nhất. </strong> applied for a job <span class="colored">Xem thêm thông tin chi tiết về Hướng Dẫn & Điều Kiện về đánh giá</span></li>
                                     </ul>
                                 </div>
                                 </div>

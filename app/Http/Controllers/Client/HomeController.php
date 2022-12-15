@@ -22,7 +22,7 @@ class HomeController extends Controller
     {
         $count = [];
         $job_short = [];
-        $data_job_type = Major::all();
+        $data_job_type = Major::paginate(6);
         $dataYour = [];
         $job_short = [];
         $data = [];
