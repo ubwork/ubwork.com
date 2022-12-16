@@ -95,7 +95,9 @@ class DetailCandidateController extends Controller
                 return response()->json([
                     'success'=> true,
                     'message' => 'Mở khóa thành công!',
-                    'nameSeeker' => $data->name
+                    'nameSeeker' => $data->name,
+                    'openEmail' => $data->email,
+                    'openPhone' => $data->phone,
                 ]);
             }
         }
