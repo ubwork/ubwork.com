@@ -22,7 +22,7 @@
                 <td>
                     {{config('custom.level')[$item->level]['name']}}
                 </td>
-                <td>Lượt ứng tuyển: {{ $item->activities->count() }} <br> Ngày hết hạn:
+                <td>Lượt ứng tuyển: {{ $item->activities->count() > 0 ? $item->activities[0]->count : 0 }} <br> Ngày hết hạn:
                     {{ date_format(new DateTime($item->end_date), 'd/m/Y') }} </td>
                 <td class="status">{{ $item->status }}</td>
                 <td>

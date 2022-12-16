@@ -3,7 +3,11 @@
 {{__('UB Work')}} | {{$title}}
 @endsection
 @section('content')
-
+<style>
+  .btn_lock {
+    display: none;
+  }
+</style>
 <section class="candidate-detail-section style-three" style=" background-color: white;">
     <div class="upper-box mb-0">
       <div class="auto-container">
@@ -30,7 +34,7 @@
             </h4>
             <span class="designation">{!!$data['major']->name ?? ''!!}</span>
             <div class="content">
-              <ul class="candidate-info justify-content-center">
+              <ul class="candidate-info justify-content-center" style="max-width: 50%;">
                 @if ($data->address ?? '')
                 <li><span class="icon flaticon-map-locator"> </span>{{$data->address ?? ''}}</li>
                 @endif
@@ -39,7 +43,9 @@
                 @endif
               </ul>
               <div class="btn-box">
-                <div data-url="{{$data['candidate']->id}}" data-coin="{{$data->coin}}" data-id="{{$data->id}}" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Mở khóa</div>
+                <a id="unlockf" href="{{route('company.feedback',['id' => $data->candidate_id])}}" style="width: 49%;cursor: pointer; margin-right:30px" class="btn_lock theme-btn btn-style-one">Đánh giá</a>
+                <a id="unlock" href="{{asset('upload/cv/'.$data->path_cv)}}" target="_blank" style="width: 49%;cursor: pointer;" class="btn_lock theme-btn btn-style-one">Tải CV</a>
+                <div id="lock" data-url="{{$data['candidate']->id}}" data-coin="{{$data->coin}}" data-id="{{$data->id}}" style="width: 49%;cursor: pointer;" class="btn_unlock theme-btn btn-style-one">Mở khóa</div>
               </div>
             </div>
           </div>
@@ -193,7 +199,7 @@
                       <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
                         <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-mail-bulk"></i>
                         <h5>Email:</h5>
-                        **************
+                        <span id="openEmail">**************</span>
                       </a>
                     </li>
                     @endif
@@ -203,7 +209,7 @@
                       <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
                         <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-phone"></i>
                         <h5>Số điện thoại:</h5>
-                        +**********
+                        +<span id="openPhone">**********</span>
                       </a>
                     </li>
                     @endisset
@@ -274,6 +280,12 @@ $( document ).ready(function() {
                               //  tr.remove();
                             }, 500)).then(function() {
                               $('#nameSeeker').text(results.nameSeeker);
+                              $('#openEmail').text(results.openEmail);
+                              $('#openPhone').text(results.openPhone);
+                              $('#lock').remove();
+                              $('#unlock').css('display', 'block');
+                              $('#unlockf').css('display', 'block');
+                              $
                             });
                         } else {
                             Swal.fire({
