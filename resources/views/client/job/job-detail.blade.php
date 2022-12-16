@@ -3,6 +3,11 @@
     {{__('UB Work')}} | {{$data_job->title}}
 @endsection
 @section('content')
+<style>
+  iframe {
+      width: 100% !important;
+  }
+</style>
     <section class="job-detail-section mt-5">
       <!-- Upper Box -->
       <div class="upper-box" style="background-image: url({{asset('storage/images/bg-4.png')}}) ">
@@ -155,6 +160,30 @@
                     </div>
                 @endforeach
               </div>
+              <div class="related-jobs">
+                <div class="title-box">
+                  <h3>Giới thiệu về công ty</h3>
+                </div>
+
+                <!-- Job Block -->
+                @if(!empty($data_job->company->about))
+                    <div class="job-block">
+                        <div class="inner-box">
+                            <div class="content">
+                              {!! $data_job->company->about !!}
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    <div class="job-block">
+                      <div class="inner-box">
+                          <div class="content">
+                            Chưa có thông tin
+                          </div>
+                      </div>
+                  </div>
+                  @endif
+              </div>
             </div>
 
             <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
@@ -226,7 +255,7 @@
                     <div class="company-title">
                       <div class="company-logo"><img src="{{asset('storage/images/company/'.$data_job->company->logo)}}" alt=""></div>
                       <h5 class="company-name">{{$data_job->company->company_name}}</h5>
-                      <a href="{{route('company-detail', ['id' => $data_job->id])}}" class="profile-link">Thông tin công ty</a>
+                      <a target="_blank" href="{{route('company-detail', ['id' => $data_job->company->id])}}" class="profile-link">Thông tin công ty</a>
                     </div>
 
                     <ul class="company-info">
@@ -243,9 +272,36 @@
                         </div>
                       </li> --}}
                     </ul>
+                    @if(!empty($data_job->company->link_web))
                     <div class="btn-box"><a target="_blank" href="{{$data_job->company->link_web}}" class="theme-btn btn-style-three">Website công ty</a></div>
+                  @endif
                   </div>
                 </div>
+
+                @if(!empty($data_job->company->map))
+                    <div class="sidebar-widget">
+                    <!-- Map Widget -->
+                    <h4 class="widget-title">Địa điểm của {{$data_job->company->company_name}}</h4>
+                    <div class="widget-content">
+                        <div class="map-outer mb-0">
+                            @php echo $data_job->company->map @endphp
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                @if(!empty($data_job->company->iframe_ytb))
+                    <div class="sidebar-widget">
+                    <!-- Map Widget -->
+                    <h4 class="widget-title">Video của {{$data_job->company->company_name}}</h4>
+                    <div class="widget-content">
+                        <div class="map-outer mb-0">
+                            @php echo $data_job->company->iframe_ytb @endphp
+                        </div>
+                    </div>
+                </div>
+                @endif
+
               </aside>
             </div>
           </div>
