@@ -15,7 +15,7 @@
                 </td>
                 <td>{{ $item->phone }} <br>{{ $item->email }}
                 </td>
-                <td><a target="_blank" href="{{'/upload/cv/'.$item->path_cv}}">Chi tiết</a></td>
+                <td><a class="check_see" data-id-cv="{{$item->id}}" target="_blank" href="{{'/upload/cv/'.$item->path_cv}}">Chi tiết</a></td>
             </tr>
         @endforeach
     </tbody>

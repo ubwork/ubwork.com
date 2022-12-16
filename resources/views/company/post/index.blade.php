@@ -1,5 +1,6 @@
 @extends('company.layout.app')
 @section('content')
+@if(auth('company')->user()->status != 0)
     <div class="row">
         <div class="col-lg-12">
             <!-- Ls widget -->
@@ -36,7 +37,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>'
+@else
+<span class="text-warning" style="font-weight: 900">Bạn cần chờ xét duyệt</span>
+@endif
         <!-- End Info Section -->
     @endsection
     @section('script')
