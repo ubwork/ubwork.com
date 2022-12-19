@@ -43,13 +43,15 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web','locale','auth')
                 ->prefix('admin')
                 ->name('admin.')
+		//->domain('admin.ubwork.me')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
 
             Route::middleware('web','auth.company')
                 ->prefix('company')
+		        // ->domain('company.ubwork.me')
                 ->name('company.')
-                ->namespace($this->namespace)
+               ->namespace($this->namespace)
                 ->group(base_path('routes/company.php'));
         });
     }

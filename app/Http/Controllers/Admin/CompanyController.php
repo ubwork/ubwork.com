@@ -8,6 +8,10 @@ use App\Models\Company;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\Shortlist;
+use App\Models\Shortlisted;
+use App\Models\JobPost;
+use App\Models\JobPostActivities;
 
 class CompanyController extends Controller
 {
@@ -108,6 +112,7 @@ class CompanyController extends Controller
 
     public function destroy($id)
     {
+        JobPost::where('company_id',$id)->delete();
         Company::where('id', $id)->delete();
         return response()->json(['success'=>'Xóa thành công!']);
     }

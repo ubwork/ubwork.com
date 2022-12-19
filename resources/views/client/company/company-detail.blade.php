@@ -161,6 +161,7 @@
 @section('script')
   @parent
   <script src="{{asset('js/paginate.js')}}"></script>
+  <script src="{{asset('js/client/shortlist.js')}}"></script>
   <script>
     $(function() {
         $(document).on("click",".pagination li a,#button_search", function(e) {
@@ -174,5 +175,6 @@
             });
             return false;
     })})
+    updateShortList();
   </script>
 @endsection

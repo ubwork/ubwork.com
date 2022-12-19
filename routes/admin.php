@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
+Route::get('', function () {
+    return redirect()->route('admin.dashboard');
+});
+Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 Route::get('/logout', ['as'=>'logout','uses'=> 'Admin\LoginController@getLogOut']);
 
 Route::resource('user', 'Admin\UserController');
