@@ -125,7 +125,7 @@
                                     <ul class="notification-list">
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không sử dụng từ ngữ mang ý </strong><span class="colored">xúc phạm, miệt thị</span></li>
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"></span><strong>Không cung cấp</strong><span class="colored"> thông tin cá nhân</span></li>
-                                    <li class="success" style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;">Không cung cấp<strong>thông tin bảo mật, </strong><span class="colored">bí mật kinh doanh của công ty</span></li>
+                                    <li class="success" style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;">Không cung cấp <strong>thông tin bảo mật, </strong><span class="colored">bí mật kinh doanh của công ty</span></li>
                                     <li style="padding-left: 0px; font-size: 15px;line-height: 25px; color: #696969; font-weight: 400;min-height: 35px;margin-bottom: 0px;"><strong>Cảm ơn bạn đã đưa ra những đánh giá chân thực nhất. </strong> </li>
                                     </ul>
                                 </div>

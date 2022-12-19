@@ -47,10 +47,10 @@
                             <div class="file-edit-box div_cv{{$item->id}}" style=" height: 130px ;background: {{$item->is_active == 1 ? 'antiquewhite' : ''}}" >
                                 <div class="edit-btns ml-0">
                                     @if(!empty($item->path_cv))
-                                    <a style="margin-right: 5px" target="_blank"
-                                        href="upload/cv/{{ $item->path_cv }}"><button><span class="la la-eye"></span></button></a>
+                                    <a style="margin-right: 5px" onclick="newTab(upload/cv/{{ $item->path_cv }})"
+                                        ><button><span class="la la-eye"></span></button></a>
                                     @endif
-                                    <a href="{{ route('CreateCV', ['idsee' => $item->id]) }}" target="_blank"><button><span class="la la-pencil"></span></button></a>
+                                    <a   onclick="{{ route('CreateCV', ['idsee' => $item->id]) }}"><button><span class="la la-pencil"></span></button></a>
                                 </div>
                                 <small style="-webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box; overflow: hidden; text-align: center;">CV-{{$item->name}}</small>
                                 <div class="form-check form-check-inline mt-3" data-toggle="tooltip" data-placement="bottom" title="Chọn cv">
@@ -149,5 +149,8 @@
             });
             
         })
+        function newTab(url) {
+            window.open(url, '_blank');
+        }
     </script>
   </div>

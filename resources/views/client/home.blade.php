@@ -196,6 +196,7 @@
                 <div class="row wow fadeInUp mt-3">
                     <!-- Job Block -->
                     @foreach ($data as $item)
+                        @if ($item->company)
                         <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
@@ -245,6 +246,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     @endforeach
                 </div>
 
