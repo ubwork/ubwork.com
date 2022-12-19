@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function getLogin()
     {
         if (auth('company')->check()) {
-            Session::flash('Account is logged in');
+            Session::flash('error', 'Tài khoản đã login');
             return redirect()->route('company.home');
         }
         return view('company.login.index');

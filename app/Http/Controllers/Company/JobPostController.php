@@ -80,7 +80,7 @@ class JobPostController extends Controller
         return view('company.post.edit',$this->v);
     }
 
-    public function update(Request $request, $id)
+    public function update(JobPostRequest $request, $id)
     {
         try {
             $model = JobPost::find($id);
