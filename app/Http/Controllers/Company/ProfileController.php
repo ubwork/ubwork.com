@@ -17,8 +17,7 @@ class ProfileController extends Controller
         $title = "Sửa thông tin";
         $activeRoute = "profile";
         if (is_null($data)) {
-            Session::flash('message', trans('system.have_an_error'));
-            Session::flash('alert-class', 'danger');
+            
             return redirect()->route('company.profile');
         }
         $team = [
@@ -43,8 +42,7 @@ class ProfileController extends Controller
         $data = auth('company')->user()->id;
         $company = auth('company')->user();
         if (is_null($company)) {
-            Session::flash('message', trans('system.have_an_error'));
-            Session::flash('alert-class', 'danger');
+            Session::flash('error', 'Không tồn tại công ty');
             return redirect()->route('company.profile');
         }
         $data = $request->all();
@@ -60,7 +58,7 @@ class ProfileController extends Controller
         $data['status'] = $company->status;
 
         $company->update($data);
-        Session::flash('message', "Cập nhật thành công");
+        Session::flash('success', "Cập nhật thành công");
         return redirect()->back();
     }
 

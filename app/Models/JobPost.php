@@ -40,7 +40,7 @@ class JobPost extends Model
     // }
     public function activities()
     {
-        return $this->hasMany(jobPostActivities::class, 'job_post_id')->selectRaw('job_post_id,count(*) as count')->where('is_function',0)->groupBy('job_post_id');
+        return $this->hasMany(JobPostActivities::class, 'job_post_id')->selectRaw('job_post_id,count(*) as count')->where('is_function',0)->groupBy('job_post_id');
     }
     public function seekerProfiles(){
         return $this->belongsToMany(SeekerProfile::class, 'job_post_activities', 'job_post_id', 'seeker_id')->withPivot('is_see');
