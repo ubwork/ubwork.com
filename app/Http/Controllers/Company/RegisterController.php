@@ -47,6 +47,7 @@ class RegisterController extends Controller
             $data['token'] = strtoupper(Str::random(10));
             $data['password'] = bcrypt($request->password);
             $data['status'] = 0;
+            $data['active'] = 0;
             if ($candidate = Company::create($data)) {
                 Mail::send('company.email.active-acc', compact('candidate'), function ($email) use ($candidate) {
                     $email->subject('UbWork - Xác nhận tài khoản');
@@ -56,7 +57,7 @@ class RegisterController extends Controller
             if ($users == null) {
                 return redirect()->route('company.register');
             } elseif ($users != null) {
-                Session::flash('success', 'Đăng ký thành công');
+                Session::flash('success', 'Đăng ký thành công vui lòng kiểm tra email để kích hoạt tài khoản!');
                 return redirect()->route('company.login');
             } else {
                 Session::flash('error', 'Lỗi đăng ký');
@@ -69,7 +70,7 @@ class RegisterController extends Controller
     {
         if ($candidate->token === $token) {
             $candidate->update([
-                'status' => 1,
+                'active' => 1,
                 'verify_time' => Carbon::now(),
                 'token' => null
             ]);

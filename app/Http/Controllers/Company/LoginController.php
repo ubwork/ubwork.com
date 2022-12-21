@@ -37,16 +37,15 @@ class LoginController extends Controller
         } else {
             $email = $request->input('email');
             $password = $request->input('password');
-            if (auth('company')->attempt(['email'=>$email, 'password'=>$password])){
-                $data = auth('company')->user();
-                auth('company')->login($data);
-                return redirect('company/dashboard');
+            if (auth('company')->attempt(['email'=>$email, 'password'=>$password, 'active' => 1])){
+                    $data = auth('company')->user();
+                    auth('company')->login($data);
+                    return redirect('company/dashboard');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng');
                 return redirect()->back()->withInput();
             }
         }
-
     }
     public function logOut(Request $request){
         auth('company')->logout();
