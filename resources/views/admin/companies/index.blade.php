@@ -102,6 +102,14 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
+              <form action="" class="form-inline float-right mr-3">
+                <div class="form-group">
+                    <input class="form-control" name="key" id="key" placeholder="Nhập tên công ty....">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -113,6 +121,7 @@
                   <th>Tên công ty</th>
                   <th>Ảnh</th>
                   <th>Email / Số điện thoại</th>
+                  <th>Số bài đăng</th>
                   <th>Đánh giá</th>
                   <th>Ảnh xác thực</th>
                   <th>Trạng thái</th>
@@ -138,7 +147,11 @@
                           <label for="">SĐT:</label>
                           <p>{{$item->phone}}</p>
                         </td>
-                        {{-- <td>{{$item->phone}}</td> --}}
+                        <td>
+                          @if(isset($bai_dang[$item->id]))
+                            <a href="{{route('admin.company.getListPost', ['id' => $item->id])}}"><?php echo $bai_dang[$item->id]->count(); ?> bài</a>              
+                          @endif
+                        </td>
                         <td>
                           {{-- hàm sử lý mảng --}}
                           <?php $k=[]?>
