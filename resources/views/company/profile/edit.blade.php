@@ -59,19 +59,21 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12">
-                                            <label>Email</label>
-                                            <input type="text"  name="email" value="{!! $data->email !!}">
+                                            <label>Email *</label>
+                                            <input type="text" readonly name="email" value="{!! $data->email !!}">
                                             @error('email')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                         <!-- Input -->
                                         <div class="form-group col-lg-6 col-md-12">
-                                            <label>Số điện thoại</label>
+                                            <label>Số điện thoại *</label>
+                                            @if ($data->phone)
+                                            <input type="text" readonly name="phone" value="{!! $data->phone !!}">
+                                            @else
                                             <input type="text" name="phone" value="{!! $data->phone !!}">
-                                            @error('phone')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                            @endif
+
                                         </div>
 
                                         <!-- Input -->
@@ -81,7 +83,11 @@
                                         </div>
                                         <div class="form-group col-lg-6 col-md-12">
                                             <label>Mã số thuế</label>
+                                            @if ($data->tax_code)
+                                            <input type="number" disabled name="tax_code" value="{!! $data->tax_code !!}">
+                                            @else
                                             <input type="number" name="tax_code" value="{!! $data->tax_code !!}">
+                                            @endif
                                         </div>
                                         <div class="form-group col-lg-6 col-md-12">
                                             <label>Lĩnh vực hoạt động</label>

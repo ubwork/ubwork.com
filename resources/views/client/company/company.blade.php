@@ -30,14 +30,14 @@
                             <div class="filter-block">
                                 <h4>Tìm theo tên</h4>
                                 <div class="form-group">
-                                    <input type="text" name="search" placeholder="Tên công ty">
+                                    <input type="text" name="search" value="{{ old('search') }}" placeholder="Tên công ty">
                                     <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
                             <div class="filter-block2">
                                 <h4>Quy mô công ty</h4>
                                 <div class="form-group">
-                                    <select name="size" class="chosen-select" style="border: 1px solid #ECEDF2 !importan;">
+                                    <select name="size" class="chosen-select" value="{{ old('size') }}" style="border: 1px solid #ECEDF2 !importan;">
                                         <option value="">Mời Chọn</option>
                                         <option value="1">1-50 Nhân viên</option>
                                         <option value="2" >50-100 Nhân Viên</option>
@@ -47,7 +47,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="filter-block2 mt-3" >
+                            {{-- <div class="filter-block2 mt-3" >
                                 <h4>Khu vực</h4>
                             <div class="form-group " >
                                 <select name="area" id="search-area" class="chosen-select">
@@ -57,11 +57,11 @@
                                     @endforeach
                                 </select>
                             </div>
-                            </div>
+                            </div> --}}
                             <div class="filter-block mt-3">
                                 <h4>Tìm theo địa điểm chi tiết</h4>
                                 <div class="form-group">
-                                    <input type="text" name="address" placeholder="Địa điểm chi tiết">
+                                    <input type="text" name="address" value="{{ old('address') }}" placeholder="Địa điểm chi tiết">
                                     <span class="icon flaticon-search-3"></span>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                                     <li><span class="icon flaticon-clock-3"></span> {{$w}}</li>
                                                     @endif
                                                 @endforeach
-                                                
+
                                             </ul>
                                         </div>
 
@@ -107,9 +107,11 @@
                             </div>
                         @endforeach
                         <!-- Listing Show More -->
-                        <div class="ls-show-more">
-                            {{ $data->links() }}
-                        </div>
+                        <nav class="ls-pagination">
+
+                                {{$data->links('company.layout.paginate')}}
+
+                           </nav>
                     </div>
                 </div>
             </div>
