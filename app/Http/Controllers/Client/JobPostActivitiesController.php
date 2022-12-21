@@ -67,22 +67,26 @@ class JobPostActivitiesController extends Controller
 
     public function jobApply()
     {
-        $id_user = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
-        $data = [];
-        $job_applied = [];
-        if (!empty($seeker)) {
+        if(auth('candidate')->check()) {
+            $id_user = auth('candidate')->user()->id;
+            $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
+            $data = [];
             $job_applied = [];
-            $data = JobPostActivities::where('seeker_id', $seeker->id)->paginate(8);
-            if (!empty($data)) {
-                foreach ($data as $item) {
-                    $id_post = $item->job_post_id;
-                    $job_applied[$id_post] = JobPost::where('id', $id_post)->first();
+            if (!empty($seeker)) {
+                $job_applied = [];
+                $data = JobPostActivities::where('seeker_id', $seeker->id)->where('is_function', 0)->paginate(8);
+                if (!empty($data)) {
+                    foreach ($data as $item) {
+                        $id_post = $item->job_post_id;
+                        $job_applied[$id_post] = JobPost::where('id', $id_post)->first();
+                    }
                 }
             }
+            $maJor = Major::all();
+            return view('client.candidate.applied-job', compact('data', 'job_applied', 'maJor'));
+        }else {
+            return Redirect()->route('candidate.login');
         }
-        $maJor = Major::all();
-        return view('client.candidate.applied-job', compact('data', 'job_applied', 'maJor'));
     }
     public function destroy($id)
     {

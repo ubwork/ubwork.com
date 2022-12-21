@@ -13,12 +13,16 @@ class ShortlistedController extends Controller
 
     public function shortlisted(Request $request, $id)
     {
-        $id_user = auth('candidate')->user()->id;
-        $shortlisted = new Shortlist;
-        $shortlisted->job_post_id = $request->id;
-        $shortlisted->candidate_id = $id_user;
-        $shortlisted->save();
-        return response()->json(['status'=>"success",'shortlistedId'=>$shortlisted->id]);
+        if (auth('candidate')->check()) {
+            $id_user = auth('candidate')->user()->id;
+            $shortlisted = new Shortlist;
+            $shortlisted->job_post_id = $request->id;
+            $shortlisted->candidate_id = $id_user;
+            $shortlisted->save();
+            return response()->json(['status'=>"success",'shortlistedId'=>$shortlisted->id]);
+        }else {
+            return Redirect()->route('candidate.login');
+        }
     }
     public function shortlisted_job()
     {
@@ -35,9 +39,11 @@ class ShortlistedController extends Controller
                     $major_job[$id_post] = Major::where('id',$job_short[$id_post]->major_id)->pluck('name')->toArray();
                 }
             }
+            $maJor = Major::all();
+            return view('client.candidate.shortlisted-job', compact('data', 'job_short', 'maJor','major_job'));
+        }else {
+            return Redirect()->route('candidate.login');
         }
-        $maJor = Major::all();
-        return view('client.candidate.shortlisted-job', compact('data', 'job_short', 'maJor','major_job'));
     }
     public function shortlisted_company()
     {
@@ -52,13 +58,19 @@ class ShortlistedController extends Controller
                     $job_short[$id_post] = JobPost::where('id', $id_post)->first();
                 }
             }
+            $maJor = Major::all();
+            return view('client.company.shortlisted-company', compact('data', 'job_short', 'maJor'));
+        }else {
+            return Redirect()->route('candidate.login');
         }
-        $maJor = Major::all();
-        return view('client.company.shortlisted-company', compact('data', 'job_short', 'maJor'));
     }
     public function destroy($id)
     {
-        Shortlist::destroy($id);
-        return response()->json(['status'=>"success"]);
+        if (auth('candidate')->check()){
+            Shortlist::destroy($id);
+            return response()->json(['status'=>"success"]);
+        }else {
+            return Redirect()->route('candidate.login');
+        }
     }
 }
