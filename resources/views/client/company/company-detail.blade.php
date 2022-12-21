@@ -42,7 +42,9 @@
                                     <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                                 @endif
                             @else
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                <a href="{{route('candidate.login')}}">
+                                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                </a>
                             @endif
                         </div>
                     </div>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\client\Upcv;
+use App\Http\Requests\Client\Upcv;
 use App\Models\Major;
 use App\Models\SeekerProfile;
 use Illuminate\Http\Request;

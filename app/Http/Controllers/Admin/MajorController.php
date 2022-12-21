@@ -71,18 +71,15 @@ class MajorController extends Controller
     public function update(Request $request, $id)
     {
         $method_route = 'admin.major.edit';
-
-        unset($params['cols']['_token']);
-        $model = new Major();
-        $obj = $model->find($id);
-        $params['cols']['id'] = $id;
-        $res = $model->saveUpdate($params);
+       
+        $model = Major::find($id);
+        $res = $model->update($request->all());
         if($res == null) {
             Session::flash('success', 'Cập nhật thành công!');
             return Redirect()->route($method_route, ['id' => $id]);
         }
         if ($res == 1) {
-            Session::flash('success', 'Cập nhật '.$obj->name .' thành công!');
+            Session::flash('success', 'Cập nhật thành công!');
             return Redirect()->route($method_route, ['id' => $id]);
         }else {
             Session::flash('error', 'Lỗi cập nhật!');

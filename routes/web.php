@@ -54,26 +54,23 @@ Route::get('/seeker', 'Client\SeekerController@index')->name('seeker');
 Route::post('/seeker', 'Client\SeekerController@store')->name('store');
 Route::get('/delete-seeker/{id}', 'Client\SeekerController@destroy')->name('delete_seeker');
 
-Route::get('/shortlisted-job', 'Client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
-Route::get('/shortlisted/{id}', 'Client\ShortlistedController@shortlisted')->name('shortlisted');
-Route::get('/delete-shortlisted/{id}', 'Client\ShortlistedController@destroy')->name('delete_shortlisted');
-
-Route::get('/shortlisted-company/{id}', 'Client\ShortlistCompanyController@shortlisted_company')->name('shortlisted_company');
-Route::get('/shortlisted-list-company', 'Client\ShortlistCompanyController@shortlisted')->name('shortlisted_list_company');
-Route::get('/delete-shortlisted-company/{id}', 'Client\ShortlistCompanyController@destroy')->name('delete_shortlisted_company');
-
-Route::get('/applied/{id}', 'Client\JobPostActivitiesController@applied')->name('applied');
-Route::POST('/appliedAJAX', 'Client\JobPostActivitiesController@appliedAjax')->name('appliedAJAX');
-Route::get('/jobApply', 'Client\JobPostActivitiesController@jobApply')->name('jobApply');
-Route::get('/delete-applied-job/{id}', 'Client\JobPostActivitiesController@destroy')->name('delete_applied_jobs');
-
-Route::get('/applied-job', function () {
-    return view('Client.candidate.applied-job');
+Route::middleware(['auth.candidate'])->group(function () {
+    
+    Route::get('/shortlisted-job', 'Client\ShortlistedController@shortlisted_job')->name('shortlisted_job');
+    Route::get('/shortlisted/{id}', 'Client\ShortlistedController@shortlisted')->name('shortlisted');
+    Route::get('/delete-shortlisted/{id}', 'Client\ShortlistedController@destroy')->name('delete_shortlisted');
+    
+    Route::get('/shortlisted-company/{id}', 'Client\ShortlistCompanyController@shortlisted_company')->name('shortlisted_company');
+    Route::get('/shortlisted-list-company', 'Client\ShortlistCompanyController@shortlisted')->name('shortlisted_list_company');
+    Route::get('/delete-shortlisted-company/{id}', 'Client\ShortlistCompanyController@destroy')->name('delete_shortlisted_company');
+    
+    Route::get('/applied/{id}', 'Client\JobPostActivitiesController@applied')->name('applied');
+    Route::POST('/appliedAJAX', 'Client\JobPostActivitiesController@appliedAjax')->name('appliedAJAX');
+    Route::get('/jobApply', 'Client\JobPostActivitiesController@jobApply')->name('jobApply');
+    Route::get('/delete-applied-job/{id}', 'Client\JobPostActivitiesController@destroy')->name('delete_applied_jobs');
 });
 
-Route::get('/candi-detail', function () {
-    return view('Client.candidate.candi-detail');
-});
+
 //Client/company
 Route::get('/company-list', 'Client\CompanyController@index')->name('company-list');
 Route::post('/company-filter', 'Client\CompanyController@filter')->name('company-filter');
