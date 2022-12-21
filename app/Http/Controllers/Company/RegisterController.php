@@ -69,7 +69,7 @@ class RegisterController extends Controller
     {
         if ($candidate->token === $token) {
             $candidate->update([
-                'status' => 2,
+                'status' => 3,
                 'verify_time' => Carbon::now(),
                 'token' => null
             ]);

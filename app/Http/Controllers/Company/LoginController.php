@@ -39,7 +39,7 @@ class LoginController extends Controller
             $password = $request->input('password');
             if (auth('company')->attempt(['email'=>$email, 'password'=>$password])){
                 $data = auth('company')->user();
-                if($data->status != 0){
+                if($data->status != 0 || $data->status != 2){
                     auth('company')->login($data);
                     return redirect('company/dashboard');
                 }else{
