@@ -39,14 +39,19 @@ class LoginController extends Controller
             $password = $request->input('password');
             if (auth('company')->attempt(['email'=>$email, 'password'=>$password])){
                 $data = auth('company')->user();
-                auth('company')->login($data);
-                return redirect('company/dashboard');
+                if($data->status != 0){
+                    auth('company')->login($data);
+                    return redirect('company/dashboard');
+                }else{
+                    auth('company')->logout();
+                    Session::flash('error', 'Tài khoản chưa được kích hoạt vui lòng kích hoạt tài khoản!');
+                    return redirect()->back()->withInput();
+                }
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng');
                 return redirect()->back()->withInput();
             }
         }
-
     }
     public function logOut(Request $request){
         auth('company')->logout();
