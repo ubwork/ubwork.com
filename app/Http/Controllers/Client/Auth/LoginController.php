@@ -20,9 +20,25 @@ class LoginController extends Controller
         if (!empty($job_id)) {
             Session::flash('job_id', $job_id);
         }
+        
         if (auth('candidate')->check()) {
             Session::flash(__('Account is logged in'));
             return Redirect::to('/');
+        }
+        if (session('link')) {
+            $myPath     = session('link');
+            $loginPath  = url('/login');
+            $previous   = url()->previous();
+    
+            if ($previous = $loginPath) {
+                session(['link' => $myPath]);
+            }
+            else{
+                session(['link' => $previous]);
+            }
+        }
+        else{
+             session(['link' => url()->previous()]);
         }
         return view('client.login.login');
     }
@@ -31,20 +47,21 @@ class LoginController extends Controller
     {
         $email = $request->input('email');
         $password = $request->input('password');
-
         if (auth('candidate')->attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
             $data = auth('candidate')->user();
             auth('candidate')->login($data);
             Session::flash('success', 'Đăng nhập thành công');
             if (Session::has('job_id') ) {
+                return redirect(session('link')); 
                 return redirect()->route('job-detail',Session::get('job_id'));
             }else{
+                return redirect(session('link')); 
                 return redirect()->back();
             }
         } elseif (auth('candidate')->attempt(['email' => $email, 'password' => $password, 'status' => 0])) {
             auth('candidate')->logout();
             Session::flash('error', 'Tài Khoản Của bạn chưa được kích hoạt. Vui lòng kích hoạt tài khoản');
-            return redirect()->back();
+            return redirect(session('link')); 
         } else {
             Session::flash('error', 'Email hoặc mật khẩu không đúng');
             return Redirect::to('/login');
