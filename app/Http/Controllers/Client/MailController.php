@@ -202,22 +202,25 @@ class MailController extends Controller
     }
     public function speedapply()
     {
-        $id_user = auth('candidate')->user()->id;
-        $seeker = SeekerProfile::where('candidate_id', $id_user)->pluck('id')->toArray();
-        // dd($seeker);
-        $data = [];
-        $job_applied = [];
-        if ($seeker != []) {
+       if(auth('candidate')->check()){
+            $id_user = auth('candidate')->user()->id;
+            $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
+            $data = [];
             $job_applied = [];
-            $data = JobPostActivities::whereIn('seeker_id', $seeker)->where('is_function', 1)->paginate(5);
-            if (!empty($data)) {
-                foreach ($data as $item) {
-                    $id_post = $item->job_post_id;
-                    $job_applied[$id_post] = JobPostActivities::where('id', $id_post)->get();
+            if (!empty($seeker)) {
+                $job_applied = [];
+                $data = JobPostActivities::where('seeker_id', $seeker->id)->where('is_function', 1)->paginate(8);
+                if (!empty($data)) {
+                    foreach ($data as $item) {
+                        $id_post = $item->job_post_id;
+                        $job_applied[$id_post] = JobPost::where('id', $id_post)->first();
+                    }
                 }
             }
+            $maJor = Major::all();
+            return view('client.job.job-speed', compact('data', 'job_applied', 'maJor'));
+       }else {
+            return Redirect()->route('candidate.login');
         }
-        $maJor = Major::all();
-        return view('client.job.job-speed', compact('data', 'job_applied', 'maJor'));
     }
 }
