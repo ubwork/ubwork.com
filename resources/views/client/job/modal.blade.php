@@ -47,7 +47,7 @@
                             <div class="file-edit-box div_cv{{$item->id}}" style=" height: 130px ;background: {{$item->is_active == 1 ? 'antiquewhite' : ''}}" >
                                 <div class="edit-btns ml-0">
                                     @if(!empty($item->path_cv))
-                                    <a style="margin-right: 5px" target="_blank" href="http://ubwork.me/upload/cv/{{ $item->path_cv }}"
+                                    <a style="margin-right: 5px" target="_blank" href="{{url('').'/upload/cv/'. $item->path_cv}}"
                                         ><button type="button"><span class="la la-eye"></span></button></a>
                                     @endif
                                     <a  target="_blank" href="{{ route('CreateCV', ['idsee' => $item->id]) }}"><button type="button"><span class="la la-pencil"></span></button></a>
