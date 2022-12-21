@@ -16,7 +16,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <h3 class="card-title float-right mr-3"><a href="{{route('admin.candidate.index')}}">{{__('Danh sách công ty')}} ➝</a></h3>
+              <h3 class="card-title float-right mr-3"><a href="{{route('admin.company.index')}}">{{__('Danh sách công ty')}} ➝</a></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

@@ -24,6 +24,13 @@ class CompanyController extends Controller
     {
         $this->v['feed']=Feedback::where('is_candidate',0)->get();
         $this->v['list'] = Company::paginate(9);
+        if(isset($this->v['list'])) {
+            foreach ($this->v['list'] as $comp) {
+                $this->v['bai_dang'][$comp->id] = JobPost::where('company_id', $comp->id)->get();
+            }
+        }
+        if ($key = request()->key);
+        $this->v['list'] = Company::where('company_name', 'like', '%' . $key . '%')->paginate(9);
         $this->v['title'] = "Danh sách công ty";
         return view("admin.companies.index", $this->v);
     }
@@ -130,5 +137,14 @@ class CompanyController extends Controller
         $val = $params['cols']['status'];
         Company::where('id', $id)->update(['status' => $val]);
         return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
+    }
+
+    public function getListPost($id) {
+        $this->v['title'] = "Danh sách bài đăng";
+        $this->v['bai_dang'] = JobPost::where('company_id', $id)->paginate(9);
+        if ($key = request()->key);
+        $this->v['bai_dang'] = JobPost::where('title', 'like', '%' . $key . '%')->where('company_id', $id)->paginate(9);
+
+        return view("admin.list-job.index", $this->v);
     }
 }
