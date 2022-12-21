@@ -20,26 +20,17 @@ class CompanyController extends Controller
     {
         $data = [];
         $job = [];
-        $data = Company::where('status', 1)->paginate(10);
-        // dd($data['id']);
-        $search = $request->search;
-        $size = $request->size;
-        $address = $request->address;
-        if (isset($search) && isset($size) && $address == null) {
-            $data = Company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->where('team', 'like', '%' . $size . '%')->paginate(10);
-        } elseif (isset($search) && $size == null && $address == null) {
-            $data = Company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->paginate(10);
-        } elseif ($search == null && isset($size) && $address == null) {
-            $data = Company::where('status', 1)->where('team', 'like', '%' . $size . '%')->paginate(10);
-        } elseif ($search == null && isset($address) && $size == null) {
-            $data = Company::where('status', 1)->where('address', 'like', '%' . $address . '%')->paginate(10);
-        } elseif (isset($search) && isset($address) && $size == null) {
-            $data = Company::where('status', 1)->where('company_name', 'like', '%' . $search . '%')->where('address', 'like', '%' . $address . '%')->paginate(10);
-        } elseif (isset($size) && isset($address) && $search == null) {
-            $data = Company::where('status', 1)->where('team', 'like', '%' . $size . '%')->where('address', 'like', '%' . $address . '%')->paginate(10);
-        } else {
-            $data = Company::where('status', 1)->paginate(10);
-        }
+        $data = Company::where('status', 1)->where(function ($q) use($request){
+            if (!empty($request->search)) {
+                $q->orwhere('company_name', 'LIKE', '%' . $request->search . '%');
+            }
+            if (!empty($request->address)) {
+                $q->orwhere('address', 'LIKE', '%' . $request->address . '%');
+            }
+            if (!empty($request->size)) {
+                $q->where('team', '=', $request->size);
+            }
+        })->paginate(10);
         foreach ($data as $item) {
             $job[$item->id] = JobPost::where('company_id', $item->id)->get();
         }
