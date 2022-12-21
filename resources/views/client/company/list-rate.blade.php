@@ -35,7 +35,7 @@
                         <a style="margin-right:10px;" href="{{route('company-detail', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Quay lại</a>
                             <a  href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Đánh giá</a>
                         @else
-                            <a href="{{route('login')}}" title="Đăng nhập để gửi đánh giá" class="theme-btn btn-style-one">Đánh giá</a>
+                            <a href="{{route('candidate.login')}}" title="Đăng nhập để gửi đánh giá" class="theme-btn btn-style-one">Đánh giá</a>
                         @endif
                         @if (auth('candidate')->check())
                             @if (!empty($idCompanyShort[$company_detail->id]) )
