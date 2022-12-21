@@ -31,7 +31,7 @@
                             @if (auth('candidate')->check())
                                 <a  href="{{route('feedback', ['id' => $company_detail->id])}}" class="theme-btn btn-style-one">Đánh giá</a>
                             @else
-                                <a href="{{route('login')}}" title="Đăng nhập để gửi đánh giá" class="theme-btn btn-style-one">Đánh giá</a>
+                                <a href="{{route('candidate.login')}}" title="Đăng nhập để gửi đánh giá" class="theme-btn btn-style-one">Đánh giá</a>
                             @endif
                             @if (auth('candidate')->check())
                                 @if (!empty($idCompanyShort[$company_detail->id]) )
@@ -42,7 +42,9 @@
                                     <a href="{{route('shortlisted_company', ['id' => $company_detail->id])}}"><button class="bookmark-btn"  ><span class="flaticon-bookmark" ></span></button></a>
                                 @endif
                             @else
-                                <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                <a href="{{route('candidate.login')}}">
+                                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                                </a>
                             @endif
                         </div>
                     </div>
