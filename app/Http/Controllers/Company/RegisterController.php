@@ -74,7 +74,7 @@ class RegisterController extends Controller
                 'token' => null
             ]);
             return redirect()->route('company.login')->with('success', 'Kích Hoạt Tài Khoản Thành Công');
-        } elseif ($candidate->token == null && $candidate->staus == 1) {
+        } elseif ($candidate->token == null && $candidate->staus != 0) {
             return view('email.404');
         } else {
             return view('email.404');
