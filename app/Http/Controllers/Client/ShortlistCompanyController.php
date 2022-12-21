@@ -32,9 +32,11 @@ class ShortlistCompanyController extends Controller
                     $com_short[$company_id] = Company::where('id', $company_id)->first();
                 }
             }
+            $maJor = Major::all();
+            return view('client.company.shortlisted-company', compact('data', 'com_short', 'maJor'));
+        }else {
+            return Redirect()->route('candidate.login');
         }
-        $maJor = Major::all();
-        return view('client.company.shortlisted-company', compact('data', 'com_short', 'maJor'));
     }
     // public function shortlisted_company()
     // {
