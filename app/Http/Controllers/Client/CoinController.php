@@ -46,7 +46,7 @@ class CoinController extends Controller
     }
     public function payment(Request $request){
         $host = $request->getHttpHost() ;   
-        $vnp_Returnurl = "http://".$host."/vnpay_return";
+        $vnp_Returnurl = url('')."/vnpay_return";
         $vnp_TmnCode = $this->vnp_TmnCode; //Website ID in VNPAY System
         $vnp_HashSecret = $this->vnp_HashSecret; //Secret key
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -137,7 +137,7 @@ class CoinController extends Controller
                 $i = 1;
             }
         }
-        $url_ipn ="http://".$request->getHttpHost(). str_replace('vnpay_return','vnpay_ipn',$request->getRequestUri());
+        $url_ipn =url(''). str_replace('vnpay_return','vnpay_ipn',$request->getRequestUri());
         $secureHash = hash_hmac('sha512', $hashData, $this->vnp_HashSecret);
         if ($secureHash == $vnp_SecureHash) {
             if ($_GET['vnp_ResponseCode'] == '00') {
