@@ -29,6 +29,8 @@ Route::prefix('company')->name('company.')->group(function () {
     Route::post('update/{id}', 'Admin\CompanyController@update')->name('update');
     Route::delete('/{id}', 'Admin\CompanyController@destroy')->name('destroy');
     Route::post('/{id}', 'Admin\CompanyController@status')->name('status');
+
+    Route::get('list-post/{id}', 'Admin\CompanyController@getListPost')->name('getListPost');
 });
 Route::prefix('blacklist')->name('blacklist.')->group(function () {
     Route::get('candidate', 'Admin\BlacklistController@index_can')->name('index_can');
