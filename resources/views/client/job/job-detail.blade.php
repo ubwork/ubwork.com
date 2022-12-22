@@ -311,9 +311,22 @@
 @endsection
 @section('script')
   @parent
+  <script src="{{asset('assets/client-bower/js/jquery.modal.min.js')}}"></script>
   <script src="{{asset('js/client/shortlist.js')}}"></script>
   <script>
     updateShortList();
+    // Open modal in AJAX callback
+	$('.call-modal').on('click', function(event) {
+	  event.preventDefault();
+	  this.blur();
+	  $.get(this.href, function(html) {
+	    $(html).appendTo('body').modal({
+	    	closeExisting: true,
+			fadeDuration: 300,
+			fadeDelay: 0.15
+	    });
+	  });
+	});
     $('.call-modal2').on('click', function(event) {
 	  event.preventDefault();
 	  this.blur();

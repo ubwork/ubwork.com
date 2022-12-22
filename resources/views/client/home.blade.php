@@ -328,10 +328,30 @@
 @endsection
 @section('script')
 @parent
+<script src="{{ asset('assets/client-bower/js/anm.min.js') }}"></script>
+<script src="{{ asset('assets/client-bower/js/wow.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script> 
 <script src="{{asset('js/client/shortlist.js')}}"></script>
 <script>
 $(document).ready(function($) {
+    (function($) {
+    // Elements Animation
+	if($('.wow').length){
+		var wow = new WOW(
+		  {
+			boxClass:     'wow',      
+			animateClass: 'animated', 
+			offset:       0,          
+			mobile:       false,       
+			live:         true       
+		  }
+		);
+		wow.init();
+	}
+    if($('.anm').length){
+		anm.on();
+	}
+    })(window.jQuery);
     var engine1 = new Bloodhound({
         remote: {
             url: '/search/title?value=%QUERY%',

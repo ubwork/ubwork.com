@@ -15,7 +15,7 @@
                         Tên gói cước : {{$invoice->package->title}}
                     </div>
                     <div class="col-sm-12 col-lg-12">
-                        Giá trị : {{$invoice->package->coin}}
+                        Giá trị : {{$invoice->package->coin}} coin
                     </div>
                     <div class="col-sm-12 col-lg-12">
                         Số tiền thanh toán :{{ number_format($invoice->package->amount, 0, ',', '.') }} vnđ 
