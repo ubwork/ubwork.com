@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Models\JobPostActivities;
 
 class SeekerController extends Controller
 {
@@ -100,6 +101,12 @@ class SeekerController extends Controller
                 }
             }
             if(isset($seeker)){
+                $job_at = JobPostActivities::where('seeker_id' , $id)->get();
+                if(isset($job_at) && $job_at->count() > 0){
+                    foreach ($job_at as $j) {
+                        $j->delete();
+                    }
+                }
                 $seeker->delete();
                 return response()->json([
                     'is_check' => true,

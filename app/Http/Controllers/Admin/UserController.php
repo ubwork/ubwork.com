@@ -39,6 +39,7 @@ class UserController extends Controller
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $data['image'] = uploadFiles($request->file('image'),'image/user');
         };
+        $data['password'] = Hash::make($request->input('password'));
         $res = $model->create($data);
         $res->assignRole($request->roles);
         if ($res) {

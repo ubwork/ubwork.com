@@ -38,7 +38,7 @@ class ManageCVController extends Controller
                             ->where('company_id',$company_id)
                             ->where('is_see', $dk_see,$is_see)
                             ->where('is_function',$dk_fun,$is_function)
-                            ->orderBy('id', 'DESC')
+                            // ->orderBy('id', 'DESC')
                             ->groupby('seeker_id')
                             ->select(['seeker_id'])
                             ->paginate(10);
@@ -46,7 +46,7 @@ class ManageCVController extends Controller
         else{
             $this->v['listCV'] = JobPostActivities::with('seeker_profile')
                                 ->where('company_id',$company_id)
-                                ->orderBy('id', 'DESC')
+                                // ->orderBy('id', 'DESC')
                                 ->groupby('seeker_id')
                                 ->select(['seeker_id'])
                                 ->paginate(10);

@@ -19,7 +19,16 @@ class RoleController extends Controller
     {
         $this->v['title'] = __('Danh sách vai trò');
         $this->v['roles'] = Role::paginate(5);
-        $this->v['permissions'] = Permission::paginate(5);
+        $this->v['permissions'] = Permission::get();
+        $permissionsToArray = $this->v['permissions']->toArray();
+        foreach ($this->v['permissions'] as $key => $value) {
+            $value->group_name = (explode('-',$value->name)[0]);
+        }
+        
+        $this->v['group'] = array();
+            foreach (  $this->v['permissions'] as $value ) {
+                $this->v['group'][$value->group_name][] = $value;
+            }
         return view('admin.role.index',$this->v);
     }
 

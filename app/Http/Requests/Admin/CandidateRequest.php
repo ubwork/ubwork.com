@@ -63,16 +63,17 @@ class CandidateRequest extends FormRequest
 
     public function messages() {
         return [
-            'name.required' => __('messages.name.required'),
-            'email.required' => __('messages.email.required'),
-            'email.email' => __('messages.email.email'),
-            'email.unique' => __('messages.email.unique'),
-            'password.required' => __('messages.password.required'),
-            'phone.required' => __('messages.phone.required'),
+            'name.required' => 'Yêu cầu nhập tên',
+            'email.required' => 'Yêu cầu nhập email',
+            'email.email' => 'Email không đúng định dạng',
+            'email.unique' => 'Email đã tồn tại',
+            'password.required' => 'Yêu cầu nhập password',
+            'phone.required' => 'Yêu cầu nhập số điện thoại',
             'phone.max' => 'Số điện thoại nhỏ hơn 10 số!',
+            'phone.min' => 'Số điện thoại lớn hơn 10 số!',
             'phone.digits' => 'Sai định dạng số điện thoại!',
             'phone.unique' => 'Số điện thoại đã tồn tại!',
-            'image.image' => __('messages.image.image'),
+            'image.image' => "Yêu cầu nhập ảnh",
             'image.mimes' => 'Ảnh phải thuộc định dạng jpg, png, jpeg!',
             'image.max' => 'Ảnh nhập không quá 5mb!',
         ];

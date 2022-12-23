@@ -25,11 +25,11 @@ class ProfileRequest extends FormRequest
     {
         $rules = [];
         $currentAction = $this->route()->getActionMethod();
+        $id = auth('company')->user()->id;
         // để lấy phương thức hiện tại
         switch ($this->method()):
             case 'POST':
                 
-                $id = auth('company')->user()->id;
                 switch ($currentAction) {
                     case 'store':
                         $rules = [
@@ -43,7 +43,7 @@ class ProfileRequest extends FormRequest
                         $rules = [
                             'name' => 'required',
                             'company_name' => 'required',
-                            'email' => 'required|email|unique:companies,email,' . $id . ',id',
+                            'email' => 'required|email|unique:companies,email,' . $id ,
                             'phone' => 'required',
                         ];
                         break;

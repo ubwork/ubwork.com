@@ -38,7 +38,7 @@ class CompanyRequest extends FormRequest
                             'email' => 'required|email|unique:companies',
                             'password' => 'required',
                             'tax_code' => 'required|unique:companies',
-                            'phone' => 'required|min:10|unique:companies',
+                            'phone' => 'required|min:10|max:10|unique:companies',
                             'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
@@ -49,7 +49,7 @@ class CompanyRequest extends FormRequest
                             'company_name' => 'required',
                             'email' => 'required|email|unique:companies,email,' . $id . ',id',
                             'tax_code' => 'required|unique:companies,tax_code,' . $id . ',id',
-                            'phone' => 'required|max:10|unique:companies,phone,' . $id . ',id',
+                            'phone' => 'required|min:10|max:10|unique:companies,phone,' . $id . ',id',
                             'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;
@@ -78,7 +78,7 @@ class CompanyRequest extends FormRequest
             'tax_code.unique' => 'Mã số thuế đã tồn tại trong hệ thống',
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'phone.min' => 'Số điện thoại phải có 10 số',
-            'phone.max' => 'Số điện thoại nhỏ hơn 10 số',
+            'phone.max' => 'Số điện thoại không quá 10 số',
             'phone.unique' => 'Số điện thoại đã tồn tại!',
             'password.required' => 'Vui lòng nhập mật khẩu',
             'image.mimes' => 'Ảnh phải thuộc định dạng jpg, png, jpeg!',

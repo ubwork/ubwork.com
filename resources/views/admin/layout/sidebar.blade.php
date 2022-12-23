@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-        <img src="{{ asset('assets/admin-bower/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+        <img src="{{ asset('images/logo_ubwork.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">UBWORK</span>
+        <span class="brand-text font-weight-light">.</span>
     </a>
 
     <!-- Sidebar -->
@@ -45,11 +45,15 @@
                         </p>
                     </a>
                 </li>
+                @can('company-read')
                 <li class="nav-item">
                     <a href="{{ route('admin.company.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p> Công ty </p>
                     </a>
+                </li>
+                @endcan
+                @can('candidate-read')
                 <li class="nav-item ">
                     <a href="{{ route('admin.candidate.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
@@ -58,6 +62,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('skill-read')
                 <li class="nav-item ">
                     <a href="{{ route('admin.skill.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
@@ -66,6 +72,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('major-read')
                 <li class="nav-item ">
                     <a href="{{ route('admin.major.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
@@ -74,6 +82,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('package-read')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
@@ -97,12 +107,16 @@
                         </li>
                     </ul>
                   </li>
+                  @endcan
+                  @can('user-read')
                 <li class="nav-item">
                     <a href="{{ route('admin.user.index') }}" class="nav-link">
                         <i class="fas fa-users nav-icon"></i>
                         <p>{{ __('Người dùng') }}</p>
                     </a>
                 </li>
+                @endcan
+                @can('role-read')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-shield"></i>
@@ -126,6 +140,7 @@
                         </li>
                     </ul>
                   </li>
+                  @endcan
                   <li class="nav-item ">
                     <a href="{{route('admin.logout')}}" class="nav-link">
                         <i class="fa fa-sign-out-alt"></i>
