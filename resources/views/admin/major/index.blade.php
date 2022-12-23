@@ -28,7 +28,11 @@
                   <th>STT</th>
                   <th>{{__('Tên chuyên ngành')}}</th>
                   <th>{{__('Mô tả')}}</th>
-                  <th><a href="{{route('admin.major.create')}}"><i class="fa fa-plus"></i></a></th>
+                  <th>
+                    @can('major-create')
+                    <a href="{{route('admin.major.create')}}"><i class="fa fa-plus"></i></a>
+                    @endcan
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,11 +42,15 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->description}}</td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
+                            @can('major-update')
                             <a class="btn btn-info mr-3" href="{{route('admin.major.edit', ['id' => $item->id])}}">
                               <i class="fa fa-edit"></i>
                             </a>
+                            @endcan
 
+                            @can('major-delete')
                             <button data-id="{{$item->id}}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

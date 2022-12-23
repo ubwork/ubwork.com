@@ -19,7 +19,7 @@
             @else
             <figure class="image"><img src="{{!empty($data->image) ? asset('storage/'. $data->image) : 'https://quarantine.doh.gov.ph/wp-content/uploads/2016/12/no-image-icon-md.png' }}" alt=""></figure>
             @endif
-            <h4 id="nameSeeker" class="name" style="bottom: 15px">
+            <h4 id="nameSeeker" class="name" style="bottom: 15px" data-toggle="tooltip" title="Mở khóa để xem thông tin chi tiết">
               @php
                 if(!empty($data->name)){
                   $nameAt = $data->name;
@@ -199,7 +199,7 @@
                       <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
                         <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-mail-bulk"></i>
                         <h5>Email:</h5>
-                        <span id="openEmail">**************</span>
+                        <span id="openEmail" data-toggle="tooltip" title="Mở khóa để xem thông tin chi tiết">**************</span>
                       </a>
                     </li>
                     @endif
@@ -209,7 +209,7 @@
                       <a href="javascript:void(0)" title="Vui lòng nhấn mở khóa để lấy thông tin liên hệ">
                         <i style="color: #1967d2;font-size: 20px;" class="icon fa fa-phone"></i>
                         <h5>Số điện thoại:</h5>
-                        +<span id="openPhone">**********</span>
+                        +<span id="openPhone" data-toggle="tooltip" title="Mở khóa để xem thông tin chi tiết">**********</span>
                       </a>
                     </li>
                     @endisset

@@ -46,7 +46,6 @@ class JobPostRequest extends FormRequest
                     'requirement' => 'required',
                     'benefits' => 'required',
                     'skill' => 'required',
-                    'end_date' => 'required'
                 ];
                 break;
             default:

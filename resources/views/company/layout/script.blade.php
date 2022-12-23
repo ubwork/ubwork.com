@@ -1,4 +1,4 @@
-{{-- <script src="{{asset('assets/client-bower/js/jquery.js')}}"></script> --}}
+<script src="{{asset('assets/client-bower/js/jquery.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/chosen.min.js')}}"></script>
 <script src="{{asset('assets/client-bower/js/bootstrap.min.js')}}"></script>

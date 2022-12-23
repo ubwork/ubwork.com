@@ -21,9 +21,9 @@
                                         <div class="text col-3" style="margin-left: 5px; padding-top:7px">
                                             Số dư hiện tại : {{auth('candidate')->user()->coin}}
                                         </div>
-                                        <div class="col-2">
+                                        {{-- <div class="col-2">
                                             <button class="theme-btn btn-style-one btn-sm" style="padding: 7px 15px 5px 15px;" >Rút tiền</button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 <div class="row resume-outer theme-blue p-5 mt-4">
                                     <!-- Pricing Table -->

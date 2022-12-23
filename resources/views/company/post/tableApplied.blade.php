@@ -11,7 +11,7 @@
             <tr>
                 <td>
                     <h6>{{ $item->name }}</h6>
-                    <span>{{ $item->pivot->is_see == 1 ? "Đã xem" : "Chưa xem" }}</span>
+                    {{-- <span>{{ $item->pivot->is_see == 1 ? "Đã xem" : "Chưa xem" }}</span> --}}
                 </td>
                 <td>{{ $item->phone }} <br>{{ $item->email }}
                 </td>

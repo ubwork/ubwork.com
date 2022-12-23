@@ -16,18 +16,29 @@
               <small id="name-error" class="error invalid-feedback"></small>
             </div>
           </div>
-          <label for="" >{{ __('Danh sách quyền') }}</label>
-          <p><span id="permission-error" class="error text-danger"></span></p>
           <div class="row">
-            @foreach ($permissions as  $permission)
-              <div class="col-lg-3 col-md-4">
-                <div class="custom-control custom-checkbox">
-                  <input class="custom-control-input custom-control-input-secondary custom-control-input-outline" type="checkbox" id="permissionCheck{{$permission->id}}" name="permissions[]" value="{{$permission->name}}">
-                  <label for="permissionCheck{{$permission->id}}" class="custom-control-label">{{$permission->name}}</label>
-                </div>
-              </div>
-            @endforeach
+            <label for="" class="col-4">{{ __('Danh sách quyền') }}</label>
+            <div class="custom-control custom-checkbox ">
+              <input type="checkbox" id="check-all-permission" name="permission" class="custom-control-input-secondary custom-control-input-outline mr-2 ">
+              <label for="checkall" >Chọn tất cả</label>
+            </div>
           </div>
+          <p><span id="permission-error" class="error text-danger"></span></p>
+          @foreach ($group as $key => $item)
+          <div class="row pl-2">
+          <div class="col-lg-3 col-md-3 mb-3">
+            <strong>{{$key}}</strong>
+          </div>
+                @foreach ($item as  $permission)
+                  <div class="col-lg-2 col-md-2">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input custom-control-input-secondary custom-control-input-outline permission" type="checkbox" id="permissionCheck{{$permission->id}}" name="permissions[]" value="{{$permission->name}}">
+                      <label for="permissionCheck{{$permission->id}}" class="custom-control-label">{{explode('-',$permission->name)[1]}}</label>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+          @endforeach
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary btn-create">{{__('Lưu')}}</button>

@@ -29,8 +29,12 @@
                             <th>{{ __('Vai trò') }}</th>
                             {{-- <th>{{ __('IMAGE') }}</th> --}}
                             {{-- <th>{{ __('ROLE') }}</th> --}}
-                            <th>{{ __('Trạng thái') }}</th>
-                            <th><a href="{{ route('admin.user.create') }}"><i class="fa fa-plus"></i></a></th>
+                            {{-- <th>{{ __('Trạng thái') }}</th> --}}
+                            <th>
+                                @can('user-create')
+                                    <a href="{{ route('admin.user.create') }}"><i class="fa fa-plus"></i></a>
+                                @endcan
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,8 +50,8 @@
                                             <label class="badge badge-success">{{ $v }}</label>
                                         @endforeach
                                     @endif
-                                </td>
-                                <td>
+                                {{-- </td>
+                                <td> --}}
                                 </td>
                                 {{-- <td>{{ $user->role->name }}</td> --}}
                                 {{-- <td>
@@ -56,12 +60,16 @@
                                         data-id="{{ $user->id }}">{{ __($user->status) }}</button>
                                 </td> --}}
                                 <td>
+                                    @can('user-update')
                                     <a class="btn btn-primary btn-sm" href="{{ route('admin.user.edit', $user->id) }}"><i
-                                            class="fa fa-edit"></i></a>
+                                        class="fa fa-edit"></i></a>
+                                    @endcan
+                                    @can('user-delete')
                                     @if(Auth::user()->id != $user->id)
                                         <button class="btn btn-danger btn-sm delete-confirm" type="submit"
                                             value="{{ $user->id }}"><i class="fa fa-trash"></i></button>
                                     @endif
+                                    @endcan
 
                                 </td>
                             </tr>

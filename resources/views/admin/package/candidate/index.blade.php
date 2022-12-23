@@ -32,7 +32,11 @@
                   <th>{{__('Ngày tạo')}}</th>
                   <th>{{__('Hạn sử dụng')}}</th>
                   <th>{{__('Trạng thái')}}</th>
-                  <th><a href="{{route('admin.package.candidate.create')}}"><i class="fa fa-plus"></i></a></th>
+                  <th>
+                    @can('package-create')
+                    <a href="{{route('admin.package.candidate.create')}}"><i class="fa fa-plus"></i></a>
+                    @endcan
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,11 +60,15 @@
                             </form>
                         </td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
-                            <a class="btn btn-info mr-3" href="{{route('admin.package.candidate.edit', ['id' => $item->id])}}">
-                              <i class="fa fa-edit"></i>
-                            </a>
+                            @can('package-update')
+                              <a class="btn btn-info mr-3" href="{{route('admin.package.candidate.edit', ['id' => $item->id])}}">
+                                <i class="fa fa-edit"></i>
+                              </a>
+                            @endcan
 
+                            @can('package-delete')
                             <button data-id="{{$item->id}}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

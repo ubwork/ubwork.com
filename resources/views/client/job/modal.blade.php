@@ -23,7 +23,10 @@
      {{--   </form> --}}
             
             <div class="form-group">
-              <label for="">Chọn CV</label>
+                <div class="row">
+                <a href="{{route('createNew')}}">Tạo cv</a>
+                </div>
+                <label for="">Chọn CV</label>
                <div class="files-outer mt-3 radio-outer ">
                     <div class="radio-box d-flex">
                       {{--  <input type="radio" name="radio" id="radio-1" checked="">
