@@ -67,6 +67,13 @@
 @section('script')
     @parent
     <script>
+        $(document).ready(function() {
+        $('#check-all-permission').click(function() {
+            var checked = this.checked;
+                $('.permission').each(function() {
+                this.checked = checked;})
+            })
+        });    
         $('.btn-create').click(function(e) {
             e.preventDefault();
             var arrayUrl = $(location).attr('pathname').split('/');
@@ -91,6 +98,7 @@
                         $('#nameInput').addClass('is-invalid'),
                         $('#name-error').text(results.message.name),
                         $('#permission-error').text(results.message.permissions)
+                    
                     } else {
                         console.log(results);
                         Swal.fire({

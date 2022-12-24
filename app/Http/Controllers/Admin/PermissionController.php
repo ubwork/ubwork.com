@@ -19,7 +19,7 @@ class PermissionController extends Controller
     public function index()
     {
         $this->v['title'] = __('Danh sách quyền');
-        $this->v['permissions'] = Permission::paginate(config('paginate.permission.index'));
+        $this->v['permissions'] = Permission::orderby('created_at','DESC')->paginate(config('paginate.permission.index'));
         return view('admin.permission.index',$this->v);
     }
 
