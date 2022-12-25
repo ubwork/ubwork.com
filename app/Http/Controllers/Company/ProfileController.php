@@ -89,4 +89,14 @@ class ProfileController extends Controller
         $data['logo'] = $name;
         $data['status'] = 0;
     }
+
+    public function status(Company $company, $is_speed){
+        if ($is_speed == 2) {
+            $company->update(['is_speed' => 0]);
+            return redirect()->back();
+        } else {
+            $company->update(['is_speed' => 1]);
+            return redirect()->back();
+        }
+    }
 }

@@ -49,7 +49,7 @@ class CompanyRequest extends FormRequest
                             'company_name' => 'required',
                             'email' => 'required|email|unique:companies,email,' . $id . ',id',
                             'tax_code' => 'required|unique:companies,tax_code,' . $id . ',id',
-                            'phone' => 'required|min:10|max:10|unique:companies,phone,' . $id . ',id',
+                            'phone' => 'required|max:10|unique:companies,phone,' . $id . ',id',
                             'image' => 'image|mimes:jpg,png,jpeg|max:5000'
                         ];
                         break;

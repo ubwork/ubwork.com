@@ -118,6 +118,7 @@
                 <tr>
                   <th>STT</th>
                   <th>Tiêu đề</th>
+                  <th>Lượt ứng tuyển</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -126,6 +127,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->title}}</td>
+                        <td>{{$item->activities_count}}</td>
                         <td><a target="_blank" href="{{route('job-detail', ['id' => $item->id])}}">Xem bài viết</a></td>
                     </tr>
                     @endforeach

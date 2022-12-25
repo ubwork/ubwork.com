@@ -30,14 +30,14 @@ class CompanyController extends Controller
             if (!empty($request->size)) {
                 $q->where('team', '=', $request->size);
             }
-        })->paginate(10);
+        })->paginate(5);
         foreach ($data as $item) {
             $job[$item->id] = JobPost::where('company_id', $item->id)->get();
         }
         $workingTime = [
-            6 => '6 tiếng',
-            7 => '7 tiếng',
-            8 => '8 tiếng',
+            6 => '6 tiếng/ngày',
+            7 => '7 tiếng/ngày',
+            8 => '8 tiếng/ngày',
         ];
         $team = [
             50 => '50-100 người',

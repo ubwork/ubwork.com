@@ -23,6 +23,21 @@
                 </div>
             </div>
         </div>
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+            <div class="ui-item ui-red">
+                <div class="switchbox-outer margin-top-10">
+                    <ul class="switchbox">
+                        <li>
+                            <label class="switch">
+                            <input type="checkbox" name="status_search_job" id="status_search_job" {{$is_speed == 1 ? 'checked' : ''}}>
+                            <span class="slider round"></span>
+                            <h4 class="title">Cần tuyển gấp</h4>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class=" col-lg-12">
@@ -151,6 +166,32 @@
                         toastr.error("Lỗi dữ liệu")
                     }
                 });
+        });
+
+        $('#status_search_job:checkbox').bind('change', function(e) {
+            if ($(this).is(':checked')) {
+                call_change_status(1);
+            }
+            else {
+                call_change_status(2)
+            }
         })
+        function call_change_status(is_speed){
+            var company_id = JSON.parse("{{ json_encode($company_id) }}");
+            console.log(window.location.origin+`/company/status/`+company_id+'&'+is_speed);
+            var data = {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "company_id": company_id,
+                    "is_speed" : is_speed
+                }
+                $.ajax({
+                    type: "POST",
+                    url: window.location.origin+`/company/status/`+company_id+'&'+is_speed,
+                    data: data,
+                    success: function(response) {
+                        toastr.success("Cập nhật thành công")
+                    },
+                });
+        }
     </script>
 @endsection

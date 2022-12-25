@@ -23,12 +23,12 @@
                 <div class="row mt-3">
                     <div class="col">
                         <label for="">Bắt đầu *</label>
-                        <input type="date" name="start_date" class="form-control" >
+                        <input type="date" max="{{date('Y-m-d')}}" name="start_date" class="form-control" >
                         <small class="val_start_date text-danger pl-4"></small>
                     </div>
                     <div class="col">
                         <label for="">Kết thúc</label>
-                        <input type="date" name="end_date" class="form-control">
+                        <input type="date" name="end_date" max="{{date('Y-m-d')}}" class="form-control">
                         <small class="text-red"><i>Ghi chú: Không nhập kết thúc sẽ là hiện tại đang làm việc ở đây</i></small>
                     </div>
                 </div>
@@ -94,12 +94,12 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="">Bắt đầu *</label>
-                                    <input type="date" name="start_date" value="{{date("Y-m-d", strtotime($exp->start_date))}}" class="form-control" >
+                                    <input type="date" name="start_date" max="{{date('Y-m-d')}}" value="{{date("Y-m-d", strtotime($exp->start_date))}}" class="form-control" >
                                     <small class="val_start_date text-danger pl-4"></small>
                                 </div>
                                 <div class="col">
                                     <label for="">Kết thúc</label>
-                                    <input type="date" @if(!empty($exp->end_date)) value="{{date("Y-m-d", strtotime($exp->end_date))}}" @endif name="end_date" class="form-control">
+                                    <input type="date" @if(!empty($exp->end_date)) value="{{date("Y-m-d", strtotime($exp->end_date))}}" @endif max="{{date('Y-m-d')}}" name="end_date" class="form-control">
                                     <small class="text-red"><i>Ghi chú: Không nhập kết thúc sẽ là hiện tại đang làm việc ở đây</i></small>
                                 </div>
                             </div>

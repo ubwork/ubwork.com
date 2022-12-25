@@ -79,7 +79,7 @@
                                         <!-- Input -->
                                         <div class="form-group col-lg-6 col-md-12">
                                             <label>Website</label>
-                                            <input type="text" name="website" value="{!! $data->link_web !!}">
+                                            <input type="text" name="link_web" value="{!! $data->link_web !!}">
                                         </div>
                                         <div class="form-group col-lg-6 col-md-12">
                                             <label>Mã số thuế</label>
@@ -117,7 +117,19 @@
                                         </div>
                                         <div class="form-group col-lg-6 col-md-12">
                                             <label>Loại hình doanh nghiệp</label>
-                                            <input type="text" name="company_model" value="{!! $data->company_model !!}">
+                                            <select class="form-select" name="company_model">
+                                                @foreach (config('custom.loai_hinh_dn') as $dn)
+                                                    <option 
+                                                    @if(!empty($data->company_model))
+                                                    @if($data->company_model == $dn['id'])
+                                                    selected
+                                                    @endif
+                                                    @endif
+                                                    value="{{ $dn['id']}}">
+                                                        {{ $dn['name']}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <!-- Input -->
                                         <div class="form-group col-lg-6 col-md-12">
@@ -133,10 +145,12 @@
                                         <div class="form-group col-lg-12 col-md-12">
                                             <label>Nhúng bản đồ</label>
                                             <textarea name="map" id="" cols="30" rows="10">{!! $data->map !!}</textarea>
+                                            <small><i class="text-red">Nhúng iframe bản đồ !</i></small>
                                         </div>
                                         <div class="form-group col-lg-12 col-md-12">
                                             <label>Nhúng video công ty</label>
                                             <textarea name="iframe_ytb" id="" cols="30" rows="10">{!! $data->iframe_ytb !!}</textarea>
+                                            <small><i class="text-red">Nhúng iframe YouTube !</i></small>
                                         </div>
                                         <div class="form-group col-lg-12 col-md-12">
                                             <label>Chi tiết về công ty</label>

@@ -8,7 +8,7 @@
         <form action="send" method="GET">
             <div class="auto-container" style="width:800px">
                 Mỗi lần sử dụng bạn sẽ mất 30 coin. Tối đa bạn chỉ được sử dụng 1 lần / 1 ngày. Sử dụng chức năng sẽ giúp
-                bạn apply vào bài tuyển dụng phù hợp một cách nhanh chống mà bạn không phải tìm xem từng bài tuyển dụng nào
+                bạn apply vào bài tuyển dụng phù hợp một cách nhanh chóng mà bạn không phải tìm xem từng bài tuyển dụng nào
                 phù hợp với bạn.
                 <br>
                 @if (auth('candidate')->check())

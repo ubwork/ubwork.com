@@ -40,6 +40,7 @@ return [
         ['id'=>'0','name'=>'Hà Nội'],
         ['id'=>'1','name'=> 'Đà Nẵng'],
         ['id'=>'2','name'=>'TP Hồ Chí Minh'],
+        ['id'=>'3','name'=>'Khác'],
     ],
     'skill' => [
         ['id'=>'0','name'=>'PHP'],
@@ -71,4 +72,23 @@ return [
         ['id'=>'Đã ly hôn','name' => 'Đã ly hôn'],
         ['id'=>'Góa','name' => 'Góa'],
     ],
+
+    'loai_hinh_dn' => [
+        ['id'=>'Doanh nghiệp tư nhân', 'name'=> 'Doanh nghiệp tư nhân'],
+        ['id'=>'Công ty hợp danh','name' => 'Công ty hợp danh'],
+        ['id'=>'Công ty TNHH một thành viên','name' => 'Công ty TNHH một thành viên'],
+        ['id'=>'Công ty TNHH hai thành viên trở lên','name' => 'Công ty TNHH hai thành viên trở lên'],
+        ['id'=>'Công ty cổ phần','name' => 'Công ty cổ phần'],
+        ['id'=>'Doanh nghiệp nhà nước','name' => 'Doanh nghiệp nhà nước'],
+    ],
+    'icon-home' => [
+        'icon flaticon-money-1',
+        'icon flaticon-promotion',
+        'icon flaticon-vector',
+        'icon flaticon-web-programming',
+        'icon flaticon-rocket-ship',
+        'icon flaticon-support-1',
+        'icon flaticon-first-aid-kit-1',
+        'icon flaticon-car',
+    ]
 ];

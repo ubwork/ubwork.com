@@ -55,7 +55,7 @@
                                     @endif
                                     <a  target="_blank" href="{{ route('CreateCV', ['idsee' => $item->id]) }}"><button type="button"><span class="la la-pencil"></span></button></a>
                                 </div>
-                                <small style="-webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box; overflow: hidden; text-align: center;">CV-{{$item->name}}</small>
+                                <small style="-webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box; overflow: hidden; text-align: center;">CV-{{$item->name}}_{{$item->id}}</small>
                                 <div class="form-check form-check-inline mt-3" data-toggle="tooltip" data-placement="bottom" title="Chọn cv">
                                     <input data-id-path="{{$item->path_cv}}" @php echo $item->is_active == 1 ? 'checked' : '' @endphp class="form-check-input inlineRadio{{$item->id}}" onclick="i_active({{$item->id}})" type="radio" name="is_active" id="inlineRadio{{$item->id}}" value="1">
                                     <label class="form-check-label" for="inlineRadio{{$item->id}}"></label>
@@ -135,6 +135,18 @@
                     $('.call-modal').css('display','none');
                 },
                 error: function(rep){
+                    if (rep.status == 500) {
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Cảnh báo!',
+                        text: 'Bạn cần chọn cv trước khi gửi ',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        confirmButtonText: 'Đồng ý',
+                        confirmButtonColor: '#C46F01',
+                        cancelButtonText: 'Không'
+                    })
+                    }
                     $('close-modal').click();
                     if (rep.status == 401) {
                         Swal.fire({

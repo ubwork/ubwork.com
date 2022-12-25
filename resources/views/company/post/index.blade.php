@@ -1,6 +1,6 @@
 @extends('company.layout.app')
 @section('content')
-@if(auth('company')->user()->status != 0)
+@if(auth('company')->user()->status == 1)
     <div class="row">
         <div class="col-lg-12">
             <!-- Ls widget -->

@@ -1,3 +1,8 @@
+<style>
+    .dropdown-toggle::after {
+        content: '' !important;
+    }
+</style>
 <header class="main-header header-shaddow">
     <div class="container-fluid">
         <!-- Main box -->
@@ -38,8 +43,9 @@
                             @if($m)
                                 <img style="object-fit: cover;" src="{{  auth('company')->user()->logo }}" alt="logo"
                                     class="thumb">
-                            @elseif(Storage::exists(auth('company')->user()->logo) )
-                                <img style="object-fit: cover;" src="{{ asset('storage/images/'. auth('company')->user()->logo) }}" alt="logo"
+                            {{-- @elseif(Storage::exists(auth('company')->user()->logo) ) --}}
+                            @elseif(!empty(auth('company')->user()->logo) )
+                                <img style="object-fit: cover;" src="{{ asset('storage/images/company/'. auth('company')->user()->logo) }}" alt="logo"
                                     class="thumb">
                             @else
                                 <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
@@ -63,9 +69,9 @@
 
             <div class="outer-box">
                 <!-- Login/Register -->
-                <div class="login-box">
+                {{-- <div class="login-box">
                     <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
-                </div>
+                </div> --}}
 
                 <button id="toggle-user-sidebar">
                  

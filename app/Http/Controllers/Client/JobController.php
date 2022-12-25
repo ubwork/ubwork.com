@@ -126,7 +126,7 @@ class JobController extends Controller
             $id_user = auth('candidate')->user()->id;
             $seeker = SeekerProfile::where('candidate_id', $id_user)->first();
             if (!empty($seeker->id)) {
-                $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->where('is_function', 0)->get();
+                $dataActive = JobPostActivities::where('seeker_id', $seeker->id)->whereIn('is_function', [0,1])->get();
                 if (!empty($dataActive)) {
                     foreach ($dataActive as $item) {
                         $idJobApplied[$item->job_post_id] = $item;
@@ -203,11 +203,13 @@ class JobController extends Controller
                 $major = $request['major'];
                 $type = $request['type'];
                 $area = $request['area'];
-                if (!empty($search)) {
+                $experience = $request['experience'];
+                $level = $request['level'];
+                if (isset($search)) {
                     $q->orwhere('job_posts.title', 'LIKE', '%' . $search . '%');
                     $this->v['urlWith'] = '?search='.$search;
                 }
-                if (!empty($major)) {
+                if (isset($major)) {
                     $q->where('job_posts.major_id', '=', $major);
                     $this->v['urlWith'] .= '?major='.$major;
                 }
@@ -215,7 +217,13 @@ class JobController extends Controller
                     $q->where('job_posts.type_work', '=', $type);
                     $this->v['urlWith'] .= '?type='.$type;
                 }
-                if (!empty($area)) {
+                if (isset($request['level'])) {
+                    $q->where('job_posts.level', '=', $level);
+                }
+                if (isset($request['experience'])) {
+                    $q->where('job_posts.experience', '=', $experience);
+                }
+                if (isset($area)) {
                     $q->where('job_posts.area', '=', $area);
                     $this->v['urlWith'] .= '?area='.$area;
                 }
@@ -225,24 +233,33 @@ class JobController extends Controller
                 $search = $request['search'];
                 $major = $request['major'];
                 $type = $request['type'];
-                if (!empty($search)) {
+                $area = $request['area'];
+                $experience = $request['experience'];
+                $level = $request['level'];
+                if (isset($search)) {
                     $q->orwhere('job_posts.title', 'LIKE', '%' . $search . '%');
                 }
-                if (!empty($major)) {
+                if (isset($major)) {
                     $q->where('job_posts.major_id', '=', $major);
                 }
                 if (isset($request['type'])) {
                     $q->where('job_posts.type_work', '=', $type);
                 }
-                if (!empty($area)) {
+                if (isset($request['level'])) {
+                    $q->where('job_posts.level', '=', $level);
+                }
+                if (isset($request['experience'])) {
+                    $q->where('job_posts.experience', '=', $experience);
+                }
+                if (isset($area)) {
                     $q->where('job_posts.area', '=', $area);
                 }
             })->whereHas('skills', function ($q) use ($skill) {
-                $q->where('skill_id', $skill);
+                $q->whereIN('skill_id', $skill);
             })->where('status',1)->paginate(config('paginate.JobPostClient.index'));
-            $this->v['urlWith'] .= '?skill='.$skill;
+            // $this->v['urlWith'] .= '?skill='.$skill;
         }
-        
+        $this->v['urlWith'] = http_build_query($request->all());
         $this->v['today'] = strtotime(Carbon::now());
         $this->v['maJor'] = Major::all();
         $date = date('Y/m/d', time());

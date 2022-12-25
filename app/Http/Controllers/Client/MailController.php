@@ -35,15 +35,22 @@ class MailController extends Controller
                 $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->first();
                 $path_cv = $seeker->path_cv;
                 $tien = 30;
-                $ad = Skill::join('skill_seekers', 'skill_seekers.skill_id', '=', 'skills.id')
+                if (!empty($seeker) && $major != null && $path_cv != null && $skill_seeker != null) {
+                    $ad = Skill::join('skill_seekers', 'skill_seekers.skill_id', '=', 'skills.id')
                     ->join('skill_posts', 'skill_posts.skill_id', '=', 'skills.id')
                     ->join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
-                    ->where(function ($q) {
+                    ->join('companies', 'companies.id','=','job_posts.company_id')
+                    ->where('job_posts.status','=',1)
+                    ->where('companies.is_speed','=',1)
+                    ->where(function ($q) use($job_atv) {
                         $subject = auth('candidate')->user()->id;
                         $seeker = SeekerProfile::where('candidate_id', $subject)->first();
                         $skill_seeker = SkillSeeker::where('seeker_id', $seeker->id)->pluck('skill_id')->toArray();
-                        if ($seeker->major_id != null) {
-                            $q->where('job_posts.major_id', $seeker->major_id);
+                        foreach ($job_atv as $row) {
+                            $q->where('job_posts.id', '!=', $row->job_post_id);
+                            if ($seeker->major_id != null) {
+                                $q->where('job_posts.major_id', $seeker->major_id);
+                            }
                         }
                         if ($skill_seeker != []) {
                             $q->whereIn('skill_seekers.skill_id', $skill_seeker);
@@ -52,13 +59,13 @@ class MailController extends Controller
                     ->distinct()
                     ->select('job_posts.*')
                     ->get();
-                if (!empty($seeker) && $major != null && $path_cv != null && $skill_seeker != null) {
+                    // dd($ad);
                     if ($coin - $tien < 0) {
-                        return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
+                        return back()->with('error', 'Tài khoản của bạn không đủ sô dư vui lòng nạp thêm tiền!');
                     } elseif (!empty($jobspeed)) {
-                        return back()->with('error', 'Hôm Nay Bạn Đã Sử Dụng Phương Thức Này Rồi Vui Lòng Quay Lại Vào Ngày Mai !');
+                        return back()->with('error', 'Hôm nay bạn đã sử dụng phương thúc này vui lòng quay lại vào ngày mai!');
                     } elseif (count($ad) == 0) {
-                        return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
+                        return back()->with('warning', 'Không có Job nào phù hợp!');
                     } else {
                         foreach ($ad as $item) {
                             $end_time = strtotime($item->end_date);
@@ -101,6 +108,7 @@ class MailController extends Controller
                                 $q->where('skills.id', '=', $skill);
                             }
                             foreach ($job_atv as $row) {
+                                $q->where('job_posts.id', '!=', $row->job_post_id);
                                 if (!empty($major)) {
                                     $q->where('job_posts.major_id', '=', $major);
                                 }
@@ -110,33 +118,35 @@ class MailController extends Controller
                         ->select('job_posts.*')
                         ->get();
                     if ($coin - 30 < 0) {
-                        return back()->with('error', 'Tài Khoản Của Bạn Không Đủ Số Dư Vui Lòng Nạp Thêm Tiền !');
+                        return back()->with('error', 'Tài khoản của bạn không đủ số dư vui lòng nạp thêm tiền!');
                     }
                     if ($major == "" && $request->major == null && $request->skill == null && $request->type == null) {
-                        return back()->with('error', 'Bạn Chưa Tạo cv trên hệ thống vui lòng chọn chuyên ngành bạn muốn tìm!');
+                        return back()->with('error', 'Bạn chưa tạo cv trên hệ thống vui lòng chọn chuyên ngành bạn muốn tìm!');
                     } elseif (!empty($jobspeed)) {
-                        return back()->with('error', 'Hôm Nay Bạn Đã Sử Dụng Phương Thức Này Rồi Vui Lòng Quay Lại Vào Ngày Mai !');
+                        return back()->with('error', 'Hôm bạn đã sử dụng phương thức này rồi vui lòng quay lại vào ngày mai!');
                     } elseif (!isset($jobpost)) {
-                        return back()->with('warning', 'Không Có Job Nào Phù Hợp!');
+                        return back()->with('warning', 'Không có Job nào phù hợp!');
                     } else {
-                        // dd($request->skill);
                         $job = SkillPost::join('job_posts', 'skill_posts.post_id', '=', 'job_posts.id')
                             ->join('skills', 'skill_posts.skill_id', '=', 'skills.id')
+                            ->join('companies', 'companies.id','=','job_posts.company_id')
+                            ->where('companies.is_speed','=',1)
+                            ->where('job_posts.status','=',1)
                             ->where(function ($q) use ($request, $job_atv) {
                                 $major = $request->major;
                                 $skill = $request->skill;
                                 $type = $request->type;
                                 foreach ($job_atv as $row) {
                                     $q->where('job_posts.id', '!=', $row->job_post_id);
-                                    if (!empty($major)) {
-                                        $q->where('job_posts.major_id', '=', $major);
-                                    }
+                                }
+                                if (!empty($major)) {
+                                    $q->where('job_posts.major_id', $major);
                                 }
                                 if (!empty($skill)) {
                                     $q->whereIn('skill_posts.skill_id', $skill);
                                 }
                                 if (!empty($type)) {
-                                    $q->where('job_posts.type_work', '=', $type);
+                                    $q->where('job_posts.type_work', $type);
                                 }
                             })
                             ->distinct()
@@ -172,7 +182,7 @@ class MailController extends Controller
                             'coin' => $coin - $tien,
                         ]);
                         updateProcess(auth('candidate')->user()->id, "- $tien coin sử dụng chức năng tìm việc nhanh", $tien, 0, 1);
-                        return redirect()->route('speedapply')->with('success', 'Tìm Kiếm Thành Công');
+                        return redirect()->route('speedapply')->with('success', 'Tìm kiếm thành công');
                     }
                 } else {
                     return back()->with('error', 'Bạn chưa tạo cv trên hệ thống vui lòng tạo cv để sử dụng tính năng này!');

@@ -31,7 +31,11 @@ class FilterCvController extends Controller
         $this->v['company'] = Company::find($company_id);
 
         $data = DB::table('job_post_activities')->where('company_id', $company_id)->select('seeker_id')->groupby('seeker_id')->pluck('seeker_id')->toArray();
-        $query = SeekerProfile::whereNotIn('id',$data)->where('is_active', 1)->with('candidate');
+        $query = SeekerProfile::whereNotIn('id',$data)->where('is_active', 1)
+        ->with('candidate')
+        ->whereHas('candidate', function($q){
+            $q->where('type', 1);
+        });
         if($request->ajax()) {
             $gender = $request->get('id_gender');
             $skill = $request->get('id_skill');
@@ -115,7 +119,7 @@ class FilterCvController extends Controller
             }
 
         }
-        $this->v['seekerProfile'] = $query->paginate(9);
+        $this->v['seekerProfile'] = $query->paginate(6);
         $this->v['major'] = Major::all();
         $this->v['skill'] = Skill::all();
         $this->v['nameEdu'] = Education::distinct()->select('name_education')->get();
@@ -132,6 +136,7 @@ class FilterCvController extends Controller
         if ($request->ajax()) {
             return view('company.filter-cv.list-view',$this->v);
         }
+        // dd($this->v['seekerProfile']);
         return view('company.filter-cv.index', $this->v);
 
     }

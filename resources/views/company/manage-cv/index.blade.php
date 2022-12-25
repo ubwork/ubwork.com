@@ -83,6 +83,10 @@
               success: function(data)
               {
                 $(".rowView").html(data);
+                $('.checksee').click(function(){
+                  var id_see = $(this).data('see');
+                  var text = $('.see_'+id_see).text('Đã xem');
+                });
               },
               error: function(){
                 Swal.fire({
@@ -99,6 +103,12 @@
             });
           }
 
+          $('.checksee').click(function(){
+            var id_see = $(this).data('see');
+            var text = $('.see_'+id_see).text('Đã xem');
+          });
+
       });
+
   </script>
 @endsection

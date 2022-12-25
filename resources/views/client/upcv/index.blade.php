@@ -174,7 +174,7 @@
 			<br>
 			@endif
 
-			@if($educations->count() > 0)
+			@if($projects->count() > 0)
 			<p class="head">Dự án</p>
 			@foreach($projects as $proj)
 			<div class="box-exp" style="border-bottom: 1px solid #dbdbdbcc;width: 60%;">

@@ -21,10 +21,14 @@ class CandidateController extends Controller
     }
     public function detail()
     {
-        $id = auth('candidate')->user()->id;
-        $detail = Candidate::where('id', $id)->first();
-        $maJor = Major::all();
-        return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
+        if(auth('candidate')->check()){
+            $id = auth('candidate')->user()->id;
+            $detail = Candidate::where('id', $id)->first();
+            $maJor = Major::all();
+            return view('client.candidate.candidate-profile', compact('detail', 'maJor'));
+        }else{
+            return Redirect()->route('candidate.login');
+        }
     }
     public function update(CandidateRequest $request, $id)
     {

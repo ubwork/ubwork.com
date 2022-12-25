@@ -125,7 +125,11 @@
                   <th>Đánh giá</th>
                   <th>Ảnh xác thực</th>
                   <th>Trạng thái</th>
-                  <th><a href="{{route('admin.company.create')}}"><i class="fa fa-plus"></i></a></th>
+                  <th>
+                    @can('company-create')
+                    <a href="{{route('admin.company.create')}}"><i class="fa fa-plus"></i></a>
+                    @endcan
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -136,7 +140,24 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->company_name}}</td>
                         @if ($item->logo)
-                        <td class="text-center"><img width="100px" src="{{asset('storage/images/company/'. $item->logo)}}" alt=""></td>
+                        <td class="text-center">
+                            @php
+                                $pattern = "/(http(s?):)/";
+                                $m = preg_match($pattern,$item->logo);
+                            @endphp
+                            @if($m)
+                                <img style="object-fit: cover;" src="{{  $item->logo }}" alt="logo"
+                                    class="thumb">
+                            @elseif(Storage::exists($item->logo) )
+                                <img style="object-fit: cover;" src="{{ asset('storage/images/'. $item->logo) }}" alt="logo"
+                                    class="thumb">
+                            @else
+                                {{-- <img style="object-fit: cover;" src="{{  asset('assets/admin-bower/dist/img/avatar.png') }}" alt="avatar"
+                                        class="thumb"> --}}
+                                <img width="100px" src="{{asset('storage/images/company/'. $item->logo)}}" alt="">
+                            @endif
+                          {{-- <img width="100px" src="{{asset('storage/images/company/'. $item->logo)}}" alt=""> --}}
+                        </td>
                         @else
                         <td class="text-center"><img width="100px" src="https://vnpi-hcm.vn/wp-content/uploads/2018/01/no-image-800x600.png" alt=""></td>
                         @endif
@@ -190,11 +211,15 @@
                             </form>
                         </td>
                         <td class="project-actions xoa text-right d-flex align-items-center">
+                          @can('company-update')
                           <a class="btn btn-info mr-3" href="{{route('admin.company.edit', ['id' => $item->id])}}">
                             <i class="fa fa-edit"></i>
                           </a>
+                          @endcan
 
+                          @can('company-delete')
                           <button data-id="{{$item->id}}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></button>
+                          @endcan
                       </td>
                     </tr>
                     @endforeach

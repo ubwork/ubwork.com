@@ -78,7 +78,7 @@
                             data-speed-y="2"
                             style="transform: translate3d(-4px, -7.36px, 0px) scale(1) rotate(0deg); opacity: 1; visibility: visible; animation-delay: 1000ms; animation-name: fadeIn;">
                             <span class="icon flaticon-email-3"></span>
-                            <p>{{$countJobActive}} công việc <br>được ứng tuyển</p>
+                            <p>{{$countJobActive}} lượt ứng tuyển <br> công việc</p>
                         </div>
 
                         <!-- Info BLock Two -->
@@ -173,8 +173,8 @@
                     <div class="category-block col-lg-4 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="content">
-                                <span class="icon flaticon-headhunting"></span>
-                                <h4><a href="{{ route('job', ['id' => $item_job->id]) }}">{{ $item_job->name }}</a>
+                                <span class="icon {{config('custom.icon-home')[$loop->index]}}"></span>
+                                <h4><a href="{{ route('job', ['major' => $item_job->id]) }}">{{ $item_job->name }}</a>
                                 </h4>
                                 <p>( {{ $count[$item_job->id] }} bài đăng)</p>
                             </div>
@@ -209,13 +209,34 @@
                                         <li><span class="icon flaticon-briefcase"></span>{{ $item->major->name }}</li>
                                         <li><span class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                         </li>
+                                        @if(!empty($item->company->working_time))
                                         <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
-                                            giờ</li>
-                                            @if($item->min_salary > 0 && $item->max_salary > 0)
-                                            <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
-                                            @else
-                                            <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
-                                            @endif
+                                            giờ/ngày</li>
+                                        @endif
+
+                                            @php
+                                                $startLi = '<li><span class="icon flaticon-money"></span>';
+                                                $endLi = '</li>';
+                                                $vnd = ' đ';
+                                                $min_luong = $item->min_salary;
+                                                $max_luong = $item->max_salary;
+                                                    if($min_luong != "" && $min_luong > 0 && $max_luong != "" && $max_luong > 0  ){
+                                                        echo $startLi.number_format($item->min_salary, 0, ',', '.').$vnd.' - '.number_format($item->max_salary, 0, ',', '.').$vnd .$endLi;
+                                                    // thỏa thuận
+                                                    }elseif($min_luong == "" && $min_luong == 0 && $max_luong == "" && $max_luong == 0  ) {
+                                                        echo $startLi.'Thỏa thuận'.$endLi;
+                                                    }
+                                                    // Từ
+                                                    elseif ($max_luong == "" && $max_luong == 0) {
+                                                        echo $startLi.'Trên '.number_format($item->min_salary, 0, ',', '.').$vnd.$endLi;
+                                                    //Đến
+                                                    }elseif ($min_luong == "" && $min_luong == 0) {
+                                                        echo $startLi.number_format($item->max_salary, 0, ',', '.').$vnd.$endLi;
+                                                    }else {
+                                                        echo $startLi.'Thỏa thuận'.$endLi;
+                                                    }
+                                            @endphp
+                                            
                                         </ul>
                                     <ul class="job-other-info">
                                         @foreach (config('custom.type_work') as $value)
@@ -279,14 +300,33 @@
                                             <li><span
                                                     class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                             </li>
-                                            <li><span
-                                                    class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
-                                                giờ</li>
-                                                @if($item->min_salary > 0 && $item->max_salary > 0)
-                                                    <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}} đ</li>
-                                                @else
-                                                <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
-                                                @endif
+                                            @if(!empty($item->company->working_time))
+                                            <li><span class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
+                                                giờ/ngày</li>
+                                            @endif
+                                            
+                                            @php
+                                                $startLi = '<li><span class="icon flaticon-money"></span>';
+                                                $endLi = '</li>';
+                                                $vnd = ' đ';
+                                                $min_luong = $item->min_salary;
+                                                $max_luong = $item->max_salary;
+                                                    if($min_luong != "" && $min_luong > 0 && $max_luong != "" && $max_luong > 0  ){
+                                                        echo $startLi.number_format($item->min_salary, 0, ',', '.').$vnd.' - '.number_format($item->max_salary, 0, ',', '.').$vnd .$endLi;
+                                                    // thỏa thuận
+                                                    }elseif($min_luong == "" && $min_luong == 0 && $max_luong == "" && $max_luong == 0  ) {
+                                                        echo $startLi.'Thỏa thuận'.$endLi;
+                                                    }
+                                                    // Từ
+                                                    elseif ($max_luong == "" && $max_luong == 0) {
+                                                        echo $startLi.'Trên '.number_format($item->min_salary, 0, ',', '.').$vnd.$endLi;
+                                                    //Đến
+                                                    }elseif ($min_luong == "" && $min_luong == 0) {
+                                                        echo $startLi.number_format($item->max_salary, 0, ',', '.').$vnd.$endLi;
+                                                    }else {
+                                                        echo $startLi.'Thỏa thuận'.$endLi;
+                                                    }
+                                            @endphp
                                         </ul>
                                         <ul class="job-other-info">
                                             @foreach (config('custom.type_work') as $value)

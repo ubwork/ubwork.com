@@ -27,6 +27,12 @@ class DetailCandidateController extends Controller
         $company_id = auth('company')->user()->id;
         $data  =  SeekerProfile::with('major', 'skill', 'candidate')->where('candidate_id', $id)->first();
 
+        $acti_see = JobPostActivities::where('seeker_id', $data->id)
+        ->update([
+            'is_see' => 1
+        ]);
+
+
         $check = JobPostActivities::where([
             ['company_id','=',$company_id],
             ['seeker_id','=', $data->id],

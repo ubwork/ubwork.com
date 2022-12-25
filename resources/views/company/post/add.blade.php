@@ -101,7 +101,7 @@
                                                     </div>
                                                     <div class="form-group col-lg-4 col-md-12">
                                                         <label>Kiểu lương</label>
-                                                        <select class="chosen-select" name="type_salary">
+                                                        <select class="chosen-select" name="type_salary" id="type_salary">
                                                            @foreach (config('custom.type_salary') as  $value)
                                                                 <option value="{{ $value['id']}}">{{ $value['name']}}</option>
                                                            @endforeach
@@ -231,7 +231,14 @@
                 height: 150,
             });
 
+            $('#type_salary').change(function(){
+                var type 
+                if (condition) {
+                    
+                }
+            })
         });
+
         // $("#formPost").serialize();
         // $('#buttonSubmit').click(function(e){
         //     e.preventDefault();

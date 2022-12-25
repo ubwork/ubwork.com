@@ -44,8 +44,10 @@
                                     <button class="btn btn-primary btn-sm btn-modal-edit" data-toggle="modal"
                                         data-target="#modal-edit" data-name="{{ $role->name }}"
                                         data-id="{{ $role->id }}"><i class="fa fa-edit"></i></button>
+                                    @if (Auth::user()->hasRole('superadmin') && $role->name != 'superadmin' )
                                     <button class="btn btn-danger btn-sm delete-confirm" type="submit"
-                                        value="{{ $role->id }}"><i class="fa fa-trash"></i></button>
+                                    value="{{ $role->id }}"><i class="fa fa-trash"></i></button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

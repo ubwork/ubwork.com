@@ -49,6 +49,7 @@ Route::get('detail-profile/{id}', 'Company\DetailCandidateController@viewHidden'
 
 Route::get('historyPayment', 'Company\CoinController@historyPayment')->name('historyPayment');
 
+Route::post('status/{company}&{is_speed}', 'Company\ProfileController@status')->name('status_company');
 
 // Route::get('detail-candidates/{$id}',['as'=>'detail-candidate.index', 'uses'=>'Company\DetailCandidateController@index']);
 

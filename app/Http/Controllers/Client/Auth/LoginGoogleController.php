@@ -64,8 +64,14 @@ class LoginGoogleController extends Controller
     public function handleCompany($user){
         $checkcompany = Company::where('google_id',$user->id)->first();
         if (!empty($checkcompany)) {
-            auth('company')->login($checkcompany);
-            Session::flash('success',"Đăng nhập thành công");
+            if(in_array($checkcompany->status,[1,3])){
+                auth('company')->login($checkcompany);
+                Session::flash('success',"Đăng nhập thành công");
+            }else{
+                auth('company')->logout();
+                Session::flash('error', 'Tài khoản chưa được kích hoạt vui lòng kích hoạt tài khoản!');
+            }
+            
         }else{
             try {
                 $company =  Company::create([

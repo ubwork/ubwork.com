@@ -157,7 +157,7 @@
                       <span>{{floor($data->total_exp) == 0 ? 'chưa có kinh nghiệm' : floor($data->total_exp) }} Năm</span>
                     </li>
                     @endif
-                    @if(!empty($data['candidate']->birthday))
+                    @if(!empty($data['candidate']->birthday) && $data['candidate']->birthday < 0)
                     <li>
                       <i style="color: #1967d2;font-size: 20px;" class="icon icon-expiry"></i>
                       <h5>Tuổi:</h5>

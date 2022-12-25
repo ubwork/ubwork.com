@@ -59,7 +59,7 @@ class CreateCvController extends Controller
     public function createNew() {
         if (session('link')) {
             $myPath     = session('link');
-            $loginPath  = url('/login');
+            $loginPath  = url('/seeker');
             $previous   = url()->previous();
             session(['link' => $previous]);
         }
@@ -877,7 +877,10 @@ class CreateCvController extends Controller
         $pdf->save($fileName);
 
         Session::flash('success', 'Cập nhật CV thành công!');
-        return redirect(session('link')); 
-        return redirect()->route('seeker');
+        if (!in_array('choose-login',explode('/',session('link')))) {
+            return redirect(session('link')); 
+        }else{
+            return redirect()->route('seeker');
+        }
     }
 }

@@ -48,10 +48,10 @@
               </div>
               <div class="option-box">
                 <ul class="option-list">
-                  <li><a target="_blank" href="{{route('company.detail-candidate.index', ['id' => $item->seeker_profile->candidate_id ])}}" data-text="Chi tiết"><span class="la la-eye"></span></a></li>
+                  <li><a data-see="{{$item->seeker_profile->id}}" class="checksee" target="_blank" href="{{route('company.detail-candidate.index', ['id' => $item->seeker_profile->candidate_id ])}}" data-text="Chi tiết"><span class="la la-eye"></span></a></li>
                   {{-- <li><a data-text="Phê duyệt"><span class="la la-check"></span></a></li>
                   <li><a data-text="Từ chối"><span class="la la-times-circle"></span></a></li> --}}
-                  <li><span>{{$get_data[$item->seeker_id]['is_see'] == 0 ? 'Chưa xem' : 'Đã xem'}}</span></li>
+                  <li><span class="see_{{$item->seeker_profile->id}}" >{{$get_data[$item->seeker_id]['is_see'] == 0 ? 'Chưa xem' : 'Đã xem'}}</span></li>
                 </ul>
               </div>
             </div>

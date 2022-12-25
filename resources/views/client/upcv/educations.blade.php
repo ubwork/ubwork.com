@@ -34,7 +34,7 @@
                 <div class="row mt-3">
                     <div class="col">
                         <label for="">Bắt đầu *</label>
-                        <input type="date" name="start_date" class="form-control">
+                        <input type="date" max="{{date('Y-m-d')}}" name="start_date" class="form-control">
                         @error('start_date')
                             <small class="text-danger pl-4">
                                 {{ $message }}
@@ -153,7 +153,7 @@
                         <div class="row mt-3">
                             <div class="col">
                                 <label for="">Bắt đầu *</label>
-                                <input type="date" value="{{date("Y-m-d", strtotime($edu->start_date))}}" name="start_date" class="form-control">
+                                <input type="date" max="{{date('Y-m-d')}}" value="{{date("Y-m-d", strtotime($edu->start_date))}}" name="start_date" class="form-control">
                                 @error('start_date')
                                     <small class="text-danger pl-4">
                                         {{ $message }}

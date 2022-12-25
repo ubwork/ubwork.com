@@ -20,6 +20,13 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        // if ($this->check_isMobile()) {
+        //     abort(415);
+        //     $title = '';
+        //     $code = '';
+        //     $message = '';
+        //     return response()->view('errors.999',compact('title','code','message'));
+        // }
         $count = [];
         $job_short = [];
         $data_job_type = Major::paginate(6);
@@ -36,7 +43,7 @@ class HomeController extends Controller
         if (isset($search)) {
             $data = JobPost::Orderby('title', 'DESC')->select('*')->where('title', 'like', '%' . $search . '%')->paginate(10);
         } else {
-            $data = JobPost::inRandomOrder()->where('status', 1)->limit(6)->get();
+            $data = JobPost::withCount('activities')->orderBy('activities_count','DESC')->inRandomOrder()->where('status', 1)->limit(6)->get();
         }
         foreach ($data_job_type as $item) {
             if (!empty($item)) {
@@ -102,4 +109,24 @@ class HomeController extends Controller
         $maJor = Major::all();
         return view('client.choose', compact('maJor'));
     } 
+    public function check_isMobile() {
+        $is_mobile = '0';
+        if(preg_match('/(android|iphone|ipad|up.browser|up.link|mmp|symbian|smartphone|midp|wap|phone)/i', strtolower($_SERVER['HTTP_USER_AGENT'])))
+        $is_mobile=1;
+        if((strpos(strtolower($_SERVER['HTTP_ACCEPT']),'application/vnd.wap.xhtml+xml')>0) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE']))))
+        $is_mobile=1;
+        $mobile_ua = strtolower(substr($_SERVER['HTTP_USER_AGENT'],0,4));
+        $mobile_agents = array('w3c ','acs-','alav','alca','amoi','andr','audi','avan','benq','bird','blac','blaz','brew','cell','cldc','cmd-','dang','doco','eric','hipt','inno','ipaq','java','jigs','kddi','keji','leno','lg-c','lg-d','lg-g','lge-','maui','maxo','midp','mits','mmef','mobi','mot-','moto','mwbp','nec-','newt','noki','oper','palm','pana','pant','phil','play','port','prox','qwap','sage','sams','sany','sch-','sec-','send','seri','sgh-','shar','sie-','siem','smal','smar','sony','sph-','symb','t-mo','teli','tim-','tosh','tsm-','upg1','upsi','vk-v','voda','wap-','wapa','wapi','wapp','wapr','webc','winw','winw','xda','xda-');
+        
+        if(in_array($mobile_ua,$mobile_agents))
+        $is_mobile=1;
+        
+        if (isset($_SERVER['ALL_HTTP'])) {
+        if (strpos(strtolower($_SERVER['ALL_HTTP']),'OperaMini')>0)
+        $is_mobile=1;
+        }
+        if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']),'windows')>0)
+        $is_mobile=0;
+        return $is_mobile;
+        }
 }

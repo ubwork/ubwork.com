@@ -159,3 +159,6 @@ Route::get('historyPayment', 'Client\CoinController@historyPayment')->name('hist
 Route::get('change-language/{language}', 'LanguageController@changeLanguage')->name('change-language');
 
 Route::get('modal_selectCV', 'Client\JobController@modal_selectCV')->name('modal_selectCV');
+Route::get('thoigian',function(){
+    return view('client.time');
+});

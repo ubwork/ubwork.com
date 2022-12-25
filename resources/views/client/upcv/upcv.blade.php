@@ -59,7 +59,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <small style="-webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box; overflow: hidden; text-align: center;">CV-{{$item->name}}</small>
+                                        <small style="-webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box; overflow: hidden; text-align: center;">CV-{{$item->name}}_{{$item->id}}</small>
                                         <div class="form-check form-check-inline mt-3" data-toggle="tooltip" data-placement="bottom" title="Chọn cv">
                                             <input data-id-path="{{$item->path_cv}}" @php echo $item->is_active == 1 ? 'checked' : '' @endphp class="form-check-input" onclick="i_active({{$item->id}})" type="radio" name="is_active" id="inlineRadio{{$item->id}}" value="1">
                                             <label class="form-check-label" for="inlineRadio{{$item->id}}"></label>

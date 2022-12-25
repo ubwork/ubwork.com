@@ -17,7 +17,9 @@ class DashboardController extends Controller
     }
     public function home(Request $request){
         $this->v['title'] = "Tổng quan";
+        $this->v['is_speed']= auth('company')->user()->is_speed;
         $company_id = auth('company')->user()->id;
+        $this->v['company_id'] = $company_id;
         $this->v['JobPost'] = JobPost::with('activities')->where('company_id',$company_id)->get();
         $this->v['Applied'] = 0;
             foreach($this->v['JobPost'] as $post){

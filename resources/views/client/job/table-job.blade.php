@@ -21,18 +21,40 @@
                                 <li><span
                                         class="icon flaticon-briefcase"></span>{{ $item->major->name }}
                                 </li>
+                                @if(!empty($item->company->address))
                                 <li><span
                                         class="icon flaticon-map-locator"></span>{{ $item->company->address }}
                                 </li>
-                                <li><span
-                                        class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}
-                                </li>
-                                @if($item->min_salary > 0 && $item->max_salary > 0)
-                                <li><span class="icon flaticon-money"></span>
-                                    {{number_format($item->min_salary, 0, ',', '.')}} - {{number_format($item->max_salary, 0, ',', '.')}}</li>
-                                @else
-                                <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
                                 @endif
+                                @if(!empty($item->company->working_time))
+                                <li><span
+                                        class="icon flaticon-clock-3"></span>{{ $item->company->working_time }}h/ngày
+                                </li>
+                                @endif
+
+                                @php
+                                    $startLi = '<li><span class="icon flaticon-money"></span>';
+                                    $endLi = '</li>';
+                                    $vnd = ' đ';
+                                    $min_luong = $item->min_salary;
+                                    $max_luong = $item->max_salary;
+                                        if($min_luong != "" && $min_luong > 0 && $max_luong != "" && $max_luong > 0  ){
+                                            echo $startLi.number_format($item->min_salary, 0, ',', '.').$vnd.' - '.number_format($item->max_salary, 0, ',', '.').$vnd .$endLi;
+                                        // thỏa thuận
+                                        }elseif($min_luong == "" && $min_luong == 0 && $max_luong == "" && $max_luong == 0  ) {
+                                            echo $startLi.'Thỏa thuận'.$endLi;
+                                        }
+                                        // Từ
+                                        elseif ($max_luong == "" && $max_luong == 0) {
+                                            echo $startLi.'Trên '.number_format($item->min_salary, 0, ',', '.').$vnd.$endLi;
+                                        //Đến
+                                        }elseif ($min_luong == "" && $min_luong == 0) {
+                                            echo $startLi.number_format($item->max_salary, 0, ',', '.').$vnd.$endLi;
+                                        }else {
+                                            echo $startLi.'Thỏa thuận'.$endLi;
+                                        }
+                                @endphp
+                                
                                 <li><i class="icon flaticon-clock-3"></i><span>
                                         @if ($day < 0)
                                             <b>Hết hạn.</b>

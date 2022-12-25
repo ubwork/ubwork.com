@@ -47,7 +47,7 @@
           
           <div class="d-flex justify-content-between">
             @if (!empty($item->candidate_id))
-            <a href="{{route('company.detail-profile.hidden', $item->candidate_id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
+            <a target="_blank" href="{{route('company.detail-profile.hidden', $item->candidate_id)}}" class="theme-btn btn-style-three">Xem Chi Tiết</a>
             @endif
 
           </div>

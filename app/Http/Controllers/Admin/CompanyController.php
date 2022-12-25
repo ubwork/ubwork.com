@@ -102,6 +102,7 @@ class CompanyController extends Controller
         $model = new Company();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
+        JobPost::where('company_id', $id)->update(['status' => $params['cols']['status']]);
         $res = $model->saveUpdate($params);
         if($res == null) {
             Session::flash('success', 'Cập nhật thành công!');
@@ -136,14 +137,15 @@ class CompanyController extends Controller
         unset($params['cols']['_token']);
         $val = $params['cols']['status'];
         Company::where('id', $id)->update(['status' => $val]);
+        JobPost::where('company_id', $id)->update(['status' => $val]);
         return response()->json(['success'=>'Cập nhật trạng thái thành công!']);
     }
 
     public function getListPost($id) {
         $this->v['title'] = "Danh sách bài đăng";
-        $this->v['bai_dang'] = JobPost::where('company_id', $id)->paginate(9);
+        $this->v['bai_dang'] = JobPost::withCount('activities')->where('company_id', $id)->paginate(9);
         if ($key = request()->key);
-        $this->v['bai_dang'] = JobPost::where('title', 'like', '%' . $key . '%')->where('company_id', $id)->paginate(9);
+        $this->v['bai_dang'] = JobPost::withCount('activities')->where('title', 'like', '%' . $key . '%')->where('company_id', $id)->paginate(9);
 
         return view("admin.list-job.index", $this->v);
     }
