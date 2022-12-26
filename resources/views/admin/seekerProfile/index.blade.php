@@ -11,14 +11,14 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
-              <form action="" class="form-inline float-right mr-3">
+              {{-- <form action="" class="form-inline float-right mr-3">
                 <div class="form-group">
                     <input class="form-control" name="key" id="key" placeholder="Nhập tên ứng viên ....">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-            </form>
+            </form> --}}
             </div>
             <!-- /.card-header -->
             <div class="card-body">

@@ -55,7 +55,7 @@ class DetailCandidateController extends Controller
 
     public function viewHidden(Request $request, $id) {
         $company_id = auth('company')->user()->id;
-        $data  =  SeekerProfile::with('major', 'skill', 'candidate')->where('candidate_id', $id)->first();
+        $data  =  SeekerProfile::where('is_active', 1)->with('major', 'skill', 'candidate')->where('candidate_id', $id)->first();
         $check = JobPostActivities::where([
                 ['company_id','=',$company_id],
                 ['seeker_id','=', $data->id],

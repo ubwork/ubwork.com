@@ -64,7 +64,7 @@
               </div>
 
               <div class="form-group">
-                <label>Password</label>
+                <label>Mật khẩu</label>
                 <input id="password-field" type="password" name="password" value="" placeholder="Password">
                 @error('password')
                   <small class="text-danger">{{$message}}</small>

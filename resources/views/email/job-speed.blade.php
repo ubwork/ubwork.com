@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <section class="page-title style-three" style="margin-top:100px ">
-        <h1>Tìm Kiếm Nhanh</h1>
+        <h1>Tìm Việc Nhanh</h1>
         <form action="send" method="GET">
             <div class="auto-container" style="width:800px">
                 Mỗi lần sử dụng bạn sẽ mất 30 coin. Tối đa bạn chỉ được sử dụng 1 lần / 1 ngày. Sử dụng chức năng sẽ giúp
