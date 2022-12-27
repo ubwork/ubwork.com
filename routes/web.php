@@ -162,3 +162,4 @@ Route::get('modal_selectCV', 'Client\JobController@modal_selectCV')->name('modal
 Route::get('thoigian',function(){
     return view('client.time');
 });
+Route::post('upVideo','Client\HomeController@upVideo')->name('upVideo');

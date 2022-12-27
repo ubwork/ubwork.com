@@ -15,6 +15,11 @@ use App\Models\Skill;
 use App\Models\SkillPost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+// Use the FFMpeg tool
+use FFMpeg\FFMpeg;
+use FFMpeg\Format\Video\X264;
+use Intervention\Image\Facades\Image;
 
 class HomeController extends Controller
 {
@@ -129,4 +134,19 @@ class HomeController extends Controller
         $is_mobile=0;
         return $is_mobile;
         }
+
+
+    public function upVideo(Request $request){
+
+            $fileName = $request->video->getClientOriginalName();
+            // dd($request->file('video')->getSize());
+            $filePath = 'images/' . $fileName;
+            $request->file('video')->storeAs('video', $fileName, 'public');
+            $isFileUploaded = Storage::disk('public')->put($filePath, file_get_contents($request->video));
+    
+            // File URL to access the video in frontend
+            $url = Storage::disk('public')->url($filePath);
+    
+        return back();
+    }
 }
