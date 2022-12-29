@@ -15,9 +15,15 @@
         body {
             margin: 0 auto;
             display: flex;
+            height: 100vh;
             justify-content: center;
         }
-        video{
+        video {
+            width: 100%;
+            height: 100vh;
+        }
+        @media screen and (max-width: 800px) {
+            video{
         width: 100vw;
         height: 100vh;
         object-fit: cover;
@@ -25,6 +31,9 @@
         top: 0;
         left: 0;
         }
+
+}
+        
     </style>
 </head>
 <body>
