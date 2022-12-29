@@ -137,6 +137,7 @@
                     <a href="{{ route('choose') }}" class="theme-btn btn-style-three">Đăng nhập</a>
                 </div>
             </div>
+<<<<<<< HEAD
         @endif
     </div>
     <!-- Mobile Header -->
@@ -144,6 +145,15 @@
         <div class="logo"><a href="/"><img src="{{ asset('images/logo_ubwork.png') }}" alt=""
                     title=""></a>
         </div>
+=======
+    </div>
+    @endif
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        {{-- <div class="logo"><a href=""><img src="{{ asset('images/logo_ubwork.png') }}" alt=""
+                    title=""></a>
+        </div> --}}
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
 
         <!--Nav Box-->
         <div class="nav-outer clearfix">

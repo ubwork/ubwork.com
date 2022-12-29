@@ -20,6 +20,7 @@
                 <h4><a href="{{route('job-detail', ['id' => $data_job->id])}}">{{$data_job->title}}</a></h4>
                 <ul class="job-info">
                   {{-- <li><span class="icon flaticon-briefcase"></span> {{$data_job->major->name}}</li> --}}
+<<<<<<< HEAD
                   @if(!empty($data_job->company->address))
                   <li><span class="icon flaticon-map-locator"></span>{{$data_job->company->address}}</li>
                   @endif
@@ -28,6 +29,15 @@
                   <li><span class="icon flaticon-clock-3"></span>{{$data_job->company->working_time}}h/ngày</li>
                   @endif
 
+=======
+                  <li><span class="icon flaticon-map-locator"></span>{{$data_job->company->address}}</li>
+                  <li><span class="icon flaticon-clock-3"></span>{{$data_job->company->working_time}}h/ngày</li>
+                  @if($data_job->min_salary > 0 && $data_job->max_salary > 0)
+                  <li><span class="icon flaticon-money"></span> {{number_format($data_job->min_salary)}} - {{number_format($data_job->max_salary)}}</li>
+                  @else
+                  <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                  @endif
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                 </ul>
                 <ul class="job-other-info">
                   @foreach (config('custom.type_work') as $value)
@@ -42,7 +52,11 @@
 
               <div class="btn-box">
                 @if (auth('candidate')->check())
+<<<<<<< HEAD
                 @if (!empty($idJobApplied[$data_job->id]) )
+=======
+                    @if (!empty($idJobApplied[$data_job->id]) )
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                       @if($idJobApplied[$data_job->id]->job_post_id == $data_job->id )
                       <button class="theme-btn btn-style-one" >Đã ứng tuyển</button>
                       @endif
@@ -95,6 +109,7 @@
                   {!! $data_job->benefits !!}
                 </ul>
                 @endif
+<<<<<<< HEAD
               </div>
 
               <div class="other-options">
@@ -105,6 +120,16 @@
                   @endphp
                   <a target="_blank" href="https://www.facebook.com/sharer.php?u={{$url_root}}" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
                 </div>
+=======
+                <h4>Kinh nghiệm</h4>
+                <ul class="list-style-three">
+                  @foreach (config('custom.experience') as $value)
+                  @if($data_job->experience == $value['id'])
+                  <li>{{$value['name']}}</li>
+                  @endif
+                  @endforeach
+                </ul>
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
               </div>
 
 
@@ -124,6 +149,7 @@
                             <h4><a href="{{route('job-detail', ['id' => $item->id])}}">{{$item->title}}</a></h4>
                             <ul class="job-info">
                                 {{-- <li><span class="icon flaticon-briefcase"></span>{{$item->major->name}}</li> --}}
+<<<<<<< HEAD
                                 @if(!empty($item->company->address))
                                 <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
                                 @endif
@@ -156,6 +182,15 @@
                                 @endphp
 
                                 
+=======
+                                <li><span class="icon flaticon-map-locator"></span>{{$item->company->address}}</li>
+                                <li><span class="icon flaticon-clock-3"></span>{{$item->company->working_time}} giờ/ngày</li>
+                                @if($item->min_salary > 0 && $item->max_salary > 0)
+                                <li><span class="icon flaticon-money"></span>{{number_format($item->min_salary)}} - {{number_format($item->max_salary)}}</li>
+                                @else
+                                <li><span class="icon flaticon-money"></span>Thỏa thuận</li>
+                                @endif
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                               </ul>
                             <ul class="job-other-info">
                                  @foreach (config('custom.type_work') as $value)
@@ -222,6 +257,7 @@
                   <div class="widget-content">
                     <ul class="job-overview">
                       <li>
+<<<<<<< HEAD
                         <i class="icon icon-expiry"></i>
                         <h5>Hạn nộp hồ sơ:</h5>
                         <span>{{date("d-m-Y", strtotime($data_job->end_date))}}</span>
@@ -302,6 +338,36 @@
                       </li>
                       @endif
 
+=======
+                        <i class="icon icon-calendar"></i>
+                        <h5>Ngày đăng:</h5>
+                        <span>{{date("d-m-Y", strtotime($data_job->created_at))}}</span>
+                      </li>
+                      <li>
+                        <i class="icon icon-expiry"></i>
+                        <h5>Ngày hết hạn:</h5>
+                        <span>{{date("d-m-Y", strtotime($data_job->end_date))}}</span>
+                      </li>
+                      <li>
+                        <i class="icon icon-location"></i>
+                        <h5>Địa điểm:</h5>
+                        <span>{{$data_job->company->address}}</span>
+                      </li>
+                      <li>
+                        <i class="icon icon-clock"></i>
+                        <h5>Giờ làm việc:</h5>
+                        <span>{{$data_job->company->working_time}} giờ/ngày</span>
+                      </li>
+                      <li>
+                        <i class="icon icon-salary"></i>
+                        <h5>Lương:</h5>
+                        @if($data_job->min_salary > 0 && $data_job->max_salary > 0)
+                         <span>{{number_format($data_job->min_salary, 0, ',', '.')}} - {{number_format($data_job->max_salary, 0, ',', '.')}} đ</span>
+                         @else
+                         <li>Thỏa thuận</li>
+                         @endif
+                        </li>
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                     </ul>
                   </div>
 
@@ -316,12 +382,15 @@
                   </div> --}}
 
                   <!-- Job Skills -->
+<<<<<<< HEAD
                   <h4 class="widget-title">Chuyên ngành</h4>
                   
                   <div class="widget-content">
                       {{$data_job->major->name}}
                   </div>
                   <br>
+=======
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                   <h4 class="widget-title">Kỹ năng</h4>
                   
                   <div class="widget-content">
@@ -348,9 +417,13 @@
                       <li>Loại hình doanh nghiệp: <span>{{$data_job->company->company_model}}</span></li>
                       {{-- <li>Quy mô: <span>{{$data_job->company->company_size}}</span></li> --}}
                       <li>Thành lập: <span>{{date('d-m-Y', strtotime($data_job->company->founded_in))}}</span></li>
+<<<<<<< HEAD
                       @if(!empty($data_job->company->address))
                       <li>Địa điểm: <span>{{$data_job->company->address}}</span></li>
                       @endif
+=======
+                      <li>Địa điểm: <span>{{$data_job->company->address}}</span></li>
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                       {{-- <li>Truyền thông xã hội:
                         <div class="social-links">
                           <a href="#"><i class="fab fa-facebook-f"></i></a>

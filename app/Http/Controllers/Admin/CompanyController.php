@@ -102,7 +102,7 @@ class CompanyController extends Controller
         $model = new Company();
         $obj = $model->find($id);
         $params['cols']['id'] = $id;
-        JobPost::where('company_id', $id)->update(['status' => $params['cols']['status']]);
+        // JobPost::where('company_id', $id)->update(['status' => $params['cols']['status']]);
         $res = $model->saveUpdate($params);
         if($res == null) {
             Session::flash('success', 'Cập nhật thành công!');

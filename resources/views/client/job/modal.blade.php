@@ -135,6 +135,7 @@
                     $('.call-modal').css('display','none');
                 },
                 error: function(rep){
+<<<<<<< HEAD
                     if (rep.status == 500) {
                         Swal.fire({
                         icon: 'error',
@@ -147,6 +148,8 @@
                         cancelButtonText: 'Không'
                     })
                     }
+=======
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                     $('close-modal').click();
                     if (rep.status == 401) {
                         Swal.fire({

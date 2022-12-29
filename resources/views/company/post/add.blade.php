@@ -231,6 +231,7 @@
                 height: 150,
             });
 
+<<<<<<< HEAD
             $('#type_salary').change(function(){
                 var type 
                 if (condition) {
@@ -239,6 +240,9 @@
             })
         });
 
+=======
+        });
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
         // $("#formPost").serialize();
         // $('#buttonSubmit').click(function(e){
         //     e.preventDefault();

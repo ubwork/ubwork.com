@@ -94,7 +94,11 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="">Bắt đầu *</label>
+<<<<<<< HEAD
                                     <input type="date" name="start_date" max="{{date('Y-m-d')}}" value="{{date("Y-m-d", strtotime($exp->start_date))}}" class="form-control" >
+=======
+                                    <input type="date" name="start_date" value="{{date("Y-m-d", strtotime($exp->start_date))}}" class="form-control" >
+>>>>>>> 9e52d1e839eb39c430a46b87121290a274295b30
                                     <small class="val_start_date text-danger pl-4"></small>
                                 </div>
                                 <div class="col">

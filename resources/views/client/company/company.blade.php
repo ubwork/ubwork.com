@@ -39,11 +39,11 @@
                                 <div class="form-group">
                                     <select name="size" class="chosen-select" value="{{ old('size') }}" style="border: 1px solid #ECEDF2 !importan;">
                                         <option value="">Mời Chọn</option>
-                                        <option value="50">1-50 Nhân viên</option>
-                                        <option value="100" >50-100 Nhân Viên</option>
-                                        <option value="200" >100-200 Nhân Viên</option>
-                                        <option value="300" >200-500 Nhân Viên</option>
-                                        <option value="500" >500-1000 Nhân Viên</option>
+                                        <option value="1">1-50 Nhân viên</option>
+                                        <option value="2" >50-100 Nhân Viên</option>
+                                        <option value="3" >100-200 Nhân Viên</option>
+                                        <option value="4" >200-500 Nhân Viên</option>
+                                        <option value="5" >500-1000 Nhân Viên</option>
                                     </select>
                                 </div>
                             </div>
